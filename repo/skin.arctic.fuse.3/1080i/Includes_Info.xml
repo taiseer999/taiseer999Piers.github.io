@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
     <include name="Info_Meta_Object">
@@ -162,7 +161,8 @@
                 <control type="grouplist">
                     <include>Info_Meta_Grouplist_Definition</include>
 
-                    <!-- Ratings -->
+                    
+                     <!-- Ratings -->
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">Movies</param>
                         <param name="item">Item01</param>
@@ -182,6 +182,36 @@
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">Movies</param>
+                        <param name="item">Item04</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">Movies</param>
+                        <param name="item">Item05</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">Movies</param>
+                        <param name="item">Item06</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">Movies</param>
+                        <param name="item">Item07</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">Movies</param>
+                        <param name="item">Item08</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">TVShows</param>
                         <param name="item">Item01</param>
                         <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
@@ -196,6 +226,36 @@
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">TVShows</param>
                         <param name="item">Item03</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">TVShows</param>
+                        <param name="item">Item04</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">TVShows</param>
+                        <param name="item">Item05</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">TVShows</param>
+                        <param name="item">Item06</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">TVShows</param>
+                        <param name="item">Item07</param>
+                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="service">$PARAM[service]</param>
+                    </include>
+                    <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
+                        <param name="content">TVShows</param>
+                        <param name="item">Item08</param>
                         <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
@@ -298,7 +358,7 @@
         </definition>
     </include>
 
-    <include name="Info_Line_Label">
+   <include name="Info_Line_Label">
         <param name="haspath">false</param>
         <param name="dbtype_count">1</param>
         <definition>
@@ -389,6 +449,7 @@
             </control>
         </definition>
     </include>
+
 
     <include name="Info_Title">
         <param name="left">40</param>
@@ -794,13 +855,13 @@
                     <animation effect="fade" end="33" condition="true">Conditional</animation>
                 </control>
                 <control type="image">
-                    <colordiffuse>$PARAM[colordiffuse]_90</colordiffuse>
+                    <colordiffuse>FFFDCC0D</colordiffuse>
                     <aspectratio>keep</aspectratio>
                     <texture>flags/star5.png</texture>
                     <visible>Integer.IsGreater($PARAM[rating],$PARAM[half]) + !Integer.IsGreater($PARAM[rating],$PARAM[full])</visible>
                 </control>
                 <control type="image">
-                    <colordiffuse>$PARAM[colordiffuse]_90</colordiffuse>
+                    <colordiffuse>FFFDCC0D</colordiffuse>
                     <aspectratio>keep</aspectratio>
                     <texture>flags/star10.png</texture>
                     <visible>Integer.IsGreater($PARAM[rating],$PARAM[full])</visible>
@@ -873,7 +934,7 @@
                 <width>155</width>
                 <include>Dimension_Info_Line_Pillbox</include>
                 <control type="image">
-                    <texture colordiffuse="main_fg_30" border="8">flags/blank-bordered.png</texture>
+                    <texture colordiffuse="main_fg_50" border="8">special://skin/extras/backgrounds/overlay/blank-bordered.png</texture>
                 </control>
                 <include content="Info_StarRating">
                     <param name="colordiffuse">$PARAM[colordiffuse]</param>
@@ -1353,7 +1414,7 @@
             <param name="width">$PARAM[width]</param>
         </include>
 
-        <!-- Episodes Plotline -->
+       <!-- Episodes Plotline -->
         <include content="Info_Plot_Main_Plotline_Content" condition="Skin.String(Plotline.$PARAM[dbtype],Episodes)">
             <param name="label">$INFO[ListItem.Property(watchedepisodes),$LOCALIZE[16102] , $LOCALIZE[1443] ]$INFO[ListItem.Property(totalepisodes)] $LOCALIZE[20453]</param>
             <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Property(totalepisodes))</param>
