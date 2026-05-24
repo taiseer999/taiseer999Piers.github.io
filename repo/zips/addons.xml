@@ -3044,7 +3044,7 @@ Version 1.30.0
     <fanart>fanart.jpg</fanart>
   </assets>
 </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.0.5" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.0.7" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>

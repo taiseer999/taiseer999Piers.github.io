@@ -228,6 +228,41 @@ def get_ModeVar():
     return parts[0] if len(parts) > 0 else ""
 
 
+def get_ModeConvertVar():
+    val = _info("Player.Process(amlogic.eoft_gamut)")
+
+    if not val:
+        return ""
+
+    val = str(val).strip().upper()
+
+    if "DV" in val or "dolbyvision" in val:
+        result = "-> Dolby Vision Profile 8.1"
+        base = "Dolby Vision"
+        
+    elif "HDR10+" in val or "hdr10plus" in val:
+        result = ""
+        base = "HDR10+"
+
+    elif "HDR10" in val or "hdr10" in val:
+        result = "-> HDR10"
+        base = "HDR10"
+
+    elif "SDR" in val or "" in val:
+        result = "-> SDR"
+        base = "SDR"
+
+    else:
+        return ""
+
+    hdr = get_HdrTypeVar()
+
+    if hdr.lower() == base.lower():
+        return ""
+
+    return result
+
+
 def get_GamutVar():
     val = _info("Player.Process(amlogic.eoft_gamut)")
 
@@ -381,6 +416,7 @@ def update_properties(window):
     window.setProperty("HdrTypeVar",            get_HdrTypeVar())
     window.setProperty("HdrDetailVar",          get_HdrDetailVar())
     window.setProperty("ModeVar",               get_ModeVar())
+    window.setProperty("ModeConvertVar",        get_ModeConvertVar())
     window.setProperty("GamutVar",              get_GamutVar())
     window.setProperty("VideoCodecVar",         get_VideoCodecVar())
     window.setProperty("AudioCodecVar",         get_AudioCodecVar())

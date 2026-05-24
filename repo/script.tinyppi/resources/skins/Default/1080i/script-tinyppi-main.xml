@@ -168,7 +168,7 @@
 					<control type="label">
 						<left>210</left>
 						<top>35</top>
-						<label>$INFO[Window().Property(HdrTypeVar)] $INFO[Window().Property(HdrDetailVar)]</label>
+						<label>$INFO[Window().Property(HdrTypeVar)] $INFO[Window().Property(HdrDetailVar)]$INFO[Window().Property(ModeConvertVar)]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
