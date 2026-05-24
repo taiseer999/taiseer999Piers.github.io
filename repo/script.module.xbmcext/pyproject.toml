@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "xbmcext"
+version = "1.5.2"
+authors = [{ name = "groggyegg", email = "groggyegg@protonmail.com" }]
+description = "XBMCExt extends utilities, dialogs, and various control widgets."
+readme = "README.md"
+requires-python = ">=2.7"
+dependencies = [
+    "Kodistubs >= 18.0.0",
+    "six >= 1.16.0"
+]
+classifiers = [
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+[project.optional-dependencies]
+tests = [
+    "parameterized >= 0.8.1"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/groggyegg/script.module.xbmcext"

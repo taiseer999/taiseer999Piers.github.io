@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<fonts>
+    <font>
+        <filename>XBZar.ttf</filename>
+        <familyname>XB Zar</familyname>
+    </font>
+    <font>
+        <filename>Adobe Arabic Regular.ttf</filename>
+        <familyname>Adobe Arabic</familyname>
+    </font>
+    <font>
+        <filename>Osama Font Regular.ttf</filename>
+        <familyname>Osama Font</familyname>
+    </font>
+    <font>
+        <filename>Arabic Subtitles.hackfix.ttf</filename>
+        <familyname>Arabic Subtitles</familyname>
+    </font>
+    <font>
+        <filename>Droid.Arabic.Naskh_.Regular_DownloadSoftware.iR_.ttf</filename>
+        <familyname>Droid Arabic Naskh</familyname>
+    </font>
+    <font>
+        <filename>Bahij_Droid_Naskh-Regular.ttf</filename>
+        <familyname>Bahij Droid Naskh</familyname>
+    </font>
+    <font>
+        <filename>Amazon Arabic Ember Regular.ttf</filename>
+        <familyname>Amazon Arabic Ember</familyname>
+    </font>
+    <font>
+        <filename>AL-Mohanad.ttf</filename>
+        <familyname>Al-Mohanad</familyname>
+    </font>
+    <font>
+        <filename>Samim-Medium.ttf</filename>
+        <familyname>Samim</familyname>
+    </font>
+</fonts>

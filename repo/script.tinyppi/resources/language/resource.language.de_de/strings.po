@@ -1,0 +1,124 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: TinyPPI\n"
+"Language: de\n"
+
+msgctxt "#32000"
+msgid "Display mode"
+msgstr "Bildauflösung"
+
+msgctxt "#32001"
+msgid "Video mode"
+msgstr "Videoauflösung"
+
+msgctxt "#32005"
+msgid "Decoder"
+msgstr "Decoder"
+
+msgctxt "#32007"
+msgid "Processing"
+msgstr "Verarbeitung"
+
+msgctxt "#32013"
+msgid "Playback time"
+msgstr "Wiedergabezeit"
+
+msgctxt "#32014"
+msgid "Processor"
+msgstr "Prozessor"
+
+msgctxt "#32015"
+msgid "Gamut"
+msgstr "Gamut"
+
+msgctxt "#32023"
+msgid "Pixel format"
+msgstr "Pixelformat"
+
+msgctxt "#32024"
+msgid "Aspect ratio"
+msgstr "Verhältnis"
+
+msgctxt "#32027"
+msgid "Media source"
+msgstr "Medienquelle"
+
+msgctxt "#32031"
+msgid "Deinterlacing"
+msgstr "Verfahren"
+
+msgctxt "#32032"
+msgid "Player cache"
+msgstr "Player Cache"
+
+msgctxt "#32033"
+msgid "N/A"
+msgstr "Nicht verfügbar"
+
+msgctxt "#32034"
+msgid "Memory usage"
+msgstr "Arbeitsspeicher"
+
+msgctxt "#32035"
+msgid "Passthrough"
+msgstr "Passthrough"
+
+msgctxt "#32036"
+msgid "System FPS"
+msgstr "System FPS"
+
+msgctxt "#32046"
+msgid "Codec"
+msgstr "Codec"
+
+msgctxt "#32047"
+msgid "Bitrate"
+msgstr "Bitrate"
+
+msgctxt "#32051"
+msgid "Input"
+msgstr "Eingang"
+
+msgctxt "#32052"
+msgid "Audio language"
+msgstr "Audiosprache"
+
+msgctxt "#32053"
+msgid "Subtitle language"
+msgstr "Untertitelsprache"
+
+msgctxt "#32054"
+msgid "Video"
+msgstr "Video"
+
+msgctxt "#32055"
+msgid "Output"
+msgstr "Ausgang"
+
+msgctxt "#32056"
+msgid "Audio"
+msgstr "Ton"
+
+msgctxt "#32069"
+msgid "Bit depth"
+msgstr "Bittiefe"
+
+msgctxt "#32070"
+msgid "Mode"
+msgstr "Mode"
+
+msgctxt "#32087"
+msgid "Decoding"
+msgstr "Dekodierung"
+
+msgctxt "#32088"
+msgid "System"
+msgstr "System"
+
+msgctxt "#32091"
+msgid "Disabled"
+msgstr "Deaktiviert"

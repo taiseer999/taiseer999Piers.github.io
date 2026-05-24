@@ -1,0 +1,3 @@
+Welcome - مرحبا
+
+This wizard will allow you to install ready made builds without bloat targeting Arab/ English users - هذا البرنامج يساعد في تركيب بيلدات خالية من الاضافات غير اللازمة

@@ -1,0 +1,30 @@
+[
+  {
+    "name": "[B][COLOR gold]Arctic Horizon 2[/COLOR][/B]",
+    "description": "CoreELEC Optimized",
+    "screenshot": "https://iili.io/C9FQD12.png",
+    "id": "skin.arctic.horizon.2",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999ce.github.io/master/repo/zips/skin.arctic.horizon.2/skin.arctic.horizon.2-2.12.15.1.zip"
+  },
+  {
+    "name": "[B][COLOR gold]Arctic Fuse 2[/COLOR][/B]",
+    "description": "CoreELEC Optimized",
+    "screenshot": "https://iili.io/C9FQtql.png",
+    "id": "skin.arctic.fuse.2",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999ce.github.io/master/repo/zips/skin.arctic.fuse.2/skin.arctic.fuse.2-4.6.26.17.2.zip"
+  },
+  {
+    "name": "[B][COLOR gold]Arctic Fuse 3[/COLOR][/B]",
+    "description": "CoreELEC Optimized",
+    "screenshot": "https://iili.io/C9FQszG.png",
+    "id": "skin.arctic.fuse.3",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999ce.github.io/master/repo/zips/skin.arctic.fuse.3/skin.arctic.fuse.3-3.2.9.18.zip"
+  },
+  {
+    "name": "[B][COLOR gold]Estuary MOD V2 Omega Cpm[/COLOR][/B]",
+    "description": "CoreELEC Optimized",
+    "screenshot": "https://iili.io/C9FQLXf.png",
+    "id": "skin.avdvplus.estuary",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999ce.github.io/master/repo/zips/skin.estuary.modv2cpm/skin.estuary.modv2cpm-21.1.28.1.zip"
+  }
+]
