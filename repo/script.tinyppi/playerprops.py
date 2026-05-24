@@ -273,6 +273,7 @@ def get_GamutVar():
 
     return parts[1] if len(parts) > 1 else ""
 
+
 def get_VideoCodecVar():
     codec = _info("VideoPlayer.VideoCodec")
 
@@ -282,6 +283,39 @@ def get_VideoCodecVar():
     codec = str(codec).lower().strip()
 
     return _VIDEO_CODEC_MAP.get(codec, codec.upper())
+
+
+def get_HdrCheckVar():
+    hdr = _info("VideoPlayer.HdrType")
+    gamut = _info("Player.Process(amlogic.eoft_gamut)")
+
+    hdr_l = (hdr or "").lower()
+    gamut_l = (gamut or "").lower()
+
+    def is_empty(x):
+        return not x or str(x).strip() == ""
+
+    def contains(hay, needle):
+        return needle.lower() in hay
+
+    sdr_ok = (not is_empty(hdr)) and contains(gamut_l, "sdr")
+
+    hdr10_ok = (
+        (is_empty(hdr) or
+         contains(hdr_l, "dolbyvision") or
+         contains(hdr_l, "hlg"))
+        and contains(gamut_l, "hdr10")
+    )
+
+    dv_ok = (
+        (is_empty(hdr) or
+         contains(hdr_l, "hdr10") or
+         contains(hdr_l, "hdr10plus") or
+         contains(hdr_l, "hlg"))
+        and contains(gamut_l, "dv")
+    )
+
+    return "[COLOR lightgreen]■͏[/COLOR]" if (sdr_ok or hdr10_ok or dv_ok) else "[COLOR tomato]■͏[/COLOR]"
 
 
 # ---------------------------------------------------------------------------
@@ -419,6 +453,7 @@ def update_properties(window):
     window.setProperty("ModeConvertVar",        get_ModeConvertVar())
     window.setProperty("GamutVar",              get_GamutVar())
     window.setProperty("VideoCodecVar",         get_VideoCodecVar())
+    window.setProperty("HdrCheckVar",           get_HdrCheckVar())
     window.setProperty("AudioCodecVar",         get_AudioCodecVar())
     window.setProperty("AudioCodecSpatialVar",  get_AudioCodecSpatialVar())
     window.setProperty("AudioChannelsVar",      get_AudioChannelsVar())

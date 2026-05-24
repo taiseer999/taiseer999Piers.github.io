@@ -158,16 +158,31 @@
 						<textcolor>ffededed</textcolor>
 					</control>
 					
-					<!-- Media source -->
+					<!-- VS10 status -->
 					<control type="label">
 						<top>35</top>
-						<label>$ADDON[script.tinyppi 32027]:</label>
+						<label>$ADDON[script.tinyppi 32026]:</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 					<control type="label">
 						<left>210</left>
 						<top>35</top>
+						<label>$INFO[Window().Property(HdrCheckVar)]</label>
+						<font>font10</font>
+						<textcolor>e7ededed</textcolor>
+					</control>
+					
+					<!-- Media source -->
+					<control type="label">
+						<top>65</top>
+						<label>$ADDON[script.tinyppi 32027]:</label>
+						<font>font10</font>
+						<textcolor>e7ededed</textcolor>
+					</control>
+					<control type="label">
+						<left>210</left>
+						<top>65</top>
 						<label>$INFO[Window().Property(HdrTypeVar)] $INFO[Window().Property(HdrDetailVar)]$INFO[Window().Property(ModeConvertVar)]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
@@ -175,14 +190,14 @@
 					
 					<!-- Bitrate -->
 					<control type="label">
-						<top>65</top>
+						<top>95</top>
 						<label>$ADDON[script.tinyppi 32047]:</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 					<control type="label">
 						<left>210</left>
-						<top>65</top>
+						<top>95</top>
 						<label>$INFO[Window().Property(VideoBitrateMBVar)]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
@@ -190,7 +205,7 @@
 					<!-- N/A -->
 					<control type="label">
 						<left>210</left>
-						<top>65</top>
+						<top>95</top>
 						<label>$ADDON[script.tinyppi 32033]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
@@ -199,14 +214,14 @@
 					
 					<!-- Mode -->
 					<control type="label">
-						<top>95</top>
+						<top>125</top>
 						<label>$ADDON[script.tinyppi 32070]:</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 					<control type="label">
 						<left>210</left>
-						<top>95</top>
+						<top>125</top>
 						<label>$INFO[Window().Property(ModeVar)]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
@@ -214,43 +229,17 @@
 					
 					<!-- Gamut -->
 					<control type="label">
-						<top>125</top>
+						<top>155</top>
 						<label>$ADDON[script.tinyppi 32015]:</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 					<control type="label">
 						<left>210</left>
-						<top>125</top>
+						<top>155</top>
 						<label>$INFO[Window().Property(GamutVar)]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
-					</control>
-					
-					<!-- Playback time -->
-					<control type="label">
-						<top>155</top>
-						<label>$ADDON[script.tinyppi 32013]:</label>
-						<font>font10</font>
-						<textcolor>e7ededed</textcolor>
-					</control>
-					<control type="label">
-						<left>210</left>
-						<top>155</top>
-						<label>$INFO[Player.Time] $INFO[Player.Duration,/ ,] [COLOR b3ededed]$INFO[Player.Progress, (,%)][/COLOR]</label>
-						<font>font10</font>
-						<textcolor>e7ededed</textcolor>
-						<visible>!String.IsEmpty(Player.Duration)</visible>
-						<visible>!PVR.IsPlayingTV</visible>
-					</control>
-					<!-- N/A -->
-					<control type="label">
-						<left>210</left>
-						<top>155</top>
-						<label>$ADDON[script.tinyppi 32033]</label>
-						<font>font10</font>
-						<textcolor>e7ededed</textcolor>
-						<visible>String.IsEmpty(Player.Duration) | PVR.IsPlayingTV</visible>
 					</control>
 				</control>
 				
@@ -501,19 +490,30 @@
 						<textcolor>e7ededed</textcolor>
 					</control>
 					
-					<!-- Placeholder -->
+					<!-- Playback time -->
 					<control type="label">
 						<top>155</top>
-						<label>Placeholder:</label>
+						<label>$ADDON[script.tinyppi 32013]:</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 					<control type="label">
 						<left>240</left>
 						<top>155</top>
-						<label>Placeholder</label>
+						<label>$INFO[Player.Time] $INFO[Player.Duration,/ ,] [COLOR b3ededed]$INFO[Player.Progress,(,%)][/COLOR]</label>
 						<font>font10</font>
 						<textcolor>e7ededed</textcolor>
+						<visible>!String.IsEmpty(Player.Duration)</visible>
+						<visible>!PVR.IsPlayingTV</visible>
+					</control>
+					<!-- N/A -->
+					<control type="label">
+						<left>240</left>
+						<top>155</top>
+						<label>$ADDON[script.tinyppi 32033]</label>
+						<font>font10</font>
+						<textcolor>e7ededed</textcolor>
+						<visible>String.IsEmpty(Player.Duration) | PVR.IsPlayingTV</visible>
 					</control>
 				</control>
 			</control>

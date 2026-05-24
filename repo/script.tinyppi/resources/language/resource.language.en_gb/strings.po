@@ -43,6 +43,10 @@ msgctxt "#32024"
 msgid "Aspect ratio"
 msgstr ""
 
+msgctxt "#32026"
+msgid "VS10 engine"
+msgstr ""
+
 msgctxt "#32027"
 msgid "Media source"
 msgstr ""
