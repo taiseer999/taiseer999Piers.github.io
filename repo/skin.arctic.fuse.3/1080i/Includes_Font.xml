@@ -23,10 +23,35 @@
             <!-- Font for codec flag -->
             <font>
                 <name>font_infotag_bold</name>
-                <filename>LeagueSpartan-ExtraBold.ttf</filename>
+                <filename>monadit.ttf</filename>
                 <size>24</size>
                 <style>uppercase</style>
             </font>
+
+            <!-- Font for codecs flag -->
+            <font>
+                <name>font_infotag_reg</name>
+                <filename>monaditreg.ttf</filename>
+                <size>24</size>
+                <style>uppercase</style>
+            </font>
+
+            <!-- TOP BAR -->
+            <font>
+                <name>font_Topbar_bold</name>
+                <filename>monadi BOLD.ttf</filename>
+                <size>38</size>
+                <style>uppercase</style>
+            </font>
+
+            <!-- TOP BAR Info-->
+            <font>
+                <name>font_Topbarinfo</name>
+                <filename>monadi-reg.ttf</filename>
+                <size>29</size>
+                <style>uppercase</style>
+            </font>
+
 
             <!-- Keyboard Symbol Font -->
             <font>
@@ -59,7 +84,16 @@
                 <filename>fa-solid-900.ttf</filename>
                 <size>12</size>
             </font>
-
+            <font>
+                <name>font_tiny_iconic_regular</name>
+                <filename>fa-regular-400.ttf</filename>
+                <size>24</size>
+            </font>
+            <font>
+                <name>font_tiny_iconic_regular1</name>
+                <filename>iphone.ttf</filename>
+                <size>24</size>
+            </font>
             <!-- Kodi Logo Font -->
             <font>
                 <name>font_logo</name>
@@ -69,7 +103,7 @@
             <font>
                 <name>font_logo_large</name>
                 <filename>Questrial-Regular.ttf</filename>
-                <size>44</size>
+                <size>50</size>
             </font>
 
             <!-- Testing Fonts -->
@@ -78,6 +112,12 @@
                 <filename>CommitMono-400-Regular.ttf</filename>
                 <size>22</size>
                 <aspect>$PARAM[aspect_system]</aspect>
+            </font>
+
+            <font>
+                <name>font_top_bar</name>
+                <filename>Inter-Regular.ttf</filename>
+                <size>24</size>
             </font>
 
             <!-- Music visualisation scrolling text -->
@@ -107,21 +147,21 @@
         <param name="font_regular">Inter-Regular.ttf</param>
         <param name="font_light">Inter-Light.ttf</param>
         <param name="style_light" />
-        <param name="size_hint">15</param>
+        <param name="size_hint">17</param>
         <param name="size_tiny">21</param>
-        <param name="size_mini">24</param>
-        <param name="size_main">28</param>
-        <param name="size_midi">32</param>
-        <param name="size_head">38</param>
+        <param name="size_mini">25</param>
+        <param name="size_main">29</param>
+        <param name="size_midi">36</param>
+        <param name="size_head">37</param>
         <param name="size_huge">43</param>
         <param name="size_main_x2">56</param>
-        <param name="size_huge_x2">86</param>
-        <param name="size_midi_x2">64</param>
+        <param name="size_huge_x2">70</param>
+        <param name="size_midi_x2">48</param>
 
         <!-- Linespacing -->
         <param name="plot_linespacing_head">1.169</param>
         <param name="plot_linespacing_midi">1.455</param>
-        <param name="plot_linespacing_main">1.16</param>
+        <param name="plot_linespacing_main">1.1</param>
         <param name="plot_linespacing_mini">1.31</param>
         <param name="plot_linespacing_tiny">1.23</param>
 
@@ -137,13 +177,13 @@
             <!-- Title fonts -->
             <font>
                 <name>font_title_huge</name>
-                <filename>$PARAM[font_bold]</filename>
-                <size>$PARAM[size_huge_x2]</size>
+                <filename>Inter-Bold.ttf</filename>
+                <size>100</size>
             </font>
             <font>
                 <name>font_title_midi</name>
-                <filename>$PARAM[font_bold]</filename>
-                <size>$PARAM[size_midi_x2]</size>
+                <filename>Inter-Light.ttf</filename>
+                <size>60</size>
             </font>
 
             <!-- <font>
@@ -264,6 +304,11 @@
                 <name>font_midi</name>
                 <filename>$PARAM[font_regular]</filename>
                 <size>$PARAM[size_midi]</size>
+            </font>
+            <font>
+                <name>font_icon</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_icon]</size>
             </font>
             <font>
                 <name>font_main</name>

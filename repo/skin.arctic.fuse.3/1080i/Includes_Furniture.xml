@@ -13,34 +13,64 @@
                 <align>left</align>
                 <aligny>center</aligny>
                 <textcolor>$PARAM[textcolor]</textcolor>
-                <font>font_midi_bold</font>
+                <font>font_Topbar_bold</font>
                 <height>80</height>
+                <!-- Constrain label within the 720px group to prevent overflow into header-right -->
+                <right>0</right>
             </control>
         </control>
     </include>
 
 
     <variable name="Furniture_Header_Right_Temperature">
-        <value condition="!Skin.HasSetting(Header.DisableWeather)">$INFO[Weather.Temperature]</value>
+        <value condition="!Skin.HasSetting(Header.DisableWeather)"> $INFO[Weather.Temperature]</value>
     </variable>
     <include name="Furniture_Header_Right">
-        <visible>![Skin.HasSetting(osd.userightCodecLogos) + [Window.IsActive(VideoOSD.xml) | Window.IsActive(VideoFullScreen.xml)]]</visible>
         <control type="group">
+
             <right>0</right>
-            <width>720</width>
+            <width>370
+            </width>
             <visible>$PARAM[visible_right]</visible>
             <include content="View_Line_Divider">
                 <param name="align">right</param>
             </include>
+             <control type="grouplist">
+                  <align>right</align>
+                <aligny>right</aligny>
+               <aligny>center</aligny>
+                <control type="image">
+                   <height>70</height>
+                    <height>50</height>
+                    <width>50</width>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$INFO[Weather.FanartCode,resource://resource.images.weathericons.white/,.png]</texture>
+                    <visible>Weather.IsFetched</visible>
+                    
+                </control>
+            </control>    
             <control type="label">
-                <label>$INFO[System.Time]$VAR[Furniture_Header_Right_Temperature, • ,]</label>
+                <label> $VAR[Furniture_Header_Right_Temperature,,] • $INFO[System.Time] $VAR[NetworkVar] </label>
                 <align>right</align>
                 <aligny>center</aligny>
-                <textcolor>$PARAM[textcolor]</textcolor>
-                <font>font_midi_bold</font>
+                <textcolor>main_fg_100</textcolor>
+                <font>font_Topbar_bold</font>
                 <height>80</height>
+                
             </control>
-        </control>
+            <control type="label">
+                <visible>Skin.HasSetting(Furniture.Network_RAM)</visible>
+                <label>$INFO[System.CPUTemperature,[COLOR lightgreen][/COLOR] ,]  $INFO[system.memory(used.percent),[COLOR darkorange][/COLOR] ,]</label>
+                <align>right</align>
+                <aligny>center</aligny>
+                <textcolor>main_fg_100</textcolor>
+                <font>font_Topbarinfo</font>
+                <centertop>-10%</centertop>
+                <height>80</height>
+                
+            </control>
+            
+         </control>
     </include>
 
     <include name="Furniture_Header">
@@ -134,7 +164,7 @@
             </include>
         </control>
     </include>
-    <include name="Furniture_Studio">
+   <include name="Furniture_Studio">
         <control type="grouplist">
             <align>right</align>
             <orientation>horizontal</orientation>
@@ -143,15 +173,15 @@
             <visible>!Player.HasMedia | Skin.HasSetting(Footer.DisableNowPlaying)</visible>
             <visible>String.IsEmpty(ListItem.VideoCodec) | !Skin.HasSetting(Footer.EnableCodecs)</visible>
             <control type="image">
-                <width>300</width>
-                <height>80</height>
+                <width>290</width>
+                <height>100</height>
                 <aspectratio align="right">keep</aspectratio>
                 <texture background="true">$VAR[Image_CombinedStudio]</texture>
                 <centertop>50%</centertop>
             </control>
         </control>
     </include>
-    <include name="Furniture_Codecs">
+   <include name="Furniture_Codecs">
         <param name="colordiffuse">white</param>
         <param name="infolabel_videoresolution">ListItem.VideoResolution</param>
         <param name="infolabel_videoaspect">ListItem.VideoAspect</param>
@@ -164,10 +194,10 @@
             <control type="grouplist">
                 <visible>!String.IsEmpty($PARAM[infolabel_videoresolution])</visible>
                 <orientation>horizontal</orientation>
-                <align>$PARAM[align]</align>
+                <align>center</align>
                 <itemgap>$PARAM[itemgap]</itemgap>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoresolution],flags/color/resolution/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoresolution],flags/colorful/resolution/,.png]</texture>
                     <aspectratio>keep</aspectratio>
                     <height>48</height>
                     <width>66</width>
@@ -175,7 +205,7 @@
                     <visible>!String.IsEmpty($PARAM[infolabel_videoresolution])</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoaspect],flags/color/aspectratio/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoaspect],flags/colorful/aspectratio/,.png]</texture>
                     <aspectratio>keep</aspectratio>
                     <height>48</height>
                     <width>71</width>
@@ -183,7 +213,7 @@
                     <visible>!String.IsEmpty($PARAM[infolabel_videoaspect])</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videocodec],flags/color/source/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videocodec],flags/colorful/source/,.png]</texture>
                     <aspectratio>keep</aspectratio>
                     <height>48</height>
                     <width>71</width>
@@ -191,21 +221,57 @@
                     <visible>!String.IsEmpty($PARAM[infolabel_videocodec])</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiocodec],flags/color/audio/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiocodec],flags/colorful/audio/,.png]</texture>
                     <aspectratio>keep</aspectratio>
                     <height>48</height>
                     <width>71</width>
                     <centertop>50%</centertop>
                     <visible>!String.IsEmpty($PARAM[infolabel_audiocodec])</visible>
                 </control>
+                <control type="image" id="77881">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>85</width>
+                    <height>58</height>
+                    <aspectratio align="left">keep</aspectratio>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$VAR[Image_RipSource]</texture>
+                    <visible>!String.IsEmpty(Control.GetLabel(77881))</visible>
+                </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiochannels],flags/color/channels/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiochannels],flags/colorful/channels/,.png]</texture>
                     <aspectratio>keep</aspectratio>
-                    <height>48</height>
-                    <width>71</width>
+                    <height>43</height>
+                    <width>65</width>
                     <centertop>50%</centertop>
                     <visible>!String.IsEmpty($PARAM[infolabel_audiochannels])</visible>
                 </control>
+            </control>
+        </definition>
+    </include>
+
+
+    <include name="Object_Patch">
+        <definition>
+            <control type="grouplist">
+                   <visible>Window.IsActive(DialogVideoInfo.xml) + Control.HasFocus(4005)</visible>    
+                <top>940</top>
+                <left>0</left>
+                <align>left</align>
+                <usecontrolcoords>true</usecontrolcoords>
+              <control type="group">
+                    <height>80</height>
+                    <centerbottom>80</centerbottom>
+                    <align>center</align>
+                    <fadetime>100</fadetime>
+                    <control type="label">
+                        <left>0</left>
+                        <aligny>center</aligny>
+                        <label>$INFO[ListItem.Path] $INFO[ListItem.FileName]</label>
+                        <textcolor>main_fg_100</textcolor>
+                        <font>font_tiny</font>
+                        <width>1760</width>
+                    </control>
+              </control>
             </control>
         </definition>
     </include>
@@ -273,7 +339,7 @@
         <param name="hasspinner">false</param>
         <param name="hasprogress">false</param>
         <param name="hasicon">true</param>
-        <param name="icon">special://skin/extras/icons/kodi.png</param>
+        <param name="icon">special://skin/extras/icons/CE.png</param>
         <param name="spinspinner">false</param>
         <param name="spinnervisible">true</param>
         <param name="flipspinner">true</param>
@@ -383,7 +449,7 @@
                     </include>
                     <control type="label">
                         <font>font_hint_bold</font>
-                        <textcolor>main_fg_70</textcolor>
+                        <textcolor>main_fg_100</textcolor>
                         <shadowcolor>main_bg_30</shadowcolor>
                         <label>$PARAM[minilabel]</label>
                         <width>auto</width>
@@ -393,7 +459,7 @@
                     </control>
                     <control type="label">
                         <font>font_hint_bold</font>
-                        <textcolor>main_fg_70</textcolor>
+                        <textcolor>main_fg_100</textcolor>
                         <shadowcolor>main_bg_30</shadowcolor>
                         <label>$PARAM[percentage_label]</label>
                         <width>auto</width>
