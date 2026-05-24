@@ -1,10 +1,10 @@
-
 <window>
 
 <defaultcontrol always="true">100</defaultcontrol>
 
 <controls>
 
+<!-- ── Layer 1: background photo ───────────────────────────────────────── -->
 <control type="image">
     <left>0</left>
     <top>0</top>
@@ -14,15 +14,77 @@
     <aspectratio>stretch</aspectratio>
 </control>
 
+<!-- ── Layer 2: heavy dark vignette so text/cards always readable ───────── -->
 <control type="image">
     <left>0</left>
     <top>0</top>
     <width>1920</width>
     <height>1080</height>
-    <colordiffuse>B0000000</colordiffuse>
+    <colordiffuse>CC000000</colordiffuse>
     <texture>white.png</texture>
 </control>
 
+<!-- ── Layer 3: top header bar (dark navy, semi-transparent) ────────────── -->
+<control type="image">
+    <left>0</left>
+    <top>0</top>
+    <width>1920</width>
+    <height>120</height>
+    <colordiffuse>E0101828</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Layer 4: blue accent line along the very top edge ────────────────── -->
+<control type="image">
+    <left>0</left>
+    <top>0</top>
+    <width>1920</width>
+    <height>4</height>
+    <colordiffuse>FF00AAFF</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Layer 5: separator line below the header bar ────────────────────── -->
+<control type="image">
+    <left>0</left>
+    <top>120</top>
+    <width>1920</width>
+    <height>2</height>
+    <colordiffuse>8000AAFF</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Layer 6: bottom status bar ───────────────────────────────────────── -->
+<control type="image">
+    <left>0</left>
+    <top>1040</top>
+    <width>1920</width>
+    <height>40</height>
+    <colordiffuse>D0101828</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Layer 7: thin blue accent line above the bottom bar ──────────────── -->
+<control type="image">
+    <left>0</left>
+    <top>1040</top>
+    <width>1920</width>
+    <height>2</height>
+    <colordiffuse>8000AAFF</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Layer 8: left-side blue edge glow strip ──────────────────────────── -->
+<control type="image">
+    <left>0</left>
+    <top>0</top>
+    <width>6</width>
+    <height>1080</height>
+    <colordiffuse>FF00AAFF</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Title ─────────────────────────────────────────────────────────────── -->
 <control type="label">
     <left>60</left>
     <top>35</top>
@@ -30,15 +92,38 @@
     <height>60</height>
     <font>font30_title</font>
     <textcolor>FFFFFFFF</textcolor>
+    <shadowcolor>CC000000</shadowcolor>
     <label>SKIN SELECTION</label>
 </control>
 
+<!-- ── Decorative short accent line under the title ─────────────────────── -->
+<control type="image">
+    <left>60</left>
+    <top>108</top>
+    <width>300</width>
+    <height>3</height>
+    <colordiffuse>FF00AAFF</colordiffuse>
+    <texture>white.png</texture>
+</control>
+
+<!-- ── Hint label in the bottom bar ─────────────────────────────────────── -->
+<control type="label">
+    <left>60</left>
+    <top>1047</top>
+    <width>1800</width>
+    <height>30</height>
+    <font>font12</font>
+    <textcolor>A0FFFFFF</textcolor>
+    <label>Select a skin to install · Press Back to exit</label>
+</control>
+
+<!-- ── Grid panel ────────────────────────────────────────────────────────── -->
 <control type="panel" id="100">
 
     <left>60</left>
-    <top>150</top>
+    <top>140</top>
     <width>1800</width>
-    <height>850</height>
+    <height>890</height>
 
     <itemlayout width="520" height="340">
 
@@ -74,31 +159,65 @@
 
     <focusedlayout width="520" height="340">
 
+        <!-- outer accent border (blue glow) -->
         <control type="image">
-            <left>-5</left>
-            <top>-5</top>
-            <width>490</width>
-            <height>330</height>
-            <colordiffuse>FF303030</colordiffuse>
+            <left>-8</left>
+            <top>-8</top>
+            <width>496</width>
+            <height>336</height>
+            <colordiffuse>FF00AAFF</colordiffuse>
             <texture>white.png</texture>
         </control>
 
+        <!-- inner dark card background -->
         <control type="image">
-            <left>10</left>
-            <top>10</top>
-            <width>470</width>
-            <height>260</height>
+            <left>-2</left>
+            <top>-2</top>
+            <width>484</width>
+            <height>324</height>
+            <colordiffuse>FF1A1A2E</colordiffuse>
+            <texture>white.png</texture>
+        </control>
+
+        <!-- thumbnail, slightly larger than unselected -->
+        <control type="image">
+            <left>8</left>
+            <top>8</top>
+            <width>464</width>
+            <height>258</height>
             <texture>$INFO[ListItem.Art(thumb)]</texture>
             <aspectratio>scale</aspectratio>
         </control>
 
+        <!-- subtle blue tint over thumbnail -->
+        <control type="image">
+            <left>8</left>
+            <top>8</top>
+            <width>464</width>
+            <height>258</height>
+            <colordiffuse>1A0055FF</colordiffuse>
+            <texture>white.png</texture>
+        </control>
+
+        <!-- label bar background -->
+        <control type="image">
+            <left>-2</left>
+            <top>270</top>
+            <width>484</width>
+            <height>52</height>
+            <colordiffuse>CC00AAFF</colordiffuse>
+            <texture>white.png</texture>
+        </control>
+
+        <!-- skin name label -->
         <control type="label">
-            <left>15</left>
-            <top>280</top>
-            <width>450</width>
+            <left>12</left>
+            <top>278</top>
+            <width>460</width>
             <height>40</height>
             <font>font24_title</font>
             <textcolor>FFFFFFFF</textcolor>
+            <shadowcolor>FF000000</shadowcolor>
             <label>$INFO[ListItem.Label]</label>
         </control>
 
