@@ -9,7 +9,8 @@ PATHADDONS = os.path.dirname(os.path.dirname(CWD))
 modified = False
 
 REQUIRED_FONTS = [
-    {'name': 'font10', 'filename': 'inter-r.ttf',  'size': '21'},
+    {'name': 'font23_narrow', 'filename': 'inter-r.ttf',  'size': '21'},
+    {'name': 'font23_icon', 'filename': 'fa-r-unicode.ttf',  'size': '24'},
 ]
 
 

@@ -14,6 +14,7 @@ WINDOW_PROP = "TinyPPI.Running"
 SKIN_PROP = "TinyPPI.Active"
 
 DIALOG_LOCK = False
+BACKGROUND_TOGGLE = ADDON.getSetting("background_toggle") == "true"
 
 
 class TinyPPIDialog(xbmcgui.WindowXMLDialog):
@@ -104,6 +105,8 @@ def open_tinyppi():
 
     win.setProperty(WINDOW_PROP, "true")
     win.setProperty(SKIN_PROP, "true")
+    win.setProperty("TinyPPI.UIStyle", ADDON.getSetting("ui_style"))
+    win.setProperty("TinyPPI.BackgroundToggle", "1" if ADDON.getSetting("background_toggle") == "true" else "0")
 
     try:
         dialog = TinyPPIDialog(

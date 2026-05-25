@@ -15,12 +15,44 @@ msgctxt "#32001"
 msgid "Video mode"
 msgstr ""
 
+msgctxt "#32002"
+msgid "General"
+msgstr ""
+
+msgctxt "#32003"
+msgid "General settings"
+msgstr ""
+
+msgctxt "#32004"
+msgid "TinyPPI style"
+msgstr ""
+
 msgctxt "#32005"
 msgid "Decoder"
 msgstr ""
 
+msgctxt "#32006"
+msgid "Choose between the Modern and Classic TinyPPI style."
+msgstr ""
+
 msgctxt "#32007"
 msgid "Processing"
+msgstr ""
+
+msgctxt "#32008"
+msgid "Classic"
+msgstr ""
+
+msgctxt "#32009"
+msgid "Modern"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Remove gradient background"
+msgstr ""
+
+msgctxt "#32011"
+msgid "This option removes the gradient background in TinyPPI."
 msgstr ""
 
 msgctxt "#32013"

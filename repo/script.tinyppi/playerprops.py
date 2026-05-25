@@ -315,7 +315,12 @@ def get_HdrCheckVar():
         and contains(gamut_l, "dv")
     )
 
-    return "[COLOR lightgreen]■͏[/COLOR]" if (sdr_ok or hdr10_ok or dv_ok) else "[COLOR tomato]■͏[/COLOR]"
+    result = sdr_ok or hdr10_ok or dv_ok
+
+    if xbmc.getSkinDir() == "skin.estuary":
+        return "[COLOR lightgreen]■͏[/COLOR]" if result else "[COLOR tomato]■͏[/COLOR]"
+    else:
+        return "[COLOR lightgreen][/COLOR]" if result else "[COLOR tomato][/COLOR]"
 
 
 # ---------------------------------------------------------------------------
@@ -463,3 +468,4 @@ def update_properties(window):
     window.setProperty("SubtitleCodecVar",      get_SubtitleCodecVar())
     window.setProperty("SubtitleNameVar",       get_SubtitleNameVar())
     window.setProperty("CpuUsageVar",           get_CpuUsageVar())
+    window.setProperty("CurrentSkin",           xbmc.getSkinDir())
