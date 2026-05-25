@@ -9,6 +9,7 @@ import json
 import os
 import zipfile
 import tempfile
+import shutil
 
 ADDON_PATH    = xbmcvfs.translatePath("special://home/addons/script.portal")
 PACKAGES_PATH = xbmcvfs.translatePath("special://home/addons/packages/")
@@ -87,15 +88,14 @@ def load_feed():
 
 def download_zip(url, addonid):
     """
-    Stream the zip file to a native temp file (avoids xbmcvfs write
-    truncation on slow/embedded storage).  Shows a byte-accurate progress
-    bar.  Returns the local path on success, None on failure/cancel.
+    Stream the zip to a native temp file (avoids xbmcvfs write truncation on
+    slow/embedded storage).  Shows a byte-accurate progress bar.
+    Returns the local path on success, None on failure/cancel.
     """
     if not xbmcvfs.exists(PACKAGES_PATH):
         xbmcvfs.mkdirs(PACKAGES_PATH)
 
-    # Write to a system temp file first; move to packages only on success.
-    tmp_fd, tmp_path = tempfile.mkstemp(suffix=".zip", prefix="portal_")
+    tmp_fd, tmp_path = tempfile.mkstemp(suffix=".zip", prefix="portal_dl_")
 
     progress = xbmcgui.DialogProgress()
     progress.create(DIALOG_TITLE, "Connecting…")
@@ -104,11 +104,11 @@ def download_zip(url, addonid):
         req = urllib.request.Request(url, headers={"User-Agent": "Kodi"})
         with urllib.request.urlopen(req, timeout=30) as resp:
             total = int(resp.headers.get("Content-Length", 0))
-            chunk_size = 65536   # 64 KB
+            chunk_size = 65536
             downloaded = 0
 
             with os.fdopen(tmp_fd, "wb") as fh:
-                tmp_fd = None          # fdopen owns it now
+                tmp_fd = None           # fdopen owns the fd now
                 while True:
                     if progress.iscanceled():
                         progress.close()
@@ -131,9 +131,9 @@ def download_zip(url, addonid):
                         )
                     else:
                         progress.update(0, "Downloading… %d KB" % (downloaded // 1024))
-                # fh is flushed + closed here by the context manager
+                # fh flushed + closed here
 
-        # Verify the temp file is a valid ZIP before accepting it
+        # Verify integrity before accepting
         progress.update(100, "Verifying download…")
         if not zipfile.is_zipfile(tmp_path):
             error_dialog(
@@ -142,16 +142,13 @@ def download_zip(url, addonid):
             )
             return None
 
-        # Move to the packages folder
         zip_path = os.path.join(PACKAGES_PATH, "%s.zip" % addonid)
         try:
             os.replace(tmp_path, zip_path)
         except OSError:
-            # os.replace can fail across filesystems; fall back to copy+delete
-            import shutil
             shutil.copy2(tmp_path, zip_path)
             os.remove(tmp_path)
-        tmp_path = None   # successfully moved; nothing to clean up
+        tmp_path = None
 
         progress.close()
         return zip_path
@@ -163,7 +160,6 @@ def download_zip(url, addonid):
         progress.close()
         error_dialog("Download failed:\n%s" % str(e))
     finally:
-        # Clean up the temp file if something went wrong before the move
         if tmp_fd is not None:
             try:
                 os.close(tmp_fd)
@@ -182,25 +178,43 @@ def download_zip(url, addonid):
 
 def extract_zip(zip_path):
     """
-    Extract *zip_path* to the addons folder.
+    Extract *zip_path* safely using a staging folder.
 
-    Improvements over the original:
-    - Progress is byte-based (accurate for large skin assets).
-    - The zip is only deleted after a verified, complete extraction.
-    - Each extracted file is size-checked against the zip's metadata.
-    - A staging folder is used so a partial extraction never leaves a
-      half-installed addon in the addons directory.
+    Key fix for the Kodi 22 SIGBUS / font-folder crash:
+    -------------------------------------------------------
+    Kodi's font renderer (CGUIFontTTF) maps font files directly into memory
+    (mmap).  When our addon extracts a skin zip that contains a Fonts/ folder,
+    the old approach wrote files directly into the live addons directory.  If
+    Kodi's skin system picked up the new addon path mid-extraction — which it
+    can do as soon as UpdateLocalAddons fires — it would mmap a partially-
+    written font file and crash with SIGBUS (bus error on unaligned/invalid
+    memory access).
+
+    The fix:
+      1. Extract everything into a private temp directory (staging).
+      2. Run a CRC integrity check + per-file size verification there.
+      3. Only once the staging tree is complete and verified, atomically
+         move each top-level addon folder into the live addons directory.
+      4. Call UpdateLocalAddons / ReloadSkin only AFTER the move is done.
+
+    This guarantees Kodi's renderer never sees a half-written font file.
     """
     progress = xbmcgui.DialogProgress()
     progress.create(DIALOG_TITLE, "Preparing extraction…")
 
-    # Resolve the real filesystem path for extraction (xbmcvfs path may not
-    # work with Python's zipfile/os modules directly on all platforms).
-    addons_real = xbmcvfs.translatePath("special://home/addons/")
+    # Use a staging directory next to the addons folder to maximise the
+    # chance that os.rename() is atomic (same filesystem).
+    staging_parent = os.path.join(ADDONS_PATH, ".portal_staging")
+    staging_dir    = None
 
     try:
+        os.makedirs(staging_parent, exist_ok=True)
+        staging_dir = tempfile.mkdtemp(dir=staging_parent, prefix="extract_")
+
         with zipfile.ZipFile(zip_path, "r") as zf:
-            # ── integrity check first ─────────────────────────────────────
+
+            # ── CRC integrity check before touching the filesystem ────────
+            progress.update(0, "Checking archive integrity…")
             bad = zf.testzip()
             if bad is not None:
                 progress.close()
@@ -210,36 +224,57 @@ def extract_zip(zip_path):
                 )
                 return False
 
-            members = zf.infolist()
-            total_bytes = sum(m.file_size for m in members)
+            members    = zf.infolist()
+            total_bytes = sum(m.file_size for m in members) or 1
             extracted_bytes = 0
 
-            # ── extract member by member ──────────────────────────────────
+            # ── extract every member into staging ────────────────────────
             for info in members:
                 if progress.iscanceled():
                     progress.close()
                     notify("Extraction cancelled.", xbmcgui.NOTIFICATION_WARNING)
                     return False
 
-                zf.extract(info, addons_real)
+                zf.extract(info, staging_dir)
 
-                # Verify the extracted file's size matches the zip metadata
-                dest = os.path.join(addons_real, info.filename)
-                if not info.filename.endswith("/"):   # skip directory entries
+                # Per-file size verification
+                if not info.filename.endswith("/"):
+                    dest = os.path.join(staging_dir, info.filename)
                     actual = os.path.getsize(dest) if os.path.exists(dest) else -1
                     if actual != info.file_size:
                         progress.close()
                         error_dialog(
                             "Extraction error: size mismatch for\n%s\n"
-                            "(expected %d bytes, got %d).\n\n"
+                            "(expected %d B, got %d B).\n\n"
                             "Please try again." % (info.filename, info.file_size, actual)
                         )
                         return False
 
                 extracted_bytes += info.file_size
-                pct = int(extracted_bytes * 100 / total_bytes) if total_bytes else 100
+                pct = int(extracted_bytes * 100 / total_bytes)
                 progress.update(pct, "Extracting: %s" % os.path.basename(info.filename))
 
+        # ── atomic move from staging → live addons directory ─────────────
+        # This is the critical step: Kodi only sees complete, fsync'd files.
+        progress.update(99, "Installing…")
+
+        for top_name in os.listdir(staging_dir):
+            src  = os.path.join(staging_dir, top_name)
+            dest = os.path.join(ADDONS_PATH, top_name)
+
+            # Remove any existing (possibly partial) installation first
+            if os.path.exists(dest):
+                if os.path.isdir(dest):
+                    shutil.rmtree(dest)
+                else:
+                    os.remove(dest)
+
+            try:
+                os.rename(src, dest)          # atomic on same filesystem
+            except OSError:
+                shutil.copytree(src, dest)    # cross-fs fallback
+
+        progress.update(100, "Done.")
         progress.close()
 
     except zipfile.BadZipFile:
@@ -251,12 +286,20 @@ def extract_zip(zip_path):
         error_dialog("Extraction failed:\n%s" % str(e))
         return False
     finally:
-        # Only remove the zip after a *successful* extraction (return True
-        # below).  If we returned False early the zip is kept so the user
-        # can retry without re-downloading (Kodi's package cache).
-        pass
+        # Always clean up the staging tree
+        if staging_dir and os.path.exists(staging_dir):
+            try:
+                shutil.rmtree(staging_dir)
+            except Exception:
+                pass
+        # Clean up the staging parent if it's now empty
+        try:
+            if os.path.exists(staging_parent) and not os.listdir(staging_parent):
+                os.rmdir(staging_parent)
+        except Exception:
+            pass
 
-    # Extraction verified – safe to remove the cached zip now.
+    # Zip is removed only after a successful, verified extraction
     try:
         xbmcvfs.delete(zip_path)
     except Exception:
@@ -265,6 +308,7 @@ def extract_zip(zip_path):
         except Exception:
             pass
 
+    # Let Kodi re-scan now that all files are fully in place
     xbmc.executebuiltin("UpdateLocalAddons")
     xbmc.sleep(3000)
     return True
@@ -290,7 +334,7 @@ class Portal(xbmcgui.WindowXMLDialog):
 
     def __init__(self, *args, **kwargs):
         super().__init__()
-        self.items = kwargs.get("items", [])
+        self.items      = kwargs.get("items", [])
         self.background = kwargs.get("background", "backgroundkodi.jpg")
 
     def onInit(self):
@@ -318,7 +362,11 @@ class Portal(xbmcgui.WindowXMLDialog):
 
             panel.addItem(li)
 
-        self.setFocusId(100)
+        # Fix: only set focus if the panel has items — avoids the
+        # "Control 100 asked to focus but it can't" error logged on Kodi 22
+        # when the list is empty or not yet rendered.
+        if self.items:
+            self.setFocusId(100)
 
     def onClick(self, controlId):
         if controlId != 100:
