@@ -1,5 +1,6 @@
 import re
 import xbmc
+import xbmcgui
 
 from constants import (_VIDEO_CODEC_MAP, _SUBTITLE_CODEC_MAP, _AUDIO_CODEC_MAP, _CHANNELS_MAP, _CHANNELS_INPUT_MAP, _LANGUAGE_MAP)
 
@@ -438,6 +439,17 @@ def get_CpuUsageVar():
             continue
 
     return " | ".join(values)
+    
+    
+def set_ui_position(window):
+    ui_style = xbmcgui.Window(10000).getProperty("TinyPPI.UIStyle")
+
+    if ui_style == "1":
+        left, top = 40, 575
+    else:
+        left, top = 0, 615
+
+    window.getControl(9000).setPosition(left, top)
 
 
 # ---------------------------------------------------------------------------
@@ -445,7 +457,8 @@ def get_CpuUsageVar():
 # ---------------------------------------------------------------------------
 
 def update_properties(window):
-    """Call this from onInit() and your update loop."""
+    set_ui_position(window)
+    
     window.setProperty("VideoDecoderVar",       get_VideoDecoderVar())
     window.setProperty("VideoPixelFormatVar",   get_VideoPixelFormatVar())
     window.setProperty("DisplayModeVar",        get_DisplayModeVar())

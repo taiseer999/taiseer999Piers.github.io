@@ -10,19 +10,20 @@ modified = False
 
 REQUIRED_FONTS = [
     {'name': 'font23_narrow', 'filename': 'inter-r.ttf',  'size': '21'},
+    {'name': 'font32', 'filename': 'inter-b.ttf',  'size': '32'},
     {'name': 'font23_icon', 'filename': 'fa-r-unicode.ttf',  'size': '24'},
 ]
 
 
 def _findFontXml(skinpath):
-    """Finds the Fonts.xml (or Font.xml) in the skin directory."""
+    """Finds Font.xml in the skin directory, excludes Includes_*.xml"""
     for root, dirs, files in os.walk(skinpath):
         for file in files:
-            if 'Font' in file and file.endswith('.xml'):
+            if file.lower() == 'font.xml':
                 found = os.path.normpath(os.path.join(root, file))
-                xbmc.log(f'[FontInstallMonitor] Font-XML found: {found}', xbmc.LOGINFO)
+                xbmc.log(f'TinyPPI: Font-XML found: {found}', xbmc.LOGINFO)
                 return found
-    xbmc.log(f'[FontInstallMonitor] No Font-XML in: {skinpath}', xbmc.LOGWARNING)
+    xbmc.log(f'TinyPPI: No Font-XML in: {skinpath}', xbmc.LOGWARNING)
     return None
 
 
@@ -50,7 +51,7 @@ def fontsAlreadyInstalled(skinpath):
         tree    = ET.parse(fontxmlpath)
         xmlroot = tree.getroot()
     except ET.ParseError as e:
-        xbmc.log(f'[FontInstallMonitor] XML-Parse-Error: {e}', xbmc.LOGERROR)
+        xbmc.log(f'TinyPPI: XML-Parse-Error: {e}', xbmc.LOGERROR)
         return False
 
     registered = set()
@@ -62,12 +63,12 @@ def fontsAlreadyInstalled(skinpath):
 
     for f in REQUIRED_FONTS:
         if (f['name'], f['filename']) not in registered:
-            xbmc.log(f"[FontInstallMonitor] XML entry missed: {f['name']}", xbmc.LOGINFO)
+            xbmc.log(f"TinyPPI: XML entry missed: {f['name']}", xbmc.LOGINFO)
             return False
 
     ttf_destdir = _findTtfDir(skinpath)
     if not ttf_destdir:
-        xbmc.log('[FontInstallMonitor] No TTF directory found', xbmc.LOGWARNING)
+        xbmc.log('TinyPPI: No TTF directory found', xbmc.LOGWARNING)
         return False
 
     addon_fonts_dir = os.path.normpath(os.path.join(CWD, 'fonts'))
@@ -75,7 +76,7 @@ def fontsAlreadyInstalled(skinpath):
         for file in files:
             dest = os.path.normpath(os.path.join(ttf_destdir, file))
             if not os.path.exists(dest):
-                xbmc.log(f'[FontInstallMonitor] TTF missed: {file}', xbmc.LOGINFO)
+                xbmc.log(f'TinyPPI: TTF missed: {file}', xbmc.LOGINFO)
                 return False
 
     return True
@@ -87,8 +88,8 @@ def installFont():
     def getSkinPath():
         localpath = os.path.normpath(os.path.join(PATHADDONS, xbmc.getSkinDir()))
         syspath   = os.path.normpath(os.path.join(os.getcwd(), 'addons', xbmc.getSkinDir()))
-        xbmc.log(f'[FontInstallMonitor] Skin local: {localpath}', xbmc.LOGINFO)
-        xbmc.log(f'[FontInstallMonitor] Skin sys:   {syspath}',   xbmc.LOGINFO)
+        xbmc.log(f'TinyPPI: Skin local: {localpath}', xbmc.LOGINFO)
+        xbmc.log(f'TinyPPI: Skin sys:   {syspath}',   xbmc.LOGINFO)
         if os.path.exists(localpath):
             return localpath
         elif os.path.exists(syspath):
@@ -97,13 +98,13 @@ def installFont():
 
     skinpath = getSkinPath()
     if not skinpath:
-        xbmc.log('[FontInstallMonitor] Skin path not found', xbmc.LOGWARNING)
+        xbmc.log('TinyPPI: Skin path not found', xbmc.LOGWARNING)
         return
 
-    xbmc.log(f'[FontInstallMonitor] Skin path: {skinpath}', xbmc.LOGINFO)
+    xbmc.log(f'TinyPPI: Skin path: {skinpath}', xbmc.LOGINFO)
 
     if fontsAlreadyInstalled(skinpath):
-        xbmc.log('[FontInstallMonitor] All fonts are already installed – skip installation', xbmc.LOGINFO)
+        xbmc.log('TinyPPI: All fonts are already installed – skip installation', xbmc.LOGINFO)
         return
 
     # ── XML ──────────────────────────────────────────────────────────────────
@@ -113,7 +114,7 @@ def installFont():
 
         fontxmlpath = _findFontXml(path)
         if not fontxmlpath:
-            xbmc.log('[FontInstallMonitor] installxml: Font-XML not found', xbmc.LOGERROR)
+            xbmc.log('TinyPPI: installxml: Font-XML not found', xbmc.LOGERROR)
             return
 
         tree    = ET.parse(fontxmlpath)
@@ -137,7 +138,7 @@ def installFont():
             else:
                 insert_idx = len(list(fontset))
 
-            xbmc.log(f'[FontInstallMonitor] Edit fontset "{fset_id}", Insert Index: {insert_idx}', xbmc.LOGINFO)
+            xbmc.log(f'TinyPPI: Edit fontset "{fset_id}", Insert Index: {insert_idx}', xbmc.LOGINFO)
 
             for f in REQUIRED_FONTS:
                 if (f['name'], f['filename']) not in registered:
@@ -149,7 +150,7 @@ def installFont():
                     insert_idx += 1
                     registered.add((f['name'], f['filename']))
                     added = True
-                    xbmc.log(f"[FontInstallMonitor] Font inserted: {f['name']} in fontset \"{fset_id}\"", xbmc.LOGINFO)
+                    xbmc.log(f"TinyPPI: Font inserted: {f['name']} in fontset \"{fset_id}\"", xbmc.LOGINFO)
 
         if added:
             try:
@@ -158,12 +159,12 @@ def installFont():
                 pass
 
             tree.write(fontxmlpath, encoding='utf-8', xml_declaration=True)
-            xbmc.log(f'[FontInstallMonitor] XML writen: {fontxmlpath}', xbmc.LOGINFO)
+            xbmc.log(f'TinyPPI: XML writen: {fontxmlpath}', xbmc.LOGINFO)
 
             global modified
             modified = True
         else:
-            xbmc.log('[FontInstallMonitor] No new fonts have been added', xbmc.LOGINFO)
+            xbmc.log('TinyPPI: No new fonts have been added', xbmc.LOGINFO)
 
     # ── TTF ──────────────────────────────────────────────────────────────────
 
@@ -172,12 +173,12 @@ def installFont():
 
         ttf_destdir = _findTtfDir(path)
         if not ttf_destdir:
-            xbmc.log('[FontInstallMonitor] installttf: No TTF destination directory', xbmc.LOGWARNING)
+            xbmc.log('TinyPPI: installttf: No TTF destination directory', xbmc.LOGWARNING)
             return
 
         addon_fonts_dir = os.path.normpath(os.path.join(CWD, 'fonts'))
-        xbmc.log(f'[FontInstallMonitor] TTF source: {addon_fonts_dir}', xbmc.LOGINFO)
-        xbmc.log(f'[FontInstallMonitor] TTF target: {ttf_destdir}', xbmc.LOGINFO)
+        xbmc.log(f'TinyPPI: TTF source: {addon_fonts_dir}', xbmc.LOGINFO)
+        xbmc.log(f'TinyPPI: TTF target: {ttf_destdir}', xbmc.LOGINFO)
 
         for root, dirs, files in os.walk(addon_fonts_dir):
             for file in files:
@@ -185,11 +186,11 @@ def installFont():
                 dest = os.path.normpath(os.path.join(ttf_destdir, file))
                 if not os.path.exists(dest):
                     shutil.copy(src, dest)
-                    xbmc.log(f'[FontInstallMonitor] TTF copied: {file}', xbmc.LOGINFO)
+                    xbmc.log(f'TinyPPI: TTF copied: {file}', xbmc.LOGINFO)
                     global modified
                     modified = True
                 else:
-                    xbmc.log(f'[FontInstallMonitor] TTF already exists: {file}', xbmc.LOGINFO)
+                    xbmc.log(f'TinyPPI: TTF already exists: {file}', xbmc.LOGINFO)
 
     # ── Run ──────────────────────────────────────────────────────────────────
 
@@ -197,7 +198,7 @@ def installFont():
         installxml(skinpath)
         installttf(skinpath)
     except Exception as e:
-        xbmc.log(f'[FontInstallMonitor] Installation error: {e}', xbmc.LOGERROR)
+        xbmc.log(f'TinyPPI: Installation error: {e}', xbmc.LOGERROR)
         import traceback
         xbmc.log(traceback.format_exc(), xbmc.LOGERROR)
 
@@ -214,11 +215,11 @@ class FontInstallMonitor(xbmc.Monitor):
 
     def onNotification(self, sender, method, data):
         if method == 'System.OnUpdated':
-            xbmc.log('[FontInstallMonitor] System.OnUpdated – Check fonts', xbmc.LOGINFO)
+            xbmc.log('TinyPPI: System.OnUpdated – Check fonts', xbmc.LOGINFO)
             self._reinstall()
 
     def onSkinChanged(self):
-        xbmc.log('[FontInstallMonitor] Skin changed – Check fonts', xbmc.LOGINFO)
+        xbmc.log('TinyPPI: Skin changed – Check fonts', xbmc.LOGINFO)
         xbmc.sleep(500)
         self._reinstall()
 

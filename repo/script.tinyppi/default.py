@@ -3,9 +3,11 @@ import playerprops
 import sys
 import threading
 import time
+import os
 import xbmc
 import xbmcaddon
 import xbmcgui
+import xbmcvfs
 
 ADDON = xbmcaddon.Addon()
 ADDON_PATH = ADDON.getAddonInfo('path')
@@ -88,6 +90,21 @@ def open_tinyppi():
     win = xbmcgui.Window(10000)
     player = xbmc.Player()
 
+    skin_path = xbmcvfs.translatePath("special://skin/")
+    is_720_skin = os.path.exists(os.path.join(skin_path, "720p"))
+
+    if is_720_skin:
+
+        xbmcgui.Dialog().notification(
+            "TinyPPI",
+            ADDON.getLocalizedString(32012),
+            xbmcgui.NOTIFICATION_ERROR,
+            4000
+        )
+
+        xbmc.log("TinyPPI: 720p skin detected - unsupported", xbmc.LOGWARNING)
+        return
+
     if not xbmc.getCondVisibility("Window.IsActive(fullscreenvideo)"):
         return
 
@@ -95,7 +112,7 @@ def open_tinyppi():
         return
 
     if win.getProperty(WINDOW_PROP) == "true":
-        xbmc.log("TinyPPI: TOGGLE close", xbmc.LOGINFO)
+        xbmc.log("TinyPPI: Toggle close", xbmc.LOGINFO)
 
         xbmc.executebuiltin("Action(Back)")
         return
