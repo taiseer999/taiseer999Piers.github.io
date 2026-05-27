@@ -25,7 +25,7 @@
                 <include content="Size_SlideOver_Conditional_Buttons">
                     <param name="condition">$EXP[FileBrowser_Conditional_Buttons_Expression]</param>
                 </include>
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
                     <control type="group">
@@ -129,6 +129,5 @@
         </include>
 
     </include>
-
 
 </includes>

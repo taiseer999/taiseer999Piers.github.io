@@ -123,7 +123,7 @@
     <include name="DialogProcessInfo_Items">
         <content>
 
-            <!-- Process -->
+
             <item>
                 <label>$LOCALIZE[38031]</label>
                 <label2>$INFO[Player.Process(videodar),, $LOCALIZE[31260]]$INFO[Player.Process(videofps),$COMMA , $LOCALIZE[31259]]$INFO[VideoPlayer.VideoBitrate,$COMMA , kb/s]</label2>
@@ -167,7 +167,7 @@
                 <param name="info">Player.Process(deintmethod)</param>
             </include>
 
-            <!-- PVR -->
+
             <include content="DialogProcessInfo_Items_PVRObject">
                 <param name="label">$LOCALIZE[19099]</param>
                 <param name="info">PVR.ActStreamServiceName</param>

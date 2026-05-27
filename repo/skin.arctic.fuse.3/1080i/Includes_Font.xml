@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-    <!--
-    =====================================================
 
-    Typographic Scale is Pentatonic
-    n=5 r=2 f0=30
-
-    quantise plotbox linespacing to 40px grid
-
-    =====================================================
-     (2)    (4)    (5)     1      2      3      4      5
-     17  >  23  >  26  >  30  >  34  >  40  >  45  >  52
-    hint   tiny   mini   main   midi   head   huge   info
-    =====================================================
--->
 
     <include name="Font_Static">
         <param name="aspect_system">0.8</param>
         <definition>
 
-            <!-- Font for codec flag -->
+
             <font>
                 <name>font_infotag_bold</name>
                 <filename>monadit.ttf</filename>
@@ -28,7 +15,7 @@
                 <style>uppercase</style>
             </font>
 
-            <!-- Font for codecs flag -->
+
             <font>
                 <name>font_infotag_reg</name>
                 <filename>monaditreg.ttf</filename>
@@ -36,7 +23,7 @@
                 <style>uppercase</style>
             </font>
 
-            <!-- TOP BAR -->
+
             <font>
                 <name>font_Topbar_bold</name>
                 <filename>monadi BOLD.ttf</filename>
@@ -44,7 +31,7 @@
                 <style>uppercase</style>
             </font>
 
-            <!-- TOP BAR Info-->
+
             <font>
                 <name>font_Topbarinfo</name>
                 <filename>monadi-reg.ttf</filename>
@@ -53,7 +40,6 @@
             </font>
 
 
-            <!-- Keyboard Symbol Font -->
             <font>
                 <name>font_midi_iconic</name>
                 <filename>fa-solid-900.ttf</filename>
@@ -94,7 +80,7 @@
                 <filename>iphone.ttf</filename>
                 <size>24</size>
             </font>
-            <!-- Kodi Logo Font -->
+
             <font>
                 <name>font_logo</name>
                 <filename>Questrial-Regular.ttf</filename>
@@ -106,7 +92,7 @@
                 <size>50</size>
             </font>
 
-            <!-- Testing Fonts -->
+
             <font>
                 <name>font_debug</name>
                 <filename>CommitMono-400-Regular.ttf</filename>
@@ -120,7 +106,7 @@
                 <size>24</size>
             </font>
 
-            <!-- Music visualisation scrolling text -->
+
             <font>
                 <name>font_musicvis_biggest</name>
                 <filename>$PARAM[font_light]</filename>
@@ -158,7 +144,7 @@
         <param name="size_huge_x2">70</param>
         <param name="size_midi_x2">48</param>
 
-        <!-- Linespacing -->
+
         <param name="plot_linespacing_head">1.169</param>
         <param name="plot_linespacing_midi">1.455</param>
         <param name="plot_linespacing_main">1.1</param>
@@ -174,7 +160,7 @@
                 <param name="style_light">$PARAM[style_light]</param>
             </include>
 
-            <!-- Title fonts -->
+
             <font>
                 <name>font_title_huge</name>
                 <filename>Inter-Bold.ttf</filename>
@@ -186,62 +172,6 @@
                 <size>60</size>
             </font>
 
-            <!-- <font>
-                <name>font_title_midi_1</name>
-                <filename>titles/LavishlyYours.ttf</filename>
-                <linespacing>0.8</linespacing>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_2</name>
-                <filename>titles/BungeeShade.ttf</filename>
-                <linespacing>0.9</linespacing>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_3</name>
-                <filename>titles/PermanentMarker.ttf</filename>
-                <linespacing>0.8</linespacing>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_4</name>
-                <filename>titles/Condiment.ttf</filename>
-                <linespacing>0.9</linespacing>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_5</name>
-                <filename>titles/OoohBaby.ttf</filename>
-                <linespacing>0.9</linespacing>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_6</name>
-                <filename>titles/Aboreto.ttf</filename>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_7</name>
-                <filename>titles/Sail.ttf</filename>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_8</name>
-                <filename>titles/Barrio.ttf</filename>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_9</name>
-                <filename>titles/Turnaround.ttf</filename>
-                <size>$PARAM[size_midi_x2]</size>
-            </font>
-            <font>
-                <name>font_title_midi_0</name>
-                <filename>titles/Meddon.ttf</filename>
-                <linespacing>0.6</linespacing>
-                <size>$PARAM[size_midi_x2]</size>
-            </font> -->
 
 
             <font>
@@ -251,7 +181,7 @@
                 <linespacing>$PARAM[plot_linespacing_head]</linespacing>
             </font>
 
-            <!-- Bold Fonts -->
+
             <font>
                 <name>font_huge_bold</name>
                 <filename>$PARAM[font_bold]</filename>
@@ -289,7 +219,7 @@
                 <size>$PARAM[size_hint]</size>
             </font>
 
-            <!-- Standard Fonts -->
+
             <font>
                 <name>font_huge</name>
                 <filename>$PARAM[font_regular]</filename>
@@ -331,7 +261,7 @@
                 <size>$PARAM[size_hint]</size>
             </font>
 
-            <!-- Textbox Fonts -->
+
             <font>
                 <name>font_midi_plot</name>
                 <filename>$PARAM[font_regular]</filename>
@@ -357,7 +287,7 @@
                 <size>$PARAM[size_tiny]</size>
             </font>
 
-            <!-- Required for system -->
+
             <font>
                 <name>font10</name>
                 <filename>$PARAM[font_regular]</filename>

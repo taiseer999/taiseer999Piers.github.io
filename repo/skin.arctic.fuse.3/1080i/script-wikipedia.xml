@@ -15,11 +15,11 @@
                 <param name="subline">false</param>
             </include>
 
-            <!-- Content -->
+
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
 
-                <!-- Left -->
+
                 <control type="group">
                     <width>380</width>
                     <control type="group">
@@ -99,8 +99,6 @@
                 </control>
             </control>
         </control>
-
-
 
         <include content="Object_Hidden_Button">
             <param name="id">9904</param>

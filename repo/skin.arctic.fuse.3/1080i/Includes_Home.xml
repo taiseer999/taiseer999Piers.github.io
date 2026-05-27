@@ -203,12 +203,11 @@
 
     <include name="Home_Vert_Movement">
         <onleft>SetProperty(Bumper.Direction,Left,Home)</onleft>
-        <!-- <onleft>ActivateWindow(1180)</onleft> -->
+
         <onleft>ActivateWindow(1181)</onleft>
         <oninfo>ActivateWindow(1181)</oninfo>
 
-        <!-- <onright condition="![String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined)]">SetFocus($INFO[Window.Property(TMDBHelper.WidgetContainer)],0,absolute)</onright>
-        <onright condition="[String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined)]">400</onright> -->
+
 
         <onright>400</onright>
 
@@ -271,8 +270,7 @@
     </include>
 
     <include name="Home_Animation">
-        <!-- <animation effect="slide" start="0,-200" end="0" time="400" delay="100" tween="cubic" easing="out">Visible</animation>
-        <animation effect="slide" end="0,-200" start="0" time="400" tween="cubic" easing="out">Hidden</animation> -->
+
         <animation effect="fade" start="0" end="100" time="400" delay="200" tween="cubic" easing="out">Visible</animation>
         <animation effect="fade" end="0" start="100" time="200" tween="cubic" easing="out">Hidden</animation>
     </include>
@@ -286,7 +284,7 @@
     </include>
     <include name="Home_Info_Animation">
         <animation effect="fade" start="0" end="100" time="400" delay="200" tween="cubic" easing="in">Visible</animation>
-        <!-- <animation effect="fade" end="0" start="100" time="200" tween="cubic" easing="in">Hidden</animation> -->
+
     </include>
 
     <include name="Home_Reposition">
@@ -883,7 +881,6 @@
             </control>
         </definition>
     </include>
-
 
     <include name="Home_Grouplist_Icon_Definition">
         <centerleft>50%</centerleft>

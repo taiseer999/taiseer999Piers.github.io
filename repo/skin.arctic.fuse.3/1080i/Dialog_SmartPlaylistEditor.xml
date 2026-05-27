@@ -11,10 +11,10 @@
             </include>
             <control type="group">
 
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
-                    <!-- Left -->
+
                     <control type="group">
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
@@ -96,7 +96,7 @@
                             </control>
                         </control>
                     </control>
-                    <!-- Right -->
+
                     <include content="Part_Button_Grouplist">
                         <param name="onleft">61</param>
                         <param name="items">SmartPlaylistEditor_Items</param>
@@ -113,11 +113,11 @@
                 <param name="dialog_size">Dimension_DialogPlaylistRule</param>
             </include>
 
-            <!-- Content -->
+
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
 
-                <!-- Left -->
+
                 <control type="group">
                     <include>Size_LeftGroup_Main</include>
                     <control type="group">

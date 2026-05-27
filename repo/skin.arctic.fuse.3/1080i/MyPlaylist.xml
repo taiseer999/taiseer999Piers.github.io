@@ -26,7 +26,6 @@
             <control type="group">
                 <include>Animation_View_WindowChange</include>
 
-
                 <include content="Object_Hidden_Button">
                     <param name="id">611</param>
                     <onfocus>SetFocus(64)</onfocus>

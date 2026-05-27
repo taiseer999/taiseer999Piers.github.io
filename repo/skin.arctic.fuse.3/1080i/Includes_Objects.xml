@@ -576,7 +576,6 @@
                     <param name="role">$PARAM[role]</param>
                     <param name="icon">$PARAM[icon]</param>
 
-
                     <include content="Object_InfoCircle_Image" condition="$PARAM[alt1]">
                         <param name="colordiffuse">main_bg_100</param>
                         <param name="icon">common/white.png</param>
@@ -639,7 +638,6 @@
                     <param name="role">$PARAM[role]</param>
                     <param name="icon">$PARAM[icon]</param>
                     <param name="fallback_role">$PARAM[fallback_role]</param>
-
 
                     <include content="Object_InfoCircle_Image" condition="$PARAM[alt1]">
                         <param name="colordiffuse">main_bg_100</param>
@@ -1029,24 +1027,24 @@
                 <width>64</width>
                 <height>64</height>
 
-                <!-- Visibility of Group -->
+
                 <include content="Object_Indicator_Visible">
                     <param name="listitem">$PARAM[listitem]</param>
                 </include>
 
-                <!-- Focused Item -->
+
                 <include content="Object_Indicator_Selected" condition="$PARAM[selected]">
                     <param name="shadow">$PARAM[shadow]</param>
                     <param name="listitem">$PARAM[listitem]</param>
                 </include>
 
-                <!-- Black Circle Backing -->
+
                 <include content="Object_Control" condition="$PARAM[backing]">
                     <param name="control">image</param>
                     <texture colordiffuse="ff333333">indicator/circle-colordiffuse.png</texture>
                 </include>
 
-                <!-- Percentage -->
+
                 <include content="Object_Control">
                     <param name="control">image</param>
                     <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">$VAR[Defs_PercentPlayed$PARAM[affix],progress/circle/p,.png]</texture>
@@ -1057,7 +1055,7 @@
                     </include>
                 </include>
 
-                <!-- Episodes Count -->
+
                 <include content="Object_Control" condition="!Skin.HasSetting(Indicator.DisableEpisodes)">
                     <param name="control">label</param>
                     <font>font_hint_bold</font>
@@ -1071,7 +1069,7 @@
                     </include>
                 </include>
 
-                <!-- Timers -->
+
                 <control type="group">
                     <include content="Object_Indicator_Visible">
                         <param name="include_type">Timers</param>
@@ -1090,7 +1088,7 @@
                     </control>
                 </control>
 
-                <!-- Progress -->
+
                 <include content="Object_Control" condition="!Skin.HasSetting(Indicator.DisableProgress)">
                     <param name="control">image</param>
                     <bordersize>20</bordersize>
@@ -1101,7 +1099,7 @@
                     </include>
                 </include>
 
-                <!-- Watched -->
+
                 <include content="Object_Control" condition="!Skin.HasSetting(Indicator.DisableWatched)">
                     <param name="control">group</param>
                     <control type="image">
@@ -1118,7 +1116,7 @@
                     </include>
                 </include>
 
-                <!-- Library -->
+
                 <include content="Object_Control" condition="!Skin.HasSetting(Indicator.DisableLibrary)">
                     <param name="control">image</param>
                     <bordersize>20</bordersize>
@@ -1129,7 +1127,7 @@
                     </include>
                 </include>
 
-                <!-- Collection -->
+
                 <include content="Object_Control" condition="!Skin.HasSetting(Indicator.DisableCollection)">
                     <param name="control">image</param>
                     <bordersize>20</bordersize>
@@ -1140,7 +1138,7 @@
                     </include>
                 </include>
 
-                <!-- Playing -->
+
                 <include content="Object_Control" condition="True">
                     <param name="control">group</param>
                     <control type="image">
@@ -1558,10 +1556,10 @@
         <onclick>Number9</onclick>
     </include>
 
-    <include name="Object_SearchLetter_Click__"> <!-- Space -->
+    <include name="Object_SearchLetter_Click__">
         <onclick>Number0</onclick>
     </include>
-    <include name="Object_SearchLetter_Click_&lt;"> <!-- Backspace -->
+    <include name="Object_SearchLetter_Click_&lt;">
         <onclick>Backspace</onclick>
     </include>
 

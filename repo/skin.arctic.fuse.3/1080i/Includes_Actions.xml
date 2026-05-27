@@ -31,14 +31,14 @@
     </include>
 
     <variable name="Action_DialogInfo_PlayMedia">
-        <!-- Play FileNameAndPath -->
+
         <value condition="!String.IsEmpty(ListItem.FileNameAndPath) + !$EXP[Exp_IsFolder]">RunScript(plugin.video.themoviedb.helper,close_dialog=1190,"playmedia=$INFO[ListItem.FileNameAndPath]")</value>
 
-        <!-- Browse Folder -->
+
         <value condition="$EXP[Exp_IsFolder] + Window.IsVisible(videos)">RunScript(plugin.video.themoviedb.helper,close_dialog=1190,"call_update=$INFO[ListItem.FolderPath]")</value>
         <value condition="$EXP[Exp_IsFolder]">RunScript(plugin.video.themoviedb.helper,close_dialog=1190,"call_path=$INFO[ListItem.FolderPath]")</value>
 
-        <!-- Play FolderPath -->
+
         <value>RunScript(plugin.video.themoviedb.helper,close_dialog=1190,"playmedia=$INFO[ListItem.FolderPath]")</value>
     </variable>
 
@@ -71,7 +71,7 @@
         <onload condition="String.IsEmpty(Skin.String(OptionsTiles.03.Target)) + !String.IsEmpty(Skin.String(OptionsTiles.03.Path))">Skin.SetString(OptionsTiles.03.Onclick,$INFO[Skin.String(OptionsTiles.03.Path)])</onload>
         <onload condition="String.IsEmpty(Skin.String(OptionsTiles.04.Target)) + !String.IsEmpty(Skin.String(OptionsTiles.04.Path))">Skin.SetString(OptionsTiles.04.Onclick,$INFO[Skin.String(OptionsTiles.04.Path)])</onload>
 
-        <!-- Check for options tray -->
+
         <include>skinvariables-powertray-onload</include>
     </include>
 
@@ -144,11 +144,11 @@
         <param name="onparent">$EXP[Exp_Navigation_OnParent]</param>
         <definition>
 
-            <!-- Previous: Return to First Item -->
+
             <onback condition="$PARAM[enable] + $PARAM[onprevious] + !Integer.IsEqual(Container($PARAM[id]).CurrentItem,1)">$PARAM[grouplistid]</onback>
             <onback condition="$PARAM[enable] + $PARAM[onprevious] + !Integer.IsEqual(Container($PARAM[id]).CurrentItem,1)">SetFocus($PARAM[id],0,absolute)</onback>
 
-            <!-- Parent: Return to Top Focus (Previous on First Item = Parent Back) -->
+
             <onback condition="$PARAM[enable] + [[Integer.IsEqual(Container($PARAM[id]).CurrentItem,1) + $PARAM[onprevious]] | $PARAM[onparent]]">$PARAM[grouplistid]</onback>
             <onback condition="$PARAM[enable] + [[Integer.IsEqual(Container($PARAM[id]).CurrentItem,1) + $PARAM[onprevious]] | $PARAM[onparent]]">AlarmClock(refocus2,$PARAM[refocus],00:00,silent)</onback>
 

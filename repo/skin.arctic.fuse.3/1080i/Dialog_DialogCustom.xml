@@ -146,9 +146,7 @@
     </include>
 
 
-    <!-- Items -->
     <include name="DialogCustom_Settings_Items">
-
 
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_Settings_Items_ColourPresets)">DialogCustom_Settings_Items_ColourPresets</include>
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_Settings_Items_ColourHighlights)">DialogCustom_Settings_Items_ColourHighlights</include>
@@ -158,7 +156,6 @@
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_Settings_Items_Startup)">DialogCustom_Settings_Items_Startup</include>
 
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_MusicVis_Items)">DialogCustom_MusicVis_Items</include>
-
 
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_Settings_Items_Indicators)">DialogCustom_Settings_Items_Indicators</include>
 
@@ -1035,16 +1032,7 @@
             <onclick>Skin.ToggleSetting(OSD.DisplayInfoOnControls)</onclick>
         </include>
 
-        <!-- <include content="Settings_Button" description="Expanded info landscape art">
-            <param name="dialog">true</param>
-            <param name="id">8002</param>
-            <param name="control">radiobutton</param>
-            <param name="slevel">2</param>
-            <label>$LOCALIZE[31045] [LOWERCASE]$LOCALIZE[39123][/LOWERCASE]</label>
-            <selected>!Skin.HasSetting(OSD.DisableLandscapeOnInfo)</selected>
-            <onclick>Skin.ToggleSetting(OSD.DisableLandscapeOnInfo)</onclick>
-            <visible>Skin.HasSetting(OSD.DisplayInfoOnControls)</visible>
-        </include> -->
+
 
         <include content="Settings_Button" description="Expanded info plot and ratings">
             <param name="dialog">true</param>
@@ -1658,7 +1646,7 @@
             <onclick>SetProperty(ConfigureRatingItem,Item07,Home)</onclick>
             <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
             <onclick>ActivateWindow(1119)</onclick>
-        </include>. 
+        </include>.
 
         <include content="Settings_Button" description="CustomDialog Ratings">
             <param name="dialog">true</param>

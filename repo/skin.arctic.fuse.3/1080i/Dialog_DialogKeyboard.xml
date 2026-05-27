@@ -11,7 +11,7 @@
                 <param name="lines_right">constant_group_small_w</param>
             </include>
 
-            <!-- Content -->
+
             <control type="group">
                 <include>Size_Dialog_Pad</include>
 
@@ -29,7 +29,7 @@
                         <control type="group">
                             <include>Size_Grouplist_Pad</include>
 
-                            <!-- Text Entry -->
+
                             <control type="group" id="8312">
                                 <height>80</height>
                                 <width>keyboard_edit_w</width>
@@ -81,7 +81,7 @@
                                 </include>
                             </control>
 
-                            <!-- Keys -->
+
                             <control type="grouplist" id="8000">
                                 <align>bottom</align>
                                 <orientation>vertical</orientation>
@@ -111,7 +111,7 @@
                     </control>
                 </control>
 
-                <!-- Right -->
+
                 <include content="Part_Button_Grouplist">
                     <param name="items">DialogKeyboard_Items</param>
                     <param name="onleft">8000</param>
@@ -157,7 +157,6 @@
             </include>
         </definition>
     </include>
-
 
     <include name="DialogKeyboard_Row_Grouplist">
         <control type="grouplist" id="$PARAM[id]">

@@ -162,7 +162,6 @@
                             </control>
                         </control>
 
-
                         <control type="group">
                             <visible>Container(3).HasFocus(3)</visible>
                             <include content="List_DialogSelect">

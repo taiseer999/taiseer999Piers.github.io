@@ -8,14 +8,14 @@
             <onclick>Action(Back)</onclick>
             <onclick condition="Integer.IsGreater(Playlist.Length(video),0) + [Player.HasVideo | Integer.IsEqual(Playlist.Length(music),0)]">ActivateWindow(videoplaylist)</onclick>
             <onclick condition="Integer.IsGreater(Playlist.Length(music),0) + !Player.HasVideo">ActivateWindow(musicplaylist)</onclick>
-            <!-- <visible>[Integer.IsGreater(Playlist.Length(video),0) + [Player.HasVideo | Integer.IsEqual(Playlist.Length(music),0)]] | [Integer.IsGreater(Playlist.Length(music),0) + !Player.HasVideo]</visible> -->
+
         </item>
 
         <item>
             <label>$LOCALIZE[31579]</label>
             <icon>special://skin/extras/icons/backward-step.png</icon>
             <onclick>PlayerControl(Previous)</onclick>
-            <!-- <visible>Player.HasAudio</visible> -->
+
         </item>
 
         <item>
@@ -25,24 +25,15 @@
             <onclick condition="!Player.HasMedia">Action(Back)</onclick>
             <onclick condition="!Player.HasMedia + Integer.IsGreater(Playlist.Length(music),0)">PlayMedia(playlistmusic://,isdir,playlist_type_hint=0)</onclick>
             <onclick condition="!Player.HasMedia + !Integer.IsGreater(Playlist.Length(music),0)">PlayMedia(playlistvideo://,isdir,playlist_type_hint=1)</onclick>
-            <!-- <visible>Player.HasMedia | Integer.IsGreater(Playlist.Length(video),0) | Integer.IsGreater(Playlist.Length(music),0)</visible> -->
+
         </item>
-
-
 
         <item>
             <label>$LOCALIZE[209]</label>
             <icon>special://skin/extras/icons/forward-step.png</icon>
             <onclick>PlayerControl(Next)</onclick>
-            <!-- <visible>Player.HasAudio</visible> -->
-        </item>
 
-        <!-- <item>
-            <label>$LOCALIZE[31485]</label>
-            <icon>special://skin/extras/icons/stop.png</icon>
-            <onclick>PlayerControl(Stop)</onclick>
-            <visible>Player.HasMedia</visible>
-        </item> -->
+        </item>
 
 
 
@@ -51,7 +42,7 @@
             <icon>special://skin/extras/icons/fullscreen.png</icon>
             <onclick>Dialog.Close(all,true)</onclick>
             <onclick>Fullscreen</onclick>
-            <!-- <visible>Player.HasMedia</visible> -->
+
         </item>
     </include>
 

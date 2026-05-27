@@ -88,7 +88,6 @@
         <value>special://skin/extras/icons/settings-basic.png</value>
     </variable>
 
-
     <variable name="Image_Widget_Style">
         <value condition="String.IsEqual(ListItem.Property(widget_style),Landscape)">special://skin/extras/icons/view-landscape.png</value>
         <value condition="String.IsEqual(ListItem.Property(widget_style),Square)">special://skin/extras/icons/view-square.png</value>
@@ -340,7 +339,6 @@
         <value condition="!String.IsEmpty(Skin.String(Startup.ImageFolder))">$INFO[Skin.String(Startup.ImageFolder)]</value>
         <value>special://skin/extras/backgrounds/launch/</value>
     </variable>
-
 
     <variable name="Image_ResourceIcon">
         <value condition="$EXP[Exp_IsGenre]">$VAR[Image_GenreIcon]</value>
@@ -680,7 +678,6 @@
         <value condition="Integer.IsEqual(VideoPlayer.PlaylistPosition,49)">$VAR[Image_Landscape_LIA_C450_49]</value>
         <value condition="Integer.IsEqual(VideoPlayer.PlaylistPosition,50)">$VAR[Image_Landscape_LIA_C450_50]</value>
     </variable>
-
 
     <variable name="Image_DialogConfirm_10">
         <value condition="String.IsEqual(Control.GetLabel(10),$LOCALIZE[222])">special://skin/extras/icons/circle-xmark.png</value>

@@ -15,7 +15,6 @@
     <include>Action_BuildShortcuts_OnUnLoad</include>
     <controls>
 
-
         <include>Background</include>
 
         <include content="Settings_Dialog">
@@ -110,7 +109,6 @@
                     </include>
                 </include>
 
-
                 <include content="Settings_Right_Group">
                     <control type="group">
                         <control type="group" id="340">
@@ -133,8 +131,6 @@
                     </control>
                 </include>
             </include>
-
-
 
         </include>
 

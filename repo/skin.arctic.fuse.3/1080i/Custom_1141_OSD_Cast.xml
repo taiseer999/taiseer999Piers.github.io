@@ -17,7 +17,7 @@
                     <param name="label">[CAPITALIZE]$INFO[Skin.String(VideoOSD.PersonCredits.CastCrew)][/CAPITALIZE]$VAR[Label_OSD_Title, (,)]</param>
                 </include>
 
-                <!-- Cast Icon -->
+
                 <include content="OSD_Info_Tray">
                     <param name="icon">$INFO[Container(6501).ListItem.Icon]</param>
                     <param name="role">$INFO[Container(6501).ListItem.Label]</param>
@@ -25,7 +25,7 @@
                     <param name="text">$INFO[Window(Home).Property(TMDbHelper.ListItem.Plot)]</param>
                 </include>
 
-                <!-- Cast List -->
+
                 <include content="List_Poster_Row">
                     <param name="orientation">horizontal</param>
                     <param name="control">fixedlist</param>
@@ -38,7 +38,6 @@
                     <onup condition="Skin.String(VideoOSD.PersonCredits.CastCrew,cast)">PreviousMenu</onup>
                     <onup condition="Skin.String(VideoOSD.PersonCredits.CastCrew,crew)">Skin.SetString(VideoOSD.PersonCredits.CastCrew,cast)</onup>
                     <ondown condition="Skin.String(VideoOSD.PersonCredits.CastCrew,cast)">Skin.SetString(VideoOSD.PersonCredits.CastCrew,crew)</ondown>
-
 
                     <include>Animation_OSD_Dialog_VisibleChange</include>
 

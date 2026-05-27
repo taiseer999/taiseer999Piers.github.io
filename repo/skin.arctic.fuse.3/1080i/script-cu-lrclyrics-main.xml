@@ -13,7 +13,7 @@
             <control type="group">
                 <top>-10</top>
                 <bottom>10</bottom>
-                <!-- ** Required ** Do not change <id> or <type> (Lyrics, will autoscroll if lrc based lyrics are shown) -->
+
                 <control type="list" id="110">
                     <scrolltime>200</scrolltime>
                     <itemlayout height="80">
@@ -64,7 +64,7 @@
             </control>
         </control>
 
-        <!-- ** Required ** Do not change <id> or <type> (name of the used scraper and optionally the number of found lyrics) -->
+
         <control type="label" id="200">
             <description>Scraper label</description>
             <visible>false</visible>

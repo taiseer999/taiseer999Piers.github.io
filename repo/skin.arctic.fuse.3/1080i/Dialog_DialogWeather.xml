@@ -11,11 +11,11 @@
                     <param name="dialog_size">Dimension_DialogFullMenu</param>
                 </include>
 
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
 
-                    <!-- Left -->
+
                     <control type="group">
                         <include>Size_LeftGroup_Large</include>
                         <control type="group">
@@ -61,7 +61,7 @@
         </definition>
     </include>
 
-    <!-- Current Conditions -->
+
 
     <include name="DialogWeather_Current_Conditions">
         <control type="grouplist">
@@ -95,19 +95,19 @@
             <height>120</height>
             <orientation>horizontal</orientation>
             <align>center</align>
-            <!-- UV -->
+
             <include content="DialogWeather_Details">
                 <param name="top_label">UV</param>
                 <param name="sub_label">$INFO[Window(Weather).Property(Current.UVIndex)]</param>
                 <visible>!String.IsEmpty(Window(Weather).Property(Current.UVIndex))</visible>
             </include>
-            <!-- UV -->
+
             <include content="DialogWeather_Details">
                 <param name="top_label">$INFO[Window(Weather).Property(Current.FeelsLike), ,°]</param>
                 <param name="sub_label">[CAPITALIZE]$LOCALIZE[402][/CAPITALIZE]</param>
                 <visible>!String.IsEmpty(Window(Weather).Property(Current.FeelsLike))</visible>
             </include>
-            <!-- Chance Rain -->
+
             <include content="DialogWeather_Details">
                 <param name="sub_label">[CAPITALIZE]$LOCALIZE[31465][/CAPITALIZE]</param>
                 <param name="top_label">$INFO[Window(Weather).Property(Current.ChancePrecipitation)]</param>
@@ -211,7 +211,7 @@
         </definition>
     </include>
 
-    <!-- Forecast Conditions -->
+
 
     <include name="DialogWeather_Forecast">
         <control type="group">
@@ -445,7 +445,7 @@
             <visible>!String.IsEqual(Weather.Plugin,weather.gismeteo)</visible>
             <height>760</height>
             <control type="group">
-                <!-- Every two hours for hourly to cover full 24hours in 2 pages of 6 items -->
+
                 <include content="DialogWeather_Forecast_List" condition="!String.IsEqual(Weather.Plugin,weather.gismeteo)">
                     <param name="visible">True</param>
                     <param name="items">DialogWeather_Forecast_TwoHour_Early_Items</param>
@@ -470,7 +470,7 @@
             <visible>String.IsEqual(Weather.Plugin,weather.gismeteo)</visible>
             <height>760</height>
             <control type="group">
-                <!-- GisMeteo hourly is every 3 hours so dont artificially add in spacing -->
+
                 <include content="DialogWeather_Forecast_List" condition="String.IsEqual(Weather.Plugin,weather.gismeteo)">
                     <param name="visible">True</param>
                     <param name="items">DialogWeather_Forecast_Hourly_Early_Items</param>
@@ -560,7 +560,7 @@
         </control>
     </include>
 
-    <!-- Graphs -->
+
 
     <include name="DialogWeather_Graph">
         <control type="group">
@@ -710,7 +710,7 @@
         </control>
     </include>
 
-    <!-- Radars -->
+
     <include name="DialogWeather_Radar">
         <include condition="String.IsEqual(Weather.Plugin,weather.ozweather)">DialogWeather_Radar_OzWeather</include>
         <include condition="String.IsEqual(Weather.Plugin,weather.openmeteo)">DialogWeather_Radar_OpenMeteo</include>

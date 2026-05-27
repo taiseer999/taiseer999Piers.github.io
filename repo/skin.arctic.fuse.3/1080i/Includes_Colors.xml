@@ -15,7 +15,7 @@
         <value>monochrome</value>
     </variable>
 
-    <!-- ColorPicker -->
+
     <variable name="ColorPickerHex">
         <value condition="Control.HasFocus(3000)">$INFO[Container(3000).ListItem.Label]</value>
         <value condition="String.IsEqual(Window(Home).Property(ColorPicker_Type),Highlight)">$VAR[ColorHighlight]</value>
@@ -28,25 +28,25 @@
         <value condition="String.IsEqual(Window(Home).Property(ColorPicker_Type),mid_season_finale)">$VAR[ColorBanner_mid_season_finale]</value>
     </variable>
 
-    <!-- Highlight Color -->
+
     <variable name="ColorHighlight">
         <value condition="!String.IsEmpty(Skin.String(focuscolor.name))">$INFO[Skin.String(focuscolor.name)]</value>
         <value>ffffffff</value>
     </variable>
 
-    <!-- Watched / Progress Color -->
+
     <variable name="ColorWatchedProgress">
         <value condition="!String.IsEmpty(Skin.String(watchedprogresscolor.name))">$INFO[Skin.String(watchedprogresscolor.name)]</value>
         <value>ff03b585</value>
     </variable>
 
-    <!-- Mouse Pointer -->
+
     <variable name="ColorMousePointer">
         <value condition="!String.IsEmpty(Skin.String(mousepointercolor.name))">$INFO[Skin.String(mousepointercolor.name)]</value>
         <value>bf999999</value>
     </variable>
 
-    <!-- Banner Colors -->
+
     <variable name="ColorBanner_series_premiere">
         <value condition="!String.IsEmpty(Skin.String(series_premiere_color.name))">$INFO[Skin.String(series_premiere_color.name)]</value>
         <value>ff0385b5</value>
@@ -76,12 +76,12 @@
         <value>ff181818</value>
     </variable>
 
-    <!-- EPG Progress Color -->
+
     <variable name="ColorPVRProgress">
         <value>main_bg_70</value>
     </variable>
 
-    <!-- Selected Color -->
+
     <variable name="ColorSelected_30">
         <value condition="!Skin.HasSetting(RevertSelectedText)">4d272727</value>
         <value>4dffffff</value>
@@ -96,7 +96,7 @@
         <value>ff272727</value>
     </variable>
 
-    <!-- Tricks for Settings Changer -->
+
     <variable name="ColorSettingsToggleButtonHighlight">
         <value condition="[Control.HasFocus(20) + !System.HasVisibleModalDialog]">00ffffff</value>
         <value>$VAR[ColorHighlight]</value>

@@ -16,7 +16,7 @@
                 <include content="Size_SlideOver_Conditional_Buttons">
                     <param name="condition">$EXP[DialogSelect_Conditional_Buttons_Expression]</param>
                 </include>
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
                     <control type="group">
@@ -100,7 +100,7 @@
                 <param name="dialog_size">Dimension_DialogFullMenu</param>
                 <param name="topline">false</param>
             </include>
-            <!-- Content -->
+
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
                 <control type="group">
@@ -124,47 +124,16 @@
                             <right>0</right>
                             <top>20</top>
                             <bottom>20</bottom>
-                            <!-- <control type="grouplist">
-                                <orientation>horizontal</orientation>
-                                <itemgap>0</itemgap>
-                                <control type="group">
-                                    <width>1000</width>
-                                    <height>580</height>
-                                    <animation effect="fade" start="100" end="50" condition="true">Conditional</animation>
-                                    <include content="Layout_ViewType">
-                                        <param name="selected">false</param>
-                                        <param name="icon">$INFO[Container(3).ListItem(-1).Icon]</param>
-                                    </include>
-                                </control>
-                                <control type="group">
-                                    <width>1000</width>
-                                    <height>580</height>
-                                    <include content="Layout_ViewType">
-                                        <param name="selected">true</param>
-                                        <param name="icon">$INFO[Container(3).ListItem.Icon]</param>
-                                    </include>
-                                </control>
-                                <control type="group">
-                                    <width>1000</width>
-                                    <height>580</height>
-                                    <animation effect="fade" start="100" end="50" condition="true">Conditional</animation>
-                                    <include content="Layout_ViewType">
-                                        <param name="selected">false</param>
-                                        <param name="icon">$INFO[Container(3).ListItem(1).Icon]</param>
-                                    </include>
-                                </control>
-                            </control> -->
+
 
                             <control type="wraplist" id="3">
 
-                                <!-- <include content="Animation_ConditionalFade">
-                                    <param name="condition">true</param>
-                                </include> -->
+
                                 <animation effect="fade" start="100" end="50" condition="true">Conditional</animation>
                                 <orientation>horizontal</orientation>
                                 <focusposition>1</focusposition>
                                 <preloaditems>2</preloaditems>
-                                <!-- <scrolltime>0</scrolltime> -->
+
 
                                 <itemlayout width="1000" height="580">
                                     <include content="Layout_ViewType">
@@ -261,16 +230,11 @@
                         </control>
 
                     </control>
-                    <!-- <include content="Part_Scrollbar">
-                        <param name="id">61</param>
-                        <onleft>3</onleft>
-                        <onright>9000</onright>
-                    </include> -->
+
                 </control>
             </control>
         </control>
     </include>
-
 
     <include name="DialogSelect_GameFilters">
         <include>Part_Dim_Overlay</include>
@@ -281,7 +245,7 @@
                 <param name="dialog_size">Dimension_DialogMainMenu</param>
                 <param name="topline">false</param>
             </include>
-            <!-- Content -->
+
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
                 <control type="group">
@@ -363,16 +327,14 @@
                     <param name="dialog_size">$PARAM[dimension]</param>
                     <param name="topline">false</param>
                 </include>
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
 
-                    <!-- Left -->
+
                     <control type="group">
                         <include>Size_LeftGroup_Large</include>
-                        <!-- <width>constant_group_large_w</width>
-                        <right>0</right>
-                        <include>Part_Panel</include> -->
+
                         <include content="DialogPlot_Artwork">
                             <param name="poster_icon">$VAR[Image_VideoVersion_Poster]</param>
                         </include>
@@ -380,7 +342,7 @@
                     <control type="group">
                         <include>Part_Panel</include>
                         <include>Size_RightGroup_Large</include>
-                        <!-- <right>constant_group_large_w</right> -->
+
                         <control type="group">
                             <include>Size_Group_Head</include>
                             <include content="Part_HeadText">
@@ -504,7 +466,7 @@
         <value>special://skin/extras/icons/circle-plus.png</value>
     </variable>
 
-    <!-- Items -->
+
     <include name="DialogSelect_Standard_Items">
         <include content="Button_Dialog">
             <param name="id">9001</param>
@@ -646,6 +608,5 @@
             </item>
         </content>
     </include>
-
 
 </includes>

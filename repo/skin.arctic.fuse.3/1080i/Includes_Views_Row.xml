@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-    <!-- Square Row -->
+
     <include name="View_500_Square_Row">
         <include content="View_Row_Include">
             <param name="id">500</param>
@@ -11,7 +11,7 @@
         </include>
     </include>
 
-    <!-- Landscape Row -->
+
     <include name="View_501_Landscape_Row">
         <include content="View_Row_Include">
             <param name="id">501</param>
@@ -21,7 +21,7 @@
         </include>
     </include>
 
-    <!-- Poster Row -->
+
     <include name="View_502_Poster_Row">
         <include content="View_Row_Include">
             <param name="id">502</param>
@@ -31,7 +31,7 @@
         </include>
     </include>
 
-    <!-- Circle Row -->
+
     <include name="View_503_Circle_Row">
         <include content="View_Row_Include">
             <param name="id">503</param>
@@ -41,7 +41,7 @@
         </include>
     </include>
 
-    <!-- Board Row -->
+
     <include name="View_504_Board_Row">
         <include content="View_Row_Include">
             <param name="id">504</param>
@@ -51,7 +51,7 @@
         </include>
     </include>
 
-    <!-- Card Row -->
+
     <include name="View_505_Card_Row">
         <include content="View_Row_Include">
             <param name="id">505</param>
@@ -62,8 +62,6 @@
     </include>
 
 
-
-    <!-- Row Template View -->
     <include name="View_Row_Include">
         <definition>
             <control type="group">

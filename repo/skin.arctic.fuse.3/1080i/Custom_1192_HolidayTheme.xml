@@ -5,12 +5,12 @@
     <visible>Skin.HasSetting(EnableHolidayTheme)</visible>
     <controls>
 
-        <!-- With thanks to SualFred -->
-        <!-- Christmas theme snow loop textures originally from skin.embuary -->
+
+
 
         <control type="group">
             <visible>!System.ScreenSaverActive + !Window.IsVisible(slideshow)</visible>
-            <!-- XMAS -->
+
             <control type="group">
                 <visible>$EXP[Exp_Christmas_Theme]</visible>
                 <control type="group">

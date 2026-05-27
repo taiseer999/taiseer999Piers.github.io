@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-    <!-- Basic List -->
+
     <include name="View_506_Basic_List">
         <include content="View_MediaList_Include">
             <param name="id">506</param>
@@ -17,7 +17,7 @@
         </include>
     </include>
 
-    <!-- Media List -->
+
     <include name="View_507_Media_List">
         <include content="View_MediaList_Include" condition="Window.IsVisible(videos)">
             <param name="id">507</param>
@@ -47,7 +47,7 @@
         </include>
     </include>
 
-    <!-- Expanded List -->
+
     <include name="View_508_Expanded_List">
         <include content="View_MediaList_Include" condition="Window.IsVisible(videos)">
             <param name="id">508</param>
@@ -85,7 +85,7 @@
         </include>
     </include>
 
-    <!-- FlixArt List -->
+
     <include name="View_509_Flixart_List">
         <include content="View_MediaList_Include">
             <param name="id">509</param>
@@ -101,7 +101,7 @@
         </include>
     </include>
 
-    <!-- FlixArt List -->
+
     <include name="View_549_Flixart_List">
         <include content="View_MediaList_Include">
             <param name="id">549</param>

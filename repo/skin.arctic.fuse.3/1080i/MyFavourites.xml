@@ -35,8 +35,8 @@
                 <param name="movement">5</param>
                 <param name="scrollbar_id">65</param>
                 <param name="overlay">true</param>
-                <!-- <param name="variation">true</param> -->
-                <!-- <param name="include_detailed_labels">false</param> -->
+
+
 
                 <control type="group">
                     <height>585</height>
@@ -61,7 +61,6 @@
                 <param name="visible">true</param>
             </include>
         </control>
-
 
     </controls>
 </window>

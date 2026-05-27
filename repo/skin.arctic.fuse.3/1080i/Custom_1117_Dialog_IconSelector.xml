@@ -17,12 +17,12 @@
 
         <control type="group">
             <include content="Part_Dialog_Backing">
-                <!-- <param name="dialog_size">$PARAM[dialog_size]</param> -->
+
             </include>
 
             <control type="group">
                 <include>Size_Dialog_Pad</include>
-                <!-- Left -->
+
                 <control type="group">
                     <width>480</width>
                     <control type="group">
@@ -41,13 +41,7 @@
                             <onright>450</onright>
                             <onup>SetFocus(8100,9999,absolute)</onup>
                             <ondown>SetFocus(8100,0,absolute)</ondown>
-                            <!-- <include content="Settings_Label">
-                                <param name="dialog">true</param>
-                                <param name="id">8091</param>
-                                <label>$LOCALIZE[587]</label>
-                                <top>0</top>
-                                <height>40</height>
-                            </include> -->
+
                             <include content="Settings_Button">
                                 <param name="dialog">true</param>
                                 <param name="id">8001</param>
@@ -140,7 +134,7 @@
                     </control>
                 </control>
 
-                <!-- Right -->
+
                 <control type="group">
                     <left>480</left>
                     <include>Part_Panel</include>
@@ -168,7 +162,6 @@
                     <bottom>40</bottom>
                 </include>
             </control>
-
 
         </control>
 

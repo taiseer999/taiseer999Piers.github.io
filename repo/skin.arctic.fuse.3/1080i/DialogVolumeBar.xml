@@ -11,7 +11,7 @@
             <param name="mainlabel">$LOCALIZE[13376]</param>
             <param name="minilabel">$INFO[Player.Volume]</param>
             <param name="haslabel">false</param>
-            <!-- <param name="visible">!Player.Muted</param> -->
+
             <param name="flipspinner">false</param>
             <param name="percentage_label">$INFO[Control.GetLabel(933)]</param>
             <param name="percentage_visible">false</param>

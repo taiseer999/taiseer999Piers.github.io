@@ -15,12 +15,11 @@
                 <textcolor>$PARAM[textcolor]</textcolor>
                 <font>font_Topbar_bold</font>
                 <height>80</height>
-                <!-- Constrain label within the 720px group to prevent overflow into header-right -->
+
                 <right>0</right>
             </control>
         </control>
     </include>
-
 
     <variable name="Furniture_Header_Right_Temperature">
         <value condition="!Skin.HasSetting(Header.DisableWeather)"> $INFO[Weather.Temperature]</value>
@@ -46,9 +45,9 @@
                     <aspectratio>keep</aspectratio>
                     <texture>$INFO[Weather.FanartCode,resource://resource.images.weathericons.white/,.png]</texture>
                     <visible>Weather.IsFetched</visible>
-                    
+
                 </control>
-            </control>    
+            </control>
             <control type="label">
                 <label> $VAR[Furniture_Header_Right_Temperature,,] • $INFO[System.Time] $VAR[NetworkVar] </label>
                 <align>right</align>
@@ -56,7 +55,7 @@
                 <textcolor>main_fg_100</textcolor>
                 <font>font_Topbar_bold</font>
                 <height>80</height>
-                
+
             </control>
             <control type="label">
                 <visible>Skin.HasSetting(Furniture.Network_RAM)</visible>
@@ -67,9 +66,9 @@
                 <font>font_Topbarinfo</font>
                 <centertop>-10%</centertop>
                 <height>80</height>
-                
+
             </control>
-            
+
          </control>
     </include>
 
@@ -249,11 +248,10 @@
         </definition>
     </include>
 
-
     <include name="Object_Patch">
         <definition>
             <control type="grouplist">
-                   <visible>Window.IsActive(DialogVideoInfo.xml) + Control.HasFocus(4005)</visible>    
+                   <visible>Window.IsActive(DialogVideoInfo.xml) + Control.HasFocus(4005)</visible>
                 <top>940</top>
                 <left>0</left>
                 <align>left</align>
@@ -510,7 +508,7 @@
     </include>
 
     <include name="Furniture_Reposition">
-        <!-- <animation effect="slide" start="0" end="0,-700" condition="String.IsEqual(Window(Home).Property(InfoPanel.FullSwitch),Wall) + !$EXP[Exp_InfoDialogs] + [Window.IsMedia | Window.IsVisible(Home) | Window.IsVisible(1101) | Window.IsVisible(1102) | Window.IsVisible(1103) | Window.IsVisible(1104)]">Conditional</animation> -->
+
         <animation effect="slide" start="0" end="0,-70" time="300" tween="sine" easing="inout" condition="Window.IsActive(DialogSeekBar.xml) + [Window.IsActive(VideoFullScreen.xml) | Window.IsActive(MusicVisualisation.xml)] + ![Window.IsVisible(DialogSubtitles.xml) | Window.IsVisible(DialogSettings.xml) | Window.IsVisible(DialogSelect.xml) | Window.IsVisible(DialogPlayerProcessInfo.xml) | Window.IsVisible(FileBrowser.xml) | Window.IsVisible(DialogContextMenu.xml) | Window.IsVisible(DialogSlider.xml) | Window.IsVisible(1193)]">Conditional</animation>
         <animation effect="slide" start="0" end="0,-80" time="300" tween="sine" easing="inout" condition="[Window.IsVisible(videoosd) | Window.ISVisible(musicosd)] + [Window.IsActive(VideoFullScreen.xml) | Window.IsActive(MusicVisualisation.xml)] + ![Window.IsVisible(DialogSubtitles.xml) | Window.IsVisible(DialogSettings.xml) | Window.IsVisible(DialogSelect.xml) | Window.IsVisible(DialogPlayerProcessInfo.xml) | Window.IsVisible(FileBrowser.xml) | Window.IsVisible(DialogContextMenu.xml) | Window.IsVisible(DialogSlider.xml) | Window.IsVisible(1193)]">Conditional</animation>
     </include>
@@ -586,6 +584,5 @@
 
         </definition>
     </include>
-
 
 </includes>

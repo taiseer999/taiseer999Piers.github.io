@@ -47,7 +47,7 @@
                                     <pagecontrol>60</pagecontrol>
                                     <onright>60</onright>
                                     <onleft>3</onleft>
-                                    <!-- <right>0</right> -->
+
                                     <include content="Dimension_Padding">
                                         <param name="pad">20</param>
                                     </include>
@@ -111,7 +111,7 @@
                                     <onleft>60</onleft>
                                     <pagecontrol>61</pagecontrol>
                                     <onright>61</onright>
-                                    <!-- <left>0</left> -->
+
                                     <include content="Dimension_Padding">
                                         <param name="pad">20</param>
                                     </include>
@@ -130,7 +130,6 @@
                                         <onleft>21</onleft>
                                     </control>
                                 </control>
-
 
                                 <control type="group">
                                     <left>40</left>
@@ -159,7 +158,6 @@
                         <control type="group">
 
                             <visible>Container(3).HasFocus(2)</visible>
-
 
                             <control type="group">
                                 <width>50%</width>
@@ -208,7 +206,6 @@
                                         </item>
 
                                     </content>
-
 
                                 </include>
 
@@ -261,7 +258,6 @@
                                     </include>
 
                                     <content target="$INFO[Container(8000).ListItem.Property(target)]">$INFO[Container(8000).ListItem.Property(path)]</content>
-
 
                                 </include>
                                 <control type="group">

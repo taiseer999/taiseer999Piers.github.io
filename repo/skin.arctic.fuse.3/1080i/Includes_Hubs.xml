@@ -286,7 +286,6 @@
         </control>
     </include>
 
-
     <include name="Hub_Grouplist_OnLeft">
         <onleft condition="Skin.HasSetting(HomeSwitcher.Vertical)">SetFocus(300)</onleft>
     </include>
@@ -346,11 +345,11 @@
     </include>
 
     <include name="Hub_Spotlight_Button">
-        <!-- <onfocus>SetProperty(HomeSwitcher.IsVisible,True,Home)</onfocus> -->
+
         <onfocus>SetProperty(TMDbHelper.WidgetContainer,301,$PARAM[window])</onfocus>
         <onfocus>ClearProperty(Background.ShowOverlay,Home)</onfocus>
         <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-        <!-- <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus> -->
+
         <onfocus>SetProperty(InfoPanel.FullSwitch,Spotlight,Home)</onfocus>
 
         <oninfo>SetFocus(301)</oninfo>
@@ -716,7 +715,7 @@
 
             <include>Hub_Window_Background</include>
 
-            <!-- Spotlight List -->
+
             <include content="Hub_Spotlight_List" condition="!String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target)) + $PARAM[spotlight]">
                 <param name="window">$PARAM[window]</param>
                 <param name="content">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Path)]</param>
@@ -743,16 +742,15 @@
                         <include condition="Skin.HasSetting(Spotlight.EnableSlide) + $PARAM[spotlight]">Hub_Window_Slide_OnSpotlight</include>
 
 
-                        <!-- Content -->
                         <control type="group" id="400">
                             <include>Animation_View_WindowChange</include>
 
-                            <!-- Spotlight -->
+
                             <include content="Hub_Spotlight" condition="$PARAM[spotlight]">
                                 <param name="window">$PARAM[window]</param>
                             </include>
 
-                            <!-- Widgets Groups -->
+
                             <control type="group" id="500">
                                 <include content="Hub_Combined_Widgets_Grouplist" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">
                                     <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">skinvariables-$PARAM[window]widgets-wall</include>
@@ -761,7 +759,7 @@
                                 <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">skinvariables-$PARAM[window]widgets-standard</include>
                             </control>
 
-                            <!-- Switching Groups -->
+
                             <control type="group" id="600">
                                 <include content="Hub_Widget_Switcher" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">
                                     <param name="include_content">skinvariables-$PARAM[window]widgets-wall-selector</param>
@@ -774,7 +772,7 @@
                             </control>
                         </control>
 
-                        <!-- Info Panels -->
+
                         <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">skinvariables-$PARAM[window]widgets-wall-info</include>
                         <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">skinvariables-$PARAM[window]widgets-combined-info</include>
                         <include condition="!String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))">Hub_Spotlight_Info</include>
@@ -793,8 +791,6 @@
 
         </definition>
     </include>
-
-
 
     <include name="Hub_Prefab_Window">
         <param name="overlay">true</param>
@@ -818,10 +814,10 @@
                 <control type="group">
                     <include condition="Skin.HasSetting(HomeSwitcher.Vertical)">Hub_Window_Side_Slide</include>
 
-                    <!-- Content -->
+
                     <control type="group" id="400">
                         <include>Animation_View_WindowChange</include>
-                        <!-- Widgets Groups -->
+
                         <control type="group" id="500">
                             <include content="Hub_Combined_Widgets_Grouplist" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">
                                 <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">$PARAM[widgets_wall]</include>
@@ -830,7 +826,7 @@
                             <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">$PARAM[widgets_standard]</include>
                         </control>
 
-                        <!-- Switching Groups -->
+
                         <control type="group" id="600">
                             <include content="Hub_Widget_Switcher" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">
                                 <param name="include_content">$PARAM[switcher_content]</param>
@@ -843,14 +839,13 @@
                         </control>
                     </control>
 
-                    <!-- Info Panels -->
+
                     <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">$PARAM[info_wall]</include>
                     <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">$PARAM[info_combined]</include>
                     <include content="Hub_VertMenu" condition="Skin.HasSetting(HomeSwitcher.Vertical)">
                         <param name="window">$PARAM[window]</param>
                     </include>
                 </control>
-
 
                 <control type="group">
                     <include>Furniture_Reposition</include>

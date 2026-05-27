@@ -35,14 +35,13 @@
                 <param name="extended">true</param>
             </include>
 
-            <!-- Widgets Groups -->
+
             <control type="group" id="500">
                 <include content="Hub_Combined_Widgets_Grouplist">
                     <include>Hub_Settings_Widgets</include>
                 </include>
 
                 <include>Hub_Weather_Widget</include>
-
 
                 <include content="List_SettingsWidget">
                     <param name="id">503</param>
@@ -61,15 +60,7 @@
                 </include>
             </control>
 
-            <!-- <control type="group">
-                <visible>!$EXP[Exp_InfoDialogs]</visible>
-                <visible>String.IsEqual(Container(601).ListItem.Property(guid),weather)</visible>
-                <include>Dimension_Bottombar</include>
-                <include content="View_Furniture_Footer_ViewLine">
-                    <param name="label">$INFO[Weather.Location]</param>
-                    <param name="align">left</param>
-                </include>
-            </control> -->
+
 
             <control type="group">
                 <include>Furniture_Reposition</include>
@@ -78,7 +69,6 @@
             </control>
 
         </control>
-
 
     </controls>
 </window>

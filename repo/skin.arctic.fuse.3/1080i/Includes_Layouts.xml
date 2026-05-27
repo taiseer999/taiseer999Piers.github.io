@@ -72,12 +72,12 @@
                         <width>64</width>
                         <height>64</height>
 
-                        <!-- Focused Item -->
+
                         <include content="Object_Indicator_Selected">
                             <param name="shadow">false</param>
                         </include>
 
-                        <!-- Black Circle Backing -->
+
                         <control type="image">
                             <texture colordiffuse="ff333333">indicator/circle-colordiffuse.png</texture>
                         </control>
@@ -115,7 +115,6 @@
                 <label>$INFO[ListItem.Label2]</label>
                 <visible>$PARAM[detailed]</visible>
             </control>
-
 
             <control type="label">
                 <include condition="$PARAM[selected]">Color_SelectedText</include>
@@ -188,7 +187,7 @@
                     <width>40</width>
                     <height>40</height>
                     <control type="image">
-                        <!-- <bordersize>icon_home_bordersize</bordersize> -->
+
                         <aspectratio scalediffuse="false">scale</aspectratio>
                         <include content="Object_ColorDiffuse" condition="$PARAM[selected]">
                             <param name="colordiffuse">$VAR[ColorSelected]</param>
@@ -722,7 +721,7 @@
                 <left>$PARAM[left]</left>
             </include>
 
-            <!-- No Indicator Text -->
+
             <include content="Object_InfoCircle_Text_Top" condition="$PARAM[include_detailed_labels]">
                 <param name="id">1</param>
                 <include condition="$PARAM[selected] + false">Color_SelectedText</include>
@@ -755,7 +754,7 @@
                 <visible>![ListItem.IsRecording | ListItem.HasTimer | [ListItem.IsPlayable + !Skin.HasSetting(Indicator.DisablePVRGuideCatchUp)]]</visible>
             </control>
 
-            <!-- Indicator Text -->
+
             <include content="Object_InfoCircle_Text_Top" condition="$PARAM[include_detailed_labels]">
                 <param name="id">1</param>
                 <include condition="$PARAM[selected] + false">Color_SelectedText</include>
@@ -938,7 +937,7 @@
 
                     <right>20</right>
 
-                    <!-- Order -->
+
                     <control type="group">
                         <right>0</right>
                         <width>$PARAM[item_h]</width>
@@ -971,7 +970,7 @@
                         </control>
                     </control>
 
-                    <!-- Style -->
+
                     <control type="group">
                         <right>140</right>
                         <width>$PARAM[item_h]</width>
@@ -1050,13 +1049,12 @@
                     <include>Texture_Menu_Highlight_H</include>
                     <right>20</right>
                     <height>80</height>
-                    <!-- <centertop>50%</centertop> -->
-                </include>
 
+                </include>
 
                 <control type="group">
                     <height>80</height>
-                    <!-- <centertop>50%</centertop> -->
+
                     <left>-20</left>
                     <include content="Object_Right" condition="$PARAM[variation] + ![$PARAM[indicator]]">
                         <param name="right">0</param>
@@ -1350,7 +1348,6 @@
                                     </control>
                                 </control>
                             </control>
-
 
                             <control type="textbox">
                                 <include condition="$PARAM[selected]">Color_SelectedText</include>

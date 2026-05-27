@@ -12,10 +12,10 @@
             </include>
 
             <control type="group">
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
-                    <!-- Left -->
+
                     <control type="group">
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
@@ -53,7 +53,7 @@
                             </control>
                         </control>
                     </control>
-                    <!-- Right -->
+
                     <control type="group">
                         <include>Size_Group_Panel_Right</include>
                         <include>Part_Panel</include>

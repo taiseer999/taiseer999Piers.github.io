@@ -7,7 +7,7 @@
 	<include name="Info_Line_Two_Row">
 		<height>50</height>
 	</include>
-	
+
 	<variable name="Label_Setting_InfoLineStyle">
 		<value condition="Skin.HasSetting(Info.EnablePillboxStyle)">$LOCALIZE[31209]</value>
 		<value>$LOCALIZE[31329]</value>
@@ -20,7 +20,7 @@
 	</variable>
 
 	<include name="PPI_Button">
-		<!-- Button 9 -->
+
 		<control type="button" id="6009">
 			<include>Defs_OSD_Button</include>
 			<onclick>CancelAlarm(osd_timeout,true)</onclick>
@@ -39,13 +39,13 @@
 			<visible>[!Pvr.IsPlayingTv + !String.IsEmpty(Player.Art(discart)) + String.IsEqual(Skin.String(OSD.ArtworkStyle),DiscArt)]</visible>
 			<left>1455</left>
 			<top>400</top>
-			<!-- Disc Background -->
+
 			<control type="image">
 				<width>500</width>
 				<height>425</height>
 				<texture colordiffuse="shadow_hard">u3k/discart.png</texture>
 			</control>
-			<!-- Disc Art -->
+
 			<control type="image">
 				<left>15</left>
 				<top>10</top>
@@ -78,13 +78,13 @@
 			<visible>[!Pvr.IsPlayingTv + !String.IsEmpty(Player.Art(discart)) + String.IsEqual(Skin.String(OSD.ArtworkStyle),DiscArt)]</visible>
 			<left>1455</left>
 			<top>400</top>
-			<!-- Disc Background -->
+
 			<control type="image">
 				<width>500</width>
 				<height>425</height>
 				<texture colordiffuse="shadow_hard">u3k/discart.png</texture>
 			</control>
-			<!-- Disc Art -->
+
 			<control type="image">
 				<left>15</left>
 				<top>10</top>
@@ -115,7 +115,7 @@
 			<visible>[!Pvr.IsPlayingTv + !String.IsEmpty(Player.Art(discart)) + String.IsEqual(Skin.String(OSD.ArtworkStyle),VHSArt)]</visible>
 			<left>1315</left>
 			<top>510</top>
-			<!-- VHS Background -->
+
 			<control type="image">
 				<right>90</right>
 				<width>500</width>
@@ -149,7 +149,7 @@
 			</animation>
 		</control>
 	</include>
-	
+
     <variable name="OSDCodecLogosStartupTimerLabel">
         <value condition="Skin.HasSetting(osd.useOneSecondCodecLogos)">1 $LOCALIZE[31985]</value>
         <value condition="Skin.HasSetting(osd.useTwoSecondsCodecLogos)">2 $LOCALIZE[31130]</value>
@@ -168,7 +168,7 @@
         <value condition="Skin.HasSetting(osd.useFifteenSecondsCodecLogos)">15 $LOCALIZE[31130]</value>
         <value>5 $LOCALIZE[31130]</value>
     </variable>
-	
+
     <variable name="OSDCodecLogosStartupLabel">
         <value condition="Skin.HasSetting(osd.useleftCodecStartupLogos)">$LOCALIZE[31987]</value>
         <value condition="Skin.HasSetting(osd.usecenterCodecStartupLogos)">$LOCALIZE[31988]</value>
@@ -1206,7 +1206,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Video_Background_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1226,7 +1226,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Audio_Background_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1246,7 +1246,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="VS10_Indicator_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1267,7 +1267,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Convert_SDR_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1288,7 +1288,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Convert_HDR10_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1309,7 +1309,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Convert_DV_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1330,7 +1330,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Bypass_SDR_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1351,7 +1351,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Bypass_HDR10_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1372,7 +1372,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Bypass_HDR10Plus_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1393,7 +1393,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Bypass_DV_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1414,7 +1414,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Bypass_HLG_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1435,7 +1435,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Separation_Line_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1456,7 +1456,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="PCM_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1477,7 +1477,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="AAC_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1498,7 +1498,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Dolby_Digital_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1519,7 +1519,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Dolby_Digital_Plus_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1540,7 +1540,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Dolby_Atmos_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1561,7 +1561,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Dolby_TrueHD_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1582,7 +1582,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="Dolby_Atmos1_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1603,7 +1603,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="MP3_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1624,7 +1624,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="DTS_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1645,7 +1645,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="DTS_HD_MA_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1666,7 +1666,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="DTS_HD_HRA_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1687,7 +1687,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="DTS_X_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1708,7 +1708,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="IMAX_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1729,7 +1729,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="FLAC_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1750,7 +1750,7 @@
             </control>
         </definition>
     </include>
-	
+
     <include name="OPUS_Flag">
         <param name="groupId" />
         <param name="imageId" />

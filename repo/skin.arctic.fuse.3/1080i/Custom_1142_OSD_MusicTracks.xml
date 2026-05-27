@@ -69,11 +69,11 @@
             </control>
         </control>
 
-        <!-- Playing Icon and Details -->
+
         <control type="group">
             <height>60</height>
             <centerbottom>110</centerbottom>
-            <!-- Cast Icon -->
+
             <include content="OSD_Info_Tray">
                 <param name="icon">$INFO[Container(9801).ListItem.Icon]</param>
                 <param name="role">$INFO[Container(9801).ListItem.Artist]</param>

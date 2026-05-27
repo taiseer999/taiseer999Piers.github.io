@@ -17,14 +17,14 @@
                     <param name="dialog_size">$PARAM[dialog_size]</param>
                 </include>
 
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
 
-                    <!-- Left -->
+
                     <control type="group">
                         <right>$PARAM[dialog_right]</right>
-                        <!-- <include>Part_Panel</include> -->
+
                         <control type="group">
                             <include>Size_Group_Head</include>
                             <include content="Part_HeadText">
@@ -120,7 +120,7 @@
     <include name="DialogPictureInfo_Video">
         <include content="DialogPictureInfo_Image">
             <param name="icon">$INFO[Player.Icon]</param>
-            <!-- <param name="diffuse">diffuse/square_w600_h600.png</param> -->
+
         </include>
     </include>
 </includes>

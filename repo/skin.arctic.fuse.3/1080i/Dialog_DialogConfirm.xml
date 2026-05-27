@@ -25,11 +25,11 @@
                 <param name="topline">false</param>
             </include>
 
-            <!-- Content -->
+
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
 
-                <!-- Left -->
+
                 <control type="group">
                     <include>Size_LeftGroup_Main</include>
                     <control type="group">
@@ -48,7 +48,7 @@
                     </control>
                 </control>
 
-                <!-- Right -->
+
                 <control type="group">
                     <include>Size_Group_Panel_Right</include>
                     <control type="group">
@@ -77,7 +77,7 @@
         </control>
     </include>
 
-    <!-- Items -->
+
     <include name="DialogConfirm_Items">
         <definition>
             <include content="Button_Dialog">

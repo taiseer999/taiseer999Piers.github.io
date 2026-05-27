@@ -13,6 +13,5 @@
             <param name="include_itemline">!String.IsEmpty(Player.FileNameAndPath)</param>
         </include>
 
-
-    </controls>        
+    </controls>
 </window>

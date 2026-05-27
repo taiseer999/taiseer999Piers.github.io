@@ -30,10 +30,10 @@
                 <include content="Part_Dialog_Backing">
                     <param name="dialog_size">$PARAM[dialog_size]</param>
                 </include>
-                <!-- Content -->
+
                 <control type="group">
                     <include>Size_Dialog_Pad</include>
-                    <!-- Left -->
+
                     <control type="group">
                         <include content="Object_Right" condition="$PARAM[has_options]">
                             <param name="right">320</param>
@@ -55,7 +55,7 @@
                             </include>
                         </control>
                     </control>
-                    <!-- Right -->
+
                     <include content="DialogColorPicker_TextureMaker_Options" condition="$PARAM[has_options]">
                     </include>
                 </control>
@@ -148,7 +148,6 @@
                 </control>
 
 
-                <!-- Red -->
                 <include content="Object_ColorSlider">
                     <param name="id">2</param>
                     <param name="label">Red</param>
@@ -157,7 +156,7 @@
                     <param name="ondown">8003</param>
                     <param name="onback">9000</param>
                 </include>
-                <!-- Green -->
+
                 <include content="Object_ColorSlider">
                     <param name="id">3</param>
                     <param name="label">Green</param>
@@ -166,7 +165,7 @@
                     <param name="ondown">8004</param>
                     <param name="onback">9000</param>
                 </include>
-                <!-- Blue -->
+
                 <include content="Object_ColorSlider">
                     <param name="id">4</param>
                     <param name="label">Blue</param>
@@ -175,7 +174,7 @@
                     <param name="ondown">8001</param>
                     <param name="onback">9000</param>
                 </include>
-                <!-- Alpha -->
+
                 <include content="Object_ColorSlider">
                     <param name="id">1</param>
                     <param name="label">Alpha</param>
@@ -264,7 +263,7 @@
                         <width>45%</width>
                         <control type="label">
                             <top>0</top>
-                            <!-- <align>center</align> -->
+
                             <font>font_hint_bold</font>
                             <height>40</height>
                             <label>$LOCALIZE[31227]</label>
@@ -302,7 +301,7 @@
                         <width>45%</width>
                         <control type="label">
                             <top>0</top>
-                            <!-- <align>center</align> -->
+
                             <font>font_hint_bold</font>
                             <height>40</height>
                             <label>$LOCALIZE[849]</label>
@@ -408,7 +407,7 @@
                 <param name="itemlayout_include">$PARAM[itemlayout_include]</param>
                 <param name="action_include">$PARAM[action_include]</param>
             </include>
-            <!-- Selection Box -->
+
             <control type="group">
                 <left>-30</left>
                 <top>-30</top>

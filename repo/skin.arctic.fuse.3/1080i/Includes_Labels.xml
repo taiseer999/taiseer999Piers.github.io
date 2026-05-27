@@ -718,7 +718,6 @@
         <value>$INFO[Window.Property(rating)]</value>
     </variable>
 
-
     <variable name="Label_OSD_UpNext_Playlist_TopTitle">
         <value condition="!Integer.IsLess(VideoPlayer.PlaylistPosition,VideoPlayer.PlaylistLength)">$INFO[Container(450).ListItemAbsolute(0).Title]</value>
         <value condition="Integer.IsEqual(VideoPlayer.PlaylistPosition,1)">$INFO[Container(450).ListItemAbsolute(1).Title]</value>
@@ -1079,20 +1078,20 @@
     </variable>
 
     <variable name="Label_Section_Main">
-        <!-- Filtered Dir -->
+
         <value condition="Window.IsMedia + String.IsEqual(Container.FolderName,Skin Variables) + !String.IsEmpty(Window.Property(MediaFilter.BaseDir.Name))">$INFO[Window.Property(MediaFilter.BaseDir.Name)]</value>
 
-        <!-- Playlist label -->
+
         <value condition="Window.IsVisible(videoplaylist)">$LOCALIZE[10025]</value>
         <value condition="Window.IsVisible(musicplaylist)">$LOCALIZE[134]</value>
 
-        <!-- Content Labels -->
+
         <value condition="Container.Content(seasons)">$LOCALIZE[33054]</value>
         <value condition="Container.Content(albums)">$LOCALIZE[132]</value>
         <value condition="Container.Content(songs)">$LOCALIZE[134]</value>
         <value condition="Container.Content(episodes) + !String.IsEmpty(Container.FolderName) + String.IsEqual(Container.FolderName,Container.ShowTitle)">$LOCALIZE[20360]</value>
 
-        <!-- Category Labels -->
+
         <value condition="Window.IsMedia + !String.IsEmpty(Container.PluginCategory)">$INFO[Container.PluginCategory]</value>
         <value condition="Window.IsMedia + !String.IsEmpty(Container.FolderName)">$INFO[Container.FolderName]</value>
         <value condition="Window.IsMedia + !String.IsEmpty(Container.PluginName)">$LOCALIZE[24000]</value>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-
-
     <include name="Search">
         <param name="window">1105</param>
         <definition>
@@ -21,7 +19,7 @@
                     <include condition="Skin.HasSetting(HomeSwitcher.Vertical)">Hub_Window_Side_Slide</include>
                     <include condition="!Skin.HasSetting(Search.DisableCombined)">Search_Footer_Left</include>
 
-                    <!-- Content -->
+
                     <control type="group" id="400">
 
                         <control type="group">
@@ -104,7 +102,7 @@
                 <include>Home_Animation</include>
                 <left>view_pad</left>
                 <top>280</top>
-                <!-- <visible>Skin.HasSetting(HomeSwitcher.DisableHeader)</visible> -->
+
             </control>
             <control type="label">
                 <wrapmultiline>true</wrapmultiline>
@@ -236,7 +234,7 @@
 
     <include name="Search_Bar_Edit">
 
-        <!-- Backing Panel -->
+
         <control type="image">
             <texture colordiffuse="main_fg_12" border="40">common/menu-outlined.png</texture>
             <visible>!Control.HasFocus(3000)</visible>
@@ -246,7 +244,7 @@
             <visible>Control.HasFocus(3000)</visible>
         </control>
 
-        <!-- Edit Control -->
+
         <control type="button" id="3001">
 
             <onfocus>ClearProperty(Searchbar.IsHidden)</onfocus>
@@ -277,7 +275,6 @@
             <onright condition="Skin.HasSetting(HomeSwitcher.Vertical)">SetProperty(Bumper.Direction,Right,Home)</onright>
             <onright condition="Skin.HasSetting(HomeSwitcher.Vertical)">ActivateWindow(1180)</onright>
 
-
             <onleft condition="!Skin.HasSetting(HomeSwitcher.Vertical)">$INFO[Container(399).ListItem(-1).Property(action)]</onleft>
             <onright condition="!Skin.HasSetting(HomeSwitcher.Vertical)">$INFO[Container(399).ListItem(1).Property(action)]</onright>
 
@@ -306,7 +303,6 @@
         </control>
     </include>
 
-
     <include name="Search_Bar_Keys">
         <control type="wraplist" id="301">
             <orientation>horizontal</orientation>
@@ -314,14 +310,14 @@
             <onfocus condition="!Skin.HasSetting(HomeSwitcher.Vertical)">SetProperty(HomeSwitcher.IsVisible,True,Home)</onfocus>
             <onunfocus>SetProperty(Searchbar.IsHidden,True)</onunfocus>
             <onfocus>ClearProperty(Searchbar.IsHidden)</onfocus>
-            <!-- <onup>3000</onup> -->
+
             <onup>ClearProperty(RefocusMenu)</onup>
             <onup>3001</onup>
             <onback>SetProperty(RefocusMenu,True)</onback>
             <onback>3001</onback>
             <ondown condition="!Skin.HasSetting(Search.DisableCombined)">601</ondown>
             <ondown condition="Skin.HasSetting(Search.DisableCombined)">602</ondown>
-            <!-- <width>700</width> -->
+
             <width>750</width>
             <focusposition>7</focusposition>
             <centerleft>50%</centerleft>
@@ -542,6 +538,5 @@
             </content>
         </control>
     </include>
-
 
 </includes>

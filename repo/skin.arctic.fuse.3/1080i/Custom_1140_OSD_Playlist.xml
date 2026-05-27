@@ -19,7 +19,7 @@
                     <param name="label">$LOCALIZE[559]</param>
                 </include>
 
-                <!-- Episodes List -->
+
                 <include content="List_Landscape_Row">
                     <param name="orientation">horizontal</param>
                     <param name="control">fixedlist</param>
@@ -42,7 +42,7 @@
                     </include>
                 </include>
 
-                <!-- Playing Icon and Details -->
+
                 <include content="OSD_Info_Tray">
                     <param name="icon">$VAR[Image_OSD_7000_Poster]</param>
                     <param name="role">$VAR[Label_OSD_7000_Title]</param>

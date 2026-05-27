@@ -23,10 +23,10 @@
                 <param name="dialog_size">Dimension_DialogHugeMenu</param>
             </include>
             <control type="group">
-                <!-- Content -->
+
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
-                    <!-- Left -->
+
                     <control type="group">
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
@@ -52,7 +52,7 @@
                             </include>
                         </control>
                     </control>
-                    <!-- Right -->
+
                     <include content="Part_Button_Grouplist">
                         <param name="onleft">61</param>
                         <param name="items">DialogSettings_Items</param>
@@ -87,11 +87,11 @@
                 <param name="topline">false</param>
             </include>
 
-            <!-- Content -->
+
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
 
-                <!-- Left -->
+
                 <control type="group">
                     <include>Size_Group_AddonSettings_Left</include>
                     <control type="group">
@@ -115,7 +115,7 @@
                     </control>
                 </control>
 
-                <!-- Mid -->
+
                 <control type="group">
                     <include>Size_Group_AddonSettings_Middle</include>
                     <include>Part_Panel_Middle</include>
@@ -152,7 +152,7 @@
                     </control>
                 </control>
 
-                <!-- Right -->
+
                 <include content="Part_Button_Grouplist">
                     <param name="onleft">61</param>
                     <param name="items">DialogAddonSettings_Items</param>
@@ -162,7 +162,7 @@
         </control>
     </include>
 
-    <!-- Button Definitions -->
+
     <include name="DialogSettings_Button_Templates">
         <include content="Settings_Button">
             <param name="id">7</param>
@@ -223,7 +223,7 @@
         </include>
     </include>
 
-    <!-- Items -->
+
     <include name="DialogAddonSettings_Items">
         <definition>
             <include content="Button_Dialog">
