@@ -82,7 +82,6 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         xbmcgui.Window(10000).clearProperty(WINDOW_PROP)
         xbmcgui.Window(10000).clearProperty(SKIN_PROP)
 
-
 def open_tinyppi():
 
     global DIALOG_LOCK
