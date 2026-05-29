@@ -1,0 +1,22 @@
+<addon id="plugin.program.kodi.auth.backup"
+       name="Kodi Auth Backup"
+       version="5.7.4"
+       provider-name="i-Meshal">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="default.py"/>
+    
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Authentication Backup for Kodi 21/22</summary>
+        <summary lang="ar_SA">نسخ واستعادة توثيقات إضافات كودي 21/22</summary>
+        <description lang="en_GB">Backup and restore addon authentication settings, accounts, and selected Kodi settings safely.</description>
+        <description lang="ar_SA">أداة لحفظ واستعادة توثيقات الإضافات والحسابات وملفات الإعدادات المحددة في كودي.</description>
+        <website>https://github.com/i-Meshal/Kodi-Auth-Backup</website>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
