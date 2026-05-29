@@ -1,3 +1,15 @@
+_FPS = {
+    "history": [],
+    "last_sample": 0.0,
+    "cached_in": 0,
+    "cached_out": 0,
+    "valid": False,
+    "spinner": 0,
+    "last_spinner": 0.0,
+    "drop_hold": 0,
+    "last_drop_change": 0.0,
+}
+
 _VIDEO_CODEC_MAP = {
     "av1": "AV1",
     "avc1": "AVC1",

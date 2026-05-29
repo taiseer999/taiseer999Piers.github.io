@@ -64,8 +64,8 @@ msgid "Playback time"
 msgstr "Wiedergabezeit"
 
 msgctxt "#32014"
-msgid "Processor"
-msgstr "Prozessor"
+msgid "CPU cores"
+msgstr "Prozessorkerne"
 
 msgctxt "#32015"
 msgid "Gamut"
@@ -80,12 +80,8 @@ msgid "The CoreELEC version could not be detected"
 msgstr "Die CoreELEC Version konnte nicht erkannt werden"
 
 msgctxt "#32018"
-msgid "CPU usage"
-msgstr "CPU-Auslastung"
-
-msgctxt "#32019"
-msgid "Bitrate (FEL)"
-msgstr "Bitrate (FEL)"
+msgid "Temp / load"
+msgstr "Temperatur / Last"
 
 msgctxt "#32020"
 msgid "Style"
@@ -128,8 +124,8 @@ msgid "Passthrough"
 msgstr "Passthrough"
 
 msgctxt "#32036"
-msgid "System FPS"
-msgstr "System FPS"
+msgid "In / drop / out"
+msgstr "In / Drop / Out"
 
 msgctxt "#32046"
 msgid "Codec"

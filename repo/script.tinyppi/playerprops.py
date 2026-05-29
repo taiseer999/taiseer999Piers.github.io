@@ -1,9 +1,9 @@
-import subprocess
+import time
 import re
 import xbmc
 import xbmcgui
 
-from constants import (_VIDEO_CODEC_MAP, _SUBTITLE_CODEC_MAP, _AUDIO_CODEC_MAP, _CHANNELS_MAP, _CHANNELS_INPUT_MAP, _LANGUAGE_MAP)
+from constants import (_FPS, _VIDEO_CODEC_MAP, _SUBTITLE_CODEC_MAP, _AUDIO_CODEC_MAP, _CHANNELS_MAP, _CHANNELS_INPUT_MAP, _LANGUAGE_MAP)
 
 _cpu_prev = None
 
@@ -334,60 +334,29 @@ def get_DoviFelVar():
     return ""
 
 
-def get_VdecBitrates():
+def get_VdecBitrateVar():
     path = "/sys/class/vdec/vdec_status"
-
-    result = {
-        "bitrate": "",
-        "diff": ""
-    }
 
     try:
         with open(path, "r", encoding="utf-8", errors="ignore") as f:
             data = f.read()
     except Exception:
-        return result
+        return ""
 
-    matches = re.findall(
-        r"vdec channel (\d+) statistics:.*?bit rate\s*:\s*(\d+)\s*kbps",
-        data,
-        re.IGNORECASE | re.DOTALL
-    )
-
+    matches = re.findall(r"bit rate\s*:\s*(\d+)\s*kbps", data, re.IGNORECASE)
     if not matches:
-        return result
+        return ""
 
-    bitrates = []
+    kbps_values = [float(m) for m in matches]
+    kbps = max(kbps_values)
 
-    for _, br in matches:
-        try:
-            bitrates.append(int(br))
-        except ValueError:
-            pass
+    if kbps < 1000:
+        value = f"{kbps:.0f}".rstrip("0").rstrip(".")
+        return f"{value} kb/s"
 
-    if not bitrates:
-        return result
-
-    base = min(bitrates)
-    total = max(bitrates)
-
-    base_mbps = base / 1000.0
-    base_val = f"{base_mbps:.2f}".rstrip("0").rstrip(".")
-    result["bitrate"] = f"{base_val} Mb/s"
-
-    diff_kbps = total - base
-
-    if diff_kbps < 0:
-        diff_kbps = 0
-
-    if diff_kbps < 1000:
-        result["diff"] = f"{diff_kbps} kb/s"
-    else:
-        diff_mbps = diff_kbps / 1000.0
-        value = f"{diff_mbps:.2f}".rstrip("0").rstrip(".")
-        result["diff"] = f"{value} Mb/s"
-
-    return result
+    mbps = kbps / 1000.0
+    value = f"{mbps:.2f}".rstrip("0").rstrip(".")
+    return f"{value} Mb/s"
 
 
 # ---------------------------------------------------------------------------
@@ -551,6 +520,89 @@ def get_CpuTopUsageVar():
     return f"{usage:.0f}%"
 
 
+# ---------------------------------------------------------------------------
+# AML FPS
+# ---------------------------------------------------------------------------
+
+def _read_fps_sysfs():
+    try:
+        with open("/sys/class/video/fps_info", "r", encoding="utf-8", errors="ignore") as f:
+            raw = f.read().strip()
+    except Exception:
+        return None
+
+    in_m = re.search(r"input_fps:0x([0-9a-fA-F]+)", raw)
+    out_m = re.search(r"output_fps:0x([0-9a-fA-F]+)", raw)
+
+    if not in_m or not out_m:
+        return None
+
+    return int(in_m.group(1), 16), int(out_m.group(1), 16)
+
+
+def _update_fps():
+    now = time.monotonic()
+    state = _FPS
+
+    if now - state["last_sample"] < 0.1:
+        return
+
+    state["last_sample"] = now
+
+    result = _read_fps_sysfs()
+    if result:
+        in_fps, out_fps = result
+        state["cached_in"] = in_fps
+        state["cached_out"] = out_fps
+        state["valid"] = True
+
+        state["history"].append((in_fps, out_fps, now))
+
+    # keep last 1 second
+    state["history"] = [
+        x for x in state["history"]
+        if now - x[2] <= 1.0
+    ]
+
+
+def get_fps_data():
+    _update_fps()
+    state = _FPS
+
+    if not state["history"]:
+        return 0, 0, 0
+
+    total_in = sum(x[0] for x in state["history"])
+    total_out = sum(x[1] for x in state["history"])
+    count = len(state["history"])
+
+    avg_in = total_in / count
+    avg_out = total_out / count
+
+    drop = max(0, avg_in - avg_out)
+
+    return (
+        int(round(avg_in)),
+        int(round(avg_out)),
+        int(round(drop))
+    )
+
+
+def format_fps():
+    in_fps, out_fps, drop = get_fps_data()
+
+    state = _FPS
+    now = time.monotonic()
+
+    text = f"{in_fps:03d} - {drop:03d}"
+
+    return text, str(int(out_fps) if out_fps > 0 else "0")
+
+
+# ---------------------------------------------------------------------------
+# UI
+# ---------------------------------------------------------------------------
+
 def set_ui_position(window):
     ui_style = xbmcgui.Window(10000).getProperty("TinyPPI.UIStyle")
 
@@ -568,10 +620,8 @@ def set_ui_position(window):
 
 def update_properties(window):
     set_ui_position(window)
-    vdec = get_VdecBitrates()
+    get_fpsTextVar, get_fpsDropVar = format_fps()
 
-    window.setProperty("VdecBitrateVar",       vdec["bitrate"])
-    window.setProperty("VdecBitrateDiffVar",    vdec["diff"])
     window.setProperty("VideoDecoderVar",       get_VideoDecoderVar())
     window.setProperty("VideoPixelFormatVar",   get_VideoPixelFormatVar())
     window.setProperty("DisplayModeVar",        get_DisplayModeVar())
@@ -584,6 +634,9 @@ def update_properties(window):
     window.setProperty("HdmiHdrStatusVar",      get_HdmiHdrStatusVar())
     window.setProperty("DoviProfileVar",        get_DoviProfileVar())
     window.setProperty("DoviFelVar",            get_DoviFelVar())
+    window.setProperty("VdecBitrateVar",        get_VdecBitrateVar())
+    window.setProperty("FpsInfoVar",            get_fpsTextVar)
+    window.setProperty("FpsDropVar",            get_fpsDropVar)
     window.setProperty("AudioCodecVar",         get_AudioCodecVar())
     window.setProperty("AudioCodecSpatialVar",  get_AudioCodecSpatialVar())
     window.setProperty("AudioChannelsVar",      get_AudioChannelsVar())

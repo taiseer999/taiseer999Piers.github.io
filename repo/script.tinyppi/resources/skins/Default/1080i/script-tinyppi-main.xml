@@ -626,73 +626,9 @@
 						<aligny>top</aligny>
 					</control>
 					
-					<!-- Processor -->
+					<!-- In / drop / out -->
 					<control type="label">
 						<top>60</top>
-						<label>$ADDON[script.tinyppi 32014]:</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<aligny>top</aligny>
-					</control>
-					<control type="label">
-						<visible>String.IsEqual(Window(10000).Property(TinyPPI.UIStyle),0)</visible>
-						<top>60</top>
-						<left>240</left>
-						<label>$INFO[System.CPUTemperature] | $INFO[Window().Property(CpuUsageVar)]</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<aligny>top</aligny>
-					</control>
-					<control type="label">
-						<visible>String.IsEqual(Window(10000).Property(TinyPPI.UIStyle),1)</visible>
-						<top>60</top>
-						<left>240</left>
-						<width>305</width>
-						<label>$INFO[System.CPUTemperature] | $INFO[Window().Property(CpuUsageVar)]</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<aligny>top</aligny>
-					</control>
-
-					<!-- CPU Usage / FEL bitrate -->
-					<control type="label">
-						<top>90</top>
-						<label>$ADDON[script.tinyppi 32018]:</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<aligny>top</aligny>
-						<visible>!String.IsEqual(Window.Property(DoviFelVar),FEL)</visible>
-					</control>
-					<control type="label">
-						<top>90</top>
-						<label>$ADDON[script.tinyppi 32019]:</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEqual(Window.Property(DoviFelVar),FEL)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>90</top>
-						<label>$INFO[Window().Property(CpuTopUsageVar]</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<visible>!String.IsEqual(Window.Property(DoviFelVar),FEL)</visible>
-						<aligny>top</aligny>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>90</top>
-						<label>$INFO[Window().Property(VdecBitrateDiffVar]</label>
-						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
-						<visible>String.IsEqual(Window.Property(DoviFelVar),FEL)</visible>
-						<aligny>top</aligny>
-					</control>
-
-					<!-- System FPS -->
-					<control type="label">
-						<top>120</top>
 						<label>$ADDON[script.tinyppi 32036]:</label>
 						<font>font23_narrow</font>
 						<textcolor>E7EDEDED</textcolor>
@@ -700,8 +636,42 @@
 					</control>
 					<control type="label">
 						<left>240</left>
+						<top>60</top>
+						<label>$INFO[Window().Property(FpsInfoVar)] = $INFO[Window().Property(FpsDropVar)] FPS</label>
+						<font>font23_narrow</font>
+						<textcolor>E7EDEDED</textcolor>
+						<aligny>top</aligny>
+					</control>
+
+					<!-- CPU cores -->
+					<control type="label">
+						<top>90</top>
+						<label>$ADDON[script.tinyppi 32014]:</label>
+						<font>font23_narrow</font>
+						<textcolor>E7EDEDED</textcolor>
+						<aligny>top</aligny>
+					</control>
+					<control type="label">
+						<left>240</left>
+						<top>90</top>
+						<label>$INFO[Window().Property(CpuUsageVar)]</label>
+						<font>font23_narrow</font>
+						<textcolor>E7EDEDED</textcolor>
+						<aligny>top</aligny>
+					</control>
+
+					<!-- Temp / Load -->
+					<control type="label">
 						<top>120</top>
-						<label>$INFO[System.FPS] FPS</label>
+						<label>$ADDON[script.tinyppi 32018]:</label>
+						<font>font23_narrow</font>
+						<textcolor>E7EDEDED</textcolor>
+						<aligny>top</aligny>
+					</control>
+					<control type="label">
+						<top>120</top>
+						<left>240</left>
+						<label>$INFO[System.CPUTemperature] | $INFO[Window().Property(CpuTopUsageVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>

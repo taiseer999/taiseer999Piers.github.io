@@ -56,7 +56,7 @@ def _skin_installed(addonid):
 # ─── source / feed ──────────────────────────────────────────────────────────
 
 def choose_source():
-    options = ["KODI Repository", "CoreELEC Repository", "Piers Repository"]
+    options = ["Kodi 21.3 Repository", "CoreELEC 21.3 \"NG\" Repository", "Piers and Kodi 22 \"NO\" Repository"]
     selected = xbmcgui.Dialog().select("Select Repository", options)
     if selected == -1:
         return None, None

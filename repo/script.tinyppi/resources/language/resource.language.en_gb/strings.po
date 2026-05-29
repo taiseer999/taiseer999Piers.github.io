@@ -64,7 +64,7 @@ msgid "Playback time"
 msgstr ""
 
 msgctxt "#32014"
-msgid "Processor"
+msgid "CPU cores"
 msgstr ""
 
 msgctxt "#32015"
@@ -80,11 +80,7 @@ msgid "The CoreELEC version could not be detected"
 msgstr ""
 
 msgctxt "#32018"
-msgid "CPU usage"
-msgstr ""
-
-msgctxt "#32019"
-msgid "Bitrate (FEL)"
+msgid "Temp / load"
 msgstr ""
 
 msgctxt "#32020"
@@ -128,7 +124,7 @@ msgid "Passthrough"
 msgstr ""
 
 msgctxt "#32036"
-msgid "System FPS"
+msgid "In / drop / out"
 msgstr ""
 
 msgctxt "#32046"
