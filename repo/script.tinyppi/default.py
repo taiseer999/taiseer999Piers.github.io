@@ -82,6 +82,7 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         xbmcgui.Window(10000).clearProperty(WINDOW_PROP)
         xbmcgui.Window(10000).clearProperty(SKIN_PROP)
 
+
 def open_tinyppi():
 
     global DIALOG_LOCK
@@ -91,6 +92,7 @@ def open_tinyppi():
 
     skin_path = xbmcvfs.translatePath("special://skin/")
     is_720_skin = os.path.exists(os.path.join(skin_path, "720p"))
+
 
     if is_720_skin:
 
@@ -122,6 +124,7 @@ def open_tinyppi():
     win.setProperty(WINDOW_PROP, "true")
     win.setProperty(SKIN_PROP, "true")
     win.setProperty("TinyPPI.UIStyle", ADDON.getSetting("ui_style"))
+    win.setProperty("TinyPPI.Filename", ADDON.getSetting("filename"))
     win.setProperty("TinyPPI.BackgroundToggle", "1" if ADDON.getSetting("background_toggle") == "true" else "0")
 
     try:
