@@ -10,11 +10,6 @@
     <controls>
         <control type="group">
 
-			<!-- Codec logos support -->
-            <include condition="Skin.HasSetting(ppi.useleftCodecLogos)">CodecLogosLeftOSD</include>
-            <include condition="Skin.HasSetting(ppi.usecenterCodecLogos)">CodecLogosCenterOSD</include>
-            <include condition="Skin.HasSetting(ppi.userightCodecLogos)">CodecLogosRightOSD</include>
-
 			<!-- Classic -->
 			<control type="group">
 				<visible>String.IsEqual(Window(10000).Property(TinyPPI.BackgroundToggle),0)</visible>
@@ -23,7 +18,7 @@
 				<!-- Background -->
 				<control type="group">
 					<top>-1000</top>
-					<width>2000</width>
+					<width>1920</width>
 					<height>2080</height>
 					<control type="image">
 						<texture colordiffuse="FF000000">background-classic.png</texture>
@@ -52,14 +47,36 @@
 			<control type="group">
 				<visible>String.IsEqual(Window(10000).Property(TinyPPI.UIStyle),1)</visible>
 
-				<!-- Background -->
+				<!-- Background - Start -->
 				<control type="group">
 					<left>35</left>
 					<top>440</top>
-					<width>1220</width>
+					<width>23</width>
 					<height>605</height>
 					<control type="image">
-						<texture colordiffuse="FAFFFFFF">background-modern.png</texture>
+						<texture colordiffuse="FAFFFFFF">background-modern-start.png</texture>
+					</control>
+				</control>
+
+				<!-- Background - Middle -->
+				<control type="group">
+					<left>58</left>
+					<top>440</top>
+					<width>1174</width>
+					<height>605</height>
+					<control type="image">
+						<texture colordiffuse="FAFFFFFF">background-modern-middle.png</texture>
+					</control>
+				</control>
+
+				<!-- Background - End -->
+				<control type="group">
+					<left>1232</left>
+					<top>440</top>
+					<width>23</width>
+					<height>605</height>
+					<control type="image">
+						<texture colordiffuse="FAFFFFFF">background-modern-end.png</texture>
 					</control>
 				</control>
 
@@ -114,6 +131,11 @@
 					</control>
 				</control>
 			</control>
+			
+			<!-- Codec logos support -->
+            <include condition="Skin.HasSetting(ppi.useleftCodecLogos)">CodecLogosLeftOSD</include>
+            <include condition="Skin.HasSetting(ppi.usecenterCodecLogos)">CodecLogosCenterOSD</include>
+            <include condition="Skin.HasSetting(ppi.userightCodecLogos)">CodecLogosRightOSD</include>
 
 			<!-- Group: Bottom screen -->
 			<control type="group" id="9000">
@@ -253,7 +275,7 @@
 						<aligny>top</aligny>
 					</control>
 
-					<!-- Deinterlacing -->
+					<!-- Method -->
 					<control type="label">
 						<top>210</top>
 						<label>$ADDON[script.tinyppi 32031]:</label>
@@ -264,7 +286,7 @@
 					<control type="label">
 						<left>210</left>
 						<top>210</top>
-						<label>[CAPITALIZE]$INFO[Player.Process(deintmethod)][/CAPITALIZE]</label>
+						<label>$INFO[Window().Property(VideoDecoderExtVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
@@ -335,6 +357,25 @@
 						<font>font23_narrow</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
+						<visible>!String.IsEmpty(Window().Property(VdecBitrate)) + !String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
+					</control>
+					<control type="label">
+						<left>210</left>
+						<top>60</top>
+						<label>$INFO[Window().Property(VideoBitrateMBVar)]</label>
+						<font>font23_narrow</font>
+						<textcolor>E7EDEDED</textcolor>
+						<aligny>top</aligny>
+						<visible>String.IsEmpty(Window().Property(VdecBitrate)) + !String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
+					</control>
+					<control type="label">
+						<left>210</left>
+						<top>60</top>
+						<label>$INFO[Window().Property(VdecBitrate)] $INFO[Window().Property(VdecBitrateUnit)]</label>
+						<font>font23_narrow</font>
+						<textcolor>E7EDEDED</textcolor>
+						<aligny>top</aligny>
+						<visible>!String.IsEmpty(Window().Property(VdecBitrate)) + String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
 					</control>
 					<!-- N/A -->
 					<control type="label">
