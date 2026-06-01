@@ -137,7 +137,7 @@
 					<width>900</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>$INFO[Player.Process(videodecoder),VideoHWDecoder: ]$VAR[VideoHWDecoder, (,)]</label>
+					<label>$INFO[Player.Process(videodecoder),VideoHWDecoder: ]$VAR[VideoHWDecoder,]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>Player.HasVideo</visible>
@@ -155,7 +155,7 @@
 					<width>900</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>$INFO[Player.Process(videowidth),Video width: ,x]$INFO[Player.Process(videoheight)]$INFO[Player.Process(videoscantype)]$INFO[Player.Process(videodar),$COMMA , AR]$INFO[Player.Process(videofps),$COMMA , FPS]$INFO[VideoPlayer.VideoBitrate,$COMMA , kb/s]</label>
+					<label>$INFO[Player.Process(videowidth),Video Stream: ,x]$INFO[Player.Process(videoheight)]$INFO[Player.Process(videoscantype)]$INFO[Player.Process(videodar),$COMMA , AR]$INFO[Player.Process(videofps),$COMMA , FPS]$INFO[VideoPlayer.VideoBitrate,$COMMA , kb/s]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 				</control>
@@ -235,7 +235,7 @@
 					<width>420</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Additional: $VAR[AudioCodecWithoutObjectVar]  $VAR[AudioChannelsVar]</label>
+					<label>Audio: $VAR[AudioCodecWithoutObjectVar]  $VAR[AudioChannelsVar]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>!String.IsEmpty(VideoPlayer.AudioCodec)</visible>
@@ -365,9 +365,9 @@
 			</control>
 			<control type="grouplist" id="5550">
 				<right>15</right>
-				<top>-310</top>
+				<top>-270</top>
 				<width>1000</width>
-				<height>100</height>
+				<height>50</height>
 				<align>right</align>
 				<orientation>horizontal</orientation>
 				<itemgap>-10</itemgap>
@@ -384,12 +384,24 @@
 				</control>
 				<control type="button" id="5553">
 					<width>auto</width>
-					<height>100</height>
+					<height>55</height>
 					<textoffsetx>40</textoffsetx>
-					<label>Player process info</label>
+					<label>PLAYER PROCESS INFO</label>
 					<onfocus>SetProperty(PlayerInfoDialogFocus,5553,Home)</onfocus>
 				</control>
 			</control>
+			<control type="group">
+                <centerbottom>60</centerbottom>
+                <center>view_pad</center>
+                <height>110</height>
+                <include>OSD_Codecs</include>
+				
+				<include content="Object_MenuHeader">
+				<param name="icon">special://skin/extras/icons/ppi1.png</param>
+                <param name="label"></param>
+				<height>50</height>
+                </include>
+               </control>
 		</control>
 	</controls>
 </window>

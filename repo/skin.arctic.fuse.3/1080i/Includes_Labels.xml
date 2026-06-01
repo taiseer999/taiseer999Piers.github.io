@@ -1235,7 +1235,10 @@
         <value condition="!String.Contains(Network.IPAddress,1)">[COLOR tomato][/COLOR]</value>
         <value condition="![System.HasAddon(service.coreelec.settings)| System.HasAddon(service.libreelec.settings)]">$INFO[System.InternetState]</value>
     </variable>
-
+<variable name="ActiveVideoPlayerAudioLanguage">
+		<value condition="!String.IsEmpty(VideoPlayer.AudioLanguage)">$INFO[VideoPlayer.AudioLanguage]</value>
+		<value condition="String.IsEmpty(VideoPlayer.AudioLanguage) | String.IsEqual(ListItem.AudioLanguage,und)">$LOCALIZE[13205]</value>
+	</variable>
 <variable name="VideoCodecVar">
 		<value condition="String.IsEqual(ListItem.VideoCodec,av1) | [Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.VideoCodec,av1)]">AV1</value>
 		<value condition="String.IsEqual(ListItem.VideoCodec,avc1) | [Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.VideoCodec,avc1)]">AVC1</value>
@@ -1630,5 +1633,5 @@
 		<value condition="String.IsEqual(VideoPlayer.HdrDetail,7MEL)">P7 [COLOR orange]MEL[/COLOR]</value>
 		<value condition="String.IsEqual(VideoPlayer.HdrDetail,7FEL)">P7 [COLOR lightgreen]FEL[/COLOR]</value>
 		<value condition="!String.IsEmpty(VideoPlayer.HdrDetail)">P$INFO[VideoPlayer.HdrDetail]</value>
-	</variable>    
+	</variable>
 </includes>
