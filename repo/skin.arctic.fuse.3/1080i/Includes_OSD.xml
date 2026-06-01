@@ -198,6 +198,7 @@
         </definition>
     </include>
 
+
     <include name="OSD_PlaySpeed_Label">
         <param name="width">52</param>
         <param name="selected">false</param>
@@ -307,7 +308,9 @@
                 <texture colordiffuse="7f000000">common/white.png</texture>
             </control>
 
-
+            <!-- <control type="image">
+                <texture colordiffuse="panel_bg_70">special://skin/extras/backgrounds/overlay/combined_flixart.png</texture>
+            </control> -->
         </control>
     </include>
 
@@ -326,7 +329,7 @@
             <texture colordiffuse="panel_bg_70" border="4,0,4,0">common/gradient-v.png</texture>
             <include>Animation_OSD_Fullscreen_Change</include>
             <visible>Window.IsActive(DialogSeekBar.xml) | Window.IsVisible(1152)</visible>
-            <visible>Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(1140) | Window.IsActive(1141) | Window.IsActive(1142) | Window.IsActive(1143) | Window.IsActive(1144) | Window.IsActive(1145) | Window.IsActive(1146) | Window.IsActive(1147) | Window.IsActive(1148) | Window.IsActive(1149) | Window.IsVisible(videobookmarks) | Window.IsVisible(pvrosdguide) | Window.IsVisible(pvrosdchannels) | Window.IsVisible(1152) | Window.IsActive(script-upnext-stillwatching.xml) | Window.IsActive(script-upnext-upnext.xml)</visible>
+            <visible>Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(1140) | Window.IsActive(1141) | Window.IsActive(1142) | Window.IsActive(1143) | Window.IsActive(1144) | Window.IsActive(1145) | Window.IsActive(1146) | Window.IsActive(1147) | Window.IsActive(1148) | Window.IsActive(1149) | Window.IsActive(1159) | Window.IsVisible(videobookmarks) | Window.IsVisible(pvrosdguide) | Window.IsVisible(pvrosdchannels) | Window.IsVisible(1152) | Window.IsActive(script-upnext-stillwatching.xml) | Window.IsActive(script-upnext-upnext.xml)</visible>
         </control>
     </include>
 
@@ -524,7 +527,7 @@
     <include name="OSD_Progress_Details_Grouplist_Def">
         <align>bottom</align>
         <left>0</left>
-
+        <!-- <width>info_panel_w</width> -->
         <top>-40</top>
         <bottom>227.5</bottom>
         <orientation>vertical</orientation>
@@ -666,7 +669,7 @@
 
     <include name="OSD_Progress_BarControls">
 
-
+        <!-- Cache Line -->
         <control type="group">
             <height>12</height>
             <control type="image">
@@ -687,7 +690,7 @@
             </control>
         </control>
 
-
+        <!-- Progress Bar Media -->
         <control type="progress" id="499">
             <width>100%</width>
             <height>12</height>
@@ -696,7 +699,7 @@
             <texturebg colordiffuse="00ffffff" border="12,0,12,0">progress/progress-nib.png</texturebg>
         </control>
 
-
+        <!-- Progress Bar LiveTV -->
         <control type="progress" id="498">
             <width>100%</width>
             <height>12</height>
@@ -704,7 +707,7 @@
             <visible>Pvr.IsPlayingTv</visible>
             <texturebg colordiffuse="00ffffff" border="12,0,12,0">progress/progress-nib.png</texturebg>
         </control>
-
+        <!-- CutList and Chapters Range -->
         <control type="ranges">
             <width>100%</width>
             <height>12</height>
@@ -720,7 +723,7 @@
             <info>Player.Chapters</info>
         </control>
 
-
+        <!-- Seek Nib -->
         <control type="progress" id="401">
             <visible>Player.HasMedia</visible>
             <animation effect="fade" start="100" end="0" condition="!Player.Seeking" reversible="false" delay="300" time="0">Conditional</animation>
@@ -791,7 +794,14 @@
                     <param name="align">$PARAM[align]</param>
                 </include>
 
-
+                <!-- <include content="Object_InfoCircle">
+                    <param name="name">[UPPERCASE]$INFO[VideoPlayer.VideoResolution]$INFO[VideoPlayer.VideoCodec, • ,]$INFO[VideoPlayer.VideoAspect, • ,:1]$INFO[VideoPlayer.AudioCodec, • ,]$VAR[Label_VideoPlayer_AudioChannels, • ,][/UPPERCASE]</param>
+                    <param name="role">$INFO[VideoPlayer.VideoVersionName]</param>
+                    <param name="icon">special://skin/extras/icons/photo-film.png</param>
+                    <param name="fallback_role">$LOCALIZE[31207]</param>
+                    <param name="textcolor_top">$PARAM[textcolor_top]</param>
+                    <param name="textcolor_sub">$PARAM[textcolor_sub]</param>
+                </include> -->
             </control>
         </definition>
     </include>
@@ -1024,6 +1034,8 @@
         <animation effect="fade" time="200" delay="200" end="100" start="0" condition="!$EXP[Exp_OSD_HideControls]" reversible="false">Conditional</animation>
     </include>
 
+
+
     <include name="OSD_TitleDetails">
         <control type="grouplist">
             <orientation>vertical</orientation>
@@ -1254,4 +1266,5 @@
         </definition>
     </include>
 </includes>
+
 

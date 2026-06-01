@@ -3,6 +3,16 @@
     <fontset id="Default" unicode="false">
         <include>Font_Default</include>
         <font>
+            <name>font23_narrow</name>
+            <filename>Inter-Regular.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>Inter-Bold.ttf</filename>
+            <size>32</size>
+        </font>
+        <font>
             <name>font10</name>
             <filename>inter-r.ttf</filename>
             <size>21</size>

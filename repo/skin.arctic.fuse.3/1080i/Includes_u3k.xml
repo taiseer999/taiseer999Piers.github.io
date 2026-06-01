@@ -7,7 +7,7 @@
 	<include name="Info_Line_Two_Row">
 		<height>50</height>
 	</include>
-
+	
 	<variable name="Label_Setting_InfoLineStyle">
 		<value condition="Skin.HasSetting(Info.EnablePillboxStyle)">$LOCALIZE[31209]</value>
 		<value>$LOCALIZE[31329]</value>
@@ -20,10 +20,12 @@
 	</variable>
 
 	<include name="PPI_Button">
-
+		<!-- Button 9 -->
 		<control type="button" id="6009">
 			<include>Defs_OSD_Button</include>
 			<onclick>CancelAlarm(osd_timeout,true)</onclick>
+			<onup>ActivateWindow(1159)</onup>
+			<onfocus>ActivateWindow(1159)</onfocus>
 			<onclick>RunScript(script.tinyppi)</onclick>
 		</control>
 		<include content="OSD_Button_Icon_Overlay">
@@ -39,13 +41,13 @@
 			<visible>[!Pvr.IsPlayingTv + !String.IsEmpty(Player.Art(discart)) + String.IsEqual(Skin.String(OSD.ArtworkStyle),DiscArt)]</visible>
 			<left>1455</left>
 			<top>400</top>
-
+			<!-- Disc Background -->
 			<control type="image">
 				<width>500</width>
 				<height>425</height>
 				<texture colordiffuse="shadow_hard">u3k/discart.png</texture>
 			</control>
-
+			<!-- Disc Art -->
 			<control type="image">
 				<left>15</left>
 				<top>10</top>
@@ -67,7 +69,7 @@
 			</control>
 			<animation effect="slide" start="500" end="0" time="750">WindowOpen</animation>
 			<animation effect="slide" start="0" end="500" time="750">WindowClose</animation>
-			<animation effect="slide" start="0" end="500" time="750" condition="Control.HasFocus(6006) | Control.HasFocus(6007) | Control.HasFocus(6008)">
+			<animation effect="slide" start="0" end="500" time="750" condition="Control.HasFocus(6006) | Control.HasFocus(6007) | Control.HasFocus(6008) | Control.HasFocus(6009)">
                     WindowClose
                 </animation>
 		</control>
@@ -78,13 +80,13 @@
 			<visible>[!Pvr.IsPlayingTv + !String.IsEmpty(Player.Art(discart)) + String.IsEqual(Skin.String(OSD.ArtworkStyle),DiscArt)]</visible>
 			<left>1455</left>
 			<top>400</top>
-
+			<!-- Disc Background -->
 			<control type="image">
 				<width>500</width>
 				<height>425</height>
 				<texture colordiffuse="shadow_hard">u3k/discart.png</texture>
 			</control>
-
+			<!-- Disc Art -->
 			<control type="image">
 				<left>15</left>
 				<top>10</top>
@@ -106,7 +108,7 @@
 			</control>
 			<animation effect="slide" start="500" end="0" time="750">WindowOpen</animation>
 			<animation effect="slide" start="0" end="500" time="750">WindowClose</animation>
-			<animation effect="slide" start="0" end="500" time="750" condition="Control.HasFocus(6006) | Control.HasFocus(6007) | Control.HasFocus(6008)">
+			<animation effect="slide" start="0" end="500" time="750" condition="Control.HasFocus(6006) | Control.HasFocus(6007) | Control.HasFocus(6008) | Control.HasFocus(6009)">
                     WindowClose
                 </animation>
 		</control>
@@ -115,7 +117,7 @@
 			<visible>[!Pvr.IsPlayingTv + !String.IsEmpty(Player.Art(discart)) + String.IsEqual(Skin.String(OSD.ArtworkStyle),VHSArt)]</visible>
 			<left>1315</left>
 			<top>510</top>
-
+			<!-- VHS Background -->
 			<control type="image">
 				<right>90</right>
 				<width>500</width>
@@ -149,7 +151,137 @@
 			</animation>
 		</control>
 	</include>
-
+	
+    <include name="Object_InfoCircle_VS10">
+        <param name="bordersize">1</param>
+        <param name="aspectratio">scale</param>
+        <param name="colorbacking">main_fg_100</param>
+        <param name="colordiffuse">main_bg_90</param>
+        <param name="textcolor">main_fg_90</param>
+        <param name="font_top">font_mini_bold</param>
+        <param name="include_labels">true</param>
+        <param name="backing_visible">true</param>
+        <param name="shadow_colordiffuse">shadow_soft</param>
+        <definition>
+        	<control type="group">
+                <height>80</height>
+                <control type="group">
+                	<centertop>50%</centertop>
+                	<height>50</height>
+                	<width>50</width>
+                	<control type="image">
+                        <include content="Dimension_Padding">
+                        	<param name="pad">-40</param>
+                        </include>
+                        <bordersize>40</bordersize>
+                        <bordertexture colordiffuse="$PARAM[shadow_colordiffuse]">shadows/circle_50-shadow-40.png</bordertexture>
+                        <texture colordiffuse="$PARAM[colorbacking]">diffuse/circle/circle_50.png</texture>
+                        <visible>$PARAM[backing_visible]</visible>
+                	</control>
+                	<include content="Object_InfoCircle_Image">
+                        <param name="bordersize">$PARAM[bordersize]</param>
+                        <param name="aspectratio">$PARAM[aspectratio]</param>
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="icon">$PARAM[icon]</param>
+                        <param name="diffuse">$PARAM[diffuse]</param>
+                        <param name="fallback">$PARAM[fallback]</param>
+                	</include>
+                </control>
+                <nested />
+                <left>40</left>
+                <include content="Object_InfoCircle_Text_Top" condition="$PARAM[include_labels]">
+                	<left>80</left>
+                	<height>50</height>
+                	<top>35</top>
+                	<textcolor>$PARAM[textcolor]</textcolor>
+                	<selectedcolor>$PARAM[textcolor]</selectedcolor>
+                	<label fallback="$PARAM[fallback_role]">$PARAM[name]</label>
+                </include>
+        	</control>
+        </definition>
+    </include>
+	
+    <include name="OSD_VS10_Original">
+        <param name="anchor">true</param>
+        <param name="include_fps">true</param>
+        <param name="textcolor">panel_fg_90</param>
+        <definition>
+            <control type="group">
+                <centertop>50%</centertop>
+                <height>80</height>
+                <include content="Object_InfoCircle_VS10">
+                    <param name="name">Original</param>
+                    <param name="icon">special://skin/extras/icons/o.png</param>
+                    <param name="fallback_role">Original</param>
+                    <param name="textcolor">$PARAM[textcolor]</param>
+                </include>
+            </control>
+        </definition>
+    </include>
+	
+    <include name="OSD_VS10_SDR">
+        <param name="anchor">true</param>
+        <param name="include_fps">true</param>
+        <param name="textcolor_sub">panel_fg_70</param>
+        <param name="textcolor_top">panel_fg_90</param>
+        <definition>
+            <control type="group">
+                <centertop>50%</centertop>
+                <height>80</height>
+                <include content="Object_InfoCircle">
+                    <param name="name">$VAR[Label_VideoHDRCodec] -> SDR</param>
+                    <param name="role">SDR</param>
+                    <param name="icon">special://skin/extras/icons/convert.png</param>
+                    <param name="fallback_role">SDR</param>
+                    <param name="textcolor_top">$PARAM[textcolor_top]</param>
+                    <param name="textcolor_sub">$PARAM[textcolor_sub]</param>
+                </include>
+            </control>
+        </definition>
+    </include>
+	
+    <include name="OSD_VS10_HDR">
+        <param name="anchor">true</param>
+        <param name="include_fps">true</param>
+        <param name="textcolor_sub">panel_fg_70</param>
+        <param name="textcolor_top">panel_fg_90</param>
+        <definition>
+            <control type="group">
+                <centertop>50%</centertop>
+                <height>80</height>
+                <include content="Object_InfoCircle">
+                    <param name="name">$VAR[Label_VideoHDRCodec] -> HDR10</param>
+                    <param name="role">HDR10</param>
+                    <param name="icon">special://skin/extras/icons/convert.png</param>
+                    <param name="fallback_role">HDR10</param>
+                    <param name="textcolor_top">$PARAM[textcolor_top]</param>
+                    <param name="textcolor_sub">$PARAM[textcolor_sub]</param>
+                </include>
+            </control>
+        </definition>
+    </include>
+	
+    <include name="OSD_VS10_DV">
+        <param name="anchor">true</param>
+        <param name="include_fps">true</param>
+        <param name="textcolor_sub">panel_fg_70</param>
+        <param name="textcolor_top">panel_fg_90</param>
+        <definition>
+            <control type="group">
+                <centertop>50%</centertop>
+                <height>80</height>
+                <include content="Object_InfoCircle">
+                    <param name="name">$VAR[Label_VideoHDRCodec] -> Dolby Vision</param>
+                    <param name="role">Dolby Vision</param>
+                    <param name="icon">special://skin/extras/icons/convert.png</param>
+                    <param name="fallback_role">Dolby Vision</param>
+                    <param name="textcolor_top">$PARAM[textcolor_top]</param>
+                    <param name="textcolor_sub">$PARAM[textcolor_sub]</param>
+                </include>
+            </control>
+        </definition>
+    </include>
+	
     <variable name="OSDCodecLogosStartupTimerLabel">
         <value condition="Skin.HasSetting(osd.useOneSecondCodecLogos)">1 $LOCALIZE[31985]</value>
         <value condition="Skin.HasSetting(osd.useTwoSecondsCodecLogos)">2 $LOCALIZE[31130]</value>
@@ -168,7 +300,7 @@
         <value condition="Skin.HasSetting(osd.useFifteenSecondsCodecLogos)">15 $LOCALIZE[31130]</value>
         <value>5 $LOCALIZE[31130]</value>
     </variable>
-
+	
     <variable name="OSDCodecLogosStartupLabel">
         <value condition="Skin.HasSetting(osd.useleftCodecStartupLogos)">$LOCALIZE[31987]</value>
         <value condition="Skin.HasSetting(osd.usecenterCodecStartupLogos)">$LOCALIZE[31988]</value>
@@ -1206,7 +1338,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Video_Background_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1226,7 +1358,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Audio_Background_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1246,7 +1378,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="VS10_Indicator_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1267,7 +1399,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Convert_SDR_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1288,7 +1420,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Convert_HDR10_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1309,7 +1441,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Convert_DV_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1330,7 +1462,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Bypass_SDR_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1351,7 +1483,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Bypass_HDR10_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1372,7 +1504,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Bypass_HDR10Plus_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1393,7 +1525,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Bypass_DV_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1414,7 +1546,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Bypass_HLG_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1435,7 +1567,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Separation_Line_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1456,7 +1588,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="PCM_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1477,7 +1609,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="AAC_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1498,7 +1630,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Dolby_Digital_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1519,7 +1651,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Dolby_Digital_Plus_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1540,7 +1672,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Dolby_Atmos_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1561,7 +1693,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Dolby_TrueHD_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1582,7 +1714,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="Dolby_Atmos1_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1603,7 +1735,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="MP3_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1624,7 +1756,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="DTS_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1645,7 +1777,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="DTS_HD_MA_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1666,7 +1798,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="DTS_HD_HRA_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1687,7 +1819,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="DTS_X_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1708,7 +1840,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="IMAX_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1729,7 +1861,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="FLAC_Flag">
         <param name="groupId" />
         <param name="imageId" />
@@ -1750,7 +1882,7 @@
             </control>
         </definition>
     </include>
-
+	
     <include name="OPUS_Flag">
         <param name="groupId" />
         <param name="imageId" />
