@@ -3,6 +3,7 @@
     <onload>Dialog.Close(fullscreenvideo,true)</onload>
     <onload>Dialog.Close(videoosd,true)</onload>
     <onload>Dialog.Close(seekbar,true)</onload>
+    <onload>Dialog.Close(1159,true)</onload>
     <animation effect="fade" start="0" end="100" time="350" tween="cubic" easing="inout">Visible</animation>
     <animation effect="fade" start="0" end="100" time="350" tween="cubic" easing="inout">WindowOpen</animation>
     <animation effect="fade" end="0" start="100" time="150">Hidden</animation>
@@ -219,7 +220,7 @@
 					<control type="label">
 						<left>210</left>
 						<top>90</top>
-						<label>$INFO[Window().Property(VideoPixelFormatVar)]</label>
+						<label>$INFO[Window().Property(VideoPixelFormatVar)]$INFO[Window().Property(DoviTunnelVar, -> [COLOR b3ededed](,)[/COLOR]]</label>
 						<font>font23_narrow</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
