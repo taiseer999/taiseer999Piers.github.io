@@ -477,3 +477,5 @@ def update_properties(window) -> None:
     window.setProperty("CpuUsageVar",           get_CpuUsageVar())
     window.setProperty("CpuTopUsageVar",        get_CpuTopUsageVar())
     window.setProperty("CurrentSkin",           xbmc.getSkinDir())
+    xbmc.executebuiltin(f"SetProperty(HdmiHdrStatusVar,{get_HdmiHdrStatusVar()},Home)")
+    xbmc.executebuiltin(f"SetProperty(DoviProfileVar,{get_DoviProfileVar()},Home)")

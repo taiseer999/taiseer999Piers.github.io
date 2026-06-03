@@ -1637,8 +1637,7 @@
 		<value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)">DTS:X IMAX</value>
 	</variable>
 	<variable name="DVProfileELVar">
-		<value condition="String.IsEqual(VideoPlayer.HdrDetail,7MEL)">P7 [COLOR orange]MEL[/COLOR]</value>
-		<value condition="String.IsEqual(VideoPlayer.HdrDetail,7FEL)">P7 [COLOR lightgreen]FEL[/COLOR]</value>
-		<value condition="!String.IsEmpty(VideoPlayer.HdrDetail)">P$INFO[VideoPlayer.HdrDetail]</value>
-	</variable>
+    <value condition="String.Contains(Window(Home).Property(DoviProfileVar),FEL)">[COLOR lightgreen]FEL[/COLOR]</value>
+    <value condition="String.Contains(Window(Home).Property(DoviProfileVar),MEL)">[COLOR orange]MEL[/COLOR]</value>
+</variable>
 </includes>
