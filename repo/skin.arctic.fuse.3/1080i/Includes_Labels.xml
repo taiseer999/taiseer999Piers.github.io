@@ -1625,12 +1625,13 @@
 		<value condition="Window.IsActive(fullscreenvideo) + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)">$INFO[VideoPlayer.SubtitlesLanguage] $VAR[SubtitleCodecVar]</value>
 	</variable>
 	<variable name="HDRcodectypeVar">
-		<value condition="String.Contains(VideoPlayer.HdrType,dolbyvision)">Dolby Vision</value>
-		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10plus)">HDR10+</value>
-		<value condition="String.Contains(VideoPlayer.HdrType,hdr10)">HDR10</value>
-		<value condition="String.Contains(VideoPlayer.HdrType,hlg)">HLG</value>
-		<value condition="String.IsEmpty(VideoPlayer.HdrType)">SDR</value>
-	</variable>
+    <value condition="String.IsEqual(Window(Home).Property(HdmiHdrStatusVar),HDR10+)">HDR10+</value>
+    <value condition="String.IsEqual(Window(Home).Property(HdmiHdrStatusVar),HLG)">HLG</value>
+    <value condition="String.IsEqual(Window(Home).Property(HdmiHdrStatusVar),HDR10)">HDR10</value>
+    <value condition="String.IsEqual(Window(Home).Property(HdmiHdrStatusVar),SDR)">SDR</value>
+    <value condition="String.Contains(VideoPlayer.HdrType,dolbyvision)">Dolby Vision</value>
+    <value condition="String.IsEmpty(Window(Home).Property(HdmiHdrStatusVar))">$INFO[VideoPlayer.HdrType]</value>
+</variable>
 	<variable name="VideoplayerObjectAudioTypeVar">
 		<value condition="String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)">Dolby Atmos</value>
 		<value condition="String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)">Dolby Atmos</value>
