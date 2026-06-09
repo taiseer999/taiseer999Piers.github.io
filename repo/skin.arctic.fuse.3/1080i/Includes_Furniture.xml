@@ -28,38 +28,38 @@
         <control type="group">
 
             <right>0</right>
-            <width>370
-            </width>
+            <width>370</width>
             <visible>$PARAM[visible_right]</visible>
             <include content="View_Line_Divider">
                 <param name="align">right</param>
             </include>
-             <control type="grouplist">
-                  <align>right</align>
-                <aligny>right</aligny>
-               <aligny>center</aligny>
+            <control type="grouplist">
+                <orientation>horizontal</orientation>
+                <align>right</align>
+                <aligny>center</aligny>
+                <itemgap>8</itemgap>
+                <height>80</height>
+                <control type="label">
+                    <label>‭$INFO[System.Time] • $VAR[Furniture_Header_Right_Temperature,,]‬</label>
+                    <align>right</align>
+                    <aligny>center</aligny>
+                    <textcolor>main_fg_100</textcolor>
+                    <font>font_Topbar_bold</font>
+                    <height>80</height>
+                    <width>auto</width>
+                </control>
                 <control type="image">
-                   <height>70</height>
-                    <height>50</height>
-                    <width>50</width>
+                    <height>40</height>
+                    <width>40</width>
                     <aspectratio>keep</aspectratio>
+                    <centertop>60%</centertop>
                     <texture>$INFO[Weather.FanartCode,resource://resource.images.weathericons.white/,.png]</texture>
                     <visible>Weather.IsFetched</visible>
-
                 </control>
             </control>
             <control type="label">
-                <label> $VAR[Furniture_Header_Right_Temperature,,] • $INFO[System.Time] $VAR[NetworkVar] </label>
-                <align>right</align>
-                <aligny>center</aligny>
-                <textcolor>main_fg_100</textcolor>
-                <font>font_Topbar_bold</font>
-                <height>80</height>
-
-            </control>
-            <control type="label">
                 <visible>Skin.HasSetting(Furniture.Network_RAM)</visible>
-                <label>$INFO[System.CPUTemperature,[COLOR lightgreen][/COLOR] ,]  $INFO[system.memory(used.percent),[COLOR darkorange][/COLOR] ,]</label>
+                <label>$INFO[System.CPUTemperature,[COLOR lightgreen][/COLOR] ,]  $INFO[system.memory(used.percent),[COLOR darkorange][/COLOR] ,]  $VAR[NetworkVar]</label>
                 <align>right</align>
                 <aligny>center</aligny>
                 <textcolor>main_fg_100</textcolor>
