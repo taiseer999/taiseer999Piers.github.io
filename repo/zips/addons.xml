@@ -734,7 +734,7 @@ updated YouTube addon URL
             <icon>resources/icon.png</icon>
         </assets>
     </extension>
-</addon><addon id="repository.taiseer" name="ABUKARIM repository" version="1.0.2" provider-name="taiseer999">
+</addon><addon id="repository.taiseer" name="ABUKARIM repository" version="1.0.3" provider-name="taiseer999">
     <extension point="xbmc.addon.repository" name="Example Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/taiseer999/taiseer999.github.io/main/repo/zips/addons.xml</info>
@@ -752,7 +752,7 @@ updated YouTube addon URL
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="repository.taiseerCE" name="ABUKARIMce repository" version="1.0.1" provider-name="taiseer999">
+</addon><addon id="repository.taiseerCE" name="ABUKARIMce repository" version="1.0.3.1" provider-name="taiseer999">
     <extension point="xbmc.addon.repository" name="Example Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/taiseer999/taiseer999ce.github.io/master/repo/zips/addons.xml</info>
@@ -770,7 +770,7 @@ updated YouTube addon URL
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="repository.taiseerKODI22" name="ABUKARIMKodi22 repository" version="1.0.2" provider-name="taiseer999">
+</addon><addon id="repository.taiseerKODI22" name="ABUKARIMKodi22 repository" version="1.0.3" provider-name="taiseer999">
     <extension point="xbmc.addon.repository" name="Example Repository">
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/addons.xml</info>
