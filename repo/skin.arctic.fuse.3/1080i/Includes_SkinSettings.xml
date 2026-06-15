@@ -359,7 +359,7 @@
             <param name="id">007</param>
             <param name="dialog">false</param>
             <param name="control">radiobutton</param>
-            <label>$LOCALIZE[52077]</label>
+            <label>CPU + RAM</label>
             <onclick>Skin.ToggleSetting(Furniture.Network_RAM)</onclick>
             <selected>Skin.HasSetting(Furniture.Network_RAM)</selected>
         </include>

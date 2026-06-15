@@ -2374,3 +2374,21 @@ msgstr ""
 msgctxt "#31999"
 msgid "VHS Art"
 msgstr ""
+
+
+msgctxt "#52074"
+msgid "Video OSD extras"
+msgstr ""
+
+#: /1080i/Includes_Labels.xml
+msgctxt "#51200"
+msgid "CPU + RAM above the clock"
+msgstr ""
+
+msgctxt "#52075"
+msgid "Network Connected"
+msgstr ""
+
+msgctxt "#52076"
+msgid "No connection"
+msgstr ""

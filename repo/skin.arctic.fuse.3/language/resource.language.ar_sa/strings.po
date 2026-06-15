@@ -2322,3 +2322,26 @@ msgstr "المزيد"
 msgctxt "#31605"
 msgid "Next aired"
 msgstr "العرض القادم"
+
+
+msgctxt "#52074"
+msgid "Video OSD extras"
+msgstr "ايقونات فيديو OSD"
+
+msgctxt "#52074"
+msgid "Video OSD extras"
+msgstr "ايقونات فيديو OSD"
+
+#: /1080i/Includes_Labels.xml
+msgctxt "#51200"
+msgid "CPU + RAM above the clock"
+msgstr "حرارة المعالج والذاكرة فوق الساعة"
+
+msgctxt "#52075"
+msgid "Network Connected"
+msgstr "متصل بالشبكة"
+
+msgctxt "#52076"
+msgid "No connection"
+msgstr "غير متصل بالشبكة"
+
