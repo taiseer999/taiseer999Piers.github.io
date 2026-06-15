@@ -10,19 +10,20 @@
                 <param name="topline">false</param>
             </include>
 
-
+            <!-- Content -->
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
 
                 <control type="group">
                     <right>constant_group_small_w</right>
-
+                    <!-- Left -->
                     <control type="group">
                         <width>520</width>
                         <control type="group">
                             <include>Size_Group_Head</include>
                             <include content="Part_HeadText">
-
+                                <!-- <param name="id">2</param>
+                                <param name="label">$LOCALIZE[19199]</param> -->
                                 <param name="id">9999</param>
                                 <param name="label">$VAR[Label_PVRChannelMgrHeader]</param>
                                 <param name="right">constant_dialog_pad</param>
@@ -53,14 +54,15 @@
                         </control>
                     </control>
 
-
+                    <!-- Mid -->
                     <control type="group">
                         <left>520</left>
                         <include>Part_Panel_Middle</include>
                         <control type="group">
                             <include>Size_Group_Head</include>
                             <include content="Part_HeadText">
-
+                                <!-- <param name="id">9999</param>
+                                <param name="label">$VAR[Label_PVRChannelMgrHeader]</param> -->
                                 <param name="id">2</param>
                                 <param name="label">$LOCALIZE[19199]</param>
                             </include>
@@ -130,7 +132,7 @@
                     </control>
                 </control>
 
-
+                <!-- Right -->
                 <include content="Part_Button_Grouplist">
                     <param name="onleft">61</param>
                     <param name="items">DialogPVRChannelManager_Items</param>

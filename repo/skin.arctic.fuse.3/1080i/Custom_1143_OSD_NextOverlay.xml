@@ -39,7 +39,8 @@
                             <texture background="true" diffuse="diffuse/landscape_w410_h231.png">$VAR[Image_OSD_UpNext_Playlist_Landscape]</texture>
                             <aspectratio scalediffuse="false">keep</aspectratio>
                         </control>
-
+                        <!-- <param name="top_title">$VAR[Label_OSD_UpNext_Playlist_TopTitle]</param>
+                        <param name="sub_title">$VAR[Label_OSD_UpNext_Playlist_SubTitle]</param> -->
                     </control>
                 </control>
                 <control type="grouplist">

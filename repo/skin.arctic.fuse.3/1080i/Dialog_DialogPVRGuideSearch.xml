@@ -13,16 +13,20 @@
                     <param name="dialog_size">Dimension_DialogFullMenu</param>
                 </include>
 
-
+                <!-- Content -->
                 <control type="group">
                     <include>Size_Dialog_Pad</include>
 
-
+                    <!-- Left -->
                     <control type="group" id="8000">
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
                             <include>Size_Group_Head</include>
-
+                            <!-- <include content="Part_HeadText">
+                                <param name="id">9901</param>
+                                <param name="label">$LOCALIZE[137]</param>
+                            </include>
+                            <include>Part_CloseButton</include> -->
                             <include>Part_Line</include>
                             <control type="group">
                                 <top>20</top>
@@ -225,7 +229,7 @@
                             </control>
                         </control>
                     </control>
-
+                    <!-- Right -->
                     <include content="Part_Button_Grouplist">
                         <param name="items">DialogPVRGuideSearch_Items</param>
                         <param name="onleft">8000</param>

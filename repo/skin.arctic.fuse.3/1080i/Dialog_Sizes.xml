@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
+
     <constant name="-constant_group_small_slide">-160</constant>
     <constant name="constant_group_small_slide">160</constant>
     <constant name="-constant_group_small_w">-320</constant>
@@ -82,5 +83,6 @@
             <animation effect="slide" start="0" end="-constant_group_small_slide" condition="$PARAM[condition]">Conditional</animation>
         </definition>
     </include>
+
 
 </includes>

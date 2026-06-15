@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-
+    <!-- Group Switcher -->
     <include name="View_PVR_GroupSwitcher">
         <include content="Object_Hidden_List">
             <param name="id">11</param>
@@ -38,7 +38,7 @@
         </control>
     </include>
 
-
+    <!-- EPG -->
     <include name="View_PVRGuide_Standard">
         <param name="viewtype_label">19069</param>
         <definition>
@@ -94,11 +94,11 @@
                 <viewtype label="$PARAM[viewtype_label]">list</viewtype>
                 <progresstexture border="160,40,60,40">$PARAM[progresstexture]</progresstexture>
                 <pagecontrol>8060</pagecontrol>
-
+                <!-- <top>-20</top> -->
                 <top>-20</top>
                 <bottom>80</bottom>
-
-
+                <!-- <left>-160</left> -->
+                <!-- <right>-40</right> -->
                 <orientation>horizontal</orientation>
             </include>
         </definition>
@@ -219,6 +219,7 @@
             </control>
         </control>
     </include>
+
 
     <include name="View_PVRGuide">
         <control type="group">
@@ -352,7 +353,7 @@
         </control>
     </include>
 
-
+    <!-- CHANNELS -->
     <include name="View_PVRChannels_Standard">
         <param name="channelheight">80</param>
         <param name="channelwidth">420</param>

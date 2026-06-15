@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-
+    <!-- 1728 x 1080 -->
     <constant name="view_board_movement">1</constant>
     <constant name="view_landscape_movement">2</constant>
     <constant name="view_card_movement">3</constant>

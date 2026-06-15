@@ -13,7 +13,7 @@
             <visible>!Window.IsActive(DialogPlayerProcessInfo.xml)</visible>
             <visible>!Window.IsVisible(DialogSlider.xml)</visible>
 
-
+            <!-- Settings -->
             <control type="group">
                 <visible>!Window.IsVisible(DialogSettings.xml)</visible>
                 <include>OSD_Part_Background_Blur</include>

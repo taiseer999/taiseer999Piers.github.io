@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-
-
-
-
+    <!-- ============= -->
+    <!-- Movement Defs -->
+    <!-- ============= -->
+    <!-- 7 Item: Poster, Square -->
     <include name="List_Poster_Row_Movement">
         <movement>view_poster_movement</movement>
     </include>
-
+    <!-- 5 Item: Card -->
     <include name="List_Card_Row_Movement">
         <movement>view_card_movement</movement>
     </include>
-
+    <!-- 4 Item: Landscape -->
     <include name="List_Landscape_Row_Movement">
         <movement>view_landscape_movement</movement>
     </include>
-
+    <!-- 3 Item: Board -->
     <include name="List_Board_Row_Movement">
         <movement>view_board_movement</movement>
     </include>
-
+    <!-- 1 Item: Banner -->
     <include name="List_Banner_Row_Movement">
         <movement>0</movement>
     </include>
@@ -512,7 +512,7 @@
     </include>
 
     <include name="List_Circle_Row">
-        <param name="item_w">view_poster_item_h</param>
+        <param name="item_w">view_poster_item_h</param>  <!-- Circle matches height but has slightly wider spacing for 5 item -->
         <param name="item_h">view_poster_item_h</param>
         <param name="itemlayout_w">view_circle_itemlayout_w</param>
         <param name="itemlayout_h">view_poster_itemlayout_h</param>
@@ -539,7 +539,7 @@
             </include>
         </definition>
     </include>
-
+    
     <include name="List_Square_Row">
         <param name="item_w">view_poster_item_w</param>
         <param name="item_h">view_poster_item_w</param>
@@ -578,7 +578,7 @@
             <onfocus condition="$PARAM[condition]">ClearProperty($PARAM[prefix]SpecialFolderSortBy)</onfocus>
             <onfocus condition="$PARAM[condition]">ClearProperty($PARAM[prefix]SpecialFolderSortOrder)</onfocus>
             <onfocus condition="$PARAM[condition]">ClearProperty($PARAM[prefix]SpecialFolderLimit)</onfocus>
-
+            <!-- Update Path -->
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.FolderPath) + $PARAM[container]ListItem.IsFolder">SetProperty($PARAM[prefix]SpecialFolderPath,$INFO[$PARAM[container]ListItem.FolderPath])</onfocus>
             <onfocus condition="$PARAM[condition] + !String.IsEmpty($PARAM[container]ListItem.FolderPath) + $PARAM[container]ListItem.IsFolder">SetProperty($PARAM[prefix]SpecialFolderLabel,$INFO[$PARAM[container]ListItem.Label])</onfocus>
         </definition>

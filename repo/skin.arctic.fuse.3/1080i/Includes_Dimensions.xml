@@ -51,7 +51,7 @@
         <right>view_pad</right>
         <left>view_pad</left>
     </include>
-
+    
     <include name="Dimension_PVR_HalfGuide">
         <height>480</height>
         <bottom>view_pad</bottom>

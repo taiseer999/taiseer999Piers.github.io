@@ -9,6 +9,7 @@
     <controls>
         <include>Background</include>
 
+
         <include content="Settings_Dialog">
             <include content="Settings_Main_Group">
                 <include content="Settings_Left_Group">

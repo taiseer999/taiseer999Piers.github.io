@@ -20,17 +20,20 @@
                     <param name="subline">false</param>
                 </include>
 
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
 
-
-
+                    <!-- Left -->
+                    <!-- <control type="group">
+                        <include>Size_LeftGroup_Large</include>
+                        <include>DialogPlot_Artwork</include>
+                    </control> -->
 
                     <control type="group">
-
-
-
+                        <!-- <include>Size_RightGroup_Large</include> -->
+                        <!-- <include>Size_Group_AddonSettings_Middle</include> -->
+                        <!-- <include>Part_Panel_Middle</include> -->
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
                             <include>Size_Group_Head</include>
@@ -126,7 +129,7 @@
                             </include>
                         </control>
                     </control>
-
+                    <!-- Right -->
                     <include content="Part_Button_Grouplist">
                         <param name="onleft">61</param>
                         <param name="items">DialogAddonInfo_Items</param>
@@ -194,7 +197,13 @@
                 <param name="icon">special://skin/extras/icons/play3.png</param>
                 <visible>Control.IsEnabled(12)</visible>
             </include>
-
+            <!-- <include content="Button_Dialog">
+                <param name="id">99</param>
+                <param name="groupid">9399</param>
+                <label>$LOCALIZE[15067]</label>
+                <param name="icon">special://skin/extras/icons/circle-xmark.png</param>
+                <onclick>PreviousMenu</onclick>
+            </include> -->
 
         </definition>
     </include>

@@ -11,11 +11,11 @@
                 <param name="dialog_size">Dimension_DialogFullMenu</param>
             </include>
 
-
+            <!-- Content -->
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
 
-
+                <!-- Left -->
                 <control type="group">
                     <include>Size_Group_AddonSettings_Left</include>
                     <control type="group">
@@ -39,7 +39,7 @@
                     </control>
                 </control>
 
-
+                <!-- Mid -->
                 <control type="group">
                     <include>Size_Group_AddonSettings_Middle</include>
                     <include>Part_Panel_Middle</include>
@@ -88,7 +88,7 @@
                     </control>
                 </control>
 
-
+                <!-- Right -->
                 <include content="Part_Button_Grouplist">
                     <param name="onleft">3</param>
                     <param name="items">DialogGameControllers_Items</param>
@@ -175,11 +175,12 @@
                 <visible>Control.IsEnabled(19)</visible>
             </include>
 
+
         </definition>
     </include>
 
     <include name="DialogGameControllers_Button_Definitions">
-
+        <!-- Button Template -->
         <include content="Settings_Button">
             <param name="id">7</param>
             <param name="control">button</param>
@@ -188,7 +189,7 @@
             <align>center</align>
         </include>
 
-
+        <!-- Button Template -->
         <include content="Settings_Button">
             <param name="id">10</param>
             <param name="control">button</param>
@@ -196,17 +197,18 @@
             <width>constant_addonsettings_category_w</width>
         </include>
 
-
+        <!-- Separator Template -->
         <control type="image" id="9">
             <visible>false</visible>
         </control>
 
-
+        <!-- Label Template -->
         <include content="Settings_Label">
             <param name="id">14</param>
             <param name="control">label</param>
             <param name="dialog">true</param>
         </include>
     </include>
+
 
 </includes>

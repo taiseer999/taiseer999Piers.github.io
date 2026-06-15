@@ -36,7 +36,7 @@
                             <item>
                                 <label>$LOCALIZE[24998]</label>
                                 <property name="folderpath">addons://</property>
-
+                                <!-- <property name="folderpath">addons://user/</property> -->
                                 <icon>DefaultAddonsInstalled.png</icon>
                             </item>
                             <item>
@@ -60,7 +60,21 @@
                                 <property name="folderpath">addons://running/</property>
                                 <icon>DefaultScript.png</icon>
                             </item>
-
+                            <!-- <item>
+                                <label>$LOCALIZE[31375]</label>
+                                <property name="folderpath">addons://user/</property>
+                                <property name="skipupdate">true</property>
+                                <icon>DefaultAddonsZip.png</icon>
+                                <onclick>InstallFromZip</onclick>
+                            </item>
+                            <item>
+                                <label>$LOCALIZE[137]</label>
+                                <property name="folderpath">addons://user/</property>
+                                <property name="skipupdate">true</property>
+                                <icon>DefaultAddonsSearch.png</icon>
+                                <onclick>SetFocus(50)</onclick>
+                                <onclick>Container.Update(addons://search/,replace)</onclick>
+                            </item> -->
                         </content>
                         <content sortby="label">addons://repos/</content>
                     </include>
@@ -80,7 +94,7 @@
                         <onback condition="String.IsEqual(Container.FolderPath,Container(6000).ListItem.FolderPath) | String.IsEqual(Container.FolderPath,Container(6000).ListItem.Property(folderpath)) | String.IsEqual(Container.FolderPath,addons://)">6000</onback>
                         <onleft>6000</onleft>
                         <onright>60</onright>
-
+                        
                         <pagecontrol>60</pagecontrol>
                         <top>20</top>
                         <left>20</left>

@@ -8,18 +8,20 @@
     <onunload>CancelAlarm(osd_timeout,true)</onunload>
     <controls>
 
+
         <control type="group">
 
             <visible allowhiddenfocus="true">!Window.IsVisible(1142)</visible>
             <animation effect="fade" start="0" end="100" time="300" delay="0">Visible</animation>
             <animation effect="fade" end="0" start="100" time="150">Hidden</animation>
 
+
             <control type="group">
 
                 <left>view_pad</left>
                 <right>view_pad</right>
 
-
+                <!-- Left Side Buttons -->
                 <control type="grouplist" id="6091">
                     <centerbottom>80</centerbottom>
                     <height>120</height>
@@ -31,7 +33,7 @@
 
                     <ondown condition="!Window.IsVisible(script-cu-lrclyrics-main.xml)">ActivateWindow(1142)</ondown>
 
-
+                    <!-- Button 1 -->
                     <control type="button" id="6001">
                         <onup>8200</onup>
                         <include>Defs_OSD_Button</include>
@@ -49,7 +51,7 @@
                         <param name="itemgap">osd_itemgap</param>
                     </include>
 
-
+                    <!-- Button 2 -->
                     <control type="button" id="6002">
                         <onup>8200</onup>
                         <include>Defs_OSD_Button</include>
@@ -67,7 +69,7 @@
                         <param name="itemgap">osd_itemgap</param>
                     </include>
 
-
+                    <!-- Button 3 -->
                     <control type="button" id="6003">
                         <onup>8200</onup>
                         <include>Defs_OSD_Button</include>
@@ -85,7 +87,7 @@
                         <param name="itemgap">osd_itemgap</param>
                     </include>
 
-
+                    <!-- Button 4 -->
                     <control type="button" id="6004">
                         <onup>8200</onup>
                         <include>Defs_OSD_Button</include>
@@ -104,7 +106,7 @@
                     </include>
                 </control>
 
-
+                <!-- Right Side Buttons -->
                 <control type="grouplist" id="6092">
                     <centerbottom>80</centerbottom>
                     <height>120</height>
@@ -118,7 +120,7 @@
 
                     <ondown condition="!Window.IsVisible(script-cu-lrclyrics-main.xml)">ActivateWindow(1142)</ondown>
 
-
+                    <!-- Button 5 -->
                     <control type="button" id="6005">
                         <include>Defs_OSD_Button</include>
                         <onclick>CancelAlarm(osd_timeout,true)</onclick>
@@ -133,7 +135,7 @@
                         <param name="itemgap">osd_itemgap</param>
                     </include>
 
-
+                    <!-- Button 6 -->
                     <control type="button" id="6006">
                         <include>Defs_OSD_Button</include>
                         <onclick>PlayerControl(Repeat)</onclick>
@@ -146,7 +148,7 @@
                         <param name="itemgap">osd_itemgap</param>
                     </include>
 
-
+                    <!-- Button 7 -->
                     <control type="button" id="6007">
                         <include>Defs_OSD_Button</include>
                         <onclick>PlayerControl(Random)</onclick>
@@ -159,7 +161,7 @@
                         <param name="itemgap">osd_itemgap</param>
                     </include>
 
-
+                    <!-- Button 8 -->
                     <control type="button" id="6008">
                         <include>Defs_OSD_Button</include>
                         <onclick>CancelAlarm(osd_timeout,true)</onclick>

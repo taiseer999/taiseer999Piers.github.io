@@ -8,7 +8,7 @@
                 <include content="Part_Dialog_Backing">
                     <param name="dialog_size">Dimension_DialogHugeMenu</param>
                 </include>
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
                     <include content="DialogPlot_Textbox">
@@ -28,13 +28,14 @@
             <control type="group">
                 <include>Part_Dialog_Backing</include>
 
-
+                <!-- Content -->
                 <control type="group">
                     <include>Size_Dialog_Pad</include>
 
-
+                    <!-- Left -->
                     <control type="group">
-
+                        <!-- <right>0</right>
+                        <include>Part_Panel</include> -->
                         <include>Size_LeftGroup_Large</include>
                         <include content="DialogPlot_Artwork">
                             <param name="poster_icon">$PARAM[poster_icon]</param>
@@ -46,7 +47,7 @@
                     <control type="group">
                         <include>Part_Panel</include>
                         <include>Size_RightGroup_Large</include>
-
+                        <!-- <include>Size_RightGroup_Flipped_Large</include> -->
                         <include content="DialogPlot_Textbox">
                             <param name="head_id">9999</param>
                             <param name="header">$VAR[Label_Overlay_Title]</param>
@@ -72,15 +73,16 @@
                     <param name="dialog_size">Dimension_DialogFullMenu</param>
                 </include>
 
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
 
-
+                    <!-- Left -->
                     <include content="Object_Control" condition="$PARAM[include_artwork]">
                         <param name="control">group</param>
                         <include>Size_LeftGroup_Large</include>
-
+                        <!-- <include condition="$PARAM[include_artwork]">Part_Panel</include>
+                        <right>0</right> -->
                         <include content="DialogPlot_Artwork">
                             <param name="poster_icon">$VAR[Image_1114_Poster]</param>
                             <param name="square_icon">$VAR[Image_1114_Icon]</param>
@@ -91,7 +93,7 @@
                     <control type="group">
                         <include condition="$PARAM[include_artwork]">Part_Panel</include>
                         <include condition="$PARAM[include_artwork]">Size_RightGroup_Large</include>
-
+                        <!-- <include condition="$PARAM[include_artwork]">Size_RightGroup_Flipped_Large</include> -->
                         <control type="group">
                             <include content="DialogPlot_Textbox">
                                 <param name="head_id">9999</param>
@@ -181,7 +183,7 @@
     </include>
 
     <include name="DialogCustomPlot_Items">
-
+        <!-- Info -->
         <include content="Button_Underline_Switcher">
             <param name="vertical">true</param>
             <param name="id">9001</param>
@@ -200,7 +202,7 @@
             <onclick>Dialog.Close(1141,true)</onclick>
             <onclick>Dialog.Close(videobookmarks,true)</onclick>
         </include>
-
+        <!-- Movies -->
         <include content="Button_Underline_Switcher" condition="!String.IsEmpty(Window.Property(tmdb_id)) + String.IsEqual(Window.Property(tmdb_type),person)">
             <param name="id">9011</param>
             <param name="groupid">9111</param>
@@ -212,7 +214,7 @@
             <onfocus>SetProperty(ModePath,$INFO[Window.Property(TMDb_ID),plugin://plugin.video.themoviedb.helper/?info=stars_in_movies&amp;tmdb_type=person&amp;tmdb_id=,&amp;limit=250&amp;sort_by=premiered&amp;nextpage=false&amp;cacheonly=true&amp;length=1&amp;exclude_key=genre&amp;exclude_value=Documentary / News / Talk])</onfocus>
             <onclick condition="!Container(7001).IsUpdating + !Integer.IsEqual(Container(7001).NumItems,0)">SetFocus(7001)</onclick>
         </include>
-
+        <!-- TV Shows -->
         <include content="Button_Underline_Switcher" condition="!String.IsEmpty(Window.Property(tmdb_id)) + String.IsEqual(Window.Property(tmdb_type),person)">
             <param name="id">9012</param>
             <param name="groupid">9112</param>
@@ -224,7 +226,7 @@
             <onfocus>SetProperty(ModePath,$INFO[Window.Property(TMDb_ID),plugin://plugin.video.themoviedb.helper/?info=stars_in_tvshows&amp;tmdb_type=person&amp;tmdb_id=,&amp;limit=250&amp;sort_by=premiered&amp;nextpage=false&amp;cacheonly=true&amp;length=1&amp;exclude_key=genre&amp;exclude_value=Documentary / News / Talk])</onfocus>
             <onclick condition="!Container(7001).IsUpdating + !Integer.IsEqual(Container(7001).NumItems,0)">SetFocus(7001)</onclick>
         </include>
-
+        <!-- Crew -->
         <include content="Button_Underline_Switcher" condition="!String.IsEmpty(Window.Property(tmdb_id)) + String.IsEqual(Window.Property(tmdb_type),person)">
             <param name="id">9013</param>
             <param name="groupid">9113</param>
@@ -236,7 +238,7 @@
             <onfocus>SetProperty(ModePath,$INFO[Window.Property(TMDb_ID),plugin://plugin.video.themoviedb.helper/?info=crew_in_both&amp;tmdb_type=person&amp;tmdb_id=,&amp;limit=250&amp;sort_by=premiered&amp;nextpage=false&amp;cacheonly=true&amp;length=1])</onfocus>
             <onclick condition="!Container(7001).IsUpdating + !Integer.IsEqual(Container(7001).NumItems,0)">SetFocus(7001)</onclick>
         </include>
-
+        <!-- Cast -->
         <include content="Button_Underline_Switcher" condition="!String.IsEmpty(Window.Property(tmdb_id)) + [String.IsEqual(Window.Property(tmdb_type),movie) | String.IsEqual(Window.Property(tmdb_type),tv)]">
             <param name="id">9014</param>
             <param name="groupid">9114</param>
@@ -248,7 +250,7 @@
             <onfocus>SetProperty(ModePath,$INFO[Window.Property(TMDb_ID),plugin://plugin.video.themoviedb.helper/?info=cast&amp;tmdb_id=,&amp;limit=250]$INFO[Window.Property(tmdb_type),&amp;tmdb_type=,&amp;nextpage=false&amp;cacheonly=true&amp;length=1])</onfocus>
             <onclick condition="!Container(7001).IsUpdating + !Integer.IsEqual(Container(7001).NumItems,0)">SetFocus(7001)</onclick>
         </include>
-
+        <!-- Crew -->
         <include content="Button_Underline_Switcher" condition="!String.IsEmpty(Window.Property(tmdb_id)) + [String.IsEqual(Window.Property(tmdb_type),movie) | String.IsEqual(Window.Property(tmdb_type),tv)]">
             <param name="id">9015</param>
             <param name="groupid">9115</param>
@@ -308,7 +310,7 @@
             <control type="group">
                 <include>Size_Dialog_Pad</include>
 
-
+                <!-- Hidden Images to Test Availability -->
                 <control type="image" id="99981">
                     <texture background="true" colordiffuse="00ffffff">$PARAM[poster_icon]</texture>
                     <visible>$PARAM[hidden_icon]</visible>
@@ -318,7 +320,7 @@
                     <visible>$PARAM[hidden_icon]</visible>
                 </control>
 
-
+                <!-- Visible Images Based On Availability -->
                 <control type="grouplist">
                     <orientation>vertical</orientation>
                     <itemgap>40</itemgap>
@@ -368,5 +370,6 @@
         <onright>9000</onright>
         <showonepage>false</showonepage>
     </include>
+
 
 </includes>

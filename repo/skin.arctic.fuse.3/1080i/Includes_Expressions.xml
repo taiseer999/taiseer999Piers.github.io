@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-
-
-
+    <!-- ========== -->
+    <!-- TMDBHelper -->
+    <!-- ========== -->
     <expression name="Exp_TMDbHelper_IsData">[Skin.HasSetting(TMDbHelper.EnableData)]</expression>
     <expression name="Exp_TMDbHelper_IsBlur">[Skin.HasSetting(TMDbHelper.EnableBlur)]</expression>
     <expression name="Exp_TMDbHelper_IsCrop">[Skin.HasSetting(TMDbHelper.EnableCrop)]</expression>
 
 
-
-
+    <!-- ============== -->
+    <!-- Colour Schemes -->
+    <!-- ============== -->
     <expression name="Exp_DialogTheme_IsAdaptive">[$EXP[Exp_TMDbHelper_IsBlur] + Skin.String(Background.DialogImage,Adaptive)]</expression>
 
     <expression name="Exp_ColourHighlight_IsAqua">[String.IsEqual(Skin.String(focuscolor.name),ff00b8d4) + Skin.HasSetting(RevertSelectedText)]</expression>
@@ -53,8 +54,9 @@
     <expression name="Exp_Navigation_OnPrevious">[Skin.String(Navigation.OnBack,Previous) | String.IsEmpty(Skin.String(Navigation.OnBack))]</expression>
 
 
-
-
+    <!-- ==== -->
+    <!-- Hubs -->
+    <!-- ==== -->
 
     <expression name="Exp_Hubs_Spotlight_HasItems">[!Integer.IsEqual(Container(301).NumItems,0) | Container(301).IsUpdating]</expression>
 
@@ -65,11 +67,12 @@
 
     <expression name="Exp_Hubs_SlideInfo">[[!String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + !Skin.HasSetting(HomeSwitcher.Vertical)] | [Window.IsVisible(1105) + String.IsEmpty(Window(1105).Property(Searchbar.IsHidden)) + !Window.IsActive(DialogKeyboard.xml)]]</expression>
 
+    <!-- <expression name="Exp_Hubs_SlideInfo">[!String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + !Skin.HasSetting(HomeSwitcher.Vertical)]</expression> -->
 
 
-
-
-
+    <!-- ============== -->
+    <!-- Standard Views -->
+    <!-- ============== -->
 
     <expression name="Exp_InfoDialogs_WidgetsGroup_HasFocus">[ControlGroup(5000).HasFocus()]</expression>
 
@@ -79,7 +82,7 @@
 
     <expression name="Exp_View_IsMedia">[Window.IsVisible(videos) | Window.IsVisible(music) | Window.IsVisible(programs) | Window.IsVisible(pictures) | Window.IsVisible(games) | $EXP[Exp_PVRWindows]]</expression>
 
-
+    <!-- Scrollbar -->
     <expression name="Exp_BackgroundArtwork_IsHidden">[[![$EXP[Exp_InfoDialogs] | Window.IsVisible(1190)] + [Window.IsVisible(favouritesbrowser) | Window.IsVisible(weather) | !String.IsEmpty(Window.Property(Background.HideArtwork))]] | [[$EXP[Exp_InfoDialogs] | Window.IsVisible(1190)]]]</expression>
 
     <expression name="Exp_BackgroundArtwork_IsOverlay">[$EXP[Exp_BackgroundArtwork_IsHidden] | [!$EXP[Exp_InfoDialogs] + !String.IsEmpty(Window(Home).Property(Background.ShowOverlay))] | $EXP[Exp_InfoDialogs] | $EXP[Exp_PlainBackgroundWindows]]</expression>
@@ -91,9 +94,9 @@
     <expression name="Exp_FurnitureBusy_AnimationCond_DialogBusy">[Window.IsActive(DialogExtendedProgressBar.xml) | Window.IsActive(DialogNotification.xml) | Window.IsActive(DialogVolumeBar.xml)]</expression>
     <expression name="Exp_FurnitureBusy_AnimationCond_DialogVolumeBar">[Window.IsActive(DialogExtendedProgressBar.xml) | Window.IsActive(DialogNotification.xml) | Window.IsActive(DialogBusy.xml)]</expression>
 
-
-
-
+    <!-- ================= -->
+    <!-- Windows / Dialogs -->
+    <!-- ================= -->
     <expression name="Exp_PVRWindows">[Window.IsVisible(MyPVRGuide.xml) | Window.IsVisible(MyPVRChannels.xml) | Window.IsVisible(MyPVRTimers.xml) | Window.IsVisible(MyPVRRecordings.xml) | Window.IsVisible(MyPVRSearch.xml)]</expression>
 
     <expression name="Exp_InfoDialogs">[Window.IsVisible(DialogVideoInfo.xml) | Window.IsVisible(DialogMusicInfo.xml)]</expression>
@@ -102,9 +105,9 @@
 
     <expression name="Exp_PlainBackgroundWindows">[Window.IsVisible(SettingsCategory.xml) | Window.IsVisible(SkinSettings.xml) | Window.IsVisible(SettingsProfile.xml) | Window.IsVisible(SettingsSystemInfo.xml) | Window.IsVisible(addonbrowser) | Window.IsVisible(filemanager) | Window.IsVisible(1115) | Window.IsVisible(Settings.xml) | Window.IsVisible(eventlog) | Window.IsVisible(SettingsScreenCalibration.xml) | Window.IsVisible(MyMusicPlaylistEditor.xml)]</expression>
 
-
-
-
+    <!-- =============== -->
+    <!-- ListItem Status -->
+    <!-- =============== -->
     <expression name="Exp_IsGenre">[String.IsEqual(ListItem.DBType,genre) | String.IsEqual(ListItem.Property(dbtype),genre)]</expression>
 
     <expression name="Exp_IsStudio">[String.IsEqual(ListItem.DBType,studio) | String.IsEqual(ListItem.Property(dbtype),studio)]</expression>
@@ -116,8 +119,9 @@
     <expression name="Exp_IsPVRItem">[!String.IsEmpty(ListItem.ChannelNumberLabel) | String.IsEqual(ListItem.Path,pvr://channels/tv/)]</expression>
 
 
-
-
+    <!-- === -->
+    <!-- OSD -->
+    <!-- === -->
     <expression name="Exp_OSD_HasPlaylist">[VideoPlayer.Content(episodes) | VideoPlayer.Content(livetv) | [VideoPlayer.Content(movies) + !Integer.IsEqual(VideoPlayer.PlaylistLength,1) + !Integer.IsEqual(VideoPlayer.PlaylistLength,0)]]</expression>
 
     <expression name="Exp_OSD_PVRChannelSwitch">[VideoPlayer.Content(livetv) + [!String.IsEmpty(PVR.ChannelNumberInput) | Player.ShowInfo]]</expression>
@@ -130,9 +134,9 @@
 
     <expression name="Exp_OSD_HideControls">[Window.IsActive(1140) | Window.IsActive(1141) | Window.IsActive(1142) | Window.IsActive(videobookmarks) | Window.IsActive(pvrosdguide) | Window.IsActive(pvrosdchannels) | Window.IsActive(script-upnext-stillwatching.xml) | Window.IsActive(script-upnext-upnext.xml)]</expression>
 
-
-
-
+    <!-- ==== -->
+    <!-- Misc -->
+    <!-- ==== -->
     <expression name="Exp_AutoCompletion_IsEnabled">[System.HasAddon(plugin.program.autocompletion) + System.AddonIsEnabled(plugin.program.autocompletion) + !Skin.HasSetting(Keyboard.DisableAutoCompletion)]</expression>
 
     <expression name="Exp_Video_IsNotPlaying">[![Player.HasVideo | [Player.HasAudio + !Skin.HasSetting(Background.Visualisation.Disabled) + Visualisation.Enabled]] | Player.Paused | Skin.HasSetting(Background.DisableVideo) | Window.IsVisible(1123)]</expression>

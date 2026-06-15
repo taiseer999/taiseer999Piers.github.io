@@ -59,7 +59,7 @@
                     </include>
                 </control>
 
-
+                <!-- Info Box -->
                 <control type="label">
                     <wrapmultiline>true</wrapmultiline>
                     <top>0</top>

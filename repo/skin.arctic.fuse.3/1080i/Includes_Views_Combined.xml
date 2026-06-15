@@ -70,7 +70,7 @@
         </include>
     </include>
 
-
+    <!-- Horizontal Layout (Classic) -->
     <include name="View_Combined_Row_Horz">
         <definition>
             <control type="group">
@@ -208,7 +208,7 @@
         </definition>
     </include>
 
-
+    <!-- List Layout -->
     <include name="View_ComboList_Loading_Item">
         <param name="height">165</param>
         <param name="width">284.44</param>
@@ -343,7 +343,10 @@
                         </control>
                     </control>
 
+
                 </control>
+
+
 
             </control>
         </definition>
@@ -391,7 +394,7 @@
         </definition>
     </include>
 
-
+    <!-- Combined Square -->
     <include name="View_520_Square_Combined_Row">
         <include content="View_Combined_Row">
             <param name="id">0</param>
@@ -399,7 +402,7 @@
         </include>
     </include>
 
-
+    <!-- Combined Landscape -->
     <include name="View_521_Landscape_Combined_Row">
         <include content="View_Combined_Row">
             <param name="id">1</param>
@@ -407,7 +410,7 @@
         </include>
     </include>
 
-
+    <!-- Combined Poster -->
     <include name="View_522_Poster_Combined_Row">
         <include content="View_Combined_Row">
             <param name="id">2</param>
@@ -415,7 +418,7 @@
         </include>
     </include>
 
-
+    <!-- Combined Circle -->
     <include name="View_523_Circle_Combined_Row">
         <include content="View_Combined_Row">
             <param name="id">3</param>
@@ -423,7 +426,7 @@
         </include>
     </include>
 
-
+    <!-- Combined Board -->
     <include name="View_524_Board_Combined_Row">
         <include content="View_Combined_Row">
             <param name="id">4</param>
@@ -431,7 +434,7 @@
         </include>
     </include>
 
-
+    <!-- Combined List -->
     <include name="View_526_List_Combined">
         <include content="View_ComboList_Include">
             <param name="id">6</param>
@@ -440,7 +443,7 @@
         </include>
     </include>
 
-
+    <!-- Combined List -->
     <include name="View_528_List_Combined">
         <control type="group">
             <left>20</left>

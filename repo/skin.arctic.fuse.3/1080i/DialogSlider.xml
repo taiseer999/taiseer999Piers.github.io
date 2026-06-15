@@ -27,7 +27,7 @@
                 <control type="group">
                     <height>12</height>
                     <centerbottom>60</centerbottom>
-
+                    <!-- Left Side Marker -->
                     <control type="image">
                         <texture colordiffuse="$VAR[Color_DialogBorder]">common/white.png</texture>
                         <width>2</width>
@@ -42,7 +42,7 @@
                         <centerleft>12</centerleft>
                         <bottom>-8</bottom>
                     </control>
-
+                    <!-- Left Center Marker -->
                     <control type="image">
                         <texture colordiffuse="$VAR[Color_DialogBorder]">common/white.png</texture>
                         <width>2</width>
@@ -57,7 +57,7 @@
                         <centerleft>25%</centerleft>
                         <bottom>-8</bottom>
                     </control>
-
+                    <!-- Center Marker -->
                     <control type="image">
                         <texture colordiffuse="$VAR[Color_DialogBorder]">common/white.png</texture>
                         <width>2</width>
@@ -72,7 +72,7 @@
                         <centerleft>50%</centerleft>
                         <bottom>-12</bottom>
                     </control>
-
+                    <!-- Right Center Marker -->
                     <control type="image">
                         <texture colordiffuse="$VAR[Color_DialogBorder]">common/white.png</texture>
                         <width>2</width>
@@ -87,7 +87,7 @@
                         <centerright>25%</centerright>
                         <bottom>-8</bottom>
                     </control>
-
+                    <!-- Right Side Marker -->
                     <control type="image">
                         <texture colordiffuse="$VAR[Color_DialogBorder]">common/white.png</texture>
                         <width>2</width>

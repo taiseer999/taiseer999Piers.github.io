@@ -20,5 +20,7 @@
             <param name="switcher_content">LiveTV_Switcher_Items</param>
         </include>
 
+
+
     </controls>
 </window>

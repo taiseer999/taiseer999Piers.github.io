@@ -11,7 +11,7 @@
                     <param name="topline">true</param>
                 </include>
 
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
                     <control type="group">

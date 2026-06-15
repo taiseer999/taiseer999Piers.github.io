@@ -9,6 +9,7 @@
     <include>Action_Media_Onload</include>
     <controls>
 
+
         <include>View_Main</include>
     </controls>
 </window>

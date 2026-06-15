@@ -70,7 +70,7 @@
     <include name="Overlay_DebugGrid">
         <control type="group">
 
-
+            <!-- Vertical 40 px lines -->
             <control type="grouplist">
                 <itemgap>40</itemgap>
                 <orientation>vertical</orientation>
@@ -83,7 +83,7 @@
                 <include>Vert_Line</include>
             </control>
 
-
+            <!-- Horizontal 40 px lines -->
             <control type="grouplist">
                 <itemgap>40</itemgap>
                 <orientation>horizontal</orientation>
@@ -101,7 +101,7 @@
                 <include>Horz_Red_Line</include>
             </control>
 
-
+            <!-- Screen Padding Lines -->
             <control type="image">
                 <top>80</top>
                 <height>1</height>
@@ -123,7 +123,7 @@
                 <texture colordiffuse="red">common/white.png</texture>
             </control>
 
-
+            <!-- Outer Border Lines -->
             <control type="image">
                 <top>120</top>
                 <height>1</height>
@@ -140,7 +140,7 @@
                 <texture colordiffuse="red">common/white.png</texture>
             </control>
 
-
+            <!-- Inner Border Lines -->
             <control type="image">
                 <top>view_top</top>
                 <height>1</height>
@@ -203,7 +203,7 @@
                 <texture colordiffuse="cyan">common/white.png</texture>
             </control>
 
-
+            <!-- Center Lines -->
             <control type="image">
                 <centertop>50%</centertop>
                 <height>1</height>
@@ -430,6 +430,7 @@
         </control>
     </include>
 
+
     <include name="Overlay_Test_Window_Dimensions">
         <control type="grouplist">
             <left>80</left>
@@ -501,6 +502,7 @@
                 </control>
             </control>
 
+
         </control>
 
     </include>
@@ -533,6 +535,7 @@
             </control>
         </control>
     </include>
+
 
     <include name="Overlay_Test_Window_Fonts">
         <definition>
@@ -587,7 +590,9 @@
                         </include>
                     </control>
 
+
                 </control>
+
 
                 <control type="group">
                     <bottom>0</bottom>
@@ -636,6 +641,9 @@
                         </control>
                     </control>
                 </control>
+
+
+
 
             </control>
         </definition>

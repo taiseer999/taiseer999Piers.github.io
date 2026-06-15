@@ -30,6 +30,8 @@
             <onclick condition="!String.IsEqual(ListItem.Property(tmdb_type),person)">RunScript(plugin.video.themoviedb.helper,close_dialog=1190)</onclick>
         </control>
 
+
+
         <include condition="Window.IsVisible(fullscreenvideo)">OSD_VideoBackground_Dialog</include>
 
         <control type="group">
@@ -60,6 +62,7 @@
                 <include condition="String.IsEqual(ListItem.Property(tmdb_type),person)">DialogInfo_PersonWidgets</include>
                 <include condition="!Skin.HasSetting(VideoInfo.Widgets.DisableGallery)">DialogInfo_GalleryWidget</include>
 
+
                 <include>Widget_End_Bumper</include>
             </control>
         </control>
@@ -76,6 +79,7 @@
         <include content="Object_Hidden_Button">
             <param name="id">15</param>
         </include>
+
 
     </controls>
 </window>

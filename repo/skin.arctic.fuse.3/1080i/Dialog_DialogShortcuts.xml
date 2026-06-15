@@ -37,7 +37,7 @@
             <include content="Part_Background_Panel">
                 <param name="dialog_size">Dimension_DialogFullMenu</param>
             </include>
-
+            <!-- Content -->
             <control type="group" id="8000">
                 <include>Size_Dialog_Pad</include>
                 <control type="group">
@@ -69,7 +69,7 @@
                     </control>
                 </control>
 
-
+                <!-- Right -->
                 <control type="group">
                     <width>480</width>
                     <right>0</right>
@@ -105,7 +105,7 @@
         </control>
     </include>
 
-       <include name="DialogShortcuts_ShortcutList">
+      <include name="DialogShortcuts_ShortcutList">
         <control type="group">
             <include>Size_Grouplist_Pad</include>
 
@@ -300,7 +300,7 @@
             <onback>22904</onback>
         </include>
 
-
+        <!-- Shortcuts -->
         <include content="Settings_ButtonImage">
             <param name="id">29002</param>
             <param name="groupid">29102</param>
@@ -314,7 +314,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Path -->
         <include content="Settings_ButtonImage">
             <param name="id">29003</param>
             <param name="groupid">29103</param>
@@ -328,7 +328,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Rename -->
         <include content="Settings_ButtonImage">
             <param name="id">29004</param>
             <param name="groupid">29104</param>
@@ -339,7 +339,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Icon -->
         <include content="Settings_ButtonImage">
             <param name="id">29005</param>
             <param name="groupid">29105</param>
@@ -362,7 +362,7 @@
             <onback>22904</onback>
         </include>
 
-
+        <!-- Edit custom submenu widget item -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23042</param>
@@ -389,7 +389,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Widgets: Style -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23006</param>
@@ -402,7 +402,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Widgets: Sort by -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23007</param>
@@ -415,7 +415,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Widgets: Sort order -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23008</param>
@@ -430,7 +430,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Widgets: Limit -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23009</param>
@@ -443,7 +443,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Widgets: Stacked Parent -->
         <include content="Settings_Stacked_Button">
             <param name="dialog">true</param>
             <param name="id">23011</param>
@@ -461,7 +461,7 @@
             <visible>String.StartsWith(Container(22001).ListItem.Property(path),Stacked_)</visible>
         </include>
 
-
+        <!-- Widgets: Autoscroll -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23010</param>
@@ -474,7 +474,7 @@
             <visible>$EXP[DialogShortcuts_IsEnabled_Expression]</visible>
         </include>
 
-
+        <!-- Widgets: Prevent Reload -->
         <include content="Settings_Button">
             <param name="dialog">true</param>
             <param name="id">23070</param>
@@ -498,7 +498,7 @@
         </definition>
     </include>
 
-
+     <!-- Selected Color -->
     <variable name="DialogShortcuts_ColorSelected_30">
         <value condition="ControlGroup(29000).HasFocus()">dialog_fg_70</value>
         <value>$VAR[ColorSelected_30]</value>
@@ -517,6 +517,8 @@
 
     <expression name="DialogShortcuts_IsEnabled_Expression">[!String.IsEqual(Container(22001).ListItem.Property(disabled),True) + $EXP[DialogShortcuts_IsNotBlank_Expression]]</expression>
     <expression name="DialogShortcuts_IsNotBlank_Expression">[!String.IsEqual(Container(22001).ListItem.Property(blank),True)]</expression>
+
+
 
     <include name="DialogCustom_Shortcuts_Items">
         <include content="$PARAM[include]" condition="String.IsEqual(Window(Home).Property(Dialog.1124.Window),HomeSwitcher.Home)">
@@ -608,7 +610,7 @@
             <onclick>RunScript(script.skinvariables,run_dialog=select,heading=$LOCALIZE[31016],separator=||,list=default||label||userpreference||random||dateadded||lastplayed||playcount||year||rating||userrating||votes||genre||country||studio||playlist||episodenumber||season||totalepisodes||watchedepisodes||tvshowstatus||tvshowtitle||file||title||track||time||artist||album||lastupdated||lastused||date,"executebuiltin=Skin.SetString(HomeSwitcher.$PARAM[window].Spotlight.SortMethod,{v})")</onclick>
             <visible>![String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Path)) | Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Path,noop)]</visible>
         </include>
-
+        
         <include content="Settings_Button" description="Sort order">
             <param name="dialog">true</param>
             <param name="id">8006</param>
@@ -627,7 +629,7 @@
         <param name="visible">String.IsEqual(Container(30000).ListItem.Property(editmenu),menu=search)</param>
         <param name="enabled">!Skin.HasSetting(HomeSwitcher.DisableSearch)</param>
         <definition>
-
+            <!-- Search: 9400 | 9500 -->
             <include content="Settings_Label">
                 <param name="id">9401</param>
                 <param name="control">label</param>
@@ -636,7 +638,14 @@
                 <visible>$PARAM[enabled]</visible>
                 <visible>$PARAM[visible]</visible>
             </include>
-
+            <!-- <include content="Settings_Button" description="Enabled">
+                <param name="control">radiobutton</param>
+                <param name="id">9402</param>
+                <label>$LOCALIZE[305]</label>
+                <selected>$PARAM[enabled]</selected>
+                <onclick>Skin.ToggleSetting(HomeSwitcher.DisableSearch)</onclick>
+                <visible>$PARAM[visible]</visible>
+            </include> -->
             <include content="Settings_Button" description="Layout (Search)">
                 <param name="control">button</param>
                 <param name="id">9403</param>
@@ -682,7 +691,7 @@
         <param name="enabled">!String.IsEmpty(Container(30000).ListItem.Property(enabled))</param>
         <definition>
 
-
+            <!-- Hubs: 9000 | 9100 -->
             <include content="Settings_Label">
                 <param name="id">9001</param>
                 <param name="control">label</param>
@@ -691,7 +700,16 @@
                 <visible>$PARAM[enabled]</visible>
                 <visible>$PARAM[visible]</visible>
             </include>
-
+            <!-- <include content="Settings_Button" description="Enabled">
+                <param name="control">radiobutton</param>
+                <param name="id">9002</param>
+                <label>$LOCALIZE[305]</label>
+                <selected>$PARAM[enabled]</selected>
+                <onclick condition="String.IsEmpty(Container(30000).ListItem.Property(enabled))">Skin.SetString($INFO[Container(30000).ListItem.Property(rename),,.Toggle],true)</onclick>
+                <onclick condition="String.IsEqual(Container(30000).ListItem.Property(enabled),true)">Skin.Reset($INFO[Container(30000).ListItem.Property(rename),,.Toggle])</onclick>
+                <visible>$PARAM[visible]</visible>
+                <visible>!String.IsEqual(Container(30000).ListItem.Property(editmenu),menu=home)</visible>
+            </include> -->
             <include content="Settings_Button" description="Layout">
                 <param name="id">9003</param>
                 <label>$LOCALIZE[31158]</label>
@@ -753,9 +771,9 @@
         <param name="visible">String.IsEmpty(Container(30000).ListItem.Property(editmenu))</param>
         <definition>
 
+            <!-- Additional 9600 | 9700 -->
 
-
-
+            <!-- Next Aired -->
             <include content="Settings_Label">
                 <param name="id">9601</param>
                 <param name="control">label</param>
@@ -773,7 +791,7 @@
                 <visible>$PARAM[visible]</visible>
             </include>
 
-
+            <!-- PVR -->
             <include content="Settings_Label">
                 <param name="id">9610</param>
                 <param name="control">label</param>
@@ -843,7 +861,7 @@
                 <visible>!String.IsEmpty(Skin.String(HomeSwitcher.1107.Toggle))</visible>
             </include>
 
-
+            <!-- ADDONS -->
             <include content="Settings_Label">
                 <param name="id">9620</param>
                 <param name="control">label</param>
@@ -915,7 +933,7 @@
                 <visible>!String.IsEmpty(Skin.String(HomeSwitcher.1108.Toggle))</visible>
             </include>
 
-
+            <!-- Settings -->
             <include content="Settings_Label">
                 <param name="id">9630</param>
                 <param name="control">label</param>
@@ -938,7 +956,7 @@
 
     <include name="DialogShortcuts_Window_Settings_Power_Tiles">
 
-
+        <!-- Power: 9200 | 9300 -->
         <include content="Settings_Button">
             <param name="id">92$PARAM[item]1</param>
             <param name="control">button</param>
@@ -990,6 +1008,7 @@
             <visible>Skin.String(OptionsTiles.0$PARAM[item].Include,Custom)</visible>
         </include>
     </include>
+
 
     <include name="DialogShortcuts_Window_Settings_Power">
         <param name="visible">String.IsEqual(Container(30000).ListItem.Property(editmenu),menu=power)</param>

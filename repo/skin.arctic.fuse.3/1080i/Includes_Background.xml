@@ -272,10 +272,10 @@
         <param name="plain_background">$EXP[Exp_PlainBackgroundWindows]</param>
         <definition>
 
-
+            <!-- Standard Background -->
             <include condition="!$EXP[Exp_PlainBackgroundWindows]">Background_Main</include>
 
-
+            <!-- Plain Background -->
             <include content="Background_Main" condition="$EXP[Exp_PlainBackgroundWindows]">
                 <param name="plain_background">true</param>
             </include>

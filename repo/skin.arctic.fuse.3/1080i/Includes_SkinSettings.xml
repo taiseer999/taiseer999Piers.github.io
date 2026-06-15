@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-
+    
+    <!-- Menus -->
     <include name="SkinSettings_Items_Menus">
         <include content="Settings_Label" description="Configure">
             <param name="window">skinsettings</param>
@@ -61,7 +62,7 @@
             <onclick>Skin.ToggleSetting(HomeSwitcher.EnableIcons)</onclick>
             <visible>!Skin.HasSetting(HomeSwitcher.Vertical)</visible>
         </include>
-        <include content="Settings_Button" description="Header">
+       <include content="Settings_Button" description="Header">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -79,7 +80,6 @@
 
             <onclick condition="!Skin.HasSetting(HomeSwitcher.DisableHeader) + Skin.HasSetting(HomeSwitcher.DisableDate)">Skin.SetBool(HomeSwitcher.DisableHeader)</onclick>
         </include>
-
         <include content="Settings_Label" description="Layout">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -108,7 +108,7 @@
         </include>
     </include>
 
-
+    <!-- Appearance -->
     <include name="SkinSettings_Items_Appearance">
         <include content="Settings_Label" description="LooknFeel Label">
             <param name="window">skinsettings</param>
@@ -197,7 +197,7 @@
         </include>
     </include>
 
-
+    <!-- Viewtypes -->
     <include name="SkinSettings_Items_Viewtypes">
         <include content="Settings_Label" description="Viewtypes">
             <param name="window">skinsettings</param>
@@ -259,6 +259,8 @@
             <onclick>ActivateWindow(1118)</onclick>
         </include>
 
+
+
         <include content="Settings_Label" description="Buttons">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -292,7 +294,7 @@
 
     </include>
 
-
+   <!-- Interface -->
     <include name="SkinSettings_Items_Interface">
         <include content="Settings_Label" description="Interface">
             <param name="window">skinsettings</param>
@@ -300,7 +302,17 @@
             <param name="id">001</param>
             <label>$LOCALIZE[31239]</label>
         </include>
-
+        <include content="Settings_Button" description="Codecs">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">002</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>$LOCALIZE[31207]</label>
+            <onclick>Skin.ToggleSetting(Footer.EnableCodecs)</onclick>
+            <selected>Skin.HasSetting(Footer.EnableCodecs)</selected>
+        </include>
         <include content="Settings_Button" description="Now Playing">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
@@ -340,6 +352,18 @@
             <onclick>Skin.ToggleSetting(Header.DisableWeather)</onclick>
             <selected>!Skin.HasSetting(Header.DisableWeather)</selected>
         </include>
+         <include content="Settings_Button" description="NetworkRAM">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">007</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>$LOCALIZE[52077]</label>
+            <onclick>Skin.ToggleSetting(Furniture.Network_RAM)</onclick>
+            <selected>Skin.HasSetting(Furniture.Network_RAM)</selected>
+        </include>
+       
 
         <include content="Settings_Label" description="Context">
             <param name="window">skinsettings</param>
@@ -372,8 +396,7 @@
         </include>
 
     </include>
-
-
+    <!-- Behaviour -->
     <include name="SkinSettings_Items_Behaviour">
         <include content="Settings_Label" description="Widgets">
             <param name="window">skinsettings</param>
@@ -427,7 +450,6 @@
             <selected>Skin.HasSetting(Background.ExtraFanart)</selected>
             <visible>$EXP[Exp_TMDbHelper_IsBlur]</visible>
         </include>
-
         <include content="Settings_Label" description="Navigation">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -498,13 +520,26 @@
             <onclick>Skin.ToggleSetting(Labels.Autoscroll)</onclick>
             <selected>Skin.HasSetting(Labels.Autoscroll)</selected>
         </include>
+        
 
-
+        <!-- Playback -->
         <include content="Settings_Label" description="Playback">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
             <param name="id">011</param>
             <label>$LOCALIZE[14086]</label>
+        </include>
+        
+         <include content="Settings_Button">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">0022</param>
+            <param name="control">radiobutton</param>
+            <param name="slevel">2</param>
+            <label>$LOCALIZE[52074]</label>
+            <onclick>Skin.ToggleSetting(ExtraOSD)</onclick>
+            <selected>Skin.HasSetting(ExtraOSD)</selected>
         </include>
 
         <include content="Settings_Button" description="Autoclose OSD timeout">
@@ -572,8 +607,8 @@
             <onclick>Skin.ToggleSetting(Background.DisableVideo)</onclick>
         </include>
     </include>
-
-
+  
+    <!-- Details -->
     <include name="SkinSettings_Items_Details">
 
         <include content="Settings_Label" description="TMDbHelper">
@@ -602,7 +637,7 @@
             <visible>$EXP[Exp_TMDbHelper_IsData]</visible>
         </include>
 
-        <include content="Settings_Button" description="CustomDialog Movie  Ratings">
+         <include content="Settings_Button" description="CustomDialog Movie  Ratings">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -705,7 +740,7 @@
 
     </include>
 
-
+   <!-- Other -->
     <include name="SkinSettings_Items_Other">
         <include content="Settings_Label" description="Mouse and Keyboard">
             <param name="window">skinsettings</param>
@@ -856,10 +891,13 @@
             <onclick>ActivateWindow(Startup)</onclick>
         </include>
 
+
+
     </include>
 
-
+    <!-- Dependecies -->
     <include name="SkinSettings_Items_Dependecies">
+
 
         <include content="Settings_Label" description="Dependencies">
             <param name="window">skinsettings</param>
@@ -1091,7 +1129,7 @@
         </include>
     </include>
 
-
+    <!-- Thanks -->
     <include name="SkinSettings_Items_Thanks">
         <include content="Settings_Label" description="Settings Level">
             <param name="window">skinsettings</param>

@@ -25,7 +25,7 @@
                 </control>
             </control>
 
-
+            <!-- Episodes List -->
             <include content="List_Landscape_Row">
                 <param name="orientation">horizontal</param>
                 <param name="control">fixedlist</param>
@@ -50,7 +50,7 @@
                 <onleft>SetFocus(4000)</onleft>
             </control>
 
-
+            <!-- Playing Icon and Details -->
             <include content="OSD_Info_Tray">
                 <param name="icon">$INFO[Container(11).ListItem.Icon]</param>
                 <param name="role">$INFO[Container(11).ListItem.ChannelName]</param>

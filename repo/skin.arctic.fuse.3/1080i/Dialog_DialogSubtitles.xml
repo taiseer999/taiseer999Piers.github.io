@@ -30,10 +30,10 @@
                 <param name="dialog_size">Dimension_DialogFullMenu</param>
             </include>
             <control type="group">
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
-
+                    <!-- Left -->
                     <control type="group">
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
@@ -82,7 +82,7 @@
 
                         </control>
                     </control>
-
+                    <!-- Right -->
                     <include content="Part_Button_Grouplist">
                         <param name="onleft">61</param>
                         <param name="items">DialogSubtitles_Items</param>
@@ -154,6 +154,7 @@
                 <param name="id">10</param>
                 <param name="pos">9</param>
             </include>
+
 
         </definition>
     </include>

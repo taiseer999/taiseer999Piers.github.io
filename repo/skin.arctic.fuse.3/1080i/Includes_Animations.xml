@@ -2,10 +2,11 @@
 <includes>
 
 
+    <!-- ============== -->
+    <!-- OSD Animations -->
+    <!-- ============== -->
 
-
-
-
+    <!-- Transitions for Dialogs -->
     <include name="Animation_OSD_Dialog_WindowChange">
         <animation type="WindowOpen" reversible="false">
             <effect type="fade" start="0" end="100" time="200" delay="200" tween="sine" easing="out"/>
@@ -35,7 +36,7 @@
         </include>
     </include>
 
-
+    <!-- Slide Expansions for Seekbar -->
     <include name="Animation_OSD_Seekbar_Slide">
         <animation effect="slide" start="0" end="0,80" time="300" tween="sine" easing="inout" condition="![Window.IsVisible(videoosd) | Window.IsVisible(musicosd) | $EXP[Exp_OSD_HideControls]]">Conditional</animation>
     </include>
@@ -44,14 +45,14 @@
         <animation effect="slide" start="0" end="0,80" time="300" tween="sine" easing="inout" condition="![Window.IsVisible(musicosd) | Window.IsVisible(script-cu-lrclyrics-main.xml)]">Conditional</animation>
     </include>
 
-
+    <!-- Fullscreen Window Changes -->
     <include name="Animation_OSD_Fullscreen_Change">
         <animation effect="fade" start="0" end="100" time="300">VisibleChange</animation>
     </include>
 
-
-
-
+    <!-- ==== -->
+    <!-- Busy -->
+    <!-- ==== -->
     <include name="Animation_Busy_Fade">
         <param name="end">20</param>
         <definition>
@@ -60,10 +61,11 @@
     </include>
 
 
+    <!-- ======== -->
+    <!-- Standard -->
+    <!-- ======== -->
 
-
-
-
+    <!-- Zoom Animations -->
     <include name="Animation_Zoom_In">
         <param name="type">Conditional</param>
         <param name="condition">true</param>
@@ -107,7 +109,7 @@
         </definition>
     </include>
 
-
+    <!-- Slide Animations -->
     <include name="Animation_Slide_In">
         <param name="type">Conditional</param>
         <param name="condition">true</param>
@@ -142,7 +144,7 @@
         </definition>
     </include>
 
-
+    <!-- Directional Slides -->
     <include name="Animation_Direction">
         <param name="windowopen_condition">true</param>
         <param name="windowclose_condition">true</param>
@@ -263,7 +265,7 @@
         </definition>
     </include>
 
-
+    <!-- Conditional Fade to allow Include Conditions -->
     <include name="Animation_ConditionalFade">
         <param name="end">0</param>
         <param name="condition">true</param>
@@ -272,7 +274,7 @@
         </definition>
     </include>
 
-
+    <!-- Focus Bounce for Select Box -->
     <include name="Animation_FocusBounce">
         <animation type="Focus" reversible="false">
             <effect type="zoom" start="96.5" end="100" time="150" tween="sine" easing="inout" center="auto"/>
@@ -287,7 +289,7 @@
         </animation>
     </include>
 
-
+    <!-- Standard Animations -->
     <include name="Animation_Fade_In">
         <param name="condition">true</param>
         <param name="type">Conditional</param>
@@ -309,6 +311,7 @@
             <animation effect="fade" start="100" end="0" delay="$PARAM[delay]" time="$PARAM[time]" tween="sine" easing="in" reversible="$PARAM[reversible]" condition="$PARAM[condition]">$PARAM[type]</animation>
         </definition>
     </include>
+
 
     <include name="Animation_FadeIn">
         <include content="Animation_Fade_In">
@@ -392,25 +395,25 @@
     </include>
 
     <include name="Animation_Group_Bumper">
-
+        <!-- Up (for ondown) -->
         <animation type="Conditional" condition="Window.IsVisible(1180) + [String.IsEmpty(Window(Home).Property(Bumper.Direction)) | String.IsEqual(Window(Home).Property(Bumper.Direction),Down)]" reversible="false">
             <effect type="slide" end="0,-20" time="60" tween="sine" />
             <effect type="slide" end="0,20" time="180" tween="sine" delay="80" />
         </animation>
 
-
+        <!-- Right (for onleft) -->
         <animation type="Conditional" condition="Window.IsVisible(1180) + String.IsEqual(Window(Home).Property(Bumper.Direction),Left)" reversible="false">
             <effect type="slide" end="20" time="60" tween="sine" />
             <effect type="slide" end="-20" time="180" tween="sine" delay="80" />
         </animation>
 
-
+        <!-- Left (for onright) -->
         <animation type="Conditional" condition="Window.IsVisible(1180) + String.IsEqual(Window(Home).Property(Bumper.Direction),Right)" reversible="false">
             <effect type="slide" end="-20" time="60" tween="sine" />
             <effect type="slide" end="20" time="180" tween="sine" delay="80" />
         </animation>
 
-
+        <!-- Down (for onup) -->
         <animation type="Conditional" condition="Window.IsVisible(1180) + String.IsEqual(Window(Home).Property(Bumper.Direction),Up)" reversible="false">
             <effect type="slide" end="0,20" time="60" tween="sine" />
             <effect type="slide" end="0,-20" time="180" tween="sine" delay="80" />

@@ -16,7 +16,7 @@
                 <param name="hasicon">false</param>
             </include>
 
-
+            <!-- Left -->
             <include content="Furniture_ItemIcon">
                 <param name="icon">special://skin/extras/icons/comment-dots.png</param>
                 <param name="flipped">true</param>

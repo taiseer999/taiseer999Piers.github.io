@@ -5,7 +5,7 @@
     <expression name="Exp_View_500_Include">True</expression>
     <expression name="Exp_View_501">[[Container.Content(images) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(videos) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(episodes) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(musicvideos) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(recordings) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(games) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content() + Window.IsVisible(MyGames.xml) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content() + Window.IsVisible(MyPVRRecordings.xml) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content() + Window.IsVisible(MyPVRTimers.xml) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content() + Window.IsVisible(MyPVRSearch.xml) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]]]</expression>
     <expression name="Exp_View_501_Include">True</expression>
-    <expression name="Exp_View_502">[[Container.Content(movies) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName) + !String.IsEqual(Container.PluginName,plugin.video.cumination) + !String.IsEqual(Container.PluginName,plugin.video.the-loop) + !String.IsEqual(Container.PluginName,plugin.video.3rbi)]]] | [Container.Content(sets) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [!String.IsEqual(Container.Property(param.info),episode_groups) + Container.Content(tvshows) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [String.IsEqual(Container.Property(param.info),episode_groups) + Container.Content(tvshows) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(actors) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]]]</expression>
+    <expression name="Exp_View_502">[[Container.Content(movies) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(sets) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [!String.IsEqual(Container.Property(param.info),episode_groups) + Container.Content(tvshows) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [String.IsEqual(Container.Property(param.info),episode_groups) + Container.Content(tvshows) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]] | [Container.Content(actors) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]]]</expression>
     <expression name="Exp_View_502_Include">True</expression>
     <expression name="Exp_View_503">[False]</expression>
     <expression name="Exp_View_503_Include">False</expression>
@@ -19,10 +19,10 @@
     <expression name="Exp_View_507_Include">False</expression>
     <expression name="Exp_View_508">[[Container.Content(songs) + [[String.IsEmpty(Container.PluginName)] | [!String.IsEmpty(Container.PluginName)]]]]</expression>
     <expression name="Exp_View_508_Include">True</expression>
-    <expression name="Exp_View_509">[[Container.Content(movies) + [String.IsEqual(Container.PluginName,plugin.video.the-loop)]]]</expression>
-    <expression name="Exp_View_509_Include">True</expression>
-    <expression name="Exp_View_549">[[Container.Content(movies) + [String.IsEqual(Container.PluginName,plugin.video.cumination) | String.IsEqual(Container.PluginName,plugin.video.3rbi)]]]</expression>
-    <expression name="Exp_View_549_Include">True</expression>
+    <expression name="Exp_View_509">[False]</expression>
+    <expression name="Exp_View_509_Include">False</expression>
+    <expression name="Exp_View_549">[False]</expression>
+    <expression name="Exp_View_549_Include">False</expression>
     <expression name="Exp_View_510">[False]</expression>
     <expression name="Exp_View_510_Include">False</expression>
     <expression name="Exp_View_511">[False]</expression>

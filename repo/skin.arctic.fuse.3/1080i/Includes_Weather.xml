@@ -15,6 +15,7 @@
         <param name="icon_centerbottom">33%</param>
         <definition>
 
+
             <include content="Object_ItemBack">
                 <param name="selected">false</param>
                 <param name="shadow_colordiffuse">shadow_hard</param>

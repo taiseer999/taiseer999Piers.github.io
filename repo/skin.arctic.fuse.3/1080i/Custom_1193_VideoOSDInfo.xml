@@ -10,6 +10,7 @@
     <zorder>3</zorder>
     <controls>
 
+
         <control type="button" id="9001">
             <texturefocus />
             <texturenofocus />
@@ -26,6 +27,8 @@
             <onfocus condition="Container(50).IsUpdating">AlarmClock(RepWin,SetFocus(50),00:01,silent)</onfocus>
         </control>
 
+
+
         <include content="Object_Hidden_List" condition="String.IsEmpty(Window(Home).Property(VideoOSD.InfoDialog.Path))">
             <param name="id">50</param>
             <content limit="1">$VAR[Path_VideoOSD_TMDbType,plugin://plugin.video.themoviedb.helper/?info=details&amp;tmdb_type=,]$VAR[Path_VideoOSD_TMDbQuery]</content>
@@ -39,7 +42,7 @@
             <onfocus>Dialog.Close(1193,force)</onfocus>
         </include>
 
-
+        <!-- <include>OSD_VideoBackground_Dialog</include> -->
 
         <control type="group">
             <visible>!Window.IsVisible(DialogBusy.xml)</visible>

@@ -51,13 +51,14 @@
                 <include content="Part_Dialog_Backing" condition="!$PARAM[has_artwork]">
                     <param name="dialog_size">Dimension_DialogMiniMenu</param>
                 </include>
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
 
-
+                    <!-- Left -->
                     <control type="group">
-
+                        <!-- <right>0</right>
+                        <include condition="$PARAM[has_artwork]">Part_Panel</include> -->
                         <include condition="$PARAM[has_artwork]">Size_LeftGroup_Large</include>
                         <include content="DialogPlot_Artwork" condition="$PARAM[has_artwork]">
                             <param name="poster_icon">$INFO[Window(Home).Property(TMDbHelper.ListItem.base_poster)]</param>
@@ -65,11 +66,12 @@
                         </include>
                     </control>
 
-
+                    <!--Right -->
                     <control type="group">
                         <include condition="$PARAM[has_artwork]">Part_Panel</include>
                         <include condition="$PARAM[has_artwork]">Size_RightGroup_Large</include>
 
+                        <!-- <include condition="$PARAM[has_artwork]">Size_RightGroup_Flipped_Large</include> -->
 
 
                         <control type="group">
@@ -82,7 +84,7 @@
                         <control type="group">
                             <include>Size_Group_Body</include>
 
-
+                            <!-- Plot Buttons -->
                             <include content="Object_Control" condition="$PARAM[has_menu]">
                                 <param name="control">group</param>
                                 <control type="list" id="6000">
@@ -145,7 +147,7 @@
         </definition>
     </include>
 
-
+    <!-- Variables -->
     <variable name="DialogContextMenu_Wiki_Title">
         <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_tvshowtitle))">$ESCINFO[Window(Home).Property(TMDbHelper.ListItem.base_tvshowtitle)]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_title))">$ESCINFO[Window(Home).Property(TMDbHelper.ListItem.base_title)]</value>
@@ -158,6 +160,7 @@
     </variable>
 
 
+    <!-- Items -->
     <include name="DialogContextMenu_Items">
         <item>
             <label>$LOCALIZE[207]</label>
@@ -206,6 +209,10 @@
             <onclick condition="$EXP[Exp_View_IsMedia]">ActivateWindow(1171)</onclick>
             <onclick condition="!$EXP[Exp_View_IsMedia]">ActivateWindow(1170)</onclick>
         </item>
-
+        <!-- <item>
+            <label>$LOCALIZE[15067]</label>
+            <icon>special://skin/extras/icons/circle-xmark.png</icon>
+            <onclick>PreviousMenu</onclick>
+        </item> -->
     </include>
 </includes>

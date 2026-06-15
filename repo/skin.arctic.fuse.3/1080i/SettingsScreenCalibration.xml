@@ -56,7 +56,7 @@
             <top>500</top>
             <width>380</width>
             <height>90</height>
-
+            <!-- NOTE: The image must have 40px of trasparent on top and bottom the bar -->
             <texturefocus colordiffuse="$VAR[ColorHighlight]">calibrate/cal_sub.png</texturefocus>
             <texturenofocus colordiffuse="main_fg_100">calibrate/cal_sub.png</texturenofocus>
             <movingspeed acceleration="180" maxvelocity="300" resettimeout="200" delta="1">
@@ -111,6 +111,8 @@
                 <font>font_main</font>
             </control>
         </control>
+
+
 
     </controls>
 

@@ -11,10 +11,10 @@
             </include>
             <control type="group">
 
-
+                <!-- Content -->
                 <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
-
+                    <!-- Left -->
                     <control type="group">
                         <include>Size_LeftGroup_Main</include>
                         <control type="group">
@@ -122,7 +122,7 @@
                         </control>
 
                     </control>
-
+                    <!-- Right -->
                     <include content="Part_Button_Grouplist">
                         <param name="onleft">61</param>
                         <param name="items">DialogMediaSource_Items</param>
@@ -132,7 +132,7 @@
         </control>
     </include>
 
-
+    <!-- Items -->
     <include name="DialogMediaSource_Items">
 
         <include content="Button_Dialog">
@@ -151,5 +151,6 @@
             <visible>Control.IsEnabled(19)</visible>
         </include>
     </include>
+
 
 </includes>

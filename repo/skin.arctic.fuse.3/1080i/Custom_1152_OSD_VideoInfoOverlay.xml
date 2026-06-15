@@ -10,6 +10,7 @@
     <animation effect="fade" end="0" start="100" time="300">WindowClose</animation>
     <controls>
 
+
         <control type="group">
             <include content="Animation_ConditionalFade">
                 <param name="condition">![Window.IsActive(VideoFullScreen.xml) | Window.IsActive(MusicVisualisation.xml)]</param>
