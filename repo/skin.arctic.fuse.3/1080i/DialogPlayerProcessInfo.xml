@@ -137,7 +137,7 @@
 					<width>900</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>$INFO[Player.Process(videodecoder)Video decoder: ]$VAR[VideoHWDecoder, (,)]</label>
+					<label>$INFO[Player.Process(videodecoder),Video decoder: ]$VAR[VideoHWDecoder, (,)]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>Player.HasVideo</visible>
