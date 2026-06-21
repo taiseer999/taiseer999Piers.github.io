@@ -137,7 +137,7 @@
 					<width>900</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>$INFO[Player.Process(videodecoder),VideoHWDecoder: ]$VAR[VideoHWDecoder,]</label>
+					<label>$INFO[Player.Process(videodecoder),VideoHWDecoder: ]$VAR[VideoHWDecoder, (,)]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>Player.HasVideo</visible>
@@ -163,7 +163,7 @@
 					<width>900</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Audio channels: $INFO[Player.Process(audiochannels),]</label>
+					<label>$Audio channels: $INFO[Player.Process(audiochannels),]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 				</control>
@@ -217,7 +217,7 @@
 					<width>420</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Video source: $VAR[HDRcodectypeVar] $VAR[DVProfileELVar]</label>
+					<label>Video resolution: $VAR[HDRcodectypeVar] $VAR[DVProfileELVar]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>Player.HasVideo</visible>
@@ -226,7 +226,7 @@
 					<width>420</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Video resolution: $VAR[VideoResolutionTypeVar]  $VAR[VideoCodecVar]</label>
+					<label>Audio: $VAR[VideoResolutionTypeVar]  $VAR[VideoCodecVar]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>Player.HasVideo</visible>
@@ -235,7 +235,7 @@
 					<width>420</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Audio: $VAR[AudioCodecWithoutObjectVar]  $VAR[AudioChannelsVar]</label>
+					<label>Audio object base: $VAR[AudioCodecWithoutObjectVar]  $VAR[AudioChannelsVar]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>!String.IsEmpty(VideoPlayer.AudioCodec)</visible>
@@ -244,7 +244,7 @@
 					<width>420</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Audio object base: $VAR[VideoplayerObjectAudioTypeVar]</label>
+					<label>Audio Language: $VAR[VideoplayerObjectAudioTypeVar]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>[String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos) | String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]</visible>
@@ -253,7 +253,7 @@
 					<width>420</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Audio Language: $VAR[ActiveVideoPlayerAudioLanguage]</label>
+					<label>Subtitle Lang: $VAR[ActiveVideoPlayerAudioLanguage]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
@@ -262,8 +262,9 @@
 					<width>425</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>Subtitle Lang: $VAR[ActiveVideoPlayerSubtitleLang]</label>
+					<label>Active Video Player SubtitleLang: $VAR[ActiveVideoPlayerSubtitleLang]</label>
 					<font>font_mini</font>
+					<scroll>true</scroll>
 					<shadowcolor>black</shadowcolor>
 				</control>
 			</control>
@@ -275,7 +276,7 @@
 					<width>870</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
-					<label>System memory: $INFO[system.memory(used)] / $INFO[system.memory(total)] - $INFO[system.memory(used.percent)]</label>
+					<label>Memory: $INFO[system.memory(used)] / $INFO[system.memory(total)] - $INFO[system.memory(used.percent)]</label>
 					<font>font_mini</font>
 					<shadowcolor>black</shadowcolor>
 					<visible>Player.HasVideo</visible>
@@ -300,7 +301,7 @@
 				<top>-204</top>
 				<visible>Control.HasFocus(5553)</visible>
 				<control type="label">
-					<width>420</width>
+					<width>520</width>
 					<height>40</height>
 					<aligny>bottom</aligny>
 					<label>$INFO[Player.Process(amlogic.displaymode),Display mode: ]</label>
@@ -405,3 +406,4 @@
 		</control>
 	</controls>
 </window>
+
