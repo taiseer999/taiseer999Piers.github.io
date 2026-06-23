@@ -1,0 +1,228 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: TinyPPI\n"
+"Language: en\n"
+
+msgctxt "#32000"
+msgid "Display mode"
+msgstr "Kimenő felbontás"
+
+msgctxt "#32001"
+msgid "Video mode"
+msgstr "Videó felbontás"
+
+msgctxt "#32002"
+msgid "General"
+msgstr "Általános"
+
+msgctxt "#32003"
+msgid "General settings"
+msgstr "Beállítások"
+
+msgctxt "#32004"
+msgid "TinyPPI style"
+msgstr "Megjelenési stílus"
+
+msgctxt "#32005"
+msgid "Decoder"
+msgstr "Dekóder"
+
+msgctxt "#32006"
+msgid "Choose between the Modern and Classic TinyPPI style."
+msgstr "Válassz a klassikus vagy modern háttér között"
+
+msgctxt "#32007"
+msgid "Processing"
+msgstr "Feldolgozás"
+
+msgctxt "#32008"
+msgid "Classic"
+msgstr "Klasszikus (elmosódó)"
+
+msgctxt "#32009"
+msgid "Modern"
+msgstr "Modern (lekerekített)"
+
+msgctxt "#32010"
+msgid "Remove gradient background"
+msgstr "Gradiens háttér letiltása"
+
+msgctxt "#32011"
+msgid "This option removes the gradient background in TinyPPI."
+msgstr "Ezzel letiltod a gradiens hátteret."
+
+msgctxt "#32012"
+msgid "720p skins are not supported"
+msgstr "720p skinek nem támogatottak"
+
+msgctxt "#32013"
+msgid "Playback time"
+msgstr "Lejátszási idő"
+
+msgctxt "#32014"
+msgid "CPU cores"
+msgstr "CPU használat"
+
+msgctxt "#32015"
+msgid "Gamut"
+msgstr "Színtér"
+
+msgctxt "#32017"
+msgid "The CoreELEC version could not be detected"
+msgstr "A CoreELEC verziója nem felismerhető"
+
+msgctxt "#32018"
+msgid "Temp / load"
+msgstr ""
+
+msgctxt "#32019"
+msgid "Show file name"
+msgstr "Fájlnév mutatása alul"
+
+msgctxt "#32020"
+msgid "Style"
+msgstr "Stílus"
+
+msgctxt "#32021"
+msgid "This option adds the name of the file currently playing to TinyPPI."
+msgstr "A lejátszott fájl nevét mutatja legalul"
+
+msgctxt "#32022"
+msgid "Video queue / data"
+msgstr ""
+
+msgctxt "#32023"
+msgid "Pixel format"
+msgstr "Színmélység"
+
+msgctxt "#32024"
+msgid "Aspect ratio"
+msgstr "Képarány"
+
+msgctxt "#32025"
+msgid "Audio queue / data"
+msgstr ""
+
+msgctxt "#32027"
+msgid "Output mode"
+msgstr "Média kimenet"
+
+msgctxt "#32028"
+msgid "Screen mode"
+msgstr "Képernyőmód"
+
+msgctxt "#32029"
+msgid "Framerate"
+msgstr ""
+
+msgctxt "#32030"
+msgid "L5 active offsets"
+msgstr "L5 aktív vágás"
+
+msgctxt "#32031"
+msgid "Method"
+msgstr "Váltottsorosság"
+
+msgctxt "#32032"
+msgid "Player cache"
+msgstr "Gyorsítótár"
+
+msgctxt "#32033"
+msgid "N/A"
+msgstr ""
+
+msgctxt "#32034"
+msgid "Memory usage"
+msgstr "Memória használat"
+
+msgctxt "#32035"
+msgid "Passthrough"
+msgstr "hangtovábbítás"
+
+msgctxt "#32036"
+msgid "In / drop / out"
+msgstr "Dobott / kodi fps"
+
+msgctxt "#32046"
+msgid "Codec"
+msgstr "Kodek"
+
+msgctxt "#32047"
+msgid "Bitrate"
+msgstr "Bitráta"
+
+msgctxt "#32051"
+msgid "Input"
+msgstr "Forrás"
+
+msgctxt "#32052"
+msgid "Audio language"
+msgstr "Szinkronnyelv"
+
+msgctxt "#32053"
+msgid "Subtitle language"
+msgstr "Felirat"
+
+msgctxt "#32054"
+msgid "Video"
+msgstr "Videó"
+
+msgctxt "#32055"
+msgid "Output"
+msgstr "Kimenet"
+
+msgctxt "#32056"
+msgid "Audio"
+msgstr "Hang"
+
+msgctxt "#32069"
+msgid "Bit depth"
+msgstr "Bitmélység"
+
+msgctxt "#32070"
+msgid "Mode"
+msgstr "Színmód"
+
+msgctxt "#32087"
+msgid "Decoding"
+msgstr "Dekóder"
+
+msgctxt "#32088"
+msgid "System"
+msgstr "Rendszer"
+
+msgctxt "#32091"
+msgid "Disabled"
+msgstr "Letiltva"
+
+msgctxt "#32092"
+msgid "Launch mode"
+msgstr "Indítási mód"
+
+msgctxt "#32093"
+msgid "Choose what opens when Add-on is launched."
+msgstr "Válaszd ki, hogy mi nyíljon meg a kiegészítő indításakor."
+
+msgctxt "#32094"
+msgid "TinyPPI"
+msgstr "Lejátszó információ"
+
+msgctxt "#32095"
+msgid "VS10 Dialog"
+msgstr "VS10 kiválasztó menü"
+
+msgctxt "#32096"
+msgid "Fetching..."
+msgstr "Lehívás..."
+
+msgctxt "#32119"
+msgid "CPU Freq"
+msgstr "CPU frekvencia"
+
+msgctxt "#32120"
+msgid "Video bitrate"
+msgstr "Videó bitráta"
