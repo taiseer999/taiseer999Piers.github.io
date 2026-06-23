@@ -30,7 +30,7 @@ _PROP_ACTIVE  = "TinyPPI.Active"
 _dialog_lock = False
 
 # Raise to True to allow launching on non-CoreELEC platforms (e.g. for testing).
-_ALLOW_NON_COREELEC = False
+_ALLOW_NON_COREELEC = True
 
 # ---------------------------------------------------------------------------
 # Helpers
