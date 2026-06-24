@@ -1376,75 +1376,10 @@
 						<top>30</top>
 						<label>$INFO[Window().Property(HdmiHdrStatusVar)]$INFO[Window().Property(DoviProfileVar)]</label>
 						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
+						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
-						<visible>![[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEmpty(VideoPlayer.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)]</visible>
-						<visible>![[String.IsEmpty(VideoPlayer.HdrType) | String.IsEqual(VideoPlayer.HdrType,dolbyvision)] + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)]</visible>
-						<visible>![[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEqual(VideoPlayer.HdrType,dolbyvision)] + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)]</visible>
 					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>SDR [COLOR lightgreen]->[/COLOR] Dolby Vision profile 8.1</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEmpty(VideoPlayer.HdrType) + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>SDR [COLOR lightgreen]->[/COLOR] HDR 10</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEmpty(VideoPlayer.HdrType) + String.Contains(Player.Process(amlogic.eoft_gamut),hdr10)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>HDR 10 [COLOR lightgreen]->[/COLOR] Dolby Vision profile 8.1</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEqual(VideoPlayer.HdrType,hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>HLG [COLOR lightgreen]->[/COLOR] Dolby Vision profile 8.1</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEqual(VideoPlayer.HdrType,hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>HDR 10 [COLOR lightgreen]->[/COLOR] SDR</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEqual(VideoPlayer.HdrType,hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>HLG [COLOR lightgreen]->[/COLOR] SDR</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEqual(VideoPlayer.HdrType,hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					</control>
-					<control type="label">
-						<left>240</left>
-						<top>30</top>
-						<label>Dolby Vision [COLOR lightgreen]->[/COLOR] SDR</label>
-						<font>font23_narrow</font>
-						<textcolor>e7ededed</textcolor>
-						<aligny>top</aligny>
-						<visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					</control>
+					
 					
 					<!-- Display mode -->
 					<control type="label">
