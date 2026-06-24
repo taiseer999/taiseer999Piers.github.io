@@ -39,7 +39,7 @@
 						<center>50%</center>
 						<width>1900</width>
 						<label>$INFO[Player.Filename]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<align>center</align>
 						<scroll>true</scroll>
@@ -68,7 +68,7 @@
 						<center>50%</center>
 						<width>1900</width>
 						<label>$INFO[Player.Filename]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7666666</textcolor>
 						<align>center</align>
 						<scroll>true</scroll>
@@ -1093,14 +1093,14 @@
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32054][/UPPERCASE][/B]</label>
 						<left>37</left>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
 					<control type="label">
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32054][/UPPERCASE][/B]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1109,7 +1109,7 @@
 					<control type="label">
 						<top>30</top>
 						<label>$ADDON[script.tinyppi 32001]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1117,7 +1117,7 @@
 						<left>240</left>
 						<top>30</top>
 						<label>$INFO[Window().Property(VideoResolutionVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1126,7 +1126,7 @@
 					<control type="label">
 						<top>60</top>
 						<label>$ADDON[script.tinyppi 32046]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1134,7 +1134,7 @@
 						<left>240</left>
 						<top>60</top>
 						<label>$INFO[Window().Property(VideoCodecVar)]  [COLOR b3ededed]-  $VAR[HDRcodectypeVar][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1143,7 +1143,7 @@
 					<control type="label">
 						<top>90</top>
 						<label>$ADDON[script.tinyppi 32005]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1151,7 +1151,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>[UPPERCASE]$INFO[Player.Process(videodecoder)][/UPPERCASE] [COLOR b3ededed]$INFO[Window().Property(VideoDecoderVar),(,)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1160,7 +1160,7 @@
 					<control type="label">
 						<top>120</top>
 						<label>$ADDON[script.tinyppi 32023]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1168,7 +1168,7 @@
 						<left>240</left>
 						<top>120</top>
 						<label>$INFO[Window().Property(VideoPixelFormatVar)] [COLOR b3ededed]$INFO[Window().Property(DoviTunnelVar),(,)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1177,7 +1177,7 @@
 					<control type="label">
 						<top>150</top>
 						<label>$ADDON[script.tinyppi 32024]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1185,7 +1185,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$INFO[Player.Process(videodar)]:1</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					<visible>![String.Contains(VideoPlayer.HdrType,dolby) + !String.IsEqual(VideoPlayer.VideoCodec,av1)]</visible>
@@ -1194,7 +1194,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$INFO[Player.Process(videodar)]:1 [COLOR b3ededed](L5 cut: $INFO[Window().Property(DoviLevel5OffsetsVar)] px)[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					<visible>String.Contains(VideoPlayer.HdrType,dolby) + !String.IsEqual(VideoPlayer.VideoCodec,av1)</visible>
@@ -1204,7 +1204,7 @@
 					<control type="label">
 						<top>180</top>
 						<label>$ADDON[script.tinyppi 32031]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1212,7 +1212,7 @@
 						<left>240</left>
 						<top>180</top>
 						<label>[CAPITALIZE]$INFO[Player.Process(deintmethod)][/CAPITALIZE]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1221,7 +1221,7 @@
 					<control type="label">
 						<top>210</top>
 						<label>$ADDON[script.tinyppi 32013]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1229,7 +1229,7 @@
 						<left>240</left>
 						<top>210</top>
 						<label>$INFO[Player.Time] $INFO[Player.Duration,/ ,] [COLOR b3ededed]$INFO[Player.Progress, (,%)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<visible>!String.IsEmpty(Player.Duration)</visible>
 						<visible>!PVR.IsPlayingTV</visible>
@@ -1240,7 +1240,7 @@
 						<left>240</left>
 						<top>210</top>
 						<label>$ADDON[script.tinyppi 32033]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7666666</textcolor>
 						<visible>String.IsEmpty(Player.Duration) | PVR.IsPlayingTV</visible>
 						<aligny>top</aligny>
@@ -1250,7 +1250,7 @@
 					<control type="label">
 						<top>240</top>
 						<label>$ADDON[script.tinyppi 32022]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1259,7 +1259,7 @@
 						<left>340</left>
 						<top>240</top>
 						<label>$INFO[Player.Process(videoqueuelevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1268,7 +1268,7 @@
 						<left>240</left>
 						<top>240</top>
 						<label>$INFO[Player.Process(videoqueuelevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1295,7 +1295,7 @@
 						<left>290</left>
 						<top>240</top>
 						<label>| $INFO[Player.Process(videoqueuedatalevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1304,7 +1304,7 @@
 						<left>500</left>
 						<top>240</top>
 						<label>$INFO[Player.Process(videoqueuedatalevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1351,14 +1351,14 @@
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32007][/UPPERCASE][/B]</label>
 						<left>35</left>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
 					<control type="label">
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32007][/UPPERCASE][/B]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1367,7 +1367,7 @@
 					<control type="label">
 						<top>30</top>
 						<label>$ADDON[script.tinyppi 32027]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1375,7 +1375,7 @@
 						<left>240</left>
 						<top>30</top>
 						<label>$INFO[Window().Property(HdmiHdrStatusVar)]$INFO[Window().Property(DoviProfileVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1385,7 +1385,7 @@
 					<control type="label">
 						<top>60</top>
 						<label>$ADDON[script.tinyppi 32000]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1393,7 +1393,7 @@
 						<left>240</left>
 						<top>60</top>
 						<label>$INFO[Window().Property(DisplayModeVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1402,7 +1402,7 @@
 					<control type="label">
 						<top>90</top>
 						<label>$ADDON[script.tinyppi 32120]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1410,7 +1410,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Window().Property(VdecBitrate)] $INFO[Window().Property(VdecBitrateUnit)] $INFO[Window().Property(VideoBitrateMBVar),  [COLOR b3ededed](~ ,)[/COLOR]]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEmpty(Window().Property(VdecBitrate)) + !String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
@@ -1419,7 +1419,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Window().Property(VideoBitrateMBVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEmpty(Window().Property(VdecBitrate)) + !String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
@@ -1428,7 +1428,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Window().Property(VdecBitrate)] $INFO[Window().Property(VdecBitrateUnit)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEmpty(Window().Property(VdecBitrate)) + String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
@@ -1438,7 +1438,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$ADDON[script.tinyppi 32033]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<visible>String.IsEmpty(Window().Property(VdecBitrate)) + String.IsEmpty(Window().Property(VideoBitrateMBVar))</visible>
 						<aligny>top</aligny>
@@ -1448,7 +1448,7 @@
 					<control type="label">
 						<top>120</top>
 						<label>$ADDON[script.tinyppi 32070]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1456,7 +1456,7 @@
 						<left>240</left>
 						<top>120</top>
 						<label>$INFO[Window().Property(ModeVar)]  [COLOR lightgreen](VS10 active)[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEmpty(VideoPlayer.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
@@ -1465,7 +1465,7 @@
 						<left>240</left>
 						<top>120</top>
 						<label>$INFO[Window().Property(ModeVar)]  [COLOR lightgreen](VS10 active)[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEqual(VideoPlayer.HdrType,dolbyvision)] + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
@@ -1474,7 +1474,7 @@
 						<left>240</left>
 						<top>120</top>
 						<label>$INFO[Window().Property(ModeVar)]  [COLOR lightgreen](VS10 active)[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>[String.IsEmpty(VideoPlayer.HdrType) | String.IsEqual(VideoPlayer.HdrType,dolbyvision)] + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)</visible>
@@ -1483,7 +1483,7 @@
 						<left>240</left>
 						<top>120</top>
 						<label>$INFO[Window().Property(ModeVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 						<visible>![[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEmpty(VideoPlayer.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)]</visible>
@@ -1496,7 +1496,7 @@
 					<control type="label">
 						<top>150</top>
 						<label>$ADDON[script.tinyppi 32015]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1505,7 +1505,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$INFO[Window().Property(GamutVar)] $INFO[Window().Property(DoviCmVersionVar),- [COLOR b3ededed](,)[/COLOR]]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1514,7 +1514,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$INFO[Window().Property(GamutVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1541,14 +1541,14 @@
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32056][/UPPERCASE][/B]</label>
 						<left>36</left>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
 					<control type="label">
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32056][/UPPERCASE][/B]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1557,7 +1557,7 @@
 					<control type="label">
 						<top>30</top>
 						<label>$ADDON[script.tinyppi 32046]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1566,7 +1566,7 @@
 						<top>30</top>
 						<aligny>top</aligny>
 						<label>[COLOR e7ededed]$INFO[Window().Property(AudioCodecVar)]  $INFO[Window().Property(AudioChannelsVar)][/COLOR]  [COLOR palegreen]$INFO[Window().Property(AudioCodecSpatialVar)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
                         <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)]</visible>
                         <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]]</visible>
@@ -1576,7 +1576,7 @@
 						<top>30</top>
 						<aligny>top</aligny>
 						<label>[COLOR e7ededed]$INFO[Window().Property(AudioCodecVar)]  7.1.4[/COLOR]  [COLOR palegreen]$INFO[Window().Property(AudioCodecSpatialVar)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
                         <visible>Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]</visible>
 					</control>
 					<control type="label">
@@ -1584,7 +1584,7 @@
 						<top>30</top>
 						<aligny>top</aligny>
 						<label>[COLOR e7ededed]$INFO[Window().Property(AudioCodecVar)]  7.1.4[/COLOR]  [COLOR palegreen]$INFO[Window().Property(AudioCodecSpatialVar)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
                         <visible>Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)</visible>
 					</control>
 					<control type="label">
@@ -1592,7 +1592,7 @@
 						<top>30</top>
 						<aligny>top</aligny>
 						<label>[COLOR e7ededed]$INFO[Window().Property(AudioCodecVar)]  5.1.4[/COLOR]  [COLOR palegreen]$INFO[Window().Property(AudioCodecSpatialVar)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<visible>Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)</visible>
 					</control>
 					
@@ -1601,7 +1601,7 @@
 					<control type="label">
 						<top>60</top>
 						<label>$ADDON[script.tinyppi 32069]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1609,7 +1609,7 @@
 						<left>240</left>
 						<top>60</top>
 						<label>$INFO[Player.Process(audiobitspersample),,-bit] | $INFO[Window().Property(AudioSampleRateVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1618,7 +1618,7 @@
 					<control type="label">
 						<top>90</top>
 						<label>$ADDON[script.tinyppi 32047]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1626,7 +1626,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Window().Property(AudioLiveBitrateVar)] $INFO[Window().Property(AudioBitrateKBVar), [COLOR b3ededed](~ ,)[/COLOR]]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEmpty(Window().Property(AudioLiveBitrateVar)) + !String.IsEmpty(Window().Property(AudioBitrateKBVar))</visible>
@@ -1635,7 +1635,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Window().Property(AudioBitrateKBVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEmpty(Window().Property(AudioLiveBitrateVar)) + !String.IsEmpty(Window().Property(AudioBitrateKBVar))</visible>
@@ -1644,7 +1644,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Window().Property(AudioLiveBitrateVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEmpty(Window().Property(AudioLiveBitrateVar)) + String.IsEmpty(Window().Property(AudioBitrateKBVar))</visible>
@@ -1654,7 +1654,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$ADDON[script.tinyppi 32033]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7666666</textcolor>
 						<visible>String.IsEmpty(Window().Property(AudioLiveBitrateVar)) + String.IsEmpty(Window().Property(AudioBitrateKBVar))</visible>
 						<aligny>top</aligny>
@@ -1664,7 +1664,7 @@
 					<control type="label">
 						<top>120</top>
 						<label>$ADDON[script.tinyppi 32051]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1673,7 +1673,7 @@
 						<top>120</top>
 						<aligny>top</aligny>
 						<label>$INFO[Window().Property(AudioChannelsInputVar)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<scroll>true</scroll>
 						<textcolor>e7ededed</textcolor>
 						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
@@ -1685,7 +1685,7 @@
 						<top>120</top>
 						<aligny>top</aligny>
 						<label>$INFO[Window().Property(AudioChannelsInputVar)] [COLOR palegreen](TFL, TFR, TBL, TBR)[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<scroll>true</scroll>
 						<textcolor>e7ededed</textcolor>
                         <visible>String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos) | String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)</visible>
@@ -1695,7 +1695,7 @@
 					<control type="label">
 						<top>150</top>
 						<label>$ADDON[script.tinyppi 32055]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1703,7 +1703,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$ADDON[script.tinyppi 32035]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<visible>Player.Passthrough</visible>
 						<aligny>top</aligny>
@@ -1712,7 +1712,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$INFO[Player.Process(audiochannelssink)]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<visible>!Player.Passthrough</visible>
 						<aligny>top</aligny>
@@ -1721,7 +1721,7 @@
 						<left>240</left>
 						<top>150</top>
 						<label>$ADDON[script.tinyppi 32087]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<visible>!Player.Passthrough + String.IsEmpty(Player.Process(audiochannelssink))</visible>
 						<aligny>top</aligny>
@@ -1731,7 +1731,7 @@
 					<control type="label">
 						<top>180</top>
 						<label>$ADDON[script.tinyppi 32052]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1739,7 +1739,7 @@
 						<left>240</left>
 						<top>180</top>
 						<label>[UPPERCASE]$INFO[VideoPlayer.AudioLanguage][/UPPERCASE]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<scroll>true</scroll>
 						<textcolor>e7ededed</textcolor>
 						<visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
@@ -1751,7 +1751,7 @@
 						<top>180</top>
 						<width>420</width>
 						<label>[UPPERCASE]$INFO[VideoPlayer.AudioLanguage][/UPPERCASE] [COLOR b3ededed]$INFO[VideoPlayer.AudioLanguageEx, | ][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<scroll>true</scroll>
 						<visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
@@ -1763,7 +1763,7 @@
 						<left>240</left>
 						<top>180</top>
 						<label>$ADDON[script.tinyppi 32033]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7666666</textcolor>
 						<visible>String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
 						<aligny>top</aligny>
@@ -1773,7 +1773,7 @@
 					<control type="label">
 						<top>210</top>
 						<label>$ADDON[script.tinyppi 32053]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1782,7 +1782,7 @@
 						<top>210</top>
 						<width>420</width>
 						<label>$INFO[Window().Property(SubtitleVar)] [COLOR b3ededed]$INFO[Window().Property(SubtitleNameInfoVar)][/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<scroll>true</scroll>
 						<textcolor>e7ededed</textcolor>
 						<visible>VideoPlayer.SubtitlesEnabled</visible>
@@ -1795,7 +1795,7 @@
 						<left>240</left>
 						<top>210</top>
 						<label>$ADDON[script.tinyppi 32091]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7666666</textcolor>
 						<visible>VideoPlayer.HasSubtitles + !VideoPlayer.SubtitlesEnabled</visible>
 						<aligny>top</aligny>
@@ -1805,7 +1805,7 @@
 						<left>240</left>
 						<top>210</top>
 						<label>$ADDON[script.tinyppi 32033]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7666666</textcolor>
 						<visible>!VideoPlayer.HasSubtitles</visible>
 						<aligny>top</aligny>
@@ -1815,7 +1815,7 @@
 					<control type="label">
 						<top>240</top>
 						<label>$ADDON[script.tinyppi 32025]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1824,7 +1824,7 @@
 						<left>340</left>
 						<top>240</top>
 						<label>$INFO[Player.Process(audioqueuelevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1833,7 +1833,7 @@
 						<left>240</left>
 						<top>240</top>
 						<label>$INFO[Player.Process(audioqueuelevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1860,7 +1860,7 @@
 						<left>290</left>
 						<top>240</top>
 						<label>| $INFO[Player.Process(audioqueuedatalevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1869,7 +1869,7 @@
 						<left>500</left>
 						<top>240</top>
 						<label>$INFO[Player.Process(audioqueuedatalevel)]%</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>E7EDEDED</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -1900,12 +1900,11 @@
 					<left>1480</left>
 					<width>400</width>
 					<control type="group">
-					<visible>String.Contains(VideoPlayer.HdrType,dolby) + !String.IsEqual(VideoPlayer.VideoCodec,av1)</visible>
 						<!-- RPU MDL -->
 						<control type="label">
 							<top>150</top>
 							<label>RPU MDL:</label>
-							<font>font23_narrow</font>
+							<font>font_tiny</font>
 							<textcolor>FF008AD9</textcolor>
 							<aligny>top</aligny>
 						</control>
@@ -1914,7 +1913,7 @@
 							<right>40</right>
 							<top>150</top>
 							<label>$INFO[Window().Property(DoviLevel6RpuMdlVar)]</label>
-							<font>font23_narrow</font>
+							<font>font_tiny</font>
 							<textcolor>E7EDEDED</textcolor>
 							<aligny>top</aligny>
 							<align>right</align>
@@ -1924,19 +1923,18 @@
 							<right>10</right>
 							<top>150</top>
 							<label>$INFO[Window().Property(DoviLevel6RpuMdlVar)]</label>
-							<font>font23_narrow</font>
+							<font>font_tiny</font>
 							<textcolor>E7EDEDED</textcolor>
 							<aligny>top</aligny>
 							<align>right</align>
 						</control>
 					</control>
 					<control type="group">
-					<visible>String.Contains(VideoPlayer.HdrType,dolby) + !String.IsEqual(VideoPlayer.VideoCodec,av1)</visible>
 						<!-- MaxCLL/FALL -->
 						<control type="label">
 							<top>180</top>
 							<label>MaxCLL/FALL:</label>
-							<font>font23_narrow</font>
+							<font>font_tiny</font>
 							<textcolor>FF008AD9</textcolor>
 							<aligny>top</aligny>
 						</control>
@@ -1945,7 +1943,7 @@
 							<right>40</right>
 							<top>180</top>
 							<label>$INFO[Window().Property(DoviLevel6RpuMaxCllFallVar)]</label>
-							<font>font23_narrow</font>
+							<font>font_tiny</font>
 							<textcolor>E7EDEDED</textcolor>
 							<align>right</align>
 							<aligny>top</aligny>
@@ -1955,7 +1953,7 @@
 							<right>10</right>
 							<top>180</top>
 							<label>$INFO[Window().Property(DoviLevel6RpuMaxCllFallVar)]</label>
-							<font>font23_narrow</font>
+							<font>font_tiny</font>
 							<textcolor>E7EDEDED</textcolor>
 							<align>right</align>
 							<aligny>top</aligny>
@@ -1984,14 +1982,14 @@
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32088][/UPPERCASE][/B]</label>
 						<left>38</left>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
 					<control type="label">
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
 						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32088][/UPPERCASE][/B]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF607D8B</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -2000,7 +1998,7 @@
 					<control type="label">
 						<top>30</top>
 						<label>$ADDON[script.tinyppi 32119]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -2010,7 +2008,7 @@
 						<top>30</top>
 						<aligny>top</aligny>
 						<label>$INFO[System.CpuFrequency] [COLOR FF607D8B]- $INFO[System.CPUTemperature][/COLOR] </label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 
@@ -2019,7 +2017,7 @@
 						<top>60</top>
 						<aligny>top</aligny>
 						<label>$ADDON[script.tinyppi 32036]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 					</control>
 					<control type="label">
@@ -2027,7 +2025,7 @@
 						<top>60</top>
 						<aligny>top</aligny>
 						<label>[COLOR b3ededed]$INFO[Window().Property(FpsInfoVar)] =[/COLOR] $INFO[Window().Property(FpsDropVar)] fps  [COLOR E7666666]($INFO[System.FPS] fps)[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 					</control>
 
@@ -2035,7 +2033,7 @@
 					<control type="label">
 						<top>90</top>
 						<label>$ADDON[script.tinyppi 32032]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -2043,7 +2041,7 @@
 						<left>500</left>
 						<top>90</top>
 						<label>$INFO[Player.CacheLevel,,%]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2052,7 +2050,7 @@
 						<left>240</left>
 						<top>90</top>
 						<label>$INFO[Player.CacheLevel,,%]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2080,7 +2078,7 @@
 					<control type="label">
 						<top>120</top>
 						<label>$ADDON[script.tinyppi 32034]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -2088,7 +2086,7 @@
 						<left>500</left>
 						<top>120</top>
 						<label>$INFO[system.memory(used.percent)] [COLOR E7666666]- ($INFO[system.memory(used)] / $INFO[system.memory(total)])[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2097,7 +2095,7 @@
 						<left>240</left>
 						<top>120</top>
 						<label>$INFO[system.memory(used.percent)] [COLOR E7666666]- ($INFO[system.memory(used)] / $INFO[system.memory(total)])[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2125,7 +2123,7 @@
 					<control type="label">
 						<top>150</top>
 						<label>$ADDON[script.tinyppi 32014]:</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>FF008AD9</textcolor>
 						<aligny>top</aligny>
 					</control>
@@ -2134,8 +2132,8 @@
 						<top>150</top>
 						<left>500</left>
 						<width>350</width>
-						<label>$INFO[Window().Property(CpuTopUsageVar]</label>
-						<font>font23_narrow</font>
+						<label>$INFO[Window().Property(CpuTopUsageVar)]</label>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2146,7 +2144,7 @@
 						<left>500</left>
 						<width>500</width>
 						<label>         [COLOR E7666666]-[/COLOR] [COLOR E7666666]($INFO[Window().Property(CpuUsageVar)])[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2156,8 +2154,8 @@
 						<top>150</top>
 						<left>500</left>
 						<width>350</width>
-						<label>$INFO[Window().Property(CpuTopUsageVar]</label>
-						<font>font23_narrow</font>
+						<label>$INFO[Window().Property(CpuTopUsageVar)]</label>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2168,7 +2166,7 @@
 						<left>500</left>
 						<width>500</width>
 						<label>         [COLOR E7666666]-[/COLOR] [COLOR E7666666]($INFO[Window().Property(CpuUsageVar)])[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>!String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2178,8 +2176,8 @@
 						<top>150</top>
 						<left>240</left>
 						<width>350</width>
-						<label>$INFO[Window().Property(CpuTopUsageVar]</label>
-						<font>font23_narrow</font>
+						<label>$INFO[Window().Property(CpuTopUsageVar)]</label>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2190,7 +2188,7 @@
 						<left>240</left>
 						<width>500</width>
 						<label>         [COLOR E7666666]-[/COLOR] [COLOR E7666666]($INFO[Window().Property(CpuUsageVar)])[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2200,8 +2198,8 @@
 						<top>150</top>
 						<left>240</left>
 						<width>350</width>
-						<label>$INFO[Window().Property(CpuTopUsageVar]</label>
-						<font>font23_narrow</font>
+						<label>$INFO[Window().Property(CpuTopUsageVar)]</label>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
@@ -2212,7 +2210,7 @@
 						<left>240</left>
 						<width>500</width>
 						<label>         [COLOR E7666666]-[/COLOR] [COLOR E7666666]($INFO[Window().Property(CpuUsageVar)])[/COLOR]</label>
-						<font>font23_narrow</font>
+						<font>font_tiny</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
 						<visible>String.IsEqual(Window.Property(CurrentSkin),skin.estuary)</visible>
