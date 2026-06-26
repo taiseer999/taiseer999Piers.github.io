@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BINGIE -->
+<window type="dialog" id="1160">
+    <defaultcontrol always="true">8490</defaultcontrol>
+    <controls>
+        <control type="group">
+            <visible>System.AddonIsEnabled(service.coreelec.settings)</visible>
+            <visible>Player.HasVideo</visible>
+            <animation effect="fade" time="180">WindowOpen</animation>
+            <animation effect="fade" time="180">WindowClose</animation>
+            <control type="image">
+                <include>FullscreenDimensions</include>
+                <texture background="true">diffuse/panel2.png</texture>
+                <colordiffuse>99000000</colordiffuse>
+            </control>
+            <control type="group">
+                <right>60</right>
+                <bottom>140</bottom>
+                <width>480</width>
+                <height>390</height>
+                <control type="image">
+                    <width>100%</width>
+                    <height>100%</height>
+                    <texture background="true" colordiffuse="$INFO[Skin.String(SideBladePanelColor)]">diffuse/panel2.png</texture>
+                </control>
+                <control type="grouplist">
+                    <left>40</left>
+                    <top>36</top>
+                    <width>400</width>
+                    <height>320</height>
+                    <orientation>vertical</orientation>
+                    <itemgap>6</itemgap>
+                    <onup>8493</onup>
+                    <ondown>8490</ondown>
+                    <control type="label">
+                        <width>400</width>
+                        <height>58</height>
+                        <aligny>center</aligny>
+                        <font>Bold38</font>
+                        <textcolor>$INFO[Skin.String(HeaderTextColor)]</textcolor>
+                        <label>VS10 mode</label>
+                    </control>
+                    <control type="button" id="8490">
+                        <description>VS10 Dolby Vision</description>
+                        <width>400</width>
+                        <height>52</height>
+                        <label>Dolby Vision</label>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieOSDSubLabelTextColor)]</textcolor>
+                        <focusedcolor>white</focusedcolor>
+                        <texturefocus colordiffuse="65FFFFFF">common/corner_small.png</texturefocus>
+                        <texturenofocus />
+                        <onclick>Action(vs10.dv)</onclick>
+                        <onclick>Dialog.Close(all)</onclick>
+                    </control>
+                    <control type="button" id="8491">
+                        <description>VS10 HDR10</description>
+                        <width>400</width>
+                        <height>52</height>
+                        <label>HDR10</label>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieOSDSubLabelTextColor)]</textcolor>
+                        <focusedcolor>white</focusedcolor>
+                        <texturefocus colordiffuse="65FFFFFF">common/corner_small.png</texturefocus>
+                        <texturenofocus />
+                        <onclick>Action(vs10.hdr10)</onclick>
+                        <onclick>Dialog.Close(all)</onclick>
+                        <visible>!Integer.IsEqual(Player.Process(video.source.hdr.type.raw),2)</visible>
+                    </control>
+                    <control type="button" id="8492">
+                        <description>VS10 SDR</description>
+                        <width>400</width>
+                        <height>52</height>
+                        <label>SDR</label>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieOSDSubLabelTextColor)]</textcolor>
+                        <focusedcolor>white</focusedcolor>
+                        <texturefocus colordiffuse="65FFFFFF">common/corner_small.png</texturefocus>
+                        <texturenofocus />
+                        <onclick>Action(vs10.sdr)</onclick>
+                        <onclick>Dialog.Close(all)</onclick>
+                    </control>
+                    <control type="button" id="8493">
+                        <description>VS10 Original</description>
+                        <width>400</width>
+                        <height>52</height>
+                        <label>Original</label>
+                        <align>left</align>
+                        <aligny>center</aligny>
+                        <font>Reg24</font>
+                        <textcolor>$INFO[Skin.String(BingieOSDSubLabelTextColor)]</textcolor>
+                        <focusedcolor>white</focusedcolor>
+                        <texturefocus colordiffuse="65FFFFFF">common/corner_small.png</texturefocus>
+                        <texturenofocus />
+                        <onclick>Action(vs10.original)</onclick>
+                        <onclick>Dialog.Close(all)</onclick>
+                    </control>
+                </control>
+            </control>
+        </control>
+    </controls>
+</window>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <variable name="OSDCodecLogosStartupTimerLabel">
+        <value condition="Skin.HasSetting(osd.useThreeSecondsCodecLogos)">3 seconds</value>
+        <value condition="Skin.HasSetting(osd.useTenSecondsCodecLogos)">10 seconds</value>
+        <value>5 seconds</value>
+    </variable>
+
+    <variable name="OSDCodecLogosStartupLabel">
+        <value condition="Skin.HasSetting(osd.useleftCodecStartupLogos)">Left</value>
+        <value condition="Skin.HasSetting(osd.usecenterCodecStartupLogos)">Center</value>
+        <value condition="Skin.HasSetting(osd.userightCodecStartupLogos)">Right</value>
+        <value>Off</value>
+    </variable>
+
+    <variable name="OSDCodecLogosLabel">
+        <value condition="Skin.HasSetting(osd.useleftCodecLogos)">Left</value>
+        <value condition="Skin.HasSetting(osd.usecenterCodecLogos)">Center</value>
+        <value condition="Skin.HasSetting(osd.userightCodecLogos)">Right</value>
+        <value>Off</value>
+    </variable>
+
+    <variable name="PPICodecLogosLabel">
+        <value condition="Skin.HasSetting(ppi.useleftCodecLogos)">Left</value>
+        <value condition="Skin.HasSetting(ppi.usecenterCodecLogos)">Center</value>
+        <value condition="Skin.HasSetting(ppi.userightCodecLogos)">Right</value>
+        <value>Off</value>
+    </variable>
+
+    <variable name="PPIMode">
+        <value condition="Skin.HasSetting(ppi.classicMode)">Classic</value>
+        <value condition="Skin.HasSetting(ppi.modernMode)">Modern</value>
+        <value>Off</value>
+    </variable>
+
+    <variable name="VideoDecoder">
+        <value condition="Player.Process(videohwdecoder)">HW</value>
+        <value>SW</value>
+    </variable>
+
+    <variable name="VideoPixelFormat">
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),8-bit) + String.Contains(Player.Process(amlogic.pixformat),RGB)]">8-bit, RGB</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),8-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV420)]">8-bit (YUV 4:2:0)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),8-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV422)]">8-bit (YUV 4:2:2)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),8-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV444)]">8-bit (YUV 4:4:4)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),10-bit) + String.Contains(Player.Process(amlogic.pixformat),RGB)]">10-bit, RGB</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),10-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV420)]">10-bit (YUV 4:2:0)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),10-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV422)]">10-bit (YUV 4:2:2)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),10-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV444)]">10-bit (YUV 4:4:4)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),12-bit) + String.Contains(Player.Process(amlogic.pixformat),RGB)]">12-bit, RGB</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),12-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV420)]">12-bit (YUV 4:2:0)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),12-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV422)]">12-bit (YUV 4:2:2)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),12-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV444)]">12-bit (YUV 4:4:4)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),16-bit) + String.Contains(Player.Process(amlogic.pixformat),RGB)]">16-bit, RGB</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),16-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV420)]">16-bit (YUV 4:2:0)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),16-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV422)]">16-bit (YUV 4:2:2)</value>
+        <value condition="[String.Contains(Player.Process(amlogic.pixformat),16-bit) + String.Contains(Player.Process(amlogic.pixformat),YUV444)]">16-bit (YUV 4:4:4)</value>
+        <value>$INFO[Player.Process(amlogic.pixformat)]</value>
+    </variable>
+
+    <variable name="VideoBitDepth">
+        <value condition="Integer.IsEqual(Player.Process(video.bit.depth),0)">8</value>
+        <value>$INFO[Player.Process(video.bit.depth)]</value>
+    </variable>
+
+    <variable name="SubtitleVar">
+        <value condition="String.IsEmpty(VideoPlayer.SubtitlesLanguage)">$INFO[VideoPlayer.SubtitlesLangEx]</value>
+        <value condition="!String.IsEmpty(VideoPlayer.SubtitlesLanguage)">[UPPERCASE]$INFO[VideoPlayer.SubtitlesLanguage][/UPPERCASE]</value>
+    </variable>
+
+    <variable name="SubtitleNameVar">
+        <value condition="String.IsEmpty(VideoPlayer.SubtitlesName)"></value>
+        <value condition="!String.IsEmpty(VideoPlayer.SubtitlesName)">$INFO[VideoPlayer.SubtitlesName,| ,, (,)]</value>
+    </variable>
+
+    <variable name="ColorSpaceVar">
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),SDR) + Integer.IsGreater(Player.Process(video.height.raw),479)">BT.709</value>
+        <value condition="String.Contains(Player.Process(video.dovi.profile),5)">IPTPQc2/IPT</value>
+        <value condition="String.IsEmpty(Player.Process(video.hdr.colour.primaries))">$LOCALIZE[31933]</value>
+        <value condition="!String.IsEmpty(Player.Process(video.hdr.colour.primaries))">$INFO[Player.Process(video.hdr.colour.primaries)]</value>
+    </variable>
+
+    <variable name="DVProfileVar">
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),HDR10) + String.Contains(Player.Process(video.dovi.profile),8)">-&gt; Dolby Vision Profile $INFO[Player.Process(video.dovi.profile)]$VAR[DVProfileExtVar]</value>
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),Dolby Vision) + String.Contains(Player.Process(video.dovi.profile),0)">Profile 4 </value>
+        <value condition="String.Contains(Player.Process(video.dovi.profile),5)">Profile $INFO[Player.Process(video.dovi.profile)]$VAR[DVProfileExtVar]</value>
+        <value condition="String.Contains(Player.Process(video.dovi.profile),7)">Profile $INFO[Player.Process(video.dovi.profile)]$VAR[DVProfileExtVar]</value>
+        <value condition="String.Contains(Player.Process(video.dovi.profile),8)">Profile $INFO[Player.Process(video.dovi.profile)]$VAR[DVProfileExtVar]</value>
+    </variable>
+
+    <variable name="DVProfileExtVar">
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.bl.signal.compatibility),0)"></value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.bl.signal.compatibility),1)">.1</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.bl.signal.compatibility),2)">.2</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.bl.signal.compatibility),3)">.3</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.bl.signal.compatibility),6)"></value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.bl.signal.compatibility),8)">.8</value>
+    </variable>
+
+    <variable name="DVELVar">
+        <value condition="String.Contains(Player.Process(video.dovi.el.type),minimum)">[COLOR orange] MEL[/COLOR]</value>
+        <value condition="String.Contains(Player.Process(video.dovi.el.type),full)">[COLOR palegreen] FEL[/COLOR]</value>
+        <value condition="String.IsEqual(Player.Process(video.dovi.el.type),none)"></value>
+    </variable>
+
+    <variable name="RPUPresentVar">
+        <value condition="String.IsEqual(Player.Process(video.dovi.rpu.present),1)">[COLOR palegreen]Yes[/COLOR]</value>
+        <value>[COLOR tomato]No[/COLOR]</value>
+    </variable>
+
+    <variable name="BLPresentVar">
+        <value condition="String.IsEqual(Player.Process(video.dovi.bl.present),1)">[COLOR palegreen]Yes[/COLOR]</value>
+        <value>[COLOR tomato]No[/COLOR]</value>
+    </variable>
+
+    <variable name="ELPresentVar">
+        <value condition="String.IsEqual(Player.Process(video.dovi.el.present),1)">[COLOR palegreen]Yes[/COLOR]</value>
+        <value>[COLOR tomato]No[/COLOR]</value>
+    </variable>
+
+    <variable name="ELSourcePresentVar">
+        <value condition="String.IsEqual(Player.Process(video.source.dovi.el.present),1)">[COLOR 8098FB98]Yes[/COLOR]</value>
+        <value>[COLOR 80FF6347]No[/COLOR]</value>
+    </variable>
+
+    <variable name="VideoConvVar">
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),HDR10) + String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision)">-&gt; Dolby Vision Profile 8.1</value>
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),HDR10) + String.Contains(Player.Process(amlogic.vs10.mode),SDR)">-&gt; SDR</value>
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),SDR) + String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">-&gt; HDR10</value>
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),SDR) + String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision)">-&gt; Dolby Vision Profile 8.1</value>
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),Dolby Vision) + String.Contains(Player.Process(amlogic.vs10.mode),SDR)"> -&gt; SDR</value>
+        <value condition="String.Contains(Player.Process(video.source.hdr.type),Dolby Vision) + String.Contains(Player.Process(amlogic.vs10.mode),HDR10)"> -&gt; HDR10</value>
+    </variable>
+
+    <variable name="VS10ModeVar">
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),Bypass)">[COLOR tomato]Off[/COLOR]</value>
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision)">[COLOR palegreen]On[/COLOR]</value>
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">[COLOR palegreen]On[/COLOR]</value>
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),SDR)">[COLOR palegreen]On[/COLOR]</value>
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),)">[COLOR tomato]N/A[/COLOR]</value>
+    </variable>
+
+    <variable name="DVTunnelVar">
+        <value condition="Integer.IsEqual(Player.Process(amlogic.vs10.mode.raw),1)">DV Tunnel</value>
+    </variable>
+
+    <variable name="DVDualTrackVar">
+        <value condition="String.Contains(Player.Process(video.dovi.dual.track),dual)"> - $INFO[Player.Process(video.dovi.dual.track)]</value>
+        <value condition="String.IsEqual(Player.Process(video.dovi.dual.track),1)"> - Dual Track</value>
+        <value condition="String.IsEqual(Player.Process(video.dovi.dual.track),true)"> - Dual Track</value>
+        <value condition="String.IsEqual(Player.Process(video.dovi.dual.track),yes)"> - Dual Track</value>
+    </variable>
+
+    <variable name="L5StateVar">
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),0)">L5 ($LOCALIZE[31990])</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),1)">L5 (non-16:9 skip)</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),2)">L5 (IMAX skip)</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),3)">L5 ($LOCALIZE[31991])</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),4)">L5 ($LOCALIZE[31992])</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),5)">$LOCALIZE[31967]</value>
+        <value condition="Integer.IsEqual(Player.Process(video.dovi.l5.detect.state),6)">L5 ($LOCALIZE[31993])</value>
+    </variable>
+
+    <variable name="VideoVPModeVar">
+        <value condition="Integer.IsEqual(Player.Process(video.vpmode),0)">[COLOR tomato]Off[/COLOR]</value>
+        <value condition="Integer.IsEqual(Player.Process(video.vpmode),1)">[COLOR palegreen]On[/COLOR]</value>
+    </variable>
+
+    <variable name="CMModeVar">
+        <value condition="!String.StartsWith(Player.Process(video.dovi.meta.version),V)">[COLOR tomato]No[/COLOR]</value>
+        <value condition="String.StartsWith(Player.Process(video.dovi.meta.version),V)">[COLOR palegreen]Yes[/COLOR]</value>
+    </variable>
+
+    <variable name="CMMode1Var">
+        <value condition="String.IsEqual(Player.Process(video.dovi.meta.version),VCMv4.0 2-0)">CMv4.0 2-0</value>
+        <value condition="String.IsEqual(Player.Process(video.dovi.meta.version),VCMv4.0 2-0 1-L8)">CMv4.0 2-0 1-L8</value>
+        <value>$INFO[Player.Process(video.dovi.meta.version)]</value>
+    </variable>
+
+    <variable name="AudioCodecSpatialVar">
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)">(IMAX)</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)">(Atmos)</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)">(Atmos)</value>
+    </variable>
+
+    <variable name="AudioChannelsInputVar">
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,1)">Mono</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,2)">FL, FR</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,3)">FL, FR, LFE</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,4)">FL, FR, BL, BR</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,5)">FL, FR, LFE, BL, BR</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,6)">FL, FR, FC, LFE, SL, SR</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,7)">FL, FR, FC, LFE, BC, SL, SR</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,8)">FL, FR, FC, LFE, BL, BR, SL, SR</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,9)">FL, FR, FC, LFE, BL, BR, SL, SR, FWL</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,10)">FL, FR, FC, LFE, BL, BR, SL, SR, FWL, FWR</value>
+        <value>$LOCALIZE[13205]</value>
+    </variable>
+</includes>
