@@ -50,7 +50,7 @@ class PlayerDummy:
         return self.check_strm()
 
     def check_strm(self):
-        if False and not self.resolver.is_strm and get_setting('only_resolve_strm'):  # ABUKARIM: always run dummy to suppress not-playable popup
+        if not self.resolver.is_strm and get_setting('only_resolve_strm'):
             kodi_log(['lib.player - skipped dummy no strm setting\n', self.filename], 1)
             return False
         return True

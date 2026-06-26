@@ -137,59 +137,31 @@ class TraktAuthenticator:
 
     def poller(self):
 
-        # -- TMDbHelper Trakt QR Auth patch (by ABUKARIM TOOLS) --
-        import xbmcaddon as _xbmcaddon
-        from tmdbhelper.lib.api.trakt.qr_utils import make_qr, remove_qr, get_qr_dialog
+        while True:
 
-        qr_url  = 'https://trakt.tv/activate/' + str(self.user_code)
-        qr_path = make_qr(qr_url)
-        addon_path = _xbmcaddon.Addon('plugin.video.themoviedb.helper').getAddonInfo('path')
+            if self.xbmc_monitor.abortRequested():
+                self.state = 'aborted'
+                break
 
-        qr_dialog = get_qr_dialog(addon_path)
-        qr_dialog.show()
-        qr_dialog.setProperty('user_code',      str(self.user_code))
-        qr_dialog.setProperty('qr_image',       qr_path)
-        qr_dialog.setProperty('progress_width', '530')
-        qr_dialog.setProperty('expires_label',  'Expires in %ss' % int(self.expires_in))
+            if self.auth_dialog.iscanceled():
+                self.state = 'aborted'
+                break
 
-        try:
-            while True:
+            self.auth_dialog_update()
 
-                if self.xbmc_monitor.abortRequested():
-                    self.state = 'aborted'
-                    break
+            if self.expires_in <= self.progress:
+                self.state = 'expired'
+                break
 
-                if getattr(qr_dialog, 'is_canceled', False):
-                    self.state = 'aborted'
-                    break
+            self.authorization = self.trakt_api.get_authorisation_token(self.device_code)
 
-                self.progress += self.interval
-                _remaining = max(int(self.expires_in) - self.progress, 0)
-                _width = int(float(_remaining * 530) / self.expires_in) if self.expires_in else 0
-                qr_dialog.setProperty('progress_width', str(_width))
-                qr_dialog.setProperty('expires_label',  'Expires in %ss' % _remaining)
+            if self.authorization:
+                self.state = 'success'
+                break
 
-                if self.expires_in <= self.progress:
-                    self.state = 'expired'
-                    break
+            self.xbmc_monitor.waitForAbort(self.interval)
 
-                self.authorization = self.trakt_api.get_authorisation_token(self.device_code)
-
-                if self.authorization:
-                    self.state = 'success'
-                    break
-
-                self.xbmc_monitor.waitForAbort(self.interval)
-        finally:
-            try:
-                qr_dialog.close()
-            except Exception:
-                pass
-            del qr_dialog
-            remove_qr(qr_path)
-
-        self.auth_dialog_route()
-        # -- end TMDbHelper Trakt QR Auth patch --
+        self.auth_dialog_close()
 
     mutex_lockname = 'TraktAskingForLogin'
 
