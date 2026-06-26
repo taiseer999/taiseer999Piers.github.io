@@ -5,10 +5,7 @@
 		<animation effect="slide" start="0,0" end="0,-400" time="200">WindowClose</animation>
 		<animation effect="slide" start="0,0" end="0,-400" tween="cubic" easing="out" delay="300" time="250" reversible="false">Hidden</animation>
 	<controls>
-		<include>PPI_Classic</include>
-		<include>PPI_Modern</include>
 		<control type="group">
-			<visible>!Skin.HasSetting(ppi.classicMode) + !Skin.HasSetting(ppi.modernMode)</visible>
 			<top>0</top>
             <left>0</left>
             <width>100%</width>

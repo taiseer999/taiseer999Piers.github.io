@@ -582,11 +582,7 @@
         <value condition="!String.IsEmpty(ListItem.AudioCodec)">$INFO[ListItem.AudioCodec]</value>
 		
 		<value condition="Window.IsActive(visualisation) + !String.IsEmpty(MusicPlayer.Codec)">$INFO[MusicPlayer.Codec]</value>
-		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,ac3)">Dolby Digital</value>
-		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,eac3)">Dolby Digital Plus</value>
-		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)">Dolby Digital Plus</value>
-		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,truehd)">Dolby TrueHD</value>
-		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)">Dolby TrueHD</value>
+		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,ac3)">DOLBY</value>
 		<value condition="Window.IsActive(fullscreenvideo) + String.IsEqual(VideoPlayer.AudioCodec,dca)">DTS</value>
 		<value condition="Window.IsActive(fullscreenvideo) + String.Contains(VideoPlayer.AudioCodec,dts-hd)">DTS HD</value>
 		<value condition="Window.IsActive(fullscreenvideo) + String.Contains(VideoPlayer.AudioCodec,dtshd)">DTS HD</value>
