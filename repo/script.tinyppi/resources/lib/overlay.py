@@ -16,6 +16,7 @@ import xbmcvfs
 
 import fonts
 import properties
+from theme import apply_theme
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -207,6 +208,7 @@ def open_tinyppi() -> None:
     home.setProperty("TinyPPI.Filename",         _ADDON.getSetting("filename"))
     home.setProperty("TinyPPI.BackgroundToggle",
                      "1" if _ADDON.getSetting("background_toggle") == "true" else "0")
+    apply_theme(home, _ADDON)
 
     try:
         dialog = TinyPPIDialog(
@@ -275,6 +277,7 @@ def open_dialog_mode() -> None:
     home.setProperty(_PROP_RUNNING, "true")
     home.setProperty(_PROP_ACTIVE,  "true")
     home.setProperty("TinyPPI.DialogMode", "true")
+    apply_theme(home, _ADDON)
 
     try:
         from mode_select import open_dialog

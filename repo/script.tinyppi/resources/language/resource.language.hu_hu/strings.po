@@ -226,3 +226,619 @@ msgstr "CPU frekvencia"
 msgctxt "#32120"
 msgid "Video bitrate"
 msgstr "Videó bitráta"
+
+msgctxt "#32100"
+msgid "Theme"
+msgstr ""
+
+msgctxt "#32101"
+msgid "Customise the TinyPPI overlay colors."
+msgstr ""
+
+msgctxt "#32102"
+msgid "Colors"
+msgstr ""
+
+msgctxt "#32103"
+msgid "Background color (Modern)"
+msgstr ""
+
+msgctxt "#32104"
+msgid "Background color of the Modern overlay style."
+msgstr ""
+
+msgctxt "#32105"
+msgid "Title color"
+msgstr ""
+
+msgctxt "#32106"
+msgid "Color of the section titles."
+msgstr ""
+
+msgctxt "#32107"
+msgid "Description color"
+msgstr ""
+
+msgctxt "#32108"
+msgid "Color of the label descriptions."
+msgstr ""
+
+msgctxt "#32109"
+msgid "Output color"
+msgstr ""
+
+msgctxt "#32110"
+msgid "Color of the output values."
+msgstr ""
+
+msgctxt "#32111"
+msgid "Progress bar color"
+msgstr ""
+
+msgctxt "#32112"
+msgid "Color of the progress bars."
+msgstr ""
+
+msgctxt "#32113"
+msgid "Detail color"
+msgstr ""
+
+msgctxt "#32114"
+msgid "Color of the dimmed detail values shown in parentheses."
+msgstr ""
+
+msgctxt "#32115"
+msgid "Icon color"
+msgstr ""
+
+msgctxt "#32116"
+msgid "Color of the section icons."
+msgstr ""
+
+msgctxt "#32117"
+msgid "Unit color (cd/m²)"
+msgstr ""
+
+msgctxt "#32118"
+msgid "Color of the cd/m² brightness unit."
+msgstr ""
+
+msgctxt "#32121"
+msgid "Light gray"
+msgstr "[COLOR=FFE0E0E0]●[/COLOR] Light gray"
+
+msgctxt "#32122"
+msgid "Red"
+msgstr "[COLOR=FFFF8A80]●[/COLOR] Light red"
+
+msgctxt "#32123"
+msgid "Orange"
+msgstr "[COLOR=FFFFCC80]●[/COLOR] Light orange"
+
+msgctxt "#32124"
+msgid "Yellow"
+msgstr "[COLOR=FFFFFF8D]●[/COLOR] Light yellow"
+
+msgctxt "#32125"
+msgid "Green"
+msgstr "[COLOR=FFB9F6CA]●[/COLOR] Light green"
+
+msgctxt "#32126"
+msgid "Cyan"
+msgstr "[COLOR=FF84FFFF]●[/COLOR] Light cyan"
+
+msgctxt "#32127"
+msgid "Blue"
+msgstr "[COLOR=FF82B1FF]●[/COLOR] Light blue"
+
+msgctxt "#32128"
+msgid "Purple"
+msgstr "[COLOR=FFE1BEE7]●[/COLOR] Light purple"
+
+msgctxt "#32129"
+msgid "Pink"
+msgstr "[COLOR=FFFF80AB]●[/COLOR] Light pink"
+
+msgctxt "#32130"
+msgid "Charcoal"
+msgstr "[COLOR=FF2A2E33]●[/COLOR] Charcoal (Default)"
+
+msgctxt "#32131"
+msgid "Black"
+msgstr "[COLOR=FF000000]●[/COLOR] Black"
+
+msgctxt "#32132"
+msgid "Dark red"
+msgstr "[COLOR=FF3A1414]●[/COLOR] Dark red"
+
+msgctxt "#32133"
+msgid "Dark orange"
+msgstr "[COLOR=FF3A2A12]●[/COLOR] Dark orange"
+
+msgctxt "#32134"
+msgid "Dark yellow"
+msgstr "[COLOR=FF3A360F]●[/COLOR] Dark yellow"
+
+msgctxt "#32135"
+msgid "Dark green"
+msgstr "[COLOR=FF123A12]●[/COLOR] Dark green"
+
+msgctxt "#32136"
+msgid "Dark cyan"
+msgstr "[COLOR=FF0F3A3A]●[/COLOR] Dark cyan"
+
+msgctxt "#32137"
+msgid "Dark blue"
+msgstr "[COLOR=FF12203A]●[/COLOR] Dark blue"
+
+msgctxt "#32138"
+msgid "Dark purple"
+msgstr "[COLOR=FF26123A]●[/COLOR] Dark purple"
+
+msgctxt "#32139"
+msgid "Dark gray"
+msgstr "[COLOR=FF444444]●[/COLOR] Dark gray"
+
+msgctxt "#32140"
+msgid "FPS color"
+msgstr ""
+
+msgctxt "#32141"
+msgid "Color of the In / drop / out FPS values."
+msgstr ""
+
+msgctxt "#32142"
+msgid "Header color"
+msgstr ""
+
+msgctxt "#32143"
+msgid "Color of the overlay header label (Modern)."
+msgstr ""
+
+msgctxt "#32144"
+msgid "Chart icon color"
+msgstr ""
+
+msgctxt "#32145"
+msgid "Color of the chart icon (Modern)."
+msgstr ""
+
+msgctxt "#32146"
+msgid "Reset colors to defaults"
+msgstr ""
+
+msgctxt "#32147"
+msgid "Reset all theme colors to their default values."
+msgstr ""
+
+msgctxt "#32148"
+msgid "Colors reset to defaults"
+msgstr ""
+
+msgctxt "#32150"
+msgid "Coral"
+msgstr "[COLOR=FFFF8A65]●[/COLOR] Coral"
+
+msgctxt "#32151"
+msgid "Salmon"
+msgstr "[COLOR=FFFFAB91]●[/COLOR] Salmon"
+
+msgctxt "#32152"
+msgid "Amber"
+msgstr "[COLOR=FFFFD54F]●[/COLOR] Amber"
+
+msgctxt "#32153"
+msgid "Gold"
+msgstr "[COLOR=FFFFE082]●[/COLOR] Gold"
+
+msgctxt "#32154"
+msgid "Lime"
+msgstr "[COLOR=FFCCFF90]●[/COLOR] Lime"
+
+msgctxt "#32155"
+msgid "Mint"
+msgstr "[COLOR=FFA7FFEB]●[/COLOR] Mint"
+
+msgctxt "#32156"
+msgid "Teal"
+msgstr "[COLOR=FF80CBC4]●[/COLOR] Teal"
+
+msgctxt "#32157"
+msgid "Sky blue"
+msgstr "[COLOR=FF80D8FF]●[/COLOR] Sky blue"
+
+msgctxt "#32158"
+msgid "Azure"
+msgstr "[COLOR=FF40C4FF]●[/COLOR] Azure"
+
+msgctxt "#32159"
+msgid "Indigo"
+msgstr "[COLOR=FF8C9EFF]●[/COLOR] Indigo"
+
+msgctxt "#32160"
+msgid "Violet"
+msgstr "[COLOR=FFB388FF]●[/COLOR] Violet"
+
+msgctxt "#32161"
+msgid "Lavender"
+msgstr "[COLOR=FFD1C4E9]●[/COLOR] Lavender"
+
+msgctxt "#32162"
+msgid "Magenta"
+msgstr "[COLOR=FFEA80FC]●[/COLOR] Magenta"
+
+msgctxt "#32163"
+msgid "Fuchsia"
+msgstr "[COLOR=FFF48FB1]●[/COLOR] Fuchsia"
+
+msgctxt "#32164"
+msgid "Rose"
+msgstr "[COLOR=FFF06292]●[/COLOR] Rose"
+
+msgctxt "#32165"
+msgid "Crimson"
+msgstr "[COLOR=FFFF5252]●[/COLOR] Crimson"
+
+msgctxt "#32166"
+msgid "Brown"
+msgstr "[COLOR=FFBCAAA4]●[/COLOR] Brown"
+
+msgctxt "#32167"
+msgid "Olive"
+msgstr "[COLOR=FFDCE775]●[/COLOR] Olive"
+
+msgctxt "#32168"
+msgid "Slate"
+msgstr "[COLOR=FFB0BEC5]●[/COLOR] Slate"
+
+msgctxt "#32169"
+msgid "Silver"
+msgstr "[COLOR=FFCFD8DC]●[/COLOR] Silver"
+
+msgctxt "#32170"
+msgid "Dark teal"
+msgstr "[COLOR=FF0F3A36]●[/COLOR] Dark teal"
+
+msgctxt "#32171"
+msgid "Dark sky"
+msgstr "[COLOR=FF0F2A3A]●[/COLOR] Dark sky"
+
+msgctxt "#32172"
+msgid "Dark indigo"
+msgstr "[COLOR=FF1E2240]●[/COLOR] Dark indigo"
+
+msgctxt "#32173"
+msgid "Dark violet"
+msgstr "[COLOR=FF2E1E40]●[/COLOR] Dark violet"
+
+msgctxt "#32174"
+msgid "Dark magenta"
+msgstr "[COLOR=FF3A1E3A]●[/COLOR] Dark magenta"
+
+msgctxt "#32175"
+msgid "Dark pink"
+msgstr "[COLOR=FF3A1E2C]●[/COLOR] Dark pink"
+
+msgctxt "#32176"
+msgid "Dark rose"
+msgstr "[COLOR=FF3A1E24]●[/COLOR] Dark rose"
+
+msgctxt "#32177"
+msgid "Dark brown"
+msgstr "[COLOR=FF3A2A1E]●[/COLOR] Dark brown"
+
+msgctxt "#32178"
+msgid "Dark olive"
+msgstr "[COLOR=FF2A2E12]●[/COLOR] Dark olive"
+
+msgctxt "#32179"
+msgid "Dark lime"
+msgstr "[COLOR=FF223A12]●[/COLOR] Dark lime"
+
+msgctxt "#32180"
+msgid "Dark mint"
+msgstr "[COLOR=FF123A28]●[/COLOR] Dark mint"
+
+msgctxt "#32181"
+msgid "Dark azure"
+msgstr "[COLOR=FF12303A]●[/COLOR] Dark azure"
+
+msgctxt "#32182"
+msgid "Dark slate"
+msgstr "[COLOR=FF222E33]●[/COLOR] Dark slate"
+
+msgctxt "#32183"
+msgid "Dark navy"
+msgstr "[COLOR=FF12182E]●[/COLOR] Dark navy"
+
+msgctxt "#32184"
+msgid "Dark maroon"
+msgstr "[COLOR=FF3A1212]●[/COLOR] Dark maroon"
+
+msgctxt "#32185"
+msgid "Midnight"
+msgstr "[COLOR=FF1A1A2A]●[/COLOR] Midnight"
+
+msgctxt "#32186"
+msgid "Espresso"
+msgstr "[COLOR=FF2E2418]●[/COLOR] Espresso"
+
+msgctxt "#32187"
+msgid "Onyx"
+msgstr "[COLOR=FF1E1E1E]●[/COLOR] Onyx"
+
+msgctxt "#32188"
+msgid "Graphite"
+msgstr "[COLOR=FF2C2C30]●[/COLOR] Graphite"
+
+msgctxt "#32189"
+msgid "Steel"
+msgstr "[COLOR=FF2E343A]●[/COLOR] Steel"
+
+msgctxt "#32190"
+msgid "Brightness unit (L6)"
+msgstr ""
+
+msgctxt "#32191"
+msgid "Choose the unit shown for the L6 brightness values."
+msgstr ""
+
+msgctxt "#32192"
+msgid "cd/m²"
+msgstr ""
+
+msgctxt "#32193"
+msgid "nits"
+msgstr ""
+
+msgctxt "#32194"
+msgid "Hidden"
+msgstr ""
+
+msgctxt "#32195"
+msgid "Show L5 offsets icon"
+msgstr ""
+
+msgctxt "#32196"
+msgid "Show the L5 offsets icon (lrtb) next to the L5 values."
+msgstr ""
+
+msgctxt "#32197"
+msgid "File name color"
+msgstr ""
+
+msgctxt "#32198"
+msgid "Color of the playing file name."
+msgstr ""
+
+msgctxt "#32200"
+msgid "Peach"
+msgstr "[COLOR=FFFFCCBC]●[/COLOR] Peach"
+
+msgctxt "#32201"
+msgid "Tangerine"
+msgstr "[COLOR=FFFFB74D]●[/COLOR] Tangerine"
+
+msgctxt "#32202"
+msgid "Mustard"
+msgstr "[COLOR=FFE4C441]●[/COLOR] Mustard"
+
+msgctxt "#32203"
+msgid "Chartreuse"
+msgstr "[COLOR=FFE6EE9C]●[/COLOR] Chartreuse"
+
+msgctxt "#32204"
+msgid "Forest"
+msgstr "[COLOR=FF81C784]●[/COLOR] Forest"
+
+msgctxt "#32205"
+msgid "Emerald"
+msgstr "[COLOR=FF69F0AE]●[/COLOR] Emerald"
+
+msgctxt "#32206"
+msgid "Spring"
+msgstr "[COLOR=FFB2FF59]●[/COLOR] Spring"
+
+msgctxt "#32207"
+msgid "Aqua"
+msgstr "[COLOR=FF18FFFF]●[/COLOR] Aqua"
+
+msgctxt "#32208"
+msgid "Turquoise"
+msgstr "[COLOR=FF64FFDA]●[/COLOR] Turquoise"
+
+msgctxt "#32209"
+msgid "Cerulean"
+msgstr "[COLOR=FF4FC3F7]●[/COLOR] Cerulean"
+
+msgctxt "#32210"
+msgid "Cobalt"
+msgstr "[COLOR=FF536DFE]●[/COLOR] Cobalt"
+
+msgctxt "#32211"
+msgid "Periwinkle"
+msgstr "[COLOR=FFB39DDB]●[/COLOR] Periwinkle"
+
+msgctxt "#32212"
+msgid "Plum"
+msgstr "[COLOR=FFCE93D8]●[/COLOR] Plum"
+
+msgctxt "#32213"
+msgid "Orchid"
+msgstr "[COLOR=FFBA68C8]●[/COLOR] Orchid"
+
+msgctxt "#32214"
+msgid "Raspberry"
+msgstr "[COLOR=FFFF4081]●[/COLOR] Raspberry"
+
+msgctxt "#32215"
+msgid "Watermelon"
+msgstr "[COLOR=FFFF5C8D]●[/COLOR] Watermelon"
+
+msgctxt "#32216"
+msgid "Scarlet"
+msgstr "[COLOR=FFFF6E40]●[/COLOR] Scarlet"
+
+msgctxt "#32217"
+msgid "Sand"
+msgstr "[COLOR=FFD7CCC8]●[/COLOR] Sand"
+
+msgctxt "#32218"
+msgid "Pistachio"
+msgstr "[COLOR=FFC5E1A5]●[/COLOR] Pistachio"
+
+msgctxt "#32219"
+msgid "Cadet"
+msgstr "[COLOR=FF90A4AE]●[/COLOR] Cadet"
+
+msgctxt "#32220"
+msgid "Dark peach"
+msgstr "[COLOR=FF3E2820]●[/COLOR] Dark peach"
+
+msgctxt "#32221"
+msgid "Dark tangerine"
+msgstr "[COLOR=FF3E2C10]●[/COLOR] Dark tangerine"
+
+msgctxt "#32222"
+msgid "Dark mustard"
+msgstr "[COLOR=FF383010]●[/COLOR] Dark mustard"
+
+msgctxt "#32223"
+msgid "Dark chartreuse"
+msgstr "[COLOR=FF303814]●[/COLOR] Dark chartreuse"
+
+msgctxt "#32224"
+msgid "Dark forest"
+msgstr "[COLOR=FF1C3420]●[/COLOR] Dark forest"
+
+msgctxt "#32225"
+msgid "Dark emerald"
+msgstr "[COLOR=FF143424]●[/COLOR] Dark emerald"
+
+msgctxt "#32226"
+msgid "Dark spring"
+msgstr "[COLOR=FF203814]●[/COLOR] Dark spring"
+
+msgctxt "#32227"
+msgid "Dark aqua"
+msgstr "[COLOR=FF143838]●[/COLOR] Dark aqua"
+
+msgctxt "#32228"
+msgid "Dark turquoise"
+msgstr "[COLOR=FF143830]●[/COLOR] Dark turquoise"
+
+msgctxt "#32229"
+msgid "Dark cerulean"
+msgstr "[COLOR=FF142C3E]●[/COLOR] Dark cerulean"
+
+msgctxt "#32230"
+msgid "Dark cobalt"
+msgstr "[COLOR=FF1C2040]●[/COLOR] Dark cobalt"
+
+msgctxt "#32231"
+msgid "Dark periwinkle"
+msgstr "[COLOR=FF2A2040]●[/COLOR] Dark periwinkle"
+
+msgctxt "#32232"
+msgid "Dark plum"
+msgstr "[COLOR=FF341E38]●[/COLOR] Dark plum"
+
+msgctxt "#32233"
+msgid "Dark orchid"
+msgstr "[COLOR=FF301C34]●[/COLOR] Dark orchid"
+
+msgctxt "#32234"
+msgid "Dark raspberry"
+msgstr "[COLOR=FF3E1428]●[/COLOR] Dark raspberry"
+
+msgctxt "#32235"
+msgid "Dark watermelon"
+msgstr "[COLOR=FF3E1424]●[/COLOR] Dark watermelon"
+
+msgctxt "#32236"
+msgid "Dark scarlet"
+msgstr "[COLOR=FF3E1C14]●[/COLOR] Dark scarlet"
+
+msgctxt "#32237"
+msgid "Dark sand"
+msgstr "[COLOR=FF342E28]●[/COLOR] Dark sand"
+
+msgctxt "#32238"
+msgid "Dark pistachio"
+msgstr "[COLOR=FF28341C]●[/COLOR] Dark pistachio"
+
+msgctxt "#32239"
+msgid "Dark cadet"
+msgstr "[COLOR=FF242E34]●[/COLOR] Dark cadet"
+
+msgctxt "#32240"
+msgid "Custom"
+msgstr "Custom"
+
+msgctxt "#32241"
+msgid "Custom HEX color…"
+msgstr "Custom HEX color…"
+
+msgctxt "#32242"
+msgid "Enter your own 6-digit HEX color using the keyboard."
+msgstr "Enter your own 6-digit HEX color using the keyboard."
+
+msgctxt "#32243"
+msgid "Enter a 6-digit HEX color (e.g. FF5733)"
+msgstr "Enter a 6-digit HEX color (e.g. FF5733)"
+
+msgctxt "#32244"
+msgid "Invalid HEX color – using the default color"
+msgstr "Invalid HEX color – using the default color"
+
+msgctxt "#32245"
+msgid "Custom color applied"
+msgstr "Custom color applied"
+
+msgctxt "#32250"
+msgid "Custom background color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.BackgroundColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32251"
+msgid "Custom title color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.TitleColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32252"
+msgid "Custom file name color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.FilenameColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32253"
+msgid "Custom header color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.HeaderColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32254"
+msgid "Custom icon color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.IconColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32255"
+msgid "Custom chart icon color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.ChartColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32256"
+msgid "Custom description color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.DescriptionColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32257"
+msgid "Custom output color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.OutputColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32258"
+msgid "Custom FPS color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.FpsColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32259"
+msgid "Custom progress bar color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.ProgressColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32260"
+msgid "Custom detail color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.AccentColorSwatch)]]●[/COLOR] Custom"
+
+msgctxt "#32261"
+msgid "Custom unit color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.UnitColorSwatch)]]●[/COLOR] Custom"

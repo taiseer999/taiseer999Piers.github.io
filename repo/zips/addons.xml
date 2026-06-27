@@ -154,7 +154,7 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.3.6.6" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.3.6.8" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="tools.ffmpeg-tools" />
@@ -173,6 +173,10 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="hu">Megnyit egy külön saját lejátszófolyamat infó ablakot. Ez az ablak az éppen lejátszott média, kodek- videó- ​​hang- és egyéb adatait jeleníti meg.</description>
+        <news>v1.3.6.8
+- Wired the Theme color engine into the overlay skin: title, section icons, field labels, data values, filename, progress bars and the Modern background now follow the Theme settings. Default settings reproduce the original look; codec logo icons are unchanged.
+v1.3.6.7
+- Added the Theme color engine: 12 customisable overlay colors (background, title, filename, header, icon, chart, description, output, FPS, progress, accent, unit) with 50 presets each plus custom HEX input and a reset action. Skin color wiring to be applied separately.</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>

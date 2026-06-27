@@ -35,5 +35,13 @@ elif args[0] == "dialog":
 elif args[0] == "run_mode" and len(args) > 1:
     run_mode(args[1])
 
+elif args[0] == "reset_colors":
+    from theme import reset_colors
+    reset_colors()
+
+elif args[0] == "custom_color" and len(args) > 1:
+    from theme import custom_color
+    custom_color(args[1])
+
 else:
     open_tinyppi()
