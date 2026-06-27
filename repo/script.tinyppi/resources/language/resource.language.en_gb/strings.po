@@ -8,11 +8,11 @@ msgstr ""
 "Language: en\n"
 
 msgctxt "#32000"
-msgid "Display mode"
+msgid "Display output"
 msgstr ""
 
 msgctxt "#32001"
-msgid "Video mode"
+msgid "Video stream"
 msgstr ""
 
 msgctxt "#32002"
@@ -20,11 +20,11 @@ msgid "General"
 msgstr ""
 
 msgctxt "#32003"
-msgid "General settings"
+msgid "TinyPPI settings"
 msgstr ""
 
 msgctxt "#32004"
-msgid "TinyPPI style"
+msgid "Overlay style"
 msgstr ""
 
 msgctxt "#32005"
@@ -32,7 +32,7 @@ msgid "Decoder"
 msgstr ""
 
 msgctxt "#32006"
-msgid "Choose between the Modern and Classic TinyPPI style."
+msgid "Choose the classic or modern TinyPPI overlay style."
 msgstr ""
 
 msgctxt "#32007"
@@ -48,11 +48,11 @@ msgid "Modern"
 msgstr ""
 
 msgctxt "#32010"
-msgid "Remove gradient background"
+msgid "Hide gradient background"
 msgstr ""
 
 msgctxt "#32011"
-msgid "This option removes the gradient background in TinyPPI."
+msgid "Hide the gradient background in the classic TinyPPI style."
 msgstr ""
 
 msgctxt "#32012"
@@ -64,11 +64,11 @@ msgid "Playback time"
 msgstr ""
 
 msgctxt "#32014"
-msgid "CPU cores"
+msgid "Processor"
 msgstr ""
 
 msgctxt "#32015"
-msgid "Gamut"
+msgid "Color gamut"
 msgstr ""
 
 msgctxt "#32016"
@@ -80,7 +80,7 @@ msgid "The CoreELEC version could not be detected"
 msgstr ""
 
 msgctxt "#32018"
-msgid "Temp / load"
+msgid "Temperature"
 msgstr ""
 
 msgctxt "#32019"
@@ -92,7 +92,7 @@ msgid "Style"
 msgstr ""
 
 msgctxt "#32021"
-msgid "This option adds the name of the file currently playing to TinyPPI."
+msgid "Show the currently playing file name in TinyPPI."
 msgstr ""
 
 msgctxt "#32022"
@@ -120,19 +120,15 @@ msgid "Output mode"
 msgstr ""
 
 msgctxt "#32028"
-msgid "Screen mode"
-msgstr ""
-
-msgctxt "#32029"
-msgid "Framerate"
+msgid "Converting"
 msgstr ""
 
 msgctxt "#32030"
-msgid "L5 active offsets"
+msgid "L5 active area"
 msgstr ""
 
 msgctxt "#32031"
-msgid "Method"
+msgid "Decode method"
 msgstr ""
 
 msgctxt "#32032"
@@ -155,8 +151,12 @@ msgctxt "#32036"
 msgid "In / drop / out"
 msgstr ""
 
+msgctxt "#32045"
+msgid "Audio codec"
+msgstr ""
+
 msgctxt "#32046"
-msgid "Codec"
+msgid "Video codec"
 msgstr ""
 
 msgctxt "#32047"
@@ -188,7 +188,7 @@ msgid "Audio"
 msgstr ""
 
 msgctxt "#32069"
-msgid "Bit depth"
+msgid "Audio resolution"
 msgstr ""
 
 msgctxt "#32070"
@@ -212,7 +212,7 @@ msgid "Launch mode"
 msgstr ""
 
 msgctxt "#32093"
-msgid "Choose what opens when Add-on is launched."
+msgid "Choose what opens when the add-on is launched."
 msgstr ""
 
 msgctxt "#32094"
@@ -220,19 +220,19 @@ msgid "TinyPPI"
 msgstr ""
 
 msgctxt "#32095"
-msgid "VS10 Dialog"
+msgid "VS10 dialog"
 msgstr ""
 
 msgctxt "#32096"
 msgid "Fetching..."
 msgstr ""
 
-msgctxt "#32119"
-msgid "CPU Freq"
+msgctxt "#32097"
+msgid "L6 RPU MDL"
 msgstr ""
 
-msgctxt "#32120"
-msgid "Video bitrate"
+msgctxt "#32098"
+msgid "L6 MaxCLL/FALL"
 msgstr ""
 
 msgctxt "#32100"
@@ -248,7 +248,7 @@ msgid "Colors"
 msgstr ""
 
 msgctxt "#32103"
-msgid "Background color (Modern)"
+msgid "Background (Modern)"
 msgstr ""
 
 msgctxt "#32104"
@@ -256,7 +256,7 @@ msgid "Background color of the Modern overlay style."
 msgstr ""
 
 msgctxt "#32105"
-msgid "Title color"
+msgid "Title"
 msgstr ""
 
 msgctxt "#32106"
@@ -264,7 +264,7 @@ msgid "Color of the section titles."
 msgstr ""
 
 msgctxt "#32107"
-msgid "Description color"
+msgid "Description"
 msgstr ""
 
 msgctxt "#32108"
@@ -272,7 +272,7 @@ msgid "Color of the label descriptions."
 msgstr ""
 
 msgctxt "#32109"
-msgid "Output color"
+msgid "Output"
 msgstr ""
 
 msgctxt "#32110"
@@ -280,7 +280,7 @@ msgid "Color of the output values."
 msgstr ""
 
 msgctxt "#32111"
-msgid "Progress bar color"
+msgid "Progress bar"
 msgstr ""
 
 msgctxt "#32112"
@@ -288,7 +288,7 @@ msgid "Color of the progress bars."
 msgstr ""
 
 msgctxt "#32113"
-msgid "Detail color"
+msgid "Detail"
 msgstr ""
 
 msgctxt "#32114"
@@ -296,7 +296,7 @@ msgid "Color of the dimmed detail values shown in parentheses."
 msgstr ""
 
 msgctxt "#32115"
-msgid "Icon color"
+msgid "Icon"
 msgstr ""
 
 msgctxt "#32116"
@@ -304,12 +304,16 @@ msgid "Color of the section icons."
 msgstr ""
 
 msgctxt "#32117"
-msgid "Unit color (cd/m²)"
+msgid "Unit (cd/m², nits)"
 msgstr ""
 
 msgctxt "#32118"
 msgid "Color of the cd/m² brightness unit."
 msgstr ""
+
+msgctxt "#32120"
+msgid "White"
+msgstr "[COLOR=FFEDEDED]●[/COLOR] White (Default)"
 
 msgctxt "#32121"
 msgid "Light gray"
@@ -388,7 +392,7 @@ msgid "Dark gray"
 msgstr "[COLOR=FF444444]●[/COLOR] Dark gray"
 
 msgctxt "#32140"
-msgid "FPS color"
+msgid "FPS"
 msgstr ""
 
 msgctxt "#32141"
@@ -396,7 +400,7 @@ msgid "Color of the In / drop / out FPS values."
 msgstr ""
 
 msgctxt "#32142"
-msgid "Header color"
+msgid "Header"
 msgstr ""
 
 msgctxt "#32143"
@@ -404,7 +408,7 @@ msgid "Color of the overlay header label (Modern)."
 msgstr ""
 
 msgctxt "#32144"
-msgid "Chart icon color"
+msgid "Chart icon"
 msgstr ""
 
 msgctxt "#32145"
@@ -612,7 +616,7 @@ msgid "Show the L5 offsets icon (lrtb) next to the L5 values."
 msgstr ""
 
 msgctxt "#32197"
-msgid "File name color"
+msgid "File name"
 msgstr ""
 
 msgctxt "#32198"
@@ -803,50 +807,70 @@ msgctxt "#32245"
 msgid "Custom color applied"
 msgstr "Custom color applied"
 
+msgctxt "#32246"
+msgid "Color selection"
+msgstr "Color selection"
+
+msgctxt "#32247"
+msgid "Reset settings to defaults"
+msgstr "Reset settings to defaults"
+
+msgctxt "#32248"
+msgid "Reset all add-on settings to their default values."
+msgstr "Reset all add-on settings to their default values."
+
+msgctxt "#32249"
+msgid "Settings reset to defaults"
+msgstr "Settings reset to defaults"
+
 msgctxt "#32250"
-msgid "Custom background color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.BackgroundColorSwatch)]]●[/COLOR] Custom"
+msgid "Custom"
+msgstr "Custom"
 
-msgctxt "#32251"
-msgid "Custom title color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.TitleColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32262"
+msgid "Custom HEX background color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.BackgroundColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32252"
-msgid "Custom file name color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.FilenameColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32263"
+msgid "Custom HEX title color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.TitleColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32253"
-msgid "Custom header color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.HeaderColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32264"
+msgid "Custom HEX file name color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.FilenameColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32254"
-msgid "Custom icon color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.IconColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32265"
+msgid "Custom HEX header color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.HeaderColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32255"
-msgid "Custom chart icon color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.ChartColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32266"
+msgid "Custom HEX icon color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.IconColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32256"
-msgid "Custom description color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.DescriptionColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32267"
+msgid "Custom HEX chart icon color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.ChartColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32257"
-msgid "Custom output color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.OutputColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32268"
+msgid "Custom HEX description color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.DescriptionColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32258"
-msgid "Custom FPS color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.FpsColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32269"
+msgid "Custom HEX output color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.OutputColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32259"
-msgid "Custom progress bar color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.ProgressColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32270"
+msgid "Custom HEX FPS color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.FpsColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32260"
-msgid "Custom detail color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.AccentColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32271"
+msgid "Custom HEX progress bar color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.ProgressColorSwatch)]]●[/COLOR] Custom HEX color…"
 
-msgctxt "#32261"
-msgid "Custom unit color"
-msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.UnitColorSwatch)]]●[/COLOR] Custom"
+msgctxt "#32272"
+msgid "Custom HEX detail color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.AccentColorSwatch)]]●[/COLOR] Custom HEX color…"
+
+msgctxt "#32273"
+msgid "Custom HEX unit color"
+msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.UnitColorSwatch)]]●[/COLOR] Custom HEX color…"
