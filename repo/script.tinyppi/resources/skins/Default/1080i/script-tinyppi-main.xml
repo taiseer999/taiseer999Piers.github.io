@@ -96,9 +96,9 @@
 				<control type="label">
 					<left>0</left>
 					<width>900</width>
-					<label>[B]Player Process Info[/B]</label>
+					<label>[B][UPPERCASE]Player Process Info[/UPPERCASE][/B]</label>
 					<font>font_main_bold</font>
-					<textcolor>$INFO[Window(10000).Property(TinyPPI.HeaderColor)]</textcolor>
+					<textcolor>FFFFFFFF</textcolor>
 					<aligny>center</aligny>
 				</control>
 				<control type="image">
@@ -107,17 +107,6 @@
 					<width>34</width>
 					<height>34</height>
 					<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.IconColor)]">icons/chart.png</texture>
-				</control>
-			</control>
-
-			<!-- Header separator line -->
-			<control type="group">
-				<top>-14</top>
-				<left>30</left>
-				<control type="image">
-					<width>1810</width>
-					<height>1</height>
-					<texture colordiffuse="2CFFFFFF">common/dot-1x1.png</texture>
 				</control>
 			</control>
 

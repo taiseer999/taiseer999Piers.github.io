@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.tinyppi" name="TinyPPI" version="1.4.2" provider-name="jamal2362">
+<addon id="script.tinyppi" name="TinyPPI" version="1.4.3" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="tools.ffmpeg-tools"/>
@@ -18,7 +18,9 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="hu">Megnyit egy külön saját lejátszófolyamat infó ablakot. Ez az ablak az éppen lejátszott média, kodek- videó- ​​hang- és egyéb adatait jeleníti meg.</description>
-        <news>v1.4.2
+        <news>v1.4.3
+- Header title set to uppercase white; removed the separator line under the header.
+v1.4.2
 - Enlarged the Modern background to enclose the "Player Process Info" title and chart icon, with a subtle separator line below the header.
 v1.4.1
 - Migrated the full Player Process Info panel into the Modern overlay (Display output, Pixel format, Color gamut, audio Bitrate, Subtitle language and all field rows).
