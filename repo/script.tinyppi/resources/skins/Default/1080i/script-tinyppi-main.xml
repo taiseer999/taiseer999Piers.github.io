@@ -24,9 +24,9 @@
 				<!-- Background -->
 				<control type="group">
 					<left>20</left>
-					<top>360</top>
+					<top>290</top>
 					<width>1880</width>
-					<height>685</height>
+					<height>755</height>
 					<control type="image">
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/modern.png</texture>
 					</control>
@@ -89,9 +89,42 @@
 				<height>0</height>
 				<top>45</top>
 
+			<!-- Header: Player Process Info -->
+			<control type="group">
+				<top>-58</top>
+				<left>30</left>
+				<control type="label">
+					<left>0</left>
+					<width>900</width>
+					<label>[B]Player Process Info[/B]</label>
+					<font>font_main_bold</font>
+					<textcolor>$INFO[Window(10000).Property(TinyPPI.HeaderColor)]</textcolor>
+					<aligny>center</aligny>
+				</control>
+				<control type="image">
+					<left>1170</left>
+					<top>2</top>
+					<width>34</width>
+					<height>34</height>
+					<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.IconColor)]">icons/chart.png</texture>
+				</control>
+			</control>
+
+			<!-- Header separator line -->
+			<control type="group">
+				<top>-14</top>
+				<left>30</left>
+				<control type="image">
+					<width>1810</width>
+					<height>1</height>
+					<texture colordiffuse="59FFFFFF">common/dot-1x1.png</texture>
+				</control>
+			</control>
+
 			<!-- Group: channels -->
 			<control type="group">
 				<top>120</top>
+				<left>-130</left>
 				<width>1920</width>
 				<height>0</height>
 				<visible>String.IsEqual(Window(10000).Property(TinyPPI.UIStyle),1)</visible>
@@ -164,6 +197,7 @@
 			<control type="group">
 				<width>1920</width>
 				<height>400</height>
+				<left>-130</left>
 				<visible>String.IsEqual(Window(10000).Property(TinyPPI.UIStyle),1)</visible>
 				<control type="group">
 					<top>-55</top>
@@ -1333,7 +1367,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>90</top>
-						<label>$INFO[Window().Property(ModeVar)] $INFO[Window().Property(DoviCmVersionVar),/ ,]</label>
+						<label>$INFO[Window().Property(ModeVar)]$INFO[Window().Property(DoviCmVersionVar), / ,]</label>
 						<font>font_tiny</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
 						<aligny>top</aligny>

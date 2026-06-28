@@ -316,13 +316,23 @@ def get_DoviTunnelVar() -> str:
 def get_DoviCmVersionVar() -> str:
     """
     Return the source Dolby Vision Content-Mapping version
-    (``'CMv2.9'`` or ``'CMv4.0'``), a localized status while/after detection,
-    or ``''`` when the source is not Dolby Vision.
+    (``'CMv2.9'`` or ``'CMv4.0'``), a localized 'detecting' status while
+    detection runs, or ``''`` when the source is not Dolby Vision or detection
+    failed.
 
     Detection runs once per file in a background thread (see dvinfo.py), so
     this call never blocks the polling loop.
+
+    The Mode field concatenates this after ModeVar with a " / " separator, so
+    returning the "N/A" status label here would render a dangling " / N/A".
+    We therefore collapse the N/A status to empty for this field; the L6/L5
+    rows have their own getters and still show "N/A" by design.
     """
-    return get_cm_version()
+    val = get_cm_version()
+    from dvinfo import _na_label
+    if val == _na_label():
+        return ""
+    return val
 
 
 def get_DoviLevel5OffsetsVar() -> str:

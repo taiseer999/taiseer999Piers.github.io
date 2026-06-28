@@ -364,6 +364,63 @@ def _parse_summary(out: str) -> dict[str, str]:
     }
 
 
+def _binary_runs(path: str, version_arg: str) -> tuple[bool, str]:
+    """Try to execute a bundled binary with a version flag.
+
+    Returns ``(ok, detail)``. ``ok`` is True only if the binary actually spawns
+    and exits. ``detail`` carries the OS error (e.g. 'Exec format error' for an
+    architecture mismatch, or 'Permission denied' for a lost exec bit) so the
+    real reason DV detection is unavailable shows up in the Kodi log instead of
+    being silently swallowed.
+    """
+    try:
+        subprocess.run(
+            [path, version_arg],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            timeout=8,
+        )
+        return True, ""
+    except OSError as exc:
+        # errno 8 = Exec format error (wrong CPU arch), 13 = Permission denied.
+        return False, "%s (errno=%s)" % (exc.strerror or str(exc),
+                                         getattr(exc, "errno", "?"))
+    except Exception as exc:
+        return False, str(exc)
+
+
+_binaries_checked = False
+
+
+def _verify_binaries(dovi: str, ffmpeg: str) -> bool:
+    """Run a one-time self-test of both binaries and log any failure reason.
+
+    Logged once per Kodi session so the AM6B/CoreELEC log clearly states
+    whether the bundled aarch64 ffmpeg/dovi_tool actually run on this device.
+    """
+    global _binaries_checked
+    if _binaries_checked:
+        return True
+    _binaries_checked = True
+
+    ff_ok, ff_detail = _binary_runs(ffmpeg, "-version")
+    dv_ok, dv_detail = _binary_runs(dovi, "--version")
+
+    if not ff_ok:
+        _log("DV: ffmpeg binary will not execute on this device: %s -> %s. "
+             "DV metadata (CM version, L5/L6) needs an ffmpeg build matching "
+             "this CPU (aarch64 Linux for AM6B/CoreELEC)."
+             % (ffmpeg, ff_detail), xbmc.LOGWARNING)
+    if not dv_ok:
+        _log("DV: dovi_tool binary will not execute on this device: %s -> %s. "
+             "Needs an aarch64 Linux build for AM6B/CoreELEC."
+             % (dovi, dv_detail), xbmc.LOGWARNING)
+    if ff_ok and dv_ok:
+        _log("DV: ffmpeg + dovi_tool self-test passed; DV detection active.",
+             xbmc.LOGINFO)
+    return ff_ok and dv_ok
+
+
 def _detect(path: str) -> dict[str, str]:
     """Return compact Dolby Vision metadata for the given playing path."""
     dovi   = _dovi_tool()
@@ -373,6 +430,11 @@ def _detect(path: str) -> dict[str, str]:
         return {}
     if not ffmpeg:
         _log("DV: tools.tinyppi not available", xbmc.LOGWARNING)
+        return {}
+
+    # One-time self-test so a wrong-architecture or non-executable binary is
+    # reported clearly instead of silently yielding an empty RPU (=> N/A).
+    if not _verify_binaries(dovi, ffmpeg):
         return {}
 
     src, is_temp = _local_source(path)

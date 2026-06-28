@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.tinyppi" name="TinyPPI" version="1.4" provider-name="jamal2362,AK">
+<addon id="script.tinyppi" name="TinyPPI" version="1.4.2" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="tools.ffmpeg-tools"/>
@@ -18,7 +18,13 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="hu">Megnyit egy külön saját lejátszófolyamat infó ablakot. Ez az ablak az éppen lejátszott média, kodek- videó- ​​hang- és egyéb adatait jeleníti meg.</description>
-        <news>v1.3.6.8
+        <news>v1.4.1
+- Migrated the full Player Process Info panel into the Modern overlay (Display output, Pixel format, Color gamut, audio Bitrate, Subtitle language and all field rows).
+- Added a graceful fallback for devices that do not expose amlogic InfoLabels (e.g. the VTB decode path): unresolved labels no longer echo their own name and now fall back to generic display/colour InfoLabels.
+- Added "Player Process Info" header with chart icon; centred the right-side speaker/codec graphic.
+- Fixed the dangling " / N/A" in the Mode row when no Dolby Vision metadata is present.
+- Dolby Vision detection (CM version, L5/L6) now self-tests its ffmpeg/dovi_tool binaries once per session and logs the real reason when they cannot run.
+v1.3.6.8
 - Wired the Theme color engine into the overlay skin: title, section icons, field labels, data values, filename, progress bars and the Modern background now follow the Theme settings. Default settings reproduce the original look; codec logo icons are unchanged.
 v1.3.6.7
 - Added the Theme color engine: 12 customisable overlay colors (background, title, filename, header, icon, chart, description, output, FPS, progress, accent, unit) with 50 presets each plus custom HEX input and a reset action. Skin color wiring to be applied separately.</news>
