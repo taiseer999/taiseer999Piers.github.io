@@ -1997,7 +1997,7 @@
 					<!-- CPU Freq -->
 					<control type="label">
 						<top>30</top>
-						<label>$ADDON[script.tinyppi 32119]:</label>
+						<label>$ADDON[script.tinyppi CPU]:</label>
 						<font>font_tiny</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.HeaderColor)]</textcolor>
 						<aligny>top</aligny>

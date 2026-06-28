@@ -307,6 +307,10 @@ msgctxt "#32117"
 msgid "Unit (cd/m², nits)"
 msgstr ""
 
+msgctxt "#32119"
+msgid "CPU."
+msgstr ""
+
 msgctxt "#32118"
 msgid "Color of the cd/m² brightness unit."
 msgstr ""
