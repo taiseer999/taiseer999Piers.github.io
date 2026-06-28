@@ -16,10 +16,11 @@ Detection runs once per file in a background thread and is cached, so the
 polling loop in overlay.py never blocks.  The results are published through
 the Dolby Vision properties in properties.py.  CoreELEC only.
 
-Bundle the dovi_tool binary at:
-    resources/bin/aarch64/dovi_tool
-DV-capable Amlogic SoCs (S905X2/X4/X5, S922X) are all 64-bit, so aarch64
-covers every realistic target.
+The dovi_tool and ffmpeg binaries are provided by the tools.tinyppi addon at:
+    tools/dovi/dovi_tool
+    tools/ffmpeg/ffmpeg
+The bundled binary is an aarch64 build; DV-capable Amlogic SoCs
+(S905X2/X4/X5, S922X) are all 64-bit, so it covers every realistic target.
 """
 
 import os
@@ -40,7 +41,6 @@ from utils import _info
 # ---------------------------------------------------------------------------
 
 _ADDON      = xbmcaddon.Addon()
-_ADDON_PATH = _ADDON.getAddonInfo("path")
 
 _TEMP_DIR   = xbmcvfs.translatePath("special://temp/")
 _CHUNK_PATH = os.path.join(_TEMP_DIR, "tinyppi_dv.chunk")
@@ -68,10 +68,14 @@ _CACHE_FIELD_PROPERTIES = {
     "l6_mdl": "TinyPPI.DVInfo.L6Mdl",
     "l6_max_cll_fall": "TinyPPI.DVInfo.L6MaxCllFall",
 }
+_SUMMARY_SECTION_RE = re.compile(
+    r"^(L\d+\s|RPU\s|Scene/shot|Profile|Frames|DM version:)",
+)
 
 # ---------------------------------------------------------------------------
 # State
 # ---------------------------------------------------------------------------
+
 _inflight:  set[str]       = set()  # paths currently being processed
 _lock                      = threading.Lock()
 _ffmpeg_cached: str | None = None   # "" once searched and not found
@@ -92,7 +96,7 @@ def _localized(label_id: int, fallback: str) -> str:
 
 def _fetch_label() -> str:
     """Return the localized label shown while DV metadata is being fetched."""
-    return _localized(_LABEL_FETCH, "Fetch...")
+    return _localized(_LABEL_FETCH, "Fetching...")
 
 
 def _na_label() -> str:
@@ -103,6 +107,7 @@ def _na_label() -> str:
 def is_status_label(value: str) -> bool:
     """Return True when a value is a localized DV metadata status label."""
     return value in (_fetch_label(), _na_label())
+
 
 def _cache_window() -> xbmcgui.Window:
     """Return Kodi's global home window used for cross-invocation caching."""
@@ -177,34 +182,47 @@ def reset_playback_cache() -> None:
         _inflight.clear()
 
 
-def _dovi_tool() -> str:
-    """Return the bundled dovi_tool path, restoring the exec bit if needed."""
-    arch = "aarch64"
-    path = os.path.join(_ADDON_PATH, "resources", "bin", arch, "dovi_tool")
+def _ensure_executable(path: str) -> None:
+    """Restore the exec bit on a bundled binary if it was lost.
+
+    The executable bit is frequently lost when an addon is packaged as a zip
+    and unpacked on install; restore it defensively so the binary can be
+    spawned instead of failing with PermissionError ([Errno 13])."""
     if os.path.exists(path) and not os.access(path, os.X_OK):
-        # The executable bit is frequently lost when an addon is packaged as a
-        # zip and unpacked on install; restore it defensively.
         try:
             os.chmod(path, 0o755)
         except OSError:
             pass
+
+
+def _dovi_tool() -> str:
+    """Return the dovi_tool path from the tools.tinyppi addon, restoring the
+    exec bit if needed."""
+    try:
+        base = xbmcaddon.Addon("tools.tinyppi").getAddonInfo("path")
+    except Exception:
+        return ""
+    path = os.path.join(base, "tools", "dovi", "dovi_tool")
+    _ensure_executable(path)
     return path
 
 
 def _ffmpeg() -> str | None:
-    """Locate the ffmpeg binary provided by the tools.ffmpeg-tools addon."""
+    """Locate the ffmpeg binary provided by the tools.tinyppi addon."""
     global _ffmpeg_cached
     if _ffmpeg_cached is not None:
         return _ffmpeg_cached or None
 
     try:
-        base = xbmcaddon.Addon("tools.ffmpeg-tools").getAddonInfo("path")
+        base = xbmcaddon.Addon("tools.tinyppi").getAddonInfo("path")
     except Exception:
         _ffmpeg_cached = ""
         return None
 
-    candidates = [os.path.join(base, "bin", "ffmpeg"),
-                  os.path.join(base, "ffmpeg")]
+    candidates = [
+        os.path.join(base, "tools", "ffmpeg", "ffmpeg"),
+        os.path.join(base, "ffmpeg"),
+    ]
     if not any(os.path.exists(c) for c in candidates):
         for root, _dirs, files in os.walk(base):
             if "ffmpeg" in files:
@@ -213,6 +231,7 @@ def _ffmpeg() -> str | None:
 
     for cand in candidates:
         if os.path.exists(cand):
+            _ensure_executable(cand)
             _ffmpeg_cached = cand
             return cand
 
@@ -265,7 +284,7 @@ def _compact_l6_mdl(entry: str) -> str:
     )
 
     if mdl:
-        return f"{mdl.group(1)} l {mdl.group(2)}"
+        return f"{mdl.group(1)} | {mdl.group(2)}"
 
     return ""
 
@@ -276,7 +295,7 @@ def _compact_l6_max_cll_fall(entry: str) -> str:
     maxfall = re.search(r"MaxFALL:\s*([0-9.]+)\s*nits", entry, re.IGNORECASE)
 
     if maxcll and maxfall:
-        return f"{maxcll.group(1)} l {maxfall.group(1)}"
+        return f"{maxcll.group(1)} | {maxfall.group(1)}"
 
     return ""
 
@@ -285,17 +304,16 @@ def _compact_l5_offsets(offsets: str) -> str:
     """Return compact Level 5 active-area offsets in L/R/T/B order."""
     matches = dict(re.findall(r"\b(top|bottom|left|right)=([^,\s]+)", offsets))
 
-    if matches:
-        top = matches.get("top", "0")
-        bottom = matches.get("bottom", "0")
-        left = matches.get("left", "0")
-        right = matches.get("right", "0")
+    def normalize(value: str) -> str:
+        return "0" if value == "N/A" else value
 
-        values = [
-            "0" if value == "N/A" else value
-            for value in (left, right, top, bottom)
-        ]
-        return " l ".join(values)
+    if matches:
+        left = normalize(matches.get("left", "0"))
+        right = normalize(matches.get("right", "0"))
+        top = normalize(matches.get("top", "0"))
+        bottom = normalize(matches.get("bottom", "0"))
+
+        return f"{left} | {right} | {top} | {bottom}"
 
     return re.sub(r"\s+", " ", offsets).strip()
 
@@ -325,10 +343,7 @@ def _parse_summary(out: str) -> dict[str, str]:
                     continuation = lines[idx].strip()
                     if not continuation:
                         break
-                    if re.match(
-                        r"^(L\d+\s|RPU\s|Scene/shot|Profile|Frames|DM version:)",
-                        continuation,
-                    ):
+                    if _SUMMARY_SECTION_RE.match(continuation):
                         idx -= 1
                         break
                     l6_entries.append(continuation)
@@ -357,7 +372,7 @@ def _detect(path: str) -> dict[str, str]:
         _log(f"DV: dovi_tool binary missing ({dovi})", xbmc.LOGWARNING)
         return {}
     if not ffmpeg:
-        _log("DV: tools.ffmpeg-tools not available", xbmc.LOGWARNING)
+        _log("DV: tools.tinyppi not available", xbmc.LOGWARNING)
         return {}
 
     src, is_temp = _local_source(path)
@@ -366,14 +381,30 @@ def _detect(path: str) -> dict[str, str]:
         # pipes them into dovi_tool, which writes the parsed RPU.  A truncated
         # chunk may make dovi_tool log an error on the final frame, so the
         # exit code is ignored and only a non-empty RPU is required.
+        ffmpeg_cmd = [
+            ffmpeg,
+            "-loglevel", "error",
+            "-i", src,
+            "-map", "0:v:0",
+            "-c:v", "copy",
+            "-frames:v", str(_FRAMES),
+            "-bsf:v", "hevc_mp4toannexb",
+            "-f", "hevc",
+            "-",
+        ]
+        dovi_extract_cmd = [dovi, "extract-rpu", "-", "-o", _RPU_PATH]
+
         ff = subprocess.Popen(
-            [ffmpeg, "-loglevel", "error", "-i", src, "-map", "0:v:0",
-             "-c:v", "copy", "-frames:v", str(_FRAMES),
-             "-bsf:v", "hevc_mp4toannexb", "-f", "hevc", "-"],
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
-        subprocess.run([dovi, "extract-rpu", "-", "-o", _RPU_PATH],
-                       stdin=ff.stdout,
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            ffmpeg_cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+        )
+        subprocess.run(
+            dovi_extract_cmd,
+            stdin=ff.stdout,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
         if ff.stdout:
             ff.stdout.close()
         ff.wait()
@@ -383,8 +414,10 @@ def _detect(path: str) -> dict[str, str]:
 
         out = subprocess.run(
             [dovi, "info", "-i", _RPU_PATH, "-s"],
-            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-            text=True).stdout
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+        ).stdout
 
         return _parse_summary(out)
     finally:
@@ -403,7 +436,6 @@ def _worker(path: str, session_token: str) -> None:
     except Exception as exc:
         _log(f"DV CM detection failed: {exc}", xbmc.LOGWARNING)
         info = {}
-   
 
     try:
         _write_cached_info(path, info or _empty_info(), session_token)
@@ -426,7 +458,7 @@ def _get_info_status_value(key: str) -> tuple[str, str]:
     been found, and ``'failed'`` once the field cannot be determined.  The
     completed result is shared between addon invocations until playback stops.
     """
-    if (key == "cm_version" and "dolby" not in _info("VideoPlayer.HdrType").lower()):
+    if key == "cm_version" and "dolby" not in _info("VideoPlayer.HdrType").lower():
         return "", ""
 
     try:
