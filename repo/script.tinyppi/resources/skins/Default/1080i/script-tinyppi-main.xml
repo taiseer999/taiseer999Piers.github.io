@@ -117,7 +117,7 @@
 				<control type="image">
 					<width>1810</width>
 					<height>1</height>
-					<texture colordiffuse="59FFFFFF">common/dot-1x1.png</texture>
+					<texture colordiffuse="2CFFFFFF">common/dot-1x1.png</texture>
 				</control>
 			</control>
 
