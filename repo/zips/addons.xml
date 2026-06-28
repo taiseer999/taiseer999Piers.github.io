@@ -154,7 +154,7 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.4.2" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.4.3" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="tools.ffmpeg-tools" />
@@ -173,7 +173,11 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="hu">Megnyit egy külön saját lejátszófolyamat infó ablakot. Ez az ablak az éppen lejátszott média, kodek- videó- ​​hang- és egyéb adatait jeleníti meg.</description>
-        <news>v1.4.1
+        <news>v1.4.3
+- Header title set to uppercase white; removed the separator line under the header.
+v1.4.2
+- Enlarged the Modern background to enclose the "Player Process Info" title and chart icon, with a subtle separator line below the header.
+v1.4.1
 - Migrated the full Player Process Info panel into the Modern overlay (Display output, Pixel format, Color gamut, audio Bitrate, Subtitle language and all field rows).
 - Added a graceful fallback for devices that do not expose amlogic InfoLabels (e.g. the VTB decode path): unresolved labels no longer echo their own name and now fall back to generic display/colour InfoLabels.
 - Added "Player Process Info" header with chart icon; centred the right-side speaker/codec graphic.
