@@ -71,6 +71,22 @@ _TEXT_COLORS = (
     "FF90A4AE",  # 49 Cadet
 )
 
+# Palette for separator lines (very faint dividers, alpha 26 ~ 15%).
+# Same hues as _TEXT_COLORS but heavily dimmed so the lines stay subtle.
+# Index 0 is the default. Brought in from v1.5.6.
+_LINE_COLORS = (
+    "26808080",  # 0  White (default)
+    "26E0E0E0",  # 1  Light gray
+    "26FF8A80",  # 2  Red
+    "26FFCC80",  # 3  Orange
+    "26FFFF8D",  # 4  Yellow
+    "26B9F6CA",  # 5  Green
+    "2684FFFF",  # 6  Cyan
+    "2682B1FF",  # 7  Blue
+    "26E1BEE7",  # 8  Purple
+    "26FF80AB",  # 9  Pink
+)
+
 # Palette for inline detail accents (the dimmed values shown in parentheses).
 # Same hues as _TEXT_COLORS but at alpha B3 (~70%) so they stay subtle.
 # The index matches the <option> order in resources/settings.xml.
@@ -352,6 +368,22 @@ def apply_theme(home, addon=None, overrides=None, custom=None) -> None:
     home.setProperty("TinyPPI.UnitLabel",        _pick(_UNIT_LABELS, addon.getSetting("unit_type")))
     home.setProperty("TinyPPI.AccentColor",      _resolve(_ACCENT_COLORS, addon, "accent_color", custom, overrides))
     home.setProperty("TinyPPI.BackgroundColor",  _resolve(_BACKGROUND_COLORS, addon, "background_color", custom, overrides))
+
+    # New properties brought in from v1.5.6. The matching settings may not be
+    # present in this build's settings.xml; _resolve then falls back to each
+    # palette's index 0, giving sensible defaults.
+    # HeaderIconColor defaults to the same value as the section IconColor so the
+    # header chart icon matches the section icons unless themed separately.
+    home.setProperty("TinyPPI.HeaderIconColor",
+                     _resolve(_TEXT_COLORS, addon, "header_icon_color", custom, overrides)
+                     if addon.getSetting("header_icon_color") not in ("", None)
+                     else _resolve(_TEXT_COLORS, addon, "icon_color", custom, overrides))
+    home.setProperty("TinyPPI.LineColor",
+                     _resolve(_LINE_COLORS, addon, "line_color", custom, overrides))
+    home.setProperty("TinyPPI.DialogFocusColor",
+                     _resolve(_TEXT_COLORS, addon, "dialog_focus_color", custom, overrides))
+    home.setProperty("TinyPPI.DialogFocusTextColor",
+                     _resolve(_TEXT_COLORS, addon, "dialog_focus_text_color", custom, overrides))
 
     # Publish a full-opacity (FF) swatch per color so the "Custom" list option
     # can preview the chosen HEX, matching the fixed-color swatches.  The

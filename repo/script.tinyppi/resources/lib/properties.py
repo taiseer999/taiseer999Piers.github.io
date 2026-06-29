@@ -32,6 +32,7 @@ from dvinfo import (
     get_l5_offsets,
     get_l6_rpu_mdl,
     get_l6_rpu_max_cll_fall,
+    get_bit_depth,
     is_status_label,
 )
 
@@ -118,6 +119,23 @@ def get_VideoPixelFormatVar() -> str:
     if bits:
         return f"{bits}-bit"
     return ""
+
+
+def get_VideoBitDepthVar() -> str:
+    """
+    Return the source video bit depth for display, e.g. ``12-bit``.
+
+    Dolby Vision streams are measured from the RPU with dovi_tool, because FEL
+    material reconstructs a 12-bit signal that MediaInfo would report as the
+    10-bit base layer; every other format is read from MediaInfo.  Detection
+    runs in a background thread (see dvinfo.py), so this call never blocks the
+    polling loop; the localized status label is passed through unchanged while
+    detection is running or after it fails.
+    """
+    value = get_bit_depth()
+    if not value or is_status_label(value):
+        return value
+    return f"{value}-bit"
 
 
 def get_DisplayModeVar() -> str:
@@ -762,6 +780,7 @@ def update_properties(window) -> None:
             ("VideoDecoderVar", get_VideoDecoderVar()),
             ("VideoDecoderExtVar", get_VideoDecoderExtVar()),
             ("VideoPixelFormatVar", get_VideoPixelFormatVar()),
+            ("VideoBitDepthVar", get_VideoBitDepthVar()),
             ("DisplayModeVar", get_DisplayModeVar()),
             ("VideoResolutionVar", get_VideoResolutionVar()),
             ("VideoBitrateMBVar", get_VideoBitrateMBVar()),
