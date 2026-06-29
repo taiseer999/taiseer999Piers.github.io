@@ -33,6 +33,7 @@ from dvinfo import (
     get_l6_rpu_mdl,
     get_l6_rpu_max_cll_fall,
     get_bit_depth,
+    get_display_aspect_ratio,
     is_status_label,
 )
 
