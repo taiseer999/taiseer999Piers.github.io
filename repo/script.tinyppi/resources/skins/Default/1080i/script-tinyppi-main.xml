@@ -1247,11 +1247,28 @@
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
 						<aligny>top</aligny>
 					</control>
+
+					<!-- Bit depth -->
+					<control type="label">
+						<top>240</top>
+						<label>$ADDON[script.tinyppi 32099]:</label>
+						<font>font_tiny</font>
+						<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
+						<aligny>top</aligny>
+					</control>
+					<control type="label">
+						<left>240</left>
+						<top>240</top>
+						<label>$INFO[Window().Property(VideoBitDepthVar)]</label>
+						<font>font_tiny</font>
+						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
+						<aligny>top</aligny>
+					</control>
 				</control>
 
 				<!-- Group: Processing -->
 				<control type="group">
-					<top>260</top>
+					<top>290</top>
 					<left>30</left>
 
 					<!-- Processing Icon -->
@@ -1696,7 +1713,7 @@
 
 				<!-- Group: System -->
 				<control type="group">
-					<top>260</top>
+					<top>290</top>
 					<left>640</left>
 
 					<!-- System Icon -->

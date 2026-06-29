@@ -874,3 +874,7 @@ msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.AccentColorSwatch)]]●[/COL
 msgctxt "#32273"
 msgid "Custom HEX unit color"
 msgstr "[COLOR=$INFO[Window(10000).Property(TinyPPI.UnitColorSwatch)]]●[/COLOR] Custom HEX color…"
+
+msgctxt "#32099"
+msgid "Bit depth"
+msgstr ""
