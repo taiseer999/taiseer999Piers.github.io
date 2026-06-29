@@ -458,4 +458,24 @@ v1.3.6.7
 		<disclaimer lang="zh_CN">Estuary 是 Kodi 的默认皮肤，删除它可能导致故障。</disclaimer>
 		<disclaimer lang="zh_TW">Estuary 是 Kodi 預設的佈景主題，移除它可能會造成問題</disclaimer>
 	</extension>
+</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.0.2" provider-name="jamal2362">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides />
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="de">Verschiedene Tools für das TinyPPI-Add-on</summary>
+        <summary lang="en">Various tools for the TinyPPI add-on</summary>
+        <description lang="de">Verschiedene Tools, die für das TinyPPI-Add-on benötigt werden.</description>
+        <description lang="en">Various tools required for the TinyPPI add-on.</description>
+        <platform>all</platform>
+        <license>MIT-License</license>
+        <source>https://github.com/CE-Repo/tools.tinyppi</source>
+        <assets>
+            <icon>icon.jpg</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon></addons>
