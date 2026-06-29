@@ -98,6 +98,27 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
+</addon><addon id="script.fentastic.helper" name="FENtastic Plus Helper" version="100.6.25f" provider-name="Tikipeter, Ivar Brandt, Zaxxon709">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.19.1" />
+    </requires>
+    <extension point="xbmc.python.library" library="resources/lib/default.py" />
+    <extension point="xbmc.service" library="resources/lib/service.py" start="startup" />
+    <extension point="xbmc.addon.metadata">
+        <news />
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum />
+        <source />
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+        <description lang="en_GB">Helper for the FENtastic Plus Skin. Based on Fentastic Helper v0.6.20a.</description>
+        <description lang="en_NZ">Helper for the FENtastic Plus Skin. Based on Fentastic Helper v0.6.20a.</description>
+        <description lang="en_US">Helper for the FENtastic Plus Skin. Based on Fentastic Helper v0.6.20a.</description>
+    </extension>
 </addon><addon id="script.skinshortcuts" name="Skin Shortcuts" version="4.0" provider-name="BigNoid, marcelveldt, SiLVO">
     <requires>
         <import addon="xbmc.python" version="3.0.2" />
@@ -459,6 +480,40 @@ v1.3.6.7
 		<disclaimer lang="vi_VN">Estuary là giao diện mặc định cho Kodi, loại bỏ nó có thể gây ra sự cố</disclaimer>
 		<disclaimer lang="zh_CN">Estuary 是 Kodi 的默认皮肤，删除它可能导致故障。</disclaimer>
 		<disclaimer lang="zh_TW">Estuary 是 Kodi 預設的佈景主題，移除它可能會造成問題</disclaimer>
+	</extension>
+</addon><addon id="skin.fentastic" version="100.0.30i" name="FENtastic Plus" provider-name="Ivar Brandt, Zaxxon709">
+	<requires>
+		<import addon="xbmc.gui" version="5.17.0" />
+		<import addon="script.fentastic.helper" version="100.6.25f" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1440" aspect="4:3" default="false" folder="xml" />
+		<res width="1920" height="1280" aspect="3:2" default="false" folder="xml" />
+		<res width="1920" height="1200" aspect="16:10" default="false" folder="xml" />
+		<res width="2040" height="1080" aspect="17:9" default="false" folder="xml" />
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="xml" />
+		<res width="2560" height="1080" aspect="21:9" default="false" folder="xml" />
+		<res width="2338" height="1080" aspect="19.5:9" default="false" folder="xml" />
+		<res width="2160" height="1080" aspect="18:9" default="false" folder="xml" />
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>CC BY-SA 4.0, GNU GENERAL PUBLIC LICENSE Version 2.0</license>
+		<forum>http://forum.kodi.tv/</forum>
+		<source>https://github.com/xbmc/skin.estuary/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/images/customizable_widgets.jpg</screenshot>
+			<screenshot>resources/images/infopanel.jpg</screenshot>
+			<screenshot>resources/images/viewtypes1.jpg</screenshot>
+		</assets>
+		<summary lang="en_GB">FENtastic Plus skin by Ivar Brandt, Zaxxon709 (Estuary MOD). Based on FENtastic v1.0.25</summary>
+		<summary lang="en_NZ">FENtastic Plus skin by Ivar Brandt, Zaxxon709 (Estuary MOD). Based on FENtastic v1.0.25</summary>
+		<summary lang="en_US">FENtastic Plus skin by Ivar Brandt, Zaxxon709 (Estuary MOD). Based on FENtastic v1.0.25</summary>
+		<description lang="en_GB">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
+		<description lang="en_NZ">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
+		<description lang="en_US">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
 </addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.0.2.1" provider-name="jamal2362">
     <requires>

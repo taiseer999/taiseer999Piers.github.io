@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="MovieWidgets">
+        <include condition="System.HasAddon(plugin.video.umbrella)" content="WidgetListCategory">
+            <param name="content_path" value="plugin://plugin.video.umbrella/?action=movieGenres&amp;url=tmdb_genre&amp;folderName=Genres+%28TMDb%29"/>
+            <param name="widget_header" value="Genres "/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19011"/>
+        </include>
+        <include condition="System.HasAddon(plugin.video.umbrella)" content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.umbrella/?action=movies&amp;url=tmdbrecentweek&amp;folderName=Trending+this+Week+%28TMDB%29"/>
+            <param name="widget_header" value="Trending this Week"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19012"/>
+        </include>
+        <include condition="System.HasAddon(plugin.video.umbrella)" content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.umbrella/?action=movies&amp;url=traktrecommendations&amp;folderName=Recommended+%28Trakt%29"/>
+            <param name="widget_header" value="Recommended"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="19013"/>
+        </include>
+    </include>
+</includes>
