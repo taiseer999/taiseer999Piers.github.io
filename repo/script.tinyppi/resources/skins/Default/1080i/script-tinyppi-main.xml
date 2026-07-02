@@ -1481,7 +1481,7 @@
 
                     <!-- Playback time -->
 					<control type="group">
-					<visible>!String.Contains(VideoPlayer.HdrType,dolby)</visible>
+					<visible>String.IsEmpty(Window().Property(DoviProfileVar))</visible>
 						<control type="label">
 							<top>210</top>
 							<label>$ADDON[script.tinyppi 32013]:</label>
