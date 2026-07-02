@@ -1398,7 +1398,7 @@
 
 					<!-- L6 RPU MDL -->
 					<control type="group">
-					<visible>String.Contains(VideoPlayer.HdrType,dolby)</visible>
+					<visible>!String.IsEmpty(Window().Property(DoviProfileVar))</visible>
 						<control type="label">
 							<top>150</top>
 							<label>$ADDON[script.tinyppi 32097]:</label>
@@ -1418,7 +1418,7 @@
 
 					<!-- L6 MaxCLL/FALL -->
 					<control type="group">
-					<visible>String.Contains(VideoPlayer.HdrType,dolby)</visible>
+					<visible>!String.IsEmpty(Window().Property(DoviProfileVar))</visible>
 						<control type="label">
 							<top>180</top>
 							<label>$ADDON[script.tinyppi 32098]:</label>
@@ -1439,7 +1439,7 @@
 					<!-- L5 active offsets -->
 					<control type="group">
 						<control type="group">
-					<visible>String.Contains(VideoPlayer.HdrType,dolby)</visible>
+					<visible>!String.IsEmpty(Window().Property(DoviProfileVar))</visible>
 						<control type="label">
 							<top>210</top>
 							<label>$ADDON[script.tinyppi 32030]:</label>

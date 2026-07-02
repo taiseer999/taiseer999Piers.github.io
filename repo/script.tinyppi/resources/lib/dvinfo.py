@@ -697,15 +697,3 @@ def get_bit_depth() -> str:
     reconstructs 12-bit); every other format is read from MediaInfo.
     """
     return _get_info_value("bit_depth")
-
-
-def get_display_aspect_ratio() -> str:
-    """Return the source display aspect ratio reported by MediaInfo.
-
-    Empty when MediaInfo reports no value — including while detection is still
-    running or after it fails — instead of a status/N/A label, so the skin's
-    parenthetical next to the live videodar simply disappears rather than
-    showing "(N/A)".
-    """
-    value, _status = _get_info_status_value("display_aspect_ratio")
-    return value
