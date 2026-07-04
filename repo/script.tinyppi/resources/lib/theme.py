@@ -71,21 +71,20 @@ _TEXT_COLORS = (
     "FF90A4AE",  # 49 Cadet
 )
 
-# Palette for separator lines (very faint dividers, alpha 26 ~ 15%).
-# Same hues as _TEXT_COLORS but heavily dimmed so the lines stay subtle.
-# Index 0 is the default. Brought in from v1.5.6.
-_LINE_COLORS = (
-    "26808080",  # 0  White (default)
-    "26E0E0E0",  # 1  Light gray
-    "26FF8A80",  # 2  Red
-    "26FFCC80",  # 3  Orange
-    "26FFFF8D",  # 4  Yellow
-    "26B9F6CA",  # 5  Green
-    "2684FFFF",  # 6  Cyan
-    "2682B1FF",  # 7  Blue
-    "26E1BEE7",  # 8  Purple
-    "26FF80AB",  # 9  Pink
-)
+# Palette for the focused button highlight in the VS10 dialog (texturefocus).
+# Same hues as _TEXT_COLORS but index 0 is pure white to match the original
+# default.  The index matches the <option> order in resources/settings.xml.
+_DIALOG_FOCUS_COLORS = ("FFFFFFFF",) + _TEXT_COLORS[1:]
+
+# Palette for the focused button text in the VS10 dialog (focusedcolor).
+# Black (the original default) and pure white lead, followed by the full hue
+# set from _TEXT_COLORS (its near-white index 0 is dropped in favour of the
+# pure white above).  The index matches the <option> order of
+# ``dialog_focus_text_color`` in resources/settings.xml.
+_DIALOG_FOCUS_TEXT_COLORS = (
+    "FF000000",  # 0  Black (default)
+    "FFFFFFFF",  # 1  White
+) + _TEXT_COLORS[1:]
 
 # Palette for inline detail accents (the dimmed values shown in parentheses).
 # Same hues as _TEXT_COLORS but at alpha B3 (~70%) so they stay subtle.
@@ -141,6 +140,62 @@ _ACCENT_COLORS = (
     "B3D7CCC8",  # 47 Sand
     "B3C5E1A5",  # 48 Pistachio
     "B390A4AE",  # 49 Cadet
+)
+
+# Palette for the separator lines (very faint dividers, alpha 26 ~ 15%).
+# Same hues as _TEXT_COLORS but heavily dimmed so the lines stay subtle.
+# The index matches the <option> order in resources/settings.xml.
+_LINE_COLORS = (
+    "26808080",  # 0  White (default)
+    "26E0E0E0",  # 1  Light gray
+    "26FF8A80",  # 2  Red
+    "26FFCC80",  # 3  Orange
+    "26FFFF8D",  # 4  Yellow
+    "26B9F6CA",  # 5  Green
+    "2684FFFF",  # 6  Cyan
+    "2682B1FF",  # 7  Blue
+    "26E1BEE7",  # 8  Purple
+    "26FF80AB",  # 9  Pink
+    "26FF8A65",  # 10 Coral
+    "26FFAB91",  # 11 Salmon
+    "26FFD54F",  # 12 Amber
+    "26FFE082",  # 13 Gold
+    "26CCFF90",  # 14 Lime
+    "26A7FFEB",  # 15 Mint
+    "2680CBC4",  # 16 Teal
+    "2680D8FF",  # 17 Sky blue
+    "2640C4FF",  # 18 Azure
+    "268C9EFF",  # 19 Indigo
+    "26B388FF",  # 20 Violet
+    "26D1C4E9",  # 21 Lavender
+    "26EA80FC",  # 22 Magenta
+    "26F48FB1",  # 23 Fuchsia
+    "26F06292",  # 24 Rose
+    "26FF5252",  # 25 Crimson
+    "26BCAAA4",  # 26 Brown
+    "26DCE775",  # 27 Olive
+    "26B0BEC5",  # 28 Slate
+    "26CFD8DC",  # 29 Silver
+    "26FFCCBC",  # 30 Peach
+    "26FFB74D",  # 31 Tangerine
+    "26E4C441",  # 32 Mustard
+    "26E6EE9C",  # 33 Chartreuse
+    "2681C784",  # 34 Forest
+    "2669F0AE",  # 35 Emerald
+    "26B2FF59",  # 36 Spring
+    "2618FFFF",  # 37 Aqua
+    "2664FFDA",  # 38 Turquoise
+    "264FC3F7",  # 39 Cerulean
+    "26536DFE",  # 40 Cobalt
+    "26B39DDB",  # 41 Periwinkle
+    "26CE93D8",  # 42 Plum
+    "26BA68C8",  # 43 Orchid
+    "26FF4081",  # 44 Raspberry
+    "26FF5C8D",  # 45 Watermelon
+    "26FF6E40",  # 46 Scarlet
+    "26D7CCC8",  # 47 Sand
+    "26C5E1A5",  # 48 Pistachio
+    "2690A4AE",  # 49 Cadet
 )
 
 # Palette for the Modern background (semi-transparent dark shades, alpha FA).
@@ -209,24 +264,6 @@ _UNIT_LABELS = (
 )
 
 
-# All color settings managed on the Theme category, used by reset_colors().
-# Their <default> in resources/settings.xml is 0, so resetting means "0".
-_COLOR_SETTINGS = (
-    "background_color",
-    "title_color",
-    "filename_color",
-    "header_color",
-    "icon_color",
-    "chart_color",
-    "description_color",
-    "output_color",
-    "fps_color",
-    "progress_color",
-    "accent_color",
-    "unit_color",
-)
-
-
 # Setting value (option) that marks a color as a user-defined custom HEX value.
 # The integer color setting is set to this option so the list shows
 # "Benutzerdefiniert"; the actual 8-digit ARGB hex is stored in the JSON file
@@ -242,49 +279,38 @@ _CUSTOM_FILE = "special://profile/addon_data/script.tinyppi/custom_colors.json"
 # Anything not listed uses full opacity (FF) so the 6-digit input becomes an
 # 8-digit ARGB value internally.
 _CUSTOM_ALPHA = {
-    "background_color": "FA",  # Modern background shades
-    "accent_color":     "B3",  # dimmed detail accents (~70%)
+    "background_color":        "FA",  # Modern background shades
+    "global_background_color": "FA",  # full-screen global background shades
+    "accent_color":            "B3",  # dimmed detail accents (~70%)
+    "line_color":              "26",  # faint separator lines (~15%)
 }
 _DEFAULT_ALPHA = "FF"
-
-# Per-setting default colors that preserve the original (v1.3.6.6) overlay look.
-# When a color setting is still at its factory index 0 ("Default" in the list),
-# these ARGB values are used instead of the palette's index-0 swatch, so an
-# untouched install renders exactly like the pre-theme skin.  Choosing any
-# other option (or a custom HEX) overrides this entirely.
-_LEGACY_DEFAULTS = {
-    "title_color":       "FF607D8B",  # section titles (slate)
-    "icon_color":        "FF607D8B",  # section icons (slate)
-    "progress_color":    "FF607D8B",  # progress-bar fill (slate)
-    "header_color":      "FF008AD9",  # field labels (azure)
-    "output_color":      "FFEDEDED",  # data values (near-white)
-    "filename_color":    "FFEDEDED",  # filename label
-    "background_color":  "FAFFFFFF",  # modern background = untinted PNG (alpha FA)
-}
 
 _HEX6_RE = re.compile(r"^[0-9A-Fa-f]{6}$")
 _HEX8_RE = re.compile(r"^[0-9A-Fa-f]{8}$")
 
+# Suffix of the per-color "HEX color" action button (see resources/settings.xml).
+# The button is a string setting whose value Kodi renders as the row's label2.
+# We store a self-contained swatch + HEX string there so the settings dialog can
+# preview the chosen color (a full-opacity ● dot followed by the 6-digit HEX)
+# without depending on the Home-window properties, which are only live while the
+# overlay is open.
+_CUSTOM_BTN_SUFFIX = "_custom_btn"
 
-# (setting_id, property base name, palette) for every themable color.
-# Used to publish a full-opacity (FF) swatch property per color so the "Custom"
-# option can preview the chosen HEX in the settings list, exactly like the
-# fixed-color options do.  The property base names match those published in
-# apply_theme(); the swatch property simply appends "Swatch".
-_SWATCH_COLORS = (
-    ("background_color",  "TinyPPI.BackgroundColor",  _BACKGROUND_COLORS),
-    ("title_color",       "TinyPPI.TitleColor",       _TEXT_COLORS),
-    ("filename_color",    "TinyPPI.FilenameColor",    _TEXT_COLORS),
-    ("header_color",      "TinyPPI.HeaderColor",      _TEXT_COLORS),
-    ("icon_color",        "TinyPPI.IconColor",        _TEXT_COLORS),
-    ("chart_color",       "TinyPPI.ChartColor",       _TEXT_COLORS),
-    ("description_color", "TinyPPI.DescriptionColor", _TEXT_COLORS),
-    ("output_color",      "TinyPPI.OutputColor",      _TEXT_COLORS),
-    ("fps_color",         "TinyPPI.FpsColor",         _TEXT_COLORS),
-    ("progress_color",    "TinyPPI.ProgressColor",    _TEXT_COLORS),
-    ("accent_color",      "TinyPPI.AccentColor",      _ACCENT_COLORS),
-    ("unit_color",        "TinyPPI.UnitColor",        _TEXT_COLORS),
-)
+
+def _custom_btn_label(raw6: str) -> str:
+    """Return the ``label2`` markup previewing a 6-digit HEX color."""
+    return "[COLOR=FF{0}]●[/COLOR] #{0}".format(raw6)
+
+
+def _notify(addon, message_id: int, icon: str, duration: int) -> None:
+    """Show a localized TinyPPI settings notification."""
+    xbmcgui.Dialog().notification(
+        addon.getAddonInfo("name"),
+        addon.getLocalizedString(message_id),
+        icon,
+        duration,
+    )
 
 
 def _load_custom() -> dict:
@@ -319,6 +345,33 @@ def _pick(palette: tuple, value: str) -> str:
         return palette[0]
 
 
+# Default background opacity (percent) used when the setting is missing or
+# invalid.  98 % maps to alpha FA, matching the original hard-coded shades.
+_DEFAULT_BG_OPACITY = 98
+
+# Default opacity (percent) for the full-screen global background.  0 % keeps
+# the layer fully transparent (off), so the overlay looks unchanged until the
+# user raises the slider.
+_DEFAULT_GLOBAL_BG_OPACITY = 0
+
+
+def _opacity_alpha(addon, setting_id="background_opacity",
+                   default=_DEFAULT_BG_OPACITY, overrides=None) -> str:
+    """
+    Return the 2-digit hex alpha for a configured opacity slider.
+
+    The referenced setting is a 0–100 % slider: 100 % is fully opaque (FF) and
+    0 % is fully transparent (00).  The ``background_opacity`` default of 98 %
+    maps to FA, matching the alpha baked into ``_BACKGROUND_COLORS``.
+    """
+    try:
+        percent = int(_setting_value(addon, setting_id, overrides))
+    except (ValueError, TypeError):
+        percent = default
+    percent = max(0, min(100, percent))
+    return "{:02X}".format(round(percent * 255 / 100))
+
+
 def _setting_value(addon, setting_id: str, overrides) -> str:
     """Return a setting value, allowing fresh writes to bypass Kodi's cache."""
     if overrides and setting_id in overrides:
@@ -340,9 +393,31 @@ def _resolve(palette: tuple, addon, setting_id: str, custom: dict, overrides=Non
         if _HEX8_RE.match(stored):
             return stored
         return palette[0]
-    if value in ("", "0") and setting_id in _LEGACY_DEFAULTS:
-        return _LEGACY_DEFAULTS[setting_id]
     return _pick(palette, value)
+
+
+_THEME_PROPERTIES = (
+    ("TinyPPI.TitleColor",           _TEXT_COLORS, "title_color"),
+    ("TinyPPI.FilenameColor",        _TEXT_COLORS, "filename_color"),
+    ("TinyPPI.IconColor",            _TEXT_COLORS, "icon_color"),
+    ("TinyPPI.HeaderColor",          _TEXT_COLORS, "header_color"),
+    ("TinyPPI.HeaderIconColor",      _TEXT_COLORS, "header_icon_color"),
+    ("TinyPPI.DescriptionColor",     _TEXT_COLORS, "description_color"),
+    ("TinyPPI.OutputColor",          _TEXT_COLORS, "output_color"),
+    ("TinyPPI.ProgressColor",        _TEXT_COLORS, "progress_color"),
+    ("TinyPPI.FpsColor",             _TEXT_COLORS, "fps_color"),
+    ("TinyPPI.UnitColor",            _TEXT_COLORS, "unit_color"),
+    ("TinyPPI.AccentColor",          _ACCENT_COLORS, "accent_color"),
+    ("TinyPPI.BackgroundColor",      _BACKGROUND_COLORS, "background_color"),
+    ("TinyPPI.GlobalBackgroundColor", _BACKGROUND_COLORS, "global_background_color"),
+    ("TinyPPI.LineColor",            _LINE_COLORS, "line_color"),
+    ("TinyPPI.DialogFocusColor",     _DIALOG_FOCUS_COLORS, "dialog_focus_color"),
+    (
+        "TinyPPI.DialogFocusTextColor",
+        _DIALOG_FOCUS_TEXT_COLORS,
+        "dialog_focus_text_color",
+    ),
+)
 
 
 def apply_theme(home, addon=None, overrides=None, custom=None) -> None:
@@ -355,70 +430,25 @@ def apply_theme(home, addon=None, overrides=None, custom=None) -> None:
     addon = addon or xbmcaddon.Addon()
     custom = _load_custom() if custom is None else custom
 
-    home.setProperty("TinyPPI.TitleColor",       _resolve(_TEXT_COLORS, addon, "title_color", custom, overrides))
-    home.setProperty("TinyPPI.FilenameColor",    _resolve(_TEXT_COLORS, addon, "filename_color", custom, overrides))
-    home.setProperty("TinyPPI.IconColor",        _resolve(_TEXT_COLORS, addon, "icon_color", custom, overrides))
-    home.setProperty("TinyPPI.HeaderColor",      _resolve(_TEXT_COLORS, addon, "header_color", custom, overrides))
-    home.setProperty("TinyPPI.ChartColor",       _resolve(_TEXT_COLORS, addon, "chart_color", custom, overrides))
-    home.setProperty("TinyPPI.DescriptionColor", _resolve(_TEXT_COLORS, addon, "description_color", custom, overrides))
-    home.setProperty("TinyPPI.OutputColor",      _resolve(_TEXT_COLORS, addon, "output_color", custom, overrides))
-    home.setProperty("TinyPPI.ProgressColor",    _resolve(_TEXT_COLORS, addon, "progress_color", custom, overrides))
-    home.setProperty("TinyPPI.FpsColor",         _resolve(_TEXT_COLORS, addon, "fps_color", custom, overrides))
-    home.setProperty("TinyPPI.UnitColor",        _resolve(_TEXT_COLORS, addon, "unit_color", custom, overrides))
-    home.setProperty("TinyPPI.UnitLabel",        _pick(_UNIT_LABELS, addon.getSetting("unit_type")))
-    home.setProperty("TinyPPI.AccentColor",      _resolve(_ACCENT_COLORS, addon, "accent_color", custom, overrides))
-    home.setProperty("TinyPPI.BackgroundColor",  _resolve(_BACKGROUND_COLORS, addon, "background_color", custom, overrides))
+    for property_name, palette, setting_id in _THEME_PROPERTIES:
+        value = _resolve(palette, addon, setting_id, custom, overrides)
+        if setting_id == "background_color":
+            # Override the palette/custom alpha with the panel opacity.
+            value = _opacity_alpha(addon, overrides=overrides) + value[2:]
+        elif setting_id == "global_background_color":
+            # The full-screen global background has its own color and its own
+            # opacity slider (independent of the panel).
+            value = _opacity_alpha(
+                addon,
+                "global_background_opacity",
+                _DEFAULT_GLOBAL_BG_OPACITY,
+                overrides,
+            ) + value[2:]
+        home.setProperty(property_name, value)
 
-    # New properties brought in from v1.5.6. The matching settings may not be
-    # present in this build's settings.xml; _resolve then falls back to each
-    # palette's index 0, giving sensible defaults.
-    # HeaderIconColor defaults to the same value as the section IconColor so the
-    # header chart icon matches the section icons unless themed separately.
-    home.setProperty("TinyPPI.HeaderIconColor",
-                     _resolve(_TEXT_COLORS, addon, "header_icon_color", custom, overrides)
-                     if addon.getSetting("header_icon_color") not in ("", None)
-                     else _resolve(_TEXT_COLORS, addon, "icon_color", custom, overrides))
-    home.setProperty("TinyPPI.LineColor",
-                     _resolve(_LINE_COLORS, addon, "line_color", custom, overrides))
-    home.setProperty("TinyPPI.DialogFocusColor",
-                     _resolve(_TEXT_COLORS, addon, "dialog_focus_color", custom, overrides))
-    home.setProperty("TinyPPI.DialogFocusTextColor",
-                     _resolve(_TEXT_COLORS, addon, "dialog_focus_text_color", custom, overrides))
-
-    # Publish a full-opacity (FF) swatch per color so the "Custom" list option
-    # can preview the chosen HEX, matching the fixed-color swatches.  The
-    # background and accent colors carry a reduced alpha (FA/B3) that would make
-    # the swatch dot look dim, so the swatch always forces full opacity.
-    for setting_id, prop, palette in _SWATCH_COLORS:
-        resolved = _resolve(palette, addon, setting_id, custom, overrides)
-        home.setProperty(prop + "Swatch", "FF" + resolved[2:])
-
-
-def reset_colors(addon=None) -> None:
-    """
-    Reset every Theme color setting back to its default (index 0) and confirm
-    with a notification.  Invoked from the settings dialog via
-    ``RunScript(script.tinyppi,reset_colors)``.
-    """
-    addon = addon or xbmcaddon.Addon()
-
-    for setting_id in _COLOR_SETTINGS:
-        addon.setSetting(setting_id, "0")
-
-    _save_custom({})  # drop every stored custom HEX value
-
-    # Re-publish properties so an overlay that is already open updates too.
-    overrides = {setting_id: "0" for setting_id in _COLOR_SETTINGS}
-    try:
-        apply_theme(xbmcgui.Window(10000), addon, overrides=overrides, custom={})
-    except Exception:  # pragma: no cover - best effort, never block the reset
-        pass
-
-    xbmcgui.Dialog().notification(
-        addon.getAddonInfo("name"),
-        addon.getLocalizedString(32148),
-        xbmcgui.NOTIFICATION_INFO,
-        3000,
+    home.setProperty(
+        "TinyPPI.UnitLabel",
+        _pick(_UNIT_LABELS, _setting_value(addon, "unit_type", overrides)),
     )
 
 
@@ -459,10 +489,11 @@ def custom_color(setting_id, addon=None) -> None:
         custom.pop(setting_id, None)
         _save_custom(custom)
         addon.setSetting(setting_id, "0")
+        addon.setSetting(setting_id + _CUSTOM_BTN_SUFFIX, "")
         setting_value = "0"
-        xbmcgui.Dialog().notification(
-            addon.getAddonInfo("name"),
-            addon.getLocalizedString(32244),
+        _notify(
+            addon,
+            32244,
             xbmcgui.NOTIFICATION_ERROR,
             4000,
         )
@@ -471,10 +502,11 @@ def custom_color(setting_id, addon=None) -> None:
         custom[setting_id] = alpha + raw
         _save_custom(custom)
         addon.setSetting(setting_id, _CUSTOM_INDEX)
+        addon.setSetting(setting_id + _CUSTOM_BTN_SUFFIX, _custom_btn_label(raw))
         setting_value = _CUSTOM_INDEX
-        xbmcgui.Dialog().notification(
-            addon.getAddonInfo("name"),
-            addon.getLocalizedString(32245),
+        _notify(
+            addon,
+            32245,
             xbmcgui.NOTIFICATION_INFO,
             3000,
         )

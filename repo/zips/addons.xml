@@ -192,7 +192,7 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.5.8.2" provider-name="jamal2362,AK">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.6.1.1" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="tools.tinyppi" version="1.0.0" />
@@ -207,28 +207,14 @@
         <source>https://github.com/CE-Repo/script.tinyppi</source>
         <summary lang="de">Zeigt benutzerdefinierte Prozessinformationen an</summary>
         <summary lang="en">Displays custom player process information</summary>
-        <summary lang="hu">Egyéni lejátszófolyamat infó mutatása</summary>
+        <summary lang="zh">显示自定义播放器进程信息</summary>
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
-        <description lang="hu">Megnyit egy külön saját lejátszófolyamat infó ablakot. Ez az ablak az éppen lejátszott média, kodek- videó- ​​hang- és egyéb adatait jeleníti meg.</description>
-        <news>v1.4.5
-- Added a "Bit depth" row to the VIDEO section showing the source bit depth (12-bit for Dolby Vision FEL, MediaInfo-measured for other formats). Requires tools.tinyppi 1.0.2+ for non-DV detection.
-v1.4.4
-- Pulled in v1.5.6 improvements: source video bit-depth detection (dovi_tool RPU for Dolby Vision incl. FEL 12-bit, MediaInfo for other formats); refactored CoreELEC DV mode switching; new theme colours (HeaderIconColor, LineColor, DialogFocus colours). Header chart icon now uses HeaderIconColor.
-v1.4.3
-- Header title set to uppercase white; removed the separator line under the header.
-v1.4.2
-- Enlarged the Modern background to enclose the "Player Process Info" title and chart icon, with a subtle separator line below the header.
-v1.4.1
-- Migrated the full Player Process Info panel into the Modern overlay (Display output, Pixel format, Color gamut, audio Bitrate, Subtitle language and all field rows).
-- Added a graceful fallback for devices that do not expose amlogic InfoLabels (e.g. the VTB decode path): unresolved labels no longer echo their own name and now fall back to generic display/colour InfoLabels.
-- Added "Player Process Info" header with chart icon; centred the right-side speaker/codec graphic.
-- Fixed the dangling " / N/A" in the Mode row when no Dolby Vision metadata is present.
-- Dolby Vision detection (CM version, L5/L6) now self-tests its ffmpeg/dovi_tool binaries once per session and logs the real reason when they cannot run.
-v1.3.6.8
-- Wired the Theme color engine into the overlay skin: title, section icons, field labels, data values, filename, progress bars and the Modern background now follow the Theme settings. Default settings reproduce the original look; codec logo icons are unchanged.
-v1.3.6.7
-- Added the Theme color engine: 12 customisable overlay colors (background, title, filename, header, icon, chart, description, output, FPS, progress, accent, unit) with 50 presets each plus custom HEX input and a reset action. Skin color wiring to be applied separately.</news>
+        <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
+        <news>v1.6.1.1
+- Merged upstream v1.6.1 (single-layout rewrite, new theme wiring, tools.tinyppi-provided binaries).
+- Re-added the right-side speaker channel graphic and codec/HDR logo stack (ppicodecs) removed upstream, at the original Modern positions; UIStyle gating dropped as the Modern/Classic switch no longer exists.
+- Fixed fonts.py: register NotoSans-Regular/Bold.ttf (the files tools.tinyppi 1.0.3 actually ships; upstream referenced non-existent Noto-*.ttf), and update stale same-name Font.xml entries in place instead of appending duplicates (converts old Inter-*.ttf entries from 1.5.x).</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>
@@ -532,7 +518,7 @@ v1.3.6.7
 		<description lang="en_NZ">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.0.2.1" provider-name="jamal2362">
+</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.0.3" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>

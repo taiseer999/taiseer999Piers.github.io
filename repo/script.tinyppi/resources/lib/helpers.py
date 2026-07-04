@@ -9,8 +9,6 @@ public addon API.
 import re
 import time
 
-import xbmcgui
-
 from maps import _FPS
 
 # ---------------------------------------------------------------------------
@@ -183,14 +181,3 @@ def _read_last_dovi_log_line() -> str:
         if m:
             return m.group(0)
     return ""
-
-
-# ---------------------------------------------------------------------------
-# UI helpers
-# ---------------------------------------------------------------------------
-
-def set_ui_position(window) -> None:
-    """Adjust the overlay group position based on the active UI style setting."""
-    ui_style = xbmcgui.Window(10000).getProperty("TinyPPI.UIStyle")
-    left, top = (40, 515) if ui_style == "1" else (15, 540)
-    window.getControl(9000).setPosition(left, top)

@@ -9,8 +9,8 @@ Various tools required for the TinyPPI add-on.
 - `tools/ffmpeg/ffmpeg` - FFmpeg binary for media analysis and media processing.
 - `tools/mediainfo/mediainfo` - MediaInfo binary for media analysis and media processing.
 - `tools/dovi/dovi_tool` - dovi_tool binary for Dolby Vision related processing.
-- `tools/fonts/Inter-Regular.ttf` - Inter Regular font.
-- `tools/fonts/Inter-Bold.ttf` - Inter Bold font.
+- `tools/fonts/Noto-Regular.ttf` - Noto Regular font.
+- `tools/fonts/Noto-Bold.ttf` - Noto Bold font.
 - `icon.jpg` - Kodi add-on icon.
 - `fanart.jpg` - Kodi fanart.
 
@@ -28,8 +28,8 @@ addon_path = xbmcaddon.Addon("tools.tinyppi").getAddonInfo("path")
 ffmpeg_path = os.path.join(addon_path, "tools", "ffmpeg", "ffmpeg")
 mediainfo_path = os.path.join(addon_path, "tools", "mediainfo", "mediainfo")
 dovi_tool_path = os.path.join(addon_path, "tools", "dovi", "dovi_tool")
-font_regular_path = os.path.join(addon_path, "tools", "fonts", "Inter-Regular.ttf")
-font_bold_path = os.path.join(addon_path, "tools", "fonts", "Inter-Bold.ttf")
+font_regular_path = os.path.join(addon_path, "tools", "fonts", "Noto-Regular.ttf")
+font_bold_path = os.path.join(addon_path, "tools", "fonts", "Noto-Bold.ttf")
 ```
 
 ---
@@ -51,6 +51,6 @@ tools.tinyppi/
     |-- mediainfo/
     |   `-- mediainfo
     `-- fonts/
-        |-- Inter-Bold.ttf
-        `-- Inter-Regular.ttf
+        |-- Noto-Bold.ttf
+        `-- Noto-Regular.ttf
 ```

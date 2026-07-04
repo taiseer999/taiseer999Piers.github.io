@@ -76,6 +76,7 @@ _CACHE_FIELD_PROPERTIES = {
     "l6_mdl": "TinyPPI.DVInfo.L6Mdl",
     "l6_max_cll_fall": "TinyPPI.DVInfo.L6MaxCllFall",
     "bit_depth": "TinyPPI.DVInfo.BitDepth",
+    "display_aspect_ratio": "TinyPPI.DVInfo.DisplayAspectRatio",
 }
 _SUMMARY_SECTION_RE = re.compile(
     r"^(L\d+\s|RPU\s|Scene/shot|Profile|Frames|DM version:)",
@@ -419,21 +420,23 @@ def _dovi_bit_depth(dovi: str) -> str:
     return str(minus8 + 8) if isinstance(minus8, int) else ""
 
 
-def _mediainfo_bit_depth(src: str) -> str:
-    """Return the video bit depth (as a bare number) reported by MediaInfo.
+def _mediainfo_fields(src: str) -> dict[str, str]:
+    """Return the video fields reported by MediaInfo.
 
-    Used for every non-Dolby-Vision format, where the base-layer bit depth is
-    the real one.  Returns ``''`` when MediaInfo is unavailable or reports no
-    value.
+    Provides the container display aspect ratio plus the base-layer bit depth
+    (the real one for non-Dolby-Vision formats).  Returns ``''`` for any field
+    MediaInfo cannot provide.
 
     A dynamically linked MediaInfo CLI needs ``libmediainfo.so`` and
     ``libzen.so``; the directory holding the binary is added to the loader path
     so those libraries can simply be bundled next to it in tools/mediainfo/.
     """
+    empty = {"bit_depth": "", "display_aspect_ratio": ""}
+
     mediainfo = _mediainfo()
     if not mediainfo or not os.path.exists(mediainfo):
-        _log(f"bit depth: mediainfo binary missing ({mediainfo})", xbmc.LOGWARNING)
-        return ""
+        _log(f"mediainfo binary missing ({mediainfo})", xbmc.LOGWARNING)
+        return empty
 
     env = dict(os.environ)
     lib_dir = os.path.dirname(mediainfo)
@@ -441,84 +444,41 @@ def _mediainfo_bit_depth(src: str) -> str:
         part for part in (lib_dir, env.get("LD_LIBRARY_PATH", "")) if part
     )
 
+    # A literal "|" separator is passed through verbatim by MediaInfo, so the
+    # two fields come back on one line as "10|16:9".  This avoids depending on
+    # "\n" escape handling in the inline template, which not every MediaInfo
+    # build honours (and which left the trailing field empty).  The chosen
+    # fields never contain a "|" themselves.
+    template = "%BitDepth%|%DisplayAspectRatio/String%"
     try:
         proc = subprocess.run(
-            [mediainfo, "--Output=Video;%BitDepth%", src],
+            [mediainfo, f"--Output=Video;{template}", src],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
             env=env,
         )
     except OSError as exc:
-        _log(f"bit depth: mediainfo failed to start: {exc}", xbmc.LOGWARNING)
-        return ""
+        _log(f"mediainfo failed to start: {exc}", xbmc.LOGWARNING)
+        return empty
 
-    match = re.search(r"\d+", proc.stdout)
-    if not match:
+    parts = proc.stdout.strip().split("|")
+    parts += [""] * (2 - len(parts))
+    bit_depth_raw, display_aspect_ratio = parts[:2]
+
+    bit_depth_match = re.search(r"\d+", bit_depth_raw)
+    if not bit_depth_match:
         _log(
-            f"bit depth: mediainfo returned no value "
-            f"(rc={proc.returncode}, stderr={proc.stderr.strip()!r})",
+            f"mediainfo returned no usable output "
+            f"(rc={proc.returncode}, stdout={proc.stdout.strip()!r}, "
+            f"stderr={proc.stderr.strip()!r})",
             xbmc.LOGWARNING,
         )
-        return ""
 
-    return match.group(0)
-
-
-def _binary_runs(path: str, version_arg: str) -> tuple[bool, str]:
-    """Try to execute a bundled binary with a version flag.
-
-    Returns ``(ok, detail)``. ``ok`` is True only if the binary actually spawns
-    and exits. ``detail`` carries the OS error (e.g. 'Exec format error' for an
-    architecture mismatch, or 'Permission denied' for a lost exec bit) so the
-    real reason DV detection is unavailable shows up in the Kodi log instead of
-    being silently swallowed.
-    """
-    try:
-        subprocess.run(
-            [path, version_arg],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            timeout=8,
-        )
-        return True, ""
-    except OSError as exc:
-        return False, "%s (errno=%s)" % (exc.strerror or str(exc),
-                                         getattr(exc, "errno", "?"))
-    except Exception as exc:
-        return False, str(exc)
-
-
-_binaries_checked = False
-
-
-def _verify_binaries(dovi: str, ffmpeg: str) -> bool:
-    """Run a one-time self-test of both binaries and log any failure reason.
-
-    Logged once per Kodi session so the AM6B/CoreELEC log clearly states
-    whether the bundled aarch64 ffmpeg/dovi_tool actually run on this device.
-    """
-    global _binaries_checked
-    if _binaries_checked:
-        return True
-    _binaries_checked = True
-
-    ff_ok, ff_detail = _binary_runs(ffmpeg, "-version")
-    dv_ok, dv_detail = _binary_runs(dovi, "--version")
-
-    if not ff_ok:
-        _log("DV: ffmpeg binary will not execute on this device: %s -> %s. "
-             "DV metadata (CM version, L5/L6, bit depth) needs an ffmpeg build "
-             "matching this CPU (aarch64 Linux for AM6B/CoreELEC)."
-             % (ffmpeg, ff_detail), xbmc.LOGWARNING)
-    if not dv_ok:
-        _log("DV: dovi_tool binary will not execute on this device: %s -> %s. "
-             "Needs an aarch64 Linux build for AM6B/CoreELEC."
-             % (dovi, dv_detail), xbmc.LOGWARNING)
-    if ff_ok and dv_ok:
-        _log("DV: ffmpeg + dovi_tool self-test passed; DV detection active.",
-             xbmc.LOGINFO)
-    return ff_ok and dv_ok
+    return {
+        "bit_depth": bit_depth_match.group(0) if bit_depth_match else "",
+        "display_aspect_ratio": display_aspect_ratio.strip(),
+    }
 
 
 def _detect(path: str) -> dict[str, str]:
@@ -530,11 +490,6 @@ def _detect(path: str) -> dict[str, str]:
         return {}
     if not ffmpeg:
         _log("DV: tools.tinyppi not available", xbmc.LOGWARNING)
-        return {}
-
-    # One-time self-test so a wrong-architecture or non-executable binary is
-    # reported clearly instead of silently yielding an empty RPU (=> N/A).
-    if not _verify_binaries(dovi, ffmpeg):
         return {}
 
     src, is_temp = _local_source(path)
@@ -571,10 +526,14 @@ def _detect(path: str) -> dict[str, str]:
             ff.stdout.close()
         ff.wait()
 
+        # MediaInfo provides the display aspect ratio for every format (and, for
+        # non-DV, the real bit depth).  It runs even when an RPU is present so
+        # that the aspect ratio is populated for Dolby Vision streams too.
+        media = _mediainfo_fields(src)
+
         if not os.path.exists(_RPU_PATH) or os.path.getsize(_RPU_PATH) == 0:
-            # No RPU -> not a Dolby Vision stream.  MediaInfo reports the real
-            # bit depth for every other format.
-            return {"bit_depth": _mediainfo_bit_depth(src)}
+            # No RPU -> not a Dolby Vision stream.
+            return media
 
         out = subprocess.run(
             [dovi, "info", "-i", _RPU_PATH, "-s"],
@@ -585,6 +544,7 @@ def _detect(path: str) -> dict[str, str]:
 
         info = _parse_summary(out)
         info["bit_depth"] = _dovi_bit_depth(dovi)
+        info["display_aspect_ratio"] = media["display_aspect_ratio"]
         return info
     finally:
         for tmp in (_RPU_PATH, _CHUNK_PATH if is_temp else None):
@@ -697,3 +657,15 @@ def get_bit_depth() -> str:
     reconstructs 12-bit); every other format is read from MediaInfo.
     """
     return _get_info_value("bit_depth")
+
+
+def get_display_aspect_ratio() -> str:
+    """Return the source display aspect ratio reported by MediaInfo.
+
+    Empty when MediaInfo reports no value — including while detection is still
+    running or after it fails — instead of a status/N/A label, so the skin's
+    parenthetical next to the live videodar simply disappears rather than
+    showing "(N/A)".
+    """
+    value, _status = _get_info_status_value("display_aspect_ratio")
+    return value

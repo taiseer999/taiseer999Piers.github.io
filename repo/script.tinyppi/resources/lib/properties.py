@@ -18,21 +18,21 @@ from maps import (
     _VIDEO_CODEC_MAP,
     _SUBTITLE_CODEC_MAP,
 )
-from utils import _cond, _info, _info_safe, _clean
+from utils import _cond, _info, _clean
 from helpers import (
     _normalize_fps,
     _format_fps,
     _read_hdr_status,
     _read_last_dovi_log_line,
     format_fps,
-    set_ui_position,
 )
 from dvinfo import (
+    get_bit_depth,
     get_cm_version,
+    get_display_aspect_ratio,
     get_l5_offsets,
     get_l6_rpu_mdl,
     get_l6_rpu_max_cll_fall,
-    get_bit_depth,
     is_status_label,
 )
 
@@ -77,112 +77,53 @@ def get_VideoPixelFormatVar() -> str:
     """
     Parse ``amlogic.pixformat`` and return a human-readable string such as
     ``10-bit (YUV 4:2:0)`` or ``8-bit, RGB``.
-
-    Falls back to generic ``videocolordepth`` / ``videocolorspace`` InfoLabels
-    when the amlogic-specific label is unavailable.
     """
-    val = _info_safe("Player.Process(amlogic.pixformat)").strip()
-    if val:
-        match = re.search(
-            r"(\d+)-bit\s*,\s*(RGB|YUV420|YUV422|YUV444)",
-            val,
-            re.IGNORECASE,
-        )
-        if match:
-            bits, fmt = match.groups()
-            fmt = fmt.upper()
-            if fmt == "RGB":
-                return f"{bits}-bit, RGB"
-            yuv_map = {
-                "YUV420": "YUV 4:2:0",
-                "YUV422": "YUV 4:2:2",
-                "YUV444": "YUV 4:4:4",
-            }
-            return f"{bits}-bit ({yuv_map.get(fmt, fmt)})"
+    val = _info("Player.Process(amlogic.pixformat)").strip()
+    if not val:
+        return ""
+
+    match = re.search(
+        r"(\d+)-bit\s*,\s*(RGB|YUV420|YUV422|YUV444)",
+        val,
+        re.IGNORECASE,
+    )
+    if not match:
         return val
 
-    # Fallback: build from generic color-depth / color-space InfoLabels.
-    bits = _info_safe("Player.Process(videocolordepth)").strip()
-    if not bits:
-        bits = _info_safe("Player.Process(amlogic.bitdepth)").strip()
-    space = _info_safe("Player.Process(videocolorspace)").strip()
+    bits, fmt = match.groups()
+    fmt = fmt.upper()
 
-    space_map = {
-        "bt2020nc": "YUV 4:2:0",
-        "bt2020c":  "YUV 4:2:0",
-        "bt709":    "YUV 4:2:0",
+    if fmt == "RGB":
+        return f"{bits}-bit, RGB"
+
+    yuv_map = {
+        "YUV420": "YUV 4:2:0",
+        "YUV422": "YUV 4:2:2",
+        "YUV444": "YUV 4:4:4",
     }
-    space_disp = space_map.get(space.lower(), space)
-
-    if bits and space_disp:
-        return f"{bits}-bit ({space_disp})"
-    if bits:
-        return f"{bits}-bit"
-    return ""
-
-
-def get_VideoBitDepthVar() -> str:
-    """
-    Return the source video bit depth for display, e.g. ``12-bit``.
-
-    Dolby Vision streams are measured from the RPU with dovi_tool, because FEL
-    material reconstructs a 12-bit signal that MediaInfo would report as the
-    10-bit base layer; every other format is read from MediaInfo.  Detection
-    runs in a background thread (see dvinfo.py), so this call never blocks the
-    polling loop; the localized status label is passed through unchanged while
-    detection is running or after it fails.
-    """
-    value = get_bit_depth()
-    if not value or is_status_label(value):
-        return value
-    return f"{value}-bit"
+    return f"{bits}-bit ({yuv_map.get(fmt, fmt)})"
 
 
 def get_DisplayModeVar() -> str:
     """
     Parse ``amlogic.displaymode`` and return a compact string like
     ``1080p 23.976Hz``.
-
-    Falls back to Kodi's generic display InfoLabels when the amlogic-specific
-    label is unavailable (e.g. on the VTB decode path).
     """
-    val = _info_safe("Player.Process(amlogic.displaymode)").strip()
-    if val:
-        compact = re.sub(r"\s+", "", val)
-        match = re.match(
-            r"(\d+(?:x\d+)?)(p|i)(\d+(?:\.\d+)?)[Hh][Zz]",
-            compact,
-            re.IGNORECASE,
-        )
-        if match:
-            res, scan, raw_fps = match.groups()
-            return f"{res}{scan} {_normalize_fps(raw_fps)}Hz"
-        return val
-
-    # Fallback: generic screen resolution InfoLabel.
-    # On many builds System.ScreenResolution already includes the refresh
-    # rate, e.g. "1920x1080@60.00Hz" or "3840x2160 - Full Screen (24.00Hz)".
-    res = _info("System.ScreenResolution").strip()
-    if not res:
+    val = _info("Player.Process(amlogic.displaymode)").strip()
+    if not val:
         return ""
 
-    # Pull a "WIDTHxHEIGHT" token and an optional refresh rate out of whatever
-    # format this build uses, then rebuild a clean "WIDTHxHEIGHT RATEHz" string.
-    res_m  = re.search(r"(\d{3,5}x\d{3,5})", res)
-    rate_m = re.search(r"(\d+(?:\.\d+)?)\s*[Hh][Zz]", res)
+    compact = re.sub(r"\s+", "", val)
+    match = re.match(
+        r"(\d+(?:x\d+)?)(p|i)(\d+(?:\.\d+)?)[Hh][Zz]",
+        compact,
+        re.IGNORECASE,
+    )
+    if not match:
+        return val
 
-    resolution = res_m.group(1) if res_m else res.split(" - ")[0].strip()
-
-    rate = ""
-    if rate_m:
-        rate = rate_m.group(1)
-    else:
-        # Last resort: a generic, non-amlogic refresh-rate label.
-        rate = _info_safe("System.ScreenRefreshRate").strip()
-
-    if rate:
-        return f"{resolution} {_normalize_fps(rate)}Hz"
-    return resolution
+    res, scan, raw_fps = match.groups()
+    return f"{res}{scan} {_normalize_fps(raw_fps)}Hz"
 
 
 def get_VideoResolutionVar() -> str:
@@ -237,6 +178,23 @@ def get_VideoCodecVar() -> str:
     if not codec:
         return ""
     return _VIDEO_CODEC_MAP.get(codec, codec.upper())
+
+
+def get_VideoBitDepthVar() -> str:
+    """
+    Return the source video bit depth for display, e.g. ``12-bit``.
+
+    Dolby Vision streams are measured from the RPU with dovi_tool, because FEL
+    material reconstructs a 12-bit signal that MediaInfo would report as the
+    10-bit base layer; every other format is read from MediaInfo.  Detection
+    runs in a background thread (see dvinfo.py), so this call never blocks the
+    polling loop; the localized status label is passed through unchanged while
+    detection is running or after it fails.
+    """
+    value = get_bit_depth()
+    if not value or is_status_label(value):
+        return value
+    return f"{value}-bit"
 
 
 # ---------------------------------------------------------------------------
@@ -315,7 +273,7 @@ def get_DoviTunnelVar() -> str:
         "DV Tunnel" if the sysfs value is 1 and the output is 8-bit.
         "" otherwise.
     """
-    pixformat = _info_safe("Player.Process(amlogic.pixformat)").strip()
+    pixformat = _info("Player.Process(amlogic.pixformat)").strip()
     bits = re.search(r"(\d+)-bit", pixformat, re.IGNORECASE)
     if not bits or bits.group(1) != "8":
         return ""
@@ -334,23 +292,13 @@ def get_DoviTunnelVar() -> str:
 def get_DoviCmVersionVar() -> str:
     """
     Return the source Dolby Vision Content-Mapping version
-    (``'CMv2.9'`` or ``'CMv4.0'``), a localized 'detecting' status while
-    detection runs, or ``''`` when the source is not Dolby Vision or detection
-    failed.
+    (``'CMv2.9'`` or ``'CMv4.0'``), a localized status while/after detection,
+    or ``''`` when the source is not Dolby Vision.
 
     Detection runs once per file in a background thread (see dvinfo.py), so
     this call never blocks the polling loop.
-
-    The Mode field concatenates this after ModeVar with a " / " separator, so
-    returning the "N/A" status label here would render a dangling " / N/A".
-    We therefore collapse the N/A status to empty for this field; the L6/L5
-    rows have their own getters and still show "N/A" by design.
     """
-    val = get_cm_version()
-    from dvinfo import _na_label
-    if val == _na_label():
-        return ""
-    return val
+    return get_cm_version()
 
 
 def get_DoviLevel5OffsetsVar() -> str:
@@ -378,6 +326,19 @@ def get_DoviLevel6RpuMaxCllFallVar() -> str:
     return get_l6_rpu_max_cll_fall()
 
 
+def get_DisplayAspectRatioVar() -> str:
+    """
+    Return the source display aspect ratio from MediaInfo, restricted to the
+    standard ``16:9`` and ``4:3`` ratios; any other value (or no value at all)
+    yields ``''``.
+
+    Shown as a parenthetical next to the live ``videodar`` value, so an empty
+    string simply omits the addition.
+    """
+    value = get_display_aspect_ratio()
+    return value if value in ("16:9", "4:3") else ""
+
+
 def _with_unit(value: str, unit: str) -> str:
     """Append a unit only to real metadata values, not status labels."""
     if not value or is_status_label(value):
@@ -393,30 +354,14 @@ def _with_unit(value: str, unit: str) -> str:
 
 def get_ModeVar() -> str:
     """Return the first token of ``amlogic.eoft_gamut`` (the mode field)."""
-    parts = _info_safe("Player.Process(amlogic.eoft_gamut)").split()
+    parts = _info("Player.Process(amlogic.eoft_gamut)").split()
     return parts[0] if parts else ""
 
 
 def get_GamutVar() -> str:
-    """
-    Return the second token of ``amlogic.eoft_gamut`` (the gamut field).
-
-    Falls back to the generic ``videocolorspace`` InfoLabel when the
-    amlogic-specific label is unavailable.
-    """
-    parts = _info_safe("Player.Process(amlogic.eoft_gamut)").split()
-    if len(parts) > 1:
-        return parts[1]
-
-    space = _info_safe("Player.Process(videocolorspace)").strip()
-    space_map = {
-        "bt2020nc": "BT.2020nc",
-        "bt2020c":  "BT.2020c",
-        "bt709":    "BT.709",
-        "bt601":    "BT.601",
-        "smpte170m": "BT.601",
-    }
-    return space_map.get(space.lower(), space)
+    """Return the second token of ``amlogic.eoft_gamut`` (the gamut field)."""
+    parts = _info("Player.Process(amlogic.eoft_gamut)").split()
+    return parts[1] if len(parts) > 1 else ""
 
 
 # ---------------------------------------------------------------------------
@@ -468,7 +413,7 @@ def get_AudioBitrateKBVar() -> str:
 
 def get_AudioLiveBitrateVar() -> str:
     """Return audio live bitrate with dot instead of comma."""
-    bitrate = _info_safe("Player.Process(audiolivebitrate)")
+    bitrate = _info("Player.Process(audiolivebitrate)")
     if not bitrate:
         return ""
 
@@ -582,7 +527,7 @@ def get_SubtitleCodecVar() -> str:
     """
     Return the mapped display name for the current subtitle codec.
     """
-    codec = _info_safe("VideoPlayer.SubtitleCodec").lower().strip()
+    codec = _info("VideoPlayer.SubtitleCodec").lower().strip()
     return _SUBTITLE_CODEC_MAP.get(codec, codec.upper()) if codec else ""
 
 
@@ -754,7 +699,6 @@ def update_properties(window) -> None:
     Call this from ``onInit()`` and from a polling loop in your
     ``WindowXMLDialog`` subclass.
     """
-    set_ui_position(window)
 
     unit = _metadata_unit()
     video_queue = get_queue_level("Player.Process(videoqueuelevel)")
@@ -780,12 +724,12 @@ def update_properties(window) -> None:
             ("VideoDecoderVar", get_VideoDecoderVar()),
             ("VideoDecoderExtVar", get_VideoDecoderExtVar()),
             ("VideoPixelFormatVar", get_VideoPixelFormatVar()),
-            ("VideoBitDepthVar", get_VideoBitDepthVar()),
             ("DisplayModeVar", get_DisplayModeVar()),
             ("VideoResolutionVar", get_VideoResolutionVar()),
             ("VideoBitrateMBVar", get_VideoBitrateMBVar()),
             ("VideoLiveBitrateVar", get_VideoLiveBitrateVar()),
             ("VideoCodecVar", get_VideoCodecVar()),
+            ("VideoBitDepthVar", get_VideoBitDepthVar()),
             ("HdmiHdrStatusVar", get_HdmiHdrStatusVar()),
             ("DoviProfileVar", get_DoviProfileVar()),
             ("DoviFelVar", get_DoviFelVar()),
@@ -795,6 +739,7 @@ def update_properties(window) -> None:
             ("DoviLevel5OffsetsIconVisible", l5_offsets_icon_visible),
             ("DoviLevel6RpuMdlVar", l6_rpu_mdl),
             ("DoviLevel6RpuMaxCllFallVar", l6_rpu_max_cll_fall),
+            ("DisplayAspectRatioVar", get_DisplayAspectRatioVar()),
             ("ModeVar", get_ModeVar()),
             ("GamutVar", get_GamutVar()),
             ("VdecBitrate", bitrate_value),
