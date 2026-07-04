@@ -44,7 +44,7 @@
 				<control type="group">
 					<left>58</left>
 					<top>380</top>
-					<width>1196</width>
+					<width>1714</width>
 					<height>665</height>
 					<control type="image">
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">common/dot-1x1.png</texture>
@@ -53,7 +53,7 @@
 
 				<!-- Background - End -->
 				<control type="group">
-					<left>1254</left>
+					<left>1772</left>
 					<top>380</top>
 					<width>23</width>
 					<height>665</height>
@@ -82,7 +82,7 @@
 				<control type="group">
 					<left>58</left>
 					<top>380</top>
-					<width>1196</width>
+					<width>1714</width>
 					<height>685</height>
 					<control type="image">
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">common/dot-1x1.png</texture>
@@ -91,7 +91,7 @@
 
 				<!-- Background - End -->
 				<control type="group">
-					<left>1254</left>
+					<left>1772</left>
 					<top>380</top>
 					<width>23</width>
 					<height>685</height>
@@ -105,7 +105,7 @@
 					<top>1028</top>
 					<control type="label">
 						<left>70</left>
-						<width>1169</width>
+						<width>1690</width>
 						<label>$INFO[Player.Filename]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.FilenameColor)]</textcolor>
@@ -136,7 +136,7 @@
 				<!-- Chart icon -->
 				<control type="group">
 					<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowHeaderIcon),1)</visible>
-					<left>1204</left>
+					<left>1723</left>
 					<top>415</top>
 					<control type="image">
 						<width>36</width>
@@ -151,7 +151,7 @@
 					<left>70</left>
 					<top>485</top>
 					<control type="image">
-						<width>1171</width>
+						<width>1689</width>
 						<height>1</height>
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
 					</control>
@@ -164,7 +164,7 @@
 					<left>70</left>
 					<top>1023</top>
 					<control type="image">
-						<width>1171</width>
+						<width>1689</width>
 						<height>1</height>
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
 					</control>
