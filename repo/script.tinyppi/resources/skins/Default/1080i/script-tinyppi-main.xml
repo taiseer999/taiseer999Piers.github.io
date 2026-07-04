@@ -171,11 +171,17 @@
 				</control>
 			</control>
 
+			<!-- Group: Bottom screen -->
+			<control type="group" id="9000">
+				<width>1920</width>
+				<height>0</height>
+				<left>40</left>
+				<top>515</top>
+
 			<!-- Custom: right-side speaker channels + codec logos (ported from 1.5.8.2) -->
 			<control type="group">
 				<width>1920</width>
 				<height>0</height>
-				<top>45</top>
 			<!-- Group: channels -->
 			<control type="group">
 				<top>120</top>
@@ -676,12 +682,6 @@
 			 </control>
 			</control>
 
-			<!-- Group: Bottom screen -->
-			<control type="group" id="9000">
-				<width>1920</width>
-				<height>0</height>
-				<left>40</left>
-				<top>515</top>
 
 				<!-- Group: Video -->
 				<control type="group">
