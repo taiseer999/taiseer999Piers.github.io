@@ -192,10 +192,10 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.6.1.3" provider-name="jamal2362,AK">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.6.5.1" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="tools.tinyppi" version="1.0.0" />
+        <import addon="tools.tinyppi" version="1.0.6" />
     </requires>
     <extension point="xbmc.service" library="resources/lib/monitor.py" />
     <extension point="xbmc.python.script" library="main.py">
@@ -211,10 +211,9 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
-        <news>v1.6.1.1
-- Merged upstream v1.6.1 (single-layout rewrite, new theme wiring, tools.tinyppi-provided binaries).
-- Re-added the right-side speaker channel graphic and codec/HDR logo stack (ppicodecs) removed upstream, at the original Modern positions; UIStyle gating dropped as the Modern/Classic switch no longer exists.
-- Fixed fonts.py: register NotoSans-Regular/Bold.ttf (the files tools.tinyppi 1.0.3 actually ships; upstream referenced non-existent Noto-*.ttf), and update stale same-name Font.xml entries in place instead of appending duplicates (converts old Inter-*.ttf entries from 1.5.x).</news>
+        <news>v1.6.5.1
+- Merged upstream v1.6.5 onto the 1.6.1.1 custom base.
+- Re-applied: right-side speaker channel graphic + codec logo stack inside group 9000 (tracks panel position and offsets); panel background/lines/icon extended to x1795 to enclose the graphics; fonts.py NotoSans filename fix with update-in-place Font.xml entries.</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>
@@ -518,7 +517,7 @@
 		<description lang="en_NZ">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.0.3" provider-name="jamal2362">
+</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.0.6" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>

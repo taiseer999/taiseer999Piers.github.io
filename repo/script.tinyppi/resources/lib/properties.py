@@ -8,6 +8,7 @@ Call ``update_properties(window)`` once per polling interval from your
 import re
 
 import xbmc
+import xbmcgui
 
 from maps import (
     _AUDIO_CODEC_MAP,
@@ -29,7 +30,9 @@ from helpers import (
 from dvinfo import (
     get_bit_depth,
     get_cm_version,
-    get_display_aspect_ratio,
+    get_hdr_format,
+    get_output_mode,
+    get_structure,
     get_l5_offsets,
     get_l6_rpu_mdl,
     get_l6_rpu_max_cll_fall,
@@ -180,16 +183,38 @@ def get_VideoCodecVar() -> str:
     return _VIDEO_CODEC_MAP.get(codec, codec.upper())
 
 
+def get_VideoDecoderNameVar() -> str:
+    """
+    Return the active video decoder name with a friendly prefix.
+
+    ``Player.Process(videodecoder)`` reports values such as ``am-h264`` or
+    ``ff-hevc``.  The ``am-`` prefix is rewritten to ``AML`` and the ``ff-``
+    prefix to ``FFmpeg``; the codec remainder is upper-cased.  Any other
+    decoder string is passed through upper-cased, matching the previous
+    ``[UPPERCASE]`` skin styling.
+    """
+    raw = _info("Player.Process(videodecoder)").strip()
+    if not raw:
+        return ""
+
+    low = raw.lower()
+    if low.startswith("am-"):
+        return "AML-"
+    if low.startswith("ff-"):
+        return "FF-"
+    return raw.upper()
+
+
 def get_VideoBitDepthVar() -> str:
     """
     Return the source video bit depth for display, e.g. ``12-bit``.
 
-    Dolby Vision streams are measured from the RPU with dovi_tool, because FEL
-    material reconstructs a 12-bit signal that MediaInfo would report as the
-    10-bit base layer; every other format is read from MediaInfo.  Detection
-    runs in a background thread (see dvinfo.py), so this call never blocks the
-    polling loop; the localized status label is passed through unchanged while
-    detection is running or after it fails.
+    FEL Dolby Vision streams reconstruct a higher-bit-depth signal from a 10-bit
+    base layer, so hdrprobe's reconstructed_bit_depth is reported for them
+    (falling back to 12-bit when absent); every other format uses hdrprobe's
+    container bit depth.  Detection runs in a background thread (see dvinfo.py),
+    so this call never blocks the polling loop; the localized status label is
+    passed through unchanged while detection is running or after it fails.
     """
     value = get_bit_depth()
     if not value or is_status_label(value):
@@ -226,32 +251,26 @@ def get_HdmiHdrStatusVar() -> str:
 
 def get_DoviProfileVar() -> str:
     """
-    Return a Dolby Vision profile string such as
-    ``Dolby Vision Profile 7 [COLOR lightgreen]FEL[/COLOR]``.
+    Return the overlay's output-mode string from hdrprobe: the source format
+    (``HDR10``, ``HDR10+``, ``HLG``, ``SDR``) or, for Dolby Vision, a string
+    such as ``Dolby Vision Profile 7 [COLOR lightgreen]FEL[/COLOR]`` with the
+    enhancement layer coloured — FEL green, MEL orange.
 
-    Returns an empty string when DV is not active or no matching log line
-    can be found.
+    Detection runs in a background thread (see dvinfo.py), so this never blocks;
+    a localized ``Fetching...`` / ``N/A`` status label is shown while detection
+    is running or after it fails.
     """
-    if "dolby" not in _read_hdr_status():
-        return ""
+    return get_output_mode()
 
-    text = _read_last_dovi_log_line()
-    if not text:
-        return "Dolby Vision Profile 8.1"
 
-    prof = re.search(r"profile\s*(\d+)", text)
-    if not prof:
-        return "Dolby Vision Profile 8.1"
+def get_DoviProfileAltVar() -> str:
+    """Like :func:`get_DoviProfileVar`, but with the shorter ``DV Profile``
+    prefix instead of ``Dolby Vision Profile`` for Dolby Vision streams.
 
-    profile_num = prof.group(1)
-    if profile_num in ("0", "8"):
-        profile_num = "8.1"
-
-    if "minimum enhancement layer" in text:
-        return f"Dolby Vision Profile {profile_num} [COLOR orange]MEL[/COLOR]"
-    if "full enhancement layer" in text:
-        return f"Dolby Vision Profile {profile_num} [COLOR lightgreen]FEL[/COLOR]"
-    return f"Dolby Vision Profile {profile_num}"
+    All other formats (``HDR10``, ``HLG``, …) and the ``Fetching...`` / ``N/A``
+    status labels are returned unchanged.
+    """
+    return get_output_mode().replace("Dolby Vision Profile", "DV Profile")
 
 
 def get_DoviFelVar() -> str:
@@ -292,13 +311,31 @@ def get_DoviTunnelVar() -> str:
 def get_DoviCmVersionVar() -> str:
     """
     Return the source Dolby Vision Content-Mapping version
-    (``'CMv2.9'`` or ``'CMv4.0'``), a localized status while/after detection,
-    or ``''`` when the source is not Dolby Vision.
+    (``'CMv2.9'`` or ``'CMv4.0'``), or ``''`` when it is not (yet) known.
+
+    Unlike the other fields, this never surfaces a "Fetching..." or "N/A"
+    status label: the value is shown only once detected, and stays empty
+    otherwise.
 
     Detection runs once per file in a background thread (see dvinfo.py), so
     this call never blocks the polling loop.
     """
     return get_cm_version()
+
+
+def get_DoviStructureVar() -> str:
+    """
+    Return the source Dolby Vision layer-structure tag
+    (``(ST-DL)`` / ``(DT-DL)`` / ``(ST-SL)``), or ``''`` when it is not (yet)
+    known.
+
+    Like the CM version this never surfaces a "Fetching..." or "N/A" status
+    label: the value is shown only once detected, and stays empty otherwise.
+
+    Detection runs once per file in a background thread (see dvinfo.py), so
+    this call never blocks the polling loop.
+    """
+    return get_structure()
 
 
 def get_DoviLevel5OffsetsVar() -> str:
@@ -311,32 +348,20 @@ def get_DoviLevel5OffsetsVar() -> str:
 
 def get_DoviLevel6RpuMdlVar() -> str:
     """
-    Return the source Dolby Vision Level 6 RPU mastering-display luminance, a
-    localized status while/after detection, or ``''`` when the source is not
-    Dolby Vision.
+    Return the source mastering-display luminance: the Dolby Vision Level 6 RPU
+    value, or the static HDR10 mastering display when the source is HDR10.
+    Falls back to a localized status while/after detection, and to N/A for SDR.
     """
     return get_l6_rpu_mdl()
 
 
 def get_DoviLevel6RpuMaxCllFallVar() -> str:
     """
-    Return the source Dolby Vision Level 6 RPU MaxCLL/MaxFALL, a localized
-    status while/after detection, or ``''`` when the source is not Dolby Vision.
+    Return the source MaxCLL/MaxFALL content light: the Dolby Vision Level 6 RPU
+    value, or the static HDR10 content light when the source is HDR10.  Falls
+    back to a localized status while/after detection, and to N/A for SDR.
     """
     return get_l6_rpu_max_cll_fall()
-
-
-def get_DisplayAspectRatioVar() -> str:
-    """
-    Return the source display aspect ratio from MediaInfo, restricted to the
-    standard ``16:9`` and ``4:3`` ratios; any other value (or no value at all)
-    yields ``''``.
-
-    Shown as a parenthetical next to the live ``videodar`` value, so an empty
-    string simply omits the addition.
-    """
-    value = get_display_aspect_ratio()
-    return value if value in ("16:9", "4:3") else ""
 
 
 def _with_unit(value: str, unit: str) -> str:
@@ -675,6 +700,26 @@ def _metadata_unit() -> str:
     return f" {unit_label}"
 
 
+def publish_hdr_type(home=None) -> None:
+    """Publish the hdrprobe-detected HDR type on Kodi's Home window.
+
+    ``TinyPPI.HdrType`` replaces the ``VideoPlayer.HdrType`` infolabel the skin
+    branches on (SDR / HDR10 / Dolby Vision).  It lives on the global Home
+    window so both the overlay and the mode-select dialog can read it, and is
+    refreshed each polling cycle as background detection completes.
+
+    The HDR10+ token is published as ``hdr10plus`` (not ``hdr10+``): Kodi's
+    boolean parser treats ``+`` as the AND operator, so a skin condition like
+    ``String.IsEqual(...,hdr10+)`` would not parse.  ``hdr10plus`` still
+    contains ``hdr10``, so existing ``String.Contains(...,hdr10)`` branches keep
+    matching it.
+    """
+    hdr_type = get_hdr_format()
+    if hdr_type == "hdr10+":
+        hdr_type = "hdr10plus"
+    (home or xbmcgui.Window(10000)).setProperty("TinyPPI.HdrType", hdr_type)
+
+
 def _set_properties(window, values: tuple[tuple[str, str], ...]) -> None:
     """Publish a batch of Kodi window properties."""
     for name, value in values:
@@ -699,6 +744,8 @@ def update_properties(window) -> None:
     Call this from ``onInit()`` and from a polling loop in your
     ``WindowXMLDialog`` subclass.
     """
+
+    publish_hdr_type()
 
     unit = _metadata_unit()
     video_queue = get_queue_level("Player.Process(videoqueuelevel)")
@@ -729,17 +776,19 @@ def update_properties(window) -> None:
             ("VideoBitrateMBVar", get_VideoBitrateMBVar()),
             ("VideoLiveBitrateVar", get_VideoLiveBitrateVar()),
             ("VideoCodecVar", get_VideoCodecVar()),
+            ("VideoDecoderNameVar", get_VideoDecoderNameVar()),
             ("VideoBitDepthVar", get_VideoBitDepthVar()),
             ("HdmiHdrStatusVar", get_HdmiHdrStatusVar()),
             ("DoviProfileVar", get_DoviProfileVar()),
+            ("DoviProfileAltVar", get_DoviProfileAltVar()),
             ("DoviFelVar", get_DoviFelVar()),
             ("DoviTunnelVar", get_DoviTunnelVar()),
             ("DoviCmVersionVar", get_DoviCmVersionVar()),
+            ("DoviStructureVar", get_DoviStructureVar()),
             ("DoviLevel5OffsetsVar", l5_offsets),
             ("DoviLevel5OffsetsIconVisible", l5_offsets_icon_visible),
             ("DoviLevel6RpuMdlVar", l6_rpu_mdl),
             ("DoviLevel6RpuMaxCllFallVar", l6_rpu_max_cll_fall),
-            ("DisplayAspectRatioVar", get_DisplayAspectRatioVar()),
             ("ModeVar", get_ModeVar()),
             ("GamutVar", get_GamutVar()),
             ("VdecBitrate", bitrate_value),

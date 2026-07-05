@@ -6,9 +6,7 @@ Various tools required for the TinyPPI add-on.
 
 ## Included Files
 
-- `tools/ffmpeg/ffmpeg` - FFmpeg binary for media analysis and media processing.
-- `tools/mediainfo/mediainfo` - MediaInfo binary for media analysis and media processing.
-- `tools/dovi/dovi_tool` - dovi_tool binary for Dolby Vision related processing.
+- `tools/hdrprobe/hdrprobe` - hdrprobe binary for media analysis and media processing.
 - `tools/fonts/Noto-Regular.ttf` - Noto Regular font.
 - `tools/fonts/Noto-Bold.ttf` - Noto Bold font.
 - `icon.jpg` - Kodi add-on icon.
@@ -25,9 +23,7 @@ import os
 import xbmcaddon
 
 addon_path = xbmcaddon.Addon("tools.tinyppi").getAddonInfo("path")
-ffmpeg_path = os.path.join(addon_path, "tools", "ffmpeg", "ffmpeg")
-mediainfo_path = os.path.join(addon_path, "tools", "mediainfo", "mediainfo")
-dovi_tool_path = os.path.join(addon_path, "tools", "dovi", "dovi_tool")
+hdrprobe_path = os.path.join(addon_path, "tools", "hdrprobe", "hdrprobe")
 font_regular_path = os.path.join(addon_path, "tools", "fonts", "Noto-Regular.ttf")
 font_bold_path = os.path.join(addon_path, "tools", "fonts", "Noto-Bold.ttf")
 ```
@@ -44,13 +40,16 @@ tools.tinyppi/
 |-- LICENSE
 |-- README.md
 `-- tools/
-    |-- dovi/
-    |   `-- dovi_tool
-    |-- ffmpeg/
-    |   `-- ffmpeg
-    |-- mediainfo/
-    |   `-- mediainfo
+    |-- hdrprobe/
+    |   `-- hdrprobe
     `-- fonts/
         |-- Noto-Bold.ttf
         `-- Noto-Regular.ttf
 ```
+
+---
+
+## Credits
+
+- **hdrprobe** by [matthane](https://github.com/matthane/hdrprobe) — fast HDR, HDR10+, and Dolby Vision metadata inspector. Licensed under the MIT License.
+- **Google Noto Fonts** by [Google](https://github.com/notofonts/notofonts.github.io) — the Noto font family, aiming to support all languages with a harmonious look and feel. Licensed under the SIL Open Font License 1.1.
