@@ -89,113 +89,14 @@ _DIALOG_FOCUS_TEXT_COLORS = (
 # Palette for inline detail accents (the dimmed values shown in parentheses).
 # Same hues as _TEXT_COLORS but at alpha B3 (~70%) so they stay subtle.
 # The index matches the <option> order in resources/settings.xml.
-_ACCENT_COLORS = (
-    "B3EDEDED",  # 0  White (default)
-    "B3E0E0E0",  # 1  Light gray
-    "B3FF8A80",  # 2  Red
-    "B3FFCC80",  # 3  Orange
-    "B3FFFF8D",  # 4  Yellow
-    "B3B9F6CA",  # 5  Green
-    "B384FFFF",  # 6  Cyan
-    "B382B1FF",  # 7  Blue
-    "B3E1BEE7",  # 8  Purple
-    "B3FF80AB",  # 9  Pink
-    "B3FF8A65",  # 10 Coral
-    "B3FFAB91",  # 11 Salmon
-    "B3FFD54F",  # 12 Amber
-    "B3FFE082",  # 13 Gold
-    "B3CCFF90",  # 14 Lime
-    "B3A7FFEB",  # 15 Mint
-    "B380CBC4",  # 16 Teal
-    "B380D8FF",  # 17 Sky blue
-    "B340C4FF",  # 18 Azure
-    "B38C9EFF",  # 19 Indigo
-    "B3B388FF",  # 20 Violet
-    "B3D1C4E9",  # 21 Lavender
-    "B3EA80FC",  # 22 Magenta
-    "B3F48FB1",  # 23 Fuchsia
-    "B3F06292",  # 24 Rose
-    "B3FF5252",  # 25 Crimson
-    "B3BCAAA4",  # 26 Brown
-    "B3DCE775",  # 27 Olive
-    "B3B0BEC5",  # 28 Slate
-    "B3CFD8DC",  # 29 Silver
-    "B3FFCCBC",  # 30 Peach
-    "B3FFB74D",  # 31 Tangerine
-    "B3E4C441",  # 32 Mustard
-    "B3E6EE9C",  # 33 Chartreuse
-    "B381C784",  # 34 Forest
-    "B369F0AE",  # 35 Emerald
-    "B3B2FF59",  # 36 Spring
-    "B318FFFF",  # 37 Aqua
-    "B364FFDA",  # 38 Turquoise
-    "B34FC3F7",  # 39 Cerulean
-    "B3536DFE",  # 40 Cobalt
-    "B3B39DDB",  # 41 Periwinkle
-    "B3CE93D8",  # 42 Plum
-    "B3BA68C8",  # 43 Orchid
-    "B3FF4081",  # 44 Raspberry
-    "B3FF5C8D",  # 45 Watermelon
-    "B3FF6E40",  # 46 Scarlet
-    "B3D7CCC8",  # 47 Sand
-    "B3C5E1A5",  # 48 Pistachio
-    "B390A4AE",  # 49 Cadet
-)
+_ACCENT_COLORS = tuple("B3" + color[2:] for color in _TEXT_COLORS)
 
 # Palette for the separator lines (very faint dividers, alpha 26 ~ 15%).
-# Same hues as _TEXT_COLORS but heavily dimmed so the lines stay subtle.
+# Same hues as _TEXT_COLORS but heavily dimmed so the lines stay subtle,
+# except index 0 which keeps the original neutral gray default.
 # The index matches the <option> order in resources/settings.xml.
-_LINE_COLORS = (
-    "26808080",  # 0  White (default)
-    "26E0E0E0",  # 1  Light gray
-    "26FF8A80",  # 2  Red
-    "26FFCC80",  # 3  Orange
-    "26FFFF8D",  # 4  Yellow
-    "26B9F6CA",  # 5  Green
-    "2684FFFF",  # 6  Cyan
-    "2682B1FF",  # 7  Blue
-    "26E1BEE7",  # 8  Purple
-    "26FF80AB",  # 9  Pink
-    "26FF8A65",  # 10 Coral
-    "26FFAB91",  # 11 Salmon
-    "26FFD54F",  # 12 Amber
-    "26FFE082",  # 13 Gold
-    "26CCFF90",  # 14 Lime
-    "26A7FFEB",  # 15 Mint
-    "2680CBC4",  # 16 Teal
-    "2680D8FF",  # 17 Sky blue
-    "2640C4FF",  # 18 Azure
-    "268C9EFF",  # 19 Indigo
-    "26B388FF",  # 20 Violet
-    "26D1C4E9",  # 21 Lavender
-    "26EA80FC",  # 22 Magenta
-    "26F48FB1",  # 23 Fuchsia
-    "26F06292",  # 24 Rose
-    "26FF5252",  # 25 Crimson
-    "26BCAAA4",  # 26 Brown
-    "26DCE775",  # 27 Olive
-    "26B0BEC5",  # 28 Slate
-    "26CFD8DC",  # 29 Silver
-    "26FFCCBC",  # 30 Peach
-    "26FFB74D",  # 31 Tangerine
-    "26E4C441",  # 32 Mustard
-    "26E6EE9C",  # 33 Chartreuse
-    "2681C784",  # 34 Forest
-    "2669F0AE",  # 35 Emerald
-    "26B2FF59",  # 36 Spring
-    "2618FFFF",  # 37 Aqua
-    "2664FFDA",  # 38 Turquoise
-    "264FC3F7",  # 39 Cerulean
-    "26536DFE",  # 40 Cobalt
-    "26B39DDB",  # 41 Periwinkle
-    "26CE93D8",  # 42 Plum
-    "26BA68C8",  # 43 Orchid
-    "26FF4081",  # 44 Raspberry
-    "26FF5C8D",  # 45 Watermelon
-    "26FF6E40",  # 46 Scarlet
-    "26D7CCC8",  # 47 Sand
-    "26C5E1A5",  # 48 Pistachio
-    "2690A4AE",  # 49 Cadet
+_LINE_COLORS = ("26808080",) + tuple(
+    "26" + color[2:] for color in _TEXT_COLORS[1:]
 )
 
 # Palette for the Modern background (semi-transparent dark shades, alpha FA).
@@ -271,6 +172,17 @@ _UNIT_LABELS = (
 # settings.xml).
 _CUSTOM_INDEX = "999"
 
+# Palette index each color setting falls back to when a custom HEX is cleared or
+# rejected as invalid.  Must mirror the ``<default>`` option in
+# resources/settings.xml.  Any setting not listed defaults to index 0 (the
+# palette's first color, White), which is the default for every other element.
+_DEFAULT_COLOR_INDEX = {
+    "convert_yes_color": "5",  # Green
+    "convert_no_color":  "2",  # Red
+    "fel_color":         "5",  # Green
+    "mel_color":         "3",  # Orange
+}
+
 # Custom HEX colors, keyed by setting id (each value an 8-digit ARGB hex string),
 # persisted as a JSON file in the add-on profile directory.
 _CUSTOM_FILE = "special://profile/addon_data/script.tinyppi/custom_colors.json"
@@ -345,31 +257,43 @@ def _pick(palette: tuple, value: str) -> str:
         return palette[0]
 
 
-# Default background opacity (percent) used when the setting is missing or
-# invalid.  98 % maps to alpha FA, matching the original hard-coded shades.
-_DEFAULT_BG_OPACITY = 98
+# Fallback opacity (percent) used when a setting is missing or invalid: full
+# opacity for text-based elements.
+_DEFAULT_OPACITY = 100
 
-# Default opacity (percent) for the full-screen global background.  0 % keeps
-# the layer fully transparent (off), so the overlay looks unchanged until the
-# user raises the slider.
-_DEFAULT_GLOBAL_BG_OPACITY = 0
+# Per-element opacity defaults (percent), keyed by color setting id.  Each value
+# reproduces the alpha baked into that element's palette so the out-of-the-box
+# look is unchanged until the user moves the slider.  Elements not listed use
+# ``_DEFAULT_OPACITY`` (100 %, alpha FF).
+_DEFAULT_OPACITIES = {
+    "background_color":        98,  # FA – Modern panel background
+    "global_background_color":  0,  # off until the user raises the slider
+    "accent_color":            70,  # B3 – dimmed inline detail accents
+    "line_color":              15,  # 26 – faint separator lines
+}
 
 
-def _opacity_alpha(addon, setting_id="background_opacity",
-                   default=_DEFAULT_BG_OPACITY, overrides=None) -> str:
+def _opacity_setting(color_setting_id: str) -> str:
+    """Return the opacity slider id paired with a ``*_color`` setting."""
+    return color_setting_id[: -len("_color")] + "_opacity"
+
+
+def _opacity_alpha(addon, setting_id, default, overrides=None) -> str:
     """
     Return the 2-digit hex alpha for a configured opacity slider.
 
     The referenced setting is a 0–100 % slider: 100 % is fully opaque (FF) and
-    0 % is fully transparent (00).  The ``background_opacity`` default of 98 %
-    maps to FA, matching the alpha baked into ``_BACKGROUND_COLORS``.
+    0 % is fully transparent (00).  ``default`` (percent) is used when the
+    setting is missing or invalid.
     """
     try:
         percent = int(_setting_value(addon, setting_id, overrides))
     except (ValueError, TypeError):
         percent = default
     percent = max(0, min(100, percent))
-    return "{:02X}".format(round(percent * 255 / 100))
+    # Round half up so the per-element defaults reproduce the palette's native
+    # alpha exactly (e.g. 70 % → B3 for the accent, 15 % → 26 for the lines).
+    return "{:02X}".format(int(percent * 255 / 100 + 0.5))
 
 
 def _setting_value(addon, setting_id: str, overrides) -> str:
@@ -392,26 +316,30 @@ def _resolve(palette: tuple, addon, setting_id: str, custom: dict, overrides=Non
         stored = str(custom.get(setting_id, "")).strip().upper()
         if _HEX8_RE.match(stored):
             return stored
-        return palette[0]
+        return _pick(palette, _DEFAULT_COLOR_INDEX.get(setting_id, "0"))
     return _pick(palette, value)
 
 
 _THEME_PROPERTIES = (
-    ("TinyPPI.TitleColor",           _TEXT_COLORS, "title_color"),
-    ("TinyPPI.FilenameColor",        _TEXT_COLORS, "filename_color"),
-    ("TinyPPI.IconColor",            _TEXT_COLORS, "icon_color"),
-    ("TinyPPI.HeaderColor",          _TEXT_COLORS, "header_color"),
-    ("TinyPPI.HeaderIconColor",      _TEXT_COLORS, "header_icon_color"),
-    ("TinyPPI.DescriptionColor",     _TEXT_COLORS, "description_color"),
-    ("TinyPPI.OutputColor",          _TEXT_COLORS, "output_color"),
-    ("TinyPPI.ProgressColor",        _TEXT_COLORS, "progress_color"),
-    ("TinyPPI.FpsColor",             _TEXT_COLORS, "fps_color"),
-    ("TinyPPI.UnitColor",            _TEXT_COLORS, "unit_color"),
-    ("TinyPPI.AccentColor",          _ACCENT_COLORS, "accent_color"),
-    ("TinyPPI.BackgroundColor",      _BACKGROUND_COLORS, "background_color"),
+    ("TinyPPI.TitleColor",            _TEXT_COLORS, "title_color"),
+    ("TinyPPI.FilenameColor",         _TEXT_COLORS, "filename_color"),
+    ("TinyPPI.IconColor",             _TEXT_COLORS, "icon_color"),
+    ("TinyPPI.HeaderColor",           _TEXT_COLORS, "header_color"),
+    ("TinyPPI.HeaderIconColor",       _TEXT_COLORS, "header_icon_color"),
+    ("TinyPPI.DescriptionColor",      _TEXT_COLORS, "description_color"),
+    ("TinyPPI.OutputColor",           _TEXT_COLORS, "output_color"),
+    ("TinyPPI.ProgressColor",         _TEXT_COLORS, "progress_color"),
+    ("TinyPPI.FpsColor",              _TEXT_COLORS, "fps_color"),
+    ("TinyPPI.UnitColor",             _TEXT_COLORS, "unit_color"),
+    ("TinyPPI.AccentColor",           _ACCENT_COLORS, "accent_color"),
+    ("TinyPPI.ConvertYesColor",       _TEXT_COLORS, "convert_yes_color"),
+    ("TinyPPI.ConvertNoColor",        _TEXT_COLORS, "convert_no_color"),
+    ("TinyPPI.FelColor",              _TEXT_COLORS, "fel_color"),
+    ("TinyPPI.MelColor",              _TEXT_COLORS, "mel_color"),
+    ("TinyPPI.BackgroundColor",       _BACKGROUND_COLORS, "background_color"),
     ("TinyPPI.GlobalBackgroundColor", _BACKGROUND_COLORS, "global_background_color"),
-    ("TinyPPI.LineColor",            _LINE_COLORS, "line_color"),
-    ("TinyPPI.DialogFocusColor",     _DIALOG_FOCUS_COLORS, "dialog_focus_color"),
+    ("TinyPPI.LineColor",             _LINE_COLORS, "line_color"),
+    ("TinyPPI.DialogFocusColor",      _DIALOG_FOCUS_COLORS, "dialog_focus_color"),
     (
         "TinyPPI.DialogFocusTextColor",
         _DIALOG_FOCUS_TEXT_COLORS,
@@ -432,19 +360,15 @@ def apply_theme(home, addon=None, overrides=None, custom=None) -> None:
 
     for property_name, palette, setting_id in _THEME_PROPERTIES:
         value = _resolve(palette, addon, setting_id, custom, overrides)
-        if setting_id == "background_color":
-            # Override the palette/custom alpha with the panel opacity.
-            value = _opacity_alpha(addon, overrides=overrides) + value[2:]
-        elif setting_id == "global_background_color":
-            # The full-screen global background has its own color and its own
-            # opacity slider (independent of the panel).
-            value = _opacity_alpha(
-                addon,
-                "global_background_opacity",
-                _DEFAULT_GLOBAL_BG_OPACITY,
-                overrides,
-            ) + value[2:]
-        home.setProperty(property_name, value)
+        # Every element has its own opacity slider; its alpha overrides the
+        # palette/custom alpha so the chosen HEX only supplies the RGB channels.
+        alpha = _opacity_alpha(
+            addon,
+            _opacity_setting(setting_id),
+            _DEFAULT_OPACITIES.get(setting_id, _DEFAULT_OPACITY),
+            overrides,
+        )
+        home.setProperty(property_name, alpha + value[2:])
 
     home.setProperty(
         "TinyPPI.UnitLabel",
@@ -485,12 +409,14 @@ def custom_color(setting_id, addon=None) -> None:
     custom = _load_custom()
 
     if not _HEX6_RE.match(raw):
-        # Invalid input → notify and fall back to the default color.
+        # Invalid input → notify and fall back to this element's default color
+        # (not blindly index 0, which is White only for most elements).
+        fallback = _DEFAULT_COLOR_INDEX.get(setting_id, "0")
         custom.pop(setting_id, None)
         _save_custom(custom)
-        addon.setSetting(setting_id, "0")
+        addon.setSetting(setting_id, fallback)
         addon.setSetting(setting_id + _CUSTOM_BTN_SUFFIX, "")
-        setting_value = "0"
+        setting_value = fallback
         _notify(
             addon,
             32244,

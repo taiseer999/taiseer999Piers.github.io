@@ -87,10 +87,6 @@ msgctxt "#32025"
 msgid "Audio queue / data"
 msgstr "音频队列 / 数据"
 
-msgctxt "#32026"
-msgid "VS10 engine"
-msgstr "VS10 引擎"
-
 msgctxt "#32027"
 msgid "Output mode"
 msgstr "输出模式"
@@ -102,10 +98,6 @@ msgstr "正在转换"
 msgctxt "#32030"
 msgid "L5 active area"
 msgstr "L5 有效区域"
-
-msgctxt "#32031"
-msgid "Decode method"
-msgstr "解码方式"
 
 msgctxt "#32032"
 msgid "Player cache"
@@ -130,10 +122,6 @@ msgstr "输入 / 丢帧 / 输出"
 msgctxt "#32045"
 msgid "Audio codec"
 msgstr "音频编解码器"
-
-msgctxt "#32046"
-msgid "Video codec"
-msgstr "视频编解码器"
 
 msgctxt "#32047"
 msgid "Bitrate"
@@ -218,10 +206,6 @@ msgstr "主题"
 msgctxt "#32101"
 msgid "Customise the TinyPPI overlay colors."
 msgstr "自定义 TinyPPI 叠加层的颜色。"
-
-msgctxt "#32102"
-msgid "Colors"
-msgstr "颜色"
 
 msgctxt "#32103"
 msgid "Background"
@@ -747,10 +731,6 @@ msgctxt "#32239"
 msgid "[COLOR=FF242E34]●[/COLOR] Dark cadet"
 msgstr "[COLOR=FF242E34]●[/COLOR] 深军服蓝"
 
-msgctxt "#32240"
-msgid "Custom"
-msgstr "自定义"
-
 msgctxt "#32241"
 msgid "HEX color"
 msgstr "HEX 颜色"
@@ -858,3 +838,55 @@ msgstr "母版显示"
 msgctxt "#32273"
 msgid "MaxCLL/FALL"
 msgstr "MaxCLL/FALL"
+
+msgctxt "#32274"
+msgid "Opacity of this element, from 0% (fully transparent) to 100% (fully opaque)."
+msgstr "此元素的不透明度，从 0%（完全透明）到 100%（完全不透明）。"
+
+msgctxt "#32275"
+msgid "Conversion (yes)"
+msgstr "转换（是）"
+
+msgctxt "#32276"
+msgid "Color of the check-circle icon shown when conversion is active."
+msgstr "转换进行时显示的对勾圆圈图标的颜色。"
+
+msgctxt "#32277"
+msgid "Conversion (no)"
+msgstr "转换（否）"
+
+msgctxt "#32278"
+msgid "Color of the cross-circle icon shown when conversion is inactive."
+msgstr "转换未进行时显示的叉号圆圈图标的颜色。"
+
+msgctxt "#32279"
+msgid "FEL tag"
+msgstr "FEL 标记"
+
+msgctxt "#32280"
+msgid "Color of the FEL enhancement-layer tag in the output mode."
+msgstr "输出模式中 FEL 增强层标记的颜色。"
+
+msgctxt "#32281"
+msgid "MEL tag"
+msgstr "MEL 标记"
+
+msgctxt "#32282"
+msgid "Color of the MEL enhancement-layer tag in the output mode."
+msgstr "输出模式中 MEL 增强层标记的颜色。"
+
+msgctxt "#32283"
+msgid "[COLOR=FFEDEDED]●[/COLOR] White"
+msgstr "[COLOR=FFEDEDED]●[/COLOR] 白色"
+
+msgctxt "#32284"
+msgid "[COLOR=FFB9F6CA]●[/COLOR] Light green (Default)"
+msgstr "[COLOR=FFB9F6CA]●[/COLOR] 浅绿色 (默认)"
+
+msgctxt "#32285"
+msgid "[COLOR=FFFF8A80]●[/COLOR] Light red (Default)"
+msgstr "[COLOR=FFFF8A80]●[/COLOR] 浅红色 (默认)"
+
+msgctxt "#32286"
+msgid "[COLOR=FFFFCC80]●[/COLOR] Light orange (Default)"
+msgstr "[COLOR=FFFFCC80]●[/COLOR] 浅橙色 (默认)"

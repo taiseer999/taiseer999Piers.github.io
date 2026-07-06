@@ -726,6 +726,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DisplayModeVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -743,6 +744,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>60</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VideoResolutionVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -760,6 +762,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>90</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VideoPixelFormatVar)] [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Window().Property(DoviTunnelVar),(,)][/COLOR]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -777,6 +780,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>120</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VideoBitDepthVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -794,6 +798,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VdecBitrate)] $INFO[Window().Property(VdecBitrateUnit)] - [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Window().Property(VideoBitrateMBVar),(Ø ,)][/COLOR]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -803,6 +808,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VideoBitrateMBVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -812,6 +818,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VdecBitrate)] $INFO[Window().Property(VdecBitrateUnit)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -822,6 +829,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>360</width>
 						<label>$ADDON[script.tinyppi 32033]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -840,6 +848,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>180</top>
+						<width>360</width>
 						<label>$INFO[Player.Process(videodar)]:1</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -857,6 +866,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>210</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(VideoDecoderNameVar)]$INFO[Window().Property(VideoCodecVar)] [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]($INFO[Window().Property(VideoDecoderVar)])[/COLOR]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -908,6 +918,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -919,6 +930,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ DV Profile 8.1</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -928,6 +940,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ DV Profile 8.1</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -937,6 +950,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ DV Profile 8.1</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -946,6 +960,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ HDR10</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -955,6 +970,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ HDR10</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -964,6 +980,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ SDR</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -973,6 +990,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ SDR</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -982,6 +1000,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(DoviProfileAltVar)] ➞ SDR</label>
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
@@ -994,7 +1013,7 @@
 						<top>60</top>
 						<label>$ADDON[script.tinyppi 32028]:</label>
 						<font>font23_narrow</font>
-						<textcolor>E7EDEDED</textcolor>
+						<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
 						<aligny>top</aligny>
 					</control>
 					<control type="image">
@@ -1003,7 +1022,7 @@
 						<width>24</width>
 						<height>24</height>
 						<texture>icons/check-circle.png</texture>
-						<colordiffuse>palegreen</colordiffuse>
+						<colordiffuse>$INFO[Window(10000).Property(TinyPPI.ConvertYesColor)]</colordiffuse>
 						<aligny>top</aligny>
 						<visible>[[String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hlg) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10plus) | String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)] | [[String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hlg) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10plus) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)] + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)] | [[String.IsEmpty(Window(10000).Property(TinyPPI.HdrType) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby] + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)]</visible>
 					</control>
@@ -1013,7 +1032,7 @@
 						<width>24</width>
 						<height>24</height>
 						<texture>icons/circle-xmark.png</texture>
-						<colordiffuse>tomato</colordiffuse>
+						<colordiffuse>$INFO[Window(10000).Property(TinyPPI.ConvertNoColor)]</colordiffuse>
 						<aligny>top</aligny>
 						<visible>![[[String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hlg) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10plus) | String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)] | [[String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hlg) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10plus) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)] + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)] | [[String.IsEmpty(Window(10000).Property(TinyPPI.HdrType) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)] + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)]]</visible>
 					</control>
@@ -1029,6 +1048,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>90</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(ModeVar)] $INFO[Window().Property(DoviCmVersionVar),/ ,] [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Window().Property(DoviStructureVar)][/COLOR]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1046,6 +1066,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>120</top>
+						<width>360</width>
 						<label>$INFO[Window().Property(GamutVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1064,6 +1085,7 @@
 						<control type="label">
 							<left>240</left>
 							<top>150</top>
+							<width>360</width>
 							<label>$INFO[Window().Property(DoviLevel6RpuMdlVar)]</label>
 							<font>font23_narrow</font>
 							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1084,6 +1106,7 @@
 						<control type="label">
 							<visible>!String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
 							<top>180</top>
+							<width>360</width>
 							<label>$ADDON[script.tinyppi 32273]:</label>
 							<font>font23_narrow</font>
 							<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
@@ -1092,6 +1115,7 @@
 						<control type="label">
 							<left>240</left>
 							<top>180</top>
+							<width>360</width>
 							<label>$INFO[Window().Property(DoviLevel6RpuMaxCllFallVar)]</label>
 							<font>font23_narrow</font>
 							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1153,6 +1177,7 @@
 						<control type="label">
 							<left>240</left>
 							<top>210</top>
+							<width>360</width>
 							<label>$INFO[Player.Time] $INFO[Player.Duration,/ ,] [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Player.Progress,(,%)][/COLOR]</label>
 							<font>font23_narrow</font>
 							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1164,6 +1189,7 @@
 						<control type="label">
 							<left>240</left>
 							<top>210</top>
+							<width>360</width>
 							<label>$ADDON[script.tinyppi 32033]</label>
 							<font>font23_narrow</font>
 							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1216,6 +1242,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(AudioCodecVar)] $INFO[Window().Property(AudioChannelsVar)] [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Window().Property(AudioCodecSpatialVar)][/COLOR]</label>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
 						<font>font23_narrow</font>
@@ -1233,6 +1260,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>60</top>
+						<width>320</width>
 						<label>$INFO[Player.Process(audiobitspersample),,-bit] / $INFO[Window().Property(AudioSampleRateVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1250,6 +1278,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>90</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(AudioChannelsInputVar)]</label>
 						<font>font23_narrow</font>
 						<scroll>true</scroll>
@@ -1268,6 +1297,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>120</top>
+						<width>320</width>
 						<label>$ADDON[script.tinyppi 32035]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1277,6 +1307,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>120</top>
+						<width>320</width>
 						<label>$INFO[Player.Process(audiochannelssink)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1286,6 +1317,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>120</top>
+						<width>320</width>
 						<label>$ADDON[script.tinyppi 32087]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1304,6 +1336,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(AudioLiveBitrateVar)] - [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Window().Property(AudioBitrateKBVar),(Ø ,)][/COLOR]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1313,6 +1346,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(AudioBitrateKBVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1322,6 +1356,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(AudioLiveBitrateVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1332,6 +1367,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>320</width>
 						<label>$ADDON[script.tinyppi 32033]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1350,6 +1386,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>180</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(AudioNameShortVar)] $INFO[Window().Property(AudioNameVar),| ]</label>
 						<font>font23_narrow</font>
 						<scroll>true</scroll>
@@ -1361,6 +1398,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>180</top>
+						<width>320</width>
 						<label>$ADDON[script.tinyppi 32033]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1379,6 +1417,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>210</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(SubtitleNameShortVar)] $INFO[Window().Property(SubtitleNameVar),| ] [COLOR $INFO[Window(10000).Property(TinyPPI.AccentColor)]]$INFO[Window().Property(SubtitleCodecVar),(,)][/COLOR]</label>
 						<font>font23_narrow</font>
 						<scroll>true</scroll>
@@ -1391,6 +1430,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>210</top>
+						<width>320</width>
 						<label>$ADDON[script.tinyppi 32091]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1401,6 +1441,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>210</top>
+						<width>320</width>
 						<label>$ADDON[script.tinyppi 32033]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1453,6 +1494,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>30</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(FpsInfoVar)] = [COLOR $INFO[Window(10000).Property(TinyPPI.FpsColor)]]$INFO[Window().Property(FpsDropVar),, FPS][/COLOR]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1470,6 +1512,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>60</top>
+						<width>320</width>
 						<label>$INFO[Window().Property(CpuTopUsageVar),, |] $INFO[Window().Property(CpuUsageVar)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1487,6 +1530,7 @@
 					<control type="label">
 						<top>90</top>
 						<left>240</left>
+						<width>65</width>
 						<label>$INFO[System.CPUTemperature]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1521,6 +1565,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>120</top>
+						<width>65</width>
 						<label>$INFO[system.memory(used.percent)]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1556,6 +1601,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>150</top>
+						<width>65</width>
 						<label>$INFO[Player.CacheLevel,,%]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1591,6 +1637,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>180</top>
+						<width>65</width>
 						<label>$INFO[Window().Property(VideoQueueLevelVar)]%</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
@@ -1662,6 +1709,7 @@
 					<control type="label">
 						<left>240</left>
 						<top>210</top>
+						<width>65</width>
 						<label>$INFO[Window().Property(AudioQueueLevelVar)]%</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
