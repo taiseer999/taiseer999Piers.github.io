@@ -192,7 +192,7 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.6.6.1" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.6.8.1" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="tools.tinyppi" version="1.0.6" />
@@ -211,8 +211,8 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
-        <news>v1.6.6.1
-- Merged upstream v1.6.6 onto the custom base.
+        <news>v1.6.8.1
+- Merged upstream v1.6.8 onto the custom base.
 - Re-applied: right-side speaker channel graphic + codec logo stack inside group 9000; panel background/lines/icon extended to x1795; fonts.py NotoSans filename fix with update-in-place Font.xml entries.</news>
         <assets>
             <icon>icon.jpg</icon>

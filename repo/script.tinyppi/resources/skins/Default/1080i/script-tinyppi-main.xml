@@ -926,6 +926,17 @@
 						<visible>![[String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hlg) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10plus) | String.IsEmpty(Window(10000).Property(TinyPPI.HdrType))] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)]</visible>
 						<visible>![[String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)] + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)]</visible>
 						<visible>![[String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hlg) | String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10plus) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)] + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)]</visible>
+						<visible>!String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
+					</control>
+					<control type="label">
+						<left>240</left>
+						<top>30</top>
+						<width>360</width>
+						<label>$INFO[Window().Property(DoviProfileVar)]</label>
+						<font>font23_narrow</font>
+						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
+						<aligny>top</aligny>
+						<visible>String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -935,7 +946,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)) + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
+						<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)) + String.Contains(Player.Process(amlogic.eoft_gamut),DV) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -945,7 +956,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
+						<visible>String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),DV) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -955,7 +966,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
+						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),DV) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -965,7 +976,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)) + String.Contains(Player.Process(amlogic.eoft_gamut),hdr10)</visible>
+						<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType)) + String.Contains(Player.Process(amlogic.eoft_gamut),hdr10) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -975,7 +986,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby) + String.Contains(Player.Process(amlogic.eoft_gamut),hdr10)</visible>
+						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby) + String.Contains(Player.Process(amlogic.eoft_gamut),hdr10) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -985,7 +996,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
+						<visible>String.IsEqual(Window(10000).Property(TinyPPI.HdrType),hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -995,7 +1006,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
+						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 					<control type="label">
 						<left>240</left>
@@ -1005,7 +1016,7 @@
 						<font>font23_narrow</font>
 						<textcolor>e7ededed</textcolor>
 						<aligny>top</aligny>
-						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
+						<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR) + !String.IsEqual(Window().Property(DoviProfilePending),true)</visible>
 					</control>
 
 					<!-- Converting -->
