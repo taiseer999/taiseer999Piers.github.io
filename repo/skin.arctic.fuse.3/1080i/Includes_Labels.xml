@@ -1234,9 +1234,9 @@
         <value condition="!String.IsEmpty(Window(Home).Property(TMDBHelper.ListItem.biography))">$INFO[Window(Home).Property(TMDBHelper.ListItem.biography)]</value>
     </variable>
       <variable name="NetworkVar">
-        <value condition="System.HasAddon(service.coreelec.settings) + String.Contains(Network.IPAddress,1)">[COLOR green][/COLOR]</value> 
-        <value condition="System.HasAddon(service.coreelec.settings) + !String.Contains(Network.IPAddress,1)">[COLOR tomato][/COLOR]</value> 
-        <value condition="![System.HasAddon(service.coreelec.settings)| - System.HasAddon(service.libreelec.settings)]">$INFO[System.InternetState]</value>
+        <value condition="String.Contains(Network.IPAddress,1)">[COLOR dodgerblue][/COLOR]</value>
+        <value condition="!String.Contains(Network.IPAddress,1)">[COLOR tomato][/COLOR]</value>
+        <value condition="![System.HasAddon(service.coreelec.settings)| System.HasAddon(service.libreelec.settings)]">$INFO[System.InternetState]</value>
     </variable>
 
 </includes>
