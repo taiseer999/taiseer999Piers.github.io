@@ -745,15 +745,15 @@
 			 </control>
 			</control>
 
-			<!-- Custom: speaker channels (Dolby Vision layout, mini, bottom-right) -->
+			<!-- Custom: speaker channels (Dolby Vision layout, floating top-right above panel) -->
 			<control type="group">
 				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
-				<left>1700</left>
-				<top>455</top>
+				<left>1487</left>
+				<top>-405</top>
 				<control type="group">
                 <left>0</left>
-				<width>105</width>
-				<height>75</height>
+				<width>318</width>
+				<height>228</height>
 				<aspectratio>keep</aspectratio>
 				<control type="image">
 					<texture colordiffuse="F2666666">ppicodecs/$INFO[VideoPlayer.AudioChannels].png</texture>
