@@ -198,21 +198,30 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
                 return True
         return False
 
+    def _open_settings(self) -> None:
+        """Close the overlay, then open the addon settings.
+
+        The settings dialog is opened after closing because this dialog is
+        modal (doModal); opening another modal on top of the blocked script
+        can fail silently on some Kodi builds."""
+        self.close_dialog()
+        xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
+
     def onAction(self, action: xbmcgui.Action) -> None:
+        aid = action.getId()
+        xbmc.log(f"TinyPPI: overlay onAction id={aid}", xbmc.LOGDEBUG)
         if time.time() - self._opened_at < 0.3:
             return
-        if action.getId() in (xbmcgui.ACTION_MOUSE_LEFT_CLICK, xbmcgui.ACTION_TOUCH_TAP):
+        if aid in (xbmcgui.ACTION_MOUSE_LEFT_CLICK, xbmcgui.ACTION_TOUCH_TAP):
             if self._icon_hit(action.getAmount1(), action.getAmount2()):
-                xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
+                self._open_settings()
                 return
-        if action.getId() == xbmcgui.ACTION_SELECT_ITEM:
+        if aid == xbmcgui.ACTION_SELECT_ITEM:
             # Remote OK/Select: the chart icon is the overlay's only
-            # interactive element, so Select opens the settings whenever
-            # the icon is shown.
-            if xbmcgui.Window(10000).getProperty("TinyPPI.ShowHeaderIcon") == "1":
-                xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
-                return
-        if action.getId() in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
+            # interactive element, so Select opens the settings.
+            self._open_settings()
+            return
+        if aid in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
             self.close_dialog()
 
     def _start_update_loop(self) -> None:
