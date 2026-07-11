@@ -180,9 +180,31 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
     def onClick(self, control_id: int) -> None:
         self.close_dialog()
 
+    # Header chart-icon hotspots: (left, top, size) as defined in
+    # script-tinyppi-main.xml for the SDR and HDR/HLG/DV variants.  Both live
+    # inside group 5000, so the runtime position offset must be added.
+    _ICON_HOTSPOTS = ((1723, 375, 36), (1812, 375, 36))
+    _ICON_HIT_PAD = 12
+
+    def _icon_hit(self, x: float, y: float) -> bool:
+        """Return True if screen coords fall on the visible header icon."""
+        if xbmcgui.Window(10000).getProperty("TinyPPI.ShowHeaderIcon") != "1":
+            return False
+        off_x, off_y = self._offset or (0, 0)
+        pad = self._ICON_HIT_PAD
+        for left, top, size in self._ICON_HOTSPOTS:
+            if (left + off_x - pad) <= x <= (left + off_x + size + pad) \
+                    and (top + off_y - pad) <= y <= (top + off_y + size + pad):
+                return True
+        return False
+
     def onAction(self, action: xbmcgui.Action) -> None:
         if time.time() - self._opened_at < 0.3:
             return
+        if action.getId() in (xbmcgui.ACTION_MOUSE_LEFT_CLICK, xbmcgui.ACTION_TOUCH_TAP):
+            if self._icon_hit(action.getAmount1(), action.getAmount2()):
+                xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
+                return
         if action.getId() in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
             self.close_dialog()
 
