@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.tinyppi" name="TinyPPI" version="1.8.1.6" provider-name="jamal2362,AK">
+<addon id="script.tinyppi" name="TinyPPI" version="1.8.2.1" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="tools.tinyppi" version="1.0.9"/>
@@ -18,7 +18,9 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
-        <news>v1.8.1.3
+        <news>v1.8.2.1
+- Merged upstream v1.8.2 (dvinfo.py, monitor.py, splash.py) onto the 1.8.1.6 custom base; fonts.py, overlay.py, and the skin XML were untouched upstream so all customizations carry over verbatim.
+v1.8.1.3
 - Remote OK/Select while the overlay is open now opens TinyPPI settings (when the header icon is enabled), in addition to mouse/touch on the icon.
 
 v1.8.1.2
