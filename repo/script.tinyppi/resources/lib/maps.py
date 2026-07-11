@@ -1,15 +1,6 @@
-"""
-maps.py – Static lookup tables for TinyPPI.
+"""Static lookup tables, keyed on the lowercase codec/language id Kodi returns."""
 
-All maps are keyed on the lowercase codec/language identifier that Kodi
-returns via its InfoLabel API.  Display strings are intentionally kept in
-their canonical mixed-case form so they can be shown to the user as-is.
-"""
-
-# ---------------------------------------------------------------------------
-# Video codec map  (VideoPlayer.VideoCodec → display label)
-# ---------------------------------------------------------------------------
-
+# Video codec map (VideoPlayer.VideoCodec -> display label)
 VIDEO_CODEC_MAP = {
     "3iv2":       "3ivx",
     "av1":        "AV1",
@@ -50,10 +41,7 @@ VIDEO_CODEC_MAP = {
     "xvid":       "XviD",
 }
 
-# ---------------------------------------------------------------------------
-# Subtitle codec map  (VideoPlayer.SubtitleCodec → display label)
-# ---------------------------------------------------------------------------
-
+# Subtitle codec map (VideoPlayer.SubtitleCodec -> display label)
 SUBTITLE_CODEC_MAP = {
     "ass":               "ASS",
     "dvb_subtitle":      "DVB-SUB",
@@ -75,10 +63,7 @@ SUBTITLE_CODEC_MAP = {
     "xsub":              "XSUB",
 }
 
-# ---------------------------------------------------------------------------
-# Audio codec map  (VideoPlayer.AudioCodec → display label)
-# ---------------------------------------------------------------------------
-
+# Audio codec map (VideoPlayer.AudioCodec -> display label)
 AUDIO_CODEC_MAP = {
     # AAC
     "aac":             "AAC",
@@ -139,10 +124,62 @@ AUDIO_CODEC_MAP = {
     "cdda":            "CD Audio",
 }
 
-# ---------------------------------------------------------------------------
-# Channel count → surround layout string
-# ---------------------------------------------------------------------------
+# Audio codec -> splash logo (VideoPlayer.AudioCodec -> codecs/*.png, relative to
+# the skin media folder).  Unmapped codecs omit the audio image.
+AUDIO_LOGO_MAP = {
+    # AAC
+    "aac":             "codecs/AAC.png",
+    "aac_latm":        "codecs/AAC.png",
+    "aac_lc":          "codecs/AAC.png",
+    "he_aac":          "codecs/AAC.png",
+    "he_aac_v2":       "codecs/AAC.png",
+    "aac_ssr":         "codecs/AAC.png",
+    "aac_ltp":         "codecs/AAC.png",
 
+    # Dolby
+    "ac3":             "codecs/Dolby_Digital.png",
+    "dolbydigital":    "codecs/Dolby_Digital.png",
+    "eac3":            "codecs/Dolby_Digital_Plus.png",
+    "eac3_ddp_atmos":  "codecs/Dolby_Digital_Plus_Atmos.png",
+    "truehd":          "codecs/Dolby_TrueHD.png",
+    "truehd_atmos":    "codecs/Dolby_TrueHD_Atmos.png",
+
+    # DTS
+    "dca":             "codecs/DTS.png",
+    "dts":             "codecs/DTS.png",
+    "dts_96_24":       "codecs/DTS.png",
+    "dts_es":          "codecs/DTS.png",
+    "dts_express":     "codecs/DTS.png",
+    "dtshd":           "codecs/DTS-HD-MA.png",
+    "dtshd_ma":        "codecs/DTS-HD-MA.png",
+    "dtshd_hra":       "codecs/DTS-HD-HRA.png",
+    "dtshd_ma_x":      "codecs/DTSX.png",
+    "dtshd_ma_x_imax": "codecs/IMAX.png",
+
+    # Lossless / PCM
+    "flac":            "codecs/FLAC.png",
+    "pcm":             "codecs/PCM.png",
+    "pcm_bluray":      "codecs/PCM.png",
+    "pcm_s16le":       "codecs/PCM.png",
+    "pcm_s24le":       "codecs/PCM.png",
+
+    # Compressed
+    "mp3":             "codecs/MP3.png",
+    "mp3float":        "codecs/MP3.png",
+    "opus":            "codecs/OPUS.png",
+}
+
+# HDR type -> splash logo (codecs/*.png).  The empty string maps to the SDR
+# logo so every video resolves to a video image.
+HDR_LOGO_MAP = {
+    "":            "codecs/SDR.png",
+    "hdr10":       "codecs/HDR10.png",
+    "hdr10+":      "codecs/HDR10Plus.png",
+    "hlg":         "codecs/HLG.png",
+    "dolbyvision": "codecs/Dolby_Vision.png",
+}
+
+# Channel count -> surround layout string
 CHANNELS_MAP = {
     1:  "1.0",
     2:  "2.0",
@@ -154,10 +191,7 @@ CHANNELS_MAP = {
     10: "9.1",
 }
 
-# ---------------------------------------------------------------------------
-# Channel count → full speaker-label string
-# ---------------------------------------------------------------------------
-
+# Channel count -> full speaker-label string
 CHANNELS_INPUT_MAP = {
     1:  "Mono",
     2:  "FL, FR",
@@ -171,10 +205,7 @@ CHANNELS_INPUT_MAP = {
     10: "FL, FR, FC, LFE, BL, BR, SL, SR, FWL, FWR",
 }
 
-# ---------------------------------------------------------------------------
-# ISO 639-2/B language code → native language name
-# ---------------------------------------------------------------------------
-
+# ISO 639-2/B language code -> native language name
 LANGUAGE_MAP = {
     "abk": "Apsua",
     "ace": "Baksa Acèh",
@@ -661,10 +692,7 @@ LANGUAGE_MAP = {
     "zun": "Shiwi'ma",
 }
 
-# ---------------------------------------------------------------------------
 # ISO 639-2/B language code -> ISO 639-2/T code (uppercase)
-# ---------------------------------------------------------------------------
-
 LANGUAGE_MAP_SHORT = {
     "abk": "ABK",
     "ace": "ACE",

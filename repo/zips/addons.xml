@@ -192,7 +192,7 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.7.2.1" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.8.0.1" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="tools.tinyppi" version="1.0.6" />
@@ -219,7 +219,7 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="5.4.2.2">
+</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="5.4.2.3">
     <requires>
         <import addon="xbmc.gui" version="5.18.0" />
         <import addon="script.skinvariables" version="2.2.1" />

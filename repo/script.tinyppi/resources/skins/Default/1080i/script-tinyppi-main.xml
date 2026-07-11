@@ -18,13 +18,7 @@
             <texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.GlobalBackgroundColor)]">common/dot-1x1.png</texture>
         </control>
 
-        <!-- Codec logos support -->
-        <include condition="Skin.HasSetting(ppi.useleftCodecLogos)">CodecLogosLeftOSD</include>
-        <include condition="Skin.HasSetting(ppi.usecenterCodecLogos)">CodecLogosCenterOSD</include>
-        <include condition="Skin.HasSetting(ppi.userightCodecLogos)">CodecLogosRightOSD</include>
-
         <control type="group" id="5000">
-
 			<!-- Overlay - SDR -->
 			<control type="group">
 			<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType))</visible>
@@ -110,7 +104,7 @@
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
 					</control>
 				</control>
-				
+
 				<!-- Filename -->
 				<control type="group">
 					<visible>String.IsEqual(Window(Home).Property(TinyPPI.Filename),true)</visible>
@@ -128,7 +122,7 @@
 					</control>
 				</control>
 			</control>
-			
+
 			<!-- Overlay - HDR / HLG / DV -->
 			<control type="group">
 			<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hdr) | String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg) | String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
@@ -214,7 +208,7 @@
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
 					</control>
 				</control>
-				
+
 				<!-- Filename -->
 				<control type="group">
 					<visible>String.IsEqual(Window(Home).Property(TinyPPI.Filename),true)</visible>
@@ -232,7 +226,7 @@
 					</control>
 				</control>
 			</control>
-		
+
 			<!-- Group: Bottom screen -->
 			<control type="group" id="9000">
 				<width>1920</width>
@@ -2003,13 +1997,25 @@
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
 						<aligny>top</aligny>
 					</control>
-					<control type="label">
+					<control type="image">
 						<left>333</left>
-						<top>210</top>
-						<label>$INFO[Window().Property(DoviElTypeVar)]</label>
-						<font>font23_narrow</font>
-						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
-						<aligny>top</aligny>
+						<top>215</top>
+						<width>24</width>
+						<height>24</height>
+						<texture>icons/check-circle.png</texture>
+						<colordiffuse>$INFO[Window(10000).Property(TinyPPI.ConvertYesColor)]</colordiffuse>
+						<aspectratio>keep</aspectratio>
+						<visible>String.Contains(Window.Property(DoviElTypeVar),FEL) | String.Contains(Window.Property(DoviElTypeVar),MEL)</visible>
+					</control>
+					<control type="image">
+						<left>333</left>
+						<top>215</top>
+						<width>24</width>
+						<height>24</height>
+						<texture>icons/circle-xmark.png</texture>
+						<colordiffuse>$INFO[Window(10000).Property(TinyPPI.ConvertNoColor)]</colordiffuse>
+						<aspectratio>keep</aspectratio>
+						<visible>![String.Contains(Window.Property(DoviElTypeVar),FEL) | String.Contains(Window.Property(DoviElTypeVar),MEL) | String.IsEmpty(Window.Property(DoviElTypeVar))]</visible>
 					</control>
 				</control>
 				
