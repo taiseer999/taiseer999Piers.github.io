@@ -61,6 +61,24 @@
             <icon>resources/icon.png</icon>
         </assets>
     </extension>
+</addon><addon id="repository.silvo" name="SiLVO Development Repository" version="1.0.0" provider-name="SiLVO">
+    <extension point="xbmc.addon.repository" name="SiLVO Dev Repo">
+        <dir minversion="21.9.1">
+            <info compressed="false">https://raw.githubusercontent.com/MikeSiLVO/repository.silvo/main/piers/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/MikeSiLVO/repository.silvo/main/piers/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/MikeSiLVO/repository.silvo/main/piers/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">SiLVO Development Repository</summary>
+        <description lang="en_GB">Development and pre-release repository for Aeon Nox: SiLVO skin and related addons. Contains beta versions for testing before official Kodi repo releases.</description>
+        <disclaimer lang="en_GB">Pre-release software may contain bugs. Use at your own risk. Stable versions are available in the official Kodi repository.</disclaimer>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon><addon id="repository.taiseer" name="ABUKARIM repository" version="1.0.3" provider-name="taiseer999">
     <extension point="xbmc.addon.repository" name="Example Repository">
         <dir>
@@ -115,6 +133,37 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
+</addon><addon id="resource.images.moviecountryicons.flags" name="Movie Country Icons - Flags" version="0.0.1" provider-name="braz">
+	<extension point="kodi.resource.images" compile="false" type="moviecountryicons" />
+	<requires>
+		<import addon="kodi.resource" version="1.0.0" />
+	</requires>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Flag icons for the Countries node in Movies. Flags courtesy of lipis, https://github.com/lipis/flag-icon-css.</summary>
+		<description lang="en">Flag icons for the Countries node in Movies. Flags courtesy of lipis, https://github.com/lipis/flag-icon-css</description>
+		<disclaimer lang="en">Requires implementation by skinner.</disclaimer>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+		<forum />
+		<website />
+		<email />
+		<source>https://github.com/braz96/resource.images.moviecountryicons.flags</source>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>screenshot.jpg</screenshot>
+		</assets>
+	</extension>
+</addon><addon id="resource.images.weatherfanart.single" name="Weather Fanart - Single" version="0.0.6" provider-name="Silverxxx,Team Kodi">
+	<extension point="kodi.resource.images" compile="false" type="weather" />
+	<requires>
+		<import addon="kodi.resource" version="1.0.0" />
+	</requires>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Weather Fanart Single</summary>
+		<description lang="en">A single Weather Fanart image for every weather condition</description>
+		<platform>all</platform>
+	</extension>
 </addon><addon id="script.fentastic.helper" name="FENtastic Plus Helper" version="100.6.25f" provider-name="Tikipeter, Ivar Brandt, Zaxxon709">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -136,6 +185,155 @@
         <description lang="en_NZ">Helper for the FENtastic Plus Skin. Based on Fentastic Helper v0.6.20a.</description>
         <description lang="en_US">Helper for the FENtastic Plus Skin. Based on Fentastic Helper v0.6.20a.</description>
     </extension>
+</addon><addon id="script.globalsearch" name="Global Search" version="9.2.1" provider-name="ronie">
+	<requires>
+		<import addon="xbmc.python" version="3.0.2" />
+	</requires>
+	<extension point="xbmc.python.script" library="default.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="bg_BG">Търси в библиотеката Ви.</summary>
+		<summary lang="ca_ES">Cerca a la teva biblioteca.</summary>
+		<summary lang="cs_CZ">Hledej v knihovně</summary>
+		<summary lang="de_DE">Durchsuchen Sie Ihre Bibliothek.</summary>
+		<summary lang="el_GR">Αναζήτηση στη Συλλογή σας.</summary>
+		<summary lang="en_GB">Search your library.</summary>
+		<summary lang="en_NZ">Search your library.</summary>
+		<summary lang="en_US">Search your library.</summary>
+		<summary lang="es_ES">Busca en tu biblioteca.</summary>
+		<summary lang="fr_FR">Chercher dans la médiathèque.</summary>
+		<summary lang="fr_CA">Chercher dans votre bibliothèque</summary>
+		<summary lang="gl_ES">Buscar a súa biblioteca.</summary>
+		<summary lang="he_IL">חיפוש בספריית המדיה.</summary>
+		<summary lang="hr_HR">Pretražite svoju zbirku.</summary>
+		<summary lang="hu_HU">Keresés a médiatárban</summary>
+		<summary lang="id_ID">Cari pustaka Anda.</summary>
+		<summary lang="it_IT">Ricerca nella la tua libreria.</summary>
+		<summary lang="ko_KR">라이브러리 찾기</summary>
+		<summary lang="lt_LT">Ieškoti bibliotekoje.</summary>
+		<summary lang="nl_NL">Zoek in je bibliotheek.</summary>
+		<summary lang="nb_NO">Søk i biblioteket ditt</summary>
+		<summary lang="pl_PL">Przeszukaj swoją bibliotekę</summary>
+		<summary lang="pt_PT">Faça buscas na sua biblioteca.</summary>
+		<summary lang="pt_BR">Pesquise sua coleção.</summary>
+		<summary lang="ro_RO">Căutați în mediateca dumneavoastră.</summary>
+		<summary lang="ru_RU">Поиск в вашей медиатеке.</summary>
+		<summary lang="sl_SI">Iščite v svoji knjižnici.</summary>
+		<summary lang="sv_SE">Sök i ditt bibliotek.</summary>
+		<summary lang="tr_TR">Kitaplığını ara</summary>
+		<summary lang="zh_CN">资料库搜索</summary>
+		<description lang="bg_BG">Добавката може да намери всеки елемент във вашата видео и музикална библиотека.</description>
+		<description lang="ca_ES">Aquest complement pot trobat qualsevol article en la teva biblioteca de vídeo i música</description>
+		<description lang="cs_CZ">Tento dopněk dokáže najít libovolnou položku ve vaší audio a video knihovně.</description>
+		<description lang="de_DE">Dieses Add-on kann jeden Eintrag in Ihrer Video- und Musikbibliothek finden.</description>
+		<description lang="el_GR">Αυτό το πρόσθετο μπορεί να βρει κάθε αντικείμενο στις συλλογές σας.</description>
+		<description lang="en_GB">This addon can find any item in your video and music library.</description>
+		<description lang="en_NZ">This addon can find any item in your video and music library.</description>
+		<description lang="en_US">This addon can find any item in your video and music library.</description>
+		<description lang="es_ES">Este complemento puede encontrar cualquier elemento en tu biblioteca de vídeo y música.</description>
+		<description lang="fr_FR">Cette extension peut trouver tout élément dans la vidéothèque et l'audiothèque.</description>
+		<description lang="fr_CA">Cet addiciel peut trouver tout élément dans votre vidéothèque et dans votre audiothèque.</description>
+		<description lang="gl_ES">Este complemento pode atopar calquera elemento na súa biblioteca de medios.</description>
+		<description lang="he_IL">הרחבה זו יכולה למצוא כל פריט בספריות הווידאו והמוזיקה.</description>
+		<description lang="hr_HR">Ovaj dodatak može pronaći svaku stavku u vašoj videoteci ili fonoteci.</description>
+		<description lang="hu_HU">Ez a kiegészítő bármely elemet megtalálja a videó és audió médiatárban.</description>
+		<description lang="id_ID">Addon ini dapat mencari item apa saja di pustaka video dan musik Anda.</description>
+		<description lang="it_IT">Questo addon può trovare ogni elemento nella tua libreria video ed in quella musicale.</description>
+		<description lang="ko_KR">비디오와 음악 라이브러리의 모든 항목을 검색합니다.</description>
+		<description lang="lt_LT">Šis priedas gali rasti bet kokį elementą jūsų vaizdo ir garso bibliotekoje.</description>
+		<description lang="nl_NL">Deze addon kan elk item in je video- en muziekbibliotheken vinden.</description>
+		<description lang="nb_NO">Dette tillegget kan finne hva som helst i ditt film eller musikk bibliotek.</description>
+		<description lang="pl_PL">Ten plugin może odnaleźć dowolną pozycję w twojej bibliotece wideo oraz muzycznej.</description>
+		<description lang="pt_PT">Este addon pode encontrar qualquer item na sua biblioteca de vídeos e de músicas.</description>
+		<description lang="pt_BR">Este addon pode encontrar qualquer item na sua coleção de vídeos e música.</description>
+		<description lang="ro_RO">Acest supliment poate găsi orice element în mediateca dumneavoastră video și audio.</description>
+		<description lang="ru_RU">Это дополнение поможет найти любую запись в вашей медиатеке.</description>
+		<description lang="sl_SI">Ta dodatek lahko poišče katerokoli podatek v vaši knjižnici filmov in glasbe.</description>
+		<description lang="sv_SE">Detta tillägg kan hitta vilket objekt som helst i ditt video och musikbibliotek.</description>
+		<description lang="tr_TR">Bu eklenti video ve müzik kitaplığınızdaki herhangi bir öğeyi bulabilir.</description>
+		<description lang="zh_CN">此插件搜索你的视频和音乐资料库项目。</description>
+		<platform>all</platform>
+		<license>GPL-2.0-only</license>
+		<forum>https://forum.kodi.tv/showthread.php?tid=109301</forum>
+		<source>https://gitlab.com/ronie/script.globalsearch/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+		<news>- compatibel wit Kodi 22 Piers</news>
+	</extension>
+</addon><addon id="script.image.resource.select" name="Image Resource Select Addon" version="3.0.2" provider-name="ronie">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+	</requires>
+	<extension point="xbmc.python.library" library="default.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Image resource selection addon</summary>
+		<description lang="en_GB">Script for skinners to let users select an image resource addon.</description>
+		<platform>all</platform>
+		<license>GPL-2.0-only</license>
+		<forum>https://forum.kodi.tv/showthread.php?tid=239558</forum>
+		<source>https://gitlab.com/ronie/script.image.resource.select</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+		<news>- code refactor</news>
+	</extension>
+</addon><addon id="script.skin.info.service" name="Skin Info Service" version="2.0.0~beta39" provider-name="MikeSiLVO">
+	<requires>
+		<import addon="xbmc.python" version="3.0.1" />
+		<import addon="xbmc.json" version="13.5.0" />
+		<import addon="script.module.pil" version="1.1.7" />
+		<import addon="script.module.requests" version="2.31.0" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="plugin.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.python.library" library="script.py" />
+	<extension point="xbmc.service" library="service.py" />
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="context.py">
+				<label>$ADDON[script.skin.info.service 32102]</label>
+				<visible>!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song)]</visible>
+			</item>
+		</menu>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<license>GPL-3.0-only</license>
+		<source>https://github.com/MikeSiLVO/script.skin.info.service</source>
+		<forum>https://forum.kodi.tv/showthread.php?tid=384016</forum>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+		<news>
+2.0.0~beta39
+- Watched episode percentage on TV show widgets now matches Kodi's own value
+- Fixed stale library info lingering after moving onto an add-on item with no library entry
+
+2.0.0-Betas
+- Complete rewrite of the service
+- Online metadata and multi-source ratings (TMDb, OMDb, MDBList, Trakt, IMDb, Rotten Tomatoes, Metacritic and more)
+- Incremental IMDb rating updates and IMDb Top 250 rankings
+- Smart caching that adapts to content age and TV show status, no manual settings
+- Music and music video online data and artwork (TheAudioDB, Last.fm, Wikipedia, Fanart.tv)
+- Artwork review tool plus single and bulk artwork download
+- Metadata editor for movies, TV shows, episodes, music videos, artists, albums and songs
+- Plugin widgets: Next Up, Discovery, Recommendations, Cast, Crew, Similar, letter jump and more
+- Info dialogs: Actor Info, Video Info and Image Viewer
+- Stinger (mid/post-credits) notifications with skin override support
+- Tools: image blur, color picker, fanart slideshow, texture cache cleanup and GIF poster scanner
+- Skinner helpers: JSON-RPC wrapper (action=json) and skin setting actions
+- Requires Kodi 21 (Omega) or newer; skins enable it with Skin.SetBool(SkinInfo.Service)
+		</news>
+		<summary lang="en_GB">Provides rich media info and artwork to skins.</summary>
+		<summary lang="fr_FR">Fournit aux habillages des informations enrichies sur les médias ainsi que leurs visuels.</summary>
+		<summary lang="pl_PL">Dostarcza bogate informacje o mediach i grafikę dla skórek.</summary>
+		<description lang="en_GB">Skin Info Service provides skins with rich metadata and artwork beyond what Kodi exposes by default. It adds extra properties such as ratings from multiple sources, artwork, stream details, and cast and plot information for movies, TV shows, episodes, sets, music videos, artists, and albums, drawing on both your library and online data. It also includes a tool to find and add animated GIF posters to your library.</description>
+		<description lang="fr_FR">Skin Info Service fournit des informations supplémentaires telles que les notes, les illustrations et les détails de flux pour les films, les séries, les sagas, les artistes et les albums. Comprend un outil de recherche d'affiches GIF pour trouver et ajouter automatiquement des affiches GIF animées à votre médiathèque.</description>
+		<description lang="pl_PL">Skin Info Service dostarcza skórkom bogate metadane i grafikę, wykraczając daleko poza to, co Kodi udostępnia domyślnie. Dodaje dodatkowe właściwości, takie jak oceny z wielu źródeł, grafikę, szczegóły transmisji oraz informacje o obsadzie i fabule filmów, seriali, odcinków, kolekcji filmowych, teledysków, wykonawców i albumów, korzystając zarówno z Twojej biblioteki, jak i danych online. Zawiera również narzędzie do wyszukiwania i dodawania animowanych plakatów GIF do Twojej biblioteki.</description>
+	</extension>
 </addon><addon id="script.skinshortcuts" name="Skin Shortcuts" version="4.0" provider-name="BigNoid, marcelveldt, SiLVO">
     <requires>
         <import addon="xbmc.python" version="3.0.2" />
@@ -192,6 +390,84 @@
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
+</addon><addon id="script.skinshortcuts.22" name="Skin Shortcuts 22" version="3.0.2~beta4" provider-name="MikeSiLVO">
+    <requires>
+        <import addon="xbmc.python" version="3.0.2" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py" />
+    <extension point="xbmc.addon.metadata">
+        <news>
+3.0.2~beta4
+  - Fix: browsed picker icons are stored as plain paths so skin icon overrides apply
+  - Fix: a content folder wraps its items and the Create menu item to here under the content icon
+
+3.0.2~beta3
+  - Fix: the add-ons content placeholder fills its path property like the other picker options
+
+3.0.2~beta2
+  - Add: the widget, shortcut and background pickers stamp a uniform name, path and type on each option
+  - Fix: browsing into a location fills the path and name properties (library node sublevels, sources, add-ons)
+
+3.0.2~beta1
+  - Add: skins can restyle the Skin Shortcuts pickers in DialogSelect using a skinshortcuts-picker property and per-option ListItem metadata
+
+3.0.1
+  - Add: show a source as a library view instead of files (movies, TV shows, episodes, music videos, songs, albums, artists), or everything except it, with a sort order
+  - Add: a global submenuPath element under menus, plus a submenuPath property on menu items for their widget submenu
+  - Add: prompt to switch skins or downgrade the add-on when a skin is built for Skin Shortcuts v2
+  - Add: program add-ons that expose plugin content are browsable in the content picker
+  - Add: skin icon overrides apply to the add-on content placeholder
+  - Fix: Create menu item to here names the menu item after the add-on category
+  - Fix: templateonly now hides a property's numbered slot variants
+  - Fix: a playlist shortcut or background resolves to a valid path
+  - Updated translations
+        </news>
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=383314</forum>
+        <source>https://github.com/MikeSiLVO/script.skinshortcuts</source>
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+        <summary lang="cs_CZ">Vlastní nabídky, vlastnosti a grafika pro vzhledy</summary>
+        <summary lang="en_GB">Custom menus, properties, and artwork for skins</summary>
+        <summary lang="es_ES">Menús, propiedades y arte personalizado para skins</summary>
+        <summary lang="it_IT">Menu personalizzati, proprietà e grafica per le skin</summary>
+        <summary lang="pl_PL">Niestandardowe menu, właściwości i grafika dla skórek</summary>
+        <summary lang="zh_CN">皮肤自定义菜单、属性与艺术图</summary>
+        <description lang="ar_SA">إضافة مخصصه للمظهر لتوفير إدارة بسيطة للودجيت "الأقسام" و الاختصارات على الشاشة (تتطلب دعم المظهر لها)</description>
+        <description lang="bs_BA">Dodatak za skinove koji omogućava jednostavno upravljanje i prikaz korisničkih prečica (potrebna je podrška za skinove)</description>
+        <description lang="cs_CZ">Doplněk pro vzhledy poskytující jednoduchou správu a vypisování uživatelských zkratek (vyžaduje podporu vzhledu)</description>
+        <description lang="da_DK">Add-on til skins der giver enkel styring og lister over brugergenveje (kræver skin-understøttelse)</description>
+        <description lang="de_DE">Addon für Skins zum einfachen Verwalten und Anzeigen von benutzerdefinierten Verknüpfungen (erfordert Skinunterstützung)</description>
+        <description lang="el_GR">Πρόσθετο για κελύφη, το οποίο παρέχει έναν απλό τρόπο διαχείρισης και κατηγοριοποίησης των συντομεύσεων του χρήστη (πρέπει να υποστηρίζεται από το κέλυφος)</description>
+        <description lang="en_GB">Add-on for skins to provide simple managing and listing of user shortcuts (requires skin support)</description>
+        <description lang="en_NZ">Add-on for skins to provide simple managing and listing of user shortcuts (requires skin support)</description>
+        <description lang="en_US">Add-on for skins to provide simple managing and listing of user shortcuts (requires skin support)</description>
+        <description lang="es_ES">Complemento para skins para proporcionar una gestión y listado sencillo de accesos directos de usuario (requiere que el skin lo soporte)</description>
+        <description lang="et_EE">Lisamoodul, mis võimaldab lisada ja redigeerida rüü menüüelemente ja oma otseteid (vajab rüü tuge)</description>
+        <description lang="fi_FI">Lisäosa, jonka avulla ulkoasut voivat tarjota käyttäjille helpon tavan hallita ja mukauttaa valikoita ja pikavalintoja (vaatii ulkoasukohtaisen tuen).</description>
+        <description lang="fr_CA">Addiciel pour habillages qui fournit une gestion simple et un listage des raccourcis utilisateurs (exige la prise en charge de l'habillage)</description>
+        <description lang="fr_FR">Module complémentaire pour les skins pour fournir une gestion et une liste simples de raccourcis utilisateur (nécessite la prise en charge des skins)</description>
+        <description lang="gl_ES">Complemento que fornece aos temas dunha xestión sinxela dos atallos dos usuarios (require soporte do tema)</description>
+        <description lang="hr_HR">Dodatak za presvlake koji omogućuje jednostavno upravljanje i prikaz prečaca korisnika (zahtijeva podršku presvlake)</description>
+        <description lang="hu_HU">Felszín kiegészítő amely könnyen kezelhetővé és listázhatóvá teszi a felhasználói parancsikonokat (Felszín támogatás szükséges)</description>
+        <description lang="is_IS">Viðbót fyrir viðmót til að halda utan um flýtivísa og fá yfirlit yfir þá (þarfnast stuðnings frá viðmóti)</description>
+        <description lang="it_IT">Add-on per skin per fornire una semplice gestione ed elenco delle scorciatoie utente (richiede il supporto della skin)</description>
+        <description lang="ko_KR">사용자 단축키의 간단한 관리 및 목록을 제공하는 스킨용 애드온(스킨 지원 필요)</description>
+        <description lang="lt_LT">Priedas teminėms išvaizdoms, kad jos turėtų galimybę paprastai tvarkyti ir atvaizduoti vartotojo sukurtas nuorodas (reikalingas teminės išvaizdos palaikymas)</description>
+        <description lang="nb_NO">Tillegg for enkel administrering og opplisting av bruker-snarveier i tema (krever støtte i tema)</description>
+        <description lang="nl_NL">Add-on voor skins om te voorzien in het eenvoudig beheren en sorteren van gebruikers snelkoppelingen (vereist skin ondersteuning)</description>
+        <description lang="pl_PL">Wtyczka dla skór, która umożliwia proste zarządzanie i tworzenie list skrótów użytkownika (wymaga wsparcia skóry)</description>
+        <description lang="pt_BR">Add-on para que as skins possam prover gerenciamento de lista de atalhos para o menu principal (requer suporte da skin)</description>
+        <description lang="pt_PT">Um add-on que permite que os temas tenham recursos simples para gerir e listar atalhos de utilizadores (é necessário suporte do tema)</description>
+        <description lang="ru_RU">Дополнение для обложек, предоставляющее простой способ управления пользовательскими ярлыками (требуется поддержка обложкой)</description>
+        <description lang="sk_SK">Doplnok poskytujúci jednoduchý manažment zoznamu užívateľských odkazov (vyžaduje podporu v doplnku pre vzhľad)</description>
+        <description lang="sv_SE">Skinntillägg som tillhandahåller enkel hantering och översikt av användargenvägar (om skinnet stöder det)</description>
+        <description lang="zh_CN">用于皮肤的插件，提供简易的用户快捷方式管理和列表展示（需要皮肤支持）</description>
+        <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
+    </extension>
 </addon><addon id="script.tinyppi" name="TinyPPI" version="1.8.1.6" provider-name="jamal2362,AK">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -225,6 +501,22 @@ v1.8.1.1
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
+</addon><addon id="script.wikipedia" version="0.2.0" name="Wikipedia" provider-name="jurialmunkey">
+<requires>
+  <import addon="xbmc.python" version="3.0.0" />
+  <import addon="script.module.beautifulsoup4" version="4.9.3" />
+  <import addon="script.module.jurialmunkey" version="0.2.35" />
+</requires>
+<extension point="xbmc.python.script" library="resources/script.py" />
+<extension point="xbmc.addon.metadata">
+  <summary lang="en_GB">Access Wikipedia via Kodi</summary>
+  <description lang="en_GB">Access Wikipedia via Kodi</description>
+  <license>GPL-3.0-or-later</license>
+  <assets>
+    <icon>icon.png</icon>
+    <fanart>fanart.jpg</fanart>
+  </assets>
+</extension>
 </addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="5.4.2.3">
     <requires>
         <import addon="xbmc.gui" version="5.18.0" />
@@ -263,6 +555,56 @@ v1.8.1.1
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
+    </extension>
+</addon><addon id="skin.arctic.zephyr.rounded" version="2.2.21" name="Arctic: Zephyr - Rounded" provider-name="jurialmunkey, beatmasterrs, nanomani">
+    <requires>
+        <import addon="xbmc.gui" version="5.18.0" />
+        <import addon="script.skinshortcuts.22" version="3.0.0" />
+        <import addon="script.skinvariables" version="2.1.9" />
+        <import addon="plugin.video.themoviedb.helper" version="5.2.17~nexus" />
+        <import addon="script.wikipedia" version="0.0.5" />
+        <import addon="script.artistslideshow" version="3.3.5" />
+        <import addon="script.globalsearch" version="3.0.0" />
+        <import addon="script.image.resource.select" version="0.0.5" />
+        <import addon="resource.images.recordlabels.white" version="0.0.1" />
+        <import addon="resource.images.studios.coloured" version="0.0.1" />
+        <import addon="resource.images.moviecountryicons.flags" version="0.0.1" />
+        <import addon="resource.images.weathericons.white" version="0.0.6" />
+        <import addon="resource.images.weatherfanart.single" version="0.0.6" />
+    </requires>
+    <extension point="xbmc.gui.skin" defaultthemename="Textures.xbt" debugging="false" effectslowdown="1">
+        <res width="1920" height="1080" aspect="16:9" default="true" folder="1080i" />
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>Creative Commons Non Commercial 3.0 License</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=387634</forum>
+        <source>https://github.com/Nanomani/skin.arctic.zephyr.rounded</source>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>resources/01.jpg</screenshot>
+            <screenshot>resources/02.jpg</screenshot>
+            <screenshot>resources/03.jpg</screenshot>
+            <screenshot>resources/04.jpg</screenshot>
+            <screenshot>resources/05.jpg</screenshot>
+            <screenshot>resources/06.jpg</screenshot>
+            <screenshot>resources/07.jpg</screenshot>
+            <screenshot>resources/08.jpg</screenshot>
+            <screenshot>resources/09.jpg</screenshot>
+            <screenshot>resources/10.jpg</screenshot>
+            <screenshot>resources/11.jpg</screenshot>
+            <screenshot>resources/12.jpg</screenshot>
+        </assets>
+        <summary lang="de">Basiert auf dem original Arctic: Zephyr Skin von jurialmunkey und Arctic: Zephyr Reloaded Skin von beatmasterrs.</summary>
+        <summary lang="en">Based on the original Arctic: Zephyr skin by jurialmunkey and Arctic: Zephyr Reloaded  skin by beatmasterrs.</summary>
+        <summary lang="es">Basado en el original Arctic: Zephyr skin por jurialmunkey y Arctic: Zephyr Reloaded skin por beatmasterrs.</summary>
+        <summary lang="fr">Basé sur le skin original Arctic: Zephyr par jurialmunkey et Arctic: Zephyr Reloaded par beatmasterrs.</summary>
+
+        <description lang="de">Arctic: Zephyr - Rounded basiert auf dem original Arctic: Zephyr Skin von jurialmunkey und Arctic: Zephyr Reloaded Skin von beatmasterrs.</description>
+        <description lang="en">Arctic: Zephyr - Rounded is based on original Arctic: Zephyr skin, created by jurialmunkey and Arctic: Zephyr Reloaded  skin by beatmasterrs.</description>
+        <description lang="es">Arctic : Zephyr - Rounded se basa en la skin original Arctic : Zephyr, creada por jurialmunkey y Arctic : Zephyr Reloaded por beatmasterrs.</description>
+        <description lang="fr">Arctic: Zephyr - Rounded est basé sur le skin original Arctic: Zephyr, créé par jurialmunkey et Arctic: Zephyr Reloaded par beatmasterrs.</description>
     </extension>
 </addon><addon id="skin.bingie" version="2.0.2.2.1" name="Bingie" provider-name="matke">
 	<requires>
