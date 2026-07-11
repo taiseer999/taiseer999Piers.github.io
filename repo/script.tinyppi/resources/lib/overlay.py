@@ -205,6 +205,13 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
             if self._icon_hit(action.getAmount1(), action.getAmount2()):
                 xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
                 return
+        if action.getId() == xbmcgui.ACTION_SELECT_ITEM:
+            # Remote OK/Select: the chart icon is the overlay's only
+            # interactive element, so Select opens the settings whenever
+            # the icon is shown.
+            if xbmcgui.Window(10000).getProperty("TinyPPI.ShowHeaderIcon") == "1":
+                xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
+                return
         if action.getId() in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
             self.close_dialog()
 
