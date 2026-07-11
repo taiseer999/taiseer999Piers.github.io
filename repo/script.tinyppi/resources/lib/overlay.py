@@ -33,7 +33,7 @@ _ADDON_PATH = _ADDON.getAddonInfo("path")
 _dialog_lock = False
 
 # Raise to True to allow launching on non-CoreELEC platforms (e.g. for testing).
-_ALLOW_NON_COREELEC = True
+_ALLOW_NON_COREELEC = False
 
 
 def _is_coreelec() -> bool:

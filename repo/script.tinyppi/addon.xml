@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.tinyppi" name="TinyPPI" version="1.8.0.1" provider-name="jamal2362,AK">
+<addon id="script.tinyppi" name="TinyPPI" version="1.8.1.1" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="tools.tinyppi" version="1.0.6"/>
+        <import addon="tools.tinyppi" version="1.0.9"/>
     </requires>
     <extension point="xbmc.service" library="resources/lib/monitor.py" />
     <extension point="xbmc.python.script" library="main.py">
@@ -18,9 +18,9 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
-        <news>v1.7.2.1
-- Merged upstream v1.7.2 onto the custom base.
-- Re-applied: variant-aware speaker/codec block (SDR full beside grid with background extended to x1795; HDR/HLG 318x228 below metadata; DV 318x228 floating top-right above panel); fonts.py NotoSans fix.</news>
+        <news>v1.8.1.1
+- Merged upstream v1.8.1 onto the custom base.
+- Re-applied: variant-aware speaker/codec block (SDR full + extended background; HDR/HLG below metadata; DV floating top-right); patched fonts.py (NotoSans fix, update-in-place).</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>
