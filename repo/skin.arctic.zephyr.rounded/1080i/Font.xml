@@ -4,12 +4,12 @@
         <include>VideoLyrics_Fonts</include>
         <font>
             <name>font23_narrow</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Regular.ttf</filename>
             <size>21</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Bold.ttf</filename>
             <size>32</size>
         </font>
         <font>
@@ -225,12 +225,12 @@
         <include>VideoLyrics_Fonts</include>
         <font>
             <name>font23_narrow</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Regular.ttf</filename>
             <size>21</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Bold.ttf</filename>
             <size>32</size>
         </font>
         <font>
@@ -441,12 +441,12 @@
         <include>VideoLyrics_Fonts</include>
         <font>
             <name>font23_narrow</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Regular.ttf</filename>
             <size>21</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Bold.ttf</filename>
             <size>32</size>
         </font>
         <font>
@@ -655,12 +655,12 @@
         <include>VideoLyrics_Fonts</include>
         <font>
             <name>font23_narrow</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Regular.ttf</filename>
             <size>21</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <filename>NotoSans-Bold.ttf</filename>
             <size>32</size>
         </font>
         <font>
