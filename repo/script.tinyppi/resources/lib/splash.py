@@ -25,7 +25,6 @@ import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcvfs
-
 from maps import AUDIO_LOGO_MAP, HDR_LOGO_MAP
 from theme import apply_theme
 from utils import PROP_ACTIVE, PROP_DIALOG_MODE, PROP_RUNNING, info
@@ -64,10 +63,19 @@ _BG_COLOR   = "FA15181A"  # Charcoal panel (matches the overlay background)
 _LOGO_COLOR = "FFEDEDED"  # near-white (leaves white logos unchanged)
 
 # Home-window properties published by theme.apply_theme for the splash colours.
-_PROP_BG_COLOR      = "TinyPPI.SplashBackgroundColor"
-_PROP_VIDEO_COLOR   = "TinyPPI.SplashVideoColor"
-_PROP_AUDIO_COLOR   = "TinyPPI.SplashAudioColor"
-_PROP_DIVIDER_COLOR = "TinyPPI.SplashDividerColor"
+# Each context (start / osd / tinyppi) has its own bg / video / audio / divider
+# tint, so a colour change in one context does not touch the others.
+_MODE_PROP_PREFIX = {
+    "start":   "TinyPPI.SplashStart",
+    "osd":     "TinyPPI.SplashOsd",
+    "tinyppi": "TinyPPI.SplashTinyppi",
+}
+_COLOR_PROP_SUFFIX = {
+    "bg":      "BgColor",
+    "video":   "VideoColor",
+    "audio":   "AudioColor",
+    "divider": "DividerColor",
+}
 
 # Controller poll interval (seconds).
 _POLL_INTERVAL = 0.25
@@ -618,14 +626,22 @@ def _read_triggers(addon) -> tuple[bool, bool, bool]:
     )
 
 
-def _read_colors(home, addon) -> dict[str, str]:
-    """Publish the themed colours and read the splash tints back off *home*."""
-    apply_theme(home, addon)
+def _mode_colors(home, mode: str) -> dict[str, str]:
+    """Read *mode*'s bg / video / audio / divider tints off *home*.
+
+    Call after ``apply_theme`` has published the themed properties; falls back to
+    the pre-theme defaults if a property is somehow missing.
+    """
+    prefix = _MODE_PROP_PREFIX[mode]
+    fallback = {
+        "bg":      _BG_COLOR,
+        "video":   _LOGO_COLOR,
+        "audio":   _LOGO_COLOR,
+        "divider": _DIVIDER_COLOR,
+    }
     return {
-        "bg":      home.getProperty(_PROP_BG_COLOR) or _BG_COLOR,
-        "video":   home.getProperty(_PROP_VIDEO_COLOR) or _LOGO_COLOR,
-        "audio":   home.getProperty(_PROP_AUDIO_COLOR) or _LOGO_COLOR,
-        "divider": home.getProperty(_PROP_DIVIDER_COLOR) or _DIVIDER_COLOR,
+        key: home.getProperty(prefix + _COLOR_PROP_SUFFIX[key]) or fallback[key]
+        for key in _COLOR_PROP_SUFFIX
     }
 
 
@@ -724,6 +740,7 @@ def _fade_out(video_window, home, monitor, mode: str, controls) -> None:
     monitor.waitForAbort(_FADE_OUT_SECONDS)
     _remove_controls(video_window, controls)
 
+
 def _safe_addon():
     """Return a fresh Addon, or None while Kodi has our id unregistered.
 
@@ -736,6 +753,7 @@ def _safe_addon():
         return xbmcaddon.Addon()
     except RuntimeError:
         return None
+
 
 def open_splash() -> None:
     """Run the logo overlay controller for the current video's lifetime.
@@ -750,7 +768,6 @@ def open_splash() -> None:
     if addon is None:
         return
     show_on_start, show_on_osd, show_on_tinyppi = _read_triggers(addon)
-    show_on_start, show_on_osd, show_on_tinyppi = _read_triggers(xbmcaddon.Addon())
     if not show_on_start and not show_on_osd and not show_on_tinyppi:
         return
 
@@ -795,7 +812,7 @@ def open_splash() -> None:
             in_start_window = show_on_start and (now - started < duration)
 
             desired_states: dict[str, tuple] = {}
-            colors = None
+            colors_by_mode: dict[str, dict[str, str]] = {}
             if in_fullscreen:
                 logos = _current_logos()
                 if logos:
@@ -808,16 +825,19 @@ def open_splash() -> None:
                         modes.append("tinyppi")
 
                     if modes:
-                        colors = _read_colors(home, addon)
-                        color_state = tuple(sorted(colors.items()))
+                        # Publish every themed colour once, then read each
+                        # context's own tints back so they stay independent.
+                        apply_theme(home, addon)
                         for mode in modes:
+                            colors = _mode_colors(home, mode)
+                            colors_by_mode[mode] = colors
                             setting_x, setting_y = _OFFSET_SETTINGS[mode]
                             desired_states[mode] = (
                                 tuple(logos),
                                 addon.getSettingInt(setting_x),
                                 addon.getSettingInt(setting_y),
                                 _mode_scale(addon, mode),
-                                color_state,
+                                tuple(sorted(colors.items())),
                                 _visible_condition(mode, show_on_osd),
                             )
 
@@ -840,7 +860,7 @@ def open_splash() -> None:
                 if mode in controls_by_mode:
                     _fade_out(video_window, home, monitor, mode, controls_by_mode[mode])
                 controls = _build_controls(
-                    list(desired[0]), colors, desired[1], desired[2],
+                    list(desired[0]), colors_by_mode[mode], desired[1], desired[2],
                     screen_w, screen_h, desired[3],
                 )
                 controls_by_mode[mode] = controls

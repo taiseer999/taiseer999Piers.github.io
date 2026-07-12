@@ -572,10 +572,10 @@
         <description lang="zh_CN">用于皮肤的插件，提供简易的用户快捷方式管理和列表展示（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.8.4.1" provider-name="jamal2362,AK">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.8.6.1" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="tools.tinyppi" version="1.0.9" />
+        <import addon="tools.tinyppi" version="1.1.0" />
     </requires>
     <extension point="xbmc.service" library="resources/lib/monitor.py" />
     <extension point="xbmc.python.script" library="main.py">
@@ -591,17 +591,10 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
-        <news>v1.8.2.1
-- Merged upstream v1.8.2 (dvinfo.py, monitor.py, splash.py) onto the 1.8.1.6 custom base; fonts.py, overlay.py, and the skin XML were untouched upstream so all customizations carry over verbatim.
-v1.8.1.3
-- Remote OK/Select while the overlay is open now opens TinyPPI settings (when the header icon is enabled), in addition to mouse/touch on the icon.
-
-v1.8.1.2
-- Clicking/tapping the header chart icon now opens the TinyPPI settings (mouse/touch hotspot; remote navigation and player controls unaffected).
-
-v1.8.1.1
-- Merged upstream v1.8.1 onto the custom base.
-- Re-applied: variant-aware speaker/codec block (SDR full + extended background; HDR/HLG below metadata; DV floating top-right); patched fonts.py (NotoSans fix, update-in-place).</news>
+        <news>v1.8.6.1
+- Merged upstream v1.8.6 onto the custom base (fonts.py rewritten upstream to text-based Font.xml editing; update-in-place logic re-implemented for the new flow; NotoSans filename fix re-applied; settings-click overlay region grafted onto the new overlay.py).
+- Variant-aware speaker/codec block and SDR background extension re-applied.
+- NOTE: requires tools.tinyppi 1.1.0.</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>

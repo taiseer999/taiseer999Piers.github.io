@@ -5,6 +5,7 @@ FontInstallMonitor re-runs it on skin change or Kodi update.
 """
 
 import os
+import re
 import shutil
 import traceback
 import xml.etree.ElementTree as ET
@@ -129,73 +130,113 @@ def fonts_already_installed(skin_path: str) -> bool:
     return True
 
 
+# Text-based editing preserves the file byte-for-byte apart from the inserted
+# entries: the original XML declaration, encoding, blank lines and line endings
+# stay untouched (ElementTree would rewrite all of these on re-serialisation).
+_FONTSET_RE = re.compile(r"(<fontset\b[^>]*>)(.*?)(</fontset>)", re.DOTALL)
+_INCLUDE_RE = re.compile(r"<include\b.*?(?:/>|</include>)", re.DOTALL)
+_ID_RE      = re.compile(r'\bid\s*=\s*"([^"]*)"')
+
+
+def _fontset_has(inner: str, spec: dict) -> bool:
+    """True if *inner* (a fontset body) already declares this font."""
+    name_ok = re.search(r"<name>\s*" + re.escape(spec["name"]) + r"\s*</name>",
+                        inner)
+    file_ok = re.search(r"<filename>\s*" + re.escape(spec["filename"])
+                        + r"\s*</filename>", inner)
+    return bool(name_ok and file_ok)
+
+
+def _font_block(spec: dict, indent: str, nl: str) -> str:
+    """Render a <font> element (leading newline included) at *indent*."""
+    return (
+        f"{nl}{indent}<font>"
+        f"{nl}{indent}    <name>{spec['name']}</name>"
+        f"{nl}{indent}    <filename>{spec['filename']}</filename>"
+        f"{nl}{indent}    <size>{spec['size']}</size>"
+        f"{nl}{indent}</font>"
+    )
+
+
 def _install_xml(skin_path: str) -> bool:
-    """Insert missing font entries into every <fontset>; True if any written."""
+    """Insert missing font entries into every <fontset>; True if any written.
+
+    Works purely on the file text so nothing outside the inserted <font>
+    blocks is altered.
+    """
     font_xml_path = _find_font_xml(skin_path)
     if not font_xml_path:
         _log("installxml: Font.xml not found", xbmc.LOGERROR)
         return False
 
-    tree     = ET.parse(font_xml_path)
-    xml_root = tree.getroot()
+    try:
+        with open(font_xml_path, "rb") as fh:
+            original = fh.read().decode("utf-8")
+    except (OSError, UnicodeDecodeError) as exc:
+        _log(f"installxml: cannot read Font.xml: {exc}", xbmc.LOGERROR)
+        return False
+
+    nl = "\r\n" if "\r\n" in original else "\n"
     modified = False
 
-    for fontset in xml_root.findall("fontset"):
-        fset_id    = fontset.get("id", "?")
-        include_el = fontset.find("include")
+    def _process(match: "re.Match") -> str:
+        nonlocal modified
+        open_tag, inner, close_tag = match.group(1), match.group(2), match.group(3)
+        fset_id = (_ID_RE.search(open_tag).group(1)
+                   if _ID_RE.search(open_tag) else "?")
 
-        insert_idx = (list(fontset).index(include_el) + 1
-                      if include_el is not None
-                      else len(list(fontset)))
-
-        # Check this fontset's own entries so every fontset gets filled.
-        registered = _registered_fonts(fontset)
-
-        _log(f'Editing fontset "{fset_id}", insert index: {insert_idx}')
-
-        for font_spec in _REQUIRED_FONTS:
-            key = (font_spec["name"], font_spec["filename"])
-            if key in registered:
-                continue
-            # Update-in-place when an entry with the same name already exists
-            # (e.g. stale Inter-*.ttf entries from TinyPPI <= 1.5.x), so Kodi
-            # never sees duplicate font names resolving to the old file.
-            updated = False
-            for font_el in fontset.findall("font"):
-                name_el = font_el.find("name")
-                if name_el is not None and (name_el.text or "").strip() == font_spec["name"]:
-                    fn_el = font_el.find("filename")
-                    if fn_el is None:
-                        fn_el = ET.SubElement(font_el, "filename")
-                    if (fn_el.text or "").strip() != font_spec["filename"]:
-                        fn_el.text = font_spec["filename"]
-                        sz_el = font_el.find("size")
-                        if sz_el is None:
-                            sz_el = ET.SubElement(font_el, "size")
-                        sz_el.text = font_spec["size"]
+        # Update-in-place: rewrite existing same-name entries that point at a
+        # stale filename (e.g. Inter-*.ttf from TinyPPI <= 1.5.x restores), so
+        # Kodi never sees duplicate font names resolving to the old file.
+        def _fix_block(bm: "re.Match") -> str:
+            nonlocal modified
+            block = bm.group(0)
+            for spec in _REQUIRED_FONTS:
+                if re.search(r"<name>\s*" + re.escape(spec["name"]) + r"\s*</name>", block) \
+                        and not re.search(r"<filename>\s*" + re.escape(spec["filename"]) + r"\s*</filename>", block):
+                    fixed = re.sub(r"<filename>[^<]*</filename>",
+                                   f"<filename>{spec['filename']}</filename>", block, count=1)
+                    fixed = re.sub(r"<size>[^<]*</size>",
+                                   f"<size>{spec['size']}</size>", fixed, count=1)
+                    if fixed != block:
                         modified = True
-                        _log(f'Font updated in place: {font_spec["name"]} in fontset "{fset_id}"')
-                    registered.add(key)
-                    updated = True
-                    break
-            if updated:
-                continue
-            el = ET.Element("font")
-            ET.SubElement(el, "name").text     = font_spec["name"]
-            ET.SubElement(el, "filename").text = font_spec["filename"]
-            ET.SubElement(el, "size").text     = font_spec["size"]
-            fontset.insert(insert_idx, el)
-            insert_idx += 1
-            registered.add(key)
-            modified = True
-            _log(f'Font inserted: {font_spec["name"]} in fontset "{fset_id}"')
+                        _log(f'Font updated in place: {spec["name"]} in fontset "{fset_id}"')
+                        return fixed
+            return block
+
+        inner = re.sub(r"<font>.*?</font>", _fix_block, inner, flags=re.S)
+
+        missing = [s for s in _REQUIRED_FONTS if not _fontset_has(inner, s)]
+        if not missing:
+            return open_tag + inner + close_tag
+
+        # Insert right after the <include> element; derive the child indent
+        # from the include line so it matches the surrounding formatting.
+        inc = _INCLUDE_RE.search(inner)
+        if inc:
+            insert_pos = inc.end()
+            line_start = inner.rfind("\n", 0, inc.start()) + 1
+            indent = re.match(r"[ \t]*", inner[line_start:inc.start()]).group(0)
+        else:
+            insert_pos = 0
+            indent = "        "
+        indent = indent or "        "
+
+        blocks = "".join(_font_block(s, indent, nl) for s in missing)
+        for spec in missing:
+            _log(f'Font inserted: {spec["name"]} in fontset "{fset_id}"')
+        modified = True
+        return open_tag + inner[:insert_pos] + blocks + inner[insert_pos:] + close_tag
+
+    updated = _FONTSET_RE.sub(_process, original)
 
     if modified:
         try:
-            ET.indent(tree, space="    ")
-        except AttributeError:
-            pass
-        tree.write(font_xml_path, encoding="utf-8", xml_declaration=True)
+            with open(font_xml_path, "wb") as fh:
+                fh.write(updated.encode("utf-8"))
+        except OSError as exc:
+            _log(f"installxml: cannot write Font.xml: {exc}", xbmc.LOGERROR)
+            return False
         _log(f"Font.xml written: {font_xml_path}")
 
     return modified
