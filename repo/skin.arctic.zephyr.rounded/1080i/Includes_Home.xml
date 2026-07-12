@@ -181,6 +181,8 @@
 
         <!-- SUBMENU -->
 
+        <include condition="Skin.HasSetting(home.style.flix)">Furniture_Home_Flix_Widget_Flags</include>
+
         <include condition="Skin.HasSetting(home.show.sub.menu.horizontal) + !Skin.HasSetting(home.show.menu.icons)">Home_Horizontal_Sub_Menu_Text_Horizontal</include>
         <include condition="[!Skin.HasSetting(home.show.sub.menu.horizontal) | Skin.HasSetting(home.show.menu.icons)]">Home_Horizontal_Sub_Menu_Text_Vertical</include>
 
@@ -1023,6 +1025,10 @@
                         <param name="top" value="120" />
                     </include>
 
+                    <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo">
+                        <param name="id" value="$PARAM[id]" />
+                    </include>
+
                     <include content="Widgets_Item_Plot" condition="!Skin.HasSetting(show.home.flix.title.clearlogo) + !Skin.HasSetting(home.style.horizontal.clean)">
                         <param name="id" value="$PARAM[id]" />
                         <param name="height" value="176" />
@@ -1117,8 +1123,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
 
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
-
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
                 </include>
@@ -1137,8 +1141,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration_JLOM"><param name="id" value="$PARAM[id]" /></include>
-
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1159,8 +1161,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Num_Episode"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
 
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
-
                 <include content="Home_Clean_TvShows_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
                 </include>
@@ -1180,8 +1180,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Episode_X"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Premiered"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
-
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1276,8 +1274,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
 
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
-
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
                 </include>
@@ -1295,8 +1291,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Plugin_ApplePodcats"><param name="id" value="$PARAM[id]" /></include>
-
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1320,8 +1314,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Tagline"><param name="id" value="$PARAM[id]" /></include>
-
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -3003,6 +2995,17 @@
     </include>
 
     <!-- VERTICAL - FLAGS -->
+
+    <include name="Furniture_Home_Flix_Widget_Flags">
+        <control type="group">
+            <animation effect="slide" start="0" end="0,-380" time="0" condition="true">Conditional</animation>
+            <include>Animation_Common_Fade_In</include>
+            <include>Animation_Common_Fade_Out</include>
+            <visible>ControlGroup(301).HasFocus()</visible>
+            <include>Furniture_Footer_Video_Flags</include>
+            <include>Furniture_Footer_Audio_Flags</include>
+        </control>
+    </include>
 
     <include name="Furniture_Home_Vertical_Widget_Flags">
         <control type="group">

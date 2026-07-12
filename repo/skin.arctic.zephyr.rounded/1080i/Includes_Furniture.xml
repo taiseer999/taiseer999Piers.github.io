@@ -1206,6 +1206,15 @@
                             <textcolor>Dark2</textcolor>
                             <label>$INFO[System.Date]</label>
                         </control>
+
+                        <control type="label">
+                            <centertop>92</centertop>
+                            <align>left</align>
+                            <font>font23_narrow</font>
+                            <width>auto</width>
+                            <textcolor>Dark2</textcolor>
+                            <label>$INFO[System.CPUTemperature,[COLOR green][/COLOR] ,]  $INFO[system.memory(used.percent),[COLOR orange][/COLOR] ,]  $VAR[NetworkVar]</label>
+                        </control>
                     </control>
 
                     <control type="group">
@@ -2223,7 +2232,7 @@
         <control type="grouplist">
             <visible>!Skin.HasSetting(enable.furniture.flags.colored)</visible>
 
-            <visible>[Container.Content(videos) | Container.Content(movies) | Container.Content(files) | Container.Content(musicvideos) | Container.Content(episodes) | Container.Content(tvshows) | Container.Content(sets) | Container.Content(videoversions) | [Container.Content(Seasons) + !Control.HasFocus(5161) + !Control.HasFocus(5261)] | $EXP[IsAnVideoInPlaylist]] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)] + Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)]</visible>
+            <visible>[Container.Content(videos) | Container.Content(movies) | Container.Content(files) | Container.Content(musicvideos) | Container.Content(episodes) | Container.Content(tvshows) | Container.Content(sets) | Container.Content(videoversions) | [Container.Content(Seasons) + !Control.HasFocus(5161) + !Control.HasFocus(5261)] | $EXP[IsAnVideoInPlaylist]] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)] + [[Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)] | Skin.HasSetting(home.style.flix)]]</visible>
 
             <visible>[!Container.Content(files) | $EXP[IsAnVideoInPlaylist]] + !String.IsEmpty(ListItem.DBType) + !ListItem.IsParentFolder + !$EXP[IsYoutube]</visible>
 
@@ -2574,7 +2583,7 @@
         <control type="grouplist">
             <visible>Skin.HasSetting(enable.furniture.flags.colored)</visible>
 
-            <visible>[Container.Content(videos) | Container.Content(movies) | Container.Content(files) | Container.Content(musicvideos) | Container.Content(episodes) | Container.Content(sets) | Container.Content(videoversions) | Container.Content(tvshows) | [Container.Content(Seasons) + !Control.HasFocus(5161) + !Control.HasFocus(5261)] | $EXP[IsAnVideoInPlaylist]] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)] + Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)]</visible>
+            <visible>[Container.Content(videos) | Container.Content(movies) | Container.Content(files) | Container.Content(musicvideos) | Container.Content(episodes) | Container.Content(sets) | Container.Content(videoversions) | Container.Content(tvshows) | [Container.Content(Seasons) + !Control.HasFocus(5161) + !Control.HasFocus(5261)] | $EXP[IsAnVideoInPlaylist]] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set)] + [[Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)] | Skin.HasSetting(home.style.flix)]]</visible>
 
             <visible>[!Container.Content(files) | $EXP[IsAnVideoInPlaylist]] + !String.IsEmpty(ListItem.DBType) + !ListItem.IsParentFolder + !$EXP[IsYoutube]</visible>
 
@@ -3033,7 +3042,7 @@
         <control type="grouplist">
             <visible>!Skin.HasSetting(enable.furniture.flags.colored)</visible>
 
-            <visible>[Container.Content(songs) | Container.Content(albums)] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,album)] + Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)]</visible>
+            <visible>[Container.Content(songs) | Container.Content(albums)] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,album)] + [[Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)] | Skin.HasSetting(home.style.flix)]]</visible>
 
             <visible>!ListItem.IsParentFolder</visible>
 
@@ -3200,7 +3209,7 @@
         <control type="grouplist">
             <visible>Skin.HasSetting(enable.furniture.flags.colored)</visible>
 
-            <visible>[Container.Content(songs) | Container.Content(albums)] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,album)] + Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)]</visible>
+            <visible>[Container.Content(songs) | Container.Content(albums)] | [Window.IsVisible(Home) + ControlGroup(301).HasFocus() + [String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,album)] + [[Skin.HasSetting(home.vertical) + !Skin.HasSetting(hide.furniture.flags.vertical.widgets)] | Skin.HasSetting(home.style.flix)]]</visible>
 
             <visible>!ListItem.IsParentFolder</visible>
 

@@ -3244,4 +3244,10 @@
         <value condition="Container.Content(Seasons) + Control.IsVisible(5261)">$INFO[Container(5261).CurrentItem]$INFO[Container(5261).NumItems, / ,]</value>
         <value>$INFO[Container.CurrentItem]$INFO[Container.NumItems, / ,]</value>
     </variable>
+
+    <variable name="NetworkVar">
+        <value condition="String.Contains(Network.IPAddress,1)">[COLOR dodgerblue][/COLOR]</value>
+        <value condition="!String.Contains(Network.IPAddress,1)">[COLOR tomato][/COLOR]</value>
+        <value condition="![System.HasAddon(service.coreelec.settings)| System.HasAddon(service.libreelec.settings)]">$INFO[System.InternetState]</value>
+    </variable>
 </includes>
