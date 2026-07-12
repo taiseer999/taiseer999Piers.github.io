@@ -226,6 +226,11 @@
             <size>24</size>
         </font>
         <font>
+            <name>font14</name>
+            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <size>36</size>
+        </font>
+        <font>
             <name>Clock</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>130</size>
@@ -457,6 +462,11 @@
             <size>28</size>
         </font>
         <font>
+            <name>font14</name>
+            <filename>iphone.ttf</filename>
+            <size>36</size>
+        </font>
+        <font>
             <name>Clock</name>
             <filename>iphone.ttf</filename>
             <size>130</size>
@@ -681,6 +691,11 @@
             <size>30</size>
         </font>
         <font>
+            <name>font14</name>
+            <filename>Jazeerah_bold.ttf</filename>
+            <size>36</size>
+        </font>
+        <font>
             <name>Clock</name>
             <filename>Jazeerah_bold.ttf</filename>
             <size>130</size>
@@ -881,7 +896,7 @@
         </font>
         <font>
             <name>Flag</name>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <filename>tonos.ttf</filename>
             <style>RobotoNotoCJKsc-Regular</style>
             <size>23</size>
@@ -890,41 +905,41 @@
         <font>
             <name>EPGTimeline</name>
             <filename>tonos.ttf</filename>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <size>19</size>
             <aspect>0.9</aspect>
         </font>
         <font>
             <name>Home</name>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <filename>tonos.ttf</filename>
             <size>30</size>
             <aspect>0.9</aspect>
         </font>
         <font>
             <name>HomeFO</name>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <filename>tonos.ttf</filename>
             <size>44</size>
             <aspect>0.9</aspect>
         </font>
         <font>
             <name>HomeIcon</name>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <filename>tonos.ttf</filename>
             <size>26</size>
             <aspect>0.9</aspect>
         </font>
         <font>
             <name>HomeLarge</name>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <filename>tonos.ttf</filename>
             <size>34</size>
             <aspect>0.9</aspect>
         </font>
         <font>
             <name>WidgetSelector</name>
-            <style>uppercase RobotoNotoCJKsc-Regular</style>
+            <style>tonosr</style>
             <filename>tonos.ttf</filename>
             <size>21</size>
             <aspect>0.9</aspect>
@@ -952,6 +967,11 @@
             <filename>tonos.ttf</filename>
             <size>28</size>
             <aspect>0.9</aspect>
+        </font>
+        <font>
+            <name>font14</name>
+            <filename>tonos.ttf</filename>
+            <size>36</size>
         </font>
         <font>
             <name>Clock</name>
