@@ -33,7 +33,7 @@
                     <param name="bottom" value="148" />
                 </include>
 
-                <include content="Def_Bottom" condition="Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)">
+                <include content="Def_Bottom" condition="Skin.HasSetting(home.style.flix)">
                     <param name="bottom" value="88" />
                 </include>
                 <height>770</height>
@@ -69,10 +69,10 @@
 
                 <!-- HOME HORIZONTAL ONLY - MAIN MENU - SLIDE DOWN -->
 
-                <animation effect="slide" start="0" end="0,163" time="250" tween="sine" easing="out" delay="0" condition="!$EXP[Home_Menu_Is_Focus] + !Control.HasFocus(9099) + [Skin.HasSetting(hide.home.menu) | [Skin.HasSetting(hide.home.menu.with.nowplaying.extended) + $EXP[Extended_Now_Playing_Is_Visible] + !ControlGroup(301).HasFocus()]] + !Skin.HasSetting(home.style.horizontal.clean) + ![Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)]">Conditional</animation>
-                <animation effect="slide" start="0" end="0,-300" time="250" tween="sine" easing="out" delay="0" condition="!$EXP[Home_Menu_Is_Focus] + !Control.HasFocus(9099) + [Skin.HasSetting(hide.home.menu) | [Skin.HasSetting(hide.home.menu.with.nowplaying.extended) + $EXP[Extended_Now_Playing_Is_Visible] + !ControlGroup(301).HasFocus()]] + !Skin.HasSetting(home.style.horizontal.clean) + Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)">Conditional</animation>
-                <animation type="Conditional" condition="ControlGroup(301).HasFocus() + Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)" reversible="true">
-                    <effect type="slide" start="0,0" end="0,-300" time="250" tween="sine" easing="out" delay="0" />
+                <animation effect="slide" start="0" end="0,163" time="250" tween="sine" easing="out" delay="0" condition="!$EXP[Home_Menu_Is_Focus] + !Control.HasFocus(9099) + [Skin.HasSetting(hide.home.menu) | [Skin.HasSetting(hide.home.menu.with.nowplaying.extended) + $EXP[Extended_Now_Playing_Is_Visible] + !ControlGroup(301).HasFocus()]] + !Skin.HasSetting(home.style.horizontal.clean) + ![Skin.HasSetting(home.style.flix)]">Conditional</animation>
+                <animation effect="slide" start="0" end="0,-400" time="250" tween="sine" easing="out" delay="0" condition="!$EXP[Home_Menu_Is_Focus] + !Control.HasFocus(9099) + [Skin.HasSetting(hide.home.menu) | [Skin.HasSetting(hide.home.menu.with.nowplaying.extended) + $EXP[Extended_Now_Playing_Is_Visible] + !ControlGroup(301).HasFocus()]] + !Skin.HasSetting(home.style.horizontal.clean) + Skin.HasSetting(home.style.flix)">Conditional</animation>
+                <animation type="Conditional" condition="ControlGroup(301).HasFocus() + Skin.HasSetting(home.style.flix)" reversible="true">
+                    <effect type="slide" start="0,0" end="0,-400" time="250" tween="sine" easing="out" delay="0" />
                     <effect type="fade" start="100" end="0" time="200" delay="0" />
                 </animation>
 
@@ -83,6 +83,9 @@
 
                     <control type="image">
                         <visible>[Integer.IsGreater(Container(300).NumItems,12) + ![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]] | [Integer.IsGreater(Container(300).NumItems,16) + [Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]]</visible>
+                        <include content="Def_Top" condition="Skin.HasSetting(home.style.flix)">
+                            <param name="top" value="146" />
+                        </include>
                         <top>962</top>
                         <left>52</left>
                         <include>Def_Arrow_Size</include>
@@ -91,6 +94,9 @@
                     <control type="image">
                         <visible>Integer.IsGreater(Container(300).NumItems,12)</visible>
                         <visible>![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                        <include content="Def_Top" condition="Skin.HasSetting(home.style.flix)">
+                            <param name="top" value="146" />
+                        </include>
                         <top>962</top>
                         <right>480</right>
                         <include>Def_Arrow_Size</include>
@@ -99,6 +105,9 @@
                     <control type="image">
                         <visible>Integer.IsGreater(Container(300).NumItems,16)</visible>
                         <visible>[Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                        <include content="Def_Top" condition="Skin.HasSetting(home.style.flix)">
+                            <param name="top" value="146" />
+                        </include>
                         <top>962</top>
                         <right>42</right>
                         <include>Def_Arrow_Size</include>
@@ -269,9 +278,9 @@
             <!-- SUB MENU 302  -->
 
             <oninfo condition="!Integer.IsEqual(Container(302).NumItems,0)">SetFocus(302,0,absolute)</oninfo>
-            <ondown condition="!Integer.IsEqual(Container(302).NumItems,0) + ![Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)]">SetFocus(302,0,absolute)</ondown>
-            <ondown condition="Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)">301</ondown>
-            <onup condition="!Integer.IsEqual(Container(302).NumItems,0) + Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)">SetFocus(302,0,absolute)</onup>
+            <ondown condition="!Integer.IsEqual(Container(302).NumItems,0) + ![Skin.HasSetting(home.style.flix)]">SetFocus(302,0,absolute)</ondown>
+            <ondown condition="Skin.HasSetting(home.style.flix)">301</ondown>
+            <onup condition="!Integer.IsEqual(Container(302).NumItems,0) + Skin.HasSetting(home.style.flix)">SetFocus(302,0,absolute)</onup>
             <onclick condition="Skin.HasSetting(show.submenu.on.click.main.menu) + !Integer.IsEqual(Container(302).NumItems,0)">SetFocus(302,0,absolute)</onclick>
 
             <!-- NOWPLAYING : AUTO SLIDE / DISPLAY  IF WIDGET IS FOCUS -->
@@ -292,7 +301,7 @@
 
             <onback condition="Skin.HasSetting(home.onback.go.to.first.widget) + !String.IsEmpty(Window(Home).Property(BackToId))">SetFocus($INFO[Window(Home).Property(BackToId)])</onback>
 
-            <onup condition="[![Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)]] + [!$EXP[Extended_Now_Playing_Is_Visible] | [$EXP[Extended_Now_Playing_Is_Visible] | Skin.HasSetting(hide.home.nowplaying.extended.osd.control.button)]]">301</onup>
+            <onup condition="[![Skin.HasSetting(home.style.flix)]] + [!$EXP[Extended_Now_Playing_Is_Visible] | [$EXP[Extended_Now_Playing_Is_Visible] | Skin.HasSetting(hide.home.nowplaying.extended.osd.control.button)]]">301</onup>
 
             <!-- RESET VALUE BLUR IMAGE -->
 
@@ -1104,8 +1113,11 @@
                 <usecontrolcoords>true</usecontrolcoords>
 
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
+
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1122,8 +1134,11 @@
                 <usecontrolcoords>true</usecontrolcoords>
 
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration_JLOM"><param name="id" value="$PARAM[id]" /></include>
+
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1140,8 +1155,11 @@
                 <usecontrolcoords>true</usecontrolcoords>
 
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Num_Episode"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
+
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_TvShows_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1162,6 +1180,8 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Episode_X"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Premiered"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
+
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1256,6 +1276,8 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
 
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
+
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
                 </include>
@@ -1274,6 +1296,8 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Plugin_ApplePodcats"><param name="id" value="$PARAM[id]" /></include>
 
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
+
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
                 </include>
@@ -1291,10 +1315,13 @@
                 <usecontrolcoords>true</usecontrolcoords>
 
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Tagline"><param name="id" value="$PARAM[id]" /></include>
+
+                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -2150,6 +2177,9 @@
     </include>
 
     <include name="Home_Horizontal_Main_Menu_Icon">
+        <include content="Def_Top" condition="Skin.HasSetting(home.style.flix)">
+            <param name="top" value="32" />
+        </include>
         <top>848</top>
 
         <itemlayout width="111" height="220">
@@ -2278,6 +2308,9 @@
 
             <include content="Def_Top" condition="Skin.HasSetting(home.style.flix) + !Skin.HasSetting(home.show.menu.icons)">
                 <param name="top" value="230" />
+            </include>
+            <include content="Def_Top" condition="Skin.HasSetting(home.style.flix) + Skin.HasSetting(home.show.menu.icons)">
+                <param name="top" value="292" />
             </include>
             <top>181</top>
             <centerleft>170</centerleft>

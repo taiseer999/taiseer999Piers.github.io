@@ -1329,7 +1329,7 @@
     </include>
 
     <include name="Widgets_Item_Sub_Title_Definition">
-        <font>InfoNetflix</font>
+        <font>SubTitleBoldXL</font>
         <width>auto</width>
         <height>46</height>
         <align>left</align>
