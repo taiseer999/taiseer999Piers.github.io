@@ -1207,13 +1207,61 @@
                             <label>$INFO[System.Date]</label>
                         </control>
 
-                        <control type="label">
-                            <centertop>92</centertop>
-                            <align>left</align>
-                            <font>font23_narrow</font>
-                            <width>auto</width>
-                            <textcolor>Dark2</textcolor>
-                            <label>$INFO[System.CPUTemperature,[COLOR green][/COLOR] ,]  $INFO[system.memory(used.percent),[COLOR orange][/COLOR] ,]  $VAR[NetworkVar]</label>
+                        <control type="grouplist">
+                            <top>76</top>
+                            <left>0</left>
+                            <width>800</width>
+                            <height>32</height>
+                            <orientation>horizontal</orientation>
+                            <itemgap>8</itemgap>
+                            <usecontrolcoords>true</usecontrolcoords>
+                            <control type="image">
+                                <width>28</width>
+                                <height>28</height>
+                                <top>2</top>
+                                <aspectratio>keep</aspectratio>
+                                <texture>special://skin/extras/icons/stat_temp.png</texture>
+                            </control>
+                            <control type="label">
+                                <font>font23_narrow</font>
+                                <width>auto</width>
+                                <height>32</height>
+                                <textcolor>Dark2</textcolor>
+                                <label>$INFO[System.CPUTemperature]</label>
+                            </control>
+                            <control type="image">
+                                <width>28</width>
+                                <height>28</height>
+                                <top>2</top>
+                                <left>14</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>special://skin/extras/icons/stat_ram.png</texture>
+                            </control>
+                            <control type="label">
+                                <font>font23_narrow</font>
+                                <width>auto</width>
+                                <height>32</height>
+                                <textcolor>Dark2</textcolor>
+                                <label>$INFO[system.memory(used.percent)]</label>
+                            </control>
+                            <control type="image">
+                                <width>28</width>
+                                <height>28</height>
+                                <top>2</top>
+                                <left>14</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>special://skin/extras/icons/stat_net_on.png</texture>
+                                <visible>String.Contains(Network.IPAddress,1)</visible>
+                            </control>
+                            <control type="image">
+                                <width>28</width>
+                                <height>28</height>
+                                <top>2</top>
+                                <left>14</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>special://skin/extras/icons/stat_net_off.png</texture>
+                                <visible>!String.Contains(Network.IPAddress,1)</visible>
+                            </control>
                         </control>
                     </control>
 
@@ -1853,25 +1901,29 @@
                     </control>
                 </control>
             </control>
-            <control type="label">
-                <centertop>24</centertop>
-                <right>135</right>
-                <align>right</align>
-                <font>LargeBold</font>
-                <textcolor>Dark1</textcolor>
-                <label>$INFO[System.Time(hh:mm)]</label>
-                <animation effect="slide" start="0" end="55" time="0" condition="String.IsEmpty(System.Time(xx))">Conditional</animation>
-                <animation effect="slide" start="0" end="-15" time="0" condition="String.Contains(Skin.Font,Arial) + !String.IsEmpty(System.Time(xx))">Conditional</animation>
-            </control>
-            <control type="label">
-                <centertop>30</centertop>
+            <control type="grouplist">
                 <right>View_List_Side</right>
-                <font>SmallBold</font>
-                <textcolor>Dark3</textcolor>
+                <width>420</width>
+                <height>84</height>
                 <align>right</align>
-                <width>120</width>
-                <label>$INFO[System.Time(xx)]</label>
-                <visible>!String.IsEmpty(System.Time(xx))</visible>
+                <orientation>horizontal</orientation>
+                <itemgap>10</itemgap>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="label">
+                    <centertop>24</centertop>
+                    <width>auto</width>
+                    <font>LargeBold</font>
+                    <textcolor>Dark1</textcolor>
+                    <label>$INFO[System.Time(hh:mm)]</label>
+                </control>
+                <control type="label">
+                    <centertop>30</centertop>
+                    <width>auto</width>
+                    <font>SmallBold</font>
+                    <textcolor>Dark3</textcolor>
+                    <label>$INFO[System.Time(xx)]</label>
+                    <visible>!String.IsEmpty(System.Time(xx))</visible>
+                </control>
             </control>
             <control type="label">
                 <centertop>64</centertop>
