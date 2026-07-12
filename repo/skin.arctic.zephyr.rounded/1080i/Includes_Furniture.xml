@@ -1207,13 +1207,58 @@
                             <label>$INFO[System.Date]</label>
                         </control>
 
-                        <control type="grouplist">
-                            <top>76</top>
-                            <left>0</left>
+                    </control>
+
+                    <control type="group">
+                        <visible>!String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503])</visible>
+                        <visible>!String.IsEmpty(Weather.plugin)</visible>
+                        <visible>Weather.IsFetched</visible>
+                        <include>Animation_Fade_In_WeatherDelay</include>
+
+                        <top>-2</top>
+                        <left>90</left>
+                        <width>50</width>
+                        <height>50</height>
+                        <align>center</align>
+                        <aligny>center</aligny>
+
+                        <include>Def_Feature_Weather_Icon</include>
+                    </control>
+
+                    <control type="group">
+                        <visible>!String.IsEmpty(Weather.plugin)</visible>
+                        <visible>Weather.IsFetched</visible>
+                        <width>500</width>
+                        <left>30</left>
+
+                        <control type="label">
+                            <centertop>24</centertop>
+                            <left>120</left>
+                            <width>auto</width>
+                            <font>Flag</font>
+                            <align>left</align>
+                            <textcolor>Dark2</textcolor>
+                            <label>$INFO[Weather.Data(Current.Temperature)]</label>
+                        </control>
+                    </control>
+                </control>
+            </control>
+        </control>
+
+        <!-- HOME - HEADER - RIGHT - SYSTEM STATS -->
+
+        <control type="group">
+            <visible>!Window.IsVisible(DialogBusy.xml)</visible>
+            <visible>Window.IsActive(Home) + Skin.HasSetting(show.furniture.clock.date.weather)</visible>
+            <include>Animation_Fade_Vertical_Focus_Search</include>
+            <control type="grouplist">
+                            <top>116</top>
+                            <right>64</right>
                             <width>800</width>
                             <height>32</height>
                             <orientation>horizontal</orientation>
                             <itemgap>8</itemgap>
+                            <align>right</align>
                             <usecontrolcoords>true</usecontrolcoords>
                             <control type="image">
                                 <width>28</width>
@@ -1263,42 +1308,6 @@
                                 <visible>!String.Contains(Network.IPAddress,1)</visible>
                             </control>
                         </control>
-                    </control>
-
-                    <control type="group">
-                        <visible>!String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503])</visible>
-                        <visible>!String.IsEmpty(Weather.plugin)</visible>
-                        <visible>Weather.IsFetched</visible>
-                        <include>Animation_Fade_In_WeatherDelay</include>
-
-                        <top>-2</top>
-                        <left>90</left>
-                        <width>50</width>
-                        <height>50</height>
-                        <align>center</align>
-                        <aligny>center</aligny>
-
-                        <include>Def_Feature_Weather_Icon</include>
-                    </control>
-
-                    <control type="group">
-                        <visible>!String.IsEmpty(Weather.plugin)</visible>
-                        <visible>Weather.IsFetched</visible>
-                        <width>500</width>
-                        <left>30</left>
-
-                        <control type="label">
-                            <centertop>24</centertop>
-                            <left>120</left>
-                            <width>auto</width>
-                            <font>Flag</font>
-                            <align>left</align>
-                            <textcolor>Dark2</textcolor>
-                            <label>$INFO[Weather.Data(Current.Temperature)]</label>
-                        </control>
-                    </control>
-                </control>
-            </control>
         </control>
 
         <!-- HOME - HEADER - RIGHT - CLEARLOGO -->
