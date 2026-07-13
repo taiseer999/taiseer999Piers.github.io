@@ -739,6 +739,43 @@
 			 </control>
 			</control>
 
+			<!-- Custom: dark backing plate for DV floating speaker graphic -->
+			<control type="group">
+				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
+				<left>1467</left>
+				<top>-425</top>
+				<!-- Start cap -->
+				<control type="group">
+					<left>0</left>
+					<top>0</top>
+					<width>23</width>
+					<height>268</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/overlay-bg-start.png</texture>
+					</control>
+				</control>
+				<!-- Middle -->
+				<control type="group">
+					<left>23</left>
+					<top>0</top>
+					<width>312</width>
+					<height>268</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">common/dot-1x1.png</texture>
+					</control>
+				</control>
+				<!-- End cap -->
+				<control type="group">
+					<left>335</left>
+					<top>0</top>
+					<width>23</width>
+					<height>268</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/overlay-bg-end.png</texture>
+					</control>
+				</control>
+			</control>
+
 			<!-- Custom: speaker channels (Dolby Vision layout, floating top-right above panel) -->
 			<control type="group">
 				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
