@@ -572,18 +572,18 @@
         <description lang="zh_CN">用于皮肤的插件，提供简易的用户快捷方式管理和列表展示（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.8.6.2" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.9.7.1" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="tools.tinyppi" version="1.1.0" />
+        <import addon="tools.tinyppi" version="1.1.4" />
     </requires>
-    <extension point="xbmc.service" library="resources/lib/monitor.py" />
+    <extension point="xbmc.service" library="resources/lib/service/monitor.py" />
     <extension point="xbmc.python.script" library="main.py">
         <provides>executable</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
-        <license>MIT-License</license>
+        <license>MIT</license>
         <source>https://github.com/CE-Repo/script.tinyppi</source>
         <summary lang="de">Zeigt benutzerdefinierte Prozessinformationen an</summary>
         <summary lang="en">Displays custom player process information</summary>
@@ -591,13 +591,12 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
-        <news>v1.8.6.2
-- Added a dark transparent backing plate behind the DV floating speaker graphic (top-right, DV playback only), using the same overlay-bg textures as the main panel so it inherits your Background color/opacity settings.
-
-v1.8.6.1
-- Merged upstream v1.8.6 onto the custom base (fonts.py rewritten upstream to text-based Font.xml editing; update-in-place logic re-implemented for the new flow; NotoSans filename fix re-applied; settings-click overlay region grafted onto the new overlay.py).
-- Variant-aware speaker/codec block and SDR background extension re-applied.
-- NOTE: requires tools.tinyppi 1.1.0.</news>
+        <news>v1.9.7.1
+- Merged upstream v1.9.7 (major restructure: flat resources/lib/*.py moved into core/, info/, service/, ui/ packages) onto the custom base.
+- Re-applied to ui/fonts.py: NotoSans filename fix and update-in-place same-name Font.xml rewriting.
+- Re-applied to ui/overlay.py: settings-click on remote OK/Select and mouse/touch on the header chart icon, grafted alongside the new upstream arrow-key nudge feature (arrows still nudge the overlay, OK opens settings).
+- Re-applied to skin XML: variant-aware speaker/codec block (SDR full + extended background; HDR/HLG below metadata; DV floating top-right with dark backing plate).
+- NOTE: requires tools.tinyppi 1.1.4.</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>
@@ -966,7 +965,7 @@ v1.8.6.1
 		<description lang="en_NZ">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.1.0" provider-name="jamal2362">
+</addon><addon id="tools.tinyppi" name="TinyPPI Tools" version="1.1.4" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>

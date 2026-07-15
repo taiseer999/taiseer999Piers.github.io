@@ -7,20 +7,20 @@ import os
 import threading
 import time
 
-import fonts
-import properties
 import xbmc
 import xbmcaddon
 import xbmcgui
 import xbmcvfs
-from theme import apply_theme
-from utils import (
+from core.utils import (
     PROP_ACTIVE,
     PROP_DIALOG_MODE,
     PROP_RUNNING,
     clear_overlay_state,
     set_window_properties,
 )
+from info import properties
+from ui import fonts
+from ui.theme import apply_theme
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -33,6 +33,26 @@ _dialog_lock = False
 
 # Raise to True to allow launching on non-CoreELEC platforms (e.g. for testing).
 _ALLOW_NON_COREELEC = False
+
+# Runtime nudge: pixels moved per arrow-key press, and the direction each key
+# shifts the overlay by.  Deliberately not persisted – the nudge lives on the
+# dialog instance, so the next launch starts from the configured offsets again.
+_NUDGE_STEP = 10
+
+# Outermost edges of the overlay content inside group 5000 (see the skin XML);
+# the nudge is clamped so these stay on screen.
+_CONTENT_LEFT      = 35
+_CONTENT_TOP       = 340
+_CONTENT_BOTTOM    = 1045
+_CONTENT_RIGHT_SDR = 1292
+_CONTENT_RIGHT_HDR = 1885
+
+_NUDGE_ACTIONS = {
+    xbmcgui.ACTION_MOVE_LEFT:  (-_NUDGE_STEP, 0),
+    xbmcgui.ACTION_MOVE_RIGHT: (_NUDGE_STEP, 0),
+    xbmcgui.ACTION_MOVE_UP:    (0, -_NUDGE_STEP),
+    xbmcgui.ACTION_MOVE_DOWN:  (0, _NUDGE_STEP),
+}
 
 
 def _is_coreelec() -> bool:
@@ -145,10 +165,15 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         self._monitor   = xbmc.Monitor()
         self._opened_at = 0.0
         self._offset    = None
+        self._auto_hide = 0
+        self._nudge     = (0, 0)
 
     def onInit(self) -> None:
         self._running   = True
         self._opened_at = time.time()
+        # Auto-hide timeout in seconds (0 = off). Applies to the TinyPPI
+        # overlay only, not the VS10 selection dialog.
+        self._auto_hide = _ADDON.getSettingInt("auto_hide")
 
         # Publish properties first so the HDR type is known before the initial
         # position is applied (matters when reopening with a cached result).
@@ -156,28 +181,48 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         self._apply_position_offset()
         self._start_update_loop()
 
-    def _apply_position_offset(self) -> None:
-        """Shift the overlay content by the configured offsets.
+    def _base_offset(self) -> tuple:
+        """Return the (x, y) offset configured in the settings.
 
         From the bottom-left origin, the horizontal offset moves content right,
         the vertical offset moves it up; 100 % is the max on-screen travel
         (30.9 % / 28.1 % of the screen).  The horizontal offset applies to SDR
-        only (HDR stays left-aligned); re-applied each cycle since the HDR type
-        is detected asynchronously, and cached so the unchanged case is skipped.
+        only (HDR stays left-aligned).
         """
         max_x = 0.309
         max_y = 0.281
         offset_x = round(1920 * max_x * _ADDON.getSettingInt("offset_x") / 100)
         offset_y = -round(1080 * max_y * _ADDON.getSettingInt("offset_y") / 100)
-        if xbmcgui.Window(10000).getProperty("TinyPPI.HdrType"):
+        if self._is_hdr():
             offset_x = 0
-        if (offset_x, offset_y) == self._offset:
-            return
-        self._offset = (offset_x, offset_y)
-        self.getControl(5000).setPosition(offset_x, offset_y)
+        return offset_x, offset_y
 
-    def onClick(self, control_id: int) -> None:
-        self.close_dialog()
+    def _is_hdr(self) -> bool:
+        return bool(xbmcgui.Window(10000).getProperty("TinyPPI.HdrType"))
+
+    def _apply_position_offset(self) -> None:
+        """Move group 5000 to the configured offset plus the current nudge.
+
+        The nudge is clamped here rather than where it is applied, so that a
+        later HDR switch (which widens the content) pulls an already nudged
+        overlay back on screen.  Clamping the nudge instead of the resulting
+        position keeps the first press in the opposite direction effective.
+        Re-applied each cycle since the HDR type is detected asynchronously, and
+        cached so the unchanged case is skipped.
+        """
+        base_x, base_y = self._base_offset()
+        nudge_x, nudge_y = self._nudge
+        right = _CONTENT_RIGHT_HDR if self._is_hdr() else _CONTENT_RIGHT_SDR
+
+        nudge_x = min(max(nudge_x, -_CONTENT_LEFT - base_x), 1920 - right - base_x)
+        nudge_y = min(max(nudge_y, -_CONTENT_TOP - base_y), 1080 - _CONTENT_BOTTOM - base_y)
+        self._nudge = (nudge_x, nudge_y)
+
+        offset = (base_x + nudge_x, base_y + nudge_y)
+        if offset == self._offset:
+            return
+        self._offset = offset
+        self.getControl(5000).setPosition(*offset)
 
     # Header chart-icon hotspots: (left, top, size) as defined in
     # script-tinyppi-main.xml for the SDR and HDR/HLG/DV variants.  Both live
@@ -189,39 +234,48 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         """Return True if screen coords fall on the visible header icon."""
         if xbmcgui.Window(10000).getProperty("TinyPPI.ShowHeaderIcon") != "1":
             return False
-        off_x, off_y = self._offset or (0, 0)
+        off_x, off_y = self._offset if self._offset else (0, 0)
+        nx, ny = self._nudge
         pad = self._ICON_HIT_PAD
         for left, top, size in self._ICON_HOTSPOTS:
-            if (left + off_x - pad) <= x <= (left + off_x + size + pad) \
-                    and (top + off_y - pad) <= y <= (top + off_y + size + pad):
+            if (left + off_x + nx - pad) <= x <= (left + off_x + nx + size + pad) \
+                    and (top + off_y + ny - pad) <= y <= (top + off_y + ny + size + pad):
                 return True
         return False
 
     def _open_settings(self) -> None:
-        """Close the overlay, then open the addon settings.
-
-        The settings dialog is opened after closing because this dialog is
-        modal (doModal); opening another modal on top of the blocked script
-        can fail silently on some Kodi builds."""
+        """Close the overlay, then open the addon settings."""
         self.close_dialog()
         xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
 
+    def _move(self, dx: int, dy: int) -> None:
+        """Shift the overlay by one step; reverts on the next launch."""
+        nudge_x, nudge_y = self._nudge
+        self._nudge = (nudge_x + dx, nudge_y + dy)
+        self._apply_position_offset()
+
+    def onClick(self, control_id: int) -> None:
+        self.close_dialog()
+
     def onAction(self, action: xbmcgui.Action) -> None:
-        aid = action.getId()
-        xbmc.log(f"TinyPPI: overlay onAction id={aid}", xbmc.LOGDEBUG)
         if time.time() - self._opened_at < 0.3:
             return
-        if aid in (xbmcgui.ACTION_MOUSE_LEFT_CLICK, xbmcgui.ACTION_TOUCH_TAP):
+        action_id = action.getId()
+        if action_id in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
+            self.close_dialog()
+            return
+        if action_id in (xbmcgui.ACTION_MOUSE_LEFT_CLICK, xbmcgui.ACTION_TOUCH_TAP):
             if self._icon_hit(action.getAmount1(), action.getAmount2()):
                 self._open_settings()
-                return
-        if aid == xbmcgui.ACTION_SELECT_ITEM:
+            return
+        if action_id == xbmcgui.ACTION_SELECT_ITEM:
             # Remote OK/Select: the chart icon is the overlay's only
             # interactive element, so Select opens the settings.
             self._open_settings()
             return
-        if aid in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
-            self.close_dialog()
+        step = _NUDGE_ACTIONS.get(action_id)
+        if step:
+            self._move(*step)
 
     def _start_update_loop(self) -> None:
         t = threading.Thread(target=self._update_loop, daemon=True)
@@ -234,6 +288,8 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
             if not player.isPlaying():
                 break
             if not xbmc.getCondVisibility("Window.IsActive(fullscreenvideo)"):
+                break
+            if self._auto_hide and time.time() - self._opened_at >= self._auto_hide:
                 break
 
             properties.update_properties(self)
@@ -321,7 +377,7 @@ def open_dialog_mode() -> None:
     apply_theme(home, _ADDON)
 
     try:
-        from mode_select import open_dialog
+        from ui.mode_select import open_dialog
         open_dialog()
     finally:
         _release_overlay(home)

@@ -6,7 +6,8 @@ Various tools required for the TinyPPI add-on.
 
 ## Included Files
 
-- `tools/hdrprobe/hdrprobe` - hdrprobe binary for media analysis and media processing.
+- `tools/audioprobe/audioprobe` - audioprobe binary for audio analysis.
+- `tools/hdrprobe/hdrprobe` - hdrprobe binary for video analysis.
 - `tools/fonts/Noto-Regular.ttf` - Noto Regular font.
 - `tools/fonts/Noto-Bold.ttf` - Noto Bold font.
 - `icon.jpg` - Kodi add-on icon.
@@ -23,6 +24,7 @@ import os
 import xbmcaddon
 
 addon_path = xbmcaddon.Addon("tools.tinyppi").getAddonInfo("path")
+audioprobe_path = os.path.join(addon_path, "tools", "audioprobe", "audioprobe")
 hdrprobe_path = os.path.join(addon_path, "tools", "hdrprobe", "hdrprobe")
 font_regular_path = os.path.join(addon_path, "tools", "fonts", "Noto-Regular.ttf")
 font_bold_path = os.path.join(addon_path, "tools", "fonts", "Noto-Bold.ttf")
@@ -40,6 +42,8 @@ tools.tinyppi/
 |-- LICENSE
 |-- README.md
 `-- tools/
+    |-- audioprobe/
+    |   `-- audioprobe
     |-- hdrprobe/
     |   `-- hdrprobe
     `-- fonts/
@@ -52,4 +56,5 @@ tools.tinyppi/
 ## Credits
 
 - **hdrprobe** by [matthane](https://github.com/matthane/hdrprobe) — fast HDR, HDR10+, and Dolby Vision metadata inspector. Licensed under the MIT License.
+- **audioprobe** by [CE-Repo](https://github.com/CE-Repo/audioprobe) — fast audio metadata inspector. Licensed under the MIT License.
 - **Google Noto Fonts** by [Google](https://github.com/notofonts/notofonts.github.io) — the Noto font family, aiming to support all languages with a harmonious look and feel. Licensed under the SIL Open Font License 1.1.

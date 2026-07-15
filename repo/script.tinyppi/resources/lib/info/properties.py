@@ -7,9 +7,22 @@ import re
 
 import xbmc
 import xbmcgui
-from dvinfo import (
-    get_audio_bit_depth,
-    get_audio_sample_rate,
+from core.helpers import format_fps, fps_display_texts, normalize_fps
+from core.maps import (
+    AUDIO_BIT_DEPTH_MAP,
+    AUDIO_CODEC_MAP,
+    AUDIO_PCM_DEPTH_CODECS,
+    CHANNELS_INPUT_MAP,
+    CHANNELS_MAP,
+    LANGUAGE_MAP,
+    LANGUAGE_MAP_SHORT,
+    SUBTITLE_CODEC_MAP,
+    VIDEO_CODEC_MAP,
+)
+from core.utils import clean, cond, info, set_window_properties
+from info.dvinfo import (
+    get_active_audio_bit_depth,
+    get_active_audio_sample_rate,
     get_bit_depth,
     get_cm_version,
     get_dv_bl_present,
@@ -29,19 +42,6 @@ from dvinfo import (
     is_fetch_label,
     is_status_label,
 )
-from helpers import format_fps, fps_display_texts, normalize_fps
-from maps import (
-    AUDIO_BIT_DEPTH_MAP,
-    AUDIO_CODEC_MAP,
-    AUDIO_PCM_DEPTH_CODECS,
-    CHANNELS_INPUT_MAP,
-    CHANNELS_MAP,
-    LANGUAGE_MAP,
-    LANGUAGE_MAP_SHORT,
-    SUBTITLE_CODEC_MAP,
-    VIDEO_CODEC_MAP,
-)
-from utils import clean, cond, info, set_window_properties
 
 _DECIMAL_RE = re.compile(r"-?\d+(?:[.,]\d+)?")
 
@@ -247,27 +247,26 @@ def get_GamutVar() -> str:
     return parts[1] if len(parts) > 1 else ""
 
 
-def _output_mode_from_hw() -> str:
-    """Classify the ``amlogic.eoft_gamut`` mode token into an output-mode label
-    (``SDR`` / ``HDR10`` / ``HLG`` / ``HDR10+`` / ``Dolby Vision``), or ``''``.
+def _output_mode_from_videoplayer() -> str:
+    """Classify Kodi's ``VideoPlayer.HDRType`` InfoLabel into an output-mode
+    label (``SDR`` / ``HDR10`` / ``HLG`` / ``HDR10+`` / ``Dolby Vision``).
 
-    Reads the display's actual output signalling, so it works as the fallback
-    when hdrprobe detection could not run.
+    Reads Kodi's own source-side HDR detection, so it works as the fallback when
+    hdrprobe detection could not run.  An empty ``VideoPlayer.HDRType`` means no
+    HDR signalling, i.e. ``SDR``.
     """
-    mode = get_ModeVar().upper()
-    if not mode:
-        return ""
-    if "DV" in mode or "DOLBY" in mode:
-        return "Dolby Vision"
-    if "HDR10+" in mode or "HDR10PLUS" in mode or "PLUS" in mode:
-        return "HDR10+"
-    if "HLG" in mode:
-        return "HLG"
-    if "HDR" in mode:
-        return "HDR10"
-    if "SDR" in mode:
+    hdr = info("VideoPlayer.HDRType").lower()
+    if not hdr:
         return "SDR"
-    return ""
+    if "dolby" in hdr or "dovi" in hdr:
+        return "Dolby Vision"
+    if "hdr10+" in hdr or "hdr10plus" in hdr:
+        return "HDR10+"
+    if "hlg" in hdr:
+        return "HLG"
+    if "hdr10" in hdr or "hdr" in hdr or "pq" in hdr:
+        return "HDR10"
+    return "SDR"
 
 
 def _media_source_name(output_mode: str) -> str:
@@ -377,32 +376,13 @@ def get_AudioChannelsInputVar() -> str:
         return xbmc.getLocalizedString(13205)
 
 
-# Kodi audio codec name prefix -> audioprobe codec family (see audioprobe.py).
-# ``dts`` covers dts / dtshd_ma / dtshd_ma_x / dts_96_24 / ...; ``dca`` is
-# Kodi's alternate name for DTS core.
-_AUDIO_PROBE_FAMILY_PREFIXES = (
-    ("truehd", "truehd"),
-    ("dts", "dts"),
-    ("dca", "dts"),
-    ("mlp", "mlp"),
-    ("flac", "flac"),
-)
-
-
-def _audio_probe_family(codec: str) -> str:
-    """Map a Kodi audio codec name to its audioprobe codec family, or ''."""
-    for prefix, family in _AUDIO_PROBE_FAMILY_PREFIXES:
-        if codec.startswith(prefix):
-            return family
-    return ""
-
-
 def get_AudioBitDepthVar() -> str:
     """Return the source audio bit depth for display, e.g. ``24-bit``.
 
-    The depth is read from the source bitstream itself (audioprobe.py): DTS
-    carries it in the core header, MLP in the major sync, FLAC in STREAMINFO;
-    TrueHD encodes none, so a detected stream reports the universal 24.
+    The depth is read from the source bitstream itself by the audioprobe binary,
+    for the currently active audio track (see dvinfo.py): DTS carries it in the
+    core header, MLP in the major sync, FLAC in STREAMINFO; TrueHD encodes none,
+    so a detected stream reports the universal 24.
 
     While detection still runs (or found nothing), known bitstream codecs
     fall back to AUDIO_BIT_DEPTH_MAP, because Kodi's own
@@ -413,12 +393,11 @@ def get_AudioBitDepthVar() -> str:
     PCM bit depth at all and returns ``''``, so the skin shows only the
     sample rate.
     """
-    codec = info("VideoPlayer.AudioCodec").lower().strip()
-
-    probed = get_audio_bit_depth(_audio_probe_family(codec))
+    probed = get_active_audio_bit_depth()
     if probed:
         return f"{probed}-bit"
 
+    codec = info("VideoPlayer.AudioCodec").lower().strip()
     depth = AUDIO_BIT_DEPTH_MAP.get(codec)
     if depth:
         return f"{depth}-bit"
@@ -434,14 +413,13 @@ def get_AudioBitDepthVar() -> str:
 def get_AudioSampleRateVar() -> str:
     """Return the source audio sample rate for display, e.g. ``96 kHz``.
 
-    A rate probed from the source bitstream takes precedence; the scanner
-    only emits one for the DTS family, where Kodi reports the compatibility
-    core's rate (48 kHz) even when the extension carries 96/192 kHz (DTS
-    96/24, high-rate DTS-HD).  Everywhere else Kodi's own value already is
-    the source rate.
+    The rate probed from the source bitstream for the active audio track
+    (audioprobe binary) takes precedence: Kodi reports the DTS compatibility
+    core's rate (48 kHz) even when the extension carries 96/192 kHz (DTS 96/24,
+    high-rate DTS-HD).  Everywhere else the probed rate already equals Kodi's
+    own value, and Kodi's is the fallback while detection runs.
     """
-    codec = info("VideoPlayer.AudioCodec").lower().strip()
-    samplerate = get_audio_sample_rate(_audio_probe_family(codec))
+    samplerate = get_active_audio_sample_rate()
     if not samplerate:
         samplerate = clean(info("Player.Process(audiosamplerate)"))
     try:
@@ -623,14 +601,14 @@ def update_properties(window) -> None:
     bitrate_value, bitrate_unit = get_VdecBitrateVar()
     fps_info_text, fps_out_text = fps_display_texts()
 
-    # Output-mode line from hdrprobe; fall back to a plain label from the
-    # Amlogic hardware mode when it would show N/A (``Fetching...`` is kept).
+    # Output-mode line from hdrprobe; fall back to a plain label from Kodi's
+    # ``VideoPlayer.HDRType`` when it would show N/A (``Fetching...`` is kept).
     output_mode = get_output_mode()
     # Pending flag: the skin uses it to suppress the conversion-arrow suffix
     # while only the ``Fetching...`` placeholder should show.
     output_mode_pending = is_fetch_label(output_mode)
     if is_status_label(output_mode) and not is_fetch_label(output_mode):
-        output_mode = _output_mode_from_hw() or output_mode
+        output_mode = _output_mode_from_videoplayer() or output_mode
 
     l5_offsets = get_l5_offsets()
     l5_offsets_icon_visible = (

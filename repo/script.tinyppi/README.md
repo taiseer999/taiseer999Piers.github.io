@@ -4,9 +4,13 @@ A CoreELEC addon that displays detailed playback information in a custom overlay
 
 ---
 
-## Screenshot
+## Screenshots
 <p align="center">
-<img width="1200" alt="PPI" src="https://github.com/user-attachments/assets/79a1e3e1-fa03-4534-b8ca-0a39256f4af2" />
+<img width="1200" alt="TinyPPI-Overlay" src="https://github.com/user-attachments/assets/79a1e3e1-fa03-4534-b8ca-0a39256f4af2" />
+</p>
+
+<p align="center">
+<img width="1200" alt="VS10-Dialog" src="https://github.com/user-attachments/assets/d0a005fb-62bf-4277-93ee-4358f61cb172" />
 </p>
 
 ---
@@ -107,9 +111,10 @@ separately.
 | Dolby Digital Plus Atmos | Dolby Digital Plus with Dolby Atmos |
 | Dolby TrueHD | Dolby TrueHD |
 | Dolby TrueHD Atmos | Dolby TrueHD with Dolby Atmos |
-| DTS | DTS (incl. DTS Express) |
+| DTS | DTS |
 | DTS 96/24 | DTS 96/24 |
 | DTS-ES | DTS-ES |
+| DTS-Express | DTS Express |
 | DTS-HD HRA | DTS-HD High Resolution Audio |
 | DTS-HD MA | DTS-HD Master Audio |
 | DTS:X | DTS:X |
