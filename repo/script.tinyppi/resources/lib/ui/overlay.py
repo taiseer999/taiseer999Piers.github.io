@@ -282,6 +282,30 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         self._dv_channel_offset = offset
         self.getControl(5100).setPosition(*offset)
 
+    # Header chart-icon hotspots: (left, top, size) as defined in
+    # script-tinyppi-main.xml for the SDR and HDR/HLG/DV variants.  Both live
+    # inside group 5000, so the runtime position offset must be added.
+    _ICON_HOTSPOTS = ((1723, 375, 36), (1812, 375, 36))
+    _ICON_HIT_PAD = 12
+
+    def _icon_hit(self, x: float, y: float) -> bool:
+        """Return True if screen coords fall on the visible header icon."""
+        if xbmcgui.Window(10000).getProperty("TinyPPI.ShowHeaderIcon") != "1":
+            return False
+        off_x, off_y = self._offset if self._offset else (0, 0)
+        nx, ny = self._nudge
+        pad = self._ICON_HIT_PAD
+        for left, top, size in self._ICON_HOTSPOTS:
+            if (left + off_x + nx - pad) <= x <= (left + off_x + nx + size + pad) \
+                    and (top + off_y + ny - pad) <= y <= (top + off_y + ny + size + pad):
+                return True
+        return False
+
+    def _open_settings(self) -> None:
+        """Close the overlay, then open the addon settings."""
+        self.close_dialog()
+        xbmc.executebuiltin("Addon.OpenSettings(script.tinyppi)")
+
     def _move(self, dx: int, dy: int) -> None:
         """Shift the overlay by one step; reverts on the next launch."""
         nudge_x, nudge_y = self._nudge
@@ -297,6 +321,15 @@ class TinyPPIDialog(xbmcgui.WindowXMLDialog):
         action_id = action.getId()
         if action_id in (xbmcgui.ACTION_PREVIOUS_MENU, xbmcgui.ACTION_NAV_BACK):
             self.close_dialog()
+            return
+        if action_id in (xbmcgui.ACTION_MOUSE_LEFT_CLICK, xbmcgui.ACTION_TOUCH_TAP):
+            if self._icon_hit(action.getAmount1(), action.getAmount2()):
+                self._open_settings()
+            return
+        if action_id == xbmcgui.ACTION_SELECT_ITEM:
+            # Remote OK/Select: the chart icon is the overlay's only
+            # interactive element, so Select opens the settings.
+            self._open_settings()
             return
         step = _NUDGE_ACTIONS.get(action_id)
         if step:

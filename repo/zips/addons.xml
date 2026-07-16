@@ -572,7 +572,7 @@
         <description lang="zh_CN">用于皮肤的插件，提供简易的用户快捷方式管理和列表展示（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.tinyppi" name="TinyPPI" version="1.9.8" provider-name="jamal2362">
+</addon><addon id="script.tinyppi" name="TinyPPI" version="1.9.8.1" provider-name="jamal2362">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="tools.tinyppi" version="1.1.4" />
@@ -591,6 +591,12 @@
         <description lang="de">Öffnet ein eigenes Prozessinformationen-Fenster. Dieses enthält Codec-, Video- und Audio-Details zum aktuell abgespielten Medium.</description>
         <description lang="en">Opens a separate process information window. This window displays codec, video, and audio details for the currently playing media.</description>
         <description lang="zh">打开一个独立的进程信息窗口。此窗口显示当前播放媒体的编解码器、视频和音频详细信息。</description>
+        <news>v1.9.8.1
+- Merged upstream v1.9.8 onto the custom base.
+- Retired custom ppicodecs channel-layout blocks: upstream 1.9.8 now ships a native equivalent for all three variants (SDR wide, HDR wide, and a dedicated DV top-right panel with its own horizontal offset), themed via the ChannelBackgroundColor / ChannelLayoutColor / ChannelIconColor settings.  The custom XML has been removed to avoid duplicate graphics; enable Show speaker layout per variant in the Overlay settings to see them.
+- Re-applied ui/fonts.py: NotoSans filename fix and update-in-place same-name Font.xml rewriting.
+- Re-applied ui/overlay.py: settings-click on remote OK/Select and mouse/touch on the header chart icon; upstream arrow-key nudge and the new DV channel offset both preserved.
+- NOTE: still requires tools.tinyppi 1.1.4 (unchanged).</news>
         <assets>
             <icon>icon.jpg</icon>
             <fanart>fanart.jpg</fanart>

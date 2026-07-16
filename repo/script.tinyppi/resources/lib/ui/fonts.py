@@ -19,8 +19,8 @@ _ADDON_DIR = _ADDON.getAddonInfo("path")
 _ADDONS_ROOT = os.path.dirname(os.path.dirname(_ADDON_DIR))
 
 _REQUIRED_FONTS = (
-    {"name": "font23_narrow", "filename": "Noto-Regular.ttf", "size": "21"},
-    {"name": "font32",        "filename": "Noto-Bold.ttf",    "size": "32"},
+    {"name": "font23_narrow", "filename": "NotoSans-Regular.ttf", "size": "21"},
+    {"name": "font32",        "filename": "NotoSans-Bold.ttf",    "size": "32"},
 )
 
 # Fonts ship in the tools.tinyppi addon; resolve defensively so a missing
@@ -185,9 +185,30 @@ def _install_xml(skin_path: str) -> bool:
         fset_id = (_ID_RE.search(open_tag).group(1)
                    if _ID_RE.search(open_tag) else "?")
 
+        # Update-in-place: rewrite existing same-name entries that point at a
+        # stale filename (e.g. Inter-*.ttf from TinyPPI <= 1.5.x restores), so
+        # Kodi never sees duplicate font names resolving to the old file.
+        def _fix_block(bm: "re.Match") -> str:
+            nonlocal modified
+            block = bm.group(0)
+            for spec in _REQUIRED_FONTS:
+                if re.search(r"<name>\s*" + re.escape(spec["name"]) + r"\s*</name>", block) \
+                        and not re.search(r"<filename>\s*" + re.escape(spec["filename"]) + r"\s*</filename>", block):
+                    fixed = re.sub(r"<filename>[^<]*</filename>",
+                                   f"<filename>{spec['filename']}</filename>", block, count=1)
+                    fixed = re.sub(r"<size>[^<]*</size>",
+                                   f"<size>{spec['size']}</size>", fixed, count=1)
+                    if fixed != block:
+                        modified = True
+                        _log(f'Font updated in place: {spec["name"]} in fontset "{fset_id}"')
+                        return fixed
+            return block
+
+        inner = re.sub(r"<font>.*?</font>", _fix_block, inner, flags=re.S)
+
         missing = [s for s in _REQUIRED_FONTS if not _fontset_has(inner, s)]
         if not missing:
-            return match.group(0)
+            return open_tag + inner + close_tag
 
         # Insert right after the <include> element; derive the child indent
         # from the include line so it matches the surrounding formatting.
