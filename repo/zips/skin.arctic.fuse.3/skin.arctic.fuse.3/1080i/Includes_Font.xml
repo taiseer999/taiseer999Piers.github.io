@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+
+
+    <include name="Font_Static">
+        <param name="aspect_system">0.8</param>
+        <definition>
+
+
+            <font>
+                <name>font_infotag_bold</name>
+                <filename>monadit.ttf</filename>
+                <size>24</size>
+                <style>uppercase</style>
+            </font>
+
+
+            <font>
+                <name>font_infotag_reg</name>
+                <filename>monaditreg.ttf</filename>
+                <size>24</size>
+                <style>uppercase</style>
+            </font>
+
+
+            <font>
+                <name>font_Topbar_bold</name>
+                <filename>monadi BOLD.ttf</filename>
+                <size>38</size>
+                <style>uppercase</style>
+            </font>
+
+
+            <font>
+                <name>font_Topbarinfo</name>
+                <filename>monadi-reg.ttf</filename>
+                <size>29</size>
+                <style>uppercase</style>
+            </font>
+
+
+            <font>
+                <name>font_midi_iconic</name>
+                <filename>fa-solid-900.ttf</filename>
+                <size>34</size>
+            </font>
+            <font>
+                <name>font_main_iconic</name>
+                <filename>fa-solid-900.ttf</filename>
+                <size>30</size>
+            </font>
+            <font>
+                <name>font_mini_iconic</name>
+                <filename>fa-solid-900.ttf</filename>
+                <size>26</size>
+            </font>
+            <font>
+                <name>font_tiny_iconic</name>
+                <filename>fa-solid-900.ttf</filename>
+                <size>22</size>
+            </font>
+            <font>
+                <name>font_hint_iconic</name>
+                <filename>fa-solid-900.ttf</filename>
+                <size>16</size>
+            </font>
+            <font>
+                <name>font_itsy_iconic</name>
+                <filename>fa-solid-900.ttf</filename>
+                <size>12</size>
+            </font>
+            <font>
+                <name>font_tiny_iconic_regular</name>
+                <filename>fa-regular-400.ttf</filename>
+                <size>24</size>
+            </font>
+            <font>
+                <name>font_tiny_iconic_regular1</name>
+                <filename>iphone.ttf</filename>
+                <size>24</size>
+            </font>
+
+            <font>
+                <name>font_logo</name>
+                <filename>Questrial-Regular.ttf</filename>
+                <size>24</size>
+            </font>
+            <font>
+                <name>font_logo_large</name>
+                <filename>Questrial-Regular.ttf</filename>
+                <size>50</size>
+            </font>
+
+
+            <font>
+                <name>font_debug</name>
+                <filename>CommitMono-400-Regular.ttf</filename>
+                <size>22</size>
+                <aspect>$PARAM[aspect_system]</aspect>
+            </font>
+
+            <font>
+                <name>font_top_bar</name>
+                <filename>Inter-Regular.ttf</filename>
+                <size>24</size>
+            </font>
+
+
+            <font>
+                <name>font_musicvis_biggest</name>
+                <filename>$PARAM[font_light]</filename>
+                <style>$PARAM[style_light]</style>
+                <size>230</size>
+            </font>
+            <font>
+                <name>font_musicvis_bigger</name>
+                <filename>$PARAM[font_light]</filename>
+                <style>$PARAM[style_light]</style>
+                <size>130</size>
+            </font>
+            <font>
+                <name>font_musicvis_big</name>
+                <filename>$PARAM[font_light]</filename>
+                <style>$PARAM[style_light]</style>
+                <size>80</size>
+            </font>
+        </definition>
+    </include>
+
+    <include name="Font_Default">
+        <param name="font_bold">Inter-Bold.ttf</param>
+        <param name="font_regular">Inter-Regular.ttf</param>
+        <param name="font_light">Inter-Light.ttf</param>
+        <param name="style_light" />
+        <param name="size_hint">17</param>
+        <param name="size_tiny">21</param>
+        <param name="size_mini">25</param>
+        <param name="size_main">29</param>
+        <param name="size_midi">36</param>
+        <param name="size_head">37</param>
+        <param name="size_huge">43</param>
+        <param name="size_main_x2">56</param>
+        <param name="size_huge_x2">70</param>
+        <param name="size_midi_x2">48</param>
+
+
+        <param name="plot_linespacing_head">1.169</param>
+        <param name="plot_linespacing_midi">1.455</param>
+        <param name="plot_linespacing_main">1.1</param>
+        <param name="plot_linespacing_mini">1.31</param>
+        <param name="plot_linespacing_tiny">1.23</param>
+
+        <definition>
+
+            <include content="Font_Static">
+                <param name="font_bold">$PARAM[font_bold]</param>
+                <param name="font_regular">$PARAM[font_regular]</param>
+                <param name="font_light">$PARAM[font_light]</param>
+                <param name="style_light">$PARAM[style_light]</param>
+            </include>
+
+
+            <font>
+                <name>font_title_huge</name>
+                <filename>Inter-Bold.ttf</filename>
+                <size>100</size>
+            </font>
+            <font>
+                <name>font_title_midi</name>
+                <filename>Inter-Light.ttf</filename>
+                <size>60</size>
+            </font>
+
+
+
+            <font>
+                <name>font_title_main</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_main_x2]</size>
+                <linespacing>$PARAM[plot_linespacing_head]</linespacing>
+            </font>
+
+
+            <font>
+                <name>font_huge_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_huge]</size>
+            </font>
+            <font>
+                <name>font_head_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_head]</size>
+            </font>
+            <font>
+                <name>font_midi_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_midi]</size>
+            </font>
+            <font>
+                <name>font_main_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_main]</size>
+            </font>
+            <font>
+                <name>font_mini_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_mini]</size>
+            </font>
+            <font>
+                <name>font_tiny_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_tiny]</size>
+            </font>
+            <font>
+                <name>font_hint_bold</name>
+                <filename>$PARAM[font_bold]</filename>
+                <style>uppercase</style>
+                <size>$PARAM[size_hint]</size>
+            </font>
+
+
+            <font>
+                <name>font_huge</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_huge]</size>
+            </font>
+            <font>
+                <name>font_head</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_head]</size>
+            </font>
+            <font>
+                <name>font_midi</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_midi]</size>
+            </font>
+            <font>
+                <name>font_icon</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_icon]</size>
+            </font>
+            <font>
+                <name>font_main</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_main]</size>
+            </font>
+            <font>
+                <name>font_mini</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_mini]</size>
+            </font>
+            <font>
+                <name>font_tiny</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_tiny]</size>
+            </font>
+            <font>
+                <name>font_hint</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_hint]</size>
+            </font>
+
+
+            <font>
+                <name>font_midi_plot</name>
+                <filename>$PARAM[font_regular]</filename>
+                <linespacing>$PARAM[plot_linespacing_midi]</linespacing>
+                <size>$PARAM[size_midi]</size>
+            </font>
+            <font>
+                <name>font_main_plot</name>
+                <filename>$PARAM[font_regular]</filename>
+                <linespacing>$PARAM[plot_linespacing_main]</linespacing>
+                <size>$PARAM[size_main]</size>
+            </font>
+            <font>
+                <name>font_mini_plot</name>
+                <filename>$PARAM[font_regular]</filename>
+                <linespacing>$PARAM[plot_linespacing_mini]</linespacing>
+                <size>$PARAM[size_mini]</size>
+            </font>
+            <font>
+                <name>font_tiny_plot</name>
+                <filename>$PARAM[font_regular]</filename>
+                <linespacing>$PARAM[plot_linespacing_tiny]</linespacing>
+                <size>$PARAM[size_tiny]</size>
+            </font>
+
+
+            <font>
+                <name>font10</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_tiny]</size>
+            </font>
+            <font>
+                <name>font12</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_mini]</size>
+            </font>
+            <font>
+                <name>font13</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_main]</size>
+            </font>
+            <font>
+                <name>font14</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_midi]</size>
+            </font>
+            <font>
+                <name>font45</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_huge]</size>
+            </font>
+            <font>
+                <name>font60</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>$PARAM[size_main_x2]</size>
+            </font>
+        </definition>
+    </include>
+
+</includes>
