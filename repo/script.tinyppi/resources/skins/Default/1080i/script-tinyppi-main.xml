@@ -19,8 +19,9 @@
         </control>
 
         <control type="group" id="5000">
-			<!-- Overlay - SDR -->
+			<!-- Overlay - SDR - w/o Channels -->
 			<control type="group">
+			<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowChannelIcon),0)</visible>
 			<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType))</visible>
 
 				<!-- Background - Start -->
@@ -38,7 +39,7 @@
 				<control type="group">
 					<left>58</left>
 					<top>340</top>
-					<width>1714</width>
+					<width>1211</width>
 					<height>705</height>
 					<control type="image">
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">common/dot-1x1.png</texture>
@@ -47,7 +48,7 @@
 
 				<!-- Background - End -->
 				<control type="group">
-					<left>1772</left>
+					<left>1269</left>
 					<top>340</top>
 					<width>23</width>
 					<height>705</height>
@@ -72,7 +73,7 @@
 				<!-- Chart icon -->
 				<control type="group">
 					<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowHeaderIcon),1)</visible>
-					<left>1723</left>
+					<left>1219</left>
 					<top>375</top>
 					<control type="image">
 						<width>36</width>
@@ -87,7 +88,7 @@
 					<left>70</left>
 					<top>445</top>
 					<control type="image">
-						<width>1689</width>
+						<width>1186</width>
 						<height>1</height>
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
 					</control>
@@ -99,7 +100,7 @@
 					<left>70</left>
 					<top>1008</top>
 					<control type="image">
-						<width>1689</width>
+						<width>1186</width>
 						<height>1</height>
 						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
 					</control>
@@ -111,13 +112,138 @@
 					<top>1008</top>
 					<control type="label">
 						<left>70</left>
-						<width>1690</width>
+						<width>1184</width>
 						<label>$INFO[Player.Filename]</label>
 						<font>font23_narrow</font>
 						<textcolor>$INFO[Window(10000).Property(TinyPPI.FilenameColor)]</textcolor>
 						<align>center</align>
 						<scroll>true</scroll>
 						<scrollspeed>30</scrollspeed>
+						<aligny>top</aligny>
+					</control>
+				</control>
+			</control>
+			
+			<!-- Overlay - SDR - with Channels -->
+			<control type="group">
+			<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowChannelIcon),1) + !String.IsEmpty(Window().Property(ChannelIconVar))</visible>
+			<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType))</visible>
+
+				<!-- Background - Start -->
+				<control type="group">
+					<left>35</left>
+					<top>340</top>
+					<width>23</width>
+					<height>705</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/overlay-bg-start.png</texture>
+					</control>
+				</control>
+
+				<!-- Background - Middle -->
+				<control type="group">
+					<left>58</left>
+					<top>340</top>
+					<width>1804</width>
+					<height>705</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">common/dot-1x1.png</texture>
+					</control>
+				</control>
+
+				<!-- Background - End -->
+				<control type="group">
+					<left>1862</left>
+					<top>340</top>
+					<width>23</width>
+					<height>705</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/overlay-bg-end.png</texture>
+					</control>
+				</control>
+
+				<!-- Label -->
+				<control type="group">
+					<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowHeaderTitle),1)</visible>
+					<left>70</left>
+					<top>371</top>
+					<control type="label">
+						<label>[B][CAPITALIZE]$LOCALIZE[10116][/CAPITALIZE][/B]</label>
+						<font>font32</font>
+						<textcolor>$INFO[Window(10000).Property(TinyPPI.HeaderColor)]</textcolor>
+						<aligny>top</aligny>
+					</control>
+				</control>
+
+				<!-- Chart icon -->
+				<control type="group">
+					<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowHeaderIcon),1)</visible>
+					<left>1812</left>
+					<top>375</top>
+					<control type="image">
+						<width>36</width>
+						<height>36</height>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.HeaderIconColor)]">icons/chart.png</texture>
+					</control>
+				</control>
+
+				<!-- Line / Top -->
+				<control type="group">
+					<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowLine),1)</visible>
+					<left>70</left>
+					<top>445</top>
+					<control type="image">
+						<width>1779</width>
+						<height>1</height>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
+					</control>
+				</control>
+
+				<!-- Line / Bottom -->
+				<control type="group">
+					<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowLine),1)</visible>
+					<left>70</left>
+					<top>1008</top>
+					<control type="image">
+						<width>1779</width>
+						<height>1</height>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.LineColor)]">common/dot-1x1.png</texture>
+					</control>
+				</control>
+
+				<!-- Filename -->
+				<control type="group">
+					<visible>String.IsEqual(Window(Home).Property(TinyPPI.Filename),true)</visible>
+					<top>1008</top>
+					<control type="label">
+						<left>70</left>
+						<width>1778</width>
+						<label>$INFO[Player.Filename]</label>
+						<font>font23_narrow</font>
+						<textcolor>$INFO[Window(10000).Property(TinyPPI.FilenameColor)]</textcolor>
+						<align>center</align>
+						<scroll>true</scroll>
+						<scrollspeed>30</scrollspeed>
+						<aligny>top</aligny>
+					</control>
+				</control>
+
+				<!-- Channel layout -->
+				<control type="group">
+				<top>580</top>
+				<left>1355</left>
+					<control type="image">
+						<width>495</width>
+						<height>298</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelLayoutColor)]">$INFO[Window().Property(ChannelLayerVar)]</texture>
+						<aligny>top</aligny>
+					</control>
+					<control type="image">
+						<width>495</width>
+						<height>298</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelIconColor)]">$INFO[Window().Property(ChannelIconVar)]</texture>
 						<aligny>top</aligny>
 					</control>
 				</control>
@@ -226,6 +352,68 @@
 					</control>
 				</control>
 			</control>
+			
+			
+			<!-- Channel layout - DV -->
+			<control type="group" id="5100">
+			<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowChannelIcon),1) + !String.IsEmpty(Window().Property(ChannelIconVar))</visible>
+			<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
+
+				<!-- Background - Start -->
+				<control type="group">
+					<left>1485</left>
+					<top>37</top>
+					<width>23</width>
+					<height>265</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelBackgroundColor)]">background/channels-bg-start.png</texture>
+					</control>
+				</control>
+
+				<!-- Background - Middle -->
+				<control type="group">
+					<left>1508</left>
+					<top>37</top>
+					<width>354</width>
+					<height>265</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelBackgroundColor)]">common/dot-1x1.png</texture>
+					</control>
+				</control>
+
+				<!-- Background - End -->
+				<control type="group">
+					<left>1862</left>
+					<top>37</top>
+					<width>23</width>
+					<height>265</height>
+					<control type="image">
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelBackgroundColor)]">background/channels-bg-end.png</texture>
+					</control>
+				</control>
+
+				<!-- Channel layout -->
+				<control type="group">
+				<top>53</top>
+				<left>1485</left>
+					<control type="image">
+						<width>400</width>
+						<height>241</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelLayoutColor)]">$INFO[Window().Property(ChannelLayerVar)]</texture>
+						<aligny>top</aligny>
+					</control>
+					<control type="image">
+						<width>400</width>
+						<height>241</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelIconColor)]">$INFO[Window().Property(ChannelIconVar)]</texture>
+						<aligny>top</aligny>
+					</control>
+				</control>
+				
+				
+			</control>
 
 			<!-- Group: Bottom screen -->
 			<control type="group" id="9000">
@@ -233,621 +421,6 @@
 				<height>0</height>
 				<left>40</left>
 				<top>475</top>
-
-			<!-- Custom: right-side speaker channels + codec logos (SDR layout) -->
-			<control type="group">
-				<width>1920</width>
-				<height>0</height>
-				<visible>String.IsEmpty(Window(10000).Property(TinyPPI.HdrType))</visible>
-			<!-- Group: channels -->
-			<control type="group">
-				<top>120</top>
-				<left>-130</left>
-				<width>1920</width>
-				<height>0</height>
-			  <control type="group">
-                <left>1450</left>
-				<width>400</width>
-				<height>287</height>
-				<aspectratio>keep</aspectratio>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/$INFO[VideoPlayer.AudioChannels].png</texture>
-						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
-						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
-                        <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)]</visible>
-                        <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]]</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/5.1.4.png</texture>
-                        <visible>Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="99FFFFFF">ppicodecs/7.1.4.png</texture>
-                        <visible>Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/00.png</texture>
-						<visible>Integer.IsEqual(VideoPlayer.AudioChannels,0)</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/unk.png</texture>
-						<visible>String.IsEmpty(VideoPlayer.AudioChannels)</visible>
-				</control>
-              </control>
-           </control>
-			<!-- Group: big logos-->
-			<control type="group">
-				<width>1920</width>
-				<height>400</height>
-				<left>-130</left>
-				<control type="group">
-					<top>-55</top>
-					<left>1500</left>
-					<width>250</width>
-				<control type="group">
-					<visible>String.IsEmpty(VideoPlayer.HdrType) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1sdr.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1sdr.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,hdr10plus) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1sdr.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,hlg) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1sdr.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1sdr.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,hdr10) + ![String.Contains(Player.Process(amlogic.eoft_gamut),DV) | String.Contains(Player.Process(amlogic.eoft_gamut),SDR)]</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1hdr10.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,hdr10plus) + ![String.Contains(Player.Process(amlogic.eoft_gamut),DV) | String.Contains(Player.Process(amlogic.eoft_gamut),SDR)]</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1hdr10plus.png</texture>
-					</control>
-				</control>
-				<control type="group">
-				    <visible>String.IsEqual(VideoPlayer.HdrType,hlg) + ![String.Contains(Player.Process(amlogic.eoft_gamut),DV) | String.Contains(Player.Process(amlogic.eoft_gamut),SDR)]</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1hlg.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1hdr10.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEmpty(VideoPlayer.HdrType) + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1hdr10.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) + ![String.Contains(Player.Process(amlogic.eoft_gamut),HDR) | String.Contains(Player.Process(amlogic.eoft_gamut),SDR)]</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbyvision.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEmpty(VideoPlayer.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
-					<top>80</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbyvision.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>138</top>
-					<left>100</left>
-					<control type="image">
-						<width>82</width>
-						<height>28</height>
-						<texture colordiffuse="E7BDBDBD">ppicodecs/vs10add.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEmpty(VideoPlayer.HdrType) + String.Contains(Player.Process(amlogic.eoft_gamut),HDR)</visible>
-					<top>138</top>
-					<left>100</left>
-					<control type="image">
-						<width>82</width>
-						<height>28</height>
-						<texture colordiffuse="E7BDBDBD">ppicodecs/vs10add.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEmpty(VideoPlayer.HdrType)] + String.Contains(Player.Process(amlogic.eoft_gamut),DV)</visible>
-					<top>138</top>
-					<left>100</left>
-					<control type="image">
-						<width>82</width>
-						<height>28</height>
-						<texture colordiffuse="E7BDBDBD">ppicodecs/vs10add.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>[String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEqual(VideoPlayer.HdrType,dolbyvision)] + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>138</top>
-					<left>100</left>
-					<control type="image">
-						<width>82</width>
-						<height>28</height>
-						<texture colordiffuse="E7BDBDBD">ppicodecs/vs10add.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.HdrType,hdr10) + String.Contains(Player.Process(amlogic.eoft_gamut),SDR)</visible>
-					<top>138</top>
-					<left>100</left>
-					<control type="image">
-						<width>82</width>
-						<height>28</height>
-						<texture colordiffuse="E7BDBDBD">ppicodecs/vs10add.png</texture>
-					</control>
-				</control>
-
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,pcm) | String.IsEqual(VideoPlayer.AudioCodec,pcm_bluray) | String.IsEqual(VideoPlayer.AudioCodec,pcm_s16le) | String.IsEqual(VideoPlayer.AudioCodec,pcm_s24le)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1pcm.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,dolbydigital) | String.IsEqual(VideoPlayer.AudioCodec,ac3)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbydigital.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,eac3)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbydigitalplus.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbyatmos.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,truehd)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbytruehd.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dolbyatmos.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,mp3) | String.IsEqual(VideoPlayer.AudioCodec,mp3float)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1mp3.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,mp1)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1mp1.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,mp2)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1mp2.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,dca) | String.IsEqual(VideoPlayer.AudioCodec,dts)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dts.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dtshdma.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra) | String.IsEqual(VideoPlayer.AudioCodec,dtshra)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dtshdhra.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1dtsx.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1imax.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,pcm) | String.IsEqual(VideoPlayer.AudioCodec,pcm_bluray) | String.IsEqual(VideoPlayer.AudioCodec,pcm_s16le) | String.IsEqual(VideoPlayer.AudioCodec,pcm_s24le)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1pcm.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,aac) | String.IsEqual(VideoPlayer.AudioCodec,aac_latm) | String.IsEqual(VideoPlayer.AudioCodec,aac_lc) | String.IsEqual(VideoPlayer.AudioCodec,aac_ltp) | String.IsEqual(VideoPlayer.AudioCodec,aac_ssr) | String.IsEqual(VideoPlayer.AudioCodec,he_aac) | String.IsEqual(VideoPlayer.AudioCodec,he_aac_v2)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1aac.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,flac)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1flac.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,aif)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1aiff.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,alac)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1alac.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,ape)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1ape.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,cdda)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1cdda.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,ogg)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1ogg.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,vorbis)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1vorbis.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,wavpack)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1wavp.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,wma) | String.IsEqual(VideoPlayer.AudioCodec,wmav2) | String.IsEqual(VideoPlayer.AudioCodec,wmapro)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1wma.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,cook)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1cook.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec,opus)</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1opus.png</texture>
-					</control>
-				</control>
-				<control type="group">
-					<visible>String.IsEqual(VideoPlayer.AudioCodec, )</visible>
-					<top>163</top>
-					<left>66</left>
-					<control type="image">
-						<width>150</width>
-						<height>56</height>
-						<texture colordiffuse="E7666666">ppicodecs/1fallback.png</texture>
-					</control>
-				</control>
-			   </control>	 
-			 </control>
-			</control>
-
-			<!-- Custom: dark backing plate for DV floating speaker graphic -->
-			<control type="group">
-				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
-				<left>1467</left>
-				<top>-425</top>
-				<!-- Start cap -->
-				<control type="group">
-					<left>0</left>
-					<top>0</top>
-					<width>23</width>
-					<height>268</height>
-					<control type="image">
-						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/overlay-bg-start.png</texture>
-					</control>
-				</control>
-				<!-- Middle -->
-				<control type="group">
-					<left>23</left>
-					<top>0</top>
-					<width>312</width>
-					<height>268</height>
-					<control type="image">
-						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">common/dot-1x1.png</texture>
-					</control>
-				</control>
-				<!-- End cap -->
-				<control type="group">
-					<left>335</left>
-					<top>0</top>
-					<width>23</width>
-					<height>268</height>
-					<control type="image">
-						<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.BackgroundColor)]">background/overlay-bg-end.png</texture>
-					</control>
-				</control>
-			</control>
-
-			<!-- Custom: speaker channels (Dolby Vision layout, floating top-right above panel) -->
-			<control type="group">
-				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),dolby)</visible>
-				<left>1487</left>
-				<top>-405</top>
-				<control type="group">
-                <left>0</left>
-				<width>318</width>
-				<height>228</height>
-				<aspectratio>keep</aspectratio>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/$INFO[VideoPlayer.AudioChannels].png</texture>
-						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
-						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
-                        <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)]</visible>
-                        <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]]</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/5.1.4.png</texture>
-                        <visible>Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="99FFFFFF">ppicodecs/7.1.4.png</texture>
-                        <visible>Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/00.png</texture>
-						<visible>Integer.IsEqual(VideoPlayer.AudioChannels,0)</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/unk.png</texture>
-						<visible>String.IsEmpty(VideoPlayer.AudioChannels)</visible>
-				</control>
-              </control>
-			</control>
-
-			<!-- Custom: speaker channels (HDR/HLG layout, below static metadata) -->
-			<control type="group">
-				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hdr) | String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg)</visible>
-				<left>1420</left>
-				<top>300</top>
-				<control type="group">
-                <left>0</left>
-				<width>318</width>
-				<height>228</height>
-				<aspectratio>keep</aspectratio>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/$INFO[VideoPlayer.AudioChannels].png</texture>
-						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
-						<visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
-                        <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)]</visible>
-                        <visible>![Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]]</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/5.1.4.png</texture>
-                        <visible>Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="99FFFFFF">ppicodecs/7.1.4.png</texture>
-                        <visible>Integer.IsEqual(VideoPlayer.AudioChannels,8) + [String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)]</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/00.png</texture>
-						<visible>Integer.IsEqual(VideoPlayer.AudioChannels,0)</visible>
-				</control>
-				<control type="image">
-					<texture colordiffuse="F2666666">ppicodecs/unk.png</texture>
-						<visible>String.IsEmpty(VideoPlayer.AudioChannels)</visible>
-				</control>
-              </control>
-			</control>
-
 
 				<!-- Group: Video -->
 				<control type="group">
@@ -1766,64 +1339,149 @@
 				<!-- Group: HDR Static Metadata -->
 				<control type="group">
 				<visible>String.Contains(Window(10000).Property(TinyPPI.HdrType),hdr) | String.Contains(Window(10000).Property(TinyPPI.HdrType),hlg)</visible>
-					<top>205</top>
 					<left>1315</left>
 					
-					<!-- HDR Static Metadata Icon -->
-					<control type="image">
-						<top>4</top>
-						<width>26</width>
-						<height>26</height>
-						<texture>icons/layer-group.png</texture>
-						<colordiffuse>$INFO[Window(10000).Property(TinyPPI.IconColor)]</colordiffuse>
-						<aligny>top</aligny>
-					</control>
+					<control type="group">
+						<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowChannelIcon),1) + !String.IsEmpty(Window().Property(ChannelIconVar))</visible>
+						<top>30</top>
 
-					<!-- HDR Static Metadata -->
-					<control type="label">
-						<label>[B][UPPERCASE]$ADDON[script.tinyppi 32300][/UPPERCASE][/B]</label>
-						<left>35</left>
-						<font>font23_narrow</font>
-						<textcolor>$INFO[Window(10000).Property(TinyPPI.TitleColor)]</textcolor>
-						<aligny>top</aligny>
+						<!-- HDR Static Metadata Icon -->
+						<control type="image">
+							<top>4</top>
+							<width>26</width>
+							<height>26</height>
+							<texture>icons/layer-group.png</texture>
+							<colordiffuse>$INFO[Window(10000).Property(TinyPPI.IconColor)]</colordiffuse>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- HDR Static Metadata -->
+						<control type="label">
+							<label>[B][UPPERCASE]$ADDON[script.tinyppi 32300][/UPPERCASE][/B]</label>
+							<left>35</left>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.TitleColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- HDR10 MDL -->
+						<control type="label">
+							<top>30</top>
+							<label>$ADDON[script.tinyppi 32296]:</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+						<control type="label">
+							<left>225</left>
+							<top>30</top>
+							<width>270</width>
+							<align>right</align>
+							<label>$INFO[Window().Property(Hdr10MdlVar)]</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- HDR10 MaxCLL/FALL -->
+						<control type="label">
+							<top>60</top>
+							<label>$ADDON[script.tinyppi 32297]:</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+						<control type="label">
+							<left>225</left>
+							<top>60</top>
+							<width>270</width>
+							<align>right</align>
+							<label>$INFO[Window().Property(Hdr10MaxCllFallVar)]</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- Channel layout -->
+						<control type="group">
+							<top>140</top>
+							<control type="image">
+								<width>495</width>
+								<height>298</height>
+								<aspectratio>keep</aspectratio>
+								<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelLayoutColor)]">$INFO[Window().Property(ChannelLayerVar)]</texture>
+								<aligny>top</aligny>
+							</control>
+							<control type="image">
+								<width>495</width>
+								<height>298</height>
+								<aspectratio>keep</aspectratio>
+								<texture colordiffuse="$INFO[Window(10000).Property(TinyPPI.ChannelIconColor)]">$INFO[Window().Property(ChannelIconVar)]</texture>
+								<aligny>top</aligny>
+							</control>
+						</control>
 					</control>
 					
-					<!-- HDR10 MDL -->
-					<control type="label">
-						<top>30</top>
-						<label>$ADDON[script.tinyppi 32296]:</label>
-						<font>font23_narrow</font>
-						<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
-						<aligny>top</aligny>
-					</control>
-					<control type="label">
-						<left>225</left>
-						<top>30</top>
-						<width>270</width>
-						<align>right</align>
-						<label>$INFO[Window().Property(Hdr10MdlVar)]</label>
-						<font>font23_narrow</font>
-						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
-						<aligny>top</aligny>
-					</control>
-					
-					<!-- HDR10 MaxCLL/FALL -->
-					<control type="label">
-						<top>60</top>
-						<label>$ADDON[script.tinyppi 32297]:</label>
-						<font>font23_narrow</font>
-						<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
-						<aligny>top</aligny>
-					</control>
-					<control type="label">
-						<left>225</left>
-						<top>60</top>
-						<width>270</width>
-						<align>right</align>
-						<label>$INFO[Window().Property(Hdr10MaxCllFallVar)]</label>
-						<font>font23_narrow</font>
-						<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
-						<aligny>top</aligny>
+					<control type="group">
+						<visible>String.IsEqual(Window(10000).Property(TinyPPI.ShowChannelIcon),0)</visible>
+						<top>207</top>
+						
+						<!-- HDR Static Metadata Icon -->
+						<control type="image">
+							<top>4</top>
+							<width>26</width>
+							<height>26</height>
+							<texture>icons/layer-group.png</texture>
+							<colordiffuse>$INFO[Window(10000).Property(TinyPPI.IconColor)]</colordiffuse>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- HDR Static Metadata -->
+						<control type="label">
+							<label>[B][UPPERCASE]$ADDON[script.tinyppi 32300][/UPPERCASE][/B]</label>
+							<left>35</left>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.TitleColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- HDR10 MDL -->
+						<control type="label">
+							<top>30</top>
+							<label>$ADDON[script.tinyppi 32296]:</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+						<control type="label">
+							<left>225</left>
+							<top>30</top>
+							<width>270</width>
+							<align>right</align>
+							<label>$INFO[Window().Property(Hdr10MdlVar)]</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+
+						<!-- HDR10 MaxCLL/FALL -->
+						<control type="label">
+							<top>60</top>
+							<label>$ADDON[script.tinyppi 32297]:</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.DescriptionColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
+						<control type="label">
+							<left>225</left>
+							<top>60</top>
+							<width>270</width>
+							<align>right</align>
+							<label>$INFO[Window().Property(Hdr10MaxCllFallVar)]</label>
+							<font>font23_narrow</font>
+							<textcolor>$INFO[Window(10000).Property(TinyPPI.OutputColor)]</textcolor>
+							<aligny>top</aligny>
+						</control>
 					</control>
 				</control>
 				
