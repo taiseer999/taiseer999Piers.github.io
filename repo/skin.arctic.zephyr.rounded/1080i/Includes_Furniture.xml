@@ -1255,54 +1255,54 @@
                             <top>116</top>
                             <right>64</right>
                             <width>800</width>
-                            <height>32</height>
+                            <height>38</height>
                             <orientation>horizontal</orientation>
-                            <itemgap>8</itemgap>
+                            <itemgap>10</itemgap>
                             <align>right</align>
                             <usecontrolcoords>true</usecontrolcoords>
                             <control type="image">
-                                <width>28</width>
-                                <height>28</height>
+                                <width>34</width>
+                                <height>34</height>
                                 <top>2</top>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_temp.png</texture>
                             </control>
                             <control type="label">
-                                <font>font23_narrow</font>
+                                <font>TinyRobotoNotoCJKsc-Regular</font>
                                 <width>auto</width>
-                                <height>32</height>
+                                <height>38</height>
                                 <textcolor>Dark2</textcolor>
                                 <label>$INFO[System.CPUTemperature]</label>
                             </control>
                             <control type="image">
-                                <width>28</width>
-                                <height>28</height>
+                                <width>34</width>
+                                <height>34</height>
                                 <top>2</top>
-                                <left>14</left>
+                                <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_ram.png</texture>
                             </control>
                             <control type="label">
-                                <font>font23_narrow</font>
+                                <font>TinyRobotoNotoCJKsc-Regular</font>
                                 <width>auto</width>
-                                <height>32</height>
+                                <height>38</height>
                                 <textcolor>Dark2</textcolor>
                                 <label>$INFO[system.memory(used.percent)]</label>
                             </control>
                             <control type="image">
-                                <width>28</width>
-                                <height>28</height>
+                                <width>34</width>
+                                <height>34</height>
                                 <top>2</top>
-                                <left>14</left>
+                                <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_net_on.png</texture>
                                 <visible>String.Contains(Network.IPAddress,1)</visible>
                             </control>
                             <control type="image">
-                                <width>28</width>
-                                <height>28</height>
+                                <width>34</width>
+                                <height>34</height>
                                 <top>2</top>
-                                <left>14</left>
+                                <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_net_off.png</texture>
                                 <visible>!String.Contains(Network.IPAddress,1)</visible>
