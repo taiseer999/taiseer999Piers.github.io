@@ -122,7 +122,7 @@
             <name>Tiny</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <linespacing>0.9</linespacing>
-            <size>24</size>
+            <size>25</size>
         </font>
         <font>
             <name>TinyBadge</name>
@@ -229,7 +229,7 @@
         <font>
             <name>font13</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>22</size>
+            <size>24</size>
         </font>
         <font>
             <name>BannerInProgress</name>
@@ -369,7 +369,7 @@
             <name>Tiny</name>
             <filename>iphone.ttf</filename>
             <linespacing>1.08</linespacing>
-            <size>24</size>
+            <size>25</size>
         </font>
         <font>
             <name>TinyBadge</name>
@@ -476,7 +476,7 @@
         <font>
             <name>font13</name>
             <filename>iphone.ttf</filename>
-            <size>22</size>
+            <size>28</size>
         </font>
         <font>
             <name>BannerInProgress</name>
@@ -609,7 +609,7 @@
         <font>
             <name>Tiny</name>
             <filename>Jazeerah_bold.ttf</filename>
-            <size>24</size>
+            <size>26</size>
             <linespacing>1.12</linespacing>
         </font>
         <font>
@@ -716,7 +716,7 @@
         <font>
             <name>font13</name>
             <filename>Jazeerah_bold.ttf</filename>
-            <size>22</size>
+            <size>30</size>
         </font>
         <font>
             <name>BannerInProgress</name>
@@ -876,7 +876,7 @@
         <font>
             <name>Tiny</name>
             <filename>tonos.ttf</filename>
-            <size>24</size>
+            <size>25</size>
             <aspect>0.9</aspect>
             <linespacing>1.12</linespacing>
         </font>
@@ -1005,7 +1005,7 @@
         <font>
             <name>font13</name>
             <filename>tonos.ttf</filename>
-            <size>22</size>
+            <size>28</size>
             <aspect>0.9</aspect>
         </font>
         <font>
