@@ -543,7 +543,7 @@
     <variable name="Label_Flag_Indicator_TVShows_In_Progress">
         <value condition="!Skin.HasSetting(hide.markers.inprogress.tvshow.label)">$INFO[ListItem.Property(WatchedEpisodes)]/$INFO[ListItem.Property(TotalEpisodes)]</value>
         <value condition="Skin.HasSetting(markers.inprogress.percentage) + !String.IsEmpty(ListItem.Property(WatchedEpisodePercent))">$INFO[ListItem.Property(WatchedEpisodePercent),,%]</value>
-        <value>$LOCALIZE[31367]</value>
+        <value></value>
     </variable>
 
     <variable name="Label_Flag_Indicator_Set_In_Progress">
