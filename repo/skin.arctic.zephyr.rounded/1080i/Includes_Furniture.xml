@@ -1296,13 +1296,13 @@
                             <width>800</width>
                             <height>38</height>
                             <orientation>horizontal</orientation>
-                            <itemgap>10</itemgap>
+                            <itemgap>8</itemgap>
                             <align>right</align>
                             <usecontrolcoords>true</usecontrolcoords>
                             <control type="image">
-                                <width>34</width>
-                                <height>34</height>
-                                <top>2</top>
+                                <width>27</width>
+                                <height>27</height>
+                                <top>5</top>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_temp.png</texture>
                             </control>
@@ -1314,9 +1314,9 @@
                                 <label>$INFO[System.CPUTemperature]</label>
                             </control>
                             <control type="image">
-                                <width>34</width>
-                                <height>34</height>
-                                <top>2</top>
+                                <width>29</width>
+                                <height>29</height>
+                                <top>5</top>
                                 <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_ram.png</texture>
@@ -1329,8 +1329,8 @@
                                 <label>$INFO[system.memory(used.percent)]</label>
                             </control>
                             <control type="image">
-                                <width>34</width>
-                                <height>34</height>
+                                <width>32</width>
+                                <height>32</height>
                                 <top>2</top>
                                 <left>17</left>
                                 <aspectratio>keep</aspectratio>
@@ -1338,8 +1338,8 @@
                                 <visible>String.Contains(Network.IPAddress,1)</visible>
                             </control>
                             <control type="image">
-                                <width>34</width>
-                                <height>34</height>
+                                <width>32</width>
+                                <height>32</height>
                                 <top>2</top>
                                 <left>17</left>
                                 <aspectratio>keep</aspectratio>
