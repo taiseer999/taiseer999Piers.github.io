@@ -1333,21 +1333,21 @@
 
     <include name="Def_Home_Label_Widget_Sub_Title_StudioLogo">
         <control type="image">
-            <left>1340</left>
-            <top>290</top>
-            <width>280</width>
-            <height>84</height>
+            <left>25</left>
+            <width min="0" max="220">auto</width>
+            <height>60</height>
             <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
+            <visible>Skin.HasSetting(home.style.flix) | Skin.HasSetting(home.style.horizontal.clean)</visible>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))</visible>
         </control>
         <control type="image">
-            <left>1340</left>
-            <top>290</top>
-            <width>280</width>
-            <height>84</height>
+            <left>25</left>
+            <width min="0" max="220">auto</width>
+            <height>60</height>
             <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$INFO[Container($PARAM[id]).ListItem.Studio,resource://resource.images.studios.coloured/,.png]</texture>
+            <visible>Skin.HasSetting(home.style.flix) | Skin.HasSetting(home.style.horizontal.clean)</visible>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) + String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) + String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Studio)</visible>
         </control>
     </include>

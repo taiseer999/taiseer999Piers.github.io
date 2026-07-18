@@ -515,7 +515,6 @@
 			<icon>special://skin/extras/icons/skinsettings.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindowAndFocus(skinsettings,9108,2)</onclick>
-			<visible>[System.Loggedon] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">16</property>
 			<property name="name">power-skinsettings</property>
 			<property name="menu">shutdown</property>
@@ -523,13 +522,13 @@
 			<property name="path">ActivateWindowAndFocus(skinsettings,9108,2)</property>
 			<property name="submenuVisibility">power-skinsettings</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="17">
 			<label>$LOCALIZE[5]</label>
 			<icon>special://skin/extras/icons/settings.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(settings)</onclick>
-			<visible>[System.Loggedon] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">17</property>
 			<property name="name">power-settings</property>
 			<property name="menu">shutdown</property>
@@ -537,13 +536,13 @@
 			<property name="path">ActivateWindow(settings)</property>
 			<property name="submenuVisibility">power-settings</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="18">
 			<label>$LOCALIZE[137]</label>
 			<icon>special://skin/extras/icons/search.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(1146)</onclick>
-			<visible>[System.ShowExitButton] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">18</property>
 			<property name="name">power-search</property>
 			<property name="menu">shutdown</property>
@@ -551,6 +550,7 @@
 			<property name="path">ActivateWindow(1146)</property>
 			<property name="submenuVisibility">power-search</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="19">
 			<label>$LOCALIZE[31146]</label>
@@ -571,7 +571,6 @@
 			<icon>special://skin/extras/icons/info.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(systeminfo)</onclick>
-			<visible>[System.Loggedon] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">20</property>
 			<property name="name">power-systeminfo</property>
 			<property name="menu">shutdown</property>
@@ -579,13 +578,13 @@
 			<property name="path">ActivateWindow(systeminfo)</property>
 			<property name="submenuVisibility">power-systeminfo</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="21">
 			<label>$LOCALIZE[10003]</label>
 			<icon>special://skin/extras/icons/filebox.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(filemanager)</onclick>
-			<visible>[System.Loggedon] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">21</property>
 			<property name="name">power-filemanager</property>
 			<property name="menu">shutdown</property>
@@ -593,13 +592,14 @@
 			<property name="path">ActivateWindow(filemanager)</property>
 			<property name="submenuVisibility">power-filemanager</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="22">
 			<label>$LOCALIZE[20150]</label>
 			<icon>special://skin/extras/icons/timer.png</icon>
 			<onclick>Close</onclick>
 			<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
-			<visible>[!System.HasAlarm(shutdowntimer) + System.CanPowerDown | System.CanSuspend | System.CanHibernate] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
+			<visible>[!System.HasAlarm(shutdowntimer)] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">22</property>
 			<property name="name">power-sleeptimer</property>
 			<property name="menu">shutdown</property>
@@ -613,7 +613,6 @@
 			<icon>special://skin/extras/icons/forbidden.png</icon>
 			<onclick>Close</onclick>
 			<onclick>CancelAlarm(shutdowntimer)</onclick>
-			<visible>[System.HasAlarm(shutdowntimer)] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">23</property>
 			<property name="name">power-canceltimer</property>
 			<property name="menu">shutdown</property>
@@ -621,13 +620,13 @@
 			<property name="path">CancelAlarm(shutdowntimer)</property>
 			<property name="submenuVisibility">power-canceltimer</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="24">
 			<label>$LOCALIZE[31274]</label>
 			<icon>special://skin/extras/icons/info2.png</icon>
 			<onclick>Close</onclick>
 			<onclick>noop</onclick>
-			<visible>[System.HasAlarm(shutdowntimer)] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">24</property>
 			<property name="name">power-timerinfo</property>
 			<property name="menu">shutdown</property>
@@ -635,6 +634,7 @@
 			<property name="path">noop</property>
 			<property name="submenuVisibility">power-timerinfo</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="25">
 			<label>$LOCALIZE[31172]</label>
@@ -642,7 +642,6 @@
 			<onclick>Close</onclick>
 			<onclick>System.ExecWait("/usr/sbin/rebootfromnand")</onclick>
 			<onclick>Reset()</onclick>
-			<visible>[System.PathExist("/dev/env")] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">25</property>
 			<property name="name">power-rebootandroid</property>
 			<property name="menu">shutdown</property>
@@ -650,6 +649,7 @@
 			<property name="path">Reset()</property>
 			<property name="submenuVisibility">power-rebootandroid</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="26">
 			<label>$LOCALIZE[31271]</label>
@@ -657,7 +657,6 @@
 			<onclick>Close</onclick>
 			<onclick>Dialog.Close(all,true)</onclick>
 			<onclick>System.LogOff</onclick>
-			<visible>[[System.HasLoginScreen | Integer.IsGreater(System.ProfileCount,1)] + System.Loggedon] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">26</property>
 			<property name="name">power-logoff</property>
 			<property name="menu">shutdown</property>
@@ -665,13 +664,13 @@
 			<property name="path">System.LogOff</property>
 			<property name="submenuVisibility">power-logoff</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="27">
 			<label>$LOCALIZE[13013]</label>
 			<icon>special://skin/extras/icons/networkinfo.png</icon>
 			<onclick>Close</onclick>
 			<onclick>Reset()</onclick>
-			<visible>[System.CanReboot] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">27</property>
 			<property name="name">power-reboot</property>
 			<property name="menu">shutdown</property>
@@ -679,13 +678,13 @@
 			<property name="path">Reset()</property>
 			<property name="submenuVisibility">power-reboot</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="28">
 			<label>$LOCALIZE[13005]</label>
 			<icon>special://skin/extras/icons/power.png</icon>
 			<onclick>Close</onclick>
 			<onclick>Powerdown()</onclick>
-			<visible>[System.CanPowerDown] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">28</property>
 			<property name="name">power-shutdown</property>
 			<property name="menu">shutdown</property>
@@ -693,13 +692,13 @@
 			<property name="path">Powerdown()</property>
 			<property name="submenuVisibility">power-shutdown</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="29">
 			<label>$LOCALIZE[13011]</label>
 			<icon>special://skin/extras/icons/power.png</icon>
 			<onclick>Close</onclick>
 			<onclick>Suspend()</onclick>
-			<visible>[System.CanSuspend] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">29</property>
 			<property name="name">power-suspend</property>
 			<property name="menu">shutdown</property>
@@ -707,13 +706,13 @@
 			<property name="path">Suspend()</property>
 			<property name="submenuVisibility">power-suspend</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="30">
 			<label>$LOCALIZE[20046]</label>
 			<icon>special://skin/extras/icons/logout.png</icon>
 			<onclick>Close</onclick>
 			<onclick>mastermode</onclick>
-			<visible>[System.HasLocks] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
 			<property name="id">30</property>
 			<property name="name">power-mastermode</property>
 			<property name="menu">shutdown</property>
@@ -721,20 +720,21 @@
 			<property name="path">mastermode</property>
 			<property name="submenuVisibility">power-mastermode</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 		<item id="31">
 			<label>$LOCALIZE[13012]</label>
 			<icon>special://skin/extras/icons/logout.png</icon>
 			<onclick>Close</onclick>
-			<onclick>Quit()</onclick>
-			<visible>[System.ShowExitButton] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
+			<onclick>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</onclick>
 			<property name="id">31</property>
 			<property name="name">power-quit</property>
 			<property name="menu">shutdown</property>
-			<property name="action">Quit()</property>
-			<property name="path">Quit()</property>
+			<property name="action">PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</property>
+			<property name="path">"plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard"</property>
 			<property name="submenuVisibility">power-quit</property>
 			<property name="parent">shutdown</property>
+			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 	</include>
 	<include name="skinshortcuts-livetv">
@@ -917,7 +917,6 @@
 			<icon>special://skin/extras/icons/skinsettings.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindowAndFocus(skinsettings,9108,2)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">1</property>
 			<property name="name">power-skinsettings</property>
 			<property name="menu">shutdown</property>
@@ -930,7 +929,6 @@
 			<icon>special://skin/extras/icons/settings.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(settings)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">2</property>
 			<property name="name">power-settings</property>
 			<property name="menu">shutdown</property>
@@ -943,7 +941,6 @@
 			<icon>special://skin/extras/icons/search.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(1146)</onclick>
-			<visible>System.ShowExitButton</visible>
 			<property name="id">3</property>
 			<property name="name">power-search</property>
 			<property name="menu">shutdown</property>
@@ -968,7 +965,6 @@
 			<icon>special://skin/extras/icons/info.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(systeminfo)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">5</property>
 			<property name="name">power-systeminfo</property>
 			<property name="menu">shutdown</property>
@@ -981,7 +977,6 @@
 			<icon>special://skin/extras/icons/filebox.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(filemanager)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">6</property>
 			<property name="name">power-filemanager</property>
 			<property name="menu">shutdown</property>
@@ -994,7 +989,7 @@
 			<icon>special://skin/extras/icons/timer.png</icon>
 			<onclick>Close</onclick>
 			<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
-			<visible>!System.HasAlarm(shutdowntimer) + System.CanPowerDown | System.CanSuspend | System.CanHibernate</visible>
+			<visible>!System.HasAlarm(shutdowntimer)</visible>
 			<property name="id">7</property>
 			<property name="name">power-sleeptimer</property>
 			<property name="menu">shutdown</property>
@@ -1007,7 +1002,6 @@
 			<icon>special://skin/extras/icons/forbidden.png</icon>
 			<onclick>Close</onclick>
 			<onclick>CancelAlarm(shutdowntimer)</onclick>
-			<visible>System.HasAlarm(shutdowntimer)</visible>
 			<property name="id">8</property>
 			<property name="name">power-canceltimer</property>
 			<property name="menu">shutdown</property>
@@ -1020,7 +1014,6 @@
 			<icon>special://skin/extras/icons/info2.png</icon>
 			<onclick>Close</onclick>
 			<onclick>noop</onclick>
-			<visible>System.HasAlarm(shutdowntimer)</visible>
 			<property name="id">9</property>
 			<property name="name">power-timerinfo</property>
 			<property name="menu">shutdown</property>
@@ -1034,7 +1027,6 @@
 			<onclick>Close</onclick>
 			<onclick>System.ExecWait("/usr/sbin/rebootfromnand")</onclick>
 			<onclick>Reset()</onclick>
-			<visible>System.PathExist("/dev/env")</visible>
 			<property name="id">10</property>
 			<property name="name">power-rebootandroid</property>
 			<property name="menu">shutdown</property>
@@ -1048,7 +1040,6 @@
 			<onclick>Close</onclick>
 			<onclick>Dialog.Close(all,true)</onclick>
 			<onclick>System.LogOff</onclick>
-			<visible>[System.HasLoginScreen | Integer.IsGreater(System.ProfileCount,1)] + System.Loggedon</visible>
 			<property name="id">11</property>
 			<property name="name">power-logoff</property>
 			<property name="menu">shutdown</property>
@@ -1061,7 +1052,6 @@
 			<icon>special://skin/extras/icons/networkinfo.png</icon>
 			<onclick>Close</onclick>
 			<onclick>Reset()</onclick>
-			<visible>System.CanReboot</visible>
 			<property name="id">12</property>
 			<property name="name">power-reboot</property>
 			<property name="menu">shutdown</property>
@@ -1074,7 +1064,6 @@
 			<icon>special://skin/extras/icons/power.png</icon>
 			<onclick>Close</onclick>
 			<onclick>Powerdown()</onclick>
-			<visible>System.CanPowerDown</visible>
 			<property name="id">13</property>
 			<property name="name">power-shutdown</property>
 			<property name="menu">shutdown</property>
@@ -1087,7 +1076,6 @@
 			<icon>special://skin/extras/icons/power.png</icon>
 			<onclick>Close</onclick>
 			<onclick>Suspend()</onclick>
-			<visible>System.CanSuspend</visible>
 			<property name="id">14</property>
 			<property name="name">power-suspend</property>
 			<property name="menu">shutdown</property>
@@ -1100,7 +1088,6 @@
 			<icon>special://skin/extras/icons/logout.png</icon>
 			<onclick>Close</onclick>
 			<onclick>mastermode</onclick>
-			<visible>System.HasLocks</visible>
 			<property name="id">15</property>
 			<property name="name">power-mastermode</property>
 			<property name="menu">shutdown</property>
@@ -1112,13 +1099,12 @@
 			<label>$LOCALIZE[13012]</label>
 			<icon>special://skin/extras/icons/logout.png</icon>
 			<onclick>Close</onclick>
-			<onclick>Quit()</onclick>
-			<visible>System.ShowExitButton</visible>
+			<onclick>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</onclick>
 			<property name="id">16</property>
 			<property name="name">power-quit</property>
 			<property name="menu">shutdown</property>
-			<property name="action">Quit()</property>
-			<property name="path">Quit()</property>
+			<property name="action">PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</property>
+			<property name="path">"plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard"</property>
 			<property name="submenuVisibility">power-quit</property>
 		</item>
 	</include>
