@@ -627,7 +627,7 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="skin.arctic.zephyr.rounded" version="2.5.3" name="Arctic: Zephyr - Rounded" provider-name="jurialmunkey, beatmasterrs, nanomani">
+</addon><addon id="skin.arctic.zephyr.rounded" version="2.5.4" name="Arctic: Zephyr - Rounded" provider-name="jurialmunkey, beatmasterrs, nanomani">
     <requires>
         <import addon="xbmc.gui" version="5.18.0" />
         <import addon="script.skinshortcuts" version="3.0.0" />
