@@ -1217,58 +1217,68 @@
                     <top>40</top>
                     <left>144</left>
 
-                    <control type="group">
-                        <!-- <top>10</top> -->
+                    <control type="grouplist">
+                        <top>0</top>
+                        <left>0</left>
+                        <width>700</width>
+                        <height>48</height>
+                        <orientation>horizontal</orientation>
+                        <itemgap>14</itemgap>
+                        <align>left</align>
+
                         <control type="label">
-                            <centertop>24</centertop>
+                            <width>auto</width>
+                            <height>48</height>
                             <align>left</align>
-                            <font>HeaderLabel</font>
+                            <aligny>center</aligny>
+                            <font>Name1</font>
                             <textcolor>Dark1</textcolor>
                             <label>$INFO[System.Time(hh:mm)]</label>
                         </control>
 
                         <control type="label">
-                            <centertop>58</centertop>
-                            <align>left</align>
-                            <font>Flag</font>
+                            <visible>!String.IsEmpty(System.Time(xx))</visible>
                             <width>auto</width>
+                            <height>48</height>
+                            <align>left</align>
+                            <aligny>center</aligny>
+                            <font>Flag</font>
                             <textcolor>Dark2</textcolor>
-                            <label>$INFO[System.Date]</label>
+                            <label>$INFO[System.Time(xx)]</label>
                         </control>
 
-                    </control>
-
-                    <control type="group">
-                        <visible>!String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503])</visible>
-                        <visible>!String.IsEmpty(Weather.plugin)</visible>
-                        <visible>Weather.IsFetched</visible>
-                        <include>Animation_Fade_In_WeatherDelay</include>
-
-                        <top>-2</top>
-                        <left>90</left>
-                        <width>50</width>
-                        <height>50</height>
-                        <align>center</align>
-                        <aligny>center</aligny>
-
-                        <include>Def_Feature_Weather_Icon</include>
-                    </control>
-
-                    <control type="group">
-                        <visible>!String.IsEmpty(Weather.plugin)</visible>
-                        <visible>Weather.IsFetched</visible>
-                        <width>500</width>
-                        <left>30</left>
+                        <control type="group">
+                            <visible>![String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503]) | String.IsEmpty(Window(Weather).Property(Updated))]</visible>
+                            <visible>!String.IsEmpty(Weather.plugin)</visible>
+                            <visible>Weather.IsFetched</visible>
+                            <include>Animation_Fade_In_WeatherDelay</include>
+                            <width>46</width>
+                            <height>48</height>
+                            <include>Def_Feature_Weather_Icon</include>
+                        </control>
 
                         <control type="label">
-                            <centertop>24</centertop>
-                            <left>120</left>
+                            <visible>![String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503]) | String.IsEmpty(Window(Weather).Property(Updated))]</visible>
+                            <visible>!String.IsEmpty(Weather.plugin)</visible>
+                            <visible>Weather.IsFetched</visible>
+                            <include>Animation_Fade_In_WeatherDelay</include>
                             <width>auto</width>
-                            <font>Flag</font>
+                            <height>48</height>
                             <align>left</align>
+                            <aligny>center</aligny>
+                            <font>Name1</font>
                             <textcolor>Dark2</textcolor>
                             <label>$INFO[Weather.Data(Current.Temperature)]</label>
                         </control>
+                    </control>
+
+                    <control type="label">
+                        <centertop>58</centertop>
+                        <align>left</align>
+                        <font>Flag</font>
+                        <width>auto</width>
+                        <textcolor>Dark2</textcolor>
+                        <label>$INFO[System.Date]</label>
                     </control>
                 </control>
             </control>
@@ -1861,34 +1871,26 @@
             <centerbottom>NavBarPad</centerbottom>
 
             <control type="group">
-                <visible>!String.IsEmpty(Weather.plugin)</visible>
-                <animation effect="slide" start="0" end="-45" time="0" condition="String.Contains(Skin.Font,Arial)">Conditional</animation>
-                <animation effect="slide" start="0" end="-20,0" time="0" condition="Integer.IsGreater(System.Time(hh),9) + !String.IsEmpty(System.Time(xx))">Conditional</animation>
-                <animation effect="slide" start="0" end="-30,0" time="0" condition="!String.IsEmpty(System.Time(xx))">Conditional</animation>
 
                 <control type="grouplist">
-                    <visible>!String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503])</visible>
-                    <visible>!String.IsEmpty(Weather.plugin)</visible>
-                    <visible>Weather.IsFetched</visible>
-
-                    <include>Animation_Fade_In_WeatherDelay</include>
-
-                    <right>210</right>
-                    <height>100</height>
-                    <width>500</width>
+                    <right>View_List_Side</right>
+                    <top>0</top>
+                    <height>48</height>
+                    <width>800</width>
                     <align>right</align>
-                    <bottom>-12</bottom>
-
-                    <itemgap>15</itemgap>
+                    <itemgap>14</itemgap>
                     <orientation>horizontal</orientation>
-                    <usecontrolcoords>true</usecontrolcoords>
 
                     <control type="label">
                         <visible>![String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503]) | String.IsEmpty(Window(Weather).Property(Updated))]</visible>
-                        <centertop>34</centertop>
+                        <visible>!String.IsEmpty(Weather.plugin)</visible>
+                        <visible>Weather.IsFetched</visible>
+                        <include>Animation_Fade_In_WeatherDelay</include>
                         <width>auto</width>
-                        <font>Name1</font>
+                        <height>48</height>
                         <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Name1</font>
                         <textcolor>Dark2</textcolor>
                         <label>$INFO[Weather.Data(Current.Temperature)]</label>
                     </control>
@@ -1897,11 +1899,34 @@
 
                     <control type="group">
                         <visible>![String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503]) | String.IsEmpty(Window(Weather).Property(Updated))]</visible>
-                        <width min="20" max="54">auto</width>
-                        <height>54</height>
-                        <bottom>42</bottom>
-                        <align>right</align>
+                        <visible>!String.IsEmpty(Weather.plugin)</visible>
+                        <visible>Weather.IsFetched</visible>
+                        <include>Animation_Fade_In_WeatherDelay</include>
+                        <width>46</width>
+                        <height>48</height>
                         <include>Def_Feature_Weather_Icon</include>
+                    </control>
+
+                    <!-- TIME -->
+
+                    <control type="label">
+                        <width>auto</width>
+                        <height>48</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Name1</font>
+                        <textcolor>Dark1</textcolor>
+                        <label>$INFO[System.Time(hh:mm)]</label>
+                    </control>
+                    <control type="label">
+                        <visible>!String.IsEmpty(System.Time(xx))</visible>
+                        <width>auto</width>
+                        <height>48</height>
+                        <align>right</align>
+                        <aligny>center</aligny>
+                        <font>Flag</font>
+                        <textcolor>Dark3</textcolor>
+                        <label>$INFO[System.Time(xx)]</label>
                     </control>
                 </control>
 
@@ -1937,30 +1962,6 @@
                             <texture colordiffuse="$VAR[Color_Loading_Spinner]">dialog/loading-spinner.png</texture>
                         </control>
                     </control>
-                </control>
-            </control>
-            <control type="grouplist">
-                <right>View_List_Side</right>
-                <width>420</width>
-                <height>84</height>
-                <align>right</align>
-                <orientation>horizontal</orientation>
-                <itemgap>10</itemgap>
-                <usecontrolcoords>true</usecontrolcoords>
-                <control type="label">
-                    <centertop>24</centertop>
-                    <width>auto</width>
-                    <font>LargeBold</font>
-                    <textcolor>Dark1</textcolor>
-                    <label>$INFO[System.Time(hh:mm)]</label>
-                </control>
-                <control type="label">
-                    <centertop>30</centertop>
-                    <width>auto</width>
-                    <font>SmallBold</font>
-                    <textcolor>Dark3</textcolor>
-                    <label>$INFO[System.Time(xx)]</label>
-                    <visible>!String.IsEmpty(System.Time(xx))</visible>
                 </control>
             </control>
             <control type="label">
