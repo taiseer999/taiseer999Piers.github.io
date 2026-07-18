@@ -122,7 +122,13 @@
             <name>Tiny</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <linespacing>0.9</linespacing>
-            <size>25</size>
+            <size>24</size>
+        </font>
+        <font>
+            <name>TinyBadge</name>
+            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <linespacing>0.9</linespacing>
+            <size>23</size>
         </font>
         <font>
             <name>Tiny24</name>
@@ -223,7 +229,12 @@
         <font>
             <name>font13</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>24</size>
+            <size>22</size>
+        </font>
+        <font>
+            <name>BannerInProgress</name>
+            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <size>22</size>
         </font>
         <font>
             <name>font14</name>
@@ -358,7 +369,13 @@
             <name>Tiny</name>
             <filename>iphone.ttf</filename>
             <linespacing>1.08</linespacing>
-            <size>25</size>
+            <size>24</size>
+        </font>
+        <font>
+            <name>TinyBadge</name>
+            <filename>iphone.ttf</filename>
+            <linespacing>1.08</linespacing>
+            <size>23</size>
         </font>
         <font>
             <name>Tiny24</name>
@@ -459,7 +476,12 @@
         <font>
             <name>font13</name>
             <filename>iphone.ttf</filename>
-            <size>28</size>
+            <size>22</size>
+        </font>
+        <font>
+            <name>BannerInProgress</name>
+            <filename>iphone.ttf</filename>
+            <size>26</size>
         </font>
         <font>
             <name>font14</name>
@@ -587,7 +609,13 @@
         <font>
             <name>Tiny</name>
             <filename>Jazeerah_bold.ttf</filename>
-            <size>26</size>
+            <size>24</size>
+            <linespacing>1.12</linespacing>
+        </font>
+        <font>
+            <name>TinyBadge</name>
+            <filename>Jazeerah_bold.ttf</filename>
+            <size>24</size>
             <linespacing>1.12</linespacing>
         </font>
         <font>
@@ -688,7 +716,12 @@
         <font>
             <name>font13</name>
             <filename>Jazeerah_bold.ttf</filename>
-            <size>30</size>
+            <size>22</size>
+        </font>
+        <font>
+            <name>BannerInProgress</name>
+            <filename>Jazeerah_bold.ttf</filename>
+            <size>28</size>
         </font>
         <font>
             <name>font14</name>
@@ -843,7 +876,14 @@
         <font>
             <name>Tiny</name>
             <filename>tonos.ttf</filename>
-            <size>25</size>
+            <size>24</size>
+            <aspect>0.9</aspect>
+            <linespacing>1.12</linespacing>
+        </font>
+        <font>
+            <name>TinyBadge</name>
+            <filename>tonos.ttf</filename>
+            <size>23</size>
             <aspect>0.9</aspect>
             <linespacing>1.12</linespacing>
         </font>
@@ -965,7 +1005,13 @@
         <font>
             <name>font13</name>
             <filename>tonos.ttf</filename>
-            <size>28</size>
+            <size>22</size>
+            <aspect>0.9</aspect>
+        </font>
+        <font>
+            <name>BannerInProgress</name>
+            <filename>tonos.ttf</filename>
+            <size>26</size>
             <aspect>0.9</aspect>
         </font>
         <font>

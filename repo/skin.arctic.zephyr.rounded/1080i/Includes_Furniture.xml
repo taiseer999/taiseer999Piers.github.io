@@ -339,7 +339,36 @@
                     <visible>!Skin.HasSetting(hide.markers) + $EXP[IsTVShowInProgress] + !Skin.HasSetting(hide.markers.inprogress)</visible>
                     <visible>!ListItem.IsPlaying + !Skin.HasSetting(hide.markers.isplaying)</visible>
                     <include>Def_Media_Status_Banner_Label</include>
-                    <label>$VAR[Label_Flag_Indicator_TVShows_In_Progress]</label>
+                    <font>BannerInProgress</font>
+                    <label>$VAR[Label_Flag_Indicator_TVShows_In_Progress_Banner]</label>
+                </control>
+
+                <!-- COUNT TVSHOW IN PROGRESS - TOP LEFT  -->
+
+                <control type="group">
+                    <visible>!Skin.HasSetting(hide.markers) + $EXP[IsTVShowInProgress] + !Skin.HasSetting(hide.markers.inprogress)</visible>
+                    <visible>!Skin.HasSetting(hide.markers.inprogress.tvshow.label)</visible>
+                    <visible>!ListItem.IsPlaying + !Skin.HasSetting(hide.markers.isplaying)</visible>
+                    <visible>!String.IsEmpty(ListItem.Property(TotalEpisodes))</visible>
+                    <control type="image">
+                        <left>12</left>
+                        <top>16</top>
+                        <width>90</width>
+                        <height>38</height>
+                        <texture background="true" colordiffuse="FF00A651">common/circle3.png</texture>
+                    </control>
+                    <control type="label">
+                        <left>12</left>
+                        <top>16</top>
+                        <width>90</width>
+                        <height>38</height>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <font>TinyBadge</font>
+                        <textcolor>$VAR[Color_Indicator_Background_Label]</textcolor>
+                        <selectedcolor>$VAR[Color_Indicator_Background_Label]</selectedcolor>
+                        <label>$INFO[ListItem.Property(WatchedEpisodes)]/$INFO[ListItem.Property(TotalEpisodes)]</label>
+                    </control>
                 </control>
 
                 <!-- LABEL IS WATCHED  -->
@@ -357,7 +386,7 @@
                 <!-- LABEL IS UNWATCHED  -->
 
                 <control type="label">
-                    <visible>!Skin.HasSetting(hide.markers) + !ListItem.IsResumable + Integer.IsEqual(ListItem.Playcount,0) + Skin.HasSetting(show.markers.unwatched.banner)</visible>
+                    <visible>!Skin.HasSetting(hide.markers) + !ListItem.IsResumable + !$EXP[IsTVShowInProgress] + Integer.IsEqual(ListItem.Playcount,0) + Skin.HasSetting(show.markers.unwatched.banner)</visible>
                     <visible>String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)</visible>
                     <visible>!$EXP[Home_More_Item]</visible>
                     <visible>![String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]]]</visible>
