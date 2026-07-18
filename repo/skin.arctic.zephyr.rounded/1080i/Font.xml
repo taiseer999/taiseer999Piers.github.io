@@ -80,7 +80,7 @@
         <font>
             <name>LargeNetflix</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>66</size>
+            <size>50</size>
         </font>
         <font>
             <name>EpisodeNumber</name>
@@ -327,7 +327,7 @@
         <font>
             <name>LargeNetflix</name>
             <filename>iphone.ttf</filename>
-            <size>66</size>
+            <size>50</size>
         </font>
         <font>
             <name>EpisodeNumber</name>
@@ -569,7 +569,7 @@
         <font>
             <name>LargeNetflix</name>
             <filename>Jazeerah_bold.ttf</filename>
-            <size>66</size>
+            <size>50</size>
         </font>
         <font>
             <name>EpisodeNumber</name>
@@ -823,7 +823,7 @@
             <name>LargeNetflix</name>
             <filename>tonos.ttf</filename>
             <style>RobotoNotoCJKsc-Regular</style>
-            <size>66</size>
+            <size>50</size>
             <aspect>0.9</aspect>
         </font>
         <font>
