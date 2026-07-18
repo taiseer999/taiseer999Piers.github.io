@@ -8,6 +8,11 @@
             <size>21</size>
         </font>
         <font>
+            <name>WatchedStates</name>
+            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <size>18</size>
+        </font>
+        <font>
             <name>SubTitleBold</name>
             <filename>RobotoNotoCJKsc-Bold.ttf</filename>
             <size>30</size>
@@ -260,6 +265,11 @@
             <size>21</size>
         </font>
         <font>
+            <name>WatchedStates</name>
+            <filename>iphone.ttf</filename>
+            <size>18</size>
+        </font>
+        <font>
             <name>SubTitleBold</name>
             <filename>iphone.ttf</filename>
             <size>30</size>
@@ -502,6 +512,11 @@
             <size>21</size>
         </font>
         <font>
+            <name>WatchedStates</name>
+            <filename>Jazeerah_bold.ttf</filename>
+            <size>18</size>
+        </font>
+        <font>
             <name>SubTitleBold</name>
             <filename>Jazeerah_bold.ttf</filename>
             <size>30</size>
@@ -740,6 +755,11 @@
             <name>font23_narrow</name>
             <filename>tonos.ttf</filename>
             <size>21</size>
+        </font>
+        <font>
+            <name>WatchedStates</name>
+            <filename>tonos.ttf</filename>
+            <size>18</size>
         </font>
         <font>
             <name>SubTitleBold</name>
