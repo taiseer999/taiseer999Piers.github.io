@@ -1335,7 +1335,7 @@
         <control type="image">
             <left>25</left>
             <width min="0" max="220">auto</width>
-            <height>60</height>
+            <height>46</height>
             <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
             <visible>Skin.HasSetting(home.style.flix) | Skin.HasSetting(home.style.horizontal.clean)</visible>
@@ -1344,7 +1344,7 @@
         <control type="image">
             <left>25</left>
             <width min="0" max="220">auto</width>
-            <height>60</height>
+            <height>46</height>
             <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$INFO[Container($PARAM[id]).ListItem.Studio,resource://resource.images.studios.coloured/,.png]</texture>
             <visible>Skin.HasSetting(home.style.flix) | Skin.HasSetting(home.style.horizontal.clean)</visible>
