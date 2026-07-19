@@ -3,16 +3,6 @@
 	<fontset id="Default" idloc="15109">
         <font>
             <name>font23_narrow</name>
-            <filename>Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>Noto-Bold.ttf</filename>
-            <size>32</size>
-        </font>
-        <font>
-            <name>font23_narrow</name>
             <filename>Inter-Regular.ttf</filename>
             <size>21</size>
         </font>
@@ -285,16 +275,6 @@
 		</font>
 	</fontset>
 	<fontset id="Arial" idloc="31053">
-        <font>
-            <name>font23_narrow</name>
-            <filename>Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>Noto-Bold.ttf</filename>
-            <size>32</size>
-        </font>
         <font>
             <name>font23_narrow</name>
             <filename>Inter-Regular.ttf</filename>
