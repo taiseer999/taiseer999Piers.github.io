@@ -556,7 +556,6 @@
                         <include>Object_ItemBack</include>
                         <control type="image">
                             <texture background="true" diffuse="diffuse/landscape_w410_h231.png">$VAR[Image_OSD_Landscape]</texture>
-                            <aspectratio scalediffuse="false">keep</aspectratio>
                         </control>
                         <control type="group">
                             <visible>!Window.IsActive(DialogSeekBar.xml)</visible>
