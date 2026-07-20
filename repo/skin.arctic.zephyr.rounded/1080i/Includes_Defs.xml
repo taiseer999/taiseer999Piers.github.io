@@ -1333,18 +1333,20 @@
 
     <include name="Def_Home_Label_Widget_Sub_Title_StudioLogo">
         <control type="image">
-            <left>25</left>
-            <width min="0" max="220">auto</width>
-            <height>46</height>
+            <left>23</left>
+            <top>2</top>
+            <width min="0" max="200">auto</width>
+            <height>36</height>
             <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
             <visible>Skin.HasSetting(home.style.flix) | Skin.HasSetting(home.style.horizontal.clean)</visible>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))</visible>
         </control>
         <control type="image">
-            <left>25</left>
-            <width min="0" max="220">auto</width>
-            <height>46</height>
+            <left>23</left>
+            <top>2</top>
+            <width min="0" max="200">auto</width>
+            <height>36</height>
             <aspectratio align="left" aligny="center">keep</aspectratio>
             <texture>$INFO[Container($PARAM[id]).ListItem.Studio,resource://resource.images.studios.coloured/,.png]</texture>
             <visible>Skin.HasSetting(home.style.flix) | Skin.HasSetting(home.style.horizontal.clean)</visible>
@@ -2092,20 +2094,20 @@
     <include name="Def_Image_Poster_Rating_Info_Left">
         <align>left</align>
         <aligny>center</aligny>
-        <width>40</width>
+        <width>32</width>
         <left>10</left>
         <bottom>24</bottom>
-        <height>40</height>
+        <height>32</height>
     </include>
 
     <include name="Def_Label_Poster_Rating_Left">
-        <align>left</align>
+        <align>center</align>
         <aligny>center</aligny>
-        <width>80</width>
-        <left>14</left>
-        <bottom>26</bottom>
-        <height>40</height>
-        <font>Tiny</font>
+        <width>36</width>
+        <left>8</left>
+        <bottom>24</bottom>
+        <height>32</height>
+        <font>Mini</font>
         <textcolor>black</textcolor>
         <selectedcolor>black</selectedcolor>
     </include>

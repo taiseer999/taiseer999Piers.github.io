@@ -304,7 +304,7 @@
                     <visible>![Control.IsVisible(9550) | Control.IsVisible(9557)]</visible>
                     <visible>[Container.Content(actors) + Window.IsVisible(DialogVideoInfo.xml)] | !Container.Content(actors)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_UnWatched]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_Watched]" background="true">misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS NEW  -->
@@ -338,8 +338,8 @@
                 <control type="label">
                     <visible>!Skin.HasSetting(hide.markers) + $EXP[IsTVShowInProgress] + !Skin.HasSetting(hide.markers.inprogress)</visible>
                     <visible>!ListItem.IsPlaying + !Skin.HasSetting(hide.markers.isplaying)</visible>
-                    <include>Def_Media_Status_Banner_Label</include>
                     <font>BannerInProgress</font>
+                    <include>Def_Media_Status_Banner_Label</include>
                     <label>$VAR[Label_Flag_Indicator_TVShows_In_Progress_Banner]</label>
                 </control>
 
@@ -352,19 +352,19 @@
                     <visible>!String.IsEmpty(ListItem.Property(TotalEpisodes))</visible>
                     <control type="image">
                         <left>12</left>
-                        <top>16</top>
-                        <width>90</width>
-                        <height>38</height>
+                        <top>14</top>
+                        <width>72</width>
+                        <height>30</height>
                         <texture background="true" colordiffuse="FF00A651">common/circle3.png</texture>
                     </control>
                     <control type="label">
                         <left>12</left>
-                        <top>16</top>
-                        <width>90</width>
-                        <height>38</height>
+                        <top>14</top>
+                        <width>72</width>
+                        <height>30</height>
                         <align>center</align>
                         <aligny>center</aligny>
-                        <font>TinyBadge</font>
+                        <font>MiniBadge</font>
                         <textcolor>$VAR[Color_Indicator_Background_Label]</textcolor>
                         <selectedcolor>$VAR[Color_Indicator_Background_Label]</selectedcolor>
                         <label>$INFO[ListItem.Property(WatchedEpisodes)]/$INFO[ListItem.Property(TotalEpisodes)]</label>
@@ -625,11 +625,9 @@
 
                     <control type="image">
                         <include>Def_Image_Poster_Rating_Info_Left</include>
-                        <aspectratio align="center" aligny="center" scalediffuse="false">scale</aspectratio>
-                        <texture background="true" colordiffuse="black">diffuse/circle_64.png</texture>
+                        <texture background="true" colordiffuse="FFF6C700">diffuse/circle_64.png</texture>
                     </control>
                     <control type="label">
-                        <textcolor>FF12B2E6</textcolor>
                         <include>Def_Label_Poster_Rating_Left</include>
                         <label>$VAR[Value_Item_Rating]</label>
                     </control>
@@ -646,8 +644,7 @@
 
                     <control type="image">
                         <include>Def_Image_Poster_Rating_Info_Left</include>
-                        <aspectratio align="center" aligny="center" scalediffuse="false">scale</aspectratio>
-                        <texture diffuse="diffuse/circle_64.png" background="true">logo/tmdb/tmdb_circle_64.png</texture>
+                        <texture background="true" colordiffuse="FFF6C700">diffuse/circle_64.png</texture>
                     </control>
                     <control type="label">
                         <include>Def_Label_Poster_Rating_Left</include>

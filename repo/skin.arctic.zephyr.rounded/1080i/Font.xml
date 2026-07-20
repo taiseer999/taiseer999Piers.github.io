@@ -10,7 +10,7 @@
         <font>
             <name>WatchedStates</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>20</size>
+            <size>24</size>
         </font>
         <font>
             <name>SubTitleBold</name>
@@ -156,6 +156,11 @@
             <name>Mini</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>23</size>
+        </font>
+        <font>
+            <name>MiniBadge</name>
+            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <size>20</size>
         </font>
         <font>
             <name>Hint</name>
@@ -410,6 +415,11 @@
             <size>23</size>
         </font>
         <font>
+            <name>MiniBadge</name>
+            <filename>iphone.ttf</filename>
+            <size>20</size>
+        </font>
+        <font>
             <name>Hint</name>
             <filename>iphone.ttf</filename>
             <size>19</size>
@@ -654,6 +664,11 @@
             <name>Mini</name>
             <filename>Jazeerah_bold.ttf</filename>
             <size>24</size>
+        </font>
+        <font>
+            <name>MiniBadge</name>
+            <filename>Jazeerah_bold.ttf</filename>
+            <size>21</size>
         </font>
         <font>
             <name>Hint</name>
@@ -932,6 +947,12 @@
             <name>Mini</name>
             <filename>tonos.ttf</filename>
             <size>23</size>
+            <aspect>0.9</aspect>
+        </font>
+        <font>
+            <name>MiniBadge</name>
+            <filename>tonos.ttf</filename>
+            <size>20</size>
             <aspect>0.9</aspect>
         </font>
         <font>
