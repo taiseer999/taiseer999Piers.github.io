@@ -1085,7 +1085,6 @@
                 <visible>![Container.Content(directors) | Container.Content(actors) | Container.Content(countries) | Container.Content(years) | Container.Content(genres) | Container.Content(tags) | Container.Content(studios)]</visible>
                 <visible>![$EXP[IsPvrDialog] | Window.IsVisible(AddonBrowser.xml) | Window.IsVisible(LoginScreen.xml) | Window.IsActive(videoplaylist) | Window.IsVisible(MyWeather.xml) | Container.Content(favourites)]</visible>
                 <visible>!$EXP[IsPluginApplePodcasts] + !$EXP[IsGameMode] + !Window.IsVisible(MyGames.xml)</visible>
-                <visible>Integer.IsGreater(Window(Home).Property(Movies.Count),0) | Integer.IsGreater(Window(Home).Property(TVShows.Count),0) | Integer.IsGreater(Window(Home).Property(Music.AlbumsCount),0) | Integer.IsGreater(Pvr.BackendChannels,0)</visible>
 
                 <itemgap>0</itemgap>
                 <orientation>horizontal</orientation>

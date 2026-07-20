@@ -158,6 +158,11 @@
             <size>23</size>
         </font>
         <font>
+            <name>SymbolList</name>
+            <filename>symbol.ttf</filename>
+            <size>22</size>
+        </font>
+        <font>
             <name>MiniBadge</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>20</size>
@@ -415,6 +420,11 @@
             <size>23</size>
         </font>
         <font>
+            <name>SymbolList</name>
+            <filename>symbol.ttf</filename>
+            <size>22</size>
+        </font>
+        <font>
             <name>MiniBadge</name>
             <filename>iphone.ttf</filename>
             <size>20</size>
@@ -664,6 +674,11 @@
             <name>Mini</name>
             <filename>Jazeerah_bold.ttf</filename>
             <size>24</size>
+        </font>
+        <font>
+            <name>SymbolList</name>
+            <filename>symbol.ttf</filename>
+            <size>22</size>
         </font>
         <font>
             <name>MiniBadge</name>
@@ -948,6 +963,11 @@
             <filename>tonos.ttf</filename>
             <size>23</size>
             <aspect>0.9</aspect>
+        </font>
+        <font>
+            <name>SymbolList</name>
+            <filename>symbol.ttf</filename>
+            <size>22</size>
         </font>
         <font>
             <name>MiniBadge</name>
