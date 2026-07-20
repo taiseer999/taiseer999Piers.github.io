@@ -2510,3 +2510,7 @@ msgctxt "#31622"
 msgid "Setup wizard"
 msgstr ""
 
+msgctxt "#31623"
+msgid "Show genre as icons on home"
+msgstr ""
+

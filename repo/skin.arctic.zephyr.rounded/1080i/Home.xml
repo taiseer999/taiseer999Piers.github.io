@@ -14,6 +14,9 @@
 
     <onload>Skin.SetString(FullInitEnded,1)</onload>
     <onload condition="String.IsEmpty(Skin.String(Skin.SettingsLevel))">Skin.SetString(Skin.SettingsLevel,$NUMBER[3])</onload>
+    <onload condition="String.IsEmpty(Skin.String(genre.icons.path)) + System.AddonIsEnabled(resource.images.moviegenreicons.arctic.zephyr)">Skin.SetString(genre.icons.path,resource://resource.images.moviegenreicons.arctic.zephyr/)</onload>
+    <onload condition="String.IsEmpty(Skin.String(genre.icons.path)) + System.AddonIsEnabled(resource.images.moviegenreicons.transparent)">Skin.SetString(genre.icons.path,resource://resource.images.moviegenreicons.transparent/)</onload>
+    <onload condition="!String.IsEmpty(Skin.String(genre.icons.path)) + String.IsEmpty(Skin.String(genre.icons.ext))">Skin.SetString(genre.icons.ext,.png)</onload>
 
     <!-- SET COLOR LINK WIKIPEDIA -->
 

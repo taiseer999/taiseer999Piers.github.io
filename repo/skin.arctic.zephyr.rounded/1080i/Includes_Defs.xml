@@ -1297,12 +1297,220 @@
             <left>20</left>
             <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),(,]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name), / ,])</label>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name))</visible>
+            <visible>!Skin.HasSetting(home.genre.icons)</visible>
+        </control>
+        <control type="label">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <left>20</left>
+            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre),(,)]</label>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre))</visible>
+            <visible>!Skin.HasSetting(home.genre.icons)</visible>
         </control>
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
             <left>20</left>
             <label>$INFO[Container($PARAM[id]).ListItem.Genre,(,)]</label>
-            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)</visible>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)</visible>
+            <visible>!Skin.HasSetting(home.genre.icons)</visible>
+        </control>
+        <!-- Genre as icons (Skin.HasSetting(home.genre.icons)) - bundled white icons in media/genreicons, Contains stem matching Arabic + English -->
+        <control type="image" description="Genre icon Action">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Action.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Action) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),حركة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),أكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),اكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Action) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),حركة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),أكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),اكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Action) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),حركة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),أكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),اكشن) | String.Contains(Container($PARAM[id]).ListItem.Genre,Action) | String.Contains(Container($PARAM[id]).ListItem.Genre,حركة) | String.Contains(Container($PARAM[id]).ListItem.Genre,أكشن) | String.Contains(Container($PARAM[id]).ListItem.Genre,اكشن)</visible>
+        </control>
+        <control type="image" description="Genre icon Adventure">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Adventure.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Adventure) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),مغامر) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Adventure) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),مغامر) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Adventure) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),مغامر) | String.Contains(Container($PARAM[id]).ListItem.Genre,Adventure) | String.Contains(Container($PARAM[id]).ListItem.Genre,مغامر)</visible>
+        </control>
+        <control type="image" description="Genre icon Animation">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Animation.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Animation) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),رسوم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),نيميشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Animation) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),رسوم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),نيميشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Animation) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),رسوم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),نيميشن) | String.Contains(Container($PARAM[id]).ListItem.Genre,Animation) | String.Contains(Container($PARAM[id]).ListItem.Genre,رسوم) | String.Contains(Container($PARAM[id]).ListItem.Genre,نيميشن)</visible>
+        </control>
+        <control type="image" description="Genre icon Comedy">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Comedy.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Comedy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),كوميدي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Comedy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),كوميدي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Comedy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),كوميدي) | String.Contains(Container($PARAM[id]).ListItem.Genre,Comedy) | String.Contains(Container($PARAM[id]).ListItem.Genre,كوميدي)</visible>
+        </control>
+        <control type="image" description="Genre icon Crime">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Crime.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Crime) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),جريمة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),جرائم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Crime) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),جريمة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),جرائم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Crime) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),جريمة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),جرائم) | String.Contains(Container($PARAM[id]).ListItem.Genre,Crime) | String.Contains(Container($PARAM[id]).ListItem.Genre,جريمة) | String.Contains(Container($PARAM[id]).ListItem.Genre,جرائم)</visible>
+        </control>
+        <control type="image" description="Genre icon Documentary">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Documentary.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Documentary) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),وثائقي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Documentary) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),وثائقي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Documentary) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),وثائقي) | String.Contains(Container($PARAM[id]).ListItem.Genre,Documentary) | String.Contains(Container($PARAM[id]).ListItem.Genre,وثائقي)</visible>
+        </control>
+        <control type="image" description="Genre icon Drama">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Drama.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Drama) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),دراما) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Drama) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),دراما) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Drama) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),دراما) | String.Contains(Container($PARAM[id]).ListItem.Genre,Drama) | String.Contains(Container($PARAM[id]).ListItem.Genre,دراما)</visible>
+        </control>
+        <control type="image" description="Genre icon Family">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Family.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Family) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),عائل) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),أطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),اطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Family) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),عائل) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),أطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),اطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Family) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),عائل) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),أطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),اطفال) | String.Contains(Container($PARAM[id]).ListItem.Genre,Family) | String.Contains(Container($PARAM[id]).ListItem.Genre,عائل) | String.Contains(Container($PARAM[id]).ListItem.Genre,أطفال) | String.Contains(Container($PARAM[id]).ListItem.Genre,اطفال)</visible>
+        </control>
+        <control type="image" description="Genre icon Fantasy">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Fantasy.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Fantasy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),فانتازيا) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Fantasy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),فانتازيا) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Fantasy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),فانتازيا) | String.Contains(Container($PARAM[id]).ListItem.Genre,Fantasy) | String.Contains(Container($PARAM[id]).ListItem.Genre,فانتازيا)</visible>
+        </control>
+        <control type="image" description="Genre icon History">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/History.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),History) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),تاريخ) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),History) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),تاريخ) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),History) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),تاريخ) | String.Contains(Container($PARAM[id]).ListItem.Genre,History) | String.Contains(Container($PARAM[id]).ListItem.Genre,تاريخ)</visible>
+        </control>
+        <control type="image" description="Genre icon Horror">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Horror.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Horror) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),رعب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Horror) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),رعب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Horror) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),رعب) | String.Contains(Container($PARAM[id]).ListItem.Genre,Horror) | String.Contains(Container($PARAM[id]).ListItem.Genre,رعب)</visible>
+        </control>
+        <control type="image" description="Genre icon Music">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Music.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Music) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),موسيق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Music) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),موسيق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Music) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),موسيق) | String.Contains(Container($PARAM[id]).ListItem.Genre,Music) | String.Contains(Container($PARAM[id]).ListItem.Genre,موسيق)</visible>
+        </control>
+        <control type="image" description="Genre icon Mystery">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Mystery.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Mystery) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),غموض) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),لغز) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Mystery) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),غموض) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),لغز) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Mystery) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),غموض) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),لغز) | String.Contains(Container($PARAM[id]).ListItem.Genre,Mystery) | String.Contains(Container($PARAM[id]).ListItem.Genre,غموض) | String.Contains(Container($PARAM[id]).ListItem.Genre,لغز)</visible>
+        </control>
+        <control type="image" description="Genre icon Romance">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Romance.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Romance) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),رومانس) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Romance) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),رومانس) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Romance) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),رومانس) | String.Contains(Container($PARAM[id]).ListItem.Genre,Romance) | String.Contains(Container($PARAM[id]).ListItem.Genre,رومانس)</visible>
+        </control>
+        <control type="image" description="Genre icon Science-Fiction">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Science-Fiction.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Science Fiction) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Sci-Fi) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),خيال علمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),الخيال العلمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Science Fiction) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Sci-Fi) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),خيال علمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),الخيال العلمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Science Fiction) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Sci-Fi) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),خيال علمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),الخيال العلمي) | String.Contains(Container($PARAM[id]).ListItem.Genre,Science Fiction) | String.Contains(Container($PARAM[id]).ListItem.Genre,Sci-Fi) | String.Contains(Container($PARAM[id]).ListItem.Genre,خيال علمي) | String.Contains(Container($PARAM[id]).ListItem.Genre,الخيال العلمي)</visible>
+        </control>
+        <control type="image" description="Genre icon Thriller">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Thriller.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Thriller) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),إثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),اثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),تشويق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Thriller) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),إثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),اثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),تشويق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Thriller) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),إثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),اثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),تشويق) | String.Contains(Container($PARAM[id]).ListItem.Genre,Thriller) | String.Contains(Container($PARAM[id]).ListItem.Genre,إثارة) | String.Contains(Container($PARAM[id]).ListItem.Genre,اثارة) | String.Contains(Container($PARAM[id]).ListItem.Genre,تشويق)</visible>
+        </control>
+        <control type="image" description="Genre icon War">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/War.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),War) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),حرب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),War) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),حرب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),War) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),حرب) | String.Contains(Container($PARAM[id]).ListItem.Genre,War) | String.Contains(Container($PARAM[id]).ListItem.Genre,حرب)</visible>
+        </control>
+        <control type="image" description="Genre icon Western">
+            <left>16</left>
+            <top>3</top>
+            <width>55</width>
+            <height>55</height>
+            <aspectratio align="left" aligny="center">keep</aspectratio>
+            <colordiffuse>Dark2</colordiffuse>
+            <texture>genreicons/Western.png</texture>
+            <visible>Skin.HasSetting(home.genre.icons)</visible>
+            <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),غربي) | String.Contains(Container($PARAM[id]).ListItem.Genre,Western) | String.Contains(Container($PARAM[id]).ListItem.Genre,غربي)</visible>
         </control>
     </include>
 

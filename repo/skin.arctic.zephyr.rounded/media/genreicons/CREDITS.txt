@@ -1,0 +1,3 @@
+Genre icons adapted from resource.images.moviegenreicons.arctic.zephyr by braz96
+https://github.com/braz96/resource.images.moviegenreicons.arctic.zephyr
+License: CC BY-SA 3.0 US (recolored to white, resized)
