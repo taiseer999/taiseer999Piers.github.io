@@ -304,7 +304,7 @@
                     <visible>![Control.IsVisible(9550) | Control.IsVisible(9557)]</visible>
                     <visible>[Container.Content(actors) + Window.IsVisible(DialogVideoInfo.xml)] | !Container.Content(actors)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_Watched]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_UnWatched]" background="true">misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS NEW  -->
@@ -338,8 +338,8 @@
                 <control type="label">
                     <visible>!Skin.HasSetting(hide.markers) + $EXP[IsTVShowInProgress] + !Skin.HasSetting(hide.markers.inprogress)</visible>
                     <visible>!ListItem.IsPlaying + !Skin.HasSetting(hide.markers.isplaying)</visible>
-                    <font>BannerInProgress</font>
                     <include>Def_Media_Status_Banner_Label</include>
+                    <font>BannerInProgress</font>
                     <label>$VAR[Label_Flag_Indicator_TVShows_In_Progress_Banner]</label>
                 </control>
 
@@ -352,19 +352,19 @@
                     <visible>!String.IsEmpty(ListItem.Property(TotalEpisodes))</visible>
                     <control type="image">
                         <left>12</left>
-                        <top>14</top>
-                        <width>72</width>
-                        <height>30</height>
+                        <top>16</top>
+                        <width>90</width>
+                        <height>38</height>
                         <texture background="true" colordiffuse="FF00A651">common/circle3.png</texture>
                     </control>
                     <control type="label">
                         <left>12</left>
-                        <top>14</top>
-                        <width>72</width>
-                        <height>30</height>
+                        <top>16</top>
+                        <width>90</width>
+                        <height>38</height>
                         <align>center</align>
                         <aligny>center</aligny>
-                        <font>MiniBadge</font>
+                        <font>TinyBadge</font>
                         <textcolor>$VAR[Color_Indicator_Background_Label]</textcolor>
                         <selectedcolor>$VAR[Color_Indicator_Background_Label]</selectedcolor>
                         <label>$INFO[ListItem.Property(WatchedEpisodes)]/$INFO[ListItem.Property(TotalEpisodes)]</label>
