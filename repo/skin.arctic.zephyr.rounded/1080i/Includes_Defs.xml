@@ -1294,6 +1294,7 @@
     <include name="Def_Home_Genre_Icons_Large">
         <definition>
             <control type="grouplist" description="Genre icons above widgets">
+                <usecontrolcoords>true</usecontrolcoords>
                 <left>55</left>
                 <bottom>20</bottom>
                 <width>800</width>
@@ -1446,8 +1447,9 @@
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),غربي)</visible>
             </control>
             <control type="image" description="Studio logo after genre icons">
-                <width min="0" max="170">auto</width>
-                <height>75</height>
+                <top>12</top>
+                <width min="0" max="119">auto</width>
+                <height>52</height>
                 <aspectratio align="left" aligny="center">keep</aspectratio>
                 <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
                 <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))</visible>
