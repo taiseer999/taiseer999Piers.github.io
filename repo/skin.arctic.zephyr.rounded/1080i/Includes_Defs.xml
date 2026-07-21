@@ -1307,6 +1307,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Action.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Action) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),حركة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),أكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),اكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Action) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),حركة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),أكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),اكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Action) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),حركة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),أكشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),اكشن)</visible>
             </control>
@@ -1315,6 +1316,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Adventure.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Adventure) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),مغامر) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Adventure) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),مغامر) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Adventure) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),مغامر)</visible>
             </control>
@@ -1323,6 +1325,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Animation.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Animation) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),رسوم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),نيميشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Animation) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),رسوم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),نيميشن) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Animation) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),رسوم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),نيميشن)</visible>
             </control>
@@ -1331,6 +1334,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Comedy.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Comedy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),كوميدي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Comedy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),كوميدي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Comedy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),كوميدي)</visible>
             </control>
@@ -1339,6 +1343,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Crime.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Crime) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),جريمة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),جرائم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Crime) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),جريمة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),جرائم) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Crime) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),جريمة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),جرائم)</visible>
             </control>
@@ -1347,6 +1352,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Documentary.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Documentary) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),وثائقي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Documentary) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),وثائقي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Documentary) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),وثائقي)</visible>
             </control>
@@ -1355,6 +1361,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Drama.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Drama) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),دراما) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Drama) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),دراما) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Drama) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),دراما)</visible>
             </control>
@@ -1363,6 +1370,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Family.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Family) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),عائل) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),أطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),اطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Family) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),عائل) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),أطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),اطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Family) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),عائل) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),أطفال) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),اطفال)</visible>
             </control>
@@ -1371,6 +1379,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Fantasy.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Fantasy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),فانتازيا) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Fantasy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),فانتازيا) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Fantasy) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),فانتازيا)</visible>
             </control>
@@ -1379,6 +1388,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/History.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),History) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),تاريخ) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),History) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),تاريخ) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),History) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),تاريخ)</visible>
             </control>
@@ -1387,6 +1397,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Horror.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Horror) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),رعب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Horror) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),رعب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Horror) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),رعب)</visible>
             </control>
@@ -1395,6 +1406,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Music.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Music) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),موسيق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Music) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),موسيق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Music) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),موسيق)</visible>
             </control>
@@ -1403,6 +1415,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Mystery.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Mystery) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),غموض) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),لغز) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Mystery) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),غموض) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),لغز) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Mystery) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),غموض) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),لغز)</visible>
             </control>
@@ -1411,6 +1424,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Romance.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Romance) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),رومانس) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Romance) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),رومانس) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Romance) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),رومانس)</visible>
             </control>
@@ -1419,6 +1433,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Science-Fiction.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Science Fiction) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Sci-Fi) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),خيال علمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),الخيال العلمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Science Fiction) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Sci-Fi) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),خيال علمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),الخيال العلمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Science Fiction) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Sci-Fi) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),خيال علمي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),الخيال العلمي)</visible>
             </control>
@@ -1427,6 +1442,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Thriller.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Thriller) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),إثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),اثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),تشويق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Thriller) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),إثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),اثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),تشويق) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Thriller) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),إثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),اثارة) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),تشويق)</visible>
             </control>
@@ -1435,6 +1451,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/War.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),War) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),حرب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),War) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),حرب) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),War) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),حرب)</visible>
             </control>
@@ -1443,6 +1460,7 @@
                 <height>75</height>
                 <aspectratio align="center" aligny="center">keep</aspectratio>
                 <colordiffuse>Dark2</colordiffuse>
+                <visible>!Skin.HasSetting(hide.home.genre.icons)</visible>
                 <texture>genreicons/Western.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),غربي)</visible>
             </control>
@@ -1451,6 +1469,7 @@
                 <width min="0" max="119">auto</width>
                 <height>52</height>
                 <aspectratio align="left" aligny="center">keep</aspectratio>
+                <visible>!Skin.HasSetting(hide.home.studio.logo)</visible>
                 <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
                 <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))</visible>
             </control>

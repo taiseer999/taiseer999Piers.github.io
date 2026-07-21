@@ -2514,3 +2514,11 @@ msgctxt "#31623"
 msgid "Show genre as icons on home"
 msgstr ""
 
+msgctxt "#31624"
+msgid "Show genre icons on home"
+msgstr ""
+
+msgctxt "#31625"
+msgid "Show studio logo on home"
+msgstr ""
+

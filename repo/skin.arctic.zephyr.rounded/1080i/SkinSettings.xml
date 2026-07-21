@@ -1365,6 +1365,32 @@
                     <onclick>Skin.ToggleSetting(show.time.format.hh.mm)</onclick>
                 </control>
 
+                <!-- SHOW GENRE ICONS BAR ON HOME -->
+
+                <control type="radiobutton" id="12005">
+                    <width>1278</width>
+                    <align>left</align>
+                    <label>$LOCALIZE[31624]</label>
+                    <visible>Container(3000).HasFocus(5)</visible>
+                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <selected>!Skin.HasSetting(hide.home.genre.icons)</selected>
+                    <onclick>Skin.ToggleSetting(hide.home.genre.icons)</onclick>
+                </control>
+
+                <!-- SHOW STUDIO LOGO ON HOME -->
+
+                <control type="radiobutton" id="12006">
+                    <width>1278</width>
+                    <align>left</align>
+                    <label>$LOCALIZE[31625]</label>
+                    <visible>Container(3000).HasFocus(5)</visible>
+                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <selected>!Skin.HasSetting(hide.home.studio.logo)</selected>
+                    <onclick>Skin.ToggleSetting(hide.home.studio.logo)</onclick>
+                </control>
+
                 <!-- SHOW WEATHER ALL VIEW -->
 
                 <control type="radiobutton" id="92633" description="Weather Bottom Clock Left">
