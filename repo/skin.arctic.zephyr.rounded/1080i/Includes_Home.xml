@@ -1118,7 +1118,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1138,7 +1137,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration_JLOM"><param name="id" value="$PARAM[id]" /></include>
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1158,7 +1156,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Num_Episode"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_TvShows_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />
@@ -1179,7 +1176,6 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_Episode_X"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Premiered"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
-                <include content="Def_Home_Label_Widget_Sub_Title_StudioLogo"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
                     <param name="id" value="$PARAM[id]" />

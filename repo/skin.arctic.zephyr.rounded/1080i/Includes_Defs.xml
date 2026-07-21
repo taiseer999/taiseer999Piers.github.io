@@ -1296,10 +1296,10 @@
             <control type="grouplist" description="Genre icons above widgets">
                 <left>55</left>
                 <bottom>20</bottom>
-                <width>300</width>
+                <width>800</width>
                 <height>75</height>
                 <orientation>horizontal</orientation>
-                <itemgap>5</itemgap>
+                <itemgap>2</itemgap>
                 <align>left</align>
             <control type="image" description="Genre icon large Action">
                 <width>75</width>
@@ -1445,6 +1445,13 @@
                 <texture>genreicons/Western.png</texture>
                 <visible>String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),غربي) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Western) | String.Contains(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),غربي)</visible>
             </control>
+            <control type="image" description="Studio logo after genre icons">
+                <width min="0" max="170">auto</width>
+                <height>75</height>
+                <aspectratio align="left" aligny="center">keep</aspectratio>
+                <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
+                <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))</visible>
+            </control>
             </control>
         </definition>
     </include>
@@ -1479,16 +1486,22 @@
     </include>
 
     <include name="Def_Home_Label_Widget_Sub_Title_Mpaa">
-        <control type="label">
-            <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
-            <label>($INFO[Window(Home).Property(TMDbHelper.ListItem.Mpaa),,])</label>
+        <control type="image" description="MPAA badge from TMDbHelper prop">
+            <left>16</left>
+            <top>10</top>
+            <width min="0" max="76">auto</width>
+            <height>36</height>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture>flags/mpaa/color/$VAR[flag_mpaa_homeprop]</texture>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Mpaa))</visible>
         </control>
-        <control type="label">
-            <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
-            <label>($INFO[Container($PARAM[id]).ListItem.Mpaa,,])</label>
+        <control type="image" description="MPAA badge from ListItem">
+            <left>16</left>
+            <top>10</top>
+            <width min="0" max="76">auto</width>
+            <height>36</height>
+            <aspectratio align="center" aligny="center">keep</aspectratio>
+            <texture>flags/mpaa/color/$VAR[flag_mpaa]</texture>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Mpaa)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Mpaa)</visible>
         </control>
     </include>
