@@ -1365,21 +1365,6 @@
                     <onclick>Skin.ToggleSetting(show.time.format.hh.mm)</onclick>
                 </control>
 
-                <!-- SHOW GENRE AS ICONS ON HOME -->
-
-                <control type="radiobutton" id="12005">
-                    <width>1278</width>
-                    <align>left</align>
-                    <label>$LOCALIZE[31623]</label>
-                    <visible>Container(3000).HasFocus(5)</visible>
-                    <include>Def_Skin_Settings_Level_standard</include>
-                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
-                    <selected>Skin.HasSetting(home.genre.icons)</selected>
-                    <onclick>Skin.ToggleSetting(home.genre.icons)</onclick>
-                    <onclick condition="Skin.HasSetting(home.genre.icons) + String.IsEmpty(Skin.String(genre.icons.path))">SetProperty(SelectType,genre_icons,Home)</onclick>
-                    <onclick condition="Skin.HasSetting(home.genre.icons) + String.IsEmpty(Skin.String(genre.icons.path))">RunScript(script.image.resource.select,property=genre.icons&amp;type=resource.images.moviegenreicons)</onclick>
-                </control>
-
                 <!-- SHOW WEATHER ALL VIEW -->
 
                 <control type="radiobutton" id="92633" description="Weather Bottom Clock Left">

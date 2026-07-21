@@ -157,5 +157,11 @@
         <!-- DEBUG INFO -->
 
         <include condition="Skin.HasSetting(DebugInfo.widget)">Furniture_DebugInfo_Item</include>
-    </controls>
+    
+    <control type="group" description="Home genre icons overlay">
+        <animation effect="fade" time="200">VisibleChange</animation>
+        <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name))</visible>
+        <include>Def_Home_Genre_Icons_Large</include>
+    </control>
+</controls>
 </window>
