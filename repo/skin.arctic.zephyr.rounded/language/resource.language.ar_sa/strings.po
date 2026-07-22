@@ -1933,3 +1933,12 @@ msgctxt "#31478"
 msgid "Rating stars"
 msgstr "نجوم التقييم"
 
+msgctxt "#31624"
+msgid "Show genre icons on home"
+msgstr "عرض أيقونات النوع في صفحة اليوم"
+
+msgctxt "#31625"
+msgid "Show studio logo on home"
+msgstr "عرض شعار الاستوديو في  صفحة اليوم"
+
+
