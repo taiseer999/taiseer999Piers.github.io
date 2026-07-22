@@ -1596,6 +1596,24 @@
         <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre)]</value>
     </variable>
 
+    <include name="Def_Home_Label_Widget_Sub_Title_Genre_First">
+        <control type="label">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <label>$VAR[Home_SubTitle_Genre1_AR,(,]$VAR[Home_SubTitle_Genre2_AR, / ,])</label>
+            <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name))</visible>
+        </control>
+        <control type="label">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <label>$VAR[Home_SubTitle_GenreCombined_AR,(,)]</label>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre))</visible>
+        </control>
+        <control type="label">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <label>$INFO[Container($PARAM[id]).ListItem.Genre,(,)]</label>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)</visible>
+        </control>
+    </include>
+
     <include name="Def_Home_Label_Widget_Sub_Title_Genre">
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
