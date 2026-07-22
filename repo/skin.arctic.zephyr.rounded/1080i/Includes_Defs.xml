@@ -1234,6 +1234,21 @@
         </control>
     </include>
 
+    <include name="Def_Home_Label_Widget_Sub_Title_ReleaseDate">
+        <control type="label" description="Release date from TMDbHelper prop">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <left>20</left>
+            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Premiered)]</label>
+            <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered))</visible>
+        </control>
+        <control type="label" description="Release date from ListItem">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <left>20</left>
+            <label>$INFO[Container($PARAM[id]).ListItem.Premiered]</label>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)</visible>
+        </control>
+    </include>
+
     <include name="Def_Home_Label_Widget_Sub_Title_Duration">
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
@@ -1477,17 +1492,121 @@
         </definition>
     </include>
 
+    <!-- English->Arabic genre name mapping for the home sub-title row -->
+    <variable name="Home_SubTitle_Genre1_AR">
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Action &amp; Adventure)">حركة ومغامرة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Sci-Fi &amp; Fantasy)">خيال علمي وفانتازيا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),War &amp; Politics)">حرب وسياسة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Science Fiction)">خيال علمي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Sci-Fi)">خيال علمي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),TV Movie)">فيلم تلفزيوني</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Action)">حركة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Adventure)">مغامرة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Animation)">رسوم متحركة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Comedy)">كوميديا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Crime)">جريمة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Documentary)">وثائقي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Drama)">دراما</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Family)">عائلي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Fantasy)">فانتازيا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),History)">تاريخ</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Horror)">رعب</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Music)">موسيقى</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Musical)">موسيقي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Mystery)">غموض</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Romance)">رومانسية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Thriller)">إثارة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),War)">حرب</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Western)">غربي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Kids)">أطفال</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),News)">أخبار</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Reality)">واقعي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Soap)">دراما يومية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Talk)">حواري</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Biography)">سيرة ذاتية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),Sport)">رياضة</value>
+        <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)]</value>
+    </variable>
+    <variable name="Home_SubTitle_Genre2_AR">
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Action &amp; Adventure)">حركة ومغامرة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Sci-Fi &amp; Fantasy)">خيال علمي وفانتازيا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),War &amp; Politics)">حرب وسياسة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Science Fiction)">خيال علمي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Sci-Fi)">خيال علمي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),TV Movie)">فيلم تلفزيوني</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Action)">حركة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Adventure)">مغامرة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Animation)">رسوم متحركة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Comedy)">كوميديا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Crime)">جريمة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Documentary)">وثائقي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Drama)">دراما</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Family)">عائلي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Fantasy)">فانتازيا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),History)">تاريخ</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Horror)">رعب</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Music)">موسيقى</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Musical)">موسيقي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Mystery)">غموض</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Romance)">رومانسية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Thriller)">إثارة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),War)">حرب</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Western)">غربي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Kids)">أطفال</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),News)">أخبار</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Reality)">واقعي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Soap)">دراما يومية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Talk)">حواري</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Biography)">سيرة ذاتية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name),Sport)">رياضة</value>
+        <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name)]</value>
+    </variable>
+    <variable name="Home_SubTitle_GenreCombined_AR">
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Action &amp; Adventure)">حركة ومغامرة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Sci-Fi &amp; Fantasy)">خيال علمي وفانتازيا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),War &amp; Politics)">حرب وسياسة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Science Fiction)">خيال علمي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Sci-Fi)">خيال علمي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),TV Movie)">فيلم تلفزيوني</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Action)">حركة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Adventure)">مغامرة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Animation)">رسوم متحركة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Comedy)">كوميديا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Crime)">جريمة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Documentary)">وثائقي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Drama)">دراما</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Family)">عائلي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Fantasy)">فانتازيا</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),History)">تاريخ</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Horror)">رعب</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Music)">موسيقى</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Musical)">موسيقي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Mystery)">غموض</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Romance)">رومانسية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Thriller)">إثارة</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),War)">حرب</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Western)">غربي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Kids)">أطفال</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),News)">أخبار</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Reality)">واقعي</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Soap)">دراما يومية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Talk)">حواري</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Biography)">سيرة ذاتية</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Genre),Sport)">رياضة</value>
+        <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre)]</value>
+    </variable>
+
     <include name="Def_Home_Label_Widget_Sub_Title_Genre">
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
             <left>20</left>
-            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),(,]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name), / ,])</label>
+            <label>$VAR[Home_SubTitle_Genre1_AR,(,]$VAR[Home_SubTitle_Genre2_AR, / ,])</label>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name))</visible>
         </control>
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
             <left>20</left>
-            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre),(,)]</label>
+            <label>$VAR[Home_SubTitle_GenreCombined_AR,(,)]</label>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre))</visible>
         </control>
         <control type="label">

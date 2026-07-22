@@ -263,11 +263,11 @@ msgstr "حلقات مشاهدة"
 
 msgctxt "#31061"
 msgid "h"
-msgstr "س"
+msgstr "h"
 
 msgctxt "#31062"
 msgid "m"
-msgstr "د"
+msgstr "m"
 
 msgctxt "#31063"
 msgid "New time format"
@@ -315,7 +315,7 @@ msgstr "العناصر"
 
 msgctxt "#31074"
 msgid "min"
-msgstr "دقيقة"
+msgstr "min"
 
 msgctxt "#31075"
 msgid "Live TV"
