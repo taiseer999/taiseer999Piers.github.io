@@ -67,8 +67,7 @@
                 <height>380</height>
 
                 <control type="image">
-                    <texture border="80" colordiffuse="B3333333">diffuse/circlebutton_160_flat.png</texture>
-                    <animation effect="fade" start="100" end="90" condition="true">Conditional</animation>
+                    <texture border="80" colordiffuse="FF000000">diffuse/circlebutton_160_flat.png</texture>
                 </control>
             </control>
 
