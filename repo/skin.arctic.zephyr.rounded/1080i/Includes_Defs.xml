@@ -1487,6 +1487,7 @@
                 <visible>!Skin.HasSetting(hide.home.studio.logo)</visible>
                 <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
                 <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))</visible>
+                <visible>String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.label),ListItem.Label) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.base_label),ListItem.Label)</visible>
             </control>
             </control>
         </definition>
