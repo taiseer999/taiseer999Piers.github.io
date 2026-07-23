@@ -340,7 +340,16 @@
             <include>Def_Dimensions_Fullscreen</include>
 
             <aspectratio>scale</aspectratio>
-            <imagepath background="true">$VAR[Global_Fanart_Background]</imagepath>
+                            <animation effect="fade" end="10" start="10" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),10)">Conditional</animation>
+                <animation effect="fade" end="20" start="20" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),20)">Conditional</animation>
+                <animation effect="fade" end="30" start="30" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),30)">Conditional</animation>
+                <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
+                <animation effect="fade" end="50" start="50" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),50)">Conditional</animation>
+                <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60)">Conditional</animation>
+                <animation effect="fade" end="70" start="70" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),70)">Conditional</animation>
+                <animation effect="fade" end="80" start="80" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),80)">Conditional</animation>
+                <animation effect="fade" end="90" start="90" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),90)">Conditional</animation>
+                <imagepath background="true">$VAR[Global_Fanart_Background]</imagepath>
         </control>
     </include>
 
@@ -448,9 +457,9 @@
             <animation effect="fade" end="10" start="10" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),10)">Conditional</animation>
             <animation effect="fade" end="20" start="20" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),20)">Conditional</animation>
             <animation effect="fade" end="30" start="30" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),30)">Conditional</animation>
-            <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40)">Conditional</animation>
+            <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
             <animation effect="fade" end="50" start="50" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),50)">Conditional</animation>
-            <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
+            <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60)">Conditional</animation>
             <animation effect="fade" end="70" start="70" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),70)">Conditional</animation>
             <animation effect="fade" end="80" start="80" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),80)">Conditional</animation>
             <animation effect="fade" end="90" start="90" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),90)">Conditional</animation>
@@ -556,6 +565,15 @@
                     <width>1920</width>
                     <height>1080</height>
                     <texture background="true">$VAR[Image_FullscreenWidget_Artwork-1]</texture>
+                    <animation effect="fade" end="10" start="10" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),10)">Conditional</animation>
+                    <animation effect="fade" end="20" start="20" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),20)">Conditional</animation>
+                    <animation effect="fade" end="30" start="30" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),30)">Conditional</animation>
+                    <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
+                    <animation effect="fade" end="50" start="50" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),50)">Conditional</animation>
+                    <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60)">Conditional</animation>
+                    <animation effect="fade" end="70" start="70" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),70)">Conditional</animation>
+                    <animation effect="fade" end="80" start="80" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),80)">Conditional</animation>
+                    <animation effect="fade" end="90" start="90" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),90)">Conditional</animation>
                     <aspectratio>scale</aspectratio>
                     <visible>Container($INFO[Container(300).ListItem.Property(id)]601).OnNext | Container($INFO[Container(300).ListItem.Property(id)]601).OnPrevious</visible>
                     <animation effect="fade" start="100" end="0" delay="400" time="1" reversible="false">Hidden</animation>
@@ -564,6 +582,15 @@
                     <width>1920</width>
                     <height>1080</height>
                     <texture background="true">$VAR[Image_FullscreenWidget_Artwork]</texture>
+                    <animation effect="fade" end="10" start="10" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),10)">Conditional</animation>
+                    <animation effect="fade" end="20" start="20" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),20)">Conditional</animation>
+                    <animation effect="fade" end="30" start="30" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),30)">Conditional</animation>
+                    <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
+                    <animation effect="fade" end="50" start="50" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),50)">Conditional</animation>
+                    <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60)">Conditional</animation>
+                    <animation effect="fade" end="70" start="70" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),70)">Conditional</animation>
+                    <animation effect="fade" end="80" start="80" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),80)">Conditional</animation>
+                    <animation effect="fade" end="90" start="90" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),90)">Conditional</animation>
                     <aspectratio>scale</aspectratio>
                     <fadetime>400</fadetime>
                 </control>
@@ -572,6 +599,15 @@
                     <width>1920</width>
                     <height>1080</height>
                     <texture background="true">$VAR[Image_FullscreenWidget_Artwork+1]</texture>
+                    <animation effect="fade" end="10" start="10" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),10)">Conditional</animation>
+                    <animation effect="fade" end="20" start="20" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),20)">Conditional</animation>
+                    <animation effect="fade" end="30" start="30" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),30)">Conditional</animation>
+                    <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
+                    <animation effect="fade" end="50" start="50" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),50)">Conditional</animation>
+                    <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60)">Conditional</animation>
+                    <animation effect="fade" end="70" start="70" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),70)">Conditional</animation>
+                    <animation effect="fade" end="80" start="80" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),80)">Conditional</animation>
+                    <animation effect="fade" end="90" start="90" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),90)">Conditional</animation>
                     <aspectratio>scale</aspectratio>
                     <visible>Container($INFO[Container(300).ListItem.Property(id)]601).OnNext | Container($INFO[Container(300).ListItem.Property(id)]601).OnPrevious</visible>
                     <animation effect="fade" start="100" end="0" delay="400" time="1" reversible="false">Hidden</animation>
@@ -591,6 +627,15 @@
                 <include>Def_Dimensions_Fullscreen</include>
 
                 <aspectratio>scale</aspectratio>
+                                <animation effect="fade" end="10" start="10" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),10)">Conditional</animation>
+                <animation effect="fade" end="20" start="20" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),20)">Conditional</animation>
+                <animation effect="fade" end="30" start="30" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),30)">Conditional</animation>
+                <animation effect="fade" end="40" start="40" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),40) | String.IsEmpty(Skin.String(Value_Brightness_Flix)) | String.IsEqual(Skin.String(Value_Brightness_Flix),default)">Conditional</animation>
+                <animation effect="fade" end="50" start="50" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),50)">Conditional</animation>
+                <animation effect="fade" end="60" start="60" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),60)">Conditional</animation>
+                <animation effect="fade" end="70" start="70" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),70)">Conditional</animation>
+                <animation effect="fade" end="80" start="80" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),80)">Conditional</animation>
+                <animation effect="fade" end="90" start="90" time="0" condition="Integer.IsEqual(Skin.String(Value_Brightness_Flix),90)">Conditional</animation>
                 <imagepath background="true">$VAR[Global_Fanart_Background]</imagepath>
             </control>
 
