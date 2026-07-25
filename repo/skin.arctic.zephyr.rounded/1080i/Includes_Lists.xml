@@ -481,7 +481,7 @@
         <param name="music_info_onclick" value="$PARAM[music_info_onclick]" default="true" />
 
         <param name="aspectratio" value="$PARAM[aspectratio]" default="scale" />
-        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
 
         <param name="bottom_scrollbar" value="$PARAM[bottom_scrollbar]" default="245" />
 
@@ -579,7 +579,7 @@
                                     <param name="fallback" value="$PARAM[fallbackpicture]" />
                                     <param name="thumb" value="$PARAM[thumb]" default="false" />
                                     <param name="aspectratio" value="$PARAM[aspectratio]" default="scale" />
-                                    <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                                    <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
                                 </include>
                             </control>
                         </itemlayout>
@@ -594,7 +594,7 @@
                                     <param name="zoom" value="$PARAM[zoom]" />
                                     <param name="thumb" value="$PARAM[thumb]" default="false" />
                                     <param name="aspectratio" value="$PARAM[aspectratio]" default="scale" />
-                                    <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                                    <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
                                 </include>
                             </control>
                         </focusedlayout>
@@ -738,7 +738,7 @@
         <param name="fallbackpicture" value="$PARAM[fallbackpicture]" default="DefaultPicture" />
         <param name="thumb" value="$PARAM[thumb]" default="true" />
         <param name="pad_image" value="$PARAM[pad_image]" default="10" />
-        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
 
         <definition>
             <control type="group">
@@ -772,7 +772,7 @@
         <param name="aspectratio" value="$PARAM[aspectratio]" default="scale" />
         <param name="fallbackpicture" default="pbtmdb" />
         <param name="thumb" value="$PARAM[thumb]" default="true" />
-        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
         <param name="controlid" value="$PARAM[controlid]" />
 
         <definition>
@@ -817,7 +817,7 @@
         <param name="fallbackpicture" value="$PARAM[fallbackpicture]" default="DefaultPicture" />
         <param name="poster" value="$PARAM[poster]" default="true" />
         <param name="thumb" value="$PARAM[thumb]" default="false" />
-        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
 
         <definition>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
@@ -828,7 +828,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="1" />
@@ -838,7 +838,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="2" />
@@ -848,7 +848,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="3" />
@@ -858,7 +858,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="4" />
@@ -868,7 +868,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="5" />
@@ -878,7 +878,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="6" />
@@ -888,7 +888,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
             <include content="Def_Dialog_Info_UnFocus_Poster_Square_Item">
                 <param name="id" value="7" />
@@ -898,7 +898,7 @@
                 <param name="aspect_poster" value="$PARAM[aspect_poster]" />
                 <param name="poster" value="$PARAM[poster]" default="true" />
                 <param name="thumb" value="$PARAM[thumb]" default="false" />
-                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="White100" />
+                <param name="colordiffuse" value="$PARAM[colordiffuse]" default="ArtPlate" />
             </include>
         </definition>
     </include>

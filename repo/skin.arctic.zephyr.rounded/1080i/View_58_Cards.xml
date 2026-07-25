@@ -37,7 +37,7 @@
                             <param name="pad_shadow" value="1" />
                             <param name="pad_border" value="1" />
                             <param name="pad_image" value="10" />
-                            <param name="colordiffuse" value="White100" />
+                            <param name="colordiffuse" value="ArtPlate" />
                         </include>
 
                         <control type="image">
@@ -95,7 +95,7 @@
                             <param name="pad_shadow" value="1" />
                             <param name="pad_border" value="1" />
                             <param name="pad_image" value="10" />
-                            <param name="colordiffuse" value="White100" />
+                            <param name="colordiffuse" value="ArtPlate" />
                         </include>
 
                         <include content="Def_Image_Background_Only_b24">
@@ -157,7 +157,7 @@
                             <param name="pad_shadow" value="1" />
                             <param name="pad_border" value="1" />
                             <param name="pad_image" value="10" />
-                            <param name="colordiffuse" value="White100" />
+                            <param name="colordiffuse" value="ArtPlate" />
                         </include>
 
                         <control type="image">
@@ -213,7 +213,7 @@
                             <param name="pad_shadow" value="1" />
                             <param name="pad_border" value="1" />
                             <param name="pad_image" value="10" />
-                            <param name="colordiffuse" value="White100" />
+                            <param name="colordiffuse" value="ArtPlate" />
                         </include>
 
                         <include content="Def_Image_Background_Only_b24">
