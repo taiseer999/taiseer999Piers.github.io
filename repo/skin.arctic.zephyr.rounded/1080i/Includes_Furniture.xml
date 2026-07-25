@@ -1433,8 +1433,8 @@
                             </control>
                             <control type="image">
                                 <width>32</width>
-                                <height>32</height>
-                                <top>2</top>
+                                <height>40</height>
+                                <top>0</top>
                                 <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_net_on.png</texture>
@@ -1442,17 +1442,17 @@
                             </control>
                             <control type="image">
                                 <width>32</width>
-                                <height>32</height>
-                                <top>2</top>
+                                <height>40</height>
+                                <top>0</top>
                                 <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_net_off.png</texture>
                                 <visible>!String.Contains(Network.IPAddress,1)</visible>
                             </control>
                                <control type="image">
-                              <width>40</width>
-                              <height>40</height>
-                              <top>2</top>
+                              <width>80</width>
+                              <height>80</height>
+                              <top>-20</top>
                                 <left>17</left>
                               <aspectratio>keep</aspectratio>
                               <texture>special://skin/extras/icons/CE.png</texture>
