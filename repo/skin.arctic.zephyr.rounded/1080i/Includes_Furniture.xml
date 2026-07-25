@@ -1452,7 +1452,7 @@
                                <control type="image">
                               <width>63</width>
                               <height>63</height>
-                              <top>-9</top>
+                              <top>-11</top>
                                 <left>17</left>
                               <aspectratio>keep</aspectratio>
                               <texture>special://skin/extras/icons/CE.png</texture>
