@@ -1450,9 +1450,9 @@
                                 <visible>!String.Contains(Network.IPAddress,1)</visible>
                             </control>
                                <control type="image">
-                              <width>80</width>
-                              <height>80</height>
-                              <top>-20</top>
+                              <width>63</width>
+                              <height>63</height>
+                              <top>-9</top>
                                 <left>17</left>
                               <aspectratio>keep</aspectratio>
                               <texture>special://skin/extras/icons/CE.png</texture>
