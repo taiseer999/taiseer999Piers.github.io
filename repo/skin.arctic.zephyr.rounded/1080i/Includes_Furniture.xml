@@ -1449,6 +1449,14 @@
                                 <texture>special://skin/extras/icons/stat_net_off.png</texture>
                                 <visible>!String.Contains(Network.IPAddress,1)</visible>
                             </control>
+                               <control type="image">
+                              <width>40</width>
+                              <height>40</height>
+                              <top>2</top>
+                                <left>17</left>
+                              <aspectratio>keep</aspectratio>
+                              <texture>special://skin/extras/icons/CE.png</texture>
+                            </control>
                         </control>
         </control>
 

@@ -61,7 +61,7 @@
                 <visible>Skin.HasSetting(Furniture.Network_RAM)</visible>
                 <right>0</right>
                 <centertop>-10%</centertop>
-                <height>80</height>
+                <height>79</height>
                 <width>600</width>
                 <align>right</align>
                 <orientation>horizontal</orientation>
@@ -77,7 +77,7 @@
                 <control type="label">
                     <font>font_Topbarinfo</font>
                     <width>auto</width>
-                    <height>80</height>
+                    <height>79</height>
                     <aligny>center</aligny>
                     <textcolor>main_fg_100</textcolor>
                     <label>$INFO[System.CPUTemperature]</label>
@@ -93,14 +93,14 @@
                 <control type="label">
                     <font>font_Topbarinfo</font>
                     <width>auto</width>
-                    <height>80</height>
+                    <height>79</height>
                     <aligny>center</aligny>
                     <textcolor>main_fg_100</textcolor>
                     <label>$INFO[system.memory(used.percent)]</label>
                 </control>
                 <control type="image">
                     <width>30</width>
-                    <height>30</height>
+                    <height>35</height>
                     <top>25</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
@@ -109,12 +109,20 @@
                 </control>
                 <control type="image">
                     <width>30</width>
-                    <height>30</height>
+                    <height>35</height>
                     <top>25</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
                     <texture>special://skin/extras/icons/stat_net_off.png</texture>
                     <visible>!String.Contains(Network.IPAddress,1)</visible>
+                </control>
+                <control type="image">
+                    <width>40</width>
+                    <height>40</height>
+                    <top>25</top>
+                    <left>14</left>
+                    <aspectratio>keep</aspectratio>
+                    <texture>special://skin/extras/icons/CE.png</texture>
                 </control>
             </control>
 
