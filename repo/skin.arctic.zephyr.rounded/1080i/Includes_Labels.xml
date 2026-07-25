@@ -217,6 +217,10 @@
         <value>   &#61654;</value>
     </variable>
 
+    <variable name="Label_Icon_DBID">
+        <value>&#61451;</value>
+    </variable>
+
     <!-- LABEL - WIDGET -->
 
     <variable name="Label_Widget_Status">
@@ -2879,12 +2883,17 @@
     </variable>
 
     <variable name="Label_Setting_Wiki_Language_Dialog_Info">
-        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), de)">de</value>
-        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), es)">es</value>
-        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), fr)">fr</value>
-        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), it)">it</value>
-        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), en) | String.IsEmpty(Addon.SettingStr(script.wikipedia,language))">en</value>
-        <value>other</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), de)">Deutsch</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), es)">Español</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), fr)">Français</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), it)">Italiano</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), ja)">日本語</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), pl)">Polski</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), pt)">Português</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), ru)">Русский</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), zh)">简体中文</value>
+        <value condition="String.IsEqual(Addon.SettingStr(script.wikipedia,language), en) | String.IsEmpty(Addon.SettingStr(script.wikipedia,language))">English</value>
+        <value> - - - </value>
     </variable>
 
     <variable name="Label_Setting_Kodi_Rating_Provider">
@@ -3148,8 +3157,17 @@
     </variable>
 
     <variable name="Label_Flag_Next_Aired_Details">
-        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Next_Aired))">[COLOR=Dark1]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Name),,  ][/COLOR]$INFO[Window(Home).Property(TMDbHelper.ListItem.Air_Time),, • ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired)]</value>
-        <value condition="String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Next_Aired))">[COLOR=Dark1]$INFO[Window(Home).Property(TMDbHelper.ListItem.Status),, • ][/COLOR]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired)]</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Canceled) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Canceled)">$LOCALIZE[31623]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired), • ,]</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Ended) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Ended)">$LOCALIZE[31624]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired), • ,]</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Released) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Released)">$LOCALIZE[31625]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),In Production) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),In Production) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Post Production) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Post Production)">$LOCALIZE[31626]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Planned) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Planned)">$LOCALIZE[31627]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="[String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series)] + Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Episode),1) + Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Season),1)">$LOCALIZE[31628]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="[String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series)] + Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Episode),1)">$LOCALIZE[31629]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="[String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series)] + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Days_Until_Aired)) + Integer.IsLess(Window(Home).Property(TMDbHelper.ListItem.Next_Aired.Days_Until_Aired),7) + Integer.IsLess(Window(Home).Property(TMDbHelper.ListItem.Last_Aired.Days_From_Aired),8)">$LOCALIZE[31630]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="[String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series)] + [!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Next_Aired))]">$LOCALIZE[31629]$INFO[Window(Home).Property(TMDbHelper.ListItem.Next_Aired), • ,]</value>
+        <value condition="[String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series) | String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Returning Series)]">$LOCALIZE[31631]$INFO[Window(Home).Property(TMDbHelper.ListItem.Last_Aired), • ,]</value>
+        <value>$LOCALIZE[13205]</value>
     </variable>
 
     <variable name="Label_Setting_View_Flag_Color">
@@ -3162,6 +3180,15 @@
         <value>$LOCALIZE[19662]</value>
     </variable>
 
+    <!-- LABEL - DIALOG SELECT -->
+
+    <variable name="Label_Dialog_Select_Line2">
+	    <value condition="!String.IsEmpty(Window(home).Property(skinshortcuts-picker)) + !String.isEmpty(ListItem.Property(path))">$INFO[ListItem.Property(path)]</value>
+	    <value condition="!String.IsEmpty(Window(home).Property(skinshortcuts-picker)) + !String.isEmpty(ListItem.Property(count))">$INFO[ListItem.Property(count),, $LOCALIZE[31073]]</value>
+        <value condition="!String.IsEmpty(Window(home).Property(skinshortcuts-picker)) + !String.isEmpty(ListItem.Property(type))">$INFO[ListItem.Property(type)]</value>
+	    <value>$INFO[ListItem.Label2]</value>
+    </variable>
+
     <!-- LABEL - MISC -->
 
     <variable name="Label_Setup_Wizard_Footer_Tip">
@@ -3169,7 +3196,6 @@
         <value condition="Control.HasFocus(9020)">$LOCALIZE[209]</value>
         <value condition="Control.HasFocus(9030)">$LOCALIZE[13012]</value>
     </variable>
-
 
     <variable name="Label_Keyboard_Title_Footer">
         <value condition="$EXP[Is_AutoCompletion_Enabled] + !String.IsEmpty(Control.GetLabel(312).index(1))">$LOCALIZE[31586]</value>
@@ -3227,6 +3253,8 @@
         <value condition="Window.IsVisible(Custom_1158_Set_Skin_Brightness_Flix.xml)">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1288_Debugging.xml) + ControlGroup(11).HasFocus()">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1288_Debugging.xml) + ControlGroup(12).HasFocus()">$INFO[Container(12).CurrentItem]$INFO[Container(12).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1149_Set_Media_Flags.xml) + ControlGroup(11).HasFocus()">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1149_Set_Media_Flags.xml) + ControlGroup(12).HasFocus()">$INFO[Container(12).CurrentItem]$INFO[Container(12).NumItems, / ,]</value>
         <value condition="Window.IsVisible(DialogSubtitles.xml)">$INFO[Container(120).CurrentItem]$INFO[Container(120).NumItems, / ,]</value>
         <value condition="Window.IsVisible(DialogTextViewer.xml)">$INFO[Container(5).CurrentItem]$INFO[Container(5).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1248_Dialog_Custom_Settings.xml)">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>

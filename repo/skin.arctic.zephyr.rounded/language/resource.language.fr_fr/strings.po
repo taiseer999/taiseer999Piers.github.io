@@ -50,8 +50,8 @@ msgid "Arctic Zephyr - Rounded"
 msgstr "Arctic Zephyr - Rounded"
 
 msgctxt "#31008"
-msgid "Supported add-ons"
-msgstr "Extensions prises en charge"
+msgid "Metacritic"
+msgstr "Metacritic"
 
 msgctxt "#31009"
 msgid "Resources"
@@ -382,8 +382,8 @@ msgid "Show fanart"
 msgstr "Afficher le fanart"
 
 msgctxt "#31091"
-msgid "Blur radius"
-msgstr "Rayon de flou"
+msgid "Letterboxd"
+msgstr "Letterboxd"
 
 msgctxt "#31092"
 msgid "Accent colors"
@@ -402,8 +402,8 @@ msgid "Focus squares"
 msgstr "Focus de sélection"
 
 msgctxt "#31096"
-msgid "Accents, highlights, focusbuttons"
-msgstr "Textes, informations"
+msgid "Trakt"
+msgstr "Trakt"
 
 msgctxt "#31097"
 msgid "Userrating (media flags section)"
@@ -614,8 +614,8 @@ msgid "Kiosk mode"
 msgstr "Mode Kiosque"
 
 msgctxt "#31149"
-msgid "Only display widgets when pressing up"
-msgstr "Afficher les widgets en appuyant uniquement sur la touche haut"
+msgid "IMDb"
+msgstr "IMDb"
 
 msgctxt "#31150"
 msgid "Show detailed info when video is paused"
@@ -710,8 +710,8 @@ msgid "Reboot to eMMC/NAND"
 msgstr "Redémarrer vers eMMC/NAND"
 
 msgctxt "#31173"
-msgid "Fanart overlay"
-msgstr "Superposition du fanart"
+msgid "TMDb"
+msgstr "TMDb"
 
 msgctxt "#31174"
 msgid "Now playing..."
@@ -1022,7 +1022,7 @@ msgid "Poster Wall Small"
 msgstr "Poster Mur Petit"
 
 msgctxt "#31251"
-msgid "5"
+msgid "MDBList"
 msgstr ""
 
 msgctxt "#31252"
@@ -1330,8 +1330,8 @@ msgid "Chapter markers"
 msgstr "Marqueurs de chapitre"
 
 msgctxt "#31328"
-msgid "RottenTomatoes & Metacritic"
-msgstr ""
+msgid "Rotten Tomatoes"
+msgstr "Rotten Tomatoes"
 
 msgctxt "#31329"
 msgid "Select media flags"
@@ -1925,7 +1925,6 @@ msgctxt "#31476"
 msgid "Small poster fanart"
 msgstr "Petit poster fanart"
 
-
 msgctxt "#31477"
 msgid "Wikipedia"
 msgstr "Wikipédia"
@@ -2509,3 +2508,39 @@ msgstr "Slider"
 msgctxt "#31622"
 msgid "Setup wizard"
 msgstr "Assistant de configuration"
+
+msgctxt "#31623"
+msgid "Cancelled"
+msgstr "Annulé"
+
+msgctxt "#31624"
+msgid "Ended"
+msgstr "Terminé"
+
+msgctxt "#31625"
+msgid "Released"
+msgstr "Sorti"
+
+msgctxt "#31626"
+msgid "In-Production"
+msgstr "En production"
+
+msgctxt "#31627"
+msgid "Planned"
+msgstr "Planifié"
+
+msgctxt "#31628"
+msgid "Premiering"
+msgstr "Premières"
+
+msgctxt "#31629"
+msgid "Returning"
+msgstr "De retour"
+
+msgctxt "#31630"
+msgid "Airing"
+msgstr "En diffusion"
+
+msgctxt "#31631"
+msgid "Last aired"
+msgstr "Dernière diffusion"

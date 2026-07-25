@@ -134,8 +134,10 @@
                 <height>490</height>
 
                 <onleft>3000</onleft>
-                <onup>6000</onup>
-                <ondown>6000</ondown>
+                <onup condition="Control.HasFocus(9908)">3000</onup>
+                <ondown condition="Control.HasFocus(9908)">3000</ondown>
+                <onup condition="!Control.HasFocus(9908)">6000</onup>
+                <ondown condition="!Control.HasFocus(9908)">6000</ondown>
                 <onright>1773</onright>
 
                 <itemgap>0</itemgap>
@@ -151,8 +153,10 @@
                     <description>Control Area</description>
                     <visible>Container(3000).HasFocus(1)</visible>
 
-                    <onleft>3000</onleft>
                     <height>660</height>
+
+                    <onleft>3000</onleft>
+                    <onright>3000</onright>
 
                     <itemgap>0</itemgap>
                     <orientation>vertical</orientation>
@@ -864,7 +868,7 @@
                 <control type="button" id="12007" description="Now Playing">
                     <width>1278</width>
                     <visible>Container(3000).HasFocus(3)</visible>
-                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Skin_Settings_Level_base</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
                     <label>$LOCALIZE[31317]</label>
                     <onclick>runscript(script.skinvariables,action=buildviews,configure)</onclick>
@@ -1170,7 +1174,7 @@
                     <onclick condition="Skin.HasSetting(hide.global.fanart)">Skin.Reset(show.fallback.background)</onclick>
                 </control>
 
-                 <!-- SHOW EXTRA FANART -->
+                <!-- SHOW EXTRA FANART -->
 
                 <control type="radiobutton" id="99714" description="Show extra fanart">
                     <width>1278</width>
@@ -1370,7 +1374,7 @@
                 <control type="radiobutton" id="12005">
                     <width>1278</width>
                     <align>left</align>
-                    <label>$LOCALIZE[31624]</label>
+                    <label>$LOCALIZE[31991]</label>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1383,7 +1387,7 @@
                 <control type="radiobutton" id="12006">
                     <width>1278</width>
                     <align>left</align>
-                    <label>$LOCALIZE[31625]</label>
+                    <label>$LOCALIZE[31992]</label>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>

@@ -50,7 +50,7 @@ msgid "Arctic Zephyr - Rounded"
 msgstr ""
 
 msgctxt "#31008"
-msgid "Supported add-ons"
+msgid "Metacritic"
 msgstr ""
 
 msgctxt "#31009"
@@ -382,7 +382,7 @@ msgid "Show fanart"
 msgstr ""
 
 msgctxt "#31091"
-msgid "Blur radius"
+msgid "Letterboxd"
 msgstr ""
 
 msgctxt "#31092"
@@ -402,7 +402,7 @@ msgid "Focus squares"
 msgstr ""
 
 msgctxt "#31096"
-msgid "Accents, highlights, focusbuttons"
+msgid "Trakt"
 msgstr ""
 
 msgctxt "#31097"
@@ -614,7 +614,7 @@ msgid "Kiosk mode"
 msgstr ""
 
 msgctxt "#31149"
-msgid "Only display widgets when pressing up"
+msgid "IMDb"
 msgstr ""
 
 msgctxt "#31150"
@@ -710,7 +710,7 @@ msgid "Reboot to eMMC/NAND"
 msgstr ""
 
 msgctxt "#31173"
-msgid "Fanart overlay"
+msgid "TMDb"
 msgstr ""
 
 msgctxt "#31174"
@@ -1022,7 +1022,7 @@ msgid "Poster Wall Small"
 msgstr ""
 
 msgctxt "#31251"
-msgid "5"
+msgid "MDBList"
 msgstr ""
 
 msgctxt "#31252"
@@ -1330,7 +1330,7 @@ msgid "Chapter markers"
 msgstr ""
 
 msgctxt "#31328"
-msgid "RottenTomatoes & Metacritic"
+msgid "Rotten Tomatoes"
 msgstr ""
 
 msgctxt "#31329"
@@ -1925,7 +1925,6 @@ msgctxt "#31476"
 msgid "Small poster fanart"
 msgstr ""
 
-
 msgctxt "#31477"
 msgid "Wikipedia"
 msgstr ""
@@ -2511,14 +2510,45 @@ msgid "Setup wizard"
 msgstr ""
 
 msgctxt "#31623"
-msgid "Show genre as icons on home"
+msgid "Cancelled"
 msgstr ""
 
 msgctxt "#31624"
-msgid "Show genre icons on home"
+msgid "Ended"
 msgstr ""
 
 msgctxt "#31625"
-msgid "Show studio logo on home"
+msgid "Released"
 msgstr ""
 
+msgctxt "#31626"
+msgid "In-Production"
+msgstr ""
+
+msgctxt "#31627"
+msgid "Planned"
+msgstr ""
+
+msgctxt "#31628"
+msgid "Premiering"
+msgstr ""
+
+msgctxt "#31629"
+msgid "Returning"
+msgstr ""
+
+msgctxt "#31630"
+msgid "Airing"
+msgstr ""
+
+msgctxt "#31631"
+msgid "Last aired"
+msgstr ""
+
+msgctxt "#31991"
+msgid "Show genre icons on home"
+msgstr ""
+
+msgctxt "#31992"
+msgid "Show studio logo on home"
+msgstr ""

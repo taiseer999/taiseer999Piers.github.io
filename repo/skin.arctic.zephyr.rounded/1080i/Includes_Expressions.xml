@@ -220,7 +220,7 @@
     <!--               HOME                 -->
     <!-- ================================== -->
 
-    <expression name="Home_Dialog_Button_Menu_Focus_On_Exit">[Window.IsVisible(Home) + !$EXP[View_Info_Dialog] + !Window.IsVisible(DialogSelect.xml) + !Window.IsVisible(DialogConfirm.xml) + !Window.IsVisible(Custom_1146_Home_SearchDialog.xml) + !Window.IsVisible(FileManager.xml) + !$EXP[View_Settings] + String.IsEmpty(Window(Home).Property(Trailer_Fade_Background)) + !Window.IsVisible(DialogKeyboard.xml) + !Window.IsVisible(DialogNumeric.xml)]</expression>
+    <expression name="Home_Dialog_Button_Menu_Focus_On_Exit">[Window.IsVisible(Home) + !$EXP[View_Info_Dialog] + !Window.IsVisible(DialogSelect.xml) + !Window.IsVisible(DialogConfirm.xml) + !Window.IsVisible(Custom_1146_Home_SearchDialog.xml) + !Window.IsVisible(FileManager.xml) + !$EXP[View_Settings] + String.IsEmpty(Window(Home).Property(Trailer_Fade_Background)) + !Window.IsVisible(DialogKeyboard.xml) + !Window.IsVisible(DialogNumeric.xml) + !Window.IsVisible(Custom_1201_Dialog_Custom_Font_Code.xml) + !Window.IsVisible(script.audioprofiles-apmenu.xml)]</expression>
 
     <expression name="Home_Widget_Item_PVR">[Window.IsVisible(Home) + String.Contains(Window(Home).Property(ListItem_FolderPath),pvr://channels)]</expression>
 
@@ -381,6 +381,10 @@
     <expression name="View_Info_Dialog_Active">[Window.IsActive(DialogVideoInfo.xml) | Window.IsActive(DialogMusicInfo.xml) | Window.IsActive(DialogAddonInfo.xml) | Window.IsActive(DialogPVRInfo.xml) | Window.IsActive(script-tmdbhelper-wikipedia.xml) | Window.IsActive(script-akl-romdetails.xml)]
     </expression>
 
+    <!-- DIALOG VIDEO INFO - EXTENDED VIDEO VIEWS -->
+
+     <expression name="Show_Dialog_Video_Info_Extended_Video_List">[Control.IsVisible(9506) | Control.IsVisible(9556) | Control.IsVisible(9514) | Control.IsVisible(9515) | Control.IsVisible(9517) | Control.IsVisible(9518) | Control.IsVisible(9503) | Control.IsVisible(9560) | Control.IsVisible(9552) | Control.IsVisible(9553) | Control.IsVisible(9558) | Control.IsVisible(9559) | Control.IsVisible(9550) | Control.IsVisible(9579) | Control.IsVisible(9520)]</expression>
+
     <!-- DIALOG VIDEO INFO - SHOW EXTENDED FANART -->
 
      <expression name="Show_Dialog_Video_Info_Fanart_Extended">[!Skin.HasSetting(hide.global.fanart) + $EXP[View_Info_Dialog]]</expression>
@@ -517,6 +521,10 @@
     <!-- ================================== -->
     <!--      VIEWS / LAYOUT / DIALOG       -->
     <!-- ================================== -->
+
+    <!-- VIEW DIALOG SELECT -->
+
+    <expression name="Label2_Dialog_Select_Empty">[!String.IsEmpty(Window(home).Property(skinshortcuts-picker)) + String.IsEmpty(ListItem.Property(path)) + String.IsEmpty(ListItem.Property(count) + String.IsEmpty(ListItem.Property(type) + String.IsEmpty(ListItem.Label2)] | [String.IsEmpty(Window(home).Property(skinshortcuts-picker)) + String.IsEmpty(ListItem.Label2)]</expression>
 
     <!-- VIEW DIALOG SELECT -->
 

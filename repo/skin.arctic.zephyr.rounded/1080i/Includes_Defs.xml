@@ -499,11 +499,6 @@
 
     <!-- DEF - RATING -->
 
-    <variable name="Value_Item_Rating_IMDb">
-        <value condition="$EXP[Condition_Item_IMDb_Rating]">$INFO[ListItem.Rating]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.IMDb_Rating))">$INFO[Window(Home).Property(TMDbHelper.ListItem.IMDb_Rating)]</value>
-    </variable>
-
     <variable name="Value_Item_Rating_TMDb">
         <value condition="Container.Content(seasons) + !String.IsEmpty(ListItem.Rating) + !String.IsEqual(ListItem.Rating,0)">$INFO[ListItem.Rating]</value>
         <value condition="[Container.Content(sets) |  String.IsEqual(ListItem.DBType,set)] + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Set.Rating)) + !String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Set.Rating),0)">$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.Rating)]</value>
@@ -1209,25 +1204,25 @@
             </control>
             <control type="label">
                 <include>Widgets_Item_Sub_Title_Definition</include>
-                <label>$INFO[Container($PARAM[id]).ListItem.Rating(imdb),  IMDb ]</label>
+                <label>$INFO[Container($PARAM[id]).ListItem.Rating(imdb),  $LOCALIZE[31149] ]</label>
                 <visible>!Integer.IsGreater(Container($PARAM[id]).ListItem.UserRating,0) | !Skin.HasSetting(userrating.override.kodi.rating.num)</visible>
                 <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Rating(imdb))</visible>
             </control>
             <control type="label">
                 <include>Widgets_Item_Sub_Title_Definition</include>
-                <label>$INFO[Container($PARAM[id]).ListItem.Rating(themoviedb),  TMDb ]</label>
+                <label>$INFO[Container($PARAM[id]).ListItem.Rating(themoviedb),  $LOCALIZE[31173] ]</label>
                 <visible>!Integer.IsGreater(Container($PARAM[id]).ListItem.UserRating,0) | !Skin.HasSetting(userrating.override.kodi.rating.num)</visible>
                 <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Rating(themoviedb))</visible>
             </control>
             <control type="label">
                 <include>Widgets_Item_Sub_Title_Definition</include>
-                <label>$INFO[Container($PARAM[id]).ListItem.Rating(trakt),  TrakT ]</label>
+                <label>$INFO[Container($PARAM[id]).ListItem.Rating(trakt),  $LOCALIZE[31096] ]</label>
                 <visible>!Integer.IsGreater(Container($PARAM[id]).ListItem.UserRating,0) | !Skin.HasSetting(userrating.override.kodi.rating.num)</visible>
                 <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Rating(trakt))</visible>
             </control>
             <control type="label">
                 <include>Widgets_Item_Sub_Title_Definition</include>
-                <label>$INFO[Container($PARAM[id]).ListItem.Rating,  TMDb ]</label>
+                <label>$INFO[Container($PARAM[id]).ListItem.Rating,  $LOCALIZE[31173] ]</label>
                 <visible>!Integer.IsGreater(Container($PARAM[id]).ListItem.UserRating,0) | !Skin.HasSetting(userrating.override.kodi.rating.num)</visible>
                 <visible>String.IsEmpty(Container($PARAM[id]).ListItem.Rating(imdb)) + String.IsEmpty(Container($PARAM[id]).ListItem.Rating(themoviedb)) + String.IsEmpty(Container($PARAM[id]).ListItem.Rating(trakt)) + String.IsEmpty(TMDbHelper.Container($PARAM[id]).ListItem.IMDb_Rating)</visible>
             </control>
@@ -2423,6 +2418,19 @@
         <selectedcolor>$VAR[Color_Indicator_Background_Is_Playing_Icon]</selectedcolor>
     </include>
 
+    <!-- DEF - POSTER - TMDB - DB LOCAL STATUS -->
+
+    <include name="Def_Label_Poster_TMDb_DBID_status">
+        <align>left</align>
+        <aligny>center</aligny>
+        <width>80</width>
+        <left>19</left>
+        <bottom>24</bottom>
+        <height>40</height>
+        <font>SymbolList</font>
+        <textcolor>$VAR[Color_Empty_DBID]</textcolor>
+    </include>
+
     <!-- DEF - POSTER - RATING - LEFT -->
 
     <include name="Def_Image_Poster_Rating_Info_Left">
@@ -2889,7 +2897,6 @@
         <onclick>Skin.Reset(hide.button.video.studio)</onclick>
         <onclick>Skin.SetBool(hide.button.video.similar)</onclick>
         <onclick>Skin.SetBool(show.dialog.info.clearlogo.video)</onclick>
-        <onclick>Skin.SetBool(filter.video.only.local)</onclick>
         <onclick>Skin.Reset(PlayTrailerWindowed)</onclick>
         <onclick>Skin.Reset(filter.video.only.local)</onclick>
         <onclick>Skin.SetBool(filter.video.animation)</onclick>

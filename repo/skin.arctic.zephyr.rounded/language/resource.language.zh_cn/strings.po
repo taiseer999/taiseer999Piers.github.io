@@ -50,8 +50,8 @@ msgid "Arctic Zephyr - Rounded"
 msgstr "Arctic Zephyr - Rounded"
 
 msgctxt "#31008"
-msgid "Supported add-ons"
-msgstr "支持的插件"
+msgid "Metacritic"
+msgstr "Metacritic"
 
 msgctxt "#31009"
 msgid "Resources"
@@ -307,7 +307,7 @@ msgstr "翻转列表和信息"
 
 msgctxt "#31072"
 msgid "Elapsed / Remaining Time"
-msgstr ""
+msgstr "已播放 / 剩余时间"
 
 msgctxt "#31073"
 msgid "items"
@@ -382,8 +382,8 @@ msgid "Show fanart"
 msgstr "显示背景图"
 
 msgctxt "#31091"
-msgid "Blur radius"
-msgstr "模糊半径"
+msgid "Letterboxd"
+msgstr "Letterboxd"
 
 msgctxt "#31092"
 msgid "Accent colors"
@@ -402,8 +402,8 @@ msgid "Focus squares"
 msgstr "聚焦方框"
 
 msgctxt "#31096"
-msgid "Accents, highlights, focusbuttons"
-msgstr "强调色、高亮、焦点按钮"
+msgid "Trakt"
+msgstr "Trakt"
 
 msgctxt "#31097"
 msgid "Userrating (media flags section)"
@@ -495,15 +495,15 @@ msgstr "[B]配置系统设置[/B][CR][CR] •     设置和校准显示器[CR] �
 
 msgctxt "#31119"
 msgid "[B]Configure Add-Ons[/B][CR][CR] •     Manage your installed Add-ons[CR] •     Install Add-ons from kodi.tv[CR] •     Modify Add-on settings"
-msgstr "[B]配置插件[/B][CR][CR] •     管理已安装插件[CR] •     从kodi.tv安装插件[CR] •     修改插件设置"
+msgstr "[B]配置插件[/B][CR][CR] •     管理已安装插件[CR] •     从 kodi.tv 安装插件[CR] •     修改插件设置"
 
 msgctxt "#31120"
 msgid "[B]Configure TV Settings[/B][CR][CR] •     Change full screen info[CR] •     Manage EPG data settings"
-msgstr "[B]配置电视设置[/B][CR][CR] •     更改全屏信息[CR] •     管理EPG数据设置"
+msgstr "[B]配置电视设置[/B][CR][CR] •     更改全屏信息[CR] •     管理 EPG 数据设置"
 
 msgctxt "#31121"
 msgid "[B]Configure Service Settings[/B][CR][CR] •     Control via UPnP and HTTP[CR] •     Configure file sharing[CR] •     Enable Zeroconf[CR] •     Configure AirPlay"
-msgstr "[B]配置服务设置[/B][CR][CR] •     通过 UPnP 和 HTTP 控制[CR] •     配置共享[CR] •     启用 Zeroconf[CR] •     配置 AirPlay"
+msgstr "[B]配置服务设置[/B][CR][CR] •     通过 UPnP 和 HTTP 控制[CR] •     配置 文件共享[CR] •     启用 Zeroconf[CR] •     配置 AirPlay"
 
 msgctxt "#31122"
 msgid "[B]Configure Profile Settings[/B][CR][CR] •     Setup user profiles[CR] •     Enable login screen[CR] •     Set master locks[CR] •     Control access to content"
@@ -587,7 +587,7 @@ msgstr "影视作品："
 
 msgctxt "#31142"
 msgid "TV Show appearances of"
-msgstr "参演剧集："
+msgstr "参演电视剧："
 
 msgctxt "#31143"
 msgid "Discography of"
@@ -614,8 +614,8 @@ msgid "Kiosk mode"
 msgstr "售货亭模式"
 
 msgctxt "#31149"
-msgid "Only display widgets when pressing up"
-msgstr "仅在按“上键”时显示小组件"
+msgid "IMDb"
+msgstr "IMDb"
 
 msgctxt "#31150"
 msgid "Show detailed info when video is paused"
@@ -710,8 +710,8 @@ msgid "Reboot to eMMC/NAND"
 msgstr "重启到 eMMC/NAND"
 
 msgctxt "#31173"
-msgid "Fanart overlay"
-msgstr "背景图叠加层"
+msgid "TMDb"
+msgstr "TMDb"
 
 msgctxt "#31174"
 msgid "Now playing..."
@@ -1022,8 +1022,8 @@ msgid "Poster Wall Small"
 msgstr "海报墙（小）"
 
 msgctxt "#31251"
-msgid "5"
-msgstr "5"
+msgid "MDBList"
+msgstr "MDBList"
 
 msgctxt "#31252"
 msgid "10"
@@ -1231,7 +1231,7 @@ msgstr "滚动行为"
 
 msgctxt "#31303"
 msgid "Aspect ratio"
-msgstr "宽高比例"
+msgstr "宽高比"
 
 msgctxt "#31304"
 msgid "Select aspect ratio for square widget"
@@ -1330,8 +1330,8 @@ msgid "Chapter markers"
 msgstr "章节标记"
 
 msgctxt "#31328"
-msgid "RottenTomatoes & Metacritic"
-msgstr "烂番茄和Metacritic"
+msgid "Rotten Tomatoes"
+msgstr "烂番茄"
 
 msgctxt "#31329"
 msgid "Select media flags"
@@ -1459,7 +1459,7 @@ msgstr "IMDB"
 
 msgctxt "#31360"
 msgid "Audio Channels"
-msgstr "音频频道"
+msgstr "音频声道"
 
 msgctxt "#31361"
 msgid "Widget path"
@@ -1851,27 +1851,27 @@ msgstr "预设"
 
 msgctxt "#31458"
 msgid "Lavender"
-msgstr ""
+msgstr "薰衣草紫"
 
 msgctxt "#31459"
 msgid "Bright Turquoise"
-msgstr ""
+msgstr "亮青绿松石色"
 
 msgctxt "#31460"
 msgid "Orange Pumpkin"
-msgstr ""
+msgstr "南瓜橙"
 
 msgctxt "#31461"
 msgid "Azure Blue"
-msgstr ""
+msgstr "天青蓝"
 
 msgctxt "#31462"
 msgid "Spring Green"
-msgstr ""
+msgstr "春日绿"
 
 msgctxt "#31463"
 msgid "Brick Red"
-msgstr ""
+msgstr "砖红"
 
 msgctxt "#31464"
 msgid "Save color configuration"
@@ -1983,7 +1983,7 @@ msgstr "使用 PreShow Experience 插件替代"
 
 msgctxt "#31491"
 msgid "Light Taupe"
-msgstr ""
+msgstr "浅灰褐"
 
 msgctxt "#31492"
 msgid "Show media path"
@@ -2504,3 +2504,43 @@ msgstr "方形图片"
 msgctxt "#31621"
 msgid "Slider"
 msgstr "滑块"
+
+msgctxt "#31622"
+msgid "Setup wizard"
+msgstr "设置向导"
+
+msgctxt "#31623"
+msgid "Cancelled"
+msgstr "已取消"
+
+msgctxt "#31624"
+msgid "Ended"
+msgstr "已完结"
+
+msgctxt "#31625"
+msgid "Released"
+msgstr "已发行"
+
+msgctxt "#31626"
+msgid "In-Production"
+msgstr "制作中"
+
+msgctxt "#31627"
+msgid "Planned"
+msgstr "计划中"
+
+msgctxt "#31628"
+msgid "Premiering"
+msgstr "首映中"
+
+msgctxt "#31629"
+msgid "Returning"
+msgstr "回归"
+
+msgctxt "#31630"
+msgid "Airing"
+msgstr "播出中"
+
+msgctxt "#31631"
+msgid "Last aired"
+msgstr "上次播出"
