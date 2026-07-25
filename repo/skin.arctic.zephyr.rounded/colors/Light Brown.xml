@@ -50,6 +50,7 @@
     <color name="FloorFadeBlur">D9302720</color>
 
     <color name="Fallback">FF1D1917</color>
+    <color name="IconOnFallback">CCDBDBDB</color>
 
     <color name="OSD_Black">DF000000</color>
     <color name="Panel">FF1D1917</color>

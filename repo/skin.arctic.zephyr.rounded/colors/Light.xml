@@ -75,7 +75,9 @@
 
     <color name="UnWatchedIcons">E600BCD4</color>
 
-    <color name="Fallback">FFD4D4D4</color>
+    <!-- plate behind non-poster art: dark so light add-on icons stay legible (was FFD4D4D4) -->
+    <color name="Fallback">FF5A5A5A</color>
+    <color name="IconOnFallback">FFE8E8E8</color>
 
     <color name="OSD_Black">DF000000</color>
 

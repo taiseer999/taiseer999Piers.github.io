@@ -50,6 +50,7 @@
     <color name="FloorFadeBlur">CC050505</color>
 
     <color name="Fallback">FF2D2E2E</color>
+    <color name="IconOnFallback">CCC5C5C5</color>
 
     <color name="OSD_Black">DF000000</color>
     <color name="Panel">FF2D2E2E</color>
