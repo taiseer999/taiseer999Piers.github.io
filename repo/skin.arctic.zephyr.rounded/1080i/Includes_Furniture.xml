@@ -1399,13 +1399,13 @@
                             <width>800</width>
                             <height>38</height>
                             <orientation>horizontal</orientation>
-                            <itemgap>8</itemgap>
+                            <itemgap>4</itemgap>
                             <align>right</align>
                             <usecontrolcoords>true</usecontrolcoords>
                             <control type="image">
-                                <width>27</width>
-                                <height>27</height>
-                                <top>5</top>
+                                <width>24</width>
+                                <height>20</height>
+                                <top>11</top>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_temp.png</texture>
                             </control>
@@ -1417,9 +1417,9 @@
                                 <label>$INFO[System.CPUTemperature]</label>
                             </control>
                             <control type="image">
-                                <width>29</width>
-                                <height>29</height>
-                                <top>5</top>
+                                <width>24</width>
+                                <height>24</height>
+                                <top>10</top>
                                 <left>17</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/stat_ram.png</texture>
