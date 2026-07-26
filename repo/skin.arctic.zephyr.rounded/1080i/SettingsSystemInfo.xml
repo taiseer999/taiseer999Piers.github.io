@@ -30,7 +30,7 @@
                 <left>30</left>
                 <right>30</right>
                 <height>30</height>
-                <font>Tiny</font>
+                <font>small</font>
                 <textcolor>PanelWhite70</textcolor>
                 <label>$INFO[System.FriendlyName]</label>
                 <scroll>true</scroll>

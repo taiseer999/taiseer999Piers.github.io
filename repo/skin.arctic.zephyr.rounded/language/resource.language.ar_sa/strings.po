@@ -799,7 +799,7 @@ msgstr "الإجراء"
 
 msgctxt "#31195"
 msgid "Label"
-msgstr "شركة الإنتاج"
+msgstr "التسمية"
 
 msgctxt "#31196"
 msgid "Fallback widget"

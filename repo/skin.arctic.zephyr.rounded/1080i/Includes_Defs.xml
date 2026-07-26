@@ -1305,13 +1305,13 @@
         <definition>
             <control type="grouplist" description="Genre icons above widgets">
                 <usecontrolcoords>true</usecontrolcoords>
-                <left>55</left>
+                <right>55</right>
                 <bottom>20</bottom>
                 <width>800</width>
                 <height>75</height>
                 <orientation>horizontal</orientation>
                 <itemgap>2</itemgap>
-                <align>left</align>
+                <align>right</align>
             <control type="image" description="Genre icon large Action">
                 <width>75</width>
                 <height>75</height>

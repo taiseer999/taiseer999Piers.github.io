@@ -294,7 +294,6 @@
 			<property name="action">ActivateWindow(Settings)</property>
 			<property name="path">ActivateWindow(Settings)</property>
 			<property name="submenuVisibility">settings</property>
-			<property name="hasSubmenu">True</property>
 			<property name="submenuPath">$INCLUDE[skinshortcuts-template-SettingsInfoContent]</property>
 		</item>
 		<item id="11">
@@ -307,301 +306,7 @@
 			<property name="action">ActivateWindow(shutdownmenu)</property>
 			<property name="path">ActivateWindow(shutdownmenu)</property>
 			<property name="submenuVisibility">shutdown</property>
-			<property name="hasSubmenu">True</property>
 			<property name="submenuPath">$INCLUDE[skinshortcuts-template-SystemInfoContent]</property>
-		</item>
-	</include>
-	<include name="skinshortcuts-mainmenu-submenu">
-		<item id="1">
-			<label>$LOCALIZE[7]</label>
-			<icon>special://skin/extras/icons/filebox.png</icon>
-			<onclick>ActivateWindow(FileManager)</onclick>
-			<property name="id">1</property>
-			<property name="name">settings-filemanager</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(FileManager)</property>
-			<property name="path">ActivateWindow(FileManager)</property>
-			<property name="submenuVisibility">settings-filemanager</property>
-			<property name="parent">settings</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),settings)</visible>
-		</item>
-		<item id="2">
-			<label>$LOCALIZE[24001]</label>
-			<icon>special://skin/extras/icons/addon.png</icon>
-			<onclick>ActivateWindow(AddonBrowser)</onclick>
-			<property name="id">2</property>
-			<property name="name">settings-addonbrowser</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(AddonBrowser)</property>
-			<property name="path">ActivateWindow(AddonBrowser)</property>
-			<property name="submenuVisibility">settings-addonbrowser</property>
-			<property name="parent">settings</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),settings)</visible>
-		</item>
-		<item id="3">
-			<label>$LOCALIZE[13200]</label>
-			<icon>special://skin/extras/icons/actor.png</icon>
-			<onclick>ActivateWindow(Profiles)</onclick>
-			<property name="id">3</property>
-			<property name="name">settings-profiles</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(Profiles)</property>
-			<property name="path">ActivateWindow(Profiles)</property>
-			<property name="submenuVisibility">settings-profiles</property>
-			<property name="parent">settings</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),settings)</visible>
-		</item>
-		<item id="4">
-			<label>$LOCALIZE[13000]</label>
-			<icon>special://skin/extras/icons/sysinfo.png</icon>
-			<onclick>ActivateWindow(SystemInfo)</onclick>
-			<property name="id">4</property>
-			<property name="name">settings-systeminfo</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(SystemInfo)</property>
-			<property name="path">ActivateWindow(SystemInfo)</property>
-			<property name="submenuVisibility">settings-systeminfo</property>
-			<property name="parent">settings</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),settings)</visible>
-		</item>
-		<item id="5">
-			<label>$LOCALIZE[14111]</label>
-			<icon>special://skin/extras/icons/rectangle-list.png</icon>
-			<onclick>ActivateWindow(EventLog,events://,return)</onclick>
-			<property name="id">5</property>
-			<property name="name">settings-eventlog</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(EventLog,events://,return)</property>
-			<property name="path">events://</property>
-			<property name="submenuVisibility">settings-eventlog</property>
-			<property name="parent">settings</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),settings)</visible>
-		</item>
-		<item id="6">
-			<label>$LOCALIZE[31114]</label>
-			<icon>special://skin/extras/icons/skinsettings.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindowAndFocus(skinsettings,9108,2)</onclick>
-			<property name="id">6</property>
-			<property name="name">power-skinsettings</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindowAndFocus(skinsettings,9108,2)</property>
-			<property name="path">ActivateWindowAndFocus(skinsettings,9108,2)</property>
-			<property name="submenuVisibility">power-skinsettings</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="7">
-			<label>$LOCALIZE[5]</label>
-			<icon>special://skin/extras/icons/settings.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(settings)</onclick>
-			<property name="id">7</property>
-			<property name="name">power-settings</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(settings)</property>
-			<property name="path">ActivateWindow(settings)</property>
-			<property name="submenuVisibility">power-settings</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="8">
-			<label>$LOCALIZE[137]</label>
-			<icon>special://skin/extras/icons/search.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(1146)</onclick>
-			<property name="id">8</property>
-			<property name="name">power-search</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(1146)</property>
-			<property name="path">ActivateWindow(1146)</property>
-			<property name="submenuVisibility">power-search</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="9">
-			<label>$LOCALIZE[31146]</label>
-			<icon>special://skin/extras/icons/update.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ReloadSkin()</onclick>
-			<property name="id">9</property>
-			<property name="name">power-reloadskin</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ReloadSkin()</property>
-			<property name="path">ReloadSkin()</property>
-			<property name="submenuVisibility">power-reloadskin</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="10">
-			<label>$LOCALIZE[130]</label>
-			<icon>special://skin/extras/icons/info.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(systeminfo)</onclick>
-			<property name="id">10</property>
-			<property name="name">power-systeminfo</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(systeminfo)</property>
-			<property name="path">ActivateWindow(systeminfo)</property>
-			<property name="submenuVisibility">power-systeminfo</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="11">
-			<label>$LOCALIZE[10003]</label>
-			<icon>special://skin/extras/icons/filebox.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(filemanager)</onclick>
-			<property name="id">11</property>
-			<property name="name">power-filemanager</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(filemanager)</property>
-			<property name="path">ActivateWindow(filemanager)</property>
-			<property name="submenuVisibility">power-filemanager</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="12">
-			<label>$LOCALIZE[20150]</label>
-			<icon>special://skin/extras/icons/timer.png</icon>
-			<onclick>Close</onclick>
-			<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
-			<visible>[!System.HasAlarm(shutdowntimer)] + [String.IsEqual(Container(300).ListItem.Property(name),shutdown)]</visible>
-			<property name="id">12</property>
-			<property name="name">power-sleeptimer</property>
-			<property name="menu">shutdown</property>
-			<property name="action">AlarmClock(shutdowntimer,Shutdown())</property>
-			<property name="path">AlarmClock(shutdowntimer,Shutdown())</property>
-			<property name="submenuVisibility">power-sleeptimer</property>
-			<property name="parent">shutdown</property>
-		</item>
-		<item id="13">
-			<label>$LOCALIZE[20151]</label>
-			<icon>special://skin/extras/icons/forbidden.png</icon>
-			<onclick>Close</onclick>
-			<onclick>CancelAlarm(shutdowntimer)</onclick>
-			<property name="id">13</property>
-			<property name="name">power-canceltimer</property>
-			<property name="menu">shutdown</property>
-			<property name="action">CancelAlarm(shutdowntimer)</property>
-			<property name="path">CancelAlarm(shutdowntimer)</property>
-			<property name="submenuVisibility">power-canceltimer</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="14">
-			<label>$LOCALIZE[31274]</label>
-			<icon>special://skin/extras/icons/info2.png</icon>
-			<onclick>Close</onclick>
-			<onclick>noop</onclick>
-			<property name="id">14</property>
-			<property name="name">power-timerinfo</property>
-			<property name="menu">shutdown</property>
-			<property name="action">noop</property>
-			<property name="path">noop</property>
-			<property name="submenuVisibility">power-timerinfo</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="15">
-			<label>$LOCALIZE[31172]</label>
-			<icon>special://skin/extras/icons/networkinfo.png</icon>
-			<onclick>Close</onclick>
-			<onclick>System.ExecWait("/usr/sbin/rebootfromnand")</onclick>
-			<onclick>Reset()</onclick>
-			<property name="id">15</property>
-			<property name="name">power-rebootandroid</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Reset()</property>
-			<property name="path">Reset()</property>
-			<property name="submenuVisibility">power-rebootandroid</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="16">
-			<label>$LOCALIZE[31271]</label>
-			<icon>special://skin/extras/icons/artist.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Dialog.Close(all,true)</onclick>
-			<onclick>System.LogOff</onclick>
-			<property name="id">16</property>
-			<property name="name">power-logoff</property>
-			<property name="menu">shutdown</property>
-			<property name="action">System.LogOff</property>
-			<property name="path">System.LogOff</property>
-			<property name="submenuVisibility">power-logoff</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="17">
-			<label>$LOCALIZE[13013]</label>
-			<icon>special://skin/extras/icons/networkinfo.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Reset()</onclick>
-			<property name="id">17</property>
-			<property name="name">power-reboot</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Reset()</property>
-			<property name="path">Reset()</property>
-			<property name="submenuVisibility">power-reboot</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="18">
-			<label>$LOCALIZE[13005]</label>
-			<icon>special://skin/extras/icons/power.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Powerdown()</onclick>
-			<property name="id">18</property>
-			<property name="name">power-shutdown</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Powerdown()</property>
-			<property name="path">Powerdown()</property>
-			<property name="submenuVisibility">power-shutdown</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="19">
-			<label>$LOCALIZE[13011]</label>
-			<icon>special://skin/extras/icons/power.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Suspend()</onclick>
-			<property name="id">19</property>
-			<property name="name">power-suspend</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Suspend()</property>
-			<property name="path">Suspend()</property>
-			<property name="submenuVisibility">power-suspend</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="20">
-			<label>$LOCALIZE[20046]</label>
-			<icon>special://skin/extras/icons/logout.png</icon>
-			<onclick>Close</onclick>
-			<onclick>mastermode</onclick>
-			<property name="id">20</property>
-			<property name="name">power-mastermode</property>
-			<property name="menu">shutdown</property>
-			<property name="action">mastermode</property>
-			<property name="path">mastermode</property>
-			<property name="submenuVisibility">power-mastermode</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
-		</item>
-		<item id="21">
-			<label>$LOCALIZE[13012]</label>
-			<icon>special://skin/extras/icons/logout.png</icon>
-			<onclick>Close</onclick>
-			<onclick>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</onclick>
-			<property name="id">21</property>
-			<property name="name">power-quit</property>
-			<property name="menu">shutdown</property>
-			<property name="action">PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</property>
-			<property name="path">"plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard"</property>
-			<property name="submenuVisibility">power-quit</property>
-			<property name="parent">shutdown</property>
-			<visible>String.IsEqual(Container(300).ListItem.Property(name),shutdown)</visible>
 		</item>
 	</include>
 	<include name="skinshortcuts-livetv">
@@ -719,260 +424,6 @@
 			<property name="action">ActivateWindow(Videos,plugin://plugin.program.iagl/,return)</property>
 			<property name="path">plugin://plugin.program.iagl/</property>
 			<property name="submenuVisibility">games-iagl</property>
-		</item>
-	</include>
-	<include name="skinshortcuts-settings">
-		<item id="1">
-			<label>$LOCALIZE[7]</label>
-			<icon>special://skin/extras/icons/filebox.png</icon>
-			<onclick>ActivateWindow(FileManager)</onclick>
-			<property name="id">1</property>
-			<property name="name">settings-filemanager</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(FileManager)</property>
-			<property name="path">ActivateWindow(FileManager)</property>
-			<property name="submenuVisibility">settings-filemanager</property>
-		</item>
-		<item id="2">
-			<label>$LOCALIZE[24001]</label>
-			<icon>special://skin/extras/icons/addon.png</icon>
-			<onclick>ActivateWindow(AddonBrowser)</onclick>
-			<property name="id">2</property>
-			<property name="name">settings-addonbrowser</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(AddonBrowser)</property>
-			<property name="path">ActivateWindow(AddonBrowser)</property>
-			<property name="submenuVisibility">settings-addonbrowser</property>
-		</item>
-		<item id="3">
-			<label>$LOCALIZE[13200]</label>
-			<icon>special://skin/extras/icons/actor.png</icon>
-			<onclick>ActivateWindow(Profiles)</onclick>
-			<property name="id">3</property>
-			<property name="name">settings-profiles</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(Profiles)</property>
-			<property name="path">ActivateWindow(Profiles)</property>
-			<property name="submenuVisibility">settings-profiles</property>
-		</item>
-		<item id="4">
-			<label>$LOCALIZE[13000]</label>
-			<icon>special://skin/extras/icons/sysinfo.png</icon>
-			<onclick>ActivateWindow(SystemInfo)</onclick>
-			<property name="id">4</property>
-			<property name="name">settings-systeminfo</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(SystemInfo)</property>
-			<property name="path">ActivateWindow(SystemInfo)</property>
-			<property name="submenuVisibility">settings-systeminfo</property>
-		</item>
-		<item id="5">
-			<label>$LOCALIZE[14111]</label>
-			<icon>special://skin/extras/icons/rectangle-list.png</icon>
-			<onclick>ActivateWindow(EventLog,events://,return)</onclick>
-			<property name="id">5</property>
-			<property name="name">settings-eventlog</property>
-			<property name="menu">settings</property>
-			<property name="action">ActivateWindow(EventLog,events://,return)</property>
-			<property name="path">events://</property>
-			<property name="submenuVisibility">settings-eventlog</property>
-		</item>
-	</include>
-	<include name="skinshortcuts-shutdown">
-		<item id="1">
-			<label>$LOCALIZE[31114]</label>
-			<icon>special://skin/extras/icons/skinsettings.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindowAndFocus(skinsettings,9108,2)</onclick>
-			<property name="id">1</property>
-			<property name="name">power-skinsettings</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindowAndFocus(skinsettings,9108,2)</property>
-			<property name="path">ActivateWindowAndFocus(skinsettings,9108,2)</property>
-			<property name="submenuVisibility">power-skinsettings</property>
-		</item>
-		<item id="2">
-			<label>$LOCALIZE[5]</label>
-			<icon>special://skin/extras/icons/settings.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(settings)</onclick>
-			<property name="id">2</property>
-			<property name="name">power-settings</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(settings)</property>
-			<property name="path">ActivateWindow(settings)</property>
-			<property name="submenuVisibility">power-settings</property>
-		</item>
-		<item id="3">
-			<label>$LOCALIZE[137]</label>
-			<icon>special://skin/extras/icons/search.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(1146)</onclick>
-			<property name="id">3</property>
-			<property name="name">power-search</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(1146)</property>
-			<property name="path">ActivateWindow(1146)</property>
-			<property name="submenuVisibility">power-search</property>
-		</item>
-		<item id="4">
-			<label>$LOCALIZE[31146]</label>
-			<icon>special://skin/extras/icons/update.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ReloadSkin()</onclick>
-			<property name="id">4</property>
-			<property name="name">power-reloadskin</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ReloadSkin()</property>
-			<property name="path">ReloadSkin()</property>
-			<property name="submenuVisibility">power-reloadskin</property>
-		</item>
-		<item id="5">
-			<label>$LOCALIZE[130]</label>
-			<icon>special://skin/extras/icons/info.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(systeminfo)</onclick>
-			<property name="id">5</property>
-			<property name="name">power-systeminfo</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(systeminfo)</property>
-			<property name="path">ActivateWindow(systeminfo)</property>
-			<property name="submenuVisibility">power-systeminfo</property>
-		</item>
-		<item id="6">
-			<label>$LOCALIZE[10003]</label>
-			<icon>special://skin/extras/icons/filebox.png</icon>
-			<onclick>Close</onclick>
-			<onclick>ActivateWindow(filemanager)</onclick>
-			<property name="id">6</property>
-			<property name="name">power-filemanager</property>
-			<property name="menu">shutdown</property>
-			<property name="action">ActivateWindow(filemanager)</property>
-			<property name="path">ActivateWindow(filemanager)</property>
-			<property name="submenuVisibility">power-filemanager</property>
-		</item>
-		<item id="7">
-			<label>$LOCALIZE[20150]</label>
-			<icon>special://skin/extras/icons/timer.png</icon>
-			<onclick>Close</onclick>
-			<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
-			<visible>!System.HasAlarm(shutdowntimer)</visible>
-			<property name="id">7</property>
-			<property name="name">power-sleeptimer</property>
-			<property name="menu">shutdown</property>
-			<property name="action">AlarmClock(shutdowntimer,Shutdown())</property>
-			<property name="path">AlarmClock(shutdowntimer,Shutdown())</property>
-			<property name="submenuVisibility">power-sleeptimer</property>
-		</item>
-		<item id="8">
-			<label>$LOCALIZE[20151]</label>
-			<icon>special://skin/extras/icons/forbidden.png</icon>
-			<onclick>Close</onclick>
-			<onclick>CancelAlarm(shutdowntimer)</onclick>
-			<property name="id">8</property>
-			<property name="name">power-canceltimer</property>
-			<property name="menu">shutdown</property>
-			<property name="action">CancelAlarm(shutdowntimer)</property>
-			<property name="path">CancelAlarm(shutdowntimer)</property>
-			<property name="submenuVisibility">power-canceltimer</property>
-		</item>
-		<item id="9">
-			<label>$LOCALIZE[31274]</label>
-			<icon>special://skin/extras/icons/info2.png</icon>
-			<onclick>Close</onclick>
-			<onclick>noop</onclick>
-			<property name="id">9</property>
-			<property name="name">power-timerinfo</property>
-			<property name="menu">shutdown</property>
-			<property name="action">noop</property>
-			<property name="path">noop</property>
-			<property name="submenuVisibility">power-timerinfo</property>
-		</item>
-		<item id="10">
-			<label>$LOCALIZE[31172]</label>
-			<icon>special://skin/extras/icons/networkinfo.png</icon>
-			<onclick>Close</onclick>
-			<onclick>System.ExecWait("/usr/sbin/rebootfromnand")</onclick>
-			<onclick>Reset()</onclick>
-			<property name="id">10</property>
-			<property name="name">power-rebootandroid</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Reset()</property>
-			<property name="path">Reset()</property>
-			<property name="submenuVisibility">power-rebootandroid</property>
-		</item>
-		<item id="11">
-			<label>$LOCALIZE[31271]</label>
-			<icon>special://skin/extras/icons/artist.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Dialog.Close(all,true)</onclick>
-			<onclick>System.LogOff</onclick>
-			<property name="id">11</property>
-			<property name="name">power-logoff</property>
-			<property name="menu">shutdown</property>
-			<property name="action">System.LogOff</property>
-			<property name="path">System.LogOff</property>
-			<property name="submenuVisibility">power-logoff</property>
-		</item>
-		<item id="12">
-			<label>$LOCALIZE[13013]</label>
-			<icon>special://skin/extras/icons/networkinfo.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Reset()</onclick>
-			<property name="id">12</property>
-			<property name="name">power-reboot</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Reset()</property>
-			<property name="path">Reset()</property>
-			<property name="submenuVisibility">power-reboot</property>
-		</item>
-		<item id="13">
-			<label>$LOCALIZE[13005]</label>
-			<icon>special://skin/extras/icons/power.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Powerdown()</onclick>
-			<property name="id">13</property>
-			<property name="name">power-shutdown</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Powerdown()</property>
-			<property name="path">Powerdown()</property>
-			<property name="submenuVisibility">power-shutdown</property>
-		</item>
-		<item id="14">
-			<label>$LOCALIZE[13011]</label>
-			<icon>special://skin/extras/icons/power.png</icon>
-			<onclick>Close</onclick>
-			<onclick>Suspend()</onclick>
-			<property name="id">14</property>
-			<property name="name">power-suspend</property>
-			<property name="menu">shutdown</property>
-			<property name="action">Suspend()</property>
-			<property name="path">Suspend()</property>
-			<property name="submenuVisibility">power-suspend</property>
-		</item>
-		<item id="15">
-			<label>$LOCALIZE[20046]</label>
-			<icon>special://skin/extras/icons/logout.png</icon>
-			<onclick>Close</onclick>
-			<onclick>mastermode</onclick>
-			<property name="id">15</property>
-			<property name="name">power-mastermode</property>
-			<property name="menu">shutdown</property>
-			<property name="action">mastermode</property>
-			<property name="path">mastermode</property>
-			<property name="submenuVisibility">power-mastermode</property>
-		</item>
-		<item id="16">
-			<label>$LOCALIZE[13012]</label>
-			<icon>special://skin/extras/icons/logout.png</icon>
-			<onclick>Close</onclick>
-			<onclick>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</onclick>
-			<property name="id">16</property>
-			<property name="name">power-quit</property>
-			<property name="menu">shutdown</property>
-			<property name="action">PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</property>
-			<property name="path">"plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard"</property>
-			<property name="submenuVisibility">power-quit</property>
 		</item>
 	</include>
 	<include name="skinshortcuts-template-widgets">
@@ -1112,7 +563,7 @@
 						<param name="idshort" value="1601" />
 						<param name="animation_condition" value="!Control.HasFocus(1601)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="قيد التقدم" />
+						<param name="widget_label" value=" -  قيد التقدم" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1601).NumItems,0) | Container(1601).IsUpdating" />
 					</include>
 				</control>
@@ -1233,7 +684,7 @@
 						<param name="idshort" value="1602" />
 						<param name="animation_condition" value="!Control.HasFocus(1602)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="الأفلام الجديدة" />
+						<param name="widget_label" value=" -  الأفلام الجديدة" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1602).NumItems,0) | Container(1602).IsUpdating" />
 					</include>
 				</control>
@@ -1354,7 +805,7 @@
 						<param name="idshort" value="1603" />
 						<param name="animation_condition" value="!Control.HasFocus(1603)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="الأفلام - المشهورة" />
+						<param name="widget_label" value=" -  الأفلام المشهورة" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1603).NumItems,0) | Container(1603).IsUpdating" />
 					</include>
 				</control>
@@ -1387,7 +838,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item" condition="false">
 					<param name="Fanart" value="false" />
@@ -1406,7 +857,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1604" />
@@ -1419,11 +870,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1604" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">special://skin/extras/playlists/RandomMovies.xsp</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+movies+.json&amp;plugin_category=my+movies&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1604" />
 					<param name="target" value="videos" />
-					<param name="content" value="special://skin/extras/playlists/RandomMovies.xsp" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+movies+.json&amp;plugin_category=my+movies&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
 				</include>
 			</control>
 			<control type="group" id="1504">
@@ -1475,7 +926,7 @@
 						<param name="idshort" value="1604" />
 						<param name="animation_condition" value="!Control.HasFocus(1604)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="$LOCALIZE[31028]" />
+						<param name="widget_label" value="  - افلامي" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1604).NumItems,0) | Container(1604).IsUpdating" />
 					</include>
 				</control>
@@ -1508,7 +959,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item" condition="false">
 					<param name="Fanart" value="false" />
@@ -1527,7 +978,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1605" />
@@ -1540,11 +991,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1605" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">special://skin/extras/playlists/NewMovies.xsp</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1605" />
 					<param name="target" value="videos" />
-					<param name="content" value="special://skin/extras/playlists/NewMovies.xsp" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
 				</include>
 			</control>
 			<control type="group" id="1505">
@@ -1596,7 +1047,7 @@
 						<param name="idshort" value="1605" />
 						<param name="animation_condition" value="!Control.HasFocus(1605)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="$LOCALIZE[31026]" />
+						<param name="widget_label" value="  - القوائم" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1605).NumItems,0) | Container(1605).IsUpdating" />
 					</include>
 				</control>
@@ -1661,11 +1112,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1606" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+movies+.json&amp;plugin_category=my+movies&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1606" />
 					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+movies+.json&amp;plugin_category=my+movies&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
 				</include>
 			</control>
 			<control type="group" id="1506">
@@ -1717,7 +1168,7 @@
 						<param name="idshort" value="1606" />
 						<param name="animation_condition" value="!Control.HasFocus(1606)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="افلامي" />
+						<param name="widget_label" value=" - الصنف" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1606).NumItems,0) | Container(1606).IsUpdating" />
 					</include>
 				</control>
@@ -1782,11 +1233,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1607" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1607" />
 					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
 				</include>
 			</control>
 			<control type="group" id="1507">
@@ -1838,250 +1289,8 @@
 						<param name="idshort" value="1607" />
 						<param name="animation_condition" value="!Control.HasFocus(1607)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="القوائم" />
+						<param name="widget_label" value=" - الاستوديو" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1607).NumItems,0) | Container(1607).IsUpdating" />
-					</include>
-				</control>
-			</control>
-			<control type="fixedlist" id="1608">
-				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
-				</include>
-				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
-				<include content="Def_Multi_Widget_Container">
-					<param name="id" value="1608" />
-					<param name="height" value="325" />
-					<param name="idshort" value="160" />
-					<param name="backid" value="1601" />
-					<param name="AutoTime" value="" />
-					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
-					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
-					<param name="animation_condition" value="!Control.HasFocus(1608)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]" />
-				</include>
-				<include content="Def_Normal_Layout_Item" condition="true">
-					<param name="shortcutsclearlogo" value="true" />
-					<param name="aspectratio" value="keep" />
-					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
-					<param name="Fanart" value="false" />
-					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
-					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
-				</include>
-				<include content="Def_Weather_Layout_Item" condition="false">
-					<param name="Fanart" value="false" />
-					<param name="Square" value="false" />
-				</include>
-				<include condition="false">Def_System_Layout_Item</include>
-				<include condition="false">Def_System_Layout_Item</include>
-				<include content="Def_Normal_Layout_Item_Focus" condition="true">
-					<param name="shortcutsid" value="1608" />
-					<param name="shortcutsclearlogo" value="true" />
-					<param name="aspectratio" value="keep" />
-					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
-					<param name="Fanart" value="false" />
-					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
-					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
-				</include>
-				<include content="Def_Weather_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="1608" />
-					<param name="Fanart" value="false" />
-					<param name="Square" value="false" />
-				</include>
-				<include content="Def_System_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="1608" />
-				</include>
-				<include content="Def_System_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="1608" />
-				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
-				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
-					<param name="id" value="1608" />
-					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
-				</include>
-			</control>
-			<control type="group" id="1508">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
-				<control type="group" id="1408">
-					<include content="Widget_Navigation_Arrows">
-						<param name="id" value="1608" />
-						<param name="focusid" value="1608" />
-						<param name="idshort" value="1608" />
-						<param name="animation_condition" value="!Control.HasFocus(1608)" />
-						<param name="submenuVisibility" value="movies" />
-					</include>
-				</control>
-			</control>
-			<control type="group" id="1708">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
-				<visible>Skin.HasSetting(home.style.flix)</visible>
-				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
-					<param name="condition" value="!Control.HasFocus(1608)" />
-				</include>
-				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
-				</include>
-				<control type="group">
-					<include content="Home_Flix_Widgets_Item_Info" condition="true">
-						<param name="id" value="1608" />
-						<param name="labelisvisible" value="true" />
-						<param name="submenuVisibility" value="movies" />
-					</include>
-				</control>
-				<control type="grouplist">
-					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
-				</control>
-				<control type="grouplist">
-					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
-						<param name="issettingslayout" value="false" />
-						<param name="id" value="1608" />
-					</include>
-				</control>
-			</control>
-			<control type="group" id="1908">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
-				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
-				</include>
-				<control type="grouplist" id="1808">
-					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
-						<param name="focusid" value="1608" />
-						<param name="idshort" value="1608" />
-						<param name="animation_condition" value="!Control.HasFocus(1608)" />
-						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="الصنف" />
-						<param name="busy_visible" value="Integer.IsEqual(Container(1608).NumItems,0) | Container(1608).IsUpdating" />
-					</include>
-				</control>
-			</control>
-			<control type="fixedlist" id="1609">
-				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
-				</include>
-				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
-				<include content="Def_Multi_Widget_Container">
-					<param name="id" value="1609" />
-					<param name="height" value="325" />
-					<param name="idshort" value="160" />
-					<param name="backid" value="1601" />
-					<param name="AutoTime" value="" />
-					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
-					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
-					<param name="animation_condition" value="!Control.HasFocus(1609)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]" />
-				</include>
-				<include content="Def_Normal_Layout_Item" condition="true">
-					<param name="shortcutsclearlogo" value="true" />
-					<param name="aspectratio" value="keep" />
-					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
-					<param name="Fanart" value="false" />
-					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
-					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
-				</include>
-				<include content="Def_Weather_Layout_Item" condition="false">
-					<param name="Fanart" value="false" />
-					<param name="Square" value="false" />
-				</include>
-				<include condition="false">Def_System_Layout_Item</include>
-				<include condition="false">Def_System_Layout_Item</include>
-				<include content="Def_Normal_Layout_Item_Focus" condition="true">
-					<param name="shortcutsid" value="1609" />
-					<param name="shortcutsclearlogo" value="true" />
-					<param name="aspectratio" value="keep" />
-					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
-					<param name="Fanart" value="false" />
-					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
-					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
-				</include>
-				<include content="Def_Weather_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="1609" />
-					<param name="Fanart" value="false" />
-					<param name="Square" value="false" />
-				</include>
-				<include content="Def_System_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="1609" />
-				</include>
-				<include content="Def_System_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="1609" />
-				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
-				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
-					<param name="id" value="1609" />
-					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
-				</include>
-			</control>
-			<control type="group" id="1509">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
-				<control type="group" id="1409">
-					<include content="Widget_Navigation_Arrows">
-						<param name="id" value="1609" />
-						<param name="focusid" value="1609" />
-						<param name="idshort" value="1609" />
-						<param name="animation_condition" value="!Control.HasFocus(1609)" />
-						<param name="submenuVisibility" value="movies" />
-					</include>
-				</control>
-			</control>
-			<control type="group" id="1709">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
-				<visible>Skin.HasSetting(home.style.flix)</visible>
-				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
-					<param name="condition" value="!Control.HasFocus(1609)" />
-				</include>
-				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
-				</include>
-				<control type="group">
-					<include content="Home_Flix_Widgets_Item_Info" condition="true">
-						<param name="id" value="1609" />
-						<param name="labelisvisible" value="true" />
-						<param name="submenuVisibility" value="movies" />
-					</include>
-				</control>
-				<control type="grouplist">
-					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
-				</control>
-				<control type="grouplist">
-					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
-						<param name="issettingslayout" value="false" />
-						<param name="id" value="1609" />
-					</include>
-				</control>
-			</control>
-			<control type="group" id="1909">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
-				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
-				</include>
-				<control type="grouplist" id="1809">
-					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
-						<param name="focusid" value="1609" />
-						<param name="idshort" value="1609" />
-						<param name="animation_condition" value="!Control.HasFocus(1609)" />
-						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="الاستوديو" />
-						<param name="busy_visible" value="Integer.IsEqual(Container(1609).NumItems,0) | Container(1609).IsUpdating" />
 					</include>
 				</control>
 			</control>
@@ -2464,7 +1673,7 @@
 						<param name="idshort" value="2603" />
 						<param name="animation_condition" value="!Control.HasFocus(2603)" />
 						<param name="submenuVisibility" value="tvshows" />
-						<param name="widget_label" value="قيد التقدم" />
+						<param name="widget_label" value=" - قيد التقدم" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(2603).NumItems,0) | Container(2603).IsUpdating" />
 					</include>
 				</control>
@@ -2585,7 +1794,7 @@
 						<param name="idshort" value="2604" />
 						<param name="animation_condition" value="!Control.HasFocus(2604)" />
 						<param name="submenuVisibility" value="tvshows" />
-						<param name="widget_label" value="مشهور" />
+						<param name="widget_label" value=" - مشهور" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(2604).NumItems,0) | Container(2604).IsUpdating" />
 					</include>
 				</control>
@@ -2706,7 +1915,7 @@
 						<param name="idshort" value="2605" />
 						<param name="animation_condition" value="!Control.HasFocus(2605)" />
 						<param name="submenuVisibility" value="tvshows" />
-						<param name="widget_label" value="مسلسلاتي" />
+						<param name="widget_label" value=" - مسلسلاتي" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(2605).NumItems,0) | Container(2605).IsUpdating" />
 					</include>
 				</control>
@@ -2827,7 +2036,7 @@
 						<param name="idshort" value="2606" />
 						<param name="animation_condition" value="!Control.HasFocus(2606)" />
 						<param name="submenuVisibility" value="tvshows" />
-						<param name="widget_label" value="القوائم" />
+						<param name="widget_label" value="  - القوائم" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(2606).NumItems,0) | Container(2606).IsUpdating" />
 					</include>
 				</control>
@@ -2948,7 +2157,7 @@
 						<param name="idshort" value="2607" />
 						<param name="animation_condition" value="!Control.HasFocus(2607)" />
 						<param name="submenuVisibility" value="tvshows" />
-						<param name="widget_label" value="الصنف" />
+						<param name="widget_label" value=" - الصنف" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(2607).NumItems,0) | Container(2607).IsUpdating" />
 					</include>
 				</control>
@@ -3069,7 +2278,7 @@
 						<param name="idshort" value="2608" />
 						<param name="animation_condition" value="!Control.HasFocus(2608)" />
 						<param name="submenuVisibility" value="tvshows" />
-						<param name="widget_label" value="الاستوديو" />
+						<param name="widget_label" value=" - الاستوديو" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(2608).NumItems,0) | Container(2608).IsUpdating" />
 					</include>
 				</control>
@@ -3211,7 +2420,7 @@
 						<param name="idshort" value="3601" />
 						<param name="animation_condition" value="!Control.HasFocus(3601)" />
 						<param name="submenuVisibility" value="user-894e16dd" />
-						<param name="widget_label" value="افلام جديدة" />
+						<param name="widget_label" value=" - افلام جديدة" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(3601).NumItems,0) | Container(3601).IsUpdating" />
 					</include>
 				</control>
@@ -3332,7 +2541,7 @@
 						<param name="idshort" value="3602" />
 						<param name="animation_condition" value="!Control.HasFocus(3602)" />
 						<param name="submenuVisibility" value="user-894e16dd" />
-						<param name="widget_label" value="مسلسلات جديدة" />
+						<param name="widget_label" value=" - مسلسلات جديدة" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(3602).NumItems,0) | Container(3602).IsUpdating" />
 					</include>
 				</control>
@@ -3453,7 +2662,7 @@
 						<param name="idshort" value="3603" />
 						<param name="animation_condition" value="!Control.HasFocus(3603)" />
 						<param name="submenuVisibility" value="user-894e16dd" />
-						<param name="widget_label" value="الافلام" />
+						<param name="widget_label" value=" - الافلام" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(3603).NumItems,0) | Container(3603).IsUpdating" />
 					</include>
 				</control>
@@ -3574,7 +2783,7 @@
 						<param name="idshort" value="3604" />
 						<param name="animation_condition" value="!Control.HasFocus(3604)" />
 						<param name="submenuVisibility" value="user-894e16dd" />
-						<param name="widget_label" value="المسلسلات" />
+						<param name="widget_label" value=" - المسلسلات" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(3604).NumItems,0) | Container(3604).IsUpdating" />
 					</include>
 				</control>

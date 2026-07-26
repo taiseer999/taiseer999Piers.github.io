@@ -1660,7 +1660,7 @@
 
         <control type="label">
             <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,  •  ]$INFO[Container($PARAM[id]).ListItem.Episode,  •  , $LOCALIZE[20360]]</label>
+            <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,      ]$INFO[Container($PARAM[id]).ListItem.Episode,      , $LOCALIZE[20360]]</label>
             <include>Animation_Vertical_Widgets_Title</include>
             <visible>Control.HasFocus($PARAM[focusid])</visible>
             <visible>!String.StartsWith(ListItem.FolderPath,pvr://)</visible>
@@ -1672,7 +1672,7 @@
 
         <control type="label">
             <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,  •  ]$INFO[Container($PARAM[focusid]).ListItem.Label,  •  ]</label>
+            <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,       ]$INFO[Container($PARAM[focusid]).ListItem.Label,      ]</label>
             <include>Animation_Vertical_Widgets_Title</include>
             <visible>Control.HasFocus($PARAM[focusid])</visible>
             <visible>!String.StartsWith(ListItem.FolderPath,pvr://)</visible>
@@ -1684,7 +1684,7 @@
 
         <control type="label">
             <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,  •  ]$INFO[Container($PARAM[focusid]).ListItem.Year,  •  ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),  •  ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name), / ,]</label>
+            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,       ]$INFO[Container($PARAM[focusid]).ListItem.Year,      ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),      ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name), / ,]</label>
             <include>Animation_Vertical_Widgets_Title</include>
             <visible>Control.HasFocus($PARAM[focusid])</visible>
             <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,movie) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,video)</visible>
@@ -1695,7 +1695,7 @@
 
         <control type="label">
             <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,  •  ]</label>
+            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,       ]</label>
             <include>Animation_Vertical_Widgets_Title</include>
             <visible>Control.HasFocus($PARAM[focusid])</visible>
             <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,tvshow) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,movie) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,video) | String.IsEmpty(Container($PARAM[focusid]).ListItem.DBType) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,set)</visible>
@@ -2995,7 +2995,7 @@
 
     <include name="Furniture_Home_Flix_Widget_Flags">
         <control type="group">
-            <animation effect="slide" start="0" end="0,-380" time="0" condition="true">Conditional</animation>
+            <animation effect="slide" start="0" end="0,55" time="0" condition="true">Conditional</animation>
             <include>Animation_Common_Fade_In</include>
             <include>Animation_Common_Fade_Out</include>
             <visible>ControlGroup(301).HasFocus()</visible>

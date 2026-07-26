@@ -199,7 +199,7 @@
                     <right>30</right>
                     <left>30</left>
                     <align>left</align>
-                    <font>Tiny</font>
+                    <font>TinyBadge</font>
                     <textcolor>PanelWhite100</textcolor>
                     <label>$INFO[Container(9100).ListItem.Label2]</label>
                 </control>
