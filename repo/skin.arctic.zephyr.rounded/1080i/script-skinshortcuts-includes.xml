@@ -959,7 +959,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
+					<param name="SquareSmall" value="false" />
 				</include>
 				<include content="Def_Weather_Layout_Item" condition="false">
 					<param name="Fanart" value="false" />
@@ -978,7 +978,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
+					<param name="SquareSmall" value="false" />
 				</include>
 				<include content="Def_Weather_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1605" />
@@ -991,11 +991,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1605" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">Stacked</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1605" />
 					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+					<param name="content" value="Stacked" />
 				</include>
 			</control>
 			<control type="group" id="1505">
@@ -1047,7 +1047,7 @@
 						<param name="idshort" value="1605" />
 						<param name="animation_condition" value="!Control.HasFocus(1605)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value="  - القوائم" />
+						<param name="widget_label" value="Stacked" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1605).NumItems,0) | Container(1605).IsUpdating" />
 					</include>
 				</control>
@@ -1112,11 +1112,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1606" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1606" />
 					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=moviessort.json&amp;plugin_category=moviessort&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
 				</include>
 			</control>
 			<control type="group" id="1506">
@@ -1168,7 +1168,7 @@
 						<param name="idshort" value="1606" />
 						<param name="animation_condition" value="!Control.HasFocus(1606)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value=" - الصنف" />
+						<param name="widget_label" value="  - القوائم" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1606).NumItems,0) | Container(1606).IsUpdating" />
 					</include>
 				</control>
@@ -1201,7 +1201,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
+					<param name="SquareSmall" value="false" />
 				</include>
 				<include content="Def_Weather_Layout_Item" condition="false">
 					<param name="Fanart" value="false" />
@@ -1220,7 +1220,7 @@
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
-					<param name="SquareSmall" value="true" />
+					<param name="SquareSmall" value="false" />
 				</include>
 				<include content="Def_Weather_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1607" />
@@ -1233,11 +1233,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="1607" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">Stacked</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="1607" />
 					<param name="target" value="videos" />
-					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+					<param name="content" value="Stacked" />
 				</include>
 			</control>
 			<control type="group" id="1507">
@@ -1289,8 +1289,492 @@
 						<param name="idshort" value="1607" />
 						<param name="animation_condition" value="!Control.HasFocus(1607)" />
 						<param name="submenuVisibility" value="movies" />
-						<param name="widget_label" value=" - الاستوديو" />
+						<param name="widget_label" value="Stacked" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(1607).NumItems,0) | Container(1607).IsUpdating" />
+					</include>
+				</control>
+			</control>
+			<control type="fixedlist" id="1608">
+				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
+				<include content="Def_Multi_Widget_Container">
+					<param name="id" value="1608" />
+					<param name="height" value="325" />
+					<param name="idshort" value="160" />
+					<param name="backid" value="1601" />
+					<param name="AutoTime" value="" />
+					<param name="orientation" value="horizontal" />
+					<param name="movement" value="7" />
+					<param name="movement2" value="6" />
+					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
+					<param name="animation_condition" value="!Control.HasFocus(1608)" />
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]" />
+				</include>
+				<include content="Def_Normal_Layout_Item" condition="true">
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
+				</include>
+				<include content="Def_Weather_Layout_Item" condition="false">
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include content="Def_Normal_Layout_Item_Focus" condition="true">
+					<param name="shortcutsid" value="1608" />
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
+				</include>
+				<include content="Def_Weather_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1608" />
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1608" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1608" />
+				</include>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
+					<param name="id" value="1608" />
+					<param name="target" value="videos" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Geners.json&amp;plugin_category=movies+genres&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+				</include>
+			</control>
+			<control type="group" id="1508">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
+				<control type="group" id="1408">
+					<include content="Widget_Navigation_Arrows">
+						<param name="id" value="1608" />
+						<param name="focusid" value="1608" />
+						<param name="idshort" value="1608" />
+						<param name="animation_condition" value="!Control.HasFocus(1608)" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1708">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
+				<visible>Skin.HasSetting(home.style.flix)</visible>
+				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
+					<param name="condition" value="!Control.HasFocus(1608)" />
+				</include>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="group">
+					<include content="Home_Flix_Widgets_Item_Info" condition="true">
+						<param name="id" value="1608" />
+						<param name="labelisvisible" value="true" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+				<control type="grouplist">
+					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
+				</control>
+				<control type="grouplist">
+					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
+						<param name="issettingslayout" value="false" />
+						<param name="id" value="1608" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1908">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="grouplist" id="1808">
+					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
+						<param name="focusid" value="1608" />
+						<param name="idshort" value="1608" />
+						<param name="animation_condition" value="!Control.HasFocus(1608)" />
+						<param name="submenuVisibility" value="movies" />
+						<param name="widget_label" value=" - الصنف" />
+						<param name="busy_visible" value="Integer.IsEqual(Container(1608).NumItems,0) | Container(1608).IsUpdating" />
+					</include>
+				</control>
+			</control>
+			<control type="fixedlist" id="1609">
+				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
+				<include content="Def_Multi_Widget_Container">
+					<param name="id" value="1609" />
+					<param name="height" value="325" />
+					<param name="idshort" value="160" />
+					<param name="backid" value="1601" />
+					<param name="AutoTime" value="" />
+					<param name="orientation" value="horizontal" />
+					<param name="movement" value="7" />
+					<param name="movement2" value="6" />
+					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
+					<param name="animation_condition" value="!Control.HasFocus(1609)" />
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]" />
+				</include>
+				<include content="Def_Normal_Layout_Item" condition="true">
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="false" />
+				</include>
+				<include content="Def_Weather_Layout_Item" condition="false">
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include content="Def_Normal_Layout_Item_Focus" condition="true">
+					<param name="shortcutsid" value="1609" />
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="false" />
+				</include>
+				<include content="Def_Weather_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1609" />
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1609" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1609" />
+				</include>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">Stacked</content>
+				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
+					<param name="id" value="1609" />
+					<param name="target" value="videos" />
+					<param name="content" value="Stacked" />
+				</include>
+			</control>
+			<control type="group" id="1509">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
+				<control type="group" id="1409">
+					<include content="Widget_Navigation_Arrows">
+						<param name="id" value="1609" />
+						<param name="focusid" value="1609" />
+						<param name="idshort" value="1609" />
+						<param name="animation_condition" value="!Control.HasFocus(1609)" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1709">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
+				<visible>Skin.HasSetting(home.style.flix)</visible>
+				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
+					<param name="condition" value="!Control.HasFocus(1609)" />
+				</include>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="group">
+					<include content="Home_Flix_Widgets_Item_Info" condition="true">
+						<param name="id" value="1609" />
+						<param name="labelisvisible" value="true" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+				<control type="grouplist">
+					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
+				</control>
+				<control type="grouplist">
+					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
+						<param name="issettingslayout" value="false" />
+						<param name="id" value="1609" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1909">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="grouplist" id="1809">
+					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
+						<param name="focusid" value="1609" />
+						<param name="idshort" value="1609" />
+						<param name="animation_condition" value="!Control.HasFocus(1609)" />
+						<param name="submenuVisibility" value="movies" />
+						<param name="widget_label" value="Stacked" />
+						<param name="busy_visible" value="Integer.IsEqual(Container(1609).NumItems,0) | Container(1609).IsUpdating" />
+					</include>
+				</control>
+			</control>
+			<control type="fixedlist" id="1610">
+				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
+				<include content="Def_Multi_Widget_Container">
+					<param name="id" value="1610" />
+					<param name="height" value="325" />
+					<param name="idshort" value="160" />
+					<param name="backid" value="1601" />
+					<param name="AutoTime" value="" />
+					<param name="orientation" value="horizontal" />
+					<param name="movement" value="7" />
+					<param name="movement2" value="6" />
+					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
+					<param name="animation_condition" value="!Control.HasFocus(1610)" />
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]" />
+				</include>
+				<include content="Def_Normal_Layout_Item" condition="true">
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
+				</include>
+				<include content="Def_Weather_Layout_Item" condition="false">
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include content="Def_Normal_Layout_Item_Focus" condition="true">
+					<param name="shortcutsid" value="1610" />
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
+				</include>
+				<include content="Def_Weather_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1610" />
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1610" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1610" />
+				</include>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F</content>
+				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
+					<param name="id" value="1610" />
+					<param name="target" value="videos" />
+					<param name="content" value="plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=Movies+Networks.json&amp;plugin_category=Movies+Networks&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F" />
+				</include>
+			</control>
+			<control type="group" id="1510">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]</visible>
+				<control type="group" id="1410">
+					<include content="Widget_Navigation_Arrows">
+						<param name="id" value="1610" />
+						<param name="focusid" value="1610" />
+						<param name="idshort" value="1610" />
+						<param name="animation_condition" value="!Control.HasFocus(1610)" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1710">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]</visible>
+				<visible>Skin.HasSetting(home.style.flix)</visible>
+				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
+					<param name="condition" value="!Control.HasFocus(1610)" />
+				</include>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="group">
+					<include content="Home_Flix_Widgets_Item_Info" condition="true">
+						<param name="id" value="1610" />
+						<param name="labelisvisible" value="true" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+				<control type="grouplist">
+					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
+				</control>
+				<control type="grouplist">
+					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
+						<param name="issettingslayout" value="false" />
+						<param name="id" value="1610" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1910">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]</visible>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="grouplist" id="1810">
+					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
+						<param name="focusid" value="1610" />
+						<param name="idshort" value="1610" />
+						<param name="animation_condition" value="!Control.HasFocus(1610)" />
+						<param name="submenuVisibility" value="movies" />
+						<param name="widget_label" value=" - الاستوديو" />
+						<param name="busy_visible" value="Integer.IsEqual(Container(1610).NumItems,0) | Container(1610).IsUpdating" />
+					</include>
+				</control>
+			</control>
+			<control type="fixedlist" id="1611">
+				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
+				<include content="Def_Multi_Widget_Container">
+					<param name="id" value="1611" />
+					<param name="height" value="325" />
+					<param name="idshort" value="160" />
+					<param name="backid" value="1601" />
+					<param name="AutoTime" value="" />
+					<param name="orientation" value="horizontal" />
+					<param name="movement" value="7" />
+					<param name="movement2" value="6" />
+					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
+					<param name="animation_condition" value="!Control.HasFocus(1611)" />
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]" />
+				</include>
+				<include content="Def_Normal_Layout_Item" condition="true">
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="false" />
+				</include>
+				<include content="Def_Weather_Layout_Item" condition="false">
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include condition="false">Def_System_Layout_Item</include>
+				<include content="Def_Normal_Layout_Item_Focus" condition="true">
+					<param name="shortcutsid" value="1611" />
+					<param name="shortcutsclearlogo" value="true" />
+					<param name="aspectratio" value="keep" />
+					<param name="distance" value="10" />
+					<param name="Thumbnail" value="false" />
+					<param name="Fanart" value="false" />
+					<param name="FanartSmall" value="false" />
+					<param name="ThumbnailSmall" value="false" />
+					<param name="Square" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="false" />
+				</include>
+				<include content="Def_Weather_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1611" />
+					<param name="Fanart" value="false" />
+					<param name="Square" value="false" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1611" />
+				</include>
+				<include content="Def_System_Layout_Item_Focus" condition="false">
+					<param name="shortcutsid" value="1611" />
+				</include>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">Stacked</content>
+				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
+					<param name="id" value="1611" />
+					<param name="target" value="videos" />
+					<param name="content" value="Stacked" />
+				</include>
+			</control>
+			<control type="group" id="1511">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]</visible>
+				<control type="group" id="1411">
+					<include content="Widget_Navigation_Arrows">
+						<param name="id" value="1611" />
+						<param name="focusid" value="1611" />
+						<param name="idshort" value="1611" />
+						<param name="animation_condition" value="!Control.HasFocus(1611)" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1711">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]</visible>
+				<visible>Skin.HasSetting(home.style.flix)</visible>
+				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
+					<param name="condition" value="!Control.HasFocus(1611)" />
+				</include>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="group">
+					<include content="Home_Flix_Widgets_Item_Info" condition="true">
+						<param name="id" value="1611" />
+						<param name="labelisvisible" value="true" />
+						<param name="submenuVisibility" value="movies" />
+					</include>
+				</control>
+				<control type="grouplist">
+					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
+				</control>
+				<control type="grouplist">
+					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
+						<param name="issettingslayout" value="false" />
+						<param name="id" value="1611" />
+					</include>
+				</control>
+			</control>
+			<control type="group" id="1911">
+				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]</visible>
+				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
+					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
+				</include>
+				<control type="grouplist" id="1811">
+					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
+						<param name="focusid" value="1611" />
+						<param name="idshort" value="1611" />
+						<param name="animation_condition" value="!Control.HasFocus(1611)" />
+						<param name="submenuVisibility" value="movies" />
+						<param name="widget_label" value="Stacked" />
+						<param name="busy_visible" value="Integer.IsEqual(Container(1611).NumItems,0) | Container(1611).IsUpdating" />
 					</include>
 				</control>
 			</control>
