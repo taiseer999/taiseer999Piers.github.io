@@ -318,7 +318,7 @@
         <param name="hasprogress">false</param>
         <param name="texture">dialog/loading-back.png</param>
         <param name="size">100</param>
-        <param name="icon">special://skin/extras/icons/kodi.png</param>
+        <param name="icon">special://skin/extras/icons/ce.png</param>
         <param name="progress">Control.GetLabel(32)</param>
         <param name="progress_id">32</param>
         <param name="spinprogress">false</param>
@@ -726,7 +726,7 @@
                 <height>96</height>
                 <centerleft>50%</centerleft>
                 <aspectratio>keep</aspectratio>
-                <texture colordiffuse="$VAR[ColorHighlight]">special://skin/extras/icons/kodi.png</texture>
+                <texture>special://skin/extras/icons/ce.png</texture>
             </control>
             <control type="label">
                 <height>32</height>
