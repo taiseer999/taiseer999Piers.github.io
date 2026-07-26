@@ -4,6 +4,16 @@
         <include>VideoLyrics_Fonts</include>
         <font>
             <name>font23_narrow</name>
+            <filename>Noto-Regular.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>Noto-Bold.ttf</filename>
+            <size>32</size>
+        </font>
+        <font>
+            <name>font23_narrow</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>21</size>
         </font>
@@ -317,6 +327,16 @@
         <include>VideoLyrics_Fonts</include>
         <font>
             <name>font23_narrow</name>
+            <filename>Noto-Regular.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>Noto-Bold.ttf</filename>
+            <size>32</size>
+        </font>
+        <font>
+            <name>font23_narrow</name>
             <filename>iphone.ttf</filename>
             <size>21</size>
         </font>
@@ -623,6 +643,16 @@
     </fontset>
     <fontset id="تونس" unicode="true">
         <include>VideoLyrics_Fonts</include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>Noto-Regular.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>Noto-Bold.ttf</filename>
+            <size>32</size>
+        </font>
         <font>
             <name>font23_narrow</name>
             <filename>tonos.ttf</filename>

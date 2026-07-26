@@ -1396,66 +1396,66 @@
             <control type="grouplist">
                             <top>116</top>
                             <right>64</right>
-                            <width>800</width>
-                            <height>38</height>
+                            <width>880</width>
+                            <height>42</height>
                             <orientation>horizontal</orientation>
                             <itemgap>4</itemgap>
                             <align>right</align>
                             <usecontrolcoords>true</usecontrolcoords>
                             <control type="image">
-                                <width>30</width>
-                                <height>30</height>
-                                <top>8</top>
+                                <width>33</width>
+                                <height>33</height>
+                                <top>9</top>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/cpu.png</texture>
                             </control>
                             <control type="label">
                                 <font>tiny</font>
                                 <width>auto</width>
-                                <height>42</height>
+                                <height>46</height>
                                 <textcolor>Dark2</textcolor>
                                 <label>$INFO[System.CPUTemperature]</label>
                             </control>
                             <control type="image">
-                                <width>25</width>
-                                <height>25</height>
-                                <top>10</top>
-                                <left>17</left>
+                                <width>28</width>
+                                <height>28</height>
+                                <top>11</top>
+                                <left>19</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/ram.png</texture>
                             </control>
                             <control type="label">
                                 <font>tiny</font>
                                 <width>auto</width>
-                                <height>42</height>
+                                <height>46</height>
                                 <textcolor>Dark2</textcolor>
                                 <label>$INFO[system.memory(used.percent)]</label>
                             </control>
                             <control type="image">
-                                <width>30</width>
-                    <height>40</height>
+                                <width>33</width>
+                                <height>44</height>
                                 <top>2</top>
-                                <left>17</left>
+                                <left>19</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/connected.png</texture>
                                 <visible>String.Contains(Network.IPAddress,1)</visible>
                             </control>
                             <control type="image">
-                               <width>30</width>
-                    <height>40</height>
+                                <width>33</width>
+                                <height>44</height>
                                 <top>2</top>
-                                <left>17</left>
+                                <left>19</left>
                                 <aspectratio>keep</aspectratio>
                                 <texture>special://skin/extras/icons/disconnected.png</texture>
                                 <visible>!String.Contains(Network.IPAddress,1)</visible>
                             </control>
-                               <control type="image">
-                              <width>50</width>
-                              <height>50</height>
-                              <top>-2</top>
-                                <left>17</left>
-                              <aspectratio>keep</aspectratio>
-                              <texture>special://skin/extras/icons/CE.png</texture>
+                            <control type="image">
+                                <width>55</width>
+                                <height>55</height>
+                                <top>-4</top>
+                                <left>19</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>special://skin/extras/icons/CE.png</texture>
                             </control>
                         </control>
         </control>
