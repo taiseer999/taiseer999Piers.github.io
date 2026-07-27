@@ -22,8 +22,7 @@
     <color name="Black30">4DBBBBBB</color>
     <color name="Black12">1FBBBBBB</color>
 
-    <color name="White100">FF000000</color>
-    <color name="ArtPlate">FF000000</color>
+    <color name="White100">FF333333</color>
     <color name="White70">B3333333</color>
     <color name="White30">4D333333</color>
     <color name="White12">1F333333</color>
@@ -62,7 +61,6 @@
     <color name="UnWatchedIcons">E600BCD4</color>
 
     <color name="Fallback">FF2D2E2E</color>
-    <color name="IconOnFallback">CCC5C5C5</color>
 
     <color name="OSD_Black">DF000000</color>
     <color name="Panel">FF2D2E2E</color>
