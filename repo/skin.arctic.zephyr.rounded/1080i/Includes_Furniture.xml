@@ -1377,12 +1377,12 @@
 
                     <control type="image" description="CoreELEC logo above date">
                         <visible>!Skin.HasSetting(Header.DisableLogo)</visible>
-                        <left>0</left>
+                        <left>-12</left>
                         <top>-40</top>
-                        <width>138</width>
-                        <height>38</height>
+                        <width>145</width>
+                        <height>45</height>
                         <aspectratio align="left" aligny="center">keep</aspectratio>
-                        <texture>special://skin/extras/icons/ce_logo.png</texture>
+                        <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>
                     </control>
 
                     <control type="label">

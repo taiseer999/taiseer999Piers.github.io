@@ -12,12 +12,13 @@
                 </include>
                 <control type="image" description="CoreELEC logo above date">
                     <visible>$PARAM[showlogo] + !Skin.HasSetting(Header.DisableLogo)</visible>
-                    <left>0</left>
-                    <top>-35</top>
-                    <width>165</width>
-                    <height>38</height>
+                    <left>-12</left>
+                        <top>-30</top>
+                        <width>145</width>
+                        <height>45</height>
                     <aspectratio align="left" aligny="center">keep</aspectratio>
-                    <texture>special://skin/extras/icons/ce_logo.png</texture>
+                    <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>
+
                 </control>
                 <control type="label">
                     <label>$PARAM[label]</label>
