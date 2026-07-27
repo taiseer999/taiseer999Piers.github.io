@@ -2552,3 +2552,7 @@ msgstr ""
 msgctxt "#31992"
 msgid "Show studio logo on home"
 msgstr ""
+
+msgctxt "#31993"
+msgid "Show CoreELEC logo above date"
+msgstr ""

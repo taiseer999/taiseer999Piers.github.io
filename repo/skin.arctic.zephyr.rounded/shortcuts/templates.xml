@@ -310,7 +310,6 @@
                 <ondown condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(enable.widgets.ondown.go.back.to.first.item) + Skin.HasSetting(disable.widgets.ondown.go.back.to.position.0) + !Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">300</ondown>
                 <ondown condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(enable.widgets.ondown.go.back.to.first.item) + [!Skin.HasSetting(disable.widgets.ondown.go.back.to.position.0) | Skin.HasSetting(enable_widgets_to_position_0_onback_menu)]">SetFocus(4567)</ondown>
 
-
                 <!-- HOME VERTICAL -->
                 <onup condition="$EXP[Home_Is_Vertical] + Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget)">9888</onup>
                 <onup condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget) + !Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">300</onup>

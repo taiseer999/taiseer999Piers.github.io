@@ -550,11 +550,6 @@
         <value>$LOCALIZE[31367]</value>
     </variable>
 
-    <variable name="Label_Flag_Indicator_TVShows_In_Progress_Banner">
-        <value condition="Skin.HasSetting(markers.inprogress.percentage) + !String.IsEmpty(ListItem.Property(WatchedEpisodePercent))">$INFO[ListItem.Property(WatchedEpisodePercent),,%]</value>
-        <value>$LOCALIZE[31367]</value>
-    </variable>
-
     <variable name="Label_Flag_Indicator_Set_In_Progress">
         <!-- <value condition="Skin.HasSetting(markers.inprogress.percentage) + !String.IsEmpty(ListItem.PercentPlayed)">$INFO[ListItem.PercentPlayed,,%]</value> -->
         <value>$LOCALIZE[31367]</value>
@@ -2732,7 +2727,7 @@
         <value condition="Player.HasVideo + !String.IsEmpty(VideoPlayer.Plot)">$INFO[VideoPlayer.Plot]</value>
         <value condition="Player.HasAudio + !String.IsEmpty(MusicPlayer.Property(Artist_Description))">$INFO[MusicPlayer.Property(Artist_Description)]</value>
         <value condition="Player.HasAudio + !String.IsEmpty(MusicPlayer.Property(Album_Description))">$INFO[MusicPlayer.Property(Album_Description)]</value>
-        <!-- <value>$INFO[VideoPlayer.Plot]</value> -->
+        <value condition="Player.HasAudio + !String.IsEmpty(VideoPlayer.Plot)">$INFO[VideoPlayer.Plot]</value>
     </variable>
 
     <variable name="Label_NowPlaying_Header">
@@ -3276,11 +3271,5 @@
         <value condition="Container.Content(Seasons) + Control.IsVisible(5161)">$INFO[Container(5161).CurrentItem]$INFO[Container(5161).NumItems, / ,]</value>
         <value condition="Container.Content(Seasons) + Control.IsVisible(5261)">$INFO[Container(5261).CurrentItem]$INFO[Container(5261).NumItems, / ,]</value>
         <value>$INFO[Container.CurrentItem]$INFO[Container.NumItems, / ,]</value>
-    </variable>
-
-    <variable name="NetworkVar">
-        <value condition="String.Contains(Network.IPAddress,1)">[COLOR dodgerblue][/COLOR]</value>
-        <value condition="!String.Contains(Network.IPAddress,1)">[COLOR tomato][/COLOR]</value>
-        <value condition="![System.HasAddon(service.coreelec.settings)| System.HasAddon(service.libreelec.settings)]">$INFO[System.InternetState]</value>
     </variable>
 </includes>

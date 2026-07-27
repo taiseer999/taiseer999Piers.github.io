@@ -52,7 +52,7 @@
                                 <include>Def_Art_Full_Background_b24</include>
 
                                 <include content="Def_Art_Image">
-                                    <param name="colordiffuse" value="ArtPlate" />
+                                    <param name="colordiffuse" value="White100" />
                                     <param name="texture" value="$VAR[Image_Poster]" />
                                     <param name="texture_diffuse" value="square_w428_h428_b24" />
                                     <param name="aspectratio" value="scale" />
@@ -84,7 +84,7 @@
                                 <include>Def_Art_Full_Background_b24</include>
 
                                 <include content="Def_Art_Image">
-                                    <param name="colordiffuse" value="ArtPlate" />
+                                    <param name="colordiffuse" value="White100" />
                                     <param name="texture" value="$VAR[Image_Poster]" />
                                     <param name="texture_diffuse" value="square_w428_h428_b24" />
                                     <param name="aspectratio" value="scale" />

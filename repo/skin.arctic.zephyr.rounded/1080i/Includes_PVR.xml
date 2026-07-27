@@ -418,7 +418,7 @@
                             <param name="pad_shadow" value="1" />
                             <param name="pad_border" value="1" />
                             <param name="pad_image" value="10" />
-                            <param name="colordiffuse" value="ArtPlate" />
+                            <param name="colordiffuse" value="White100" />
                         </include>
 
                         <control type="group">
@@ -568,7 +568,7 @@
                             <param name="pad_shadow" value="1" />
                             <param name="pad_border" value="1" />
                             <param name="pad_image" value="10" />
-                            <param name="colordiffuse" value="ArtPlate" />
+                            <param name="colordiffuse" value="White100" />
                         </include>
 
                         <include content="Def_Image_Background_Only_b24">
@@ -758,7 +758,7 @@
                         <param name="pad_shadow" value="1" />
                         <param name="pad_border" value="1" />
                         <param name="pad_image" value="10" />
-                        <param name="colordiffuse" value="ArtPlate" />
+                        <param name="colordiffuse" value="White100" />
                     </include>
 
                     <control type="image">
@@ -817,7 +817,7 @@
                         <param name="pad_shadow" value="1" />
                         <param name="pad_border" value="1" />
                         <param name="pad_image" value="10" />
-                        <param name="colordiffuse" value="ArtPlate" />
+                        <param name="colordiffuse" value="White100" />
                     </include>
 
                     <!-- ITEM FOCUS -->
@@ -892,7 +892,7 @@
                     <param name="pad_shadow" value="1" />
                     <param name="pad_border" value="1" />
                     <param name="pad_image" value="10" />
-                    <param name="colordiffuse" value="ArtPlate" />
+                    <param name="colordiffuse" value="White100" />
                 </include>
 
                 <control type="image">
@@ -1905,7 +1905,7 @@
                 </include>
 
                 <include content="Def_Art_Full_Background_b24">
-                    <param name="colordiffuse" value="ArtPlate" />
+                    <param name="colordiffuse" value="White100" />
                     <param name="visible" value="!Player.HasVideo" />
                 </include>
 

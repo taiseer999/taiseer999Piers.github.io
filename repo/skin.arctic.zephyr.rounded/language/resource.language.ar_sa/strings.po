@@ -2552,3 +2552,7 @@ msgstr "عرض أيقونات النوع في صفحة اليوم"
 msgctxt "#31992"
 msgid "Show studio logo on home"
 msgstr "عرض شعار الاستوديو في  صفحة اليوم"
+
+msgctxt "#31993"
+msgid "Show CoreELEC logo above date"
+msgstr "إظهار شعار CoreELEC فوق التاريخ"

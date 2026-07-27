@@ -6,7 +6,6 @@
 			<icon>special://skin/extras/icons/skinsettings.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindowAndFocus(skinsettings,9108,2)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">1</property>
 			<property name="name">power-skinsettings</property>
 			<property name="menu">powermenu</property>
@@ -19,7 +18,6 @@
 			<icon>special://skin/extras/icons/settings.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(settings)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">2</property>
 			<property name="name">power-settings</property>
 			<property name="menu">powermenu</property>
@@ -57,7 +55,6 @@
 			<icon>special://skin/extras/icons/info.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(systeminfo)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">5</property>
 			<property name="name">power-systeminfo</property>
 			<property name="menu">powermenu</property>
@@ -70,7 +67,6 @@
 			<icon>special://skin/extras/icons/filebox.png</icon>
 			<onclick>Close</onclick>
 			<onclick>ActivateWindow(filemanager)</onclick>
-			<visible>System.Loggedon</visible>
 			<property name="id">6</property>
 			<property name="name">power-filemanager</property>
 			<property name="menu">powermenu</property>
@@ -201,13 +197,13 @@
 			<label>$LOCALIZE[13012]</label>
 			<icon>special://skin/extras/icons/logout.png</icon>
 			<onclick>Close</onclick>
-			<onclick>Quit()</onclick>
+			<onclick>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</onclick>
 			<visible>System.ShowExitButton</visible>
 			<property name="id">16</property>
 			<property name="name">power-quit</property>
 			<property name="menu">powermenu</property>
-			<property name="action">Quit()</property>
-			<property name="path">Quit()</property>
+			<property name="action">PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</property>
+			<property name="path">"plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard"</property>
 			<property name="submenuVisibility">power-quit</property>
 		</item>
 	</include>
