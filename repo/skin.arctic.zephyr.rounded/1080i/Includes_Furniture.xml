@@ -1377,7 +1377,7 @@
 
                     <control type="image" description="CoreELEC logo above date">
                         <visible>!Skin.HasSetting(Header.DisableLogo)</visible>
-                        <left>-12</left>
+                        <right>80</right>
                         <top>-40</top>
                         <width>145</width>
                         <height>45</height>

@@ -103,7 +103,6 @@
             <label>$LOCALIZE[13012]</label>
 		    <action>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</action>
             <icon>special://skin/extras/icons/logout.png</icon>
-            <visible>System.ShowExitButton</visible>
         </item>
     </menu>
 
