@@ -198,7 +198,6 @@
 			<icon>special://skin/extras/icons/logout.png</icon>
 			<onclick>Close</onclick>
 			<onclick>PlayMedia("plugin://plugin.program.abukarimtools/?mode=forceclose&amp;wizard=openwizard")</onclick>
-			<visible>System.ShowExitButton</visible>
 			<property name="id">16</property>
 			<property name="name">power-quit</property>
 			<property name="menu">powermenu</property>
@@ -256,18 +255,6 @@
 			<property name="submenuVisibility">weather</property>
 			<property name="submenuPath">$INCLUDE[skinshortcuts-template-WeatherDailyInfoContent]</property>
 		</item>
-		<item id="8">
-			<label>$LOCALIZE[1036]</label>
-			<icon>special://skin/extras/icons/favourites.png</icon>
-			<onclick>ActivateWindow(favouritesbrowser)</onclick>
-			<property name="id">8</property>
-			<property name="name">favourites</property>
-			<property name="menu">mainmenu</property>
-			<property name="action">ActivateWindow(favouritesbrowser)</property>
-			<property name="path">ActivateWindow(favouritesbrowser)</property>
-			<property name="submenuVisibility">favourites</property>
-			<property name="submenuPath">favourites://</property>
-		</item>
 		<item id="9">
 			<label>$LOCALIZE[10040]</label>
 			<icon>special://skin/extras/icons/addon.png</icon>
@@ -278,7 +265,7 @@
 			<property name="action">ActivateWindow(AddonBrowser)</property>
 			<property name="path">ActivateWindow(AddonBrowser)</property>
 			<property name="submenuVisibility">programs</property>
-			<property name="submenuPath">addons://sources/executable/</property>
+			<property name="submenuPath">addons://sources/video/</property>
 		</item>
 		<item id="10">
 			<label>$LOCALIZE[10004]</label>
@@ -1928,8 +1915,8 @@
 					<param name="backid" value="2601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
+					<param name="movement" value="3" />
+					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2602)" />
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]" />
@@ -1941,7 +1928,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -1960,7 +1947,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -2049,8 +2036,8 @@
 					<param name="backid" value="2601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
+					<param name="movement" value="3" />
+					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2603)" />
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]" />
@@ -2062,7 +2049,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -2081,7 +2068,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -2170,8 +2157,8 @@
 					<param name="backid" value="2601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
+					<param name="movement" value="3" />
+					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2604)" />
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]" />
@@ -2183,7 +2170,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -2202,7 +2189,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -2917,8 +2904,8 @@
 					<param name="backid" value="3601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
+					<param name="movement" value="3" />
+					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(3602)" />
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]" />
@@ -2930,7 +2917,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -2949,7 +2936,7 @@
 					<param name="Thumbnail" value="false" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
+					<param name="ThumbnailSmall" value="true" />
 					<param name="Square" value="false" />
 					<param name="SquareMiddle" value="false" />
 					<param name="SquareSmall" value="false" />
@@ -3536,148 +3523,6 @@
 				</control>
 			</control>
 		</control>
-		<control type="grouplist" id="8400">
-			<include>Animation_Common_Global</include>
-			<include>Animation_NowPlaying_Widget_Fade</include>
-			<include>Animation_Scrolltime_Widgets_Container</include>
-			<itemgap>0</itemgap>
-			<orientation>vertical</orientation>
-			<usecontrolcoords>true</usecontrolcoords>
-			<onup condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(disable.widgets.onup.go.back.to.last.item)">SetFocus(8888)</onup>
-			<onup condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(disable.widgets.onup.go.back.to.main.menu) + Skin.HasSetting(disable.widgets.onup.go.back.to.last.item) + !Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">300</onup>
-			<onup condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(disable.widgets.onup.go.back.to.main.menu) + Skin.HasSetting(disable.widgets.onup.go.back.to.last.item) + Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">SetFocus(4567)</onup>
-			<onup condition="$EXP[Home_Is_Horizontal] + Skin.HasSetting(disable.widgets.onup.go.back.to.main.menu) + Skin.HasSetting(disable.widgets.onup.go.back.to.last.item) + Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">SetFocus(301,0)</onup>
-			<ondown condition="$EXP[Home_Is_Horizontal] + Skin.HasSetting(enable.widgets.ondown.go.back.to.first.item)">SetFocus(8808)</ondown>
-			<ondown condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(enable.widgets.ondown.go.back.to.first.item) + Skin.HasSetting(disable.widgets.ondown.go.back.to.position.0) + !Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">300</ondown>
-			<ondown condition="$EXP[Home_Is_Horizontal] + !Skin.HasSetting(enable.widgets.ondown.go.back.to.first.item) + [!Skin.HasSetting(disable.widgets.ondown.go.back.to.position.0) | Skin.HasSetting(enable_widgets_to_position_0_onback_menu)]">SetFocus(4567)</ondown>
-			<onup condition="$EXP[Home_Is_Vertical] + Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget)">9888</onup>
-			<onup condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget) + !Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">300</onup>
-			<onup condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget) + Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">SetFocus(9567)</onup>
-			<ondown condition="$EXP[Home_Is_Vertical] + Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget)">9808</ondown>
-			<ondown condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget) + !Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">300</ondown>
-			<ondown condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(enable.widgets.onup.go.back.to.last.widget) + Skin.HasSetting(enable_widgets_to_position_0_onback_menu)">SetFocus(9567)</ondown>
-			<control type="fixedlist" id="8601">
-				<include content="Animation_Widget_Direction" condition="!Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites)]" />
-				</include>
-				<include condition="Skin.HasSetting(home.disable.widget.animation)">Animation_Widget_Fade_In_Out</include>
-				<include content="Def_Multi_Widget_Container">
-					<param name="id" value="8601" />
-					<param name="height" value="325" />
-					<param name="idshort" value="860" />
-					<param name="backid" value="8601" />
-					<param name="AutoTime" value="" />
-					<param name="orientation" value="horizontal" />
-					<param name="movement" value="6" />
-					<param name="movement2" value="5" />
-					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
-					<param name="animation_condition" value="!Control.HasFocus(8601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]" />
-				</include>
-				<include content="Def_Normal_Layout_Item" condition="true">
-					<param name="shortcutsclearlogo" value="true" />
-					<param name="aspectratio" value="keep" />
-					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
-					<param name="Fanart" value="false" />
-					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
-					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="true" />
-					<param name="SquareSmall" value="false" />
-				</include>
-				<include content="Def_Weather_Layout_Item" condition="false">
-					<param name="Fanart" value="false" />
-					<param name="Square" value="false" />
-				</include>
-				<include condition="false">Def_System_Layout_Item</include>
-				<include condition="false">Def_System_Layout_Item</include>
-				<include content="Def_Normal_Layout_Item_Focus" condition="true">
-					<param name="shortcutsid" value="8601" />
-					<param name="shortcutsclearlogo" value="true" />
-					<param name="aspectratio" value="keep" />
-					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
-					<param name="Fanart" value="false" />
-					<param name="FanartSmall" value="false" />
-					<param name="ThumbnailSmall" value="false" />
-					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="true" />
-					<param name="SquareSmall" value="false" />
-				</include>
-				<include content="Def_Weather_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="8601" />
-					<param name="Fanart" value="false" />
-					<param name="Square" value="false" />
-				</include>
-				<include content="Def_System_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="8601" />
-				</include>
-				<include content="Def_System_Layout_Item_Focus" condition="false">
-					<param name="shortcutsid" value="8601" />
-				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="favourites" sortby="" sortorder="" browse="never">favourites://</content>
-				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
-					<param name="id" value="8601" />
-					<param name="target" value="favourites" />
-					<param name="content" value="favourites://" />
-				</include>
-			</control>
-			<control type="group" id="8501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]</visible>
-				<control type="group" id="8401">
-					<include content="Widget_Navigation_Arrows">
-						<param name="id" value="8601" />
-						<param name="focusid" value="8601" />
-						<param name="idshort" value="8601" />
-						<param name="animation_condition" value="!Control.HasFocus(8601)" />
-						<param name="submenuVisibility" value="favourites" />
-					</include>
-				</control>
-			</control>
-			<control type="group" id="8701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]</visible>
-				<visible>Skin.HasSetting(home.style.flix)</visible>
-				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
-					<param name="condition" value="!Control.HasFocus(8601)" />
-				</include>
-				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites)]" />
-				</include>
-				<control type="group">
-					<include content="Home_Flix_Widgets_Item_Info" condition="true">
-						<param name="id" value="8601" />
-						<param name="labelisvisible" value="true" />
-						<param name="submenuVisibility" value="favourites" />
-					</include>
-				</control>
-				<control type="grouplist">
-					<include condition="false">Home_Flix_Widgets_Weather_Info</include>
-				</control>
-				<control type="grouplist">
-					<include content="Home_Flix_Widgets_System_Info" condition="false | false">
-						<param name="issettingslayout" value="false" />
-						<param name="id" value="8601" />
-					</include>
-				</control>
-			</control>
-			<control type="group" id="8901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]</visible>
-				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),favourites)]" />
-				</include>
-				<control type="grouplist" id="8801">
-					<include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
-						<param name="focusid" value="8601" />
-						<param name="idshort" value="8601" />
-						<param name="animation_condition" value="!Control.HasFocus(8601)" />
-						<param name="submenuVisibility" value="favourites" />
-						<param name="widget_label" value="$LOCALIZE[1036]" />
-						<param name="busy_visible" value="Integer.IsEqual(Container(8601).NumItems,0) | Container(8601).IsUpdating" />
-					</include>
-				</control>
-			</control>
-		</control>
 		<control type="grouplist" id="9400">
 			<include>Animation_Common_Global</include>
 			<include>Animation_NowPlaying_Widget_Fade</include>
@@ -3758,11 +3603,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="9601" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="programs" sortby="" sortorder="" browse="never">addons://sources/executable/</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">addons://sources/video/</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="9601" />
-					<param name="target" value="programs" />
-					<param name="content" value="addons://sources/executable/" />
+					<param name="target" value="videos" />
+					<param name="content" value="addons://sources/video/" />
 				</include>
 			</control>
 			<control type="group" id="9501">
@@ -3814,7 +3659,7 @@
 						<param name="idshort" value="9601" />
 						<param name="animation_condition" value="!Control.HasFocus(9601)" />
 						<param name="submenuVisibility" value="programs" />
-						<param name="widget_label" value="$LOCALIZE[1043]" />
+						<param name="widget_label" value="$LOCALIZE[1037]" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(9601).NumItems,0) | Container(9601).IsUpdating" />
 					</include>
 				</control>
@@ -3879,11 +3724,11 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="9602" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">addons://sources/video/</content>
+				<content limit="$VAR[Value_Widget_Limit]" target="programs" sortby="" sortorder="" browse="never">addons://sources/executable/</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="9602" />
-					<param name="target" value="videos" />
-					<param name="content" value="addons://sources/video/" />
+					<param name="target" value="programs" />
+					<param name="content" value="addons://sources/executable/" />
 				</include>
 			</control>
 			<control type="group" id="9502">
@@ -3935,7 +3780,7 @@
 						<param name="idshort" value="9602" />
 						<param name="animation_condition" value="!Control.HasFocus(9602)" />
 						<param name="submenuVisibility" value="programs" />
-						<param name="widget_label" value="$LOCALIZE[1037]" />
+						<param name="widget_label" value="$LOCALIZE[1043]" />
 						<param name="busy_visible" value="Integer.IsEqual(Container(9602).NumItems,0) | Container(9602).IsUpdating" />
 					</include>
 				</control>

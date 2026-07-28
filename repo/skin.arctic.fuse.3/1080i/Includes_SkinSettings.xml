@@ -363,6 +363,18 @@
             <onclick>Skin.ToggleSetting(Furniture.Network_RAM)</onclick>
             <selected>Skin.HasSetting(Furniture.Network_RAM)</selected>
         </include>
+        <include content="Settings_Button" description="Colored System Stats Icons">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">012</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>Colored system stats icons (RAM / CPU / connection)</label>
+            <onclick>Skin.ToggleSetting(sysstats.icons.mono)</onclick>
+            <selected>!Skin.HasSetting(sysstats.icons.mono)</selected>
+            <enable>Skin.HasSetting(Furniture.Network_RAM)</enable>
+        </include>
         <include content="Settings_Button" description="CoreELEC Logo">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>

@@ -85,7 +85,7 @@
                     <height>30</height>
                     <top>25</top>
                     <aspectratio>keep</aspectratio>
-                    <texture>special://skin/extras/icons/cpu.png</texture>
+                    <texture>$VAR[SysStats_CPU_Icon]</texture>
                 </control>
                 <control type="label">
                     <font>font_Topbarinfo</font>
@@ -101,7 +101,7 @@
                     <top>28</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
-                    <texture>special://skin/extras/icons/ram.png</texture>
+                    <texture>$VAR[SysStats_RAM_Icon]</texture>
                 </control>
                 <control type="label">
                     <font>font_Topbarinfo</font>
@@ -117,7 +117,7 @@
                     <top>20</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
-                    <texture>special://skin/extras/icons/connected.png</texture>
+                    <texture>$VAR[SysStats_Connected_Icon]</texture>
                     <visible>String.Contains(Network.IPAddress,1)</visible>
                 </control>
                 <control type="image">
@@ -126,7 +126,7 @@
                     <top>20</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
-                    <texture>special://skin/extras/icons/disconnected.png</texture>
+                    <texture>$VAR[SysStats_Disconnected_Icon]</texture>
                     <visible>!String.Contains(Network.IPAddress,1)</visible>
                 </control>
             </control>

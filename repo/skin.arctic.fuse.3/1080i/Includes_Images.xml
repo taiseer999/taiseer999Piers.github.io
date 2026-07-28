@@ -813,4 +813,22 @@
         <value condition="!String.IsEmpty(Player.Art(clearlogo))">$INFO[Player.Art(clearlogo)]</value>
     </variable>
 
+    <!-- HOME - SYSTEM STATS ICONS - COLORED / MONOCHROME TOGGLE -->
+
+    <variable name="SysStats_CPU_Icon">
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/sysinfo.png</value>
+        <value>special://skin/extras/icons/cpu.png</value>
+    </variable>
+    <variable name="SysStats_RAM_Icon">
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/raminfo.png</value>
+        <value>special://skin/extras/icons/ram.png</value>
+    </variable>
+    <variable name="SysStats_Connected_Icon">
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfo.png</value>
+        <value>special://skin/extras/icons/connected.png</value>
+    </variable>
+    <variable name="SysStats_Disconnected_Icon">
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfono.png</value>
+        <value>special://skin/extras/icons/disconnected.png</value>
+    </variable>
 </includes>

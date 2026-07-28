@@ -387,6 +387,19 @@
                     <enable>Skin.HasSetting(show.furniture.clock.date.weather)</enable>
                 </control>
 
+                <!-- SYSTEM STATS ICONS - COLORED / MONOCHROME -->
+
+                <control type="radiobutton" id="9270" description="Colored System Stats Icons">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(2)</visible>
+                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <label>$LOCALIZE[31994]</label>
+                    <selected>!Skin.HasSetting(sysstats.icons.mono)</selected>
+                    <onclick>Skin.ToggleSetting(sysstats.icons.mono)</onclick>
+                    <enable>Skin.HasSetting(show.furniture.clock.date.weather)</enable>
+                </control>
+
                 <!-- CLEARLOGO INSTEAD OF TITLE - HOME NOT FLIX ONLY -->
 
                 <control type="radiobutton" id="98151" description="Clearlogo">

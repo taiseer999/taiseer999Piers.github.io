@@ -2556,3 +2556,7 @@ msgstr ""
 msgctxt "#31993"
 msgid "Show CoreELEC logo above date"
 msgstr ""
+
+msgctxt "#31994"
+msgid "Colored system stats icons (RAM / CPU / connection)"
+msgstr ""
