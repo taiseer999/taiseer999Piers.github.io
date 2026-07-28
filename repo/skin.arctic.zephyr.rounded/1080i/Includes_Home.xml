@@ -607,10 +607,13 @@
 
                         <control type="label">
                             <left>30</left>
+                            <right>30</right>
                             <align>left</align>
                             <aligny>center</aligny>
                             <height>100%</height>
                             <textcolor>$VAR[Color_Focus]</textcolor>
+                            <scroll>true</scroll>
+                            <scrollspeed>60</scrollspeed>
                             <font>Home</font>
                             <label>$VAR[Label_Home_Main_Menu]</label>
                             <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>

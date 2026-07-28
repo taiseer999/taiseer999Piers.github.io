@@ -26,11 +26,11 @@
 
             <!-- RESET / STOP ON UNFOCUS -->
 
-            <onunfocus condition="!Skin.HasSetting(enable.trailer.playing.on.unfocus)">ClearProperty(Current_Trailer_Path,Home)</onunfocus>
+            <onunfocus condition="$EXP[Trailer_Is_Playing] + !Skin.HasSetting(enable.trailer.playing.on.unfocus)">ClearProperty(Current_Trailer_Path,Home)</onunfocus>
 
-            <onunfocus condition="!$EXP[Context_Menu_Trailer_Is_Launched] + ![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo] + !Skin.HasSetting(enable.trailer.playing.on.unfocus) + String.IsEmpty(Window(Home).Property(Trailer_Is_Fullscreen_Playing))">ClearProperty(Trailer_Fade_Background,Home)</onunfocus>
+            <onunfocus condition="$EXP[Trailer_Is_Playing] + !$EXP[Context_Menu_Trailer_Is_Launched] + ![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo] + !Skin.HasSetting(enable.trailer.playing.on.unfocus) + String.IsEmpty(Window(Home).Property(Trailer_Is_Fullscreen_Playing))">ClearProperty(Trailer_Fade_Background,Home)</onunfocus>
 
-            <onunfocus condition="!$EXP[Context_Menu_Trailer_Is_Launched] + ![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo] + !Skin.HasSetting(enable.trailer.playing.on.unfocus) + String.IsEmpty(Window(Home).Property(Trailer_Is_Fullscreen_Playing)) + !Player.HasAudio">Stop</onunfocus>
+            <onunfocus condition="$EXP[Trailer_Is_Playing] + !$EXP[Context_Menu_Trailer_Is_Launched] + ![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo] + !Skin.HasSetting(enable.trailer.playing.on.unfocus) + String.IsEmpty(Window(Home).Property(Trailer_Is_Fullscreen_Playing)) + !Player.HasAudio">Stop</onunfocus>
 
             <!-- RESET FULLSCREEN PROPERTY -->
 
@@ -1642,18 +1642,18 @@
     <include name="Def_Home_Label_Widget_Sub_Title_Mpaa">
         <control type="image" description="MPAA badge from TMDbHelper prop">
             <left>16</left>
-            <top>10</top>
+            <top>0</top>
             <width min="0" max="76">auto</width>
-            <height>36</height>
+            <height>46</height>
             <aspectratio align="center" aligny="center">keep</aspectratio>
             <texture>flags/mpaa/color/$VAR[flag_mpaa_homeprop]</texture>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Mpaa))</visible>
         </control>
         <control type="image" description="MPAA badge from ListItem">
             <left>16</left>
-            <top>10</top>
+            <top>0</top>
             <width min="0" max="76">auto</width>
-            <height>36</height>
+            <height>46</height>
             <aspectratio align="center" aligny="center">keep</aspectratio>
             <texture>flags/mpaa/color/$VAR[flag_mpaa]</texture>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Mpaa)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Mpaa)</visible>
