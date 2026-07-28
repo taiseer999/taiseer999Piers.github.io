@@ -816,19 +816,19 @@
     <!-- HOME - SYSTEM STATS ICONS - COLORED / MONOCHROME TOGGLE -->
 
     <variable name="SysStats_CPU_Icon">
-        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/sysinfo.png</value>
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/sysinfo1.png</value>
         <value>special://skin/extras/icons/cpu.png</value>
     </variable>
     <variable name="SysStats_RAM_Icon">
-        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/raminfo.png</value>
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/raminfo1.png</value>
         <value>special://skin/extras/icons/ram.png</value>
     </variable>
     <variable name="SysStats_Connected_Icon">
-        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfo.png</value>
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfo1.png</value>
         <value>special://skin/extras/icons/connected.png</value>
     </variable>
     <variable name="SysStats_Disconnected_Icon">
-        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfono.png</value>
+        <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfono1.png</value>
         <value>special://skin/extras/icons/disconnected.png</value>
     </variable>
 </includes>
