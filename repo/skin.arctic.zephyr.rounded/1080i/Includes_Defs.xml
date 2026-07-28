@@ -1477,7 +1477,7 @@
             <control type="image" description="Studio logo after genre icons">
                 <top>12</top>
                 <width min="0" max="119">auto</width>
-                <height>52</height>
+                <height>60</height>
                 <aspectratio align="left" aligny="center">keep</aspectratio>
                 <visible>!Skin.HasSetting(hide.home.studio.logo)</visible>
                 <texture>$VAR[Image_Dialog_Info_Video_Studio]</texture>
