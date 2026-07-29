@@ -2095,7 +2095,7 @@
                 <textcolor>Dark2</textcolor>
                 <align>right</align>
                 <width>180</width>
-                <height>55</height>
+                <height>47</height>
                 <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>
             </control>
         </control>
