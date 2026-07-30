@@ -33,7 +33,6 @@
             </control>
         </definition>
     </include>
-
     <variable name="Furniture_Header_Right_Temperature">
         <value condition="!Skin.HasSetting(Header.DisableWeather)"> $INFO[Weather.Temperature]</value>
     </variable>
