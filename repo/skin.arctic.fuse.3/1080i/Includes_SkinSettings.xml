@@ -375,18 +375,6 @@
             <selected>!Skin.HasSetting(sysstats.icons.mono)</selected>
             <enable>Skin.HasSetting(Furniture.Network_RAM)</enable>
         </include>
-        <include content="Settings_Button" description="CoreELEC Logo">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">011</param>
-            <param name="dialog">false</param>
-            <param name="control">radiobutton</param>
-            <label>Show CoreELEC logo above date</label>
-            <onclick>Skin.ToggleSetting(Header.DisableLogo)</onclick>
-            <selected>!Skin.HasSetting(Header.DisableLogo)</selected>
-        </include>
-       
 
         <include content="Settings_Label" description="Context">
             <param name="window">skinsettings</param>
