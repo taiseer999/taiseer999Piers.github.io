@@ -1,7 +1,7 @@
 """Menu helper utilities with automatic navigation and task cancellation support."""
 from __future__ import annotations
 
-from typing import Sequence, Tuple, Optional, Any
+from typing import Sequence, Tuple, Optional, Any, Callable
 import time
 import xbmc
 import xbmcgui
@@ -49,7 +49,8 @@ class Menu:
             options: list[tuple[str, Optional[str]]] = [
                 (item.label, str(idx)) for idx, item in enumerate(self.items)
             ]
-            options.append(("Cancel", '__cancel__'))
+            if not self.is_main_menu:
+                options.append((xbmc.getLocalizedString(222), '__cancel__'))
 
             choice_str, cancelled = show_menu_with_cancel(self.title, options,
                                                           preselect=selected_idx)
@@ -103,6 +104,22 @@ class Menu:
                 return item.action
 
         return None
+
+
+def run_with_mode_choice(operation_name: str, run: Callable[[bool], None]) -> Any:
+    """Foreground/background picker, then claim the task slot and run in the chosen mode.
+
+    `run` gets the chosen use_background bool and owns its own dialog and work; it must
+    not claim the slot itself.
+    """
+    def _start(use_background: bool) -> None:
+        if task_manager.acquire_task_slot(operation_name, use_background):
+            run(use_background)
+
+    return Menu(ADDON.getLocalizedString(32410), [
+        MenuItem(ADDON.getLocalizedString(32411), lambda: _start(False)),
+        MenuItem(ADDON.getLocalizedString(32412), lambda: _start(True)),
+    ]).show()
 
 
 def show_menu_with_cancel(title: str, options: Sequence[Tuple[str, Optional[str]]],

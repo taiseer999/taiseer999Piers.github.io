@@ -346,7 +346,7 @@
         <value>Action(info)</value>
     </variable>
 
-   <variable name="Action_RatingsMonitor">
+  <variable name="Action_RatingsMonitor">
         <value condition="Skin.String(CustomRating.Movies.Item01,TMDb)">Skin.Reset(TMDbHelper.DisableRatings)</value>
         <value condition="Skin.String(CustomRating.Movies.Item01,Trakt)">Skin.Reset(TMDbHelper.DisableRatings)</value>
         <value condition="Skin.String(CustomRating.Movies.Item01,IMDb)">Skin.Reset(TMDbHelper.DisableRatings)</value>

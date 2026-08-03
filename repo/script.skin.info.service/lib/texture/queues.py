@@ -7,9 +7,11 @@ from typing import Optional, List, Dict, Set, Any, Callable
 import xbmc
 import xbmcvfs
 
-from lib.kodi.client import request, log, extract_result, encode_image_url
-from lib.infrastructure.workers import WorkerQueue
-from lib.infrastructure.paths import PathBuilder
+from lib.kodi.client import (
+    request, log, extract_result, encode_image_url, is_inherited_art, ADDON
+)
+from lib.infrastructure.workers import WorkerQueue, VFS_WORKER_COUNT
+from lib.infrastructure.paths import PathBuilder, use_basename_for
 from lib.download.artwork import DownloadArtwork
 
 
@@ -42,9 +44,10 @@ class TextureCache(WorkerQueue):
         task_context=None
     ):
         super().__init__(
-            num_workers=num_workers,
+            num_workers=num_workers or VFS_WORKER_COUNT,
             abort_flag=abort_flag,
-            task_context=task_context
+            task_context=task_context,
+            result_retention='failed'
         )
 
         self.on_complete = on_complete
@@ -117,14 +120,16 @@ class TextureCacheDownload(WorkerQueue):
         task_context=None
     ):
         super().__init__(
-            num_workers=num_workers,
+            num_workers=num_workers or VFS_WORKER_COUNT,
             abort_flag=abort_flag,
-            task_context=task_context
+            task_context=task_context,
+            result_retention='none'
         )
 
         self.existing_file_mode = existing_file_mode
         self.artworks: Dict[int, DownloadArtwork] = {}
         self.path_builder = PathBuilder()
+        self.savewith_basefilename = ADDON.getSettingBool('download.savewith_basefilename')
 
         self._stats_lock = threading.Lock()
         self.stats_cached = 0
@@ -133,6 +138,7 @@ class TextureCacheDownload(WorkerQueue):
         self.stats_download_skipped = 0
         self.stats_download_failed = 0
         self.stats_bytes = 0
+        self.stats_activity = 0
 
         log("Cache", f"TextureCacheDownload initialized with {self.num_workers} workers")
 
@@ -144,11 +150,19 @@ class TextureCacheDownload(WorkerQueue):
         artwork_type: str,
         title: str,
         season: Optional[int] = None,
-        episode: Optional[int] = None
+        episode: Optional[int] = None,
+        mbid: Optional[str] = None
     ) -> bool:
         """Queue an item for caching + downloading. Returns False if already processing."""
-        item = (url, media_type, media_file, artwork_type, title, season, episode)
+        item = (url, media_type, media_file, artwork_type, title, season, episode, mbid)
         return self.add_item(item, dedupe_key=url)
+
+    def stop(self, wait: bool = True) -> None:
+        """Stop workers, then release each worker's pooled connections."""
+        super().stop(wait=wait)
+        for downloader in list(self.artworks.values()):
+            downloader.close()
+        self.artworks.clear()
 
     def get_stats(self) -> Dict:
         base_stats = super().get_stats()
@@ -159,12 +173,18 @@ class TextureCacheDownload(WorkerQueue):
                 'downloaded': self.stats_downloaded,
                 'download_skipped': self.stats_download_skipped,
                 'download_failed': self.stats_download_failed,
-                'bytes_downloaded': self.stats_bytes
+                'bytes_downloaded': self.stats_bytes,
+                'activity': self.stats_activity
             })
         return base_stats
 
+    def _on_progress(self, _chunk_bytes: int) -> None:
+        """Per-chunk heartbeat so the coordinator can tell a slow download from a stalled one."""
+        with self._stats_lock:
+            self.stats_activity += 1
+
     def _process_item(self, item: Any, worker_id: int) -> Dict:
-        url, media_type, media_file, artwork_type, title, season, _episode = item
+        url, media_type, media_file, artwork_type, title, season, _episode, mbid = item
 
         download_success = False
         download_error = None
@@ -183,14 +203,29 @@ class TextureCacheDownload(WorkerQueue):
                     f"{cache_error}",
                     xbmc.LOGWARNING)
 
-        if url.startswith('http'):
+        if url.startswith('http') and not is_inherited_art(media_type, artwork_type):
+            use_basename = use_basename_for(media_type, self.savewith_basefilename)
             local_path = self.path_builder.build_path(
                 media_type=media_type,
                 media_file=media_file,
                 artwork_type=artwork_type,
                 season_number=season,
-                use_basename=True
+                use_basename=use_basename,
+                mbid=mbid
             )
+
+            # Art saved under the opposite naming convention still counts as present,
+            # otherwise flipping the setting re-downloads the library beside the old files.
+            alternate_path = None
+            if media_type in ('movie', 'musicvideo'):
+                alternate_path = self.path_builder.build_path(
+                    media_type=media_type,
+                    media_file=media_file,
+                    artwork_type=artwork_type,
+                    season_number=season,
+                    use_basename=not use_basename,
+                    mbid=mbid
+                )
 
             if local_path:
                 if worker_id not in self.artworks:
@@ -204,7 +239,9 @@ class TextureCacheDownload(WorkerQueue):
                     url=url,
                     local_path=local_path,
                     existing_file_mode=self.existing_file_mode,
+                    alternate_path=alternate_path,
                     abort_flag=self.abort_flag,
+                    progress_callback=self._on_progress,
                 )
 
                 with self._stats_lock:
@@ -215,12 +252,15 @@ class TextureCacheDownload(WorkerQueue):
                         self.stats_download_skipped += 1
                     elif error_category != DownloadArtwork.ERROR_ABORTED:
                         self.stats_download_failed += 1
-            else:
+            elif media_file:
                 log("Artwork",
                     f"Could not build download path for {media_type} '{title}' {artwork_type}"
                 )
                 with self._stats_lock:
                     self.stats_download_failed += 1
+            else:
+                with self._stats_lock:
+                    self.stats_download_skipped += 1
 
         return {
             'url': url,

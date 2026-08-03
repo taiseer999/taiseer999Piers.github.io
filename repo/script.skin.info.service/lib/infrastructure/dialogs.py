@@ -5,6 +5,20 @@ from typing import Optional, Union
 import xbmc
 import xbmcgui
 
+_MONITOR = xbmc.Monitor()
+
+
+class DialogProgress(xbmcgui.DialogProgress):
+    """`xbmcgui.DialogProgress` that also reports Kodi shutdown as cancelled.
+
+    Kodi's own `iscanceled()` tracks only the cancel button, so a loop polling it runs on
+    through a shutdown and holds Kodi open until its work finishes.
+    """
+
+    def iscanceled(self) -> bool:
+        """True if the user cancelled or Kodi is shutting down."""
+        return _MONITOR.abortRequested() or super().iscanceled()
+
 
 class ProgressDialog:
     """Context-managed progress dialog that picks `DialogProgress` or `DialogProgressBG` and
@@ -32,7 +46,7 @@ class ProgressDialog:
             self.dialog = xbmcgui.DialogProgressBG()
             self.dialog.create(self.heading, message)
         else:
-            self.dialog = xbmcgui.DialogProgress()
+            self.dialog = DialogProgress()
             self.dialog.create(self.heading, message)
 
         self.last_percent = -1
@@ -98,6 +112,34 @@ class ProgressDialog:
         return False
 
 
+class BackgroundNotice:
+    """Background progress bar shown on demand, for slow work that only sometimes runs.
+
+    Pass `start` as an on-demand callback so the bar appears only when the work fires
+    (e.g. a dataset download that's skipped when the cache is current).
+    """
+
+    def __init__(self, heading: str, message: str):
+        self.heading = heading
+        self.message = message
+        self._dialog: Optional[xbmcgui.DialogProgressBG] = None
+
+    def start(self) -> None:
+        """Show the bar if not already shown."""
+        if self._dialog is None:
+            self._dialog = xbmcgui.DialogProgressBG()
+            self._dialog.create(self.heading, self.message)
+
+    def close(self) -> None:
+        """Close the bar if it was shown."""
+        if self._dialog is not None:
+            try:
+                self._dialog.close()
+            except Exception:
+                pass
+            self._dialog = None
+
+
 def show_notification(
     heading: str,
     message: str,
@@ -140,9 +182,9 @@ def show_yesnocustom(heading: str, message: str, customlabel: str,
     )
 
 
-def show_textviewer(heading: str, text: str) -> None:
-    """Show text viewer dialog."""
-    xbmcgui.Dialog().textviewer(heading, text)
+def show_textviewer(heading: str, text: str, use_mono: bool = False) -> None:
+    """Show text viewer dialog. `use_mono` for reports whose columns or rules need to line up."""
+    xbmcgui.Dialog().textviewer(heading, text, usemono=use_mono)
 
 
 def show_select(

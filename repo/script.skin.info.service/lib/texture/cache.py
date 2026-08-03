@@ -10,6 +10,13 @@ import xbmcgui
 from lib.kodi.client import get_library_items, log, ADDON, decode_image_url, LibraryScanAborted
 from lib.kodi.settings import KodiSettings
 from lib.infrastructure.dialogs import ProgressDialog
+from lib.infrastructure.paths import (
+    PathBuilder,
+    get_album_folders,
+    get_tvshow_paths,
+    resolve_media_file,
+)
+from lib.infrastructure.workers import STALL_TIMEOUT_SECONDS
 from lib.texture.utilities import should_precache_url, is_library_artwork_url
 from lib.texture.queues import TextureCache, TextureCacheDownload
 from lib.texture.library import (
@@ -191,7 +198,7 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
                                   task_context=None) -> Dict[str, Any]:
     """Pre-cache + download artwork in one pass via `TextureCacheDownload`.
 
-    Returns stats: `total_items, cached, downloaded, skipped, failed, cancelled`.
+    Returns stats: `total_items, cached, downloaded, skipped, failed, cancelled, stalled`.
     """
     stats = {
         'total_items': 0,
@@ -202,7 +209,8 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
         'download_skipped': 0,
         'download_failed': 0,
         'bytes_downloaded': 0,
-        'cancelled': False
+        'cancelled': False,
+        'stalled': False
     }
 
     if media_types is None:
@@ -220,6 +228,8 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
 
         items: List[Dict[str, Any]] = []
         try:
+            tvshow_paths = get_tvshow_paths() if 'season' in media_types else {}
+
             for media_type in media_types:
                 properties = _PRECACHE_PROPERTIES.get(media_type, ['art', 'title'])
                 type_items = get_library_items(
@@ -231,9 +241,16 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
                 for item in type_items:
                     if 'title' not in item:
                         item['title'] = "Unknown"
-                    if 'file' not in item:
-                        item['file'] = ""
                 items.extend(type_items)
+
+            album_ids = [item['dbid'] for item in items
+                         if item.get('media_type') == 'album' and item.get('dbid')]
+            album_folders = get_album_folders(album_ids)
+
+            for item in items:
+                item['file'] = resolve_media_file(
+                    item, album_folders=album_folders, tvshow_paths=tvshow_paths
+                )
 
         except Exception as e:
             log("Texture",
@@ -257,6 +274,8 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
         )
         existing_file_mode = ['skip', 'overwrite', 'use_existing'][existing_file_mode_int]
 
+        PathBuilder.prepare_named_item_folders(media_types)
+
         queue = TextureCacheDownload(
             existing_file_mode=existing_file_mode,
             abort_flag=task_context.abort_flag if task_context else None,
@@ -268,8 +287,14 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
             queued = 0
             for item in items:
                 for art_type, url in item['art'].items():
-                    if not url:
+                    if not url or not should_precache_url(url):
                         continue
+
+                    mbid = None
+                    if item['media_type'] == 'artist':
+                        mbid = item.get('musicbrainzartistid', '')
+                        if isinstance(mbid, list):
+                            mbid = mbid[0] if mbid else ''
 
                     queue.add_cache_and_download(
                         url=url,
@@ -278,7 +303,8 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
                         artwork_type=art_type,
                         title=item['title'],
                         season=item.get('season'),
-                        episode=item.get('episode')
+                        episode=item.get('episode'),
+                        mbid=mbid
                     )
                     queued += 1
 
@@ -287,6 +313,9 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
 
             last_update_time = time.time()
             last_percent = -1
+            last_completed = -1
+            last_activity = -1
+            last_progress_time = time.time()
 
             while not queue.queue.empty() or queue.processing_set:
                 if (
@@ -297,13 +326,27 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
                     stats['cancelled'] = True
                     break
 
+                current_time = time.time()
+                queue_stats = queue.get_stats()
+                completed = queue_stats['completed']
+                total = queue_stats['total_queued']
+                activity = queue_stats['activity']
+
+                if completed > last_completed or activity > last_activity:
+                    last_completed = completed
+                    last_activity = activity
+                    last_progress_time = current_time
+                elif current_time - last_progress_time > STALL_TIMEOUT_SECONDS:
+                    stats['stalled'] = True
+                    log("Artwork",
+                        f"Pre-cache+download stalled - no progress for "
+                        f"{STALL_TIMEOUT_SECONDS}s at {completed}/{total}, forcing exit",
+                        xbmc.LOGWARNING)
+                    break
+
                 if progress_dialog:
-                    queue_stats = queue.get_stats()
-                    completed = queue_stats['completed']
-                    total = queue_stats['total_queued']
                     percent = 25 + int((completed / total) * 75) if total > 0 else 100
 
-                    current_time = time.time()
                     time_since_update = current_time - last_update_time
                     percent_changed = abs(percent - last_percent) >= 1
 
@@ -337,7 +380,10 @@ def precache_and_download_artwork(media_types: Optional[List[str]] = None,
             stats['download_failed'] = queue_stats['download_failed']
             stats['bytes_downloaded'] = queue_stats['bytes_downloaded']
 
-            status = "cancelled" if stats['cancelled'] else "complete"
+            if stats['stalled']:
+                status = "stalled"
+            else:
+                status = "cancelled" if stats['cancelled'] else "complete"
             log("Artwork",
                 f"Pre-cache+download {status}: {stats['cached']} cached, "
                 f"{stats['downloaded']} downloaded"

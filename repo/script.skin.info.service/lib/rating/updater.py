@@ -12,7 +12,7 @@ from lib.kodi.client import request, get_library_items, log, ADDON
 from lib.data.api.imdb import get_imdb_dataset
 from lib.data.api import tracker as usage_tracker
 from lib.data.database import workflow as db
-from lib.infrastructure.dialogs import show_ok, show_notification
+from lib.infrastructure.dialogs import show_ok, show_notification, ProgressDialog, DialogProgress
 from lib.rating.executor import RetryPoolEntry
 from lib.rating.ids import (
     clear_tvshow_uniqueid_cache,
@@ -44,11 +44,23 @@ def update_tvshow_episodes(tvshow_dbid: int, sources: List) -> int:
 
     log("Ratings", f"Updating ratings for {len(episodes)} episodes", xbmc.LOGINFO)
 
+    abort_flag = task_manager.ShutdownAbortFlag()
     updated_count = 0
-    for episode in episodes:
-        success, _ = update_single_item(episode, "episode", sources, force_refresh=False)
-        if success:
-            updated_count += 1
+    total = len(episodes)
+    progress = ProgressDialog(heading=ADDON.getLocalizedString(32300))
+    progress.create(ADDON.getLocalizedString(32402))
+    try:
+        for idx, episode in enumerate(episodes):
+            if progress.is_cancelled():
+                abort_flag.request()
+                break
+            progress.update(int(idx / total * 100),
+                            episode.get("label") or episode.get("title", ""))
+            success, _ = update_single_item(episode, "episode", sources, abort_flag)
+            if success:
+                updated_count += 1
+    finally:
+        progress.close()
 
     return updated_count
 
@@ -75,7 +87,7 @@ def update_library_ratings(
         progress = xbmcgui.DialogProgressBG()
         progress.create(heading, ADDON.getLocalizedString(32303).format(media_type))
     else:
-        progress = xbmcgui.DialogProgress()
+        progress = DialogProgress()
         progress.create(heading, ADDON.getLocalizedString(32303).format(media_type))
 
     items = get_library_items([media_type], properties=properties)
@@ -110,11 +122,13 @@ def update_library_ratings(
     if source_mode == "imdb":
         dataset = get_imdb_dataset()
         if not dataset.is_dataset_available():
-            if isinstance(progress, xbmcgui.DialogProgressBG):
-                progress.update(0, heading, ADDON.getLocalizedString(32305))
-            elif isinstance(progress, xbmcgui.DialogProgress):
-                progress.update(0, ADDON.getLocalizedString(32305))
-            dataset.force_download()
+            def _show_downloading() -> None:
+                """Surface the dataset-download message on the active progress dialog."""
+                if isinstance(progress, xbmcgui.DialogProgressBG):
+                    progress.update(0, heading, ADDON.getLocalizedString(32305))
+                elif isinstance(progress, xbmcgui.DialogProgress):
+                    progress.update(0, ADDON.getLocalizedString(32305))
+            dataset.force_download(on_download_start=_show_downloading)
 
         stats = dataset.get_stats()
         dataset_date = str(stats.get("last_modified") or "")
