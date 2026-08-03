@@ -859,7 +859,7 @@
 
     </include>
 
-  <include name="DialogCustom_Ratings_Items">
+    <include name="DialogCustom_Ratings_Items">
         <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item01) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),Movies)">
             <param name="item">Item01</param>
             <param name="content">Movies</param>
@@ -872,18 +872,6 @@
             <param name="item">Item03</param>
             <param name="content">Movies</param>
         </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item04) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),Movies)">
-            <param name="item">Item04</param>
-            <param name="content">Movies</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item05) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),Movies)">
-            <param name="item">Item05</param>
-            <param name="content">Movies</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item06) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),Movies)">
-            <param name="item">Item06</param>
-            <param name="content">Movies</param>
-        </include>
         <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item01) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
             <param name="item">Item01</param>
             <param name="content">TVShows</param>
@@ -894,34 +882,6 @@
         </include>
         <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item03) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
             <param name="item">Item03</param>
-            <param name="content">TVShows</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item04) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
-            <param name="item">Item04</param>
-            <param name="content">TVShows</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item05) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
-            <param name="item">Item05</param>
-            <param name="content">TVShows</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item06) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
-            <param name="item">Item06</param>
-            <param name="content">TVShows</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item07) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),Movies)">
-            <param name="item">Item07</param>
-            <param name="content">Movies</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item08) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),Movies)">
-            <param name="item">Item08</param>
-            <param name="content">Movies</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item07) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
-            <param name="item">Item07</param>
-            <param name="content">TVShows</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Type" condition="String.IsEqual(Window(Home).Property(ConfigureRatingItem),Item08) + String.IsEqual(Window(Home).Property(ConfigureRatingContent),TVShows)">
-            <param name="item">Item08</param>
             <param name="content">TVShows</param>
         </include>
     </include>
@@ -991,30 +951,6 @@
             <param name="item">$PARAM[item]</param>
             <param name="content">$PARAM[content]</param>
         </include>
-        <include content="DialogCustom_Ratings_Items_Template">
-            <param name="id">8010</param>
-            <param name="groupid">8110</param>
-            <param name="label">Awards (Oscars)</param>
-            <param name="type">Awards</param>
-            <param name="item">$PARAM[item]</param>
-            <param name="content">$PARAM[content]</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Template">
-            <param name="id">8011</param>
-            <param name="groupid">8111</param>
-            <param name="label">Golden Globe</param>
-            <param name="type">GoldenGlobe</param>
-            <param name="item">$PARAM[item]</param>
-            <param name="content">$PARAM[content]</param>
-        </include>
-        <include content="DialogCustom_Ratings_Items_Template">
-            <param name="id">8012</param>
-            <param name="groupid">8112</param>
-            <param name="label">Emmy</param>
-            <param name="type">Emmy</param>
-            <param name="item">$PARAM[item]</param>
-            <param name="content">$PARAM[content]</param>
-        </include>
         <include content="Button_Dialog_Setting">
             <param name="id">8020</param>
             <param name="groupid">8120</param>
@@ -1047,7 +983,6 @@
             <selected>Skin.String(CustomRating.$PARAM[content].$PARAM[item],$PARAM[type])</selected>
         </include>
     </include>
-
 
     <include name="DialogCustom_VideoOSD_Items">
 
@@ -1503,7 +1438,7 @@
         </include>
     </include>
 
-      <include name="DialogCustom_Ratings_Movies_Items">
+    <include name="DialogCustom_Ratings_Movies_Items">
         <include content="Settings_Button" description="CustomDialog Ratings">
             <param name="dialog">true</param>
             <param name="id">8001</param>
@@ -1536,66 +1471,6 @@
             <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
             <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20342]: $LOCALIZE[563] 03,Home)</onclick>
             <onclick>SetProperty(ConfigureRatingItem,Item03,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,Movies,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8004</param>
-            <label>$LOCALIZE[563] 04</label>
-            <label2>$INFO[Skin.String(CustomRating.Movies.Item04)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20342]: $LOCALIZE[563] 04,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item04,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,Movies,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8005</param>
-            <label>$LOCALIZE[563] 05</label>
-            <label2>$INFO[Skin.String(CustomRating.Movies.Item05)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20342]: $LOCALIZE[563] 05,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item05,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,Movies,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8006</param>
-            <label>$LOCALIZE[563] 06</label>
-            <label2>$INFO[Skin.String(CustomRating.Movies.Item06)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20342]: $LOCALIZE[563] 06,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item06,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,Movies,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8007</param>
-            <label>$LOCALIZE[563] 07</label>
-            <label2>$INFO[Skin.String(CustomRating.Movies.Item07)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20342]: $LOCALIZE[563] 07,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item07,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,Movies,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8008</param>
-            <label>$LOCALIZE[563] 08</label>
-            <label2>$INFO[Skin.String(CustomRating.Movies.Item08)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20342]: $LOCALIZE[563] 08,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item08,Home)</onclick>
             <onclick>SetProperty(ConfigureRatingContent,Movies,Home)</onclick>
             <onclick>ActivateWindow(1119)</onclick>
         </include>
@@ -1634,65 +1509,6 @@
             <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
             <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20343]: $LOCALIZE[563] 03,Home)</onclick>
             <onclick>SetProperty(ConfigureRatingItem,Item03,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8004</param>
-            <label>$LOCALIZE[563] 04</label>
-            <label2>$INFO[Skin.String(CustomRating.TVShows.Item04)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20343]: $LOCALIZE[563] 04,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item04,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8005</param>
-            <label>$LOCALIZE[563] 05</label>
-            <label2>$INFO[Skin.String(CustomRating.TVShows.Item05)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20343]: $LOCALIZE[563] 05,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item05,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8006</param>
-            <label>$LOCALIZE[563] 06</label>
-            <label2>$INFO[Skin.String(CustomRating.TVShows.Item06)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20343]: $LOCALIZE[563] 06,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item06,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8007</param>
-            <label>$LOCALIZE[563] 07</label>
-            <label2>$INFO[Skin.String(CustomRating.TVShows.Item07)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20343]: $LOCALIZE[563] 07,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item07,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
-            <onclick>ActivateWindow(1119)</onclick>
-        </include>. 
-
-        <include content="Settings_Button" description="CustomDialog Ratings">
-            <param name="dialog">true</param>
-            <param name="id">8008</param>
-            <label>$LOCALIZE[563] 08</label>
-            <label2>$INFO[Skin.String(CustomRating.TVShows.Item08)]</label2>
-            <onclick>SetProperty(CustomDialogSelectItems,DialogCustom_Ratings_Items,Home)</onclick>
-            <onclick>SetProperty(CustomDialogSelectTitle,$LOCALIZE[20343]: $LOCALIZE[563] 08,Home)</onclick>
-            <onclick>SetProperty(ConfigureRatingItem,Item08,Home)</onclick>
             <onclick>SetProperty(ConfigureRatingContent,TVShows,Home)</onclick>
             <onclick>ActivateWindow(1119)</onclick>
         </include>

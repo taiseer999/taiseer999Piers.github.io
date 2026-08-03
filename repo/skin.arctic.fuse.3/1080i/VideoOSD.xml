@@ -18,7 +18,7 @@
                 <visible>!Window.IsVisible(DialogSlider.xml)</visible>
 
                 <control type="group">
-
+                    <!-- Left Side Buttons -->
                     <left>view_pad</left>
                     <right>view_pad</right>
                     <control type="grouplist" id="6091">
@@ -31,7 +31,7 @@
                         <onright>6005</onright>
                         <ondown>ActivateWindow($VAR[Action_OSD_Main_OnDown])</ondown>
 
-
+                        <!-- Button 1 -->
                         <control type="button" id="6001">
                             <include>Defs_OSD_Button</include>
                             <onclick>PlayerControl(Play)</onclick>
@@ -46,7 +46,7 @@
                             <param name="itemgap">osd_itemgap</param>
                         </include>
 
-
+                        <!-- Button 2 -->
                         <control type="button" id="6002">
                             <include>Defs_OSD_Button</include>
                             <onclick condition="VideoPlayer.Content(livetv)">CancelAlarm(osd_timeout,true)</onclick>
@@ -68,7 +68,7 @@
                             <param name="itemgap">osd_itemgap</param>
                         </include>
 
-
+                        <!-- Button 3 -->
                         <control type="button" id="6003">
                             <include>Defs_OSD_Button</include>
                             <onclick condition="VideoPlayer.Content(livetv)">PVR.ToggleRecordPlayingChannel</onclick>
@@ -91,7 +91,7 @@
                             <param name="iconoffset_condition">[PVR.IsRecordingPlayingChannel + PVR.CanRecordPlayingChannel]</param>
                         </include>
 
-
+                        <!-- Button 4 -->
                         <control type="button" id="6004">
                             <include>Defs_OSD_Button</include>
                             <onclick>CancelAlarm(osd_timeout,true)</onclick>
@@ -106,7 +106,7 @@
                         </include>
                     </control>
 
-
+                    <!-- Right Side Buttons -->
                     <control type="grouplist" id="6092">
                         <centerbottom>80</centerbottom>
                         <height>120</height>
@@ -118,7 +118,7 @@
                         <onright>6001</onright>
                         <ondown>ActivateWindow($VAR[Action_OSD_Main_OnDown])</ondown>
 
-
+                        <!-- Button 5 -->
                         <control type="button" id="6005">
                             <include>Defs_OSD_Button</include>
                             <onup>ActivateWindow(1145)</onup>
@@ -133,7 +133,7 @@
                             <param name="itemgap">osd_itemgap</param>
                         </include>
 
-
+                        <!-- Button 6 -->
                         <control type="button" id="6006">
                             <include>Defs_OSD_Button</include>
                             <label>$INFO[VideoPlayer.AudioLanguage,[UPPERCASE],[/UPPERCASE]]</label>
@@ -150,7 +150,7 @@
                             <param name="iconoffset_condition">!String.IsEmpty(VideoPlayer.AudioLanguage)</param>
                         </include>
 
-
+                        <!-- Button 7 -->
                         <control type="button" id="6007">
                             <include>Defs_OSD_Button</include>
                             <label>$VAR[Label_OSD_SubtitlesLanguage]</label>
@@ -167,7 +167,7 @@
                             <param name="iconoffset_condition">[VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)]</param>
                         </include>
 
-
+                        <!-- Button 8 -->
                         <control type="button" id="6008">
                             <include>Defs_OSD_Button</include>
                             <onclick>CancelAlarm(osd_timeout,true)</onclick>
@@ -223,8 +223,7 @@
                     </control>
                 </control>
             </control>
-            <include>CD_Art</include>
-            <include>VHS_Art</include>
+            <include>CD_VHS_Art</include>
         </control>
     </controls>
 </window>
