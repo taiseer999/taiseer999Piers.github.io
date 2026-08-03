@@ -162,6 +162,7 @@
                             </control>
                         </control>
 
+
                         <control type="group">
                             <visible>Container(3).HasFocus(3)</visible>
                             <include content="List_DialogSelect">
@@ -197,11 +198,11 @@
                                         <visible>System.AddonIsEnabled(service.coreelec.settings)</visible>
                                     </item>
                                     <item>
-                                        <label>Codec Logos</label>
+                                        <label>Mods</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/configure.png</icon>
-                                        <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_u3k_Items,Home)</onclick>
-                                        <onclick>SetProperty(CustomDialogSettingsTitle,u3k,Home)</onclick>
+                                        <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_U3k_Items,Home)</onclick>
+                                        <onclick>SetProperty(CustomDialogSettingsTitle,U3k,Home)</onclick>
                                         <onclick>ActivateWindow(1118)</onclick>
                                     </item>
                                     <item>
@@ -248,7 +249,7 @@
                                         <onclick>ActivateWindow(1116)</onclick>
                                     </item>
                                     <item>
-                                        <label>$LOCALIZE[31151]</label>
+                                        <label>$LOCALIZE[31434]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/gauge.png</icon>
                                         <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_VideoOSD_Items,Home)</onclick>
@@ -256,7 +257,7 @@
                                         <onclick>ActivateWindow(1118)</onclick>
                                     </item>
                                     <item>
-                                        <label>[CAPITALIZE]$LOCALIZE[31203] $LOCALIZE[12003][/CAPITALIZE]</label>
+                                        <label>$LOCALIZE[31151]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/circle-info.png</icon>
                                         <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_VideoInfo_Items,Home)</onclick>
@@ -264,13 +265,13 @@
                                         <onclick>ActivateWindow(1118)</onclick>
                                     </item>
                                     <item>
-                                        <label>$LOCALIZE[31234]</label>
+                                        <label>$LOCALIZE[31321]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/table.png</icon>
                                         <onclick>runscript(script.skinvariables,action=buildviews,configure)</onclick>
                                     </item>
                                     <item>
-                                        <label>[CAPITALIZE]$LOCALIZE[31234][/CAPITALIZE]</label>
+                                        <label>$LOCALIZE[31234]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/cube.png</icon>
                                         <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_Settings_Items_Indicators,Home)</onclick>
