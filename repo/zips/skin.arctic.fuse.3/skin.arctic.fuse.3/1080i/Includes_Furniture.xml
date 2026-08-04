@@ -2,7 +2,6 @@
 <includes>
 
     <include name="Furniture_Header_Left">
-        <param name="showlogo">false</param>
         <definition>
             <control type="group">
                 <left>0</left>
@@ -10,16 +9,6 @@
                 <include content="View_Line_Divider">
                     <param name="align">left</param>
                 </include>
-                <control type="image" description="CoreELEC logo above date">
-                    <visible>$PARAM[showlogo] + !Skin.HasSetting(Header.DisableLogo)</visible>
-                    <left>-12</left>
-                        <top>-30</top>
-                        <width>145</width>
-                        <height>45</height>
-                    <aspectratio align="left" aligny="center">keep</aspectratio>
-                    <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>
-
-                </control>
                 <control type="label">
                     <label>$PARAM[label]</label>
                     <align>left</align>
@@ -33,7 +22,6 @@
             </control>
         </definition>
     </include>
-
     <variable name="Furniture_Header_Right_Temperature">
         <value condition="!Skin.HasSetting(Header.DisableWeather)"> $INFO[Weather.Temperature]</value>
     </variable>
@@ -140,7 +128,6 @@
         <param name="include_right">true</param>
         <param name="textcolor">main_fg_90</param>
         <param name="top">40</param>
-        <param name="showlogo">false</param>
         <definition>
             <control type="group">
                 <top>$PARAM[top]</top>
@@ -150,7 +137,6 @@
                 <include content="Furniture_Header_Left" condition="$PARAM[include_left]">
                     <param name="label">$PARAM[label]</param>
                     <param name="textcolor">$PARAM[textcolor]</param>
-                    <param name="showlogo">$PARAM[showlogo]</param>
                 </include>
                 <include content="Furniture_Header_Right" condition="$PARAM[include_right]">
                     <param name="textcolor">$PARAM[textcolor]</param>

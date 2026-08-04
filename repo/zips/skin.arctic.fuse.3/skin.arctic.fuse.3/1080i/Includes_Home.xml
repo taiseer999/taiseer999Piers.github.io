@@ -330,7 +330,6 @@
             <include>Home_Animation</include>
             <include content="Furniture_Header" condition="!Skin.HasSetting(HomeSwitcher.DisableHeader)">
                 <param name="label">$VAR[Home_Header_Label]</param>
-                <param name="showlogo">true</param>
             </include>
             <control type="group">
                 <include>Home_Group_Definition</include>
