@@ -656,7 +656,7 @@
                     <visible>Integer.IsGreater($PARAM[rating],$PARAM[half]) + !Integer.IsGreater($PARAM[rating],$PARAM[full])</visible>
                 </control>
                 <control type="image">
-                    <colordiffuse>yellow</colordiffuse>
+                    <colordiffuse>$PARAM[colordiffuse]_90</colordiffuse>
                     <aspectratio>keep</aspectratio>
                     <texture>flags/star10.png</texture>
                     <visible>Integer.IsGreater($PARAM[rating],$PARAM[full])</visible>
