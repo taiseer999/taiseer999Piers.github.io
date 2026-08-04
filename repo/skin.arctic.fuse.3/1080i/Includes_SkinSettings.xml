@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
+    
     <!-- Menus -->
     <include name="SkinSettings_Items_Menus">
         <include content="Settings_Label" description="Configure">
@@ -61,7 +62,7 @@
             <onclick>Skin.ToggleSetting(HomeSwitcher.EnableIcons)</onclick>
             <visible>!Skin.HasSetting(HomeSwitcher.Vertical)</visible>
         </include>
-        <include content="Settings_Button" description="Header">
+       <include content="Settings_Button" description="Header">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -79,8 +80,6 @@
 
             <onclick condition="!Skin.HasSetting(HomeSwitcher.DisableHeader) + Skin.HasSetting(HomeSwitcher.DisableDate)">Skin.SetBool(HomeSwitcher.DisableHeader)</onclick>
         </include>
-
-
         <include content="Settings_Label" description="Layout">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -295,7 +294,7 @@
 
     </include>
 
-    <!-- Interface -->
+   <!-- Interface -->
     <include name="SkinSettings_Items_Interface">
         <include content="Settings_Label" description="Interface">
             <param name="window">skinsettings</param>
@@ -303,7 +302,7 @@
             <param name="id">001</param>
             <label>$LOCALIZE[31239]</label>
         </include>
-        <!-- <include content="Settings_Button" description="Codecs">
+        <include content="Settings_Button" description="Codecs">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -313,7 +312,7 @@
             <label>$LOCALIZE[31207]</label>
             <onclick>Skin.ToggleSetting(Footer.EnableCodecs)</onclick>
             <selected>Skin.HasSetting(Footer.EnableCodecs)</selected>
-        </include> -->
+        </include>
         <include content="Settings_Button" description="Now Playing">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
@@ -353,7 +352,29 @@
             <onclick>Skin.ToggleSetting(Header.DisableWeather)</onclick>
             <selected>!Skin.HasSetting(Header.DisableWeather)</selected>
         </include>
-
+         <include content="Settings_Button" description="NetworkRAM">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">007</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>CPU + RAM</label>
+            <onclick>Skin.ToggleSetting(Furniture.Network_RAM)</onclick>
+            <selected>Skin.HasSetting(Furniture.Network_RAM)</selected>
+        </include>
+        <include content="Settings_Button" description="Colored System Stats Icons">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">012</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>Colored system stats icons (RAM / CPU / connection)</label>
+            <onclick>Skin.ToggleSetting(sysstats.icons.mono)</onclick>
+            <selected>!Skin.HasSetting(sysstats.icons.mono)</selected>
+            <enable>Skin.HasSetting(Furniture.Network_RAM)</enable>
+        </include>
 
         <include content="Settings_Label" description="Context">
             <param name="window">skinsettings</param>
@@ -386,7 +407,6 @@
         </include>
 
     </include>
-
     <!-- Behaviour -->
     <include name="SkinSettings_Items_Behaviour">
         <include content="Settings_Label" description="Widgets">
@@ -441,7 +461,6 @@
             <selected>Skin.HasSetting(Background.ExtraFanart)</selected>
             <visible>$EXP[Exp_TMDbHelper_IsBlur]</visible>
         </include>
-
         <include content="Settings_Label" description="Navigation">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -512,6 +531,7 @@
             <onclick>Skin.ToggleSetting(Labels.Autoscroll)</onclick>
             <selected>Skin.HasSetting(Labels.Autoscroll)</selected>
         </include>
+        
 
         <!-- Playback -->
         <include content="Settings_Label" description="Playback">
@@ -519,6 +539,18 @@
             <param name="baseid">$PARAM[baseid]</param>
             <param name="id">011</param>
             <label>$LOCALIZE[14086]</label>
+        </include>
+        
+         <include content="Settings_Button">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">0022</param>
+            <param name="control">radiobutton</param>
+            <param name="slevel">2</param>
+            <label>$LOCALIZE[52074]</label>
+            <onclick>Skin.ToggleSetting(ExtraOSD)</onclick>
+            <selected>Skin.HasSetting(ExtraOSD)</selected>
         </include>
 
         <include content="Settings_Button" description="Autoclose OSD timeout">
@@ -586,7 +618,7 @@
             <onclick>Skin.ToggleSetting(Background.DisableVideo)</onclick>
         </include>
     </include>
-
+  
     <!-- Details -->
     <include name="SkinSettings_Items_Details">
 
@@ -616,13 +648,13 @@
             <visible>$EXP[Exp_TMDbHelper_IsData]</visible>
         </include>
 
-        <include content="Settings_Button" description="CustomDialog Movie  Ratings">
+         <include content="Settings_Button" description="CustomDialog Movie  Ratings">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
             <param name="id">004</param>
             <label>$LOCALIZE[342]</label>
-            <label2>$INFO[Skin.String(CustomRating.Movies.Item01)]$INFO[Skin.String(CustomRating.Movies.Item02), • ,]$INFO[Skin.String(CustomRating.Movies.Item03), • ,]</label2>
+            <label2>$INFO[Skin.String(CustomRating.Movies.Item01)]$INFO[Skin.String(CustomRating.Movies.Item02), • ,]$INFO[Skin.String(CustomRating.Movies.Item03), • ,]$INFO[Skin.String(CustomRating.Movies.Item04), • ,]$INFO[Skin.String(CustomRating.Movies.Item05), • ,]$INFO[Skin.String(CustomRating.Movies.Item06), • ,]$INFO[Skin.String(CustomRating.Movies.Item07), • ,]$INFO[Skin.String(CustomRating.Movies.Item08), • ,]</label2>
             <onclick>SetProperty(CustomDialogSettingsTitle,[CAPITALIZE]$LOCALIZE[31202]: $LOCALIZE[342][/CAPITALIZE],Home)</onclick>
             <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_Ratings_Movies_Items,Home)</onclick>
             <onclick>ActivateWindow(1118)</onclick>
@@ -635,7 +667,7 @@
             <param name="baseid">$PARAM[baseid]</param>
             <param name="id">005</param>
             <label>$LOCALIZE[20343]</label>
-            <label2>$INFO[Skin.String(CustomRating.TVShows.Item01)]$INFO[Skin.String(CustomRating.TVShows.Item02), • ,]$INFO[Skin.String(CustomRating.TVShows.Item03), • ,]</label2>
+            <label2>$INFO[Skin.String(CustomRating.TVShows.Item01)]$INFO[Skin.String(CustomRating.TVShows.Item02), • ,]$INFO[Skin.String(CustomRating.TVShows.Item03), • ,]$INFO[Skin.String(CustomRating.TVShows.Item04), • ,]$INFO[Skin.String(CustomRating.TVShows.Item05), • ,]$INFO[Skin.String(CustomRating.TVShows.Item06), • ,]$INFO[Skin.String(CustomRating.TVShows.Item07), • ,]$INFO[Skin.String(CustomRating.TVShows.Item08), • ,]</label2>
             <onclick>SetProperty(CustomDialogSettingsTitle,[CAPITALIZE]$LOCALIZE[31202]: $LOCALIZE[20343][/CAPITALIZE],Home)</onclick>
             <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_Ratings_TVShows_Items,Home)</onclick>
             <onclick>ActivateWindow(1118)</onclick>
@@ -717,10 +749,9 @@
             <selected>Skin.HasSetting(InfoTags.EnableHDR)</selected>
         </include>
 
-
     </include>
 
-    <!-- Other -->
+   <!-- Other -->
     <include name="SkinSettings_Items_Other">
         <include content="Settings_Label" description="Mouse and Keyboard">
             <param name="window">skinsettings</param>
@@ -829,112 +860,33 @@
             <selected>!Skin.HasSetting(TMDbHelper.DisablePVR)</selected>
         </include>
 
-        <include content="Settings_Label" description="Seasonal Themes">
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">023</param>
-            <label>$LOCALIZE[31610]</label>
-        </include>
-        <include content="Settings_Button" description="Seasonal Themes: Enabled">
+        <include content="Settings_Button" description="Holiday Theme: Australian Summer">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">024</param>
+            <param name="id">013</param>
             <param name="control">radiobutton</param>
-            <label>$LOCALIZE[31610]</label>
-            <onclick>Skin.ToggleSetting(SeasonalTheme.Enable)</onclick>
-            <selected>Skin.HasSetting(SeasonalTheme.Enable)</selected>
+            <label>$LOCALIZE[31115]</label>
+            <onclick>Skin.ToggleSetting(HolidayMode.Australia)</onclick>
+            <selected>Skin.HasSetting(HolidayMode.Australia)</selected>
+            <visible>Skin.HasSetting(EnableHolidayTheme)</visible>
         </include>
-        <include content="Settings_Button" description="Seasonal Themes: Christmas">
+        <include content="Settings_Button" description="Holiday Theme: Additional Icons">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">025</param>
-            <param name="control">button</param>
-            <label> - $LOCALIZE[31611] ($LOCALIZE[31612])</label>
-            <label2>$VAR[Label_Setting_SeasonalThemesChristmas]</label2>
-            <onclick condition="Skin.String(SeasonalTheme.ChristmasTheme,Aussie)">Skin.SetString(SeasonalTheme.ChristmasTheme,Off)</onclick>
-            <onclick condition="Skin.String(SeasonalTheme.ChristmasTheme,Off)">Skin.Reset(SeasonalTheme.ChristmasTheme)</onclick>
-            <onclick condition="String.IsEmpty(Skin.String(SeasonalTheme.ChristmasTheme))">Skin.SetString(SeasonalTheme.ChristmasTheme,Aussie)</onclick>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
-        </include>
-        <include content="Settings_Button" description="Seasonal Theme: Summer Breeze">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">026</param>
+            <param name="id">014</param>
             <param name="control">radiobutton</param>
-            <label> - $LOCALIZE[31615] ($LOCALIZE[31616])</label>
-            <onclick>Skin.ToggleSetting(SeasonalTheme.DisableSummer)</onclick>
-            <selected>!Skin.HasSetting(SeasonalTheme.DisableSummer)</selected>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
-        </include>
-        <include content="Settings_Button" description="Seasonal Theme: Halloween Spook">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">027</param>
-            <param name="control">radiobutton</param>
-            <label> - $LOCALIZE[31617] ($LOCALIZE[31618])</label>
-            <onclick>Skin.ToggleSetting(SeasonalTheme.DisableHalloween)</onclick>
-            <selected>!Skin.HasSetting(SeasonalTheme.DisableHalloween)</selected>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
-        </include>
-        <include content="Settings_Button" description="Seasonal Themes: Background Overlay">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">028</param>
-            <param name="slevel">2</param>
-            <param name="control">radiobutton</param>
-            <label>$LOCALIZE[31619]</label>
-            <onclick>Skin.ToggleSetting(SeasonalTheme.DisableOverlay)</onclick>
-            <selected>!Skin.HasSetting(SeasonalTheme.DisableOverlay)</selected>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
-        </include>
-        <include content="Settings_Button" description="Seasonal Themes: Background Atmosphere">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">029</param>
-            <param name="slevel">2</param>
-            <param name="control">radiobutton</param>
-            <label>$LOCALIZE[31620]</label>
-            <onclick>Skin.ToggleSetting(SeasonalTheme.DisableLoop)</onclick>
-            <selected>!Skin.HasSetting(SeasonalTheme.DisableLoop)</selected>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
-        </include>
-        <include content="Settings_Button" description="Seasonal Themes: Fly-by Animations">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">030</param>
-            <param name="slevel">2</param>
-            <param name="control">radiobutton</param>
-            <label>$LOCALIZE[31621]</label>
-            <onclick>Skin.ToggleSetting(SeasonalTheme.DisableFlyBy)</onclick>
-            <selected>!Skin.HasSetting(SeasonalTheme.DisableFlyBy)</selected>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
-        </include>
-        <include content="Settings_Button" description="Seasonal Themes: Falling Props Density">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">031</param>
-            <param name="slevel">2</param>
-            <param name="control">button</param>
-            <label>$LOCALIZE[31622]</label>
-            <label2>$VAR[Label_Setting_SeasonalThemesPropsDensity]</label2>
-            <onclick condition="Skin.String(SeasonalTheme.PropsDensity,High)">Skin.SetString(SeasonalTheme.PropsDensity,Off)</onclick>
-            <onclick condition="Skin.String(SeasonalTheme.PropsDensity,Off)">Skin.Reset(SeasonalTheme.PropsDensity)</onclick>
-            <onclick condition="String.IsEmpty(Skin.String(SeasonalTheme.PropsDensity))">Skin.SetString(SeasonalTheme.PropsDensity,High)</onclick>
-            <visible>Skin.HasSetting(SeasonalTheme.Enable)</visible>
+            <label>$LOCALIZE[31596]</label>
+            <onclick>Skin.ToggleSetting(Disable.HolidayTheme.AdditionalIcons)</onclick>
+            <selected>!Skin.HasSetting(Disable.HolidayTheme.AdditionalIcons)</selected>
+            <visible>Skin.HasSetting(EnableHolidayTheme)</visible>
         </include>
 
         <include content="Settings_Label" description="Expert">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">032</param>
+            <param name="id">030</param>
             <param name="slevel">3</param>
             <label>$LOCALIZE[10039]</label>
         </include>
@@ -942,7 +894,7 @@
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">033</param>
+            <param name="id">031</param>
             <param name="slevel">3</param>
             <label>$LOCALIZE[31374]</label>
             <onclick>SetProperty(StartupReplaceWindow,skinsettings,Home)</onclick>
