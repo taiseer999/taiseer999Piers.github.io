@@ -41,6 +41,7 @@
 
                             <include content="Furniture_Header" condition="!Skin.HasSetting(HomeSwitcher.DisableHeader) + !Skin.HasSetting(HomeSwitcher.Vertical)">
                                 <param name="label">$VAR[Home_Header_Label]</param>
+                                <param name="showlogo">true</param>
                             </include>
                         </control>
 
@@ -142,7 +143,7 @@
                 <include content="View_Furniture_Footer_ViewLine">
                     <param name="visible">true</param>
                     <param name="label">$INFO[Container(601).ListItem.Property(widget_numitems),, $LOCALIZE[31022]]</param>
-                    <param name="label_fallback">$INFO[System.AddonVersion(skin.arctic.fuse.3),Arctic Fuse 3 • v, (U3k)]</param>
+                    <param name="label_fallback">$INFO[System.AddonVersion(skin.arctic.fuse.3),arctic.fuse v,]</param>
                 </include>
             </control>
         </control>

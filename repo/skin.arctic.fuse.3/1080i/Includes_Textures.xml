@@ -113,7 +113,7 @@
         <texture border="20" colordiffuse="$VAR[ColorHighlight]">common/box.png</texture>
     </include>
     <include name="Texture_Box_Highlight_V">
-        <texture border="20" colordiffuse="$VAR[ColorHighlight]">common/box.png</texture>
+        <texture border="20" colordiffuse="main_fg_30">common/box.png</texture>
     </include>
     <include name="Texture_Box_Highlight_Focus_H">
         <texturefocus border="20" colordiffuse="$VAR[ColorHighlight]">common/box.png</texturefocus>

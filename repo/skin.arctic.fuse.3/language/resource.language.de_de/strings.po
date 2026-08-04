@@ -16,14 +16,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.4.1\n"
 
-msgctxt "#31994"
-msgid "Information bar"
-msgstr "Informationsleiste"
-
-msgctxt "#31995"
-msgid "Two-line information bar"
-msgstr "Zweizeilige Informationsleiste"
-
 msgctxt "#31000"
 msgid "Live TV / PVR"
 msgstr "Live TV / PVR"
@@ -648,16 +640,6 @@ msgctxt "#31131"
 msgid "Continue watching in"
 msgstr "Weiter ansehen in"
 
-#: /shortcuts/skinvariables-splash.json
-msgctxt "#31132"
-msgid "Preloading Hubs"
-msgstr "Hubs werden vorgeladen"
-
-#: /shortcuts/skinvariables-splash.json
-msgctxt "#31133"
-msgid "Loading Widgets"
-msgstr "Widgets werden geladen"
-
 #: /1080i/Includes_Labels.xml
 msgctxt "#31134"
 msgid "Playing"
@@ -667,12 +649,6 @@ msgstr "Wird abgespielt"
 msgctxt "#31135"
 msgid "Page"
 msgstr "Seite"
-
-#: /1080i/Includes_Labels.xml
-#: For Spotlight to allow shorter labels which fit
-msgctxt "#31136"
-msgid "Browse"
-msgstr "Öffnen"
 
 #: /1080i/SkinSettings.xml /1080i/Includes_Labels.xml
 msgctxt "#31137"
@@ -703,12 +679,6 @@ msgstr "Gesamtdauer"
 msgctxt "#31143"
 msgid "Classic"
 msgstr "Klassisch"
-
-#: /1080i/Includes_Labels.xml
-#: For Spotlight to allow shorter labels which fit
-msgctxt "#31144"
-msgid "Play"
-msgstr "Abspielen"
 
 msgctxt "#31145"
 msgid "Initialising Skin"
@@ -897,7 +867,7 @@ msgctxt "#31207"
 msgid "Codecs"
 msgstr "Codecs"
 
-#: /1080i/SkinSettings.xml
+#: /1080i/SkinSettings.xml /1080i/SkinSettings.xml
 msgctxt "#31208"
 msgid "Header"
 msgstr "Kopfzeile"
@@ -1064,7 +1034,7 @@ msgstr "Midnight Purple"
 
 msgctxt "#31244"
 msgid "Now playing"
-msgstr "Gerade läuft"
+msgstr "Aktuelle Wiedergabe"
 
 msgctxt "#31245"
 msgid "Autoscroll labels"
@@ -1148,10 +1118,6 @@ msgstr "Bildordner"
 msgctxt "#31272"
 msgid "Searching"
 msgstr "Suche läuft"
-
-msgctxt "#31273"
-msgid "Label"
-msgstr "Bezeichnung"
 
 #: /1080i/Includes_Items.xml
 msgctxt "#31274"
@@ -2339,82 +2305,62 @@ msgctxt "#31605"
 msgid "Next aired"
 msgstr "Nächste Ausstrahlung"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31610"
-msgid "Seasonal Themes"
-msgstr "Saisonale Themes"
+msgctxt "#31985"
+msgid "second"
+msgstr "Sekunde"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31611"
-msgid "Christmas Theme"
-msgstr "Weihnachts-Theme"
+msgctxt "#31986"
+msgid "- Duration"
+msgstr "- Dauer"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31612"
-msgid "Dec 7 - Jan 7"
-msgstr "7. Dez. – 7. Jan."
+msgctxt "#31987"
+msgid "Top left"
+msgstr "Oben links"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31613"
-msgid "Winter Frost"
-msgstr "Winterfrost"
+msgctxt "#31988"
+msgid "Top center"
+msgstr "Oben mittig"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31614"
-msgid "Aussie Christmas"
-msgstr "Australische Weihnacht"
+msgctxt "#31989"
+msgid "Top right"
+msgstr "Oben rechts"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31615"
-msgid "Summer Breeze"
-msgstr "Sommerbrise"
+msgctxt "#31990"
+msgid "Codec logos (OSD)"
+msgstr "Codec-Logos (OSD)"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31616"
-msgid "Jun 21 - Aug 15"
-msgstr "21. Jun. – 15. Aug."
+msgctxt "#31991"
+msgid "Codec logos (TinyPPI)"
+msgstr "Codec-Logos (TinyPPI)"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31617"
-msgid "Halloween Spook"
-msgstr "Halloween-Spuk"
+msgctxt "#31992"
+msgid "Codec logos (Start)"
+msgstr "Codec-Logos (Start)"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31618"
-msgid "Oct 1 - Nov 1"
-msgstr "1. Okt. – 1. Nov."
+msgctxt "#31993"
+msgid "Position of codec logos"
+msgstr "Position der Codec-Logos"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31619"
-msgid "Background Overlay"
-msgstr "Hintergrund-Overlay"
+msgctxt "#31994"
+msgid "Info line"
+msgstr "Infozeile"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31620"
-msgid "Background Atmosphere"
-msgstr "Hintergrund-Atmosphäre"
+msgctxt "#31995"
+msgid "Show two-row information bar"
+msgstr "Zweizeilige Informationsleiste anzeigen"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31621"
-msgid "Fly-by Animations"
-msgstr "Vorbeiflug-Animationen"
+msgctxt "#31996"
+msgid "Artwork Style"
+msgstr "Artwork-Stil"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31622"
-msgid "Falling Props Density"
-msgstr "Dichte fallender Objekte"
+msgctxt "#31997"
+msgid "Rotating disc"
+msgstr "Drehende Disk"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31623"
-msgid "Off"
-msgstr "Aus"
+msgctxt "#31998"
+msgid "Disc Art"
+msgstr "Disk-Art"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31624"
-msgid "Normal"
-msgstr "Normal"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31625"
-msgid "High"
-msgstr "Hoch"
+msgctxt "#31999"
+msgid "VHS Art"
+msgstr "VHS-Art"
