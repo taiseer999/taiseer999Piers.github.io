@@ -438,8 +438,7 @@
     </variable>
 
     <variable name="Image_CombinedStudio">
-        <value condition="!String.IsEmpty(Container.ListItem.Studio)">$INFO[Container.ListItem.Studio,resource://resource.images.studios.coloured/,.png]</value>
-        <value condition="!String.IsEmpty(ListItem.Studio)">$INFO[ListItem.Studio,resource://resource.images.studios.coloured/,.png]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_studio))">$INFO[Window(Home).Property(TMDbHelper.ListItem.base_studio),resource://resource.images.studios.coloured/,.png]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Network.1.Name))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Network.1.Name),resource://resource.images.studios.coloured/,.png]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Studio.1.Name),resource://resource.images.studios.coloured/,.png]</value>
     </variable>
@@ -589,7 +588,8 @@
         <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Image),certified)">certified.png</value>
         <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Image),fresh)">rtfresh.png</value>
         <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Image),rotten)">rtrotten.png</value>
-        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Rating),59)">rtfresh.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Rating),74)">certified.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Rating),59) | String.IsEmpty(Window(Home).Property(TMDbHelper.Player.RottenTomatoes_Rating))">rtfresh.png</value>
         <value>rtrotten.png</value>
     </variable>
 
@@ -597,7 +597,8 @@
         <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Image),certified)">certified.png</value>
         <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Image),fresh)">rtfresh.png</value>
         <value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Image),rotten)">rtrotten.png</value>
-        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),59)">rtfresh.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),74)">certified.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),59) | String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">rtfresh.png</value>
         <value>rtrotten.png</value>
     </variable>
 
@@ -728,6 +729,90 @@
         <value condition="String.IsEqual(Control.GetLabel(12),$LOCALIZE[31032])">special://skin/extras/icons/circle-plus.png</value>
         <value>special://skin/extras/icons/circle-dot.png</value>
     </variable>
+
+    <variable name="Image_AudioCodec">
+        <value condition="String.IsEqual(ListItem.AudioCodec,truehd) + String.Contains(ListItem.Filenameandpath,.Atmos.)">flags/colorful/audio/atmos.png</value>
+        <value condition="String.IsEqual(ListItem.AudioCodec,truehd_atmos)">flags/colorful/audio/atmos.png</value>
+        <value condition="String.IsEqual(ListItem.AudioCodec,eac3) + String.Contains(ListItem.Filenameandpath,.Atmos.)">flags/colorful/audio/atmos.png</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,eac3_ddp_atmos)">flags/colorful/audio/atmos.png</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd) + [String.Contains(ListItem.Filenameandpath,DTS-X) | String.Contains(ListItem.Filenameandpath,DTSX)]">flags/colorful/audio/dtsx.png</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma) + [String.Contains(ListItem.Filenameandpath,DTS-X) | String.Contains(ListItem.Filenameandpath,DTSX)]">flags/colorful/audio/dtsx.png</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma_x)">flags/colorful/audio/dtsx.png</value>
+		<value condition="String.IsEqual(ListItem.AudioCodec,dtshd_ma_x_imax)">flags/colorful/audio/dtsx-imax.png</value>
+        <value>flags/colorful/audio/$INFO[ListItem.AudioCodec].png</value>
+    </variable>
+    
+    <variable name="Image_RipSource">
+        <value condition="![String.Contains(ListItem.FileNameAndPath,2160p) | String.Contains(ListItem.FileNameAndPath,UHD) | String.Contains(ListItem.FileNameAndPath,UltraHD) | String.Contains(ListItem.FileNameAndPath,Ultra-HD) | String.Contains(ListItem.FileNameAndPath,4K)] + [String.Contains(ListItem.FileNameAndPath,web-dl) | String.Contains(ListItem.FileNameAndPath,webdl) | String.Contains(ListItem.FileNameAndPath,WEBRip)]">flags/colorful/other/web-dl.png</value>
+        <value condition="[String.Contains(ListItem.FileNameAndPath,2160p) | String.Contains(ListItem.FileNameAndPath,UHD) | String.Contains(ListItem.FileNameAndPath,UltraHD) | String.Contains(ListItem.FileNameAndPath,Ultra-HD) | String.Contains(ListItem.FileNameAndPath,4K)] + [String.Contains(ListItem.FileNameAndPath,web-dl) | String.Contains(ListItem.FileNameAndPath,webdl) | String.Contains(ListItem.FileNameAndPath,WEBRip)]">flags/colorful/other/4K_web-dl.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,blu-ray) | String.Contains(ListItem.FileNameAndPath,bluray) | String.Contains(ListItem.FileNameAndPath,bdrip) | String.Contains(ListItem.FileNameAndPath,bd25) | String.Contains(ListItem.FileNameAndPath,bd50)">flags/colorful/other/bluray.png</value>
+        <value condition="[String.Contains(ListItem.FileNameAndPath,2160p) | String.Contains(ListItem.FileNameAndPath,UHD) | String.Contains(ListItem.FileNameAndPath,UltraHD) | String.Contains(ListItem.FileNameAndPath,Ultra-HD) | String.Contains(ListItem.FileNameAndPath,4K)] + ![String.Contains(ListItem.FileNameAndPath,web-dl) | String.Contains(ListItem.FileNameAndPath,webdl) | String.Contains(ListItem.FileNameAndPath,WEBRip)]">flags/colorful/other/4K.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,hddvd) | String.Contains(ListItem.FileNameAndPath,hd-dvd)">flags/colorful/other/hddvd.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,dvd)">flags/colorful/other/dvd.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,vhs) | String.Contains(ListItem.FileNameAndPath,vhsrip)">flags/colorful/other/vhs.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,hdtv) | String.Contains(ListItem.FileNameAndPath,pdtv) | String.Contains(ListItem.FileNameAndPath,dsr)">flags/colorful/other/hdtv.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,sdtv)">flags/colorful/other/sdtv.png</value>
+
+        <value>$INFO[Skin.String(FallbackSourceFlag)]</value>
+    </variable>
+    
+    <variable name="Image_VideoPlayer_RipSource">
+        <value condition="![String.Contains(Player.FileNameAndPath,2160p) | String.Contains(Player.FileNameAndPath,UHD) | String.Contains(Player.FileNameAndPath,UltraHD) | String.Contains(Player.FileNameAndPath,Ultra-HD) | String.Contains(Player.FileNameAndPath,4K)] + [String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.FileNameAndPath,webdl) | String.Contains(Player.FileNameAndPath,WEBRip)]">flags/colorful/other/web-dl.png</value>
+        <value condition="[String.Contains(Player.FileNameAndPath,2160p) | String.Contains(Player.FileNameAndPath,UHD) | String.Contains(Player.FileNameAndPath,UltraHD) | String.Contains(Player.FileNameAndPath,Ultra-HD) | String.Contains(Player.FileNameAndPath,4K)] + [String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.FileNameAndPath,webdl) | String.Contains(Player.FileNameAndPath,WEBRip)]">flags/colorful/other/4K_web-dl.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,blu-ray) | String.Contains(Player.FileNameAndPath,bluray) | String.Contains(Player.FileNameAndPath,bdrip) | String.Contains(Player.FileNameAndPath,bd25) | String.Contains(Player.FileNameAndPath,bd50)">flags/colorful/other/bluray.png</value>
+        <value condition="[String.Contains(Player.FileNameAndPath,2160p) | String.Contains(Player.FileNameAndPath,UHD) | String.Contains(Player.FileNameAndPath,UltraHD) | String.Contains(Player.FileNameAndPath,Ultra-HD) | String.Contains(Player.FileNameAndPath,4K)] + ![String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.FileNameAndPath,webdl) | String.Contains(Player.FileNameAndPath,WEBRip)]">flags/colorful/other/4K.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,hddvd) | String.Contains(Player.FileNameAndPath,hd-dvd)">flags/colorful/other/hddvd.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,dvd)">flags/colorful/other/dvd.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,vhs) | String.Contains(Player.FileNameAndPath,vhsrip)">flags/colorful/other/vhs.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,hdtv) | String.Contains(Player.FileNameAndPath,pdtv) | String.Contains(Player.FileNameAndPath,dsr)">flags/colorful/other/hdtv.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,sdtv)">flags/colorful/other/sdtv.png</value>
+        <value>$INFO[Skin.String(FallbackSourceFlag)]</value>
+    </variable>
+
+    <variable name="Image_VideoPlayer_AudioCodec">
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)">flags/colorful/audio/atmos.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)">flags/colorful/audio/atmos.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x)">flags/colorful/audio/dtsx.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)">flags/colorful/audio/dtsx-imax.png</value>
+        <value>flags/colorful/audio/$INFO[VideoPlayer.AudioCodec].png</value>
+    </variable>
+
+    <variable name="Image_VideoPlayer_AudioChannels">
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,6) + String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)">flags/colorful/channels/5.1.4.png</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos)">flags/colorful/channels/7.1.4.png</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x)">flags/colorful/channels/7.1.4.png</value>
+        <value condition="Integer.IsEqual(VideoPlayer.AudioChannels,8) + String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma_x_imax)">flags/colorful/channels/7.1.4.png</value>
+        <value>flags/colorful/channels/$INFO[VideoPlayer.AudioChannels].png</value>
+    </variable>
+
+    <variable name="Image_VideoPlayer_HDRCodec">
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision)">flags/colorful/other/dolbyvision.png</value>
+        <value condition="String.Contains(Player.Filenameandpath,.hdrplus.) | String.Contains(Player.Filenameandpath,.12bit.) | String.Contains(Player.Filenameandpath,.hdr10plus.) | String.Contains(Player.Filenameandpath,_hdr10plus_) | String.Contains(Player.Filenameandpath,_hdr10plus-)">flags/colorful/other/hdr10plus.png</value>
+        <value condition="String.Contains(Player.Process(amlogic.vs10.mode),HDR10 | [String.IsEqual(Player.Process(video.source.hdr.type.raw),3) + String.Contains(Player.Process(amlogic.vs10.mode),Bypass) + ![String.IsEqual(Player.Process(video.source.additional.hdr.type.raw),2) + Integer.IsEqual(System.GetInt(coreelec.amlogic.dolbyvision.mode),2)]] | !Integer.IsEqual(Player.Process(video.source.hdr.type.raw),1) + String.Contains(Player.Process(amlogic.vs10.mode),HDR10) | [String.IsEqual(Player.Process(video.source.hdr.type.raw),1) + !String.Contains(Player.Process(amlogic.vs10.mode),SDR)] | String.IsEqual(Player.Process(video.source.hdr.type.raw),1) + !String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision)">flags/colorful/other/hdr10.png</value>
+        <value condition="[String.IsEqual(Player.Process(video.source.hdr.type.raw),4) + String.Contains(Player.Process(amlogic.vs10.mode),Bypass)] | String.Contains(Player.Process(amlogic.eoft_gamut),HLG)">flags/colorful/other/hlg.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,hdr) | [VideoPlayer.IsFullscreen + String.Contains(Player.FileNameAndPath,hdr)]">flags/colorful/other/other/HDR.png</value>
+    </variable>
+
+    <variable name="Image_HDRCodec">
+        <value condition="String.IsEqual(ListItem.HdrType,dolbyvision)">flags/colorful/other/dolbyvision.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,hdr10plus)">flags/colorful/other/hdr10plus.png</value>
+        <value condition="String.IsEqual(ListItem.HdrType,hdr10)">flags/colorful/other/hdr10.png</value>
+        <value condition="String.IsEqual(ListItem.HdrType,hlg)">flags/colorful/other/hlg.png</value>
+        <value condition="String.Contains(ListItem.FileNameAndPath,hdr)">flags/colorful/other/HDR.png</value>
+    </variable>
+
+    <variable name="Image_Weather">
+        <value condition="Skin.HasSetting(Furniture.EnableColourWeather)">$INFO[Weather.FanartCode,Weather_Icons/,.png]</value>
+        <value condition="!Skin.HasSetting(Furniture.EnableColourWeather)">resource://resource.images.weathericons.white/$INFO[Weather.FanartCode].png</value>
+    </variable>
+
+    <variable name="Image_Player_Clearart">
+        <value condition="!String.IsEmpty(Player.Art(tvshow.clearart))">$INFO[Player.Art(tvshow.clearart)]</value>
+        <value condition="!String.IsEmpty(Player.Art(clearart))">$INFO[Player.Art(clearart)]</value>
+        <value condition="!String.IsEmpty(Player.Art(tvshow.clearlogo))">$INFO[Player.Art(tvshow.clearlogo)]</value>
+        <value condition="!String.IsEmpty(Player.Art(clearlogo))">$INFO[Player.Art(clearlogo)]</value>
+    </variable>
+
     <!-- HOME - SYSTEM STATS ICONS - COLORED / MONOCHROME TOGGLE -->
 
     <variable name="SysStats_CPU_Icon">

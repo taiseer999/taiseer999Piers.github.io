@@ -1344,7 +1344,7 @@
     </include>
 
     <include name="Object_MenuHeader">
-        <param name="icon">special://skin/extras/icons/CE.png</param>
+        <param name="icon">special://skin/extras/icons/kodi.png</param>
         <param name="bordersize">icon_home_bordersize</param>
         <param name="label">$LOCALIZE[33063]</param>
         <param name="has_icon">true</param>
