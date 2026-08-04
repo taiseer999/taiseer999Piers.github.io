@@ -3555,8 +3555,8 @@
 					<param name="backid" value="9601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="6" />
-					<param name="movement2" value="5" />
+					<param name="movement" value="7" />
+					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(9601)" />
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(9601).NumItems,0) | Container(9601).IsUpdating]]" />
@@ -3570,8 +3570,8 @@
 					<param name="FanartSmall" value="false" />
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="true" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item" condition="false">
 					<param name="Fanart" value="false" />
@@ -3589,8 +3589,8 @@
 					<param name="FanartSmall" value="false" />
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="true" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="9601" />
@@ -3603,7 +3603,7 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="9601" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="videos" sortby="" sortorder="" browse="never">addons://sources/video/</content>
+				<content limit="50" target="videos" sortby="" sortorder="" browse="never">addons://sources/video/</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="9601" />
 					<param name="target" value="videos" />
@@ -3676,8 +3676,8 @@
 					<param name="backid" value="9601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="6" />
-					<param name="movement2" value="5" />
+					<param name="movement" value="7" />
+					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(9602)" />
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(9602).NumItems,0) | Container(9602).IsUpdating]]" />
@@ -3691,8 +3691,8 @@
 					<param name="FanartSmall" value="false" />
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="true" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item" condition="false">
 					<param name="Fanart" value="false" />
@@ -3710,8 +3710,8 @@
 					<param name="FanartSmall" value="false" />
 					<param name="ThumbnailSmall" value="false" />
 					<param name="Square" value="false" />
-					<param name="SquareMiddle" value="true" />
-					<param name="SquareSmall" value="false" />
+					<param name="SquareMiddle" value="false" />
+					<param name="SquareSmall" value="true" />
 				</include>
 				<include content="Def_Weather_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="9602" />
@@ -3724,7 +3724,7 @@
 				<include content="Def_System_Layout_Item_Focus" condition="false">
 					<param name="shortcutsid" value="9602" />
 				</include>
-				<content limit="$VAR[Value_Widget_Limit]" target="programs" sortby="" sortorder="" browse="never">addons://sources/executable/</content>
+				<content limit="50" target="programs" sortby="" sortorder="" browse="never">addons://sources/executable/</content>
 				<include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget) + true">
 					<param name="id" value="9602" />
 					<param name="target" value="programs" />

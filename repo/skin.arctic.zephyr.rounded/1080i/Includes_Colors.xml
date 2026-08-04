@@ -89,19 +89,39 @@
     </variable>
 
     <variable name="Color_Indicator_Set">
-        <value>FFD402AA</value>
+        <value>FFAB47BC</value>
     </variable>
 
     <variable name="Color_Indicator_Version">
-        <value>FFD402AA</value>
+        <value>FFAB47BC</value>
     </variable>
 
     <variable name="Color_Indicator_DBType">
-        <value>FFD402AA</value>
+        <value>FFAB47BC</value>
     </variable>
 
     <variable name="Color_Indicator_JLOM">
-        <value>FFD402AA</value>
+        <value>FFAB47BC</value>
+    </variable>
+
+    <variable name="Color_Background_IMDb">
+        <value>FFF1C40F</value>
+    </variable>
+
+    <variable name="Color_Background_Kodi">
+        <value>FF222F3E</value>
+    </variable>
+
+    <variable name="Color_Label_Kodi">
+        <value>FF0ABDE3</value>
+    </variable>
+
+    <variable name="Color_Background_TMDb">
+        <value>FF48DBFB</value>
+    </variable>
+
+    <variable name="Color_Background_Others">
+        <value>FF081C24</value>
     </variable>
 
     <!-- HIGHLIGHT COLOR -->
@@ -277,7 +297,7 @@
 
     <variable name="KodiRatingStarColor.name.own">
         <value condition="!String.IsEmpty(Skin.String(KodiRatingStarColor.name.own))">$INFO[Skin.String(KodiRatingStarColor.name.own)]</value>
-        <value>FFD402AA</value>
+        <value>FFAB47BC</value>
     </variable>
 
     <variable name="UserRatingStarColor.name.own">
@@ -430,5 +450,27 @@
 
     <variable name="Color_OSD_Button_Background">
         <value>33ffffff</value>
+    </variable>
+
+    <!-- MEDIA FLAG - COLOR -->
+
+    <variable name="Color_Flag_Next_Aired">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FF1ABC9C</value>
+		<value>Dark1</value>
+    </variable>
+
+    <variable name="Color_Flag_Duration">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FF2980B9</value>
+		<value>Dark1</value>
+    </variable>
+
+    <variable name="Color_Flag_Songs">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FF16A085</value>
+		<value>Dark1</value>
+    </variable>
+
+    <variable name="Color_Flag_Discs">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FFC0392B</value>
+		<value>Dark1</value>
     </variable>
 </includes>

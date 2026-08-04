@@ -9,13 +9,13 @@
 
     <onunload condition="!String.IsEmpty(Window(Home).Property(reloadskin))">SetFocus(3033)</onunload>
     <onunload condition="!String.IsEmpty(Window(Home).Property(reloadsetupwizard))">SetFocus(3099)</onunload>
-    <onunload condition="String.IsEmpty(Window(Home).Property(reloadsetupwizard)) + String.IsEmpty(Window(Home).Property(SetupWizardDirection)) + Window.IsVisible(Custom_1100_Startup.xml) + !Window.IsVisible(1153) + !Window.IsVisible(1154) + !Window.IsVisible(1155) + !Window.IsVisible(1156)">AlarmClock(DelayFocus3615,SetFocus(3615),00:00,silent)</onunload>
+    <onunload condition="String.IsEmpty(Window(Home).Property(reloadsetupwizard)) + String.IsEmpty(Window(Home).Property(SetupWizardDirection)) + Window.IsVisible(Custom_1100_Startup.xml) + !Window.IsVisible(1153) + !Window.IsVisible(1154) + !Window.IsVisible(1155) + !Window.IsVisible(1159) + !Window.IsVisible(1156)">AlarmClock(DelayFocus3615,SetFocus(3615),00:00,silent)</onunload>
 
     <controls>
         <include>Background_Overlay</include>
 
         <control type="group">
-            <include content="Def_Dialog_Background">
+            <include content="Def_Dialog_Setting_Background">
                 <param name="height" value="882" />
                 <param name="width" value="1722" />
             </include>
@@ -146,7 +146,6 @@
             <!-- TIPS - FOOTER -->
 
             <include content="Object_Footer_Tips">
-                <param name="top" value="818" />
                 <param name="left" value="478" />
                 <param name="label" value="$LOCALIZE[31618]" />
                 <param name="textcolor" value="Black70" />

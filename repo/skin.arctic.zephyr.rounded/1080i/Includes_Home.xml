@@ -76,7 +76,7 @@
                     <effect type="fade" start="100" end="0" time="200" delay="0" />
                 </animation>
 
-                <!-- ARROWS (LEFT / RIGHT) - ICON -->
+                <!-- MENU - ARROWS - LEFT - RIGHT -->
 
                 <control type="group">
                     <visible>Skin.HasSetting(home.show.menu.icons)</visible>
@@ -227,18 +227,20 @@
             <include>Def_Hidden_Button</include>
             <visible allowhiddenfocus="true">False</visible>
 
-            <!-- MAIN MENU TEXT - ARROW -->
+            <!-- MAIN MENU TEXT - ARROWS -->
 
             <onfocus>SetProperty(399IsFocus,1,Home)</onfocus>
             <onunfocus>ClearProperty(399IsFocus,Home)</onunfocus>
+
             <onleft>ClearProperty(399IsFocus,Home)</onleft>
+            <onleft>AlarmClock(DelayArrow,SetProperty(399IsFocus,1,Home),00:00,silent)</onleft>
+
             <onright>ClearProperty(399IsFocus,Home)</onright>
+            <onright>AlarmClock(DelayArrow,SetProperty(399IsFocus,1,Home),00:00,silent)</onright>
 
             <!-- MAIN MENU - INIT STARTUP -->
 
             <onfocus condition="$EXP[TMDbHelper_Is_Needed_In_Home] + String.IsEmpty(Window(Home).Property(AnimationDirection)) + String.IsEmpty(Window(Home).Property(first_menu)) + String.IsEmpty(Window(Home).Property(end_menu))">SetProperty(first_menu,1,Home)</onfocus>
-
-            <onfocus condition="$EXP[TMDbHelper_Is_Needed_In_Home] + String.IsEmpty(Window(Home).Property(AnimationDirection)) + String.IsEmpty(Window(Home).Property(first_menu)) + String.IsEmpty(Window(Home).Property(end_menu))">SetProperty(AnimationDirection,Right,Home)</onfocus>
 
             <!-- TRAILER FULL SCREEN -->
 
@@ -393,7 +395,7 @@
 
                 <!-- SLIDE LEFT - IF MENU ICON -->
 
-                <include>Animation_Vertical_Menu_RightSide</include>
+                <animation effect="slide" start="0,0" end="-230,0" time="0" condition="$EXP[Home_Is_Vertical] + Skin.HasSetting(home.show.menu.icons)">Conditional</animation>
 
                 <include>Animation_Visible_Label_Tip_Fade_Conditional_Widgets</include>
 
@@ -443,53 +445,11 @@
             <!-- VERTICAL - MAIN MENU / SUB MENU -->
 
             <control type="group">
-                <include>Animation_Vertical_Menu_LeftSide</include>
-
                 <left>70</left>
 
-                <!-- ARROWS (UP / DOWN) - MAIN MENU - 300 -->
+                <!-- VERTICAL - MENU - ARROWS -->
 
-                <control type="group">
-                    <visible>[Control.HasFocus(300) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(9099)]</visible>
-                    <include content="Def_Left" condition="!Skin.HasSetting(home.show.menu.icons)">
-                        <param name="left" value="190" />
-                    </include>
-                    <left>80</left>
-                    <control type="image">
-                        <visible>Integer.IsGreater(Container(300).NumItems,9)</visible>
-                        <top>150</top>
-                        <include>Def_Arrow_Size</include>
-                        <include content="Texture_Arrow_Up"><param name="colordiffuse" value="Dark3" /></include>
-                    </control>
-                    <control type="image">
-                        <visible>Integer.IsGreater(Container(300).NumItems,9)</visible>
-                        <top>912</top>
-                        <include>Def_Arrow_Size</include>
-                        <include content="Texture_Arrow_Down"><param name="colordiffuse" value="Dark3" /></include>
-                    </control>
-                </control>
-
-                <!-- ARROWS (UP / DOWN) - SUB MENU - 302 -->
-
-                <control type="group">
-                    <visible>Control.HasFocus(302)</visible>
-                    <include content="Def_Left" condition="!Skin.HasSetting(home.show.menu.icons)">
-                        <param name="left" value="190" />
-                    </include>
-                    <left>80</left>
-                    <control type="image">
-                        <visible>Integer.IsGreater(Container(302).NumItems,9)</visible>
-                        <top>150</top>
-                        <include>Def_Arrow_Size</include>
-                        <include content="Texture_Arrow_Up"><param name="colordiffuse" value="Dark3" /></include>
-                    </control>
-                    <control type="image">
-                        <visible>Integer.IsGreater(Container(302).NumItems,9)</visible>
-                        <top>912</top>
-                        <include>Def_Arrow_Size</include>
-                        <include content="Texture_Arrow_Down"><param name="colordiffuse" value="Dark3" /></include>
-                    </control>
-                </control>
+                <include>Home_Vertical_Menu_Arrows</include>
 
                 <!-- MAIN MENU -->
 
@@ -553,7 +513,7 @@
 
                         <control type="label">
                             <left>30</left>
-                            <right>0</right>
+                            <widht>240</widht>
                             <align>left</align>
                             <aligny>center</aligny>
                             <height>100%</height>
@@ -571,9 +531,9 @@
                         <!-- MAIN MENU - ONLY ICON - NOT UNDERLINED -->
 
                         <control type="image">
+                            <top>1</top>
                             <left>262</left>
                             <width>80</width>
-                            <top>1</top>
                             <height>80</height>
                             <texture colordiffuse="$VAR[Color_Focus]">$INFO[Container(300).ListItem.Icon]</texture>
                             <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
@@ -583,15 +543,21 @@
                         <!-- MAIN MENU - ONLY ICON - UNDERLINED -->
 
                         <control type="image">
+                            <visible>Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
+
+                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
+
+                            <top>1</top>
                             <left>262</left>
                             <width>80</width>
-                            <top>1</top>
                             <height>80</height>
                             <texture colordiffuse="Dark1">$INFO[ListItem.Icon]</texture>
-                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
-                            <visible>Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                         </control>
                         <control type="group">
+                            <visible>Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
+
+                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
+
                             <top>68</top>
                             <left>277</left>
                             <width>50</width>
@@ -599,13 +565,15 @@
                             <control type="image">
                                 <include>Texture_Home_Menu_Underline</include>
                             </control>
-                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
-                            <visible>Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                         </control>
 
                         <!-- MAIN MENU - ONLY LABEL - NOT UNDERLINED -->
 
                         <control type="label">
+                            <visible>!Skin.HasSetting(home.show.menu.icons) + !Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
+
+                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
+
                             <left>30</left>
                             <right>30</right>
                             <align>left</align>
@@ -615,31 +583,48 @@
                             <scroll>true</scroll>
                             <scrollspeed>60</scrollspeed>
                             <font>Home</font>
+                            <scroll>true</scroll>
+                            <scrollspeed>60</scrollspeed>
+                            <textcolor>$VAR[Color_Focus]</textcolor>
                             <label>$VAR[Label_Home_Main_Menu]</label>
-                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
-                            <visible>!Skin.HasSetting(home.show.menu.icons) + !Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                         </control>
 
                         <!-- MAIN MENU - ONLY LABEL - UNDERLINED -->
 
-                        <control type="grouplist">
-                            <orientation>horizontal</orientation>
+                        <control type="group">
+                            <visible>!Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
+
+                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
+
+                            <top>8</top>
                             <left>30</left>
                             <right>0</right>
-                            <top>8</top>
+                            <height>100%</height>
+                            <widht>240</widht>
                             <align>left</align>
                             <aligny>center</aligny>
-                            <height>100%</height>
+
                             <control type="button">
-                                <textcolor>Dark1</textcolor>
+                                <textcolor>none</textcolor>
                                 <font>Home</font>
                                 <textoffsetx>0</textoffsetx>
-                                <width max="250">auto</width>
+                                <width max="240">auto</width>
                                 <include>Texture_Home_Menu_Button_Underline</include>
                                 <label>$VAR[Label_Home_Main_Menu]</label>
                             </control>
-                            <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Window.IsVisible(DialogButtonMenu.xml)">Conditional</animation>
-                            <visible>!Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
+                            <control type="label">
+                                <top>-7</top>
+                                <left>0</left>
+                                <align>left</align>
+                                <aligny>center</aligny>
+                                <height>100%</height>
+                                <width>240</width>
+                                <font>Home</font>
+                                <scroll>true</scroll>
+                                <scrollspeed>60</scrollspeed>
+                                <textcolor>Dark1</textcolor>
+                                <label>$VAR[Label_Home_Main_Menu]</label>
+                            </control>
                         </control>
                     </focusedlayout>
 
@@ -676,11 +661,11 @@
                     <include>Animation_Common_Fade_In</include>
                     <include>Animation_Common_Fade_Out</include>
 
-                    <left>View_List_Side</left>
-
                     <top>176</top>
+                    <left>View_List_Side</left>
                     <width>PosterW</width>
                     <height>720</height>
+
                     <orientation>vertical</orientation>
 
                     <onright>300</onright>
@@ -720,7 +705,7 @@
 
                         <control type="label">
                             <left>30</left>
-                            <right>30</right>
+                            <widht>240</widht>
                             <align>left</align>
                             <aligny>center</aligny>
                             <height>100%</height>
@@ -772,13 +757,13 @@
                         <control type="label">
                             <left>30</left>
                             <right>30</right>
+                            <height>100%</height>
                             <align>left</align>
                             <aligny>center</aligny>
-                            <height>100%</height>
-                            <textcolor>$VAR[Color_Focus]</textcolor>
                             <scroll>true</scroll>
                             <scrollspeed>60</scrollspeed>
                             <font>Home</font>
+                            <textcolor>$VAR[Color_Focus]</textcolor>
                             <label>$VAR[Label_Home_Sub_Menu]</label>
                             <visible>!Skin.HasSetting(home.show.menu.icons) + !Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                         </control>
@@ -786,21 +771,46 @@
                         <!-- SUB MENU - ONLY LABEL - UNDERLINED -->
 
                         <control type="grouplist">
-                            <orientation>horizontal</orientation>
-                            <left>30</left>
-                            <right>0</right>
                             <top>8</top>
+                            <left>30</left>
+                            <right>30</right>
+                            <width>240</width>
+                            <height>100%</height>
                             <align>left</align>
                             <aligny>center</aligny>
-                            <height>100%</height>
+
                             <control type="button">
-                                <textcolor>Dark1</textcolor>
-                                <font>Home</font>
                                 <textoffsetx>0</textoffsetx>
-                                <width max="250">auto</width>
+                                <width max="240">auto</width>
+                                <font>Home</font>
+                                <textcolor>none</textcolor>
+                                <label>$VAR[Label_Home_Sub_Menu]</label>
                                 <include>Texture_Home_Menu_Button_Underline</include>
+                            </control>
+
+                            <visible>!Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
+                        </control>
+                        <control type="group">
+                            <left>30</left>
+                            <right>30</right>
+                            <width>240</width>
+                            <height>100%</height>
+                            <align>left</align>
+                            <aligny>center</aligny>
+
+                            <control type="label">
+                                <left>0</left>
+                                <width>240</width>
+                                <height>100%</height>
+                                <align>left</align>
+                                <aligny>center</aligny>
+                                <scroll>true</scroll>
+                                <scrollspeed>60</scrollspeed>
+                                <font>Home</font>
+                                <textcolor>Dark1</textcolor>
                                 <label>$VAR[Label_Home_Sub_Menu]</label>
                             </control>
+
                             <visible>!Skin.HasSetting(home.show.menu.icons) + Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                         </control>
 
@@ -851,8 +861,6 @@
             <visible allowhiddenfocus="true">False</visible>
 
             <!-- MAIN MENU - INIT STARTUP -->
-
-            <onfocus condition="$EXP[TMDbHelper_Is_Needed_In_Home] + String.IsEmpty(Window(Home).Property(AnimationDirection)) + String.IsEmpty(Window(Home).Property(first_menu)) + String.IsEmpty(Window(Home).Property(end_menu))">SetProperty(AnimationDirection,Down,Home)</onfocus>
 
             <onfocus condition="$EXP[TMDbHelper_Is_Needed_In_Home] + String.IsEmpty(Window(Home).Property(AnimationDirection)) + String.IsEmpty(Window(Home).Property(first_menu)) + String.IsEmpty(Window(Home).Property(end_menu))">SetProperty(first_menu,1,Home)</onfocus>
 
@@ -978,7 +986,6 @@
             <onfocus>SetFocus(399)</onfocus>
         </control>
     </include>
-
 
     <!-- =================================== -->
     <!--    FLIX - WIDGET - ITEM - INFO      -->
@@ -2083,13 +2090,13 @@
 
         <itemlayout width="222" height="60">
             <control type="label">
+                <top>0</top>
+                <width>90%</width>
                 <align>center</align>
                 <aligny>top</aligny>
-                <width>90%</width>
-                <top>0</top>
                 <centerleft>45.7%</centerleft>
-                <textcolor>Dark3</textcolor>
                 <font>Home</font>
+                <textcolor>Dark3</textcolor>
                 <label>$VAR[Label_Home_Main_Menu]</label>
             </control>
         </itemlayout>
@@ -2102,15 +2109,21 @@
 
                 <control type="label">
                     <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Skin.HasSetting(home.vertical)">Conditional</animation>
+
+                    <top>0</top>
+                    <width>90%</width>
                     <align>center</align>
                     <aligny>top</aligny>
-                    <width>90%</width>
-                    <top>0</top>
                     <centerleft>45.7%</centerleft>
-                    <textcolor>$VAR[Color_Focus]</textcolor>
+                    <scroll>true</scroll>
+                    <scrollspeed>60</scrollspeed>
                     <font>Home</font>
+                    <textcolor>$VAR[Color_Focus]</textcolor>
                     <label>$VAR[Label_Home_Main_Menu]</label>
                 </control>
+
+                <!-- ARROWS - IF SUB MENU 302 CONTENT -->
+
                 <control type="image">
                     <visible>$EXP[Home_Main_Menu_Is_Focus] + !String.IsEmpty(Window(Home).Property(399IsFocus))</visible>
                     <visible>Integer.IsGreater(Container(302).NumItems,0) + [!Skin.HasSetting(show.submenu.on.click.main.menu) | [Skin.HasSetting(show.submenu.on.click.main.menu) + !String.StartsWith(Container(300).ListItem.Property(path),SetFocus(302,0))]]</visible>
@@ -2128,13 +2141,16 @@
                 <visible>Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                 <control type="label">
                     <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus] + !Skin.HasSetting(home.vertical)">Conditional</animation>
-                    <align>center</align>
-                    <aligny>top</aligny>
-                    <width>90%</width>
+
                     <top>0</top>
+                    <width>90%</width>
+                    <align>center</align>
                     <centerleft>45.7%</centerleft>
-                    <textcolor>Dark1</textcolor>
+                    <aligny>top</aligny>
+                    <scroll>true</scroll>
+                    <scrollspeed>60</scrollspeed>
                     <font>Home</font>
+                    <textcolor>Dark1</textcolor>
                     <label>$VAR[Label_Home_Main_Menu]</label>
                 </control>
                 <control type="group">
@@ -2530,17 +2546,22 @@
                     </control>
                 </itemlayout>
                 <focusedlayout width="222" height="64">
+
+                    <!-- SUB MENU - ONLY LABEL - NOT UNDERLINED -->
+
                     <control type="group">
                         <visible>!Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
 
                         <control type="label">
+                            <top>30</top>
+                            <width>90%</width>
                             <align>center</align>
                             <aligny>top</aligny>
-                            <width>90%</width>
-                            <top>30</top>
                             <centerleft>45.7%</centerleft>
-                            <textcolor>$VAR[Color_Focus]</textcolor>
+                            <scroll>true</scroll>
+                            <scrollspeed>60</scrollspeed>
                             <font>HomeIcon</font>
+                            <textcolor>$VAR[Color_Focus]</textcolor>
                             <label>$VAR[Label_Home_Sub_Menu]</label>
                         </control>
                         <control type="image">
@@ -2551,25 +2572,25 @@
                             <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false">Focus</animation>
                         </control>
                     </control>
+
+                    <!-- SUB MENU - ONLY LABEL - UNDERLINED -->
+
                     <control type="group">
                         <visible>Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
 
                         <control type="label">
+                            <top>30</top>
+                            <width>90%</width>
                             <align>center</align>
                             <aligny>top</aligny>
-                            <width>90%</width>
-                            <top>30</top>
                             <centerleft>45.7%</centerleft>
-                            <textcolor>Dark1</textcolor>
+                            <scroll>true</scroll>
+                            <scrollspeed>60</scrollspeed>
                             <font>HomeIcon</font>
+                            <textcolor>Dark1</textcolor>
                             <label>$VAR[Label_Home_Sub_Menu]</label>
                         </control>
                         <control type="group">
-                            <visible>Control.HasFocus(302)</visible>
-
-                            <include>Animation_Common_Fade_In</include>
-                            <include>Animation_Common_Fade_Out</include>
-
                             <control type="image">
                                 <top>70</top>
                                 <centerleft>45.7%</centerleft>
@@ -2595,6 +2616,198 @@
                 <content>
                     <include>skinshortcuts-mainmenu-submenu</include>
                 </content>
+            </control>
+        </control>
+    </include>
+
+    <!-- HORIZONTAL - MENU - ARROWS -->
+
+    <include name="Home_Horizontal_Menu_Arrows">
+
+        <!-- ARROWS (LEFT / RIGHT) - MAIN MENU - ICON -->
+
+        <control type="group">
+            <visible>Skin.HasSetting(home.show.menu.icons)</visible>
+            <visible>!Control.HasFocus(302)</visible>
+
+            <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false" condition="!Control.HasFocus(302)">Conditional</animation>
+
+            <control type="image">
+                <visible>[Integer.IsGreater(Container(300).NumItems,12) + ![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]] | [Integer.IsGreater(Container(300).NumItems,16) + [Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]]</visible>
+                <top>962</top>
+                <left>52</left>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Left"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(300).NumItems,12)</visible>
+                <visible>![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>480</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(300).NumItems,16)</visible>
+                <visible>[Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>42</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+        </control>
+
+        <!-- ARROWS (LEFT / RIGHT) - MAIN MENU - TEXT -->
+
+        <control type="group">
+            <visible>!Skin.HasSetting(home.show.menu.icons)</visible>
+            <visible>!Control.HasFocus(302)</visible>
+
+            <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false" condition="!Control.HasFocus(302)">Conditional</animation>
+
+            <control type="image">
+                <visible>[Integer.IsGreater(Container(300).NumItems,6) + ![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]] | [Integer.IsGreater(Container(300).NumItems,8) + [Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]]</visible>
+                <top>962</top>
+                <left>52</left>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Left"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(300).NumItems,6)</visible>
+                <visible>![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>480</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(300).NumItems,8)</visible>
+                <visible>[Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>42</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+        </control>
+
+        <!-- ARROWS (LEFT / RIGHT) - SUB MENU - ICON -->
+
+        <control type="group">
+            <visible>Skin.HasSetting(home.show.menu.icons)</visible>
+            <visible>Control.HasFocus(302)</visible>
+
+            <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false" condition="Control.HasFocus(302)">Conditional</animation>
+
+            <control type="image">
+                <visible>[Integer.IsGreater(Container(302).NumItems,12) + ![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]] | [Integer.IsGreater(Container(302).NumItems,16) + [Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]]</visible>
+                <top>962</top>
+                <left>52</left>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Left"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(302).NumItems,12)</visible>
+                <visible>![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>480</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(302).NumItems,16)</visible>
+                <visible>[Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>42</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+        </control>
+
+        <!-- ARROWS (LEFT / RIGHT) - SUB MENU - TEXT -->
+
+        <control type="group">
+            <visible>!Skin.HasSetting(home.show.menu.icons)</visible>
+            <visible>Control.HasFocus(302)</visible>
+
+            <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false" condition="Control.HasFocus(302)">Conditional</animation>
+
+            <control type="image">
+                <visible>[Integer.IsGreater(Container(302).NumItems,6) + ![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]] | [Integer.IsGreater(Container(302).NumItems,8) + [Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]]</visible>
+                <top>962</top>
+                <left>52</left>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Left"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(302).NumItems,6)</visible>
+                <visible>![Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>480</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(302).NumItems,8)</visible>
+                <visible>[Skin.HasSetting(show.home.header.clock.left) | !Skin.HasSetting(show.furniture.clock.date.weather)]</visible>
+                <top>962</top>
+                <right>42</right>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Right"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+        </control>
+    </include>
+
+    <!-- VERTICAL - MENU - ARROWS -->
+
+    <include name="Home_Vertical_Menu_Arrows">
+
+        <!-- ARROWS (UP / DOWN) - MAIN MENU - 300 -->
+
+        <control type="group">
+            <visible>[Control.HasFocus(300) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(9099)]</visible>
+
+            <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false" condition="!Control.HasFocus(302)">Conditional</animation>
+
+            <include content="Def_Left" condition="!Skin.HasSetting(home.show.menu.icons)">
+                <param name="left" value="190" />
+            </include>
+            <left>80</left>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(300).NumItems,9)</visible>
+                <top>150</top>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Up"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(300).NumItems,9)</visible>
+                <top>912</top>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Down"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+        </control>
+
+        <!-- ARROWS (UP / DOWN) - SUB MENU - 302 -->
+
+        <control type="group">
+            <visible>Control.HasFocus(302)</visible>
+
+            <animation effect="fade" end="100" start="0" delay="300" time="400" reversible="false" condition="Control.HasFocus(302)">Conditional</animation>
+
+            <include content="Def_Left" condition="!Skin.HasSetting(home.show.menu.icons)">
+                <param name="left" value="190" />
+            </include>
+            <left>80</left>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(302).NumItems,9)</visible>
+                <top>150</top>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Up"><param name="colordiffuse" value="Dark3" /></include>
+            </control>
+            <control type="image">
+                <visible>Integer.IsGreater(Container(302).NumItems,9)</visible>
+                <top>912</top>
+                <include>Def_Arrow_Size</include>
+                <include content="Texture_Arrow_Down"><param name="colordiffuse" value="Dark3" /></include>
             </control>
         </control>
     </include>

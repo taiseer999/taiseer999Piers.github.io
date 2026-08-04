@@ -6,7 +6,7 @@
         <include>Background_Overlay</include>
 
         <control type="group">
-            <include content="Def_Dialog_Background">
+            <include content="Def_Dialog_Setting_Background">
                 <param name="height" value="882" />
                 <param name="width" value="1722" />
             </include>
@@ -63,7 +63,7 @@
                     <!-- ITEM FOCUS -->
 
                     <include content="Def_Layout_Item_Focus">
-                        <param name="visible" value="Control.HasFocus(11)" />
+                        <param name="fade_condition" value="!Control.HasFocus(11)" />
                     </include>
 
                     <control type="label">

@@ -11,7 +11,10 @@
         <include>Hidden_Button_ReloadSkin</include>
 
         <control type="group">
-            <include content="Def_Dialog_Background"><param name="height" value="842" /><param name="width" value="1760" /></include>
+            <include content="Def_Dialog_Setting_Background">
+                <param name="height" value="842" />
+                <param name="width" value="1760" />
+            </include>
 
             <include content="Def_Dialog_Header">
                 <param name="label" value="31334" />
@@ -125,7 +128,6 @@
                     <label>$LOCALIZE[14078] $LOCALIZE[15111] $LOCALIZE[14013] $LOCALIZE[33027]/$LOCALIZE[33028]</label>
                     <selected>Skin.HasSetting(daynight.autocolor)</selected>
 
-                    <onclick condition="!System.HasAddon(script.skin.info.service)">InstallAddon(script.skin.info.service)</onclick>
                     <onclick condition="!System.HasAddon(script.arctic.zephyr.rounded.autocolors)">InstallAddon(script.arctic.zephyr.rounded.autocolors)</onclick>
                     <onclick condition="!Skin.HasSetting(daynight.autocolor)">Skin.SetString(settingthemecolor,3)</onclick>
 

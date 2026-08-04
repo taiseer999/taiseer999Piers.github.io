@@ -107,15 +107,12 @@
             <onup condition="$EXP[Home_Is_Vertical]">SetFocus(300,$INFO[Container(300).NumItems])</onup>
             <onup condition="$EXP[Home_Is_Vertical]">SetProperty(end_menu,1,Home)</onup>
 
-            <ondown condition="$EXP[Home_Is_Vertical]">SetProperty(AnimationDirection,Down,Home)</ondown>
             <ondown condition="$EXP[Home_Is_Vertical]">SetFocus(300,0,absolute)</ondown>
             <ondown condition="$EXP[Home_Is_Vertical]">SetProperty(first_menu,1,Home)</ondown>
 
-            <onleft condition="$EXP[Home_Is_Vertical]">SetProperty(AnimationDirection,Down,Home)</onleft>
             <onleft condition="$EXP[Home_Is_Vertical]">SetFocus(300,0,absolute)</onleft>
             <onleft condition="$EXP[Home_Is_Vertical]">SetProperty(first_menu,1,Home)</onleft>
 
-            <onright condition="$EXP[Home_Is_Vertical]">SetProperty(AnimationDirection,Down,Home)</onright>
             <onright condition="$EXP[Home_Is_Vertical]">SetFocus(300,0,absolute)</onright>
             <onright condition="$EXP[Home_Is_Vertical]">SetProperty(first_menu,1,Home)</onright>
 
@@ -125,15 +122,12 @@
             <onleft condition="$EXP[Home_Is_Horizontal]">SetFocus(300,$INFO[Container(300).NumItems])</onleft>
             <onleft condition="$EXP[Home_Is_Horizontal]">SetProperty(end_menu,1,Home)</onleft>
 
-            <onright condition="$EXP[Home_Is_Horizontal]">SetProperty(AnimationDirection,Right,Home)</onright>
             <onright condition="$EXP[Home_Is_Horizontal]">SetFocus(300,0,absolute)</onright>
             <onright condition="$EXP[Home_Is_Horizontal]">SetProperty(first_menu,1,Home)</onright>
 
-            <ondown condition="$EXP[Home_Is_Horizontal]">SetProperty(AnimationDirection,Right,Home)</ondown>
             <ondown condition="$EXP[Home_Is_Horizontal]">SetFocus(300,0,absolute)</ondown>
             <ondown condition="$EXP[Home_Is_Horizontal]">SetProperty(first_menu,1,Home)</ondown>
 
-            <onup condition="$EXP[Home_Is_Horizontal]">SetProperty(AnimationDirection,Right,Home)</onup>
             <onup condition="$EXP[Home_Is_Horizontal]">SetFocus(300,0,absolute)</onup>
             <onup condition="$EXP[Home_Is_Horizontal]">SetProperty(first_menu,1,Home)</onup>
 
@@ -965,22 +959,56 @@
 
                 <control type="label">
                     <include>Def_Header_Sub_Info_Definition</include>
+                    <label>$LOCALIZE[24029]: $LOCALIZE[231]</label>
+                    <visible>String.IsEmpty(Weather.plugin)</visible>
+                </control>
+
+                <control type="label">
+                    <include>Def_Header_Sub_Info_Definition</include>
                     <label>$INFO[Window(Weather).Property(WeatherProvider)]</label>
+                    <visible>!String.IsEmpty(Weather.plugin)</visible>
                 </control>
                 <control type="label">
                     <include>Def_Label_Header_Sub_Icon_Definition</include>
                     <label>   &#63097;</label>
+                    <visible>!String.IsEmpty(Weather.plugin)</visible>
                 </control>
 
                 <control type="label">
                     <visible>![String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503]) | String.IsEmpty(Window(Weather).Property(Updated))]</visible>
+                    <visible>!String.IsEmpty(Weather.plugin)</visible>
                     <include>Def_Header_Sub_Info_Definition</include>
                     <label>$INFO[Window(Weather).Property(Location),  •  ,]</label>
                 </control>
                 <control type="label">
                     <visible>![String.Contains(Weather.Data(Current.Temperature),$LOCALIZE[503]) | String.IsEmpty(Window(Weather).Property(Updated))]</visible>
+                    <visible>!String.IsEmpty(Weather.plugin)</visible>
                     <include>Def_Label_Header_Sub_Icon_Definition</include>
                     <label>   &#61984;</label>
+                </control>
+            </control>
+
+            <!-- FILEMANAGER -->
+
+            <control type="grouplist">
+                <visible>Window.IsVisible(FileManager.xml)</visible>
+                <visible>!String.IsEmpty(Container(20).NumItems)</visible>
+                <itemgap>0</itemgap>
+                <orientation>horizontal</orientation>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="label">
+                    <include>Def_Header_Sub_Info_Definition</include>
+                    <label>$INFO[Container(20).NumItems]</label>
+                    <visible>Control.HasFocus(20) | Control.HasFocus(1824) | ControlGroup(9000).HasFocus()</visible>
+                </control>
+                <control type="label">
+                    <include>Def_Header_Sub_Info_Definition</include>
+                    <label>$INFO[Container(21).NumItems]</label>
+                    <visible>Control.HasFocus(21) | Control.HasFocus(1825)</visible>
+                </control>
+                <control type="label">
+                    <include>Def_Label_Header_Sub_Icon_Definition</include>
+                    <label>   &#61654;</label>
                 </control>
             </control>
 
@@ -1078,7 +1106,7 @@
                 <visible>![Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(videoversions) | Container.Content(sets)]</visible>
                 <visible>![Container.Content(artists) | Container.Content(albums) | Container.Content(songs)]</visible>
                 <visible>![Container.Content(directors) | Container.Content(actors) | Container.Content(countries) | Container.Content(years) | Container.Content(genres) | Container.Content(tags) | Container.Content(studios)]</visible>
-                <visible>![$EXP[IsPvrDialog] | Window.IsVisible(AddonBrowser.xml) | Window.IsVisible(LoginScreen.xml) | Window.IsActive(videoplaylist) | Window.IsVisible(MyWeather.xml) | Container.Content(favourites)]</visible>
+                <visible>![$EXP[IsPvrDialog] | Window.IsVisible(AddonBrowser.xml) | Window.IsVisible(LoginScreen.xml) | Window.IsActive(videoplaylist) | Window.IsVisible(MyWeather.xml) | Container.Content(favourites) | Window.IsVisible(FileManager.xml)]</visible>
                 <visible>!$EXP[IsPluginApplePodcasts] + !$EXP[IsGameMode] + !Window.IsVisible(MyGames.xml)</visible>
 
                 <itemgap>0</itemgap>
@@ -1087,37 +1115,45 @@
                 <control type="label">
                     <include>Def_Header_Sub_Info_Definition</include>
                     <label>$INFO[Window(Home).Property(Movies.Count)]</label>
+                    <visible>Library.HasContent(movies)</visible>
                 </control>
                 <control type="label">
                     <include>Def_Label_Header_Sub_Icon_Definition</include>
                     <label>   &#61853;</label>
+                    <visible>Library.HasContent(movies)</visible>
                 </control>
 
                 <control type="label">
                     <include>Def_Header_Sub_Info_Definition</include>
                     <label>$INFO[Window(Home).Property(TVShows.Count),  •  ,]</label>
+                    <visible>Library.HasContent(tvshows)</visible>
                 </control>
                 <control type="label">
                     <include>Def_Label_Header_Sub_Icon_Definition</include>
                     <label>   &#61656;</label>
+                    <visible>Library.HasContent(tvshows)</visible>
                 </control>
 
                 <control type="label">
                     <include>Def_Header_Sub_Info_Definition</include>
                     <label>$INFO[Window(Home).Property(Music.AlbumsCount),  •  ,]</label>
+                    <visible>Library.HasContent(music)</visible>
                 </control>
                 <control type="label">
                     <include>Def_Label_Header_Sub_Icon_Definition</include>
                     <label>   &#62292;</label>
+                    <visible>Library.HasContent(music)</visible>
                 </control>
 
                 <control type="label">
                     <include>Def_Header_Sub_Info_Definition</include>
                     <label>$INFO[Pvr.BackendChannels,  •  ,]</label>
+                    <visible>PVR.HasTVChannels</visible>
                 </control>
                 <control type="label">
                     <include>Def_Label_Header_Sub_Icon_Definition</include>
                     <label>   &#61860;</label>
+                    <visible>PVR.HasTVChannels</visible>
                 </control>
             </control>
         </control>
@@ -2556,6 +2592,9 @@
         <width>560</width>
     </include>
 
+    <!-- ================================  -->
+    <!--     DIALOGUE - FLAG VIDEO         -->
+    <!-- ================================= -->
     <include name="Def_Onclick_Flag_Video_Reset">
 
         <!-- VIDEO -->
@@ -2638,7 +2677,7 @@
         <onclick>Skin.Reset(hide.flags.videocodec)</onclick>
         <onclick>Skin.Reset(hide.flags.aspectratio)</onclick>
         <onclick>Skin.Reset(hide.flags.hdr)</onclick>
-        <onclick>Skin.Reset(hide.flags.videoduration)</onclick>
+        <onclick>Skin.SetBool(hide.flags.videoduration)</onclick>
         <onclick>Skin.Reset(hide.flags.audiocodec)</onclick>
         <onclick>Skin.Reset(hide.flags.audiochannels)</onclick>
         <onclick>Skin.SetBool(show.flags.audio.country)</onclick>
@@ -2707,7 +2746,97 @@
     </include>
 
     <!-- ===========================  -->
-    <!--   SKIN / SERVICE - SETTINGS   -->
+    <!--        FLAG - LIBRARY        -->
+    <!-- ============================ -->
+
+	<variable name="Def_Audio_Channels">
+		<value condition="String.IsEqual(ListItem.AudioChannels,0)">0.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,1)">1.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,2)">2.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,3)">2.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,4)">4.0</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,5)">4.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,6)">5.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,7)">6.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,8)">7.1</value>
+		<value condition="String.IsEqual(ListItem.AudioChannels,10)">9.1</value>
+		<value>$INFO[ListItem.AudioChannels]</value>
+	</variable>
+
+	<variable name="Def_Flag_Color">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">color</value>
+		<value>white</value>
+	</variable>
+
+	<variable name="Def_Flag_Colordiffuse_Dark1">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">none</value>
+		<value>Dark1</value>
+	</variable>
+
+	<variable name="Def_Flag_Colordiffuse_Dark2">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">none</value>
+		<value>Dark2</value>
+	</variable>
+
+	<variable name="Def_Flag_Colordiffuse_Star">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">$VAR[Color_Stars_User_Rating_Override]</value>
+		<value>Dark1</value>
+	</variable>
+
+	<variable name="Def_Flag_Colordiffuse_UserRatung_Star">
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">$VAR[Color_Rating_User_Star]</value>
+		<value>Dark1</value>
+	</variable>
+
+    <variable name="Image_Bluray">
+        <value condition="String.IsEqual(ListItem.VideoResolution,4K) | Integer.IsEqual(ListItem.VideoResolution,2160)">ultrahd</value>
+        <value>bluray</value>
+    </variable>
+
+    <variable name="Image_Bluray_9500">
+        <value condition="String.IsEqual(Container(9500).ListItem.VideoResolution,4K) | Integer.IsEqual(Container(9500).ListItem.VideoResolution,2160)">ultrahd</value>
+        <value>bluray</value>
+    </variable>
+
+    <!-- ===========================  -->
+    <!--      FLAG - VIDEO PLAYER     -->
+    <!-- ============================ -->
+
+	<variable name="Def_VideoPlayer_Flag_Color">
+		<value condition="Skin.HasSetting(show.osd.video.colored.icons)">color</value>
+		<value>white</value>
+	</variable>
+
+	<variable name="Def_VideoPlayer_Audio_Channels">
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,0)">0.0</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,1)">1.0</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,2)">2.0</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,3)">2.1</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,4)">4.0</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,5)">4.1</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,6)">5.1</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,7)">6.1</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,8)">7.1</value>
+		<value condition="String.IsEqual(VideoPlayer.AudioChannels,10)">9.1</value>
+		<value>$INFO[VideoPlayer.AudioChannels]</value>
+	</variable>
+
+	<variable name="Def_VideoPlayer_Flag_Colordiffuse_Star">
+		<value condition="Skin.HasSetting(show.osd.video.colored.icons)">$VAR[Color_OSD_Stars_User_Rating_Override_Video]</value>
+		<value>$VAR[Color_OSD_Panel_White100]</value>
+	</variable>
+
+	<variable name="Def_VideoPlayer_Flag_Colordiffuse_Dark1">
+		<value condition="Skin.HasSetting(show.osd.video.colored.icons)">none</value>
+		<value>$VAR[Color_OSD_Panel_White100]</value>
+	</variable>
+
+	<variable name="Def_VideoPlayer_Flag_Colordiffuse_Dark2">
+		<value condition="Skin.HasSetting(show.osd.video.colored.icons)">none</value>
+		<value>$VAR[Color_OSD_Panel_White70]</value>
+	</variable>
+    <!-- ===========================  -->
+    <!--   SKIN / SERVICE - SETTINGS  -->
     <!-- ============================ -->
 
     <include name="Def_Item_Selected">
@@ -3222,6 +3351,7 @@
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(settingthemecolor,1)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(settingskinfont,1)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(settingperflevel,2)</onload>
+        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(settingskinfont,1)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(settingpresetcolor,3)</onload>
 
         <!-- COLOR -->
@@ -3229,8 +3359,8 @@
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(ColorHighlight.name,FF03A9F4)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(ColorFocus.name,FF03A9F4)</onload>
 
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(KodiRatingStarColor.name,FFCA7B02)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(UserRatingStarColor.name,FFD402AA)</onload>
+        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(KodiRatingStarColor.name,FFD6AD05)</onload>
+        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(UserRatingStarColor.name,FFAB47BC)</onload>
         <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(MpaaCertifColor.name)</onload> -->
 
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(IndicatorColorBackgroundNew.name,E6E6002E)</onload>
