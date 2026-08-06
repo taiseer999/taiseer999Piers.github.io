@@ -1321,6 +1321,71 @@
             </control>
         </control>
 
+        <!-- HOME - HEADER - RIGHT - SYSTEM STATS -->
+
+        <control type="group">
+            <visible>!Window.IsVisible(DialogBusy.xml)</visible>
+            <visible>Window.IsActive(Home) + Skin.HasSetting(show.furniture.clock.date.weather)</visible>
+            <include>Animation_Fade_Vertical_Focus_Search</include>
+            <control type="grouplist">
+                            <top>116</top>
+                            <right>64</right>
+                            <width>880</width>
+                            <height>42</height>
+                            <orientation>horizontal</orientation>
+                            <itemgap>4</itemgap>
+                            <align>right</align>
+                            <usecontrolcoords>true</usecontrolcoords>
+                            <control type="image">
+                                <width>33</width>
+                                <height>33</height>
+                                <top>9</top>
+                                <aspectratio>keep</aspectratio>
+                                <texture>$VAR[SysStats_CPU_Icon]</texture>
+                            </control>
+                            <control type="label">
+                                <font>font_tiny_top</font>
+                                <width>auto</width>
+                                <height>46</height>
+                                <textcolor>Dark2</textcolor>
+                                <label>$INFO[System.CPUTemperature]</label>
+                            </control>
+                            <control type="image">
+                                <width>28</width>
+                                <height>28</height>
+                                <top>11</top>
+                                <left>19</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>$VAR[SysStats_RAM_Icon]</texture>
+                            </control>
+                            <control type="label">
+                                <font>font_tiny_top</font>
+                                <width>auto</width>
+                                <height>46</height>
+                                <textcolor>Dark2</textcolor>
+                                <label>$INFO[system.memory(used.percent)]</label>
+                            </control>
+                            <control type="image">
+                                <width>33</width>
+                                <height>44</height>
+                                <top>2</top>
+                                <left>19</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>$VAR[SysStats_Connected_Icon]</texture>
+                                <visible>String.Contains(Network.IPAddress,1)</visible>
+                            </control>
+                            <control type="image">
+                                <width>33</width>
+                                <height>44</height>
+                                <top>2</top>
+                                <left>19</left>
+                                <aspectratio>keep</aspectratio>
+                                <texture>$VAR[SysStats_Disconnected_Icon]</texture>
+                                <visible>!String.Contains(Network.IPAddress,1)</visible>
+                            </control>
+                        </control>
+        </control>
+
         <!-- HOME - HEADER - RIGHT - CLEARLOGO -->
 
         <control type="group">
