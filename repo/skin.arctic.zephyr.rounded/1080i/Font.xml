@@ -2,20 +2,16 @@
 <fonts>
     <fontset id="Default" unicode="false" idloc="15109">
         <include>VideoLyrics_Fonts</include>
+        <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
         <font>
             <name>font23_narrow</name>
-            <filename>monadit.ttf</filename>
-            <size>21</size>
+            <filename>Noto-Regular.ttf</filename>
+            <size>18</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>monadit.ttf</filename>
-            <size>32</size>
-        </font>
-        <font>
-            <name>font23_narrow</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>21</size>
+            <filename>Noto-Bold.ttf</filename>
+            <size>27</size>
         </font>
         <font>
             <name>WatchedStates</name>
@@ -31,11 +27,6 @@
             <name>SubTitleBoldXL</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>36</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>32</size>
         </font>
         <font>
             <name>WatchedIcon</name>
@@ -330,20 +321,16 @@
     </fontset>
     <fontset id="ايفون" unicode="false">
         <include>VideoLyrics_Fonts</include>
+        <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
         <font>
             <name>font23_narrow</name>
-            <filename>monadit.ttf</filename>
-            <size>21</size>
+            <filename>Noto-Regular.ttf</filename>
+            <size>18</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>monadit.ttf</filename>
-            <size>32</size>
-        </font>
-        <font>
-            <name>font23_narrow</name>
-            <filename>iphone.ttf</filename>
-            <size>21</size>
+            <filename>Noto-Bold.ttf</filename>
+            <size>27</size>
         </font>
         <font>
             <name>WatchedStates</name>
@@ -359,11 +346,6 @@
             <name>SubTitleBoldXL</name>
             <filename>iphone.ttf</filename>
             <size>36</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>iphone.ttf</filename>
-            <size>32</size>
         </font>
         <font>
             <name>WatchedIcon</name>
@@ -658,20 +640,16 @@
     </fontset>
     <fontset id="تونس" unicode="true">
         <include>VideoLyrics_Fonts</include>
+        <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
         <font>
             <name>font23_narrow</name>
-            <filename>monadit.ttf</filename>
-            <size>21</size>
+            <filename>Noto-Regular.ttf</filename>
+            <size>18</size>
         </font>
         <font>
             <name>font32</name>
-            <filename>monadit.ttf</filename>
-            <size>32</size>
-        </font>
-        <font>
-            <name>font23_narrow</name>
-            <filename>tonos.ttf</filename>
-            <size>21</size>
+            <filename>Noto-Bold.ttf</filename>
+            <size>27</size>
         </font>
         <font>
             <name>WatchedStates</name>
@@ -687,11 +665,6 @@
             <name>SubTitleBoldXL</name>
             <filename>tonos bold.ttf</filename>
             <size>36</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>tonos.ttf</filename>
-            <size>32</size>
         </font>
         <font>
             <name>WatchedIcon</name>
