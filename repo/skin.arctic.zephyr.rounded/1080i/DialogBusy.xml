@@ -5,7 +5,7 @@
 
     <controls>
         <control type="group">
-            <visible>!Window.IsVisible(Custom_1261_DialogInfo_Video_Helper_Trailer_Youtube_Fullscreen.xml)</visible>
+            <visible>!Window.IsVisible(Custom_1262_DialogInfo_Video_Helper_Trailer_Youtube_Fullscreen.xml)</visible>
             <visible>String.IsEmpty(Window(Home).Property(script.preshowexperience.running))</visible>
             <visible>!Window.IsVisible(DialogExtendedProgressBar.xml)</visible>
             <visible>String.IsEmpty(Window(Home).Property(Trailer_Fade_Background))</visible>
@@ -13,7 +13,7 @@
             <visible>[!Window.IsVisible(DialogMusicInfo.xml) | [Window.IsVisible(DialogMusicInfo.xml) + !String.IsEmpty(Window(Home).Property(VideoYoutubeIsPlaying))]]</visible>
             <visible>String.IsEmpty(Window(Home).Property(Hide_On_Reload_Dialog_Info))</visible>
 
-            <animation effect="slide" start="0" end="0,-40" time="0" condition="[Window.IsVisible(Home.xml) + !$EXP[View_Info_Dialog_Active]] | [Skin.HasSetting(hide.view.flix.furniture.header) + $EXP[View_Flix]]">Conditional</animation>
+            <animation effect="slide" start="0" end="0,-40" time="0" condition="[Window.IsVisible(Home.xml) + !$EXP[View_Info_Dialog_Active]] | [$EXP[View_Flix_Hide_Header_Info] + $EXP[View_Flix_Is_Visible]]">Conditional</animation>
 
             <include>Animation_Common_Fade_In</include>
             <include>Animation_Common_Fade_Out</include>

@@ -853,6 +853,40 @@
         <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter))">flags/rating/white/rottentomatoes/notgood_white.png</value>
     </variable>
 
+    <!-- COLOR-AGNOSTIC WRAPPERS (used by Furniture flag bar) -->
+    <!-- Literal paths only: Kodi does not resolve a $VAR that returns another $VAR inside <texture>. -->
+
+    <variable name="Image_Trakt">
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Trakt_Rating))">flags/rating/color/trakt/trakt.png</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Trakt_Rating))">flags/rating/white/trakt/trakt_white.png</value>
+    </variable>
+
+    <variable name="Image_RottenTomatoes">
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),74) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">flags/rating/color/rottentomatoes/hot.png</value>
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),59) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">flags/rating/color/rottentomatoes/tomato.png</value>
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">flags/rating/color/rottentomatoes/rt.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),74) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">flags/rating/white/rottentomatoes/hot_white.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),59) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">flags/rating/white/rottentomatoes/tomato_white.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_Rating))">flags/rating/white/rottentomatoes/rt_white.png</value>
+    </variable>
+
+    <variable name="Image_RottenTomatoes_Audience">
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter),59) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter))">flags/rating/color/rottentomatoes/good.png</value>
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter))">flags/rating/color/rottentomatoes/notgood.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter),59) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter))">flags/rating/white/rottentomatoes/good_white.png</value>
+        <value condition="Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.RottenTomatoes_UserMeter))">flags/rating/white/rottentomatoes/notgood_white.png</value>
+    </variable>
+
+    <variable name="Image_Letterboxd">
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Letterboxd_Rating))">flags/rating/color/letterboxd/letterboxd.png</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Letterboxd_Rating))">flags/rating/white/letterboxd/letterboxd_white.png</value>
+    </variable>
+
+    <variable name="Image_Mdblist">
+        <value condition="Skin.HasSetting(enable.furniture.flags.colored) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.MDBList_Rating))">flags/rating/color/mdblist/mdblist.png</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.MDBList_Rating))">flags/rating/white/mdblist/mdblist_white.png</value>
+    </variable>
+
     <!-- IMAGE - BACKGROUND -->
 
     <variable name="Image_Background_Player_Plot_Overlay">
