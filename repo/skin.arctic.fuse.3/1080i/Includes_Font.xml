@@ -7,6 +7,23 @@
         <param name="aspect_system">0.8</param>
         <definition>
 
+            <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) -->
+            <!-- Pinned in Font_Static so they are IDENTICAL across all 9 fontsets:
+                 the PPI overlay never changes with the user's skin-font choice.
+                 Noto-Regular/Bold.ttf are Arabic-capable (shipped/copied by the
+                 abukarimtools TinyPPI patcher). Sizes 18/27 (not 21/32) compensate
+                 for Noto being wider than the skin's Inter so labels don't overflow. -->
+            <font>
+                <name>font23_narrow</name>
+                <filename>Noto-Regular.ttf</filename>
+                <size>18</size>
+            </font>
+            <font>
+                <name>font32</name>
+                <filename>Noto-Bold.ttf</filename>
+                <size>27</size>
+            </font>
+
 
             <font>
                 <name>font_infotag_bold</name>
