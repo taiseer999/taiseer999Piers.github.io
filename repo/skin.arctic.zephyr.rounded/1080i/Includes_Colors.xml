@@ -455,7 +455,9 @@
     <!-- MEDIA FLAG - COLOR -->
 
     <variable name="Color_Flag_Next_Aired">
-		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FF1ABC9C</value>
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored) + String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Ended)">FF1ABC9C</value>
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored) + String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Canceled)">FFC0392B</value>
+		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FF3498DB</value>
 		<value>Dark1</value>
     </variable>
 

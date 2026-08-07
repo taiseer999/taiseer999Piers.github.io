@@ -2749,6 +2749,12 @@
     <!--        FLAG - LIBRARY        -->
     <!-- ============================ -->
 
+	<variable name="Def_Flag_Airing">
+		<value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Canceled)">flags/video/white/other/airing_cancel.png</value>
+		<value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Ended)">flags/video/white/other/airing_ended.png</value>
+		<value>flags/video/white/other/airing.png</value>
+	</variable>
+
 	<variable name="Def_Audio_Channels">
 		<value condition="String.IsEqual(ListItem.AudioChannels,0)">0.0</value>
 		<value condition="String.IsEqual(ListItem.AudioChannels,1)">1.0</value>
