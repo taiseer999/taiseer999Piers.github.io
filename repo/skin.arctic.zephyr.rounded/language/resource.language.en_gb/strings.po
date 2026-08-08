@@ -1925,6 +1925,7 @@ msgctxt "#31476"
 msgid "Small poster fanart"
 msgstr ""
 
+
 msgctxt "#31477"
 msgid "Wikipedia"
 msgstr ""
@@ -2545,18 +2546,12 @@ msgctxt "#31631"
 msgid "Last aired"
 msgstr ""
 
-msgctxt "#31991"
-msgid "Show genre icons on home"
+msgctxt "#31632"
+msgid "Rewind"
 msgstr ""
 
-msgctxt "#31992"
-msgid "Show studio logo on home"
+msgctxt "#31633"
+msgid "Fast forward"
 msgstr ""
 
-msgctxt "#31993"
-msgid "Show CoreELEC logo above date"
-msgstr ""
 
-msgctxt "#31994"
-msgid "Colored system stats icons (RAM / CPU / connection)"
-msgstr ""
