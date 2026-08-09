@@ -146,9 +146,9 @@
     </include>
 
     <include name="Font_Default">
-        <param name="font_bold">Inter-Bold.ttf</param>
-        <param name="font_regular">Inter-Regular.ttf</param>
-        <param name="font_light">Inter-Light.ttf</param>
+        <param name="font_black">monadi BOLD.ttf</param>
+        <param name="font_bold">monadi BOLD.ttf</param>
+        <param name="font_regular">monadi-reg.ttf</param>
         <param name="style_light" />
         <param name="size_hint">17</param>
         <param name="size_tiny">21</param>
