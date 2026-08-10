@@ -284,8 +284,6 @@
             <include>Animation_Common_Fade_In</include>
             <include>Animation_Common_Fade_Out</include>
 
-            <include>Animation_OSD_Slide_Up_With_Plot</include>
-
             <top>40</top>
             <right>90</right>
             <height>160</height>
@@ -1400,7 +1398,7 @@
 
         <definition>
             <control type="group">
-                <visible>String.Contains(ListItem.Label,$LOCALIZE[31634])</visible>
+                <visible>ListItem.Property(isbookmark)</visible>
 
                 <right>$PARAM[right]</right>
                 <bottom>$PARAM[bottom]</bottom>
@@ -1560,7 +1558,7 @@
             <param name="back_colordiffuse" value="$VAR[Color_OSD_Button_Background]" />
             <include>Def_OSD_UpDown_Video_Info</include>
             <onclick>Dialog.Close(all,true)</onclick>
-            <onclick>ActivateWindow(videoplaylist)</onclick>
+            <onclick>AlarmClock(delayplaylist,ActivateWindow(videoplaylist),00:01,silent)</onclick>
         </include>
 
         <!-- SETTINGS -->
@@ -1621,19 +1619,6 @@
             <align>right</align>
             <include>Def_OSD_UpDown_Video_Info</include>
             <onclick>ActivateWindow(125)</onclick>
-        </include>
-        <!-- TINYPPI -->
-
-        <include content="Object_OSD_Button" condition="System.HasAddon(script.tinyppi) + System.AddonIsEnabled(script.tinyppi)">
-            <param name="visible" value="true" />
-            <param name="left" value="-47" />
-            <param name="icon" value="special://skin/extras/icons/ppi.png" />
-            <param name="id" value="6009" />
-            <param name="groupid" value="6109" />
-            <param name="back_colordiffuse" value="$VAR[Color_OSD_Button_Background]" />
-            <align>right</align>
-            <include>Def_OSD_UpDown_Video_Info</include>
-            <onclick>RunScript(script.tinyppi,dialog)</onclick>
         </include>
     </include>
 
