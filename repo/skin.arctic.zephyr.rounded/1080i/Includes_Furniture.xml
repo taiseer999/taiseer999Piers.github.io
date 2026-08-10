@@ -1386,6 +1386,23 @@
                         </control>
         </control>
 
+        <!-- HOME - HEADER - RIGHT - COREELEC LOGO -->
+
+        <control type="group">
+            <visible>!Window.IsVisible(DialogBusy.xml)</visible>
+            <visible>Window.IsActive(Home) + Skin.HasSetting(show.furniture.clock.date.weather)</visible>
+            <visible>!Skin.HasSetting(Header.DisableLogo)</visible>
+            <include>Animation_Fade_Vertical_Focus_Search</include>
+            <control type="image">
+                <top>40</top>
+                <right>64</right>
+                <width>200</width>
+                <height>60</height>
+                <aspectratio align="right">keep</aspectratio>
+                <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>
+            </control>
+        </control>
+
         <!-- HOME - HEADER - RIGHT - CLEARLOGO -->
 
         <control type="group">
@@ -2017,6 +2034,15 @@
                 <align>right</align>
                 <width>50%</width>
                 <label>$INFO[System.Date]</label>
+            </control>
+            <control type="image">
+                <visible>!Skin.HasSetting(Header.DisableLogo)</visible>
+                <centertop>112</centertop>
+                <right>View_List_Side</right>
+                <width>200</width>
+                <height>50</height>
+                <aspectratio align="right">keep</aspectratio>
+                <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>
             </control>
         </control>
     </include>
