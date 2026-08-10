@@ -1,2267 +1,2546 @@
 # Kodi Media Center language file
-# Addon Name: Arctic Fuse 3
-# Addon Name: skin.arctic.fuse.3
-# Addon Provider: jurialmunkey
+# Addon Name: Arctic: Zephyr - Rounded
+# Addon id: skin.arctic.zephyr.mod
+# Addon Provider: jurialmunkey, beatmasterrs
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: et_EE\n"
+"Project-Id-Version: XBMC Skins\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2023-03-24 19:13+0000\n"
+"Last-Translator: rimasx <riks_12@hot.ee>\n"
+"Language-Team: Estonian <https://kodi.weblate.cloud/projects/kodi-add-ons-skins/skin-arctic-zephyr-mod/et_ee/>\n"
+"Language: et_ee\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "#31000"
-msgid "Live TV / PVR"
-msgstr "Otsepilt / PVR"
+msgid "Limit number of items"
+msgstr ""
 
-#: /1080i/Includes_MediaFilter.xml
 msgctxt "#31001"
-msgid "In-Progress Episodes"
-msgstr "Pooleli episoodid"
+msgid "Backup / Restore"
+msgstr ""
 
-#: /1080i/Includes_Views_Combined.xml
 msgctxt "#31002"
-msgid "Combined Square"
-msgstr "Kombo - Ruut"
+msgid "Director show information"
+msgstr ""
 
-#: /1080i/Includes_Views_Combined.xml
 msgctxt "#31003"
-msgid "Combined Landscape"
-msgstr "Kombo - Rõhtpilt"
+msgid "Feature ends at"
+msgstr ""
 
-#: /1080i/Includes_Views_Combined.xml
 msgctxt "#31004"
-msgid "Combined Poster"
-msgstr "Kombo - Plakat"
+msgid "Flix"
+msgstr ""
 
-#: /1080i/Includes_Views_Combined.xml
 msgctxt "#31005"
-msgid "Combined Circle"
-msgstr "Kombo - Ring"
+msgid "Modern Fanart"
+msgstr ""
 
-#: /1080i/Includes_Views_Combined.xml
 msgctxt "#31006"
-msgid "Combined Board"
-msgstr "Kombo - Tahvel"
+msgid "Colored icon media flags"
+msgstr ""
 
-#: /1080i/Dialog_DialogSelect.xml
 msgctxt "#31007"
-msgid "Row"
-msgstr "Rida"
+msgid "Arctic Zephyr - Rounded"
+msgstr ""
 
-#: /1080i/Dialog_DialogSelect.xml
 msgctxt "#31008"
-msgid "Wall"
-msgstr "Sein"
+msgid "Metacritic"
+msgstr ""
 
-#: /1080i/Includes_Shortcuts_Window.xml
 msgctxt "#31009"
-msgid "Widget Customisation"
-msgstr "Vidina kohandamine"
+msgid "Resources"
+msgstr ""
 
-#: /1080i/Includes_Hubs.xml
 msgctxt "#31010"
-msgid "Program"
-msgstr "Programm"
+msgid "Video Infodialog"
+msgstr ""
 
-#: /1080i/Includes_Hubs.xml
 msgctxt "#31011"
-msgid "Picture"
-msgstr "Pilt"
+msgid "Show clearLogo"
+msgstr ""
 
-#: /1080i/Includes_Hubs.xml
 msgctxt "#31012"
-msgid "Recent"
-msgstr "Uued"
+msgid "Videolyrics"
+msgstr ""
 
-#: /1080i/Includes_Views_PVR.xml
 msgctxt "#31013"
-msgid "List Standard"
-msgstr "Loend - Standard"
+msgid "Shifted"
+msgstr ""
 
-#: /1080i/Includes_Views_PVR.xml
 msgctxt "#31014"
-msgid "List Info"
-msgstr "Loend - Info"
+msgid "movies in the library"
+msgstr ""
 
 msgctxt "#31015"
-msgid "Order"
-msgstr "Suund"
+msgid "Use fanart instead of landscape on Tv Shows"
+msgstr ""
 
 msgctxt "#31016"
-msgid "Sort by"
-msgstr "Järjesta"
+msgid "Use fanart instead of landscape on movies"
+msgstr ""
 
-#: /1080i/Includes_Views_PVR.xml
 msgctxt "#31017"
-msgid "List Details"
-msgstr "Loend - Üksikasjad"
+msgid "Use fanart instead of landscape on seasons"
+msgstr ""
 
 msgctxt "#31018"
-msgid "Recommendations"
-msgstr "Soovitused"
+msgid "Hide bar/CD on lyrics"
+msgstr ""
 
-#: /1080i/Includes_Views_PVR.xml
 msgctxt "#31019"
-msgid "List Planner"
-msgstr "Loend - Kava"
+msgid "Show PVR technical info"
+msgstr ""
 
-#: /1080i/Includes_Views_PVR.xml
 msgctxt "#31020"
-msgid "List Outline"
-msgstr "Loend - Kokkuvõte"
+msgid "Fullscreen Fanart"
+msgstr ""
 
-#: /1080i/Includes_Views_Combined.xml
 msgctxt "#31021"
-msgid "Combined Expanded"
-msgstr "Kombo - Laiendatud"
+msgid "Extended information"
+msgstr "Laiendatud teave"
 
 msgctxt "#31022"
+msgid "IPTV Recorder"
+msgstr "IPTV salvesti"
+
+msgctxt "#31023"
+msgid "Recordings"
+msgstr ""
+
+msgctxt "#31024"
+msgid "Last Played Channels"
+msgstr ""
+
+msgctxt "#31025"
+msgid "All Channels"
+msgstr ""
+
+msgctxt "#31026"
+msgid "New Movies"
+msgstr ""
+
+msgctxt "#31027"
+msgid "Recently Played Movies"
+msgstr "Viimati esitatud filmid"
+
+msgctxt "#31028"
+msgid "Random Movies"
+msgstr "Juhuslikud filmid"
+
+msgctxt "#31029"
+msgid "In Progress Movies"
+msgstr "Pooleli filmid"
+
+msgctxt "#31030"
+msgid "Top Rated Movies"
+msgstr "Hinnatuimad filmid"
+
+msgctxt "#31031"
+msgid "Top 250 Movies"
+msgstr ""
+
+msgctxt "#31032"
+msgid "Unwatched Movies"
+msgstr "Vaatamata filmid"
+
+msgctxt "#31033"
+msgid "Movie Sets"
+msgstr "Filmikomplektid"
+
+msgctxt "#31034"
+msgid "New Tv Shows"
+msgstr ""
+
+msgctxt "#31035"
+msgid "Recently Watched TV Shows"
+msgstr ""
+
+msgctxt "#31036"
+msgid "Random Tv Shows"
+msgstr ""
+
+msgctxt "#31037"
+msgid "Top Rated Tv Shows"
+msgstr ""
+
+msgctxt "#31038"
+msgid "New Episodes"
+msgstr ""
+
+msgctxt "#31039"
+msgid "Recently Played Episodes"
+msgstr "Viimati vaadatud episoodid"
+
+msgctxt "#31040"
+msgid "Random Episodes"
+msgstr "Juhuslikud episoodid"
+
+msgctxt "#31041"
+msgid "Unwatched Episodes"
+msgstr "Vaatamata episoodid"
+
+msgctxt "#31042"
+msgid "In Progress Episodes"
+msgstr "Pooleli episoodid"
+
+msgctxt "#31043"
+msgid "Top Rated Episodes"
+msgstr "Enim hinnatud episoodid"
+
+msgctxt "#31044"
+msgid "New Albums"
+msgstr ""
+
+msgctxt "#31045"
+msgid "Recently Played Albums"
+msgstr "Viimati esitatud albumid"
+
+msgctxt "#31046"
+msgid "Top Albums"
+msgstr ""
+
+msgctxt "#31047"
+msgid "Random Albums"
+msgstr "Juhuslikud albumid"
+
+msgctxt "#31048"
+msgid "Random Artists"
+msgstr "Juhuslikud esitajad"
+
+msgctxt "#31049"
+msgid "Show fanart/landscape view"
+msgstr ""
+
+msgctxt "#31050"
+msgid "Display blur effect"
+msgstr ""
+
+msgctxt "#31051"
+msgid "This view"
+msgstr ""
+
+msgctxt "#31052"
+msgid "Misc"
+msgstr ""
+
+msgctxt "#31053"
+msgid "Global options"
+msgstr ""
+
+msgctxt "#31054"
+msgid "Show discart"
+msgstr ""
+
+msgctxt "#31055"
+msgid "Fullsize fanart"
+msgstr ""
+
+msgctxt "#31056"
+msgid "Double Poster"
+msgstr ""
+
+msgctxt "#31057"
+msgid "Flip poster/fanart"
+msgstr ""
+
+msgctxt "#31058"
+msgid "Show list instead of posters"
+msgstr ""
+
+msgctxt "#31059"
+msgid "Fanart & poster 2"
+msgstr ""
+
+msgctxt "#31060"
+msgid "episodes watched"
+msgstr ""
+
+msgctxt "#31061"
+msgid "h"
+msgstr ""
+
+msgctxt "#31062"
+msgid "m"
+msgstr ""
+
+msgctxt "#31063"
+msgid "New time format"
+msgstr ""
+
+msgctxt "#31064"
+msgid "Double Banner"
+msgstr ""
+
+msgctxt "#31065"
+msgid "Flip fanart/banner"
+msgstr ""
+
+msgctxt "#31066"
+msgid "Hourly forecast"
+msgstr ""
+
+msgctxt "#31067"
+msgid "Next days forecast"
+msgstr ""
+
+msgctxt "#31068"
+msgid "Show RSS Feed on home menu"
+msgstr ""
+
+msgctxt "#31069"
+msgid "Show RSS Feed on top instead on bottom"
+msgstr ""
+
+msgctxt "#31070"
+msgid "RSS Feed"
+msgstr "RSS kanal"
+
+msgctxt "#31071"
+msgid "Flip list and info"
+msgstr ""
+
+msgctxt "#31072"
+msgid "Elapsed / Remaining Time"
+msgstr ""
+
+msgctxt "#31073"
 msgid "items"
 msgstr "üksust"
 
-msgctxt "#31023"
-msgid "Loading"
-msgstr "Laaditakse"
-
-msgctxt "#31024"
-msgid "Critics Consensus"
-msgstr "Kriitikute koondhinne"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31025"
-msgid "Item"
-msgstr "Üksus"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31026"
-msgid "Hub"
-msgstr "Huub"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31027"
-msgid "Focus widgets on startup"
-msgstr "Vidinate esiletõstmine käivitamisel"
-
-msgctxt "#31028"
-msgid "Outline"
-msgstr "Kokkuvõte"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31029"
-msgid "Images"
-msgstr "Pildid"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31030"
-msgid "Critics"
-msgstr "Kriitikud"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31031"
-msgid "HDR type"
-msgstr "HDR tüüp"
-
-#: /1080i/DialogPVRChannelManager.xml
-msgctxt "#31032"
-msgid "Apply"
-msgstr "Rakenda"
-
-msgctxt "#31033"
-msgid "People"
-msgstr "Inimesed"
-
-msgctxt "#31034"
-msgid "Cast member"
-msgstr "Osatäitja"
-
-msgctxt "#31035"
-msgid "Crew member"
-msgstr "Meeskonna liige"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31036"
-msgid "Limited widgets use Show More folder item"
-msgstr "Kuva piiratud vidinates üksus \"Veel\""
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31037"
-msgid "Side submenu"
-msgstr "Külje alammenüü"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31038"
-msgid "Directing"
-msgstr "Lavastamine"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31039"
-msgid "Writing"
-msgstr "Stsenaarium"
-
-#: /1080i/Includes_Views_List.xml
-msgctxt "#31040"
-msgid "List Flixart 2"
-msgstr "Loend - Flixart 2"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31041"
-msgid "Similar"
-msgstr "Sarnane"
-
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31042"
-msgid "Jump to widget"
-msgstr "Hüppa vidina juurde"
-
-#: /1080i/Custom_1115_Window_Shortcuts.xml
-msgctxt "#31043"
-msgid "Tray"
-msgstr "Alaserv"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31044"
-msgid "Viewtypes"
-msgstr "Vaatetüübid"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31045"
-msgid "Landscape"
-msgstr "Rõhtpilt"
-
-#: /1080i/Includes_Search.xml
-msgctxt "#31046"
-msgid "No Results"
-msgstr "Tulemusi pole"
-
-#: /1080i/Custom_1154_Dialog_SearchDiscover_Sort.xml
-msgctxt "#31047"
-msgid "Popularity"
-msgstr "Populaarsus"
-
-#: /1080i/Custom_1115_Window_Shortcuts.xml
-msgctxt "#31048"
-msgid "tiles"
-msgstr "ruutu"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31049"
-msgid "Customise shortcuts and widgets"
-msgstr "Kohanda otseteid ja vidinaid"
-
-#: /1080i/Includes_Search.xml
-msgctxt "#31050"
-msgid "Crew"
-msgstr "Meeskond"
-
-#: /1080i/Custom_1153_Dialog_SearchDiscover_Actors.xml
-msgctxt "#31051"
-msgid "Person"
-msgstr "Isik"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31052"
-msgid "Sound"
-msgstr "Heli"
-
-msgctxt "#31053"
-msgid "Profile"
-msgstr "Profiil"
-
-msgctxt "#31054"
-msgid "Liked by"
-msgstr "Meeldis"
-
-msgctxt "#31055"
-msgid "out of"
-msgstr "/"
-
-msgctxt "#31056"
-msgid "critics"
-msgstr "kriitikut"
-
-msgctxt "#31057"
-msgid "Years Old"
-msgstr "aastane"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31058"
-msgid "Wrap"
-msgstr "Lõputu kerimine"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31059"
-msgid "Side"
-msgstr "Külg"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31060"
-msgid "Slide"
-msgstr "Liug"
-
-#: /shortcuts/template.xml
-msgctxt "#31061"
-msgid "User rating"
-msgstr "Kasutajahinne"
-
-#: /shortcuts/template.xml
-msgctxt "#31062"
-msgid "Playlist order"
-msgstr "Esitusloendi suund"
-
-#: /shortcuts/template.xml
-msgctxt "#31063"
-msgid "Watched episodes"
-msgstr "Vaadatud episoodid"
-
-msgctxt "#31064"
-msgid "Awards"
-msgstr "Auhinnad"
-
-msgctxt "#31065"
-msgid "Creator"
-msgstr "Looja"
-
-#: /1080i/Includes_Search.xml
-msgctxt "#31066"
-msgid "Discover"
-msgstr "Avasta"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31067"
-msgid "Cinematography"
-msgstr "Operaatoritöö"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31068"
-msgid "Experimental"
-msgstr "Eksperimentaalne"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31069"
-msgid "Background video"
-msgstr "Taustavideo"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31070"
-msgid "Fixed aspect ratio"
-msgstr "Fikseeritud kuvasuhe"
-
-msgctxt "#31071"
-msgid "Playback Speed"
-msgstr "Taasesituse kiirus"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31072"
-msgid "Art Department"
-msgstr "Kunstiline toimkond"
-
-msgctxt "#31073"
-msgid "mins"
+msgctxt "#31074"
+msgid "min"
 msgstr "min"
 
-msgctxt "#31074"
-msgid "hr"
-msgstr "t"
-
-#: /1080i/Includes_Labels.xml
 msgctxt "#31075"
-msgid "Editing"
-msgstr "Montaaž"
+msgid "Live TV"
+msgstr "Otse TV"
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31076"
-msgid "Starring"
-msgstr "Peaosas"
+msgid "Used Memory"
+msgstr ""
 
 msgctxt "#31077"
-msgid "More Information"
-msgstr "Lisateave"
+msgid "Spotlight"
+msgstr "Rambivalguses"
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31078"
-msgid "Use fake label textboxes"
-msgstr "Kasuta staatilisi silte"
+msgid "Finishes at"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31079"
-msgid "improves performance on Omega"
-msgstr "parandab jõudlust Omegas"
+msgid "Video Stream"
+msgstr ""
 
-#: /1080i/Dialog_DialogCustom.xml
 msgctxt "#31080"
-msgid "Button"
-msgstr "Nupp"
+msgid "Customise home menu"
+msgstr ""
 
-#: /1080i/Dialog_DialogCustom.xml
 msgctxt "#31081"
-msgid "Others"
-msgstr "Muud"
+msgid "Background"
+msgstr "Taust"
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31082"
-msgid "Ratings style"
-msgstr "Hinde stiil"
+msgid "Show now playing video in background"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31083"
-msgid "Combined"
-msgstr "Kombo"
+msgid "Submenu"
+msgstr "Alammenüü"
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31084"
-msgid "Preload hubs during startup initialisation"
-msgstr "Huubide eellaadimine käivitusfaasis"
+msgid "No Timer"
+msgstr ""
 
 msgctxt "#31085"
-msgid "Live TV"
-msgstr "Otsepilt"
+msgid "Show header info"
+msgstr ""
 
 msgctxt "#31086"
-msgid "Customise options"
-msgstr "Külgmenüü"
+msgid "DVD Menu"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31087"
-msgid "Game Saves"
-msgstr "Mängusalvestused"
+msgid "Show artist slideshow"
+msgstr ""
 
-#: /1080i/VideoOSDBookmarks.xml
 msgctxt "#31088"
-msgid "No bookmarks"
-msgstr "Järjehoidjaid pole"
+msgid "Show visualisation behind slideshow"
+msgstr ""
 
-#: /1080i/VideoOSDBookmarks.xml
 msgctxt "#31089"
-msgid "Add a bookmark here"
-msgstr "Lisa siia järjehoidja"
+msgid "Animate artist slideshow"
+msgstr ""
 
 msgctxt "#31090"
-msgid "In-Progress"
-msgstr "Pooleli"
+msgid "Show fanart"
+msgstr "Kuva fännipildid"
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31091"
-msgid "In-Game Saves"
-msgstr "Mängusisesed salvestused"
+msgid "Letterboxd"
+msgstr ""
 
-#: /1080i/SkinSettings.xml /1080i/Includes_Shortcuts_Window.xml
 msgctxt "#31092"
-msgid "Detailed information"
-msgstr "Üksikasjalik teave"
+msgid "Accent colors"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31093"
-msgid "Cycle extra fanart"
-msgstr "Vaheta täiendavaid fännipilte"
+msgid "Rating stars (media flags section)"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31094"
-msgid "Mouse pointer size"
-msgstr "Hiirekursori suurus"
+msgid "MPAA rating (media flags section)"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31095"
-msgid "Translations"
-msgstr "Tõlked"
+msgid "Focus squares"
+msgstr ""
 
-#: /1080i/Dialog_DialogPictureInfo.xml
 msgctxt "#31096"
-msgid "plays"
-msgstr "esitust"
+msgid "Trakt"
+msgstr ""
 
-#: /1080i/Includes_DialogInfo.xml
 msgctxt "#31097"
-msgid "File details"
-msgstr "Faili üksikasjad"
+msgid "Userrating (media flags section)"
+msgstr ""
 
-#: /1080i/SkinSettings.xml /1080i/Includes_Items.xml
 msgctxt "#31098"
-msgid "Gallery"
-msgstr "Galerii"
+msgid "Hide watched"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31099"
-msgid "Last aired"
-msgstr "Viimati eetris"
+msgid "[CR]Based on the original Arctic: Zephyr skin by jurialmunkey and [CR]Arctic: Zephyr Reloaded  skin by beatmasterrs."
+msgstr ""
 
-#: /1080i/Includes_Views_Row.xml
 msgctxt "#31100"
-msgid "Row Board"
-msgstr "Rida - Tahvel"
+msgid "Play trailer in windowed mode"
+msgstr ""
 
-#: /1080i/Includes_Views_Wall.xml
 msgctxt "#31101"
-msgid "Wall Board"
-msgstr "Sein - Tahvel"
+msgid "Youtube"
+msgstr "YouTube"
+
+msgctxt "#31102"
+msgid "Set weather fanart"
+msgstr ""
 
 msgctxt "#31103"
 msgid "Widgets"
 msgstr "Vidinad"
 
+msgctxt "#31104"
+msgid "Show time, date and weather"
+msgstr ""
+
 msgctxt "#31105"
-msgid "Spotlight"
-msgstr "Rambivalgus"
+msgid "Animate fanart"
+msgstr ""
+
+msgctxt "#31106"
+msgid "Extra Info"
+msgstr ""
+
+msgctxt "#31107"
+msgid "Wrap list"
+msgstr ""
 
 msgctxt "#31108"
-msgid "Collections"
-msgstr "Kogumikud"
+msgid "Set fallback image"
+msgstr ""
+
+msgctxt "#31109"
+msgid "Power Menu"
+msgstr "Toitemenüü"
+
+msgctxt "#31110"
+msgid "Furniture"
+msgstr ""
 
 msgctxt "#31111"
-msgid "Row Poster"
-msgstr "Rida - Plakat"
+msgid "Show in the header"
+msgstr ""
 
 msgctxt "#31112"
-msgid "Row Landscape"
-msgstr "Rida - Rõhtpilt"
+msgid "Show media flags"
+msgstr "Kuva meedia andmed"
 
 msgctxt "#31113"
-msgid "Row Square"
-msgstr "Rida - Ruut"
+msgid "Show now playing info"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31114"
-msgid "Hubs"
-msgstr "Huubid"
+msgid "[COLOR=$VAR[Color_Label_AZR]]Rounded[/COLOR] Skin-Settings"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31115"
-msgid "Australian summer"
-msgstr "Austraalia suvi"
+msgid "Trailer of"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31116"
-msgid "Winter frost"
-msgstr "Talvine härmatis"
+msgid "Movies by"
+msgstr ""
 
-#: /1080i/DialogPlayerProcessInfo.xml
 msgctxt "#31117"
-msgid "RAM"
-msgstr "RAM"
+msgid "Tv Shows by"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31118"
-msgid "Expanded"
-msgstr "Laiendatud"
+msgid "[B]Configure System Settings[/B][CR][CR] •     Setup and calibrate displays[CR] •     Configure audio output[CR] •     Setup remote controls[CR] •     Set power saving options[CR] •     Enable debugging[CR] •     Setup master lock"
+msgstr ""
 
-#: /1080i/DialogPlayerProcessInfo.xml
 msgctxt "#31119"
-msgid "EOTF and Gamut"
-msgstr "EOTF ja Gamut"
+msgid "[B]Configure Add-Ons[/B][CR][CR] •     Manage your installed Add-ons[CR] •     Install Add-ons from kodi.tv[CR] •     Modify Add-on settings"
+msgstr ""
 
-#: /1080i/Includes_Views_List.xml
 msgctxt "#31120"
-msgid "List Basic"
-msgstr "Loend - Lihtne"
+msgid "[B]Configure TV Settings[/B][CR][CR] •     Change full screen info[CR] •     Manage EPG data settings"
+msgstr ""
 
-#: /1080i/Includes_MediaFilter.xml
+msgctxt "#31121"
+msgid "[B]Configure Service Settings[/B][CR][CR] •     Control via UPnP and HTTP[CR] •     Configure file sharing[CR] •     Enable Zeroconf[CR] •     Configure AirPlay"
+msgstr ""
+
 msgctxt "#31122"
-msgid "Watchlist"
-msgstr "Jälgimisloend"
+msgid "[B]Configure Profile Settings[/B][CR][CR] •     Setup user profiles[CR] •     Enable login screen[CR] •     Set master locks[CR] •     Control access to content"
+msgstr ""
+
+msgctxt "#31123"
+msgid "[B]Configure Skin Settings[/B][CR][CR] •     Customise the home screen[CR] •     Set background options[CR] •     Configure OSD options[CR] •     Enable add-on support[CR] •     Disable screen elements"
+msgstr ""
 
 msgctxt "#31124"
-msgid "Indicator"
-msgstr "Näidik"
+msgid "[B]View System Information[/B][CR][CR] •     Summary[CR] •     Storage[CR] •     Network[CR] •     Video[CR] •     Hardware[CR] •     PVR Backend"
+msgstr ""
 
 msgctxt "#31125"
-msgid "Invert Text Colour"
-msgstr "Pööratud teksti värv"
+msgid "Startup video or music playlist"
+msgstr ""
 
-#: /1080i/Includes_MediaFilter.xml
+msgctxt "#31126"
+msgid "Extras"
+msgstr "Lisad"
+
+msgctxt "#31127"
+msgid "Cinema Experience"
+msgstr ""
+
 msgctxt "#31128"
-msgid "Trending"
-msgstr "Trendid"
+msgid "Movies by"
+msgstr ""
 
 msgctxt "#31129"
-msgid "Up next in"
-msgstr "Järgmiseks"
+msgid "Recently added"
+msgstr "Viimati lisatud"
 
 msgctxt "#31130"
-msgid "seconds"
-msgstr "sekundit"
+msgid "Recently played"
+msgstr ""
 
 msgctxt "#31131"
-msgid "Continue watching in"
-msgstr "Jätka vaatamist:"
+msgid "Play random"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31132"
+msgid "Delete Settings Shortcut"
+msgstr ""
+
+msgctxt "#31133"
+msgid "Are you sure you want to remove the settings shortcut?[CR]Please ensure that you have an alternative method of accessing settings before you remove this shortcut."
+msgstr ""
+
 msgctxt "#31134"
-msgid "Playing"
-msgstr "Esitamisel"
+msgid "Hub items"
+msgstr ""
 
-#: /1080i/Includes_Views.xml
 msgctxt "#31135"
-msgid "Page"
-msgstr "Leht"
+msgid "Cast of"
+msgstr ""
 
-#: /1080i/SkinSettings.xml /1080i/Includes_Labels.xml
+msgctxt "#31136"
+msgid "Similar to"
+msgstr "Sarnased"
+
 msgctxt "#31137"
-msgid "Detailed"
-msgstr "Üksikasjalik"
+msgid "Fanart of"
+msgstr ""
 
 msgctxt "#31138"
-msgid "Aqua Classic"
-msgstr "Aqua Classic"
+msgid "Youtube videos of"
+msgstr ""
 
 msgctxt "#31139"
-msgid "Tropical Sunset"
-msgstr "Troopiline päikeseloojang"
+msgid "Crew of"
+msgstr ""
 
 msgctxt "#31140"
-msgid "Miami Vaporwave"
-msgstr "Miami Vaporwave"
+msgid "Big poster"
+msgstr ""
 
 msgctxt "#31141"
-msgid "Plain Monochrome"
-msgstr "Mustvalge"
+msgid "Filmography of"
+msgstr ""
 
 msgctxt "#31142"
-msgid "Total Duration"
-msgstr "Kogukestus"
+msgid "TV Show appearances of"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31143"
-msgid "Classic"
-msgstr "Klassikaline"
+msgid "Discography of"
+msgstr ""
+
+msgctxt "#31144"
+msgid "Movie Hub"
+msgstr ""
 
 msgctxt "#31145"
-msgid "Initialising Skin"
-msgstr "Rüü laadimine"
+msgid "TV Hub"
+msgstr ""
 
-#: /1080i/Includes_Shortcuts_Window.xml
+msgctxt "#31146"
+msgid "Reload Skin"
+msgstr ""
+
 msgctxt "#31147"
-msgid "More"
-msgstr "Veel"
+msgid "Cards"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31148"
+msgid "Kiosk mode"
+msgstr "Kioski režiim"
+
+msgctxt "#31149"
+msgid "IMDb"
+msgstr ""
+
 msgctxt "#31150"
-msgid "Categories"
-msgstr "Kategooriad"
+msgid "Show detailed info when video is paused"
+msgstr ""
+
+msgctxt "#31151"
+msgid "Artwork"
+msgstr ""
+
+msgctxt "#31152"
+msgid "Released by"
+msgstr ""
+
+msgctxt "#31153"
+msgid "Similar"
+msgstr "Sarnased"
 
 msgctxt "#31154"
-msgid "Misc options"
-msgstr "Muud valikud"
+msgid "Movies by"
+msgstr ""
 
-#: /1080i/Includes_Keyboard_Mini.xml
+msgctxt "#31155"
+msgid "In Cinemas"
+msgstr "Kinodes"
+
+msgctxt "#31156"
+msgid "Upcoming"
+msgstr "Tulemas"
+
+msgctxt "#31157"
+msgid "Popular"
+msgstr ""
+
 msgctxt "#31158"
-msgid "Layout"
-msgstr "Asetus"
+msgid "Top Rated"
+msgstr ""
 
-#: /1080i/Custom_1120_VideoInfo_Details.xml
 msgctxt "#31159"
-msgid "Version"
-msgstr "Versioon"
+msgid "Airing"
+msgstr ""
 
 msgctxt "#31160"
-msgid "REC"
-msgstr "SALVESTA"
+msgid "Today"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31161"
+msgid "Show plot"
+msgstr ""
+
 msgctxt "#31162"
-msgid "Hide"
-msgstr "Peida"
+msgid "Tracklist of"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31163"
+msgid "Show numeric rating"
+msgstr ""
+
+msgctxt "#31164"
+msgid "Next Aired"
+msgstr "Järgmine esitus"
+
 msgctxt "#31165"
-msgid "Seekbar behaviour on delayed pause"
-msgstr "Otsiriba käitumine pikema pausi korral"
+msgid "Studio"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31166"
-msgid "Back"
-msgstr "Tagasi"
+msgid "Cast"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31167"
-msgid "Logo"
-msgstr "Logo"
+msgid "Youtube"
+msgstr "YouTube"
 
-#: /1080i/Includes_Views_List.xml
 msgctxt "#31168"
-msgid "List Square"
-msgstr "Loend - Ruut"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31169"
-msgid "Birthday"
-msgstr "Sünnipäev"
-
-#: /1080i/Custom_1115_Dialog_Shortcuts_Window.xml
-msgctxt "#31170"
-msgid "Note"
-msgstr "Märkus"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31171"
-msgid "On-screen keyboard size"
-msgstr "Ekraaniklaviatuuri suurus"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31173"
-msgid "Scroll"
-msgstr "Keri"
-
-msgctxt "#31174"
-msgid "Navigation"
-msgstr "Navigeerimine"
-
-msgctxt "#31177"
-msgid "Menus"
-msgstr "Menüüd"
-
-#: /1080i/Includes_Search.xml
-msgctxt "#31179"
-msgid "Keyword"
-msgstr "Märksõna"
-
-#: /1080i/Includes_DialogInfo.xml
-msgctxt "#31181"
-msgid "Scheduled"
-msgstr "Plaanitud"
-
-#: /1080i/Includes_Info.xml
-msgctxt "#31183"
-msgid "times"
-msgstr "korda"
-
-#: /1080i/Includes_Info.xml
-msgctxt "#31184"
-msgid "Ends"
-msgstr "Lõpeb"
-
-msgctxt "#31185"
-msgid "Autoscroll"
-msgstr "Automaatne kerimine"
-
-msgctxt "#31186"
-msgid "Behaviour"
-msgstr "Käitumine"
-
-msgctxt "#31187"
-msgid "Autoscroll time interval"
-msgstr "Automaatse kerimise ajavahemik"
-
-msgctxt "#31188"
-msgid "Limit"
-msgstr "Limiit"
-
-msgctxt "#31189"
-msgid "Autoclose OSD after X seconds"
-msgstr "Peida inforiba X sekundi pärast"
-
-#: /1080i/Includes_Info.xml
-msgctxt "#31194"
-msgid "Album duration"
-msgstr "Albumi kestus"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31195"
-msgid "Light"
-msgstr "Hele"
-
-msgctxt "#31196"
-msgid "Up Next"
-msgstr "Järgmiseks"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31197"
-msgid "Skin theme"
-msgstr "Rüü teema"
-
-#: /1080i/Includes_Info.xml
-msgctxt "#31198"
-msgid "Track duration"
-msgstr "Loo kestus"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31199"
-msgid "Date and time"
-msgstr "Kuupäev ja kellaaeg"
-
-#: /1080i/Includes_Info.xml
-msgctxt "#31200"
-msgid "Added on"
-msgstr "Lisatud"
-
-msgctxt "#31202"
-msgid "Ratings"
-msgstr "Hinded"
-
-msgctxt "#31203"
-msgid "Customise"
-msgstr "Kohanda"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31204"
-msgid "Customise dialog background"
-msgstr "Valikmenüü taust"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31205"
-msgid "Codecs and providers"
-msgstr "Koodekid ja teenused"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31206"
-msgid "Item count"
-msgstr "Üksuste arv"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31207"
-msgid "Codecs"
-msgstr "Koodekid"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31208"
-msgid "Header"
-msgstr "Ülanurk"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31209"
-msgid "Boxes"
-msgstr "Kastid"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31210"
-msgid "Series Premiere"
-msgstr "Sarja esilinastus"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31211"
-msgid "Season Premiere"
-msgstr "Hooaja esilinastus"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31212"
-msgid "Mid-Season Premiere"
-msgstr "Hooaja teise poole algus"
-
-msgctxt "#31213"
-msgid "Visualisation settings"
-msgstr "Visuaalide sätted"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31214"
-msgid "Series Finale"
-msgstr "Sarja finaal"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31215"
-msgid "Season Finale"
-msgstr "Hooaja finaal"
-
-msgctxt "#31216"
-msgid "Video decoder"
-msgstr "Videodekooder"
-
-msgctxt "#31217"
-msgid "Pixel format"
-msgstr "Piksli vorming"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31218"
-msgid "Mid-Season Finale"
-msgstr "Hooaja esimese poole lõpp"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31220"
-msgid "Purple"
-msgstr "Lilla"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31221"
-msgid "Slate"
-msgstr "Sinakashall"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31222"
-msgid "Coal"
-msgstr "Süsi"
-
-msgctxt "#31223"
-msgid "Gridlines"
-msgstr "Ruudustik"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31224"
-msgid "Pink"
-msgstr "Roosa"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31225"
-msgid "Chalk"
-msgstr "Kriit"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31226"
-msgid "Blush"
-msgstr "Punane"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31227"
-msgid "Premiere"
-msgstr "Hooaja algus"
-
-#: /1080i/Custom_1115_Dialog_ColourPresets.xml
-msgctxt "#31228"
-msgid "Aqua"
-msgstr "Aqua"
-
-#: /1080i/Custom_1115_Dialog_ColourPresets.xml
-msgctxt "#31229"
-msgid "Vaporwave"
-msgstr "Vaporwave"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31230"
-msgid "Calendar"
-msgstr "Kalender"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31231"
-msgid "Customise highlight colours"
-msgstr "Esiletõstu värv"
-
-#: /1080i/Custom_1111_Dialog_ColourPicker.xml
-msgctxt "#31232"
-msgid "Gradient"
-msgstr "Üleminekuvärv"
-
-msgctxt "#31233"
-msgid "Seek to"
-msgstr "Otsi"
-
-msgctxt "#31234"
-msgid "Customise indicators"
-msgstr "Kohanda näidikuid"
-
-msgctxt "#31235"
-msgid "Indicators"
-msgstr "Näidikud"
-
-msgctxt "#31236"
-msgid "Collection"
-msgstr "Kogumik"
-
-msgctxt "#31237"
-msgid "Progress"
-msgstr "Edenemine"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31238"
-msgid "Coral"
-msgstr "Korall"
-
-msgctxt "#31239"
-msgid "Footer"
-msgstr "Alanurk"
-
-#: /1080i/Custom_1115_Dialog_ColourPresets.xml
-msgctxt "#31240"
-msgid "Tropical"
-msgstr "Troopiline"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31241"
-msgid "Colour scheme"
-msgstr "Värvilahendus"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31242"
-msgid "Blue Slate"
-msgstr "Sinine"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31243"
-msgid "Midnight Purple"
-msgstr "Kesköölilla"
-
-msgctxt "#31244"
-msgid "Now playing"
-msgstr "Esitamisel"
-
-msgctxt "#31245"
-msgid "Autoscroll labels"
-msgstr "Automaatselt kerivad nimesildid"
-
-msgctxt "#31246"
-msgid "Autoscroll textboxes"
-msgstr "Automaatselt kerivad tekstiväljad"
-
-msgctxt "#31249"
-msgid "Waiting for PVR"
-msgstr "PVR ootel"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31250"
-msgid "Highlight"
-msgstr "Esiletõst"
-
-msgctxt "#31252"
-msgid "Catch-up"
-msgstr "Järelvaatamine"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31254"
-msgid "Performance"
-msgstr "Jõudlus"
-
-msgctxt "#31255"
-msgid "Customise startup image"
-msgstr "Käivituspilt"
-
-msgctxt "#31256"
-msgid "Resource Usage"
-msgstr "Ressursikasutus"
-
-msgctxt "#31257"
-msgid "Memory"
-msgstr "Mälu"
-
-msgctxt "#31258"
-msgid "CPU"
-msgstr "CPU"
-
-msgctxt "#31259"
-msgid "FPS"
-msgstr "FPS"
-
-msgctxt "#31260"
-msgid "AR"
-msgstr "Kuvasuhe"
-
-msgctxt "#31261"
-msgid "px"
-msgstr "px"
-
-msgctxt "#31262"
-msgid "Hz"
-msgstr "Hz"
-
-msgctxt "#31263"
-msgid "bits"
-msgstr "bitti"
-
-msgctxt "#31264"
-msgid "Revenue"
-msgstr "Tulu"
-
-msgctxt "#31265"
-msgid "Budget"
-msgstr "Eelarve"
-
-msgctxt "#31270"
-msgid "Single image"
-msgstr "Üks pilt"
-
-msgctxt "#31271"
-msgid "Image folder"
-msgstr "Pildikaust"
-
-#: /1080i/Includes_Search_View.xml
-msgctxt "#31272"
-msgid "Searching"
-msgstr "Otsimine"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31274"
-msgid "Icon"
-msgstr "Ikoon"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31275"
-msgid "Customise search"
-msgstr "Kohanda otsingut"
-
-msgctxt "#31279"
-msgid "Studio icons"
-msgstr "Stuudio ikoonid"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31281"
-msgid "Welcome"
-msgstr "Tere tulemast"
-
-#: /1080i/Includes_Shortcuts_Pallette.xml
-msgctxt "#31282"
-msgid "Widget"
-msgstr "Vidin"
-
-#: /1080i/Includes_Info.xml
-msgctxt "#31283"
-msgid "Played"
-msgstr "Esitatud"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31284"
-msgid "Discover movies and tvshows on TMDb."
-msgstr "Avasta filme ja telesaateid TMDb abil."
-
-msgctxt "#31285"
-msgid "Classification (MPAA)"
-msgstr "Vanusepiirang (MPAA)"
-
-msgctxt "#31286"
-msgid "Won"
-msgstr "Võitnud"
-
-msgctxt "#31287"
-msgid "Nominated for"
-msgstr "Nomineeritud"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31288"
-msgid "Explore now."
-msgstr "Leia midagi uut."
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31289"
-msgid "Touch mode"
-msgstr "Puuterežiim"
-
-#: /1080i/script-wikipedia.xml
-msgctxt "#31290"
-msgid "Attribution"
-msgstr "Omistamine"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31291"
-msgid "Search for movies$COMMA tvshows$COMMA and more."
-msgstr "Otsi filme$COMMA sarju$COMMA ja muud."
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31292"
-msgid "Text labels"
-msgstr "Tekstisildid"
-
-msgctxt "#31293"
-msgid "Cast and more info"
-msgstr "Osatäitjad ja lisateave"
-
-msgctxt "#31294"
-msgid "Bookmarks and chapters"
-msgstr "Järjehoidjad ja peatükid"
-
-msgctxt "#31295"
-msgid "Channels"
-msgstr "Kanalid"
-
-msgctxt "#31296"
-msgid "Playlist"
-msgstr "Esitusloend"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31297"
-msgid "Extra fanart"
-msgstr "Täiendav fännipilt"
-
-msgctxt "#31298"
-msgid "Movies and tv shows starring this actor"
-msgstr "Selle näitleja filmid ja sarjad"
-
-msgctxt "#31299"
-msgid "Information is loading"
-msgstr "Teavet laaditakse"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31300"
-msgid "Customise window background"
-msgstr "Akna taust"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31301"
 msgid "Crew"
 msgstr "Meeskond"
 
-#: /1080i/SkinSettings.xml
-msgctxt "#31303"
-msgid "Customise fallback image folder"
-msgstr "Tagavarapiltide kaust"
+msgctxt "#31169"
+msgid "Albums of"
+msgstr ""
 
-#: /1080i/Includes_Search.xml
-msgctxt "#31304"
-msgid "lists"
-msgstr "loendid"
+msgctxt "#31170"
+msgid "Tracklist"
+msgstr ""
 
-#: /1080i/Includes_DialogInfo.xml
-msgctxt "#31307"
-msgid "Instrument"
-msgstr "Instrument"
+msgctxt "#31171"
+msgid "Screenshots of"
+msgstr ""
 
-#: /1080i/Includes_DialogInfo.xml
-msgctxt "#31308"
-msgid "Mood"
-msgstr "Meeleolu"
+msgctxt "#31172"
+msgid "Reboot to eMMC/NAND"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
-msgctxt "#31309"
-msgid "Glass"
-msgstr "Klaas"
+msgctxt "#31173"
+msgid "TMDb"
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
-msgctxt "#31310"
-msgid "Expand"
-msgstr "Laienda"
+msgctxt "#31174"
+msgid "Now playing..."
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
-msgctxt "#31311"
-msgid "Weekly"
-msgstr "Kord nädalas"
+msgctxt "#31175"
+msgid "Select highlight color"
+msgstr ""
 
-#: /1080i/Includes_MediaFilter.xml
-msgctxt "#31319"
-msgid "View"
-msgstr "Vaade"
+msgctxt "#31176"
+msgid "Current Color"
+msgstr "Praegune värv"
 
-#: /1080i/Includes_Views.xml
-msgctxt "#31320"
+msgctxt "#31177"
+msgid "Thumbnail Horizontal"
+msgstr ""
+
+msgctxt "#31178"
+msgid "Icons Info"
+msgstr ""
+
+msgctxt "#31179"
+msgid "from themoviedb.org"
+msgstr ""
+
+msgctxt "#31180"
+msgid "Startup image"
+msgstr ""
+
+msgctxt "#31181"
+msgid "Home menu style"
+msgstr ""
+
+msgctxt "#31182"
+msgid "Vertical"
+msgstr "Vertikaalne"
+
+msgctxt "#31183"
+msgid "Seasons of"
+msgstr ""
+
+msgctxt "#31184"
+msgid "Collections of"
+msgstr ""
+
+msgctxt "#31185"
+msgid "Display OSD at startup"
+msgstr ""
+
+msgctxt "#31186"
+msgid "Fanart Thumbs"
+msgstr ""
+
+msgctxt "#31187"
+msgid "Extra fanart"
+msgstr ""
+
+msgctxt "#31188"
+msgid "Set weather icons"
+msgstr ""
+
+msgctxt "#31189"
+msgid "Widget aspect"
+msgstr ""
+
+msgctxt "#31190"
+msgid "Poster"
+msgstr "Poster"
+
+msgctxt "#31191"
 msgid "Square"
 msgstr "Ruut"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31321"
-msgid "Select viewtypes"
-msgstr "Vali vaatetüübid"
-
-#: /1080i/SkinSettings.xml /1080i/Includes_Labels.xml
-msgctxt "#31322"
-msgid "Age"
-msgstr "Vanus"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31324"
-msgid "Content"
-msgstr "Sisu"
-
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
-msgctxt "#31328"
-msgid "Edit widgets"
-msgstr "Muuda vidinaid"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31329"
-msgid "Text"
-msgstr "Tekst"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31330"
-msgid "Crop"
-msgstr "Kärbi"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31331"
-msgid "Background style"
-msgstr "Taustapildi stiil"
-
-msgctxt "#31334"
-msgid "Comments"
-msgstr "Kommentaarid"
-
-#: /1080i/GameOSD.xml
-msgctxt "#31335"
-msgid "Game menu"
-msgstr "Mängude menüü"
-
-#: /1080i/GameOSD.xml
-msgctxt "#31336"
-msgid "Select + X"
-msgstr "Select + X"
-
-#: /1080i/GameOSD.xml
-msgctxt "#31337"
-msgid "Select + Start"
-msgstr "Select + Start"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31338"
-msgid "Select + Right Stick"
-msgstr "Select + Parem juhtkang"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31340"
-msgid "Reset skin to defaults"
-msgstr "Taasta rüü vaikeväärtused"
-
-msgctxt "#31346"
-msgid "More by this artist"
-msgstr "Veel sellelt esitajalt"
-
-#: /1080i/Includes_DialogInfo.xml
-msgctxt "#31347"
-msgid "Photography"
-msgstr "Fotograafia"
-
-msgctxt "#31348"
-msgid "Channel EPG"
-msgstr "Kanali EPG"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31349"
-msgid "Up"
-msgstr "Üles"
-
-msgctxt "#31350"
-msgid "Thanks"
-msgstr "Tänud"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31353"
-msgid "Elapsed"
-msgstr "Möödas"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31354"
-msgid "Remaining"
-msgstr "Lõpuni jäänud"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31355"
-msgid "Seekbar time display"
-msgstr "Otsimisriba aja kuvamine"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31356"
-msgid "Use online cast"
-msgstr "Hangi näitlejaandmed veebist"
-
-#: /1080i/SkinSettings.xml /1080i/Includes_Items.xml
-msgctxt "#31357"
-msgid "Artwork Overlay"
-msgstr "Kattekiht"
-
-msgctxt "#31358"
-msgid "Waiting for plugins"
-msgstr "Pluginate ootel"
-
-#: /shortcuts/generator/data/setup/powermenu_item.xml
-msgctxt "#31359"
-msgid "Switch user"
-msgstr "Vaheta kasutajat"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31362"
-msgid "Side items"
-msgstr "Külgmenüü üksused"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31363"
-msgid "Menu items"
-msgstr "Menüü üksused"
-
-#: /shortcuts/powersubmenu.DATA.xml
-msgctxt "#31364"
-msgid "Reload"
-msgstr "Laadi uuesti"
-
-#: /1080i/DialogContextMenu.xml
-msgctxt "#31365"
-msgid "Node"
-msgstr "Sõlm"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31366"
-msgid "Uncropped"
-msgstr "Kärpimata"
-
-#: /1080i/Includes_Search_View.xml
-msgctxt "#31368"
-msgid "Searching for"
-msgstr "Otsitakse"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31369"
-msgid "Video file"
-msgstr "Videofail"
-
-#: /1080i/Custom_1172_Dialog_SideMenu.xml
-msgctxt "#31370"
-msgid "Switch profile"
-msgstr "Vaheta profiili"
-
-msgctxt "#31371"
-msgid "Sorted by"
-msgstr "Järjestus"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31372"
-msgid "Options tray"
-msgstr "Külgmenüü salv"
-
-#: /1080i/Includes_DialogInfo.xml
-msgctxt "#31373"
-msgid "from"
-msgstr "/"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31374"
-msgid "Reset skin settings to defaults"
-msgstr "Taasta rüü seadete vaikeväärtused"
-
-msgctxt "#31375"
-msgid "Install zip"
-msgstr "Paigalda zip failist"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31376"
-msgid "Reset discover search history"
-msgstr "Lähtesta 'Avasta' otsinguajalugu"
-
-#: /1080i/Includes_Shortcuts_Window.xml
-msgctxt "#31377"
-msgid "Next window"
-msgstr "Järgmine aken"
-
-msgctxt "#31378"
-msgid "Foreign"
-msgstr "Välismaine"
-
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
-msgctxt "#31379"
-msgid "Edit categories"
-msgstr "Muuda kategooriaid"
-
-msgctxt "#31380"
-msgid "Forecast"
-msgstr "Ilmateade"
-
-msgctxt "#31381"
-msgid "Returning"
-msgstr "Naasev"
-
-msgctxt "#31382"
-msgid "All items"
-msgstr "Kõik üksused"
-
-msgctxt "#31383"
-msgid "Production"
-msgstr "Toodang"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31384"
-msgid "Tray labels"
-msgstr "Alaserva tekstid"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31385"
-msgid "Secondary"
-msgstr "Teisejärguline"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31386"
-msgid "Primary"
-msgstr "Peamine"
-
-#: /1080i/Includes_Labels.xml
-msgctxt "#31387"
-msgid "Contextual"
-msgstr "Kontekstipõhine"
-
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
-msgctxt "#31388"
-msgid "Seed"
-msgstr "Seeme"
-
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
-msgctxt "#31389"
-msgid "Parent widget"
-msgstr "Ülemvidin"
-
-msgctxt "#31390"
-msgid "Release Year"
-msgstr "Avaldamise aasta"
-
-#: /1080i/Includes_Items.xml Shorter label for use in info dialog buttons
-msgctxt "#31393"
-msgid "Trailer"
-msgstr "Treiler"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31394"
-msgid "Picture-in-picture video"
-msgstr "Pilt-pildis video"
-
-msgctxt "#31396"
-msgid "Recent Movies"
-msgstr "Uued filmid"
-
-msgctxt "#31397"
-msgid "Recent Tv Shows"
-msgstr "Uued sarjad"
-
-msgctxt "#31398"
-msgid "New Movies"
-msgstr "Uued filmid"
-
-msgctxt "#31399"
-msgid "New TV Shows"
-msgstr "Uued sarjad"
-
-msgctxt "#31400"
-msgid "New Episodes"
-msgstr "Uued episoodid"
-
-msgctxt "#31401"
-msgid "New Artists"
-msgstr "Uued esitajad"
-
-msgctxt "#31402"
-msgid "New Albums"
-msgstr "Uued albumid"
-
-msgctxt "#31403"
-msgid "In-Progress TV Shows"
-msgstr "Pooleli sarjad"
-
-msgctxt "#31404"
-msgid "In-Progress Movies"
-msgstr "Pooleli filmid"
-
-msgctxt "#31405"
-msgid "Top Albums"
-msgstr "Hinnatuimad albumid"
-
-msgctxt "#31406"
-msgid "Top Rated Movies"
-msgstr "Hinnatuimad filmid"
-
-msgctxt "#31407"
-msgid "Top Rated TV Shows"
-msgstr "Hinnatuimad sarjad"
-
-msgctxt "#31408"
-msgid "Random Movies"
-msgstr "Juhuslikud filmid"
-
-msgctxt "#31409"
-msgid "Random TV Shows"
-msgstr "Juhuslikud sarjad"
-
-msgctxt "#31410"
-msgid "Random Episodes"
-msgstr "Juhuslikud episoodid"
-
-msgctxt "#31411"
+msgctxt "#31192"
+msgid "Extended information"
+msgstr ""
+
+msgctxt "#31193"
+msgid "Fanart"
+msgstr "Fännipildid"
+
+msgctxt "#31194"
+msgid "Action"
+msgstr ""
+
+msgctxt "#31195"
+msgid "Label"
+msgstr "Leibel"
+
+msgctxt "#31196"
+msgid "Fallback widget"
+msgstr ""
+
+msgctxt "#31197"
+msgid "Video / Music OSD"
+msgstr ""
+
+msgctxt "#31198"
+msgid "Single Image"
+msgstr "Üksik pilt"
+
+msgctxt "#31199"
+msgid "Multi Image"
+msgstr "Mitu pilti"
+
+msgctxt "#31200"
+msgid "Hub widget"
+msgstr ""
+
+msgctxt "#31201"
+msgid "Most played Song"
+msgstr ""
+
+msgctxt "#31202"
+msgid "[B]Configure Interface Settings[/B][CR][CR] •     Skin[CR] •     Region[CR] •     Control[CR] •     Screensaver[CR] •     Master Lock[CR]"
+msgstr ""
+
+msgctxt "#31203"
+msgid "[B]Configure Library Settings[/B][CR][CR] •     Display[CR] •     Navigation[CR] •     Media Database[CR]"
+msgstr ""
+
+msgctxt "#31204"
+msgid "[B]Configure Player Settings[/B][CR][CR] •     Playback Actions[CR] •     How Content is Played[CR]"
+msgstr ""
+
+msgctxt "#31205"
+msgid "Video decoder"
+msgstr "Videodekooder"
+
+msgctxt "#31206"
+msgid "Pixel format"
+msgstr "Piksli vorming"
+
+msgctxt "#31207"
+msgid "Play Speed"
+msgstr ""
+
+msgctxt "#31208"
+msgid "Special Features"
+msgstr "Erifunktsioonid"
+
+msgctxt "#31209"
+msgid "Select artwork"
+msgstr ""
+
+msgctxt "#31210"
+msgid "Top Songs"
+msgstr ""
+
+msgctxt "#31211"
 msgid "Random Songs"
 msgstr "Juhuslikud laulud"
 
-msgctxt "#31412"
-msgid "Random Albums"
-msgstr "Juhuslikud albumid"
+msgctxt "#31212"
+msgid "Horizontal"
+msgstr ""
 
-msgctxt "#31413"
-msgid "All Movies"
-msgstr "Kõik filmid"
+msgctxt "#31213"
+msgid "Weather - daily"
+msgstr ""
 
-msgctxt "#31414"
-msgid "All TV Shows"
-msgstr "Kõik sarjad"
+msgctxt "#31214"
+msgid "Weather - hourly"
+msgstr ""
 
-msgctxt "#31415"
-msgid "Movies and TV Shows"
-msgstr "Filmid ja sarjad"
+msgctxt "#31215"
+msgid "Open Player Process Information"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
-msgctxt "#31416"
-msgid "Secondary button"
-msgstr "Lisanupp"
+msgctxt "#31216"
+msgid "Player-Cache"
+msgstr ""
 
-msgctxt "#31417"
-msgid "Random Artists"
-msgstr "Juhuslikud esitajad"
+msgctxt "#31217"
+msgid "Channel List"
+msgstr ""
 
-#: /1080i/Includes_Views_Row.xml
-msgctxt "#31418"
-msgid "Row Circle"
-msgstr "Rida - Ring"
+msgctxt "#31218"
+msgid "This is your personal rating and will not be published."
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
-msgctxt "#31419"
-msgid "Overview"
-msgstr "Ülevaade"
+msgctxt "#31219"
+msgid "       "
+msgstr ""
 
-#: /1080i/SkinSettings.xml
-msgctxt "#31420"
-msgid "Apps"
-msgstr "Rakendused"
+msgctxt "#31220"
+msgid "Video / Music Info"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
-msgctxt "#31423"
-msgid "Card"
-msgstr "Kaart"
+msgctxt "#31221"
+msgid "Show plot on HUB"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
-msgctxt "#31424"
-msgid "Board"
-msgstr "Tahvel"
+msgctxt "#31222"
+msgid "Colors"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
-msgctxt "#31425"
-msgid "Labels"
-msgstr "Nimetused"
-
-#: /1080i/Home.xml
-msgctxt "#31427"
-msgid "Initialising"
-msgstr "Laaditakse"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31428"
-msgid "Hide widget initialisation behind splash"
-msgstr "Varja vidinate laadimine käivituspildiga"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31429"
-msgid "Chapters"
-msgstr "Peatükid"
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31430"
-msgid "Customise style"
-msgstr "Kohanda stiili"
-
-#: /1080i/SkinSettings.xml /1080i/Includes_Views_Row.xml
-msgctxt "#31431"
-msgid "Circle"
-msgstr "Ring"
-
-#: /1080i/Includes_Items.xml
-msgctxt "#31432"
-msgid "Adaptive"
-msgstr "Kohanduv"
-
-#: /1080i/SkinSettings.xml
-msgctxt "#31434"
+msgctxt "#31223"
 msgid "Video OSD"
 msgstr "Video OSD"
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31224"
+msgid "Music OSD"
+msgstr "Muusika OSD"
+
+msgctxt "#31225"
+msgid "Widgets"
+msgstr "Vidinad"
+
+msgctxt "#31226"
+msgid "Views"
+msgstr ""
+
+msgctxt "#31227"
+msgid "HUBs"
+msgstr ""
+
+msgctxt "#31228"
+msgid "ClearArt"
+msgstr ""
+
+msgctxt "#31229"
+msgid "Media-Flags"
+msgstr ""
+
+msgctxt "#31230"
+msgid "Enable grid"
+msgstr ""
+
+msgctxt "#31231"
+msgid "Hide play/pause info"
+msgstr ""
+
+msgctxt "#31232"
+msgid "Auto close OSD after delay (in seconds)"
+msgstr ""
+
+msgctxt "#31233"
+msgid "Random Artists with biography only"
+msgstr ""
+
+msgctxt "#31234"
+msgid "People"
+msgstr "Inimesed"
+
+msgctxt "#31235"
+msgid "Recently added Artists"
+msgstr ""
+
+msgctxt "#31236"
+msgid "Recently added Artists with biography only"
+msgstr ""
+
+msgctxt "#31237"
+msgid "Top 20 User Rated Movies"
+msgstr ""
+
+msgctxt "#31238"
+msgid "Reset skin settings to defaults?"
+msgstr ""
+
+msgctxt "#31239"
+msgid "Reset skin settings to defaults? WARNING: This will also reset your home menu to skin defaults!"
+msgstr ""
+
+msgctxt "#31240"
+msgid "Random Actors ordered by movies"
+msgstr ""
+
+msgctxt "#31241"
+msgid "New Unwatched Movies"
+msgstr ""
+
+msgctxt "#31242"
+msgid "New Unwatched Episodes"
+msgstr ""
+
+msgctxt "#31243"
+msgid "New Unwatched Tv Shows"
+msgstr ""
+
+msgctxt "#31244"
+msgid "Search results for"
+msgstr ""
+
+msgctxt "#31245"
+msgid "Side Cards"
+msgstr ""
+
+msgctxt "#31246"
+msgid "Seasons info"
+msgstr ""
+
+msgctxt "#31247"
+msgid "ClearLogo"
+msgstr ""
+
+msgctxt "#31248"
+msgid "Show ClearLogo"
+msgstr ""
+
+msgctxt "#31249"
+msgid "Songs by"
+msgstr ""
+
+msgctxt "#31250"
+msgid "Poster Wall Small"
+msgstr ""
+
+msgctxt "#31251"
+msgid "MDBList"
+msgstr ""
+
+msgctxt "#31252"
+msgid "10"
+msgstr ""
+
+msgctxt "#31253"
+msgid "15"
+msgstr ""
+
+msgctxt "#31254"
+msgid "20"
+msgstr ""
+
+msgctxt "#31255"
+msgid "25"
+msgstr ""
+
+msgctxt "#31256"
+msgid "Auto-scrolling"
+msgstr ""
+
+msgctxt "#31257"
+msgid "Widget-listtype"
+msgstr ""
+
+msgctxt "#31258"
+msgid "List"
+msgstr "Nimekiri"
+
+msgctxt "#31259"
+msgid "Fixed list"
+msgstr ""
+
+msgctxt "#31260"
+msgid "Studio logo"
+msgstr ""
+
+msgctxt "#31261"
+msgid "Rating flag"
+msgstr ""
+
+msgctxt "#31262"
+msgid "Movie Genre Icons"
+msgstr ""
+
+msgctxt "#31263"
+msgid "Studio Icons"
+msgstr ""
+
+msgctxt "#31264"
+msgid "Record Label Icons"
+msgstr ""
+
+msgctxt "#31265"
+msgid "Animate fanart/slideshow"
+msgstr ""
+
+msgctxt "#31266"
+msgid "Normal"
+msgstr "Normaalne"
+
+msgctxt "#31267"
+msgid "Slow"
+msgstr ""
+
+msgctxt "#31268"
+msgid "Very slow"
+msgstr ""
+
+msgctxt "#31269"
+msgid "Fadetime"
+msgstr ""
+
+msgctxt "#31270"
+msgid "Customise power menu"
+msgstr ""
+
+msgctxt "#31271"
+msgid "Log off: $INFO[system.profilename]"
+msgstr ""
+
+msgctxt "#31272"
+msgid "Delete/Disable Settings Menu Item?"
+msgstr "Kas kustutada / keelata menüüelement 'Seaded'?"
+
+msgctxt "#31273"
+msgid "Are you sure you want to remove the Settings menu item?[CR]Please ensure that you have an alternative method of accessing Settings before you remove this menu item."
+msgstr "Kas oled kindel, et soovid eemaldada menüüelemendi 'Seaded'?[CR]Enne selle menüüelemendi eemaldamist veendu, et seadete juurde pääsemiseks leidub mõni muu meetod."
+
+msgctxt "#31274"
+msgid "Shutdown in: [B]$INFO[System.Alarmpos][/B]"
+msgstr ""
+
+msgctxt "#31275"
+msgid "Show Filenames"
+msgstr ""
+
+msgctxt "#31276"
+msgid "Shifted ClearArt"
+msgstr ""
+
+msgctxt "#31277"
+msgid "total"
+msgstr ""
+
+msgctxt "#31278"
+msgid "last on"
+msgstr ""
+
+msgctxt "#31279"
+msgid "[B]Configure LibreELEC Settings[/B][CR][CR] •     Setup system settings[CR] •     Configure system updatesSetup and calibrate network[CR] •     Setup and calibrate network[CR] •     Configure connections [CR]"
+msgstr ""
+
+msgctxt "#31280"
+msgid "[B]Configure CoreELEC Settings[/B][CR][CR] •     Setup system settings[CR] •     Configure system updatesSetup and calibrate network[CR] •     Setup and calibrate network[CR] •     Configure connections [CR]"
+msgstr ""
+
+msgctxt "#31281"
+msgid " -- "
+msgstr ""
+
+msgctxt "#31282"
+msgid "n/a"
+msgstr ""
+
+msgctxt "#31283"
+msgid "TBD"
+msgstr ""
+
+msgctxt "#31284"
+msgid "Fallback label for ratings in list views"
+msgstr ""
+
+msgctxt "#31285"
+msgid "Size of Icons"
+msgstr ""
+
+msgctxt "#31286"
+msgid "Align"
+msgstr ""
+
+msgctxt "#31287"
+msgid "left"
+msgstr ""
+
+msgctxt "#31288"
+msgid "center"
+msgstr ""
+
+msgctxt "#31289"
+msgid "ClearLogo with fanart"
+msgstr ""
+
+msgctxt "#31290"
+msgid "Fullsize EPG"
+msgstr ""
+
+msgctxt "#31291"
+msgid "Also use for widgets"
+msgstr ""
+
+msgctxt "#31292"
+msgid "Also use for system-icons"
+msgstr ""
+
+msgctxt "#31293"
+msgid "DiscArt Fallback"
+msgstr ""
+
+msgctxt "#31294"
+msgid "CD"
+msgstr ""
+
+msgctxt "#31295"
+msgid "Fake CD"
+msgstr ""
+
+msgctxt "#31296"
+msgid "Vinyl"
+msgstr "Vinüül"
+
+msgctxt "#31297"
+msgid "Limit number of items in hub"
+msgstr ""
+
+msgctxt "#31298"
+msgid "Multi-Widgets"
+msgstr ""
+
+msgctxt "#31299"
+msgid "Gradient"
+msgstr ""
+
+msgctxt "#31300"
+msgid "RAM"
+msgstr ""
+
+msgctxt "#31301"
+msgid "Skin-Version:"
+msgstr ""
+
+msgctxt "#31302"
+msgid "Scroll behavior"
+msgstr ""
+
+msgctxt "#31303"
+msgid "Aspect ratio"
+msgstr ""
+
+msgctxt "#31304"
+msgid "Select aspect ratio for square widget"
+msgstr ""
+
+msgctxt "#31305"
+msgid "Scale"
+msgstr ""
+
+msgctxt "#31306"
+msgid "Sunrise at"
+msgstr ""
+
+msgctxt "#31307"
+msgid "Sunset at"
+msgstr ""
+
+msgctxt "#31308"
+msgid "Square small"
+msgstr ""
+
+msgctxt "#31309"
+msgid "Square medium"
+msgstr ""
+
+msgctxt "#31310"
+msgid "Home menu bar"
+msgstr ""
+
+msgctxt "#31311"
+msgid "Fullscreen widget"
+msgstr ""
+
+msgctxt "#31312"
+msgid "Weather location"
+msgstr ""
+
+msgctxt "#31313"
+msgid "Big Poster"
+msgstr ""
+
+msgctxt "#31314"
+msgid "Images"
+msgstr ""
+
+msgctxt "#31315"
+msgid "Big wide"
+msgstr ""
+
+msgctxt "#31316"
+msgid "Big list"
+msgstr ""
+
+msgctxt "#31317"
+msgid "Customize view types"
+msgstr ""
+
+msgctxt "#31318"
+msgid "Seconds"
+msgstr "Sekundit"
+
+msgctxt "#31319"
+msgid "Big Thumbnail"
+msgstr ""
+
+msgctxt "#31320"
+msgid "more..."
+msgstr ""
+
+msgctxt "#31321"
+msgid "item"
+msgstr ""
+
+msgctxt "#31322"
+msgid "Alternative layout"
+msgstr ""
+
+msgctxt "#31323"
+msgid "Smart Shortcuts"
+msgstr ""
+
+msgctxt "#31324"
+msgid "Movies and TV shows"
+msgstr ""
+
+msgctxt "#31325"
+msgid "Recently added Songs"
+msgstr ""
+
+msgctxt "#31326"
+msgid "Most played Songs"
+msgstr ""
+
+msgctxt "#31327"
+msgid "Chapter markers"
+msgstr ""
+
+msgctxt "#31328"
+msgid "Rotten Tomatoes"
+msgstr ""
+
+msgctxt "#31329"
+msgid "Select media flags"
+msgstr ""
+
+msgctxt "#31330"
+msgid "Subtitle icon"
+msgstr ""
+
+msgctxt "#31331"
+msgid "Subtitle extended info"
+msgstr ""
+
+msgctxt "#31332"
+msgid "Reminder enabled"
+msgstr ""
+
+msgctxt "#31333"
+msgid "Reminder Rule enabled"
+msgstr ""
+
+msgctxt "#31334"
+msgid "Debugging"
+msgstr ""
+
+msgctxt "#31335"
+msgid "Extended debugging information"
+msgstr ""
+
+msgctxt "#31336"
+msgid "Extended grid"
+msgstr ""
+
+msgctxt "#31337"
+msgid "Play next episode"
+msgstr ""
+
+msgctxt "#31338"
+msgid "Widget"
+msgstr "Vidin"
+
+msgctxt "#31339"
+msgid "Edge distance"
+msgstr ""
+
+msgctxt "#31340"
+msgid "30px"
+msgstr ""
+
+msgctxt "#31341"
+msgid "Path intros"
+msgstr ""
+
+msgctxt "#31342"
+msgid "Trailer count"
+msgstr ""
+
+msgctxt "#31343"
+msgid "Some other"
+msgstr ""
+
+msgctxt "#31344"
+msgid "Video preview"
+msgstr ""
+
+msgctxt "#31345"
+msgid "DiscArt"
+msgstr ""
+
+msgctxt "#31346"
+msgid "Fake Blu-ray"
+msgstr ""
+
+msgctxt "#31347"
+msgid "Artwork section"
+msgstr ""
+
+msgctxt "#31348"
+msgid "Landscape"
+msgstr "Horisontaalpaigutus"
+
+msgctxt "#31349"
+msgid "Artwork of"
+msgstr ""
+
+msgctxt "#31350"
+msgid "disabled"
+msgstr ""
+
+msgctxt "#31351"
+msgid "Required add-ons"
+msgstr ""
+
+msgctxt "#31352"
+msgid "Recommended add-ons"
+msgstr ""
+
+msgctxt "#31353"
+msgid "CoreELEC Settings"
+msgstr "CoreELEC seaded"
+
+msgctxt "#31354"
+msgid "Configure custom widget"
+msgstr ""
+
+msgctxt "#31355"
+msgid "Flix fanart window"
+msgstr ""
+
+msgctxt "#31356"
+msgid "Media status"
+msgstr ""
+
+msgctxt "#31357"
+msgid "HDR"
+msgstr ""
+
+msgctxt "#31358"
+msgid "Blu-ray / HD DVD / DVD / WEB-DL"
+msgstr ""
+
+msgctxt "#31359"
+msgid "IMDB Top 250"
+msgstr ""
+
+msgctxt "#31360"
+msgid "Audio Channels"
+msgstr ""
+
+msgctxt "#31361"
+msgid "Widget path"
+msgstr ""
+
+msgctxt "#31362"
+msgid "Origin"
+msgstr "Päritolu"
+
+msgctxt "#31363"
+msgid "Trakt"
+msgstr "Trakt"
+
+msgctxt "#31364"
+msgid "CPU"
+msgstr "CPU"
+
+msgctxt "#31365"
+msgid "Underlined homemenu items"
+msgstr ""
+
+msgctxt "#31366"
+msgid "Poster Flix"
+msgstr ""
+
+msgctxt "#31367"
+msgid "Paused"
+msgstr ""
+
+msgctxt "#31368"
+msgid "Watched"
+msgstr ""
+
+msgctxt "#31369"
+msgid "New!"
+msgstr ""
+
+msgctxt "#31370"
+msgid "Alternative indicators"
+msgstr ""
+
+msgctxt "#31371"
+msgid "Label"
+msgstr "Leibel"
+
+msgctxt "#31372"
+msgid "Director"
+msgstr ""
+
+msgctxt "#31373"
+msgid "Collection"
+msgstr "Kogumik"
+
+msgctxt "#31374"
+msgid "Prefer percentage"
+msgstr ""
+
+msgctxt "#31375"
+msgid "Prefer local list information"
+msgstr ""
+
+msgctxt "#31376"
+msgid "On back, widgets do not return to initial position"
+msgstr ""
+
+msgctxt "#31377"
+msgid "On up, when at first widget, do not jump back to last widget"
+msgstr ""
+
+msgctxt "#31378"
+msgid "On down, when at last widget, widgets do not return to initial position"
+msgstr ""
+
+msgctxt "#31379"
+msgid "On up/down at first/last widget, go to last/first widget"
+msgstr ""
+
+msgctxt "#31380"
+msgid "Layout options"
+msgstr ""
+
+msgctxt "#31381"
+msgid "Global"
+msgstr ""
+
+msgctxt "#31382"
+msgid "4K Movies"
+msgstr ""
+
+msgctxt "#31383"
+msgid "Recent recordings"
+msgstr "Viimati salvestatud"
+
+msgctxt "#31384"
+msgid "Grouped recent recordings"
+msgstr ""
+
+msgctxt "#31385"
+msgid "Grouped deleted recordings"
+msgstr ""
+
+msgctxt "#31386"
+msgid "Hide"
+msgstr "Peida"
+
+msgctxt "#31387"
+msgid "Last Played Radio Channels"
+msgstr "Viimati mängitud raadiokanalid"
+
+msgctxt "#31388"
+msgid "Mini-EPG (vertical, only 5 Items)"
+msgstr ""
+
+msgctxt "#31389"
+msgid "Unwatched Tv Shows"
+msgstr ""
+
+msgctxt "#31390"
+msgid "for"
+msgstr ""
+
+msgctxt "#31391"
+msgid "Poster Wall"
+msgstr ""
+
+msgctxt "#31392"
+msgid "Fanart Flix"
+msgstr ""
+
+msgctxt "#31393"
+msgid "IMDB Position"
+msgstr ""
+
+msgctxt "#31394"
+msgid "Use default MPAA rating icons"
+msgstr ""
+
+msgctxt "#31395"
+msgid "Seasons info v2"
+msgstr ""
+
+msgctxt "#31396"
+msgid "Up Next"
+msgstr ""
+
+msgctxt "#31397"
+msgid "Use thumbnail instead of fanart"
+msgstr ""
+
+msgctxt "#31398"
+msgid "Clean and minimal"
+msgstr ""
+
+msgctxt "#31399"
+msgid "Hide plot, when widget is not focused"
+msgstr ""
+
+msgctxt "#31400"
+msgid "Audio streams"
+msgstr ""
+
+msgctxt "#31401"
+msgid "Info slider"
+msgstr ""
+
+msgctxt "#31402"
+msgid "Additional fanart"
+msgstr ""
+
+msgctxt "#31403"
+msgid "HD Movies"
+msgstr ""
+
+msgctxt "#31404"
+msgid "Hide, when not focused/used"
+msgstr ""
+
+msgctxt "#31405"
+msgid "Hide seekbar"
+msgstr ""
+
+msgctxt "#31406"
+msgid "Hide OSD"
+msgstr ""
+
+msgctxt "#31407"
+msgid "Scrolling text"
+msgstr ""
+
+msgctxt "#31408"
+msgid "Numeric rating"
+msgstr ""
+
+msgctxt "#31409"
+msgid "Artist slideshow"
+msgstr ""
+
+msgctxt "#31410"
+msgid "Low list"
+msgstr ""
+
+msgctxt "#31411"
+msgid "Filenames"
+msgstr ""
+
+msgctxt "#31412"
+msgid "Fallback image"
+msgstr ""
+
+msgctxt "#31413"
+msgid "ClearLogo/ClearArt"
+msgstr ""
+
+msgctxt "#31414"
+msgid "Clearlogo instead of title"
+msgstr ""
+
+msgctxt "#31415"
+msgid "Media flags"
+msgstr ""
+
+msgctxt "#31416"
+msgid "Play/pause info"
+msgstr ""
+
+msgctxt "#31417"
+msgid "PVR technical info"
+msgstr ""
+
+msgctxt "#31418"
+msgid "Progress graphic"
+msgstr ""
+
+msgctxt "#31419"
+msgid "Hide widget label"
+msgstr ""
+
+msgctxt "#31420"
+msgid "Show behind slideshow"
+msgstr ""
+
+msgctxt "#31421"
+msgid "Zoom focused items"
+msgstr ""
+
+msgctxt "#31422"
+msgid "Enable auto scrolling for titles"
+msgstr ""
+
+msgctxt "#31423"
+msgid "Show glow on focused items"
+msgstr ""
+
+msgctxt "#31424"
+msgid "List type"
+msgstr ""
+
+msgctxt "#31425"
+msgid "Enable auto playing trailers in flix views"
+msgstr ""
+
+msgctxt "#31426"
+msgid "Try to hide black bars"
+msgstr ""
+
+msgctxt "#31427"
+msgid "playing"
+msgstr ""
+
+msgctxt "#31428"
+msgid "paused"
+msgstr ""
+
+msgctxt "#31429"
+msgid "caching"
+msgstr ""
+
+msgctxt "#31430"
+msgid "Auto start delay"
+msgstr ""
+
+msgctxt "#31431"
+msgid "Auto playing trailers"
+msgstr ""
+
+msgctxt "#31432"
+msgid "None"
+msgstr "Pole"
+
+msgctxt "#31433"
+msgid "Medium"
+msgstr ""
+
+msgctxt "#31434"
+msgid "Maximal"
+msgstr ""
+
 msgctxt "#31435"
-msgid "TMDbHelper lookups"
-msgstr "TMDbHelper otsingud"
+msgid "On back, jump to first item in widget list"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31436"
+msgid "After that, focus home menu"
+msgstr ""
+
+msgctxt "#31437"
+msgid "If home menu is focused, jump to widgets on back"
+msgstr ""
+
 msgctxt "#31438"
-msgid "Simple"
-msgstr "Lihtne"
+msgid "Only, when widget is focused"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31439"
-msgid "Large"
-msgstr "Suur"
+msgid "Hide mouse warning"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31440"
-msgid "Extra Large"
-msgstr "Eriti suur"
+msgid "EDL markers"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31441"
-msgid "FlixArt Size"
-msgstr "FlixArt suurus"
+msgid "Hub widget content type"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31442"
-msgid "Parent"
-msgstr "Ülemmenüü"
+msgid "Playback action when video info dialog is shown"
+msgstr ""
 
-#: /1080i/Settings.xml
+msgctxt "#31443"
+msgid "Stop playback when item is no longer focused"
+msgstr ""
+
 msgctxt "#31444"
-msgid "Customisation"
-msgstr "Kohandamine"
+msgid "LibreELEC Settings"
+msgstr "LibreELEC seaded"
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31445"
+msgid "Is playing"
+msgstr ""
+
+msgctxt "#31446"
+msgid "Icon"
+msgstr "Ikoon"
+
+msgctxt "#31447"
+msgid "Now playing"
+msgstr "Hetkel mängib"
+
 msgctxt "#31448"
-msgid "This category contains customisation options for"
-msgstr "See jaotis sisaldab kohandamisvalikuid üksusele"
+msgid "Now playing..."
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31449"
+msgid "User rating overrides"
+msgstr ""
+
 msgctxt "#31450"
-msgid "Text only"
-msgstr "Ainult tekst"
+msgid "Star rating and value"
+msgstr ""
 
-#: /1080i/Custom_1180_Wizard.xml
 msgctxt "#31451"
-msgid "Compound"
-msgstr "Ühend"
+msgid "Show player controls"
+msgstr ""
 
-#: /1080i/Custom_1180_Wizard.xml
 msgctxt "#31452"
-msgid "Composite"
-msgstr "Komposiit"
+msgid "Show clearart"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_WideSettings.xml
+msgctxt "#31453"
+msgid "Ratings"
+msgstr "Hinded"
+
+msgctxt "#31454"
+msgid "Show detailed info when video starts (in seconds)"
+msgstr ""
+
+msgctxt "#31455"
+msgid "Customized"
+msgstr ""
+
 msgctxt "#31456"
-msgid "Prebuilt"
-msgstr "Eelseadistatud"
+msgid "Color presets"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31457"
-msgid "Scrollbar"
-msgstr "Kerimisriba"
+msgid "Preset"
+msgstr "Eelhäälestus"
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31458"
-msgid "Monochrome"
-msgstr "Mustvalge"
+msgid "Lavender"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31459"
-msgid "Letter"
-msgstr "Täht"
+msgid "Bright Turquoise"
+msgstr ""
 
-#: /1080i/SkinSettings.xml /1080i/MusicOSD.xml
 msgctxt "#31460"
-msgid "Customise visualisation"
-msgstr "Kohanda visuaale"
+msgid "Orange Pumpkin"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31461"
-msgid "Choose preset"
-msgstr "Vali eelseadistus"
+msgid "Azure Blue"
+msgstr ""
 
-#: /1080i/Includes_Views_Wall.xml
 msgctxt "#31462"
-msgid "Wall Banner"
-msgstr "Sein - Bänner"
+msgid "Spring Green"
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
+msgctxt "#31463"
+msgid "Brick Red"
+msgstr ""
+
+msgctxt "#31464"
+msgid "Save color configuration"
+msgstr ""
+
 msgctxt "#31465"
-msgid "Rain chance"
-msgstr "Vihma võimalus"
+msgid "Overwrite existing color configuration?"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
+msgctxt "#31466"
+msgid "Hide PVR recording dialog"
+msgstr ""
+
 msgctxt "#31467"
-msgid "Tiles configuration"
-msgstr "Ruutude seadistus"
+msgid "Player"
+msgstr "Pleier"
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31468"
-msgid "Tile layout"
-msgstr "Ruutude asetus"
+msgid "Players"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31469"
-msgid "Choose shortcut"
-msgstr "Vali otsetee"
+msgid "Local"
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
 msgctxt "#31470"
-msgid "Wind gusts"
-msgstr "Tuulepuhangud"
+msgid "Online"
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
 msgctxt "#31471"
-msgid "Fire danger"
-msgstr "Tuleoht"
+msgid "Game studio/flag icons"
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
 msgctxt "#31472"
-msgid "Rain since 9am"
-msgstr "Vihm alates 9.00"
+msgid "Pick a color..."
+msgstr ""
 
-#: /1080i/Custom_1161_Dialog_Weather.xml
 msgctxt "#31473"
-msgid "Radar"
-msgstr "Radar"
+msgid "Use thumb for episodes background"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31474"
+msgid "Small landscape"
+msgstr ""
+
+msgctxt "#31475"
+msgid "Small fanart"
+msgstr ""
+
 msgctxt "#31476"
-msgid "This category contains acknowledgements, contributions, and thanks."
+msgid "Small poster fanart"
 msgstr ""
-"See jaotis tänab inimesi, kes on aidanud arendamisel või toetanud "
-"annetustega."
 
-#: /1080i/SkinSettings.xml /1080i/Includes_Items.xml
 msgctxt "#31477"
-msgid "Progress percentage"
-msgstr "Edenemise protsent"
+msgid "Wikipedia"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31478"
-msgid "by"
-msgstr "autor"
+msgid "Rating stars"
+msgstr ""
 
-#: /1080i/Includes_Views_List.xml
 msgctxt "#31479"
-msgid "List Media"
-msgstr "Loend - Meedia"
+msgid "Auto show now playing info after 5 seconds delay if hidden"
+msgstr ""
 
-#: /1080i/Includes_Views_List.xml
 msgctxt "#31480"
-msgid "List Flixart"
-msgstr "Loend - Flixart"
+msgid "Animation"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31481"
+msgid "Year"
+msgstr ""
+
 msgctxt "#31482"
-msgid "Trailers"
-msgstr "Treilerid"
+msgid "Prefer to separate animation from movies"
+msgstr ""
 
-#: /1080i/Custom_1123_Dialog_Trailer.xml
 msgctxt "#31483"
-msgid "Replay"
-msgstr "Esita uuesti"
+msgid "Widgets/Items return to initial position on return to menu"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31484"
-msgid "Pause"
-msgstr "Paus"
+msgid "Documentary"
+msgstr ""
 
-#: /1080i/Custom_1123_Dialog_Trailer.xml
 msgctxt "#31485"
-msgid "Stop"
-msgstr "Peata"
+msgid "End at"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31486"
-msgid "Dialog"
-msgstr "Valikmenüü"
+msgid "Tv Shows of the year"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31487"
-msgid "and"
-msgstr "ja"
+msgid "[B]File Manager[/B][CR][CR] •     Copy[CR] •     Move[CR] •     Delete[CR] •     Rename[CR] •     Manage Source"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31488"
+msgid "Hide OSD / Seekbar on pause"
+msgstr ""
+
+msgctxt "#31489"
+msgid "IMDb rating"
+msgstr ""
+
 msgctxt "#31490"
-msgid "Cancelled"
-msgstr "Tühistatud"
+msgid "Use PreShow Experience add-on instead"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31491"
-msgid "Miscellaneous"
-msgstr "Mitmesugust"
+msgid "Light Taupe"
+msgstr ""
 
-#: /1080i/Includes_Actions.xml
 msgctxt "#31492"
-msgid "Add-ons hub"
-msgstr "Lisamoodulite huub"
+msgid "Show media path"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31493"
-msgid "Ended"
-msgstr "Lõppenud"
+msgid "On down, when at last widget, do not jump back to first widget"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
 msgctxt "#31494"
-msgid "Rebuild"
-msgstr "Loo uuesti"
+msgid "Hide in others views"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31495"
-msgid "Unlocked"
-msgstr "Lukustamata"
+msgid "Hide home menu bar and header"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31496"
-msgid "Customise widgets"
-msgstr "Kohanda vidinaid"
+msgid "Hide the shadows"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31497"
-msgid "Minimise menu"
-msgstr "Minimeeri menüü"
+msgid "DiscArt fallback only"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31498"
-msgid "Released"
-msgstr "Avaldatud"
+msgid "On left go to last item widget"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31499"
-msgid "In-Production"
-msgstr "Tootmisel"
+msgid "Show debug item info"
+msgstr ""
 
-#: /1080i/Includes_Search.xml
 msgctxt "#31500"
-msgid "There were no search results found"
-msgstr "Otsinguvasteid ei leitud"
+msgid "Countries Icons"
+msgstr ""
 
-#: /1080i/Includes_Search.xml
 msgctxt "#31501"
-msgid "Please try another search"
-msgstr "Proovi teist otsingut"
+msgid "Back auto to main menu after 10s"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31502"
-msgid "More Options"
-msgstr "Rohkem valikuid"
+msgid "From submenu only"
+msgstr ""
 
-#: /1080i/DialogVideoVersion.xml
 msgctxt "#31503"
-msgid "Extras"
-msgstr "Lisamaterjal"
+msgid "Replace jumpbar by wall view"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31504"
-msgid "Planned"
-msgstr "Plaanitud"
+msgid "Display info in footer"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31505"
-msgid "Skin user login screen on startup"
-msgstr "Rüü kasutaja sisselogimisekraan käivitamisel"
+msgid "vertical"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31506"
-msgid "Individual skin user widget configurations"
-msgstr "Rüü kasutaja isiklikud vidina seadistused"
+msgid "Horizontal"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31507"
-msgid "pseudo profiles"
-msgstr "pseudoprofiilid"
+msgid "Background presets"
+msgstr ""
 
-#: /1080i/Custom_1195_SkinUserLoginScreen.xml
 msgctxt "#31508"
-msgid "Loading skin user profiles"
-msgstr "Rüü kasutajaprofiilide laadimine"
+msgid "Autoscrolling"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31509"
-msgid "Holiday"
-msgstr "Püha"
+msgid "Slow"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
 msgctxt "#31510"
-msgid "Holiday themes"
-msgstr "Jõuluteema"
+msgid "Thumbnail Wall Small"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
 msgctxt "#31511"
-msgid "Shortcut"
-msgstr "Otsetee"
+msgid "Sort by"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31512"
+msgid "Order"
+msgstr ""
+
+msgctxt "#31513"
+msgid "Thumbnail Square Small"
+msgstr ""
+
+msgctxt "#31514"
+msgid "Initialising Skin"
+msgstr ""
+
 msgctxt "#31515"
-msgid "Main Items"
-msgstr "Põhiüksused"
+msgid "Building includes"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
 msgctxt "#31516"
-msgid "Edit items"
-msgstr "Muuda üksusi"
+msgid "Press [B]Down[/B]"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
 msgctxt "#31517"
-msgid "Reverse order"
-msgstr "Pööratud"
+msgid "Display menu label on focus"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31518"
+msgid "Listened"
+msgstr ""
+
 msgctxt "#31519"
-msgid "Empty widget placeholder"
-msgstr "Tühi vidina kohatäitja"
+msgid "Show menu background"
+msgstr ""
 
-#: /1080i/Includes_Weather_Radar.xml
 msgctxt "#31520"
-msgid "Cloudiness"
-msgstr "Pilvisus"
+msgid "Extended Info on artist"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31521"
+msgid "Extended Info on this song"
+msgstr ""
+
 msgctxt "#31522"
-msgid "Hiding empty widgets may cause positioning issues after video playback."
+msgid "Known For"
 msgstr ""
-"Tühja vidina peitmine võib pärast video taasesitust põhjustada probleeme "
-"asukohaga."
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31523"
-msgid ""
-"It is recommended to delete any unused widgets from your configuration "
-"instead of hiding them."
+msgid "Birthdate"
 msgstr ""
-"Soovitatav on kõik kasutamata vidinad seadistusest kustutada, mitte neid "
-"peita."
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31524"
-msgid ""
-"There is also an overhead refresh cost to performance associated with hiding "
-"empty widgets."
+msgid "Place of Birth"
 msgstr ""
-"Peidetud vidinate uuesti laadimine aeglustab ka kasutajaliidese jõudlust."
 
-#: /1080i/Includes_Weather_Radar.xml
 msgctxt "#31525"
-msgid "Visibility"
-msgstr "Nähtavus"
+msgid "Age"
+msgstr ""
 
-#: /1080i/Includes_Weather_Forecast.xml
 msgctxt "#31526"
-msgid "Hour"
-msgstr "Tund"
+msgid "Written by"
+msgstr ""
 
-#: /1080i/Includes_Weather_Forecast.xml
 msgctxt "#31527"
-msgid "Later"
-msgstr "Hiljem"
+msgid "Writer"
+msgstr ""
 
-#: /1080i/Includes_Weather_Forecast.xml
 msgctxt "#31528"
-msgid "Particulate"
-msgstr "Osakesed"
+msgid "Day of Death"
+msgstr ""
 
-#: /1080i/Includes_Weather_Forecast.xml
 msgctxt "#31529"
-msgid "Ozone"
-msgstr "Osoon"
+msgid "Tv shows with"
+msgstr ""
 
-#: /1080i/Includes_Weather_Forecast.xml
 msgctxt "#31530"
-msgid "Solar radiation"
-msgstr "Päikesekiirgus"
+msgid "years old"
+msgstr ""
 
-#: /1080i/Includes_Weather_Forecast.xml
 msgctxt "#31531"
-msgid "Carbon monoxide"
-msgstr "Vingugaas"
+msgid "Pictures of"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
+msgctxt "#31532"
+msgid "Studio series"
+msgstr ""
+
 msgctxt "#31533"
-msgid "Add list"
-msgstr "Lisa loend"
+msgid "Recommended"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
+msgctxt "#31534"
+msgid "Creator"
+msgstr ""
+
 msgctxt "#31535"
-msgid "Restore"
-msgstr "Taasta"
+msgid "in the crew"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
 msgctxt "#31536"
-msgid "Choose fallback image folder"
-msgstr "Vali varupiltide kaust"
+msgid "members"
+msgstr ""
 
-#: /1080i/Custom_1115_Dialog_Shortcuts.xml
 msgctxt "#31537"
-msgid "Edit submenu items"
-msgstr "Muuda alammenüü üksusi"
+msgid "Created by"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31538"
-msgid "Customise viewtypes"
-msgstr "Kohanda vaatetüüpe"
+msgid "Video version management"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31539"
-msgid "Use online gallery"
-msgstr "Hangi galeriipildid veebist"
+msgid "Manage extras"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
 msgctxt "#31540"
-msgid "Use online collection"
-msgstr "Hangi kogumikuandmed veebist"
+msgid "Press [B]RIGHT[/B] to execute the search"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31541"
-msgid "Next episode"
-msgstr "Järgmine episood"
+msgid "Display submenu on CLICK"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31542"
-msgid "Last episode"
-msgstr "Eelmine episood"
+msgid "On up, when at first widget, do not jump back to main menu"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31543"
-msgid "Anticipated"
-msgstr "Oodatud"
+msgid "Display sub menu"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31544"
-msgid "Airing"
-msgstr "Eetris"
+msgid "Button info local only?"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31545"
-msgid "Premiering"
-msgstr "Esilinastub"
+msgid "Show video in flix windows"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
+msgctxt "#31546"
+msgid "Loading info"
+msgstr ""
+
 msgctxt "#31547"
-msgid "Yesterday"
-msgstr "Eile"
+msgid "Press [B]Down[/B] displays other buttons"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31548"
+msgid "Display item"
+msgstr ""
+
+msgctxt "#31549"
+msgid "Event log"
+msgstr ""
+
 msgctxt "#31550"
-msgid "Change the visibility level of skin settings."
-msgstr "Muuda rüü seadete kuvamise taset."
+msgid "[B]Show event log[/B][CR][CR] •     Basic[CR] •     Information[CR] •     Warning[CR] •     Error [CR]"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31551"
+msgid "Customize color"
+msgstr ""
+
 msgctxt "#31552"
-msgid "Settings level"
-msgstr "Seadete tase"
+msgid "local"
+msgstr ""
 
-#: /1080i/SkinSettings.xml
+msgctxt "#31553"
+msgid "online"
+msgstr ""
+
 msgctxt "#31554"
-msgid "Wall Poster"
-msgstr "Sein - Plakat"
+msgid "Music Infodialog"
+msgstr ""
 
-#: /1080i/Includes_Views_Wall.xml
 msgctxt "#31555"
-msgid "Wall Landscape"
-msgstr "Sein - Rõhtpilt"
+msgid "Show poster"
+msgstr ""
 
-#: /1080i/Includes_Views_Wall.xml
 msgctxt "#31556"
-msgid "Wall Square"
-msgstr "Sein - Ruut"
+msgid "Flix List"
+msgstr ""
 
-#: /1080i/Includes_Views_Wall.xml
 msgctxt "#31557"
-msgid "Wall Circle"
-msgstr "Sein - Ring"
+msgid "Press [B]Up[/B]"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
+msgctxt "#31558"
+msgid "Choose widget"
+msgstr ""
+
+msgctxt "#31559"
+msgid "Content type"
+msgstr ""
+
 msgctxt "#31560"
-msgid "Bright White"
-msgstr "Erevalge"
+msgid "Show only background Other / Unknown"
+msgstr ""
 
-#: /1080i/Includes_Views_Row.xml
+msgctxt "#31561"
+msgid "Text"
+msgstr ""
+
+msgctxt "#31562"
+msgid "Menu style"
+msgstr ""
+
 msgctxt "#31563"
-msgid "Row Card"
-msgstr "Rida - Kaart"
+msgid "Submenu style"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31564"
-msgid "General appearance and widget layout customisations."
-msgstr "Üldise välimuse ja vidinate asetuse kohandamine."
+msgid "Show video in flix views"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31565"
-msgid "Detailed adjustments and additional hub customisations."
-msgstr "Täppisseadistamine ja täiendavad huubide kohandused."
+msgid "Show profile picture"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31566"
-msgid "Development tools and experimental options."
-msgstr "Arendustööristad ja eksperimentaalsed valikud."
+msgid "Prefer casting"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31567"
-msgid "Add a single item or a list of several items?"
-msgstr "Kas lisada üks üksus või loend mitme üksusega?"
+msgid "No gradient"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31568"
-msgid "Add new item(s)"
-msgstr "Lisa uusi üksusi"
+msgid "Disable colour"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31569"
-msgid "Add item"
-msgstr "Lisa üksus"
+msgid "Focus, information"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31570"
-msgid "Delete item(s)"
-msgstr "Kustuta üksusi"
+msgid "Settings menu title"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31571"
-msgid "Delete a single item or a list of several items?"
-msgstr "Kas kustutada üks või mitu üksust?"
+msgid "Invert info colour"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31572"
-msgid "Delete item"
-msgstr "Kustuta üksus"
+msgid "Show logo Record Company"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
 msgctxt "#31573"
-msgid "Delete list"
-msgstr "Kustuta loend"
+msgid "Next location"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31574"
+msgid "Banner Wall"
+msgstr ""
+
+msgctxt "#31575"
+msgid "Online casting loading"
+msgstr ""
+
 msgctxt "#31576"
-msgid "Seekbar delayed pause time"
-msgstr "Otsiriba pikema pausi aeg"
+msgid "Press [B]Down[/B] displays next location"
+msgstr ""
 
-#: /1080i/Includes_ButtonMenu.xml
+msgctxt "#31577"
+msgid "Loading photos"
+msgstr ""
+
+msgctxt "#31578"
+msgid "Episode of"
+msgstr ""
+
 msgctxt "#31579"
-msgid "Prev"
-msgstr "Eelmine"
+msgid "Show music visualisation in background"
+msgstr ""
 
-#: /1080i/Includes_Views_List.xml
 msgctxt "#31580"
-msgid "Combined List"
-msgstr "Kombo - Loend"
+msgid "Thumbnail Wall"
+msgstr ""
 
-#: /1080i/Includes_Views_List.xml
 msgctxt "#31581"
-msgid "List Expanded"
-msgstr "Loend - Laiendatud"
+msgid "Big Poster v2"
+msgstr ""
 
-#: /1080i/Custom_1116_Dialog_Shortcuts.xml
+msgctxt "#31582"
+msgid "Creator show information"
+msgstr ""
+
 msgctxt "#31583"
-msgid "Prevent reload"
-msgstr "Takista uuestilaadimine"
+msgid "Hide channel numbers"
+msgstr ""
 
-#: /1080i/Includes_Items.xml
+msgctxt "#31584"
+msgid "Remaining"
+msgstr ""
+
 msgctxt "#31585"
-msgid "Overlay"
-msgstr "Kattekiht"
+msgid "Search history"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31586"
-msgid "Customise shortcuts"
-msgstr "Kohanda otseteid"
+msgid "Automatic proposal"
+msgstr ""
 
-#: /1080i/Includes_OSD.xml
+msgctxt "#31587"
+msgid "List Square"
+msgstr ""
+
+msgctxt "#31588"
+msgid "Show plot on pause"
+msgstr ""
+
+msgctxt "#31589"
+msgid "Navigation"
+msgstr ""
+
+msgctxt "#31590"
+msgid "Movies of the year"
+msgstr ""
+
+msgctxt "#31591"
+msgid "No favourites found. You can add items from media and other views by using the context menu."
+msgstr ""
+
+msgctxt "#31592"
+msgid "Auto close"
+msgstr ""
+
+msgctxt "#31593"
+msgid "Extended information about the album"
+msgstr ""
+
 msgctxt "#31594"
-msgid "Press down"
-msgstr "Vajuta alla"
+msgid "Local subtitle available"
+msgstr ""
 
-#: /1080i/Includes_OSD.xml
 msgctxt "#31595"
-msgid "Press right"
-msgstr "Vajuta paremale"
+msgid "No auto-update"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31596"
-msgid "Additional icons"
-msgstr "Lisaikoonid"
+msgid "Online"
+msgstr ""
 
-#: /1080i/Includes_Labels.xml
 msgctxt "#31597"
-msgid "Confirmation"
-msgstr "Kinnitus"
+msgid "Local"
+msgstr ""
 
-#: /1080i/Dialogs_DialogGameControllers.xml
 msgctxt "#31598"
-msgid "Controllers"
-msgstr "Juhtsedamed"
+msgid "Prefer list information"
+msgstr ""
 
-#: /1080i/Dialogs_DialogPVRGroupManager.xml
 msgctxt "#31599"
-msgid "Ungrouped"
-msgstr "Rühmitamata"
+msgid "Recommended skin settings for limited processors"
+msgstr ""
 
-#: /1080i/Includes_Info.xml
 msgctxt "#31600"
-msgid "Ends at"
-msgstr "Lõpeb kell"
+msgid "Press [B]Left[/B] to step back, or [B]Right[/B] to step forward"
+msgstr ""
 
-#: /1080i/Custom_1115_Window_Shortcuts.xml
 msgctxt "#31601"
-msgid "Edit tray"
-msgstr "Kohanda alaserva"
+msgid "Press [B]Right[/B] to frame advance"
+msgstr ""
 
-#: /1080i/Dialog_DialogContextMenu.xml
 msgctxt "#31602"
-msgid "Add shortcut"
-msgstr "Lisa otsetee"
+msgid "Press [B]OK[/B] to select"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31603"
+msgid "Hide Tips"
+msgstr ""
+
 msgctxt "#31604"
-msgid "Additional"
-msgstr "Lisafunktsioonid"
+msgid "Rewind / Forward"
+msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
 msgctxt "#31605"
-msgid "Next aired"
-msgstr "Järgmisena eetris"
+msgid "Recommended movies"
+msgstr ""
+
+msgctxt "#31606"
+msgid "Recommended Tv Shows"
+msgstr ""
+
+msgctxt "#31607"
+msgid "Misc options"
+msgstr ""
+
+msgctxt "#31608"
+msgid "Audio podcast"
+msgstr ""
+
+msgctxt "#31609"
+msgid "Edit nodes"
+msgstr ""
+
+msgctxt "#31610"
+msgid "Performance"
+msgstr ""
+
+msgctxt "#31611"
+msgid "Balanced"
+msgstr ""
+
+msgctxt "#31612"
+msgid "Quality"
+msgstr ""
+
+msgctxt "#31613"
+msgid "Dark"
+msgstr ""
+
+msgctxt "#31614"
+msgid "Light"
+msgstr ""
+
+msgctxt "#31615"
+msgid "Auto day and night mode"
+msgstr ""
+
+msgctxt "#31616"
+msgid "Reset all menus and widgets to defaults"
+msgstr ""
+
+msgctxt "#31617"
+msgid "Auto Play / Pause"
+msgstr ""
+
+msgctxt "#31618"
+msgid "No preview"
+msgstr ""
+
+msgctxt "#31619"
+msgid "Lowercase"
+msgstr ""
+
+msgctxt "#31620"
+msgid "Squarepics"
+msgstr ""
+
+msgctxt "#31621"
+msgid "Slider"
+msgstr ""
+
+msgctxt "#31622"
+msgid "Setup wizard"
+msgstr ""
+
+msgctxt "#31623"
+msgid "Cancelled"
+msgstr ""
+
+msgctxt "#31624"
+msgid "Ended"
+msgstr ""
+
+msgctxt "#31625"
+msgid "Released"
+msgstr ""
+
+msgctxt "#31626"
+msgid "In-Production"
+msgstr ""
+
+msgctxt "#31627"
+msgid "Planned"
+msgstr ""
+
+msgctxt "#31628"
+msgid "Premiering"
+msgstr ""
+
+msgctxt "#31629"
+msgid "Returning"
+msgstr ""
+
+msgctxt "#31630"
+msgid "Airing"
+msgstr ""
+
+msgctxt "#31631"
+msgid "Last aired"
+msgstr ""
