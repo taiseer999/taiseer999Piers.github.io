@@ -153,7 +153,7 @@
         <param name="size_hint">17</param>
         <param name="size_tiny">21</param>
         <param name="size_mini">25</param>
-        <param name="size_main">27</param>
+        <param name="size_main">30</param>
         <param name="size_midi">36</param>
         <param name="size_head">37</param>
         <param name="size_huge">43</param>
