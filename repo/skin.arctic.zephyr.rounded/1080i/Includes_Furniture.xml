@@ -1394,9 +1394,9 @@
             <visible>!Skin.HasSetting(Header.DisableLogo)</visible>
             <include>Animation_Fade_Vertical_Focus_Search</include>
             <control type="image">
-                <top>40</top>
-                <right>64</right>
-                <width>200</width>
+                <top>60</top>
+                <right>100</right>
+                <width>150</width>
                 <height>60</height>
                 <aspectratio align="right">keep</aspectratio>
                 <texture>/usr/share/kodi/addons/service.coreelec.settings/resources/skins/Default/media/logo.png</texture>

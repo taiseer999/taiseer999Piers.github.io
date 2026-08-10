@@ -6,12 +6,12 @@
         <font>
             <name>font23_narrow</name>
             <filename>Noto-Regular.ttf</filename>
-            <size>18</size>
+            <size>22</size>
         </font>
         <font>
             <name>font32</name>
             <filename>Noto-Bold.ttf</filename>
-            <size>27</size>
+            <size>30</size>
         </font>
         <font>
             <name>WatchedStates</name>
@@ -148,9 +148,9 @@
         <font>
             <name>Tiny</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>25</size>
+            <size>28</size>
             
-            <linespacing>1.12</linespacing>
+            <linespacing>1.08</linespacing>
         </font>
         <font>
             <name>TinyBadge</name>
@@ -169,7 +169,7 @@
         <font>
             <name>TinyPlot</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>25</size>
+            <size>28</size>
             
             <linespacing>1.22</linespacing>
         </font>
@@ -325,12 +325,12 @@
         <font>
             <name>font23_narrow</name>
             <filename>Noto-Regular.ttf</filename>
-            <size>18</size>
+            <size>22</size>
         </font>
         <font>
             <name>font32</name>
             <filename>Noto-Bold.ttf</filename>
-            <size>27</size>
+            <size>30</size>
         </font>
         <font>
             <name>WatchedStates</name>
@@ -481,14 +481,14 @@
         <font>
             <name>Tiny24</name>
             <filename>iphone.ttf</filename>
-            <size>24</size>
+            <size>28</size>
             
             <linespacing>1.20</linespacing>
         </font>
         <font>
             <name>TinyPlot</name>
             <filename>iphone.ttf</filename>
-            <size>25</size>
+            <size>28</size>
             
             <linespacing>1.22</linespacing>
         </font>
@@ -644,12 +644,12 @@
         <font>
             <name>font23_narrow</name>
             <filename>Noto-Regular.ttf</filename>
-            <size>18</size>
+            <size>22</size>
         </font>
         <font>
             <name>font32</name>
             <filename>Noto-Bold.ttf</filename>
-            <size>27</size>
+            <size>30</size>
         </font>
         <font>
             <name>WatchedStates</name>
