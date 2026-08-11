@@ -178,15 +178,16 @@
             </include>
 
 
+            <!-- Title fonts -->
             <font>
                 <name>font_title_huge</name>
-                <filename>Inter-Bold.ttf</filename>
-                <size>100</size>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_huge_x2]</size>
             </font>
             <font>
                 <name>font_title_midi</name>
-                <filename>Inter-Light.ttf</filename>
-                <size>60</size>
+                <filename>$PARAM[font_bold]</filename>
+                <size>$PARAM[size_midi_x2]</size>
             </font>
 
 
