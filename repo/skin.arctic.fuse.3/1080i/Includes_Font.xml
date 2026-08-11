@@ -158,8 +158,8 @@
         <param name="size_head">37</param>
         <param name="size_huge">43</param>
         <param name="size_main_x2">56</param>
-        <param name="size_huge_x2">70</param>
-        <param name="size_midi_x2">48</param>
+        <param name="size_huge_x2">83</param>
+        <param name="size_midi_x2">64</param>
 
 
         <param name="plot_linespacing_head">1.169</param>

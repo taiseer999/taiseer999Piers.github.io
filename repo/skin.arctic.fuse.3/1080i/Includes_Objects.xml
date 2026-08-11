@@ -738,7 +738,7 @@
         </control>
         <control type="grouplist">
             <height>80</height>
-            <centertop>50%</centertop>
+            <centertop>48%</centertop>
             <orientation>horizontal</orientation>
             <itemgap>10</itemgap>
             <align>center</align>
