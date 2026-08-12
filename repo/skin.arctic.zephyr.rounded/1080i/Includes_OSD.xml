@@ -1553,6 +1553,7 @@
             <param name="groupid" value="6099" />
             <param name="back_colordiffuse" value="$VAR[Color_OSD_Button_Background]" />
             <align>right</align>
+            <include>Def_OSD_UpDown_Video_Info</include>
             <onclick>StereoMode</onclick>
             <disabledcolor>PanelWhite12</disabledcolor>
         </include>
@@ -1567,6 +1568,7 @@
             <param name="groupid" value="7199" />
             <param name="back_colordiffuse" value="$VAR[Color_OSD_Button_Background]" />
             <align>right</align>
+            <include>Def_OSD_UpDown_Video_Info</include>
             <onclick>runscript(script.audio.profiles,popup)</onclick>
             <disabledcolor>PanelWhite12</disabledcolor>
         </include>
@@ -1611,10 +1613,10 @@
             <param name="groupid" value="7199" />
             <param name="back_colordiffuse" value="$VAR[Color_OSD_Button_Background]" />
             <align>right</align>
+            <include>Def_OSD_UpDown_Video_Info</include>
             <onclick>runscript(script.audio.profiles,popup)</onclick>
             <disabledcolor>PanelWhite12</disabledcolor>
         </include>
-
         <!-- ALL CHANNELS -->
 
         <include content="Object_OSD_Button">
