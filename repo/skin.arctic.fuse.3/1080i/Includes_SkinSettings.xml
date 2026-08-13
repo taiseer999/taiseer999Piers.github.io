@@ -359,7 +359,7 @@
             <param name="id">007</param>
             <param name="dialog">false</param>
             <param name="control">radiobutton</param>
-            <label>CPU + RAM</label>
+            <label>$LOCALIZE[31606]</label>
             <onclick>Skin.ToggleSetting(Furniture.Network_RAM)</onclick>
             <selected>Skin.HasSetting(Furniture.Network_RAM)</selected>
         </include>
@@ -370,7 +370,7 @@
             <param name="id">012</param>
             <param name="dialog">false</param>
             <param name="control">radiobutton</param>
-            <label>Colored system stats icons (RAM / CPU / connection)</label>
+            <label>$LOCALIZE[31610]</label>
             <onclick>Skin.ToggleSetting(sysstats.icons.mono)</onclick>
             <selected>!Skin.HasSetting(sysstats.icons.mono)</selected>
             <enable>Skin.HasSetting(Furniture.Network_RAM)</enable>
@@ -382,7 +382,7 @@
             <param name="id">011</param>
             <param name="dialog">false</param>
             <param name="control">radiobutton</param>
-            <label>Show CoreELEC logo above date</label>
+            <label>$LOCALIZE[31609]</label>
             <onclick>Skin.ToggleSetting(Header.DisableLogo)</onclick>
             <selected>!Skin.HasSetting(Header.DisableLogo)</selected>
         </include>
@@ -553,18 +553,6 @@
             <label>$LOCALIZE[14086]</label>
         </include>
         
-         <include content="Settings_Button">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">0022</param>
-            <param name="control">radiobutton</param>
-            <param name="slevel">2</param>
-            <label>$LOCALIZE[52074]</label>
-            <onclick>Skin.ToggleSetting(ExtraOSD)</onclick>
-            <selected>Skin.HasSetting(ExtraOSD)</selected>
-        </include>
-
         <include content="Settings_Button" description="Autoclose OSD timeout">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
