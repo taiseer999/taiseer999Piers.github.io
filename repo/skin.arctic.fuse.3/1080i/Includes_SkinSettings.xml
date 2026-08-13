@@ -748,6 +748,17 @@
             <onclick>Skin.ToggleSetting(InfoTags.EnableHDR)</onclick>
             <selected>Skin.HasSetting(InfoTags.EnableHDR)</selected>
         </include>
+        <include content="Settings_Button" description="Hub clearlogo on right">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">013</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>$LOCALIZE[31626]</label>
+            <onclick>Skin.ToggleSetting(ClearLogo.HubRight)</onclick>
+            <selected>Skin.HasSetting(ClearLogo.HubRight)</selected>
+        </include>
 
     </include>
 

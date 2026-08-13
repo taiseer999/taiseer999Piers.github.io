@@ -2458,3 +2458,8 @@ msgstr ""
 msgctxt "#31625"
 msgid "High"
 msgstr ""
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31626"
+msgid "Hub clearlogo on right (watermark)"
+msgstr ""

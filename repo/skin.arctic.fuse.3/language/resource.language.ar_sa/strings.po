@@ -2452,3 +2452,8 @@ msgstr "عادي"
 msgctxt "#31625"
 msgid "High"
 msgstr "مرتفع"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31626"
+msgid "Hub clearlogo on right (watermark)"
+msgstr "شعار المجموعة على اليمين (علامة مائية)"
