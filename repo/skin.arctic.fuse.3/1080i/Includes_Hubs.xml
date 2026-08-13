@@ -298,7 +298,7 @@
                         <param name="include_details">false</param>
                         <!-- Hug the RIGHT edge of the box, and fade to a watermark. -->
                         <param name="align">right</param>
-                        <param name="logo_diffuse">60FFFFFF</param>
+                        <param name="logo_diffuse">E0FFFFFF</param>
                         <param name="container">Container($PARAM[id]).</param>
                     </include>
                 </control>
