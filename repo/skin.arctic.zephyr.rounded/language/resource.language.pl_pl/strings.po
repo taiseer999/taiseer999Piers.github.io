@@ -970,8 +970,8 @@ msgid "Top 20 User Rated Movies"
 msgstr "20 najlepszych filmów ocenionych przez użytkowników"
 
 msgctxt "#31238"
-msgid "Reset skin settings to defaults?"
-msgstr "Przywrócić ustawienia domyślne skóry?"
+msgid "Reset skin settings to defaults"
+msgstr "Przywrócić ustawienia domyślne skóry"
 
 msgctxt "#31239"
 msgid "Reset skin settings to defaults? WARNING: This will also reset your home menu to skin defaults!"
@@ -2050,7 +2050,7 @@ msgid "Background presets"
 msgstr ""
 
 msgctxt "#31508"
-msgid "Autoscrolling"
+msgid "Auto-scrolling"
 msgstr ""
 
 msgctxt "#31509"
@@ -2544,3 +2544,19 @@ msgstr "Nowy odcinek"
 msgctxt "#31631"
 msgid "Last aired"
 msgstr "Ostatnia emisja"
+
+msgctxt "#31632"
+msgid "Rewind"
+msgstr ""
+
+msgctxt "#31633"
+msgid "Fast forward"
+msgstr ""
+
+msgctxt "#31634"
+msgid "Bookmark"
+msgstr "Zakładka"
+
+msgctxt "#31635"
+msgid "Customise search menu"
+msgstr ""

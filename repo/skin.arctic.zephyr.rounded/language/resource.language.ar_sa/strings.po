@@ -2557,18 +2557,6 @@ msgctxt "#31634"
 msgid "Bookmark"
 msgstr "إشارة مرجعية"
 
-msgctxt "#31991"
-msgid "Show genre icons on home"
-msgstr "عرض أيقونات النوع في صفحة اليوم"
-
-msgctxt "#31992"
-msgid "Show studio logo on home"
-msgstr "عرض شعار الاستوديو في  صفحة اليوم"
-
-msgctxt "#31993"
-msgid "Show CoreELEC logo above date"
-msgstr "إظهار شعار CoreELEC فوق التاريخ"
-
-msgctxt "#31994"
-msgid "Colored system stats icons (RAM / CPU / connection)"
-msgstr "عرض ايقونات الرام والبروسسر والاتصال ملونة"
+msgctxt "#31635"
+msgid "Customise search menu"
+msgstr ""

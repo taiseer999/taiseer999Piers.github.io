@@ -2450,10 +2450,15 @@
     <!--            DEBUG            -->
     <!-- =========================== -->
 
-            <include content="Overlay_InfoLabel">
-                <label> - Container.ViewMode : $INFO[Container.ViewMode]</label>
-                <textcolor>red</textcolor>
-            </include>
+            <!-- <include content="Overlay_InfoLabel"> -->
+                <!-- <label> - Container.ViewMode : $INFO[Container.ViewMode]</label> -->
+                <!-- <textcolor>red</textcolor> -->
+            <!-- </include> -->
+
+            <!-- <include content="Overlay_InfoLabel"> -->
+                <!-- <label> - Window(Home).Property(WallMode) : $INFO[Window(Home).Property(WallMode)]</label> -->
+                <!-- <textcolor>red</textcolor> -->
+            <!-- </include> -->
 
     <!-- =========================== -->
     <!--       SKIN THEME COLOR      -->
@@ -2488,6 +2493,21 @@
                 <!-- <label> - Window(Home).Property(TMDbHelper.ListItem.BlurImage.Original) : $INFO[Window(Home).Property(TMDbHelper.ListItem.BlurImage.Original)]</label> -->
                 <!-- <textcolor>cyan</textcolor> -->
             <!-- </include> -->
+
+            <include content="Overlay_InfoLabel">
+                <label> - Window(Home).Property(SetDirectorSelected) : $INFO[Window(Home).Property(SetDirectorSelected)]</label>
+                <textcolor>cyan</textcolor>
+            </include>
+
+            <include content="Overlay_InfoLabel">
+                <label> - Window(Home).Property(TMDbHelper.Player.tmdb_id) : $INFO[Window(Home).Property(TMDbHelper.Player.tmdb_id)]</label>
+                <textcolor>orange</textcolor>
+            </include>
+
+            <include content="Overlay_InfoLabel">
+                <label> - VideoPlayer.Property(tmdb_id) : $INFO[VideoPlayer.UniqueID(tmdb)]</label>
+                <textcolor>orange</textcolor>
+            </include>
 
             <include content="Overlay_InfoLabel">
                 <label> - ListItem.Property(tmdb_id) : $INFO[ListItem.Property(tmdb_id)]</label>

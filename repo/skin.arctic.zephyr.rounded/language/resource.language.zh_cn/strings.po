@@ -970,7 +970,7 @@ msgid "Top 20 User Rated Movies"
 msgstr "用户评价最高的 20 部电影"
 
 msgctxt "#31238"
-msgid "Reset skin settings to defaults?"
+msgid "Reset skin settings to defaults"
 msgstr "将皮肤设置重置为默认值？"
 
 msgctxt "#31239"
@@ -2050,7 +2050,7 @@ msgid "Background presets"
 msgstr "背景预设"
 
 msgctxt "#31508"
-msgid "Autoscrolling"
+msgid "Auto-scrolling"
 msgstr "自动滚动"
 
 msgctxt "#31509"
@@ -2552,3 +2552,11 @@ msgstr "回退"
 msgctxt "#31633"
 msgid "Fast forward"
 msgstr "快进"
+
+msgctxt "#31634"
+msgid "Bookmark"
+msgstr "书签"
+
+msgctxt "#31635"
+msgid "Customise search menu"
+msgstr ""

@@ -970,7 +970,7 @@ msgid "Top 20 User Rated Movies"
 msgstr ""
 
 msgctxt "#31238"
-msgid "Reset skin settings to defaults?"
+msgid "Reset skin settings to defaults"
 msgstr ""
 
 msgctxt "#31239"
@@ -2050,7 +2050,7 @@ msgid "Background presets"
 msgstr ""
 
 msgctxt "#31508"
-msgid "Autoscrolling"
+msgid "Auto-scrolling"
 msgstr ""
 
 msgctxt "#31509"
@@ -2543,4 +2543,20 @@ msgstr ""
 
 msgctxt "#31631"
 msgid "Last aired"
+msgstr ""
+
+msgctxt "#31632"
+msgid "Rewind"
+msgstr ""
+
+msgctxt "#31633"
+msgid "Fast forward"
+msgstr ""
+
+msgctxt "#31634"
+msgid "Bookmark"
+msgstr "סימניה"
+
+msgctxt "#31635"
+msgid "Customise search menu"
 msgstr ""
