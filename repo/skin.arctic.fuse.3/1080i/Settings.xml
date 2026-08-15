@@ -248,7 +248,7 @@
                                         <onclick>ActivateWindow(1116)</onclick>
                                     </item>
                                     <item>
-                                        <label>$LOCALIZE[31151]</label>
+                                        <label>$LOCALIZE[31434]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/gauge.png</icon>
                                         <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_VideoOSD_Items,Home)</onclick>
@@ -256,7 +256,7 @@
                                         <onclick>ActivateWindow(1118)</onclick>
                                     </item>
                                     <item>
-                                        <label>[CAPITALIZE]$LOCALIZE[31203] $LOCALIZE[12003][/CAPITALIZE]</label>
+                                        <label>[CAPITALIZE]$LOCALIZE[12003][/CAPITALIZE]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/circle-info.png</icon>
                                         <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_VideoInfo_Items,Home)</onclick>
@@ -264,7 +264,7 @@
                                         <onclick>ActivateWindow(1118)</onclick>
                                     </item>
                                     <item>
-                                        <label>$LOCALIZE[31234]</label>
+                                        <label>$LOCALIZE[31321]</label>
                                         <label2>skin.arctic.fuse.3</label2>
                                         <icon>special://skin/extras/icons/table.png</icon>
                                         <onclick>runscript(script.skinvariables,action=buildviews,configure)</onclick>
