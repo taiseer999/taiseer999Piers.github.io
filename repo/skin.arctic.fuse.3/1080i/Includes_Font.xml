@@ -159,7 +159,7 @@
         <param name="size_huge">43</param>
         <param name="size_main_x2">56</param>
         <param name="size_huge_x2">83</param>
-        <param name="size_midi_x2">70</param>
+        <param name="size_midi_x2">64</param>
 
 
         <param name="plot_linespacing_head">1.169</param>
@@ -309,12 +309,12 @@
             <font>
                 <name>font10</name>
                 <filename>$PARAM[font_regular]</filename>
-                <size>$PARAM[size_tiny]</size>
+                <size>$PARAM[size_mini]</size>
             </font>
             <font>
                 <name>font12</name>
                 <filename>$PARAM[font_regular]</filename>
-                <size>$PARAM[size_mini]</size>
+                <size>$PARAM[size_main]</size>
             </font>
             <font>
                 <name>font13</name>
