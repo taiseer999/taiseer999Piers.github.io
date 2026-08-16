@@ -2514,31 +2514,30 @@
         <value condition="VideoPlayer.Content(livetv) + VideoPlayer.HasEpg">$INFO[PVR.EpgEventFinishTime]</value>
     </variable>
 
+	<variable name="Label_Player_Forward_Rewind_Speed">
+		<value condition="Player.Forwarding2x | Player.Rewinding2x">2x</value>
+		<value condition="Player.Forwarding4x | Player.Rewinding4x">4x</value>
+		<value condition="Player.Forwarding8x | Player.Rewinding8x">8x</value>
+		<value condition="Player.Forwarding16x | Player.Rewinding16x">16x</value>
+		<value condition="Player.Forwarding32x | Player.Rewinding32x">32x</value>
+	</variable>
+
     <variable name="Label_OSD_Player_Video_Status">
         <value condition="Player.Caching">$LOCALIZE[439] $INFO[Player.CacheLevel,,%]</value>
-        <value condition="Player.Forwarding32x">FF 32x</value>
-        <value condition="Player.Forwarding16x">FF 16x</value>
-        <value condition="Player.Forwarding8x">FF 8x</value>
-        <value condition="Player.Forwarding4x">FF 4x</value>
-        <value condition="Player.Forwarding2x">FF 2x</value>
-        <value condition="Player.Forwarding">FF</value>
-        <value condition="Player.Rewinding32x">RW 32x</value>
-        <value condition="Player.Rewinding16x">RW 16x</value>
-        <value condition="Player.Rewinding8x">RW 8x</value>
-        <value condition="Player.Rewinding4x">RW 4x</value>
-        <value condition="Player.Rewinding2x">RW 2x</value>
-        <value condition="Player.Rewinding">RW</value>
+        <value condition="Player.Forwarding">[COLOR=$VAR[Color_Focus]]$LOCALIZE[31633] $VAR[Label_Player_Forward_Rewind_Speed][/COLOR]</value>
+        <value condition="Player.Rewinding">[COLOR=$VAR[Color_Focus]]$LOCALIZE[31632] $VAR[Label_Player_Forward_Rewind_Speed][/COLOR]</value>
+
         <!-- <value condition="[Player.Seeking | Player.HasPerformedSeek(3)] + !String.IsEmpty(Player.SeekOffset)">$LOCALIZE[773]$INFO[Player.SeekOffset, ,]</value> -->
         <!-- <value condition="Player.Seeking + String.IsEmpty(Player.SeekOffset)">$LOCALIZE[773]$INFO[Player.SeekStepSize, ,]</value> -->
+
         <value condition="Player.Seeking">$LOCALIZE[773]$INFO[Player.SeekStepSize, ,]</value>
         <value condition="Player.Paused">[COLOR=$VAR[Color_Focus]]$LOCALIZE[112][/COLOR]</value>
-        <value condition="Player.IsTempo">$LOCALIZE[31207]: $INFO[Player.PlaySpeed]</value>
+        <value condition="Player.IsTempo">[COLOR=$VAR[Color_Focus]]$LOCALIZE[31207]: $INFO[Player.PlaySpeed][/COLOR]</value>
         <value condition="!String.IsEmpty(Player.Chapter) + !String.IsEqual(Player.Chapter,00) + !String.IsEmpty(Player.ChapterCount) + !String.IsEqual(Player.ChapterCount,00) + [Player.Seeking | Player.HasPerformedSeek(3)]">$INFO[Player.Chapter,$LOCALIZE[21396] ,]$INFO[Player.ChapterCount, / ,]$INFO[Player.ChapterName, - ,]</value>
         <value condition="!Player.HasVideo + !String.IsEmpty(MusicPlayer.Title) + !String.IsEmpty(MusicPlayer.TrackNumber)">$INFO[MusicPlayer.TrackNumber,,.  ]$INFO[MusicPlayer.Title,[B],[/B]]</value>
-
         <value condition="!VideoPlayer.Content(livetv) + !String.IsEmpty(Window(Home).Property(set.player.title))">$INFO[Window(Home).Property(set.player.title)]</value>
-
         <value condition="!Player.HasVideo + !String.IsEmpty(Player.Title)">$INFO[Player.Title]</value>
+
         <!-- <value>$LOCALIZE[31448]</value> -->
         <!-- <value>$INFO[Player.FinishTime,$LOCALIZE[31078] ,]</value> -->
     </variable>
@@ -2552,26 +2551,19 @@
 
     <variable name="Label_OSD_Player_Audio_Status">
         <value condition="Player.Caching">$LOCALIZE[439] $INFO[Player.CacheLevel,,%]</value>
-        <!-- <value condition="Player.Forwarding32x">FF 32x</value> -->
-        <!-- <value condition="Player.Forwarding16x">FF 16x</value> -->
-        <!-- <value condition="Player.Forwarding8x">FF 8x</value> -->
-        <!-- <value condition="Player.Forwarding4x">FF 4x</value> -->
-        <!-- <value condition="Player.Forwarding2x">FF 2x</value> -->
-        <!-- <value condition="Player.Forwarding">FF</value> -->
-        <!-- <value condition="Player.Rewinding32x">RW 32x</value> -->
-        <!-- <value condition="Player.Rewinding16x">RW 16x</value> -->
-        <!-- <value condition="Player.Rewinding8x">RW 8x</value> -->
-        <!-- <value condition="Player.Rewinding4x">RW 4x</value> -->
-        <!-- <value condition="Player.Rewinding2x">RW 2x</value> -->
-        <!-- <value condition="Player.Rewinding">RW</value> -->
+        <value condition="Player.Forwarding">[COLOR=$VAR[Color_Focus]]$LOCALIZE[31633] $VAR[Label_Player_Forward_Rewind_Speed][/COLOR]</value>
+        <value condition="Player.Rewinding">[COLOR=$VAR[Color_Focus]]$LOCALIZE[31632] $VAR[Label_Player_Forward_Rewind_Speed][/COLOR]</value>
+
         <!-- <value condition="[Player.Seeking | Player.HasPerformedSeek(3)] + !String.IsEmpty(Player.SeekOffset)">$LOCALIZE[773]$INFO[Player.SeekOffset, ,]</value> -->
         <!-- <value condition="Player.Seeking + String.IsEmpty(Player.SeekOffset)">$LOCALIZE[773]$INFO[Player.SeekStepSize, ,]</value> -->
+
         <value condition="Player.Seeking">$LOCALIZE[773]$INFO[Player.SeekStepSize, ,]</value>
         <value condition="Player.Paused">[COLOR=$VAR[Color_Focus]]$LOCALIZE[112][/COLOR]</value>
         <value condition="Player.IsTempo">$LOCALIZE[31207]: $INFO[Player.PlaySpeed]</value>
         <value condition="!Player.HasVideo + !String.IsEmpty(MusicPlayer.Title) + !String.IsEmpty(MusicPlayer.TrackNumber)">$INFO[MusicPlayer.TrackNumber,,.  ]$INFO[MusicPlayer.Title,[B],[/B]]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(set.player.title))">$INFO[Window(Home).Property(set.player.title)]</value>
         <value condition="!Player.HasVideo + !String.IsEmpty(Player.Title)">$INFO[Player.Title]</value>
+
         <!-- <value>$LOCALIZE[31448]</value> -->
         <!-- <value>$INFO[Player.FinishTime,$LOCALIZE[31078] ,]</value> -->
     </variable>
@@ -2975,13 +2967,6 @@
         <value>$LOCALIZE[31613] ($LOCALIZE[571])</value>
     </variable>
 
-    <variable name="Label_Skin_Settings_Font_Selected">
-        <value condition="String.IsEqual(Skin.String(settingskinfont),1)">Default ($LOCALIZE[571])</value>
-        <value condition="String.IsEqual(Skin.String(settingskinfont),2)">ايفون</value>
-        <value condition="String.IsEqual(Skin.String(settingskinfont),3)">تونس</value>
-        <value>Default ($LOCALIZE[571])</value>
-    </variable>
-
     <variable name="Label_Skin_Settings_Perf_Selected">
         <value condition="String.IsEqual(Skin.String(settingperflevel),1)">$LOCALIZE[31610]</value>
         <value condition="String.IsEqual(Skin.String(settingperflevel),2)">$LOCALIZE[31611] ($LOCALIZE[571])</value>
@@ -2999,6 +2984,19 @@
         <value condition="String.IsEqual(Skin.String(settingpresetcolor),7)">$LOCALIZE[31491]</value>
         <value condition="String.IsEqual(Skin.String(settingpresetcolor),8)">$INFO[Skin.String(color.preset.name.own)] - $LOCALIZE[31455]</value>
         <value>$LOCALIZE[31455]</value>
+    </variable>
+
+    <variable name="Label_Skin_Settings_Skin_Font_Selected">
+        <value condition="String.IsEqual(Skin.String(settingskinfont),1)">Default ($LOCALIZE[571])</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),2)">Fallback</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),3)">Fallback bold</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),4)">Arial</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),5)">Arial 2</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),6)">AZ Reloaded</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),7)">AZ Standard</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),8)">AZ Standard bold</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),9)">Segoe Light</value>
+        <value>$INFO[Skin.Font] ($LOCALIZE[571])</value>
     </variable>
 
     <variable name="Label_Skin_Settings_Background_Brightness_Views_Selected">
@@ -3254,8 +3252,13 @@
         <value condition="Window.IsVisible(Custom_1156_Set_Skin_Preset_Color.xml)">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1157_Set_Skin_Brightness_Views.xml)">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1158_Set_Skin_Brightness_Flix.xml)">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1159_Set_Skin_Font.xml)">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1288_Debugging.xml) + ControlGroup(11).HasFocus()">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1288_Debugging.xml) + ControlGroup(12).HasFocus()">$INFO[Container(12).CurrentItem]$INFO[Container(12).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1260_DialogInfo_Music_Settings.xml) + ControlGroup(11).HasFocus()">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1260_DialogInfo_Music_Settings.xml) + ControlGroup(12).HasFocus()">$INFO[Container(12).CurrentItem]$INFO[Container(12).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1261_DialogInfo_Video_Settings.xml) + ControlGroup(11).HasFocus()">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
+        <value condition="Window.IsVisible(Custom_1261_DialogInfo_Video_Settings.xml) + ControlGroup(12).HasFocus()">$INFO[Container(12).CurrentItem]$INFO[Container(12).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1149_Set_Media_Flags.xml) + ControlGroup(11).HasFocus()">$INFO[Container(11).CurrentItem]$INFO[Container(11).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1149_Set_Media_Flags.xml) + ControlGroup(12).HasFocus()">$INFO[Container(12).CurrentItem]$INFO[Container(12).NumItems, / ,]</value>
         <value condition="Window.IsVisible(DialogSubtitles.xml)">$INFO[Container(120).CurrentItem]$INFO[Container(120).NumItems, / ,]</value>
@@ -3272,8 +3275,6 @@
     </variable>
 
     <variable name="Label_Dialog_Select_Num_Item_Footer">
-        <value condition="Window.IsVisible(FileManager.xml) + [Control.HasFocus(20) | Control.HasFocus(1824)]">$INFO[Container(20).CurrentItem]$INFO[Container(20).NumItems, / ,]</value>
-        <value condition="Window.IsVisible(FileManager.xml) + [Control.HasFocus(21) | Control.HasFocus(1825)]">$INFO[Container(21).CurrentItem]$INFO[Container(21).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1111_Hub_Movies.xml)">$INFO[Container(9500).CurrentItem]$INFO[Container(9500).NumItems, / ,]</value>
         <value condition="Window.IsVisible(Custom_1112_Hub_TvShows.xml)">$INFO[Container(9500).CurrentItem]$INFO[Container(9500).NumItems, / ,]</value>
         <value condition="Container.Content(Seasons) + Control.IsVisible(5161)">$INFO[Container(5161).CurrentItem]$INFO[Container(5161).NumItems, / ,]</value>

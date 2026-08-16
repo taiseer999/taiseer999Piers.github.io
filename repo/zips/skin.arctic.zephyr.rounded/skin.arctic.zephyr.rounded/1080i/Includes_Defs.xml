@@ -2749,6 +2749,12 @@
     <!--        FLAG - LIBRARY        -->
     <!-- ============================ -->
 
+	<variable name="Def_Flag_Airing">
+		<value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Canceled)">flags/video/white/other/airing_cancel.png</value>
+		<value condition="String.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Status),Ended)">flags/video/white/other/airing_ended.png</value>
+		<value>flags/video/white/other/airing.png</value>
+	</variable>
+
 	<variable name="Def_Audio_Channels">
 		<value condition="String.IsEqual(ListItem.AudioChannels,0)">0.0</value>
 		<value condition="String.IsEqual(ListItem.AudioChannels,1)">1.0</value>
@@ -2788,15 +2794,7 @@
 		<value>Dark1</value>
 	</variable>
 
-    <variable name="Image_Bluray">
-        <value condition="String.IsEqual(ListItem.VideoResolution,4K) | Integer.IsEqual(ListItem.VideoResolution,2160)">ultrahd</value>
-        <value>bluray</value>
-    </variable>
-
-    <variable name="Image_Bluray_9500">
-        <value condition="String.IsEqual(Container(9500).ListItem.VideoResolution,4K) | Integer.IsEqual(Container(9500).ListItem.VideoResolution,2160)">ultrahd</value>
-        <value>bluray</value>
-    </variable>
+    
 
     <!-- ===========================  -->
     <!--      FLAG - VIDEO PLAYER     -->
@@ -3222,11 +3220,12 @@
         <onclick>Skin.SetBool(show.osd.video.flags.icons)</onclick>
         <onclick>Skin.SetBool(show.osd.video.colored.icons)</onclick>
         <onclick>Skin.SetBool(show.osd.video.flags.imdb.rating)</onclick>
-        <onclick>Skin.SetBool(show.osd.video.clock)</onclick>
+        
         <onclick>Skin.SetBool(show.home.nowplaying.extended.video.clearart)</onclick>
         <onclick>Skin.Reset(osd.open.auto.pause)</onclick>
         <onclick>Skin.Reset(show.osd.video.info.at.start)</onclick>
         <onclick>Skin.Reset(Value_Show_OSD_At_Start_Timeout)</onclick>
+        <onclick>Skin.SetBool(hide.osd.video.clock)</onclick>
 
         <!-- OSD MUSIC SETTINGS -->
 
@@ -3527,9 +3526,9 @@
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(weather.fanart.name,Weather Fanart - Single)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(weather.fanart.ext,.jpg)</onload>
 
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(hide.weather.fanart)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(hide.weather.fanart.widgets)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(weather.fanart.multi)</onload>
+        <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(hide.weather.fanart)</onload> -->
+        <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(hide.weather.fanart.widgets)</onload> -->
+        <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(weather.fanart.multi)</onload> -->
 
         <!-- FOCUS GLOW -->
 
@@ -3597,11 +3596,12 @@
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(show.osd.video.flags.icons)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(show.osd.video.colored.icons)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(show.osd.video.flags.imdb.rating)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(show.osd.video.clock)</onload>
+        
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(show.home.nowplaying.extended.video.clearart)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(osd.open.auto.pause)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(show.osd.video.info.at.start)</onload>
-        <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(Value_Show_OSD_At_Start_Timeout)</onload>
+        <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(osd.open.auto.pause)</onload> -->
+        <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(show.osd.video.info.at.start)</onload> -->
+        <!-- <onload condition="!Skin.HasSetting(startup.init)">Skin.Reset(Value_Show_OSD_At_Start_Timeout)</onload> -->
+        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(hide.osd.video.clock)</onload>
 
         <!-- OSD MUSIC SETTINGS -->
 

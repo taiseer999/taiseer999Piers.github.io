@@ -718,7 +718,7 @@
     <include name="Object_StartUp_Logo">
         <control type="grouplist">
             <height>128</height>
-            <centertop>400</centertop>
+            <centertop>350</centertop>
             <orientation>vertical</orientation>
             <align>center</align>
             <control type="image">
@@ -737,8 +737,8 @@
             </control>
         </control>
         <control type="grouplist">
-            <height>100</height>
-            <centertop>50%</centertop>
+            <height>140</height>
+            <centertop>47%</centertop>
             <orientation>horizontal</orientation>
             <itemgap>10</itemgap>
             <align>center</align>
@@ -755,7 +755,7 @@
                 <height>50</height>
                 <align>center</align>
                 <width>auto</width>
-                <font>font_head_bold</font>
+                <font>font_huge_bold</font>
                 <textcolor>$VAR[ColorHighlight]</textcolor>
                 <label>$NUMBER[3]</label>
             </control>
@@ -809,10 +809,10 @@
         <param name="progress">ListItem.Progress</param>
         <definition>
             <control type="progress">
-                <height>4</height>
+                <height>0</height>
                 <left>0</left>
                 <right>0</right>
-                <centerbottom>-15</centerbottom>
+                <centerbottom>-30</centerbottom>
                 <texturebg colordiffuse="main_fg_12" border="12,0,12,0">progress/progress-nib.png</texturebg>
                 <midtexture colordiffuse="main_logo" border="12,0,12,0">progress/progress-nib.png</midtexture>
                 <info>$PARAM[progress]</info>
