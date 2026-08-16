@@ -106,9 +106,14 @@
             <font>
                 <name>font_logo_large</name>
                 <filename>Questrial-Regular.ttf</filename>
-                <size>50</size>
+                <size>55</size>
             </font>
 
+            <font>
+            <name>font_info_black</name>
+            <filename>iphone.ttf</filename>
+            <size>98</size>
+        </font>
 
             <font>
                 <name>font_debug</name>

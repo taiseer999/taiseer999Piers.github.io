@@ -729,7 +729,7 @@
                 <texture>special://skin/extras/icons/CE.png</texture>
             </control>
             <control type="label">
-                <height>32</height>
+                <height>30</height>
                 <textcolor>main_fg_100</textcolor>
                 <label>CoreELEC "NO"</label>
                 <font>font_logo_large</font>
@@ -737,8 +737,8 @@
             </control>
         </control>
         <control type="grouplist">
-            <height>80</height>
-            <centertop>48%</centertop>
+            <height>100</height>
+            <centertop>50%</centertop>
             <orientation>horizontal</orientation>
             <itemgap>10</itemgap>
             <align>center</align>
@@ -746,7 +746,7 @@
                 <aligny>center</aligny>
                 <align>center</align>
                 <width>auto</width>
-                <font>font_title_huge</font>
+                <font>font_info_black</font>
                 <textcolor>$VAR[ColorHighlight]</textcolor>
                 <label>[COLOR=main_logo]Arctic[/COLOR] Fuse</label>
             </control>
