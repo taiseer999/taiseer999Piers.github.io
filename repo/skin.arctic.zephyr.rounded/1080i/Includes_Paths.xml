@@ -58,13 +58,35 @@
 
     <variable name="Def_Dialog_Info_Currently_Playing_Item_VideoOSD">
 
-        <!-- search episode -->
+        <!-- search episode (library item with DBID) -->
 
-        <value condition="!String.IsEmpty(VideoPlayer.TvShowTitle)">RunScript(plugin.video.themoviedb.helper,add_dbid=$INFO[VideoPlayer.DBID],tmdb_type=episode,call_auto=1190)</value>
+        <value condition="!String.IsEmpty(VideoPlayer.DBID) + !String.IsEmpty(VideoPlayer.TvShowTitle)">RunScript(plugin.video.themoviedb.helper,add_dbid=$INFO[VideoPlayer.DBID],tmdb_type=episode,call_auto=1190)</value>
 
-        <!-- search movie -->
+        <!-- search movie (library item with DBID) -->
 
-        <value condition="String.IsEmpty(VideoPlayer.TvShowTitle)">RunScript(plugin.video.themoviedb.helper,add_dbid=$INFO[VideoPlayer.DBID],tmdb_type=movie,call_auto=1190)</value>
+        <value condition="!String.IsEmpty(VideoPlayer.DBID) + String.IsEmpty(VideoPlayer.TvShowTitle)">RunScript(plugin.video.themoviedb.helper,add_dbid=$INFO[VideoPlayer.DBID],tmdb_type=movie,call_auto=1190)</value>
+
+        <!-- ============ NO DBID (streamed / plugin playback) ============ -->
+
+        <!-- episode by TMDb uniqueid -->
+
+        <value condition="String.IsEmpty(VideoPlayer.DBID) + !String.IsEmpty(VideoPlayer.TvShowTitle) + !String.IsEmpty(VideoPlayer.UniqueID(tmdb))">RunScript(plugin.video.themoviedb.helper,add_query=$INFO[VideoPlayer.TvShowTitle],tmdb_type=tv,season=$INFO[VideoPlayer.Season],episode=$INFO[VideoPlayer.Episode],call_auto=1190)</value>
+
+        <!-- episode by show title fallback -->
+
+        <value condition="String.IsEmpty(VideoPlayer.DBID) + !String.IsEmpty(VideoPlayer.TvShowTitle)">RunScript(plugin.video.themoviedb.helper,add_query=$INFO[VideoPlayer.TvShowTitle],tmdb_type=tv,season=$INFO[VideoPlayer.Season],episode=$INFO[VideoPlayer.Episode],call_auto=1190)</value>
+
+        <!-- movie by TMDb uniqueid -->
+
+        <value condition="String.IsEmpty(VideoPlayer.DBID) + String.IsEmpty(VideoPlayer.TvShowTitle) + !String.IsEmpty(VideoPlayer.UniqueID(tmdb))">RunScript(plugin.video.themoviedb.helper,add_tmdb=$INFO[VideoPlayer.UniqueID(tmdb)],tmdb_type=movie,call_auto=1190)</value>
+
+        <!-- movie by IMDb number -->
+
+        <value condition="String.IsEmpty(VideoPlayer.DBID) + String.IsEmpty(VideoPlayer.TvShowTitle) + !String.IsEmpty(VideoPlayer.IMDBNumber)">RunScript(plugin.video.themoviedb.helper,add_imdbnumber=$INFO[VideoPlayer.IMDBNumber],tmdb_type=movie,call_auto=1190)</value>
+
+        <!-- movie by title fallback -->
+
+        <value condition="String.IsEmpty(VideoPlayer.DBID) + String.IsEmpty(VideoPlayer.TvShowTitle) + !String.IsEmpty(VideoPlayer.Title)">RunScript(plugin.video.themoviedb.helper,add_query=$INFO[VideoPlayer.Title],year=$INFO[VideoPlayer.Year],tmdb_type=movie,call_auto=1190)</value>
     </variable>
 
     <!-- =================================== -->
