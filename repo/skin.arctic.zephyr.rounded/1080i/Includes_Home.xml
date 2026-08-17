@@ -1021,9 +1021,12 @@
                     <top>-750</top>
                     <width>NetflixPlotWidth</width>
 
-                    <include content="Widgets_Item_Main_Title" condition="$PARAM[labelisvisible]">
-                        <param name="id" value="$PARAM[id]" />
-                    </include>
+                    <control type="group">
+                        <left>880</left>
+                        <include content="Widgets_Item_Main_Title" condition="$PARAM[labelisvisible]">
+                            <param name="id" value="$PARAM[id]" />
+                        </include>
+                    </control>
 
                     <include content="Widgets_Item_Sub_Title" condition="!Skin.HasSetting(show.home.flix.title.clearlogo)">
                         <param name="id" value="$PARAM[id]" />
@@ -1032,7 +1035,7 @@
 
                     <include content="Widgets_Item_Sub_Title" condition="Skin.HasSetting(show.home.flix.title.clearlogo)">
                         <param name="id" value="$PARAM[id]" />
-                        <param name="top" value="120" />
+                        <param name="top" value="20" />
                     </include>
 
                     <include content="Widgets_Item_Plot" condition="!Skin.HasSetting(show.home.flix.title.clearlogo) + !Skin.HasSetting(home.style.horizontal.clean)">
@@ -1044,7 +1047,7 @@
                     <include content="Widgets_Item_Plot" condition="Skin.HasSetting(show.home.flix.title.clearlogo) + !Skin.HasSetting(home.style.horizontal.clean)">
                         <param name="id" value="$PARAM[id]" />
                         <param name="height" value="140" />
-                        <param name="top" value="185" />
+                        <param name="top" value="85" />
                     </include>
 
                     <include content="Widgets_Item_Plot" condition="!Skin.HasSetting(show.home.flix.title.clearlogo) + Skin.HasSetting(home.style.horizontal.clean)">
@@ -3211,7 +3214,8 @@
 
     <include name="Furniture_Home_Flix_Widget_Flags">
         <control type="group">
-            <animation effect="slide" start="0" end="0,55" time="0" condition="true">Conditional</animation>
+            <top>0</top>
+            <height>680</height>
             <include>Animation_Common_Fade_In</include>
             <include>Animation_Common_Fade_Out</include>
             <visible>ControlGroup(301).HasFocus()</visible>
