@@ -1394,7 +1394,7 @@
             <include>Animation_Fade_Vertical_Focus_Search</include>
             <control type="image">
                 <top>60</top>
-                <right>100</right>
+                <right>185</right>
                 <width>150</width>
                 <height>60</height>
                 <aspectratio align="right">keep</aspectratio>
@@ -2036,6 +2036,7 @@
             </control>
             <control type="image">
                 <visible>!Skin.HasSetting(Header.DisableLogo)</visible>
+                <right>155</right>
                 <centertop>112</centertop>
                 <right>View_List_Side</right>
                 <width>200</width>
