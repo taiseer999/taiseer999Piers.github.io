@@ -1342,13 +1342,13 @@
     <include name="Def_Home_Label_Widget_Sub_Title_ReleaseDate">
         <control type="label" description="Release date from TMDbHelper prop">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Premiered)]</label>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered))</visible>
         </control>
         <control type="label" description="Release date from ListItem">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$INFO[Container($PARAM[id]).ListItem.Premiered]</label>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)</visible>
         </control>
@@ -1357,19 +1357,19 @@
     <include name="Def_Home_Label_Widget_Sub_Title_Duration">
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0) + !Skin.HasSetting(show.time.format.hh.mm)</visible>
             <label>$INFO[Container($PARAM[id]).ListItem.Duration(mins),, $LOCALIZE[31074]]</label>
         </control>
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + Skin.HasSetting(show.time.format.hh.mm) + Integer.IsGreater(Container($PARAM[id]).ListItem.Duration(h),0)</visible>
             <label>$INFO[Container($PARAM[id]).ListItem.Duration(h),,$LOCALIZE[31061]] $INFO[Container($PARAM[id]).ListItem.Duration(mm),,$LOCALIZE[31062]]</label>
         </control>
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(m),0) + Skin.HasSetting(show.time.format.hh.mm) + !Integer.IsGreater(Container($PARAM[id]).ListItem.Duration(h),0)</visible>
             <label>$INFO[Container($PARAM[id]).ListItem.Duration(m),,$LOCALIZE[31062]]</label>
         </control>
@@ -1378,33 +1378,33 @@
     <include name="Def_Home_Label_Widget_Sub_Title_Duration_JLOM">
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration),0) + !Skin.HasSetting(show.time.format.hh.mm)</visible>
             <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Duration),,$LOCALIZE[31062]]</label>
         </control>
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.H)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.H),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.M)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.M),0) + Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.Duration.M),9) + Skin.HasSetting(show.time.format.hh.mm)</visible>
             <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Duration.H),,$LOCALIZE[31061]] $INFO[Window(Home).Property(TMDbHelper.ListItem.Duration.M),,$LOCALIZE[31062]]</label>
         </control>
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.H)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.H),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.M)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.M),0) + !Integer.IsGreater(Window(Home).Property(TMDbHelper.ListItem.Duration.M),9) + Skin.HasSetting(show.time.format.hh.mm)</visible>
             <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Duration.H),,$LOCALIZE[31061]] $INFO[Window(Home).Property(TMDbHelper.ListItem.Duration.M),0,$LOCALIZE[31062]]</label>
         </control>
 
         <!-- <control type="label" description="Duration"> -->
             <!-- <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left> -->
+            <left>6</left> -->
             <!-- <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.H)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.H),0) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.M)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.M),0) + Skin.HasSetting(show.time.format.hh.mm)</visible> -->
             <!-- <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Duration.M),,$LOCALIZE[31062]]</label> -->
         <!-- </control> -->
 
         <control type="label" description="Duration">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.H)) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Duration.M)) + !Integer.IsEqual(Window(Home).Property(TMDbHelper.ListItem.Duration.M),0) + Skin.HasSetting(show.time.format.hh.mm)</visible>
             <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Duration.M),,$LOCALIZE[31062]]</label>
         </control>
@@ -1723,19 +1723,19 @@
     <include name="Def_Home_Label_Widget_Sub_Title_Genre">
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$VAR[Home_SubTitle_Genre1_AR,(,]$VAR[Home_SubTitle_Genre2_AR, / ,])</label>
             <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name))</visible>
         </control>
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$VAR[Home_SubTitle_GenreCombined_AR,(,)]</label>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre))</visible>
         </control>
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$INFO[Container($PARAM[id]).ListItem.Genre,(,)]</label>
             <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) + String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)</visible>
         </control>
@@ -1813,7 +1813,7 @@
     <include name="Def_Home_Label_Widget_Sub_Title_Num_Episode">
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$INFO[Container($PARAM[id]).ListItem.Episode,, $LOCALIZE[20360]]</label>
             <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Episode)</visible>
         </control>
@@ -1848,13 +1848,13 @@
     <include name="Def_Home_Label_Widget_Sub_Title_Premiered">
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$INFO[Container($PARAM[id]).ListItem.Premiered]</label>
             <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)</visible>
         </control>
         <control type="label">
             <include>Widgets_Item_Sub_Title_Definition</include>
-            <left>20</left>
+            <left>6</left>
             <label>$INFO[Container($PARAM[id]).ListItem.Year]</label>
             <visible>String.IsEmpty(Container($PARAM[id]).ListItem.Premiered) + !String.IsEmpty(Container($PARAM[id]).ListItem.Year)</visible>
         </control>

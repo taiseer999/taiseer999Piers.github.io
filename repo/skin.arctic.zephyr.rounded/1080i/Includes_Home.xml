@@ -1022,7 +1022,7 @@
                     <width>NetflixPlotWidth</width>
 
                     <control type="group">
-                        <left>880</left>
+                        <left>980</left>
                         <include content="Widgets_Item_Main_Title" condition="$PARAM[labelisvisible]">
                             <param name="id" value="$PARAM[id]" />
                         </include>
@@ -1108,6 +1108,27 @@
         </include>
     </include>
 
+    <!-- SUB TITLE - INLINE ICONS -->
+
+    <include name="Def_Home_Sub_Title_Icon">
+        <param name="icon" value="$PARAM[icon]" />
+        <param name="visible" value="$PARAM[visible]" default="true" />
+        <param name="left" value="$PARAM[left]" default="20" />
+        <param name="width" value="$PARAM[width]" default="54" />
+
+        <definition>
+            <control type="image">
+                <left>$PARAM[left]</left>
+                <top>-4</top>
+                <width>$PARAM[width]</width>
+                <height>54</height>
+                <aspectratio>keep</aspectratio>
+                <texture>special://skin/extras/icons/$PARAM[icon]</texture>
+                <visible>$PARAM[visible]</visible>
+            </control>
+        </definition>
+    </include>
+
     <include name="Widgets_Item_Sub_Title">
         <control type="group">
             <visible>!Integer.IsEqual(Container($PARAM[id]).NumItems,0) + Integer.IsGreater(Container($PARAM[id]).NumItems,0)</visible>
@@ -1128,9 +1149,12 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre_First"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_ReleaseDate"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="timer.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
@@ -1147,9 +1171,12 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre_First"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_ReleaseDate"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="timer.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration_JLOM"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
@@ -1166,9 +1193,12 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="rectangle-list.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Episode)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Num_Episode"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_TvShows_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
@@ -1188,7 +1218,9 @@
                 <include content="Def_Home_Label_Widget_Sub_Title_TvShowTitle"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Season_X"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Episode_X"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Premiered"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="timer.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
@@ -1282,6 +1314,7 @@
 
                 <include content="Def_Home_Label_Widget_Sub_Title_Plugin_Youtube"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="timer.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_Movies_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
@@ -1299,6 +1332,7 @@
                 <usecontrolcoords>true</usecontrolcoords>
 
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="timer.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Plugin_ApplePodcats"><param name="id" value="$PARAM[id]" /></include>
 
@@ -1318,10 +1352,13 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="timer.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Duration(mins)) + !String.IsEqual(Container($PARAM[id]).ListItem.Duration(mins),0)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Duration"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Tagline"><param name="id" value="$PARAM[id]" /></include>
 

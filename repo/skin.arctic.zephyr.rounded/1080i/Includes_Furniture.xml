@@ -116,7 +116,7 @@
                 <height>45</height>
                 <align>center</align>
                 <left>10</left>
-                <texture colordiffuse="$VAR[Color_Background]">common/circle3.png</texture>
+                <texture colordiffuse="Light1">common/circle3.png</texture>
             </control>
             <control type="label">
                 <width>78</width>
@@ -145,7 +145,7 @@
                 <height>45</height>
                 <align>center</align>
                 <left>10</left>
-                <texture colordiffuse="$VAR[Color_Background]">common/circle3.png</texture>
+                <texture colordiffuse="Light1">common/circle3.png</texture>
             </control>
             <control type="label">
                 <width>78</width>
