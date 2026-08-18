@@ -2561,3 +2561,19 @@ msgstr ""
 msgctxt "#31635"
 msgid "Customise search menu"
 msgstr ""
+
+msgctxt "#31991"
+msgid "Show genre icons on home"
+msgstr ""
+
+msgctxt "#31992"
+msgid "Show studio logo on home"
+msgstr ""
+
+msgctxt "#31993"
+msgid "Show CoreELEC logo above date"
+msgstr ""
+
+msgctxt "#31994"
+msgid "Colored system stats icons (RAM / CPU / connection)"
+msgstr ""
