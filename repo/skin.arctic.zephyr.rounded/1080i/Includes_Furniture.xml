@@ -1277,7 +1277,7 @@
                         <control type="label">
                             <centertop>58</centertop>
                             <align>left</align>
-                            <font>Flag</font>
+                            <font>Button</font>
                             <width>auto</width>
                             <textcolor>Dark2</textcolor>
                             <label>$INFO[System.Date]</label>
@@ -1291,7 +1291,7 @@
                         <include>Animation_Fade_In_WeatherDelay</include>
 
                         <top>-2</top>
-                        <left>130</left>
+                        <left>100</left>
                         <width>50</width>
                         <height>50</height>
                         <align>center</align>
@@ -1308,7 +1308,7 @@
 
                         <control type="label">
                             <centertop>24</centertop>
-                            <left>160</left>
+                            <left>148</left>
                             <width>auto</width>
                             <font>HeaderLabel</font>
                             <align>left</align>
@@ -1939,13 +1939,13 @@
 
                     <include>Animation_Fade_In_WeatherDelay</include>
 
-                    <right>210</right>
+                    <right>130</right>
                     <height>100</height>
                     <width>500</width>
                     <align>right</align>
                     <bottom>-12</bottom>
 
-                    <itemgap>15</itemgap>
+                    <itemgap>25</itemgap>
                     <orientation>horizontal</orientation>
                     <usecontrolcoords>true</usecontrolcoords>
 
@@ -2007,7 +2007,7 @@
             </control>
             <control type="label">
                 <centertop>24</centertop>
-                <right>135</right>
+                <right>110</right>
                 <align>right</align>
                 <font>LargeBold</font>
                 <textcolor>Dark1</textcolor>
@@ -2016,7 +2016,7 @@
                 <animation effect="slide" start="0" end="-15" time="0" condition="String.Contains(Skin.Font,Arial) + !String.IsEmpty(System.Time(xx))">Conditional</animation>
             </control>
             <control type="label">
-                <centertop>30</centertop>
+                <centertop>24</centertop>
                 <right>View_List_Side</right>
                 <font>SmallBold</font>
                 <textcolor>Dark3</textcolor>
@@ -2028,7 +2028,7 @@
             <control type="label">
                 <centertop>64</centertop>
                 <right>View_List_Side</right>
-                <font>Flag</font>
+                <font>Button</font>
                 <textcolor>Dark2</textcolor>
                 <align>right</align>
                 <width>50%</width>
