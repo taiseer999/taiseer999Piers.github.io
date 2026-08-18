@@ -305,6 +305,7 @@
 
             <onback condition="Skin.HasSetting(home.onback.go.to.first.widget) + !String.IsEmpty(Window(Home).Property(BackToId))">SetFocus($INFO[Window(Home).Property(BackToId)])</onback>
             <onback>ActivateWindow(DialogButtonMenu)</onback>
+
             <onup condition="[![Skin.HasSetting(home.style.flix)]] + [!$EXP[Extended_Now_Playing_Is_Visible] | [$EXP[Extended_Now_Playing_Is_Visible] | Skin.HasSetting(hide.home.nowplaying.extended.osd.control.button)]]">301</onup>
 
             <!-- RESET VALUE BLUR IMAGE -->
