@@ -2576,3 +2576,7 @@ msgstr "إظهار شعار CoreELEC فوق التاريخ"
 msgctxt "#31994"
 msgid "Colored system stats icons (RAM / CPU / connection)"
 msgstr "عرض ايقونات الرام والبروسسر والاتصال ملونة"
+
+msgctxt "#31636"
+msgid "Clearlogo inside info panel"
+msgstr "الشعار داخل لوحة المعلومات"

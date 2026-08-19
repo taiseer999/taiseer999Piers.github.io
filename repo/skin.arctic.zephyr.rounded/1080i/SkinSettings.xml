@@ -611,6 +611,21 @@
                     <visible>Skin.HasSetting(home.style.flix)</visible>
                 </control>
 
+                <!-- CLEARLOGO POSITION IN PANEL -->
+
+                <control type="radiobutton" id="98781" description="ClearLogo position in panel">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(2)</visible>
+                    <include>Def_Skin_Settings_Level_base</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <label>$LOCALIZE[31636]</label>
+                    <selected>Skin.HasSetting(home.flix.clearlogo.in.panel)</selected>
+                    <onclick>Skin.ToggleSetting(home.flix.clearlogo.in.panel)</onclick>
+                    <onclick>SetProperty(reloadskin,1,Home)</onclick>
+                    <enable>Skin.HasSetting(show.home.flix.title.clearlogo)</enable>
+                    <visible>Skin.HasSetting(home.style.flix)</visible>
+                </control>
+
                 <!-- HIDE WIDGET LABEL -->
 
                 <control type="radiobutton" id="9848">

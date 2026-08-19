@@ -2570,3 +2570,7 @@ msgstr ""
 #~ msgctxt "#31154"
 #~ msgid "Show clearlogo"
 #~ msgstr "Show clearlogo"
+
+msgctxt "#31636"
+msgid "Clearlogo inside info panel"
+msgstr ""
