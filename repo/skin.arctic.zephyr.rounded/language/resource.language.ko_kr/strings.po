@@ -2559,3 +2559,11 @@ msgstr "책갈피"
 msgctxt "#31635"
 msgid "Customise search menu"
 msgstr ""
+
+msgctxt "#31636"
+msgid "Clearlogo inside info panel"
+msgstr ""
+
+msgctxt "#31637"
+msgid "Small menu icons"
+msgstr ""

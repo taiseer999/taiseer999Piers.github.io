@@ -2582,3 +2582,11 @@ msgstr ""
 #~ msgctxt "#31061"
 #~ msgid "Hide votes"
 #~ msgstr "Ocultar votos"
+
+msgctxt "#31636"
+msgid "Clearlogo inside info panel"
+msgstr ""
+
+msgctxt "#31637"
+msgid "Small menu icons"
+msgstr ""

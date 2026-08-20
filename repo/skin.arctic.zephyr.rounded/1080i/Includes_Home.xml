@@ -2253,8 +2253,7 @@
             <!-- MAIN MENU - ONLY ICON - UNDERLINED / NOT UNDERLINED -->
 
             <control type="image">
-                <height>80</height>
-                <width>80</width>
+                <include>Def_Home_Menu_Icon_Size</include>
                 <centerleft>45.7%</centerleft>
                 <centertop>45%</centertop>
                 <texture colordiffuse="Dark3">$INFO[ListItem.Icon]</texture>
@@ -2266,8 +2265,7 @@
             <!-- MAIN MENU - ONLY ICON - NOT UNDERLINED -->
 
             <control type="image">
-                <height>80</height>
-                <width>80</width>
+                <include>Def_Home_Menu_Icon_Size</include>
                 <centerleft>45.7%</centerleft>
                 <centertop>45%</centertop>
                 <animation effect="slide" start="0,0" end="0,20" time="0" condition="Skin.HasSetting(home.show.menu.icons)">Conditional</animation>
@@ -2282,8 +2280,7 @@
                 <visible>Skin.HasSetting(home.show.menu.onfocus.underlined)</visible>
                 <animation effect="slide" start="0,0" end="0,20" time="0" condition="Skin.HasSetting(home.show.menu.icons)">Conditional</animation>
                 <animation effect="fade" start="100" end="30" delay="0" time="150" condition="!$EXP[Home_Menu_Is_Focus]">Conditional</animation>
-                <height>80</height>
-                <width>80</width>
+                <include>Def_Home_Menu_Icon_Size</include>
                 <centerleft>45.7%</centerleft>
                 <centertop>45%</centertop>
                 <texture colordiffuse="Dark1">$INFO[Container(300).ListItem.Icon]</texture>
@@ -3274,7 +3271,7 @@
                 <param name="height" value="680" />
             </include>
             <include content="Def_Height" condition="Skin.HasSetting(home.flix.clearlogo.in.panel)">
-                <param name="height" value="712" />
+                <param name="height" value="700" />
             </include>
             <animation effect="zoom" start="100" end="80" center="80,568" time="0" condition="true">Conditional</animation>
             <include>Animation_Common_Fade_In</include>

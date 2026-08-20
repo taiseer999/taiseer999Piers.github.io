@@ -845,6 +845,21 @@
         <width>$PARAM[width]</width>
     </include>
 
+    <include name="Def_Home_Menu_Icon_Size">
+        <include content="Def_Height" condition="!Skin.HasSetting(home.menu.icons.small)">
+            <param name="height" value="80" />
+        </include>
+        <include content="Def_Width" condition="!Skin.HasSetting(home.menu.icons.small)">
+            <param name="width" value="80" />
+        </include>
+        <include content="Def_Height" condition="Skin.HasSetting(home.menu.icons.small)">
+            <param name="height" value="56" />
+        </include>
+        <include content="Def_Width" condition="Skin.HasSetting(home.menu.icons.small)">
+            <param name="width" value="56" />
+        </include>
+    </include>
+
     <include name="Def_Left">
         <left>$PARAM[left]</left>
     </include>

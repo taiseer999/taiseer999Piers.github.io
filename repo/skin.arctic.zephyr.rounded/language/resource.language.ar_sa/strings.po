@@ -2580,3 +2580,7 @@ msgstr "عرض ايقونات الرام والبروسسر والاتصال م�
 msgctxt "#31636"
 msgid "Clearlogo inside info panel"
 msgstr "الشعار داخل لوحة المعلومات"
+
+msgctxt "#31637"
+msgid "Small menu icons"
+msgstr "أيقونات قائمة صغيرة"

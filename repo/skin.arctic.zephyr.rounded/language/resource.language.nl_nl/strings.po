@@ -2564,3 +2564,11 @@ msgstr ""
 #~ msgctxt "#31154"
 #~ msgid "Show clearlogo"
 #~ msgstr "Toon clearlogo"
+
+msgctxt "#31636"
+msgid "Clearlogo inside info panel"
+msgstr ""
+
+msgctxt "#31637"
+msgid "Small menu icons"
+msgstr ""

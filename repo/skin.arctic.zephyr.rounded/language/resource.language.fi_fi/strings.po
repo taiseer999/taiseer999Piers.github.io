@@ -2576,3 +2576,11 @@ msgstr ""
 #~ msgctxt "#31231"
 #~ msgid "Hide play/tauko info"
 #~ msgstr "Piilota toisto/pysäytys info"
+
+msgctxt "#31636"
+msgid "Clearlogo inside info panel"
+msgstr ""
+
+msgctxt "#31637"
+msgid "Small menu icons"
+msgstr ""
