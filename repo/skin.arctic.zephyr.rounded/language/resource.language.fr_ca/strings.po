@@ -2575,3 +2575,7 @@ msgstr ""
 msgctxt "#31637"
 msgid "Small menu icons"
 msgstr ""
+
+msgctxt "#31638"
+msgid "Show info bar when playback starts"
+msgstr ""

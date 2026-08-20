@@ -2584,3 +2584,7 @@ msgstr "الشعار داخل لوحة المعلومات"
 msgctxt "#31637"
 msgid "Small menu icons"
 msgstr "أيقونات قائمة صغيرة"
+
+msgctxt "#31638"
+msgid "Show info bar when playback starts"
+msgstr "إظهار شريط المعلومات عند بدء التشغيل"

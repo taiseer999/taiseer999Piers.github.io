@@ -2390,6 +2390,18 @@
                     <onclick>Skin.ToggleSetting(hide.osd.video.tips)</onclick>
                 </control>
 
+                <!-- SHOW INFO AT PLAYBACK START -->
+
+                <control type="radiobutton" id="92115">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(7)</visible>
+                    <include>Def_Skin_Settings_Level_base</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <label>$LOCALIZE[31638]</label>
+                    <selected>Skin.HasSetting(show.osd.video.info.at.start)</selected>
+                    <onclick>Skin.ToggleSetting(show.osd.video.info.at.start)</onclick>
+                </control>
+
                 <!-- REPLACE TITLE WITH CLEARLOGO -->
 
                 <control type="radiobutton" id="9212" description="Show clearart">

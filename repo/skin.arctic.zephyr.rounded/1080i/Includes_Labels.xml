@@ -2490,6 +2490,7 @@
         <value condition="ControlGroup(101).HasFocus() + !String.IsEmpty(VideoPlayer.DBID) + !Skin.HasSetting(show.osd.on.down.wiki)">$LOCALIZE[31516] $LOCALIZE[31021]</value>
         <value condition="ControlGroup(101).HasFocus() + !String.IsEmpty(VideoPlayer.DBID) + Skin.HasSetting(show.osd.on.down.wiki)">$LOCALIZE[31516] $LOCALIZE[31477]</value>
         <value condition="ControlGroup(101).HasFocus() + VideoPlayer.Content(livetv)">$LOCALIZE[31516] $LOCALIZE[10700]</value>
+        <value condition="ControlGroup(101).HasFocus()">$LOCALIZE[31516] $LOCALIZE[31021]</value>
 
         <value condition="Control.HasFocus(8207) + !String.IsEmpty(VideoPlayer.Plot)">$LOCALIZE[31557] $LOCALIZE[19033]</value>
     </variable>

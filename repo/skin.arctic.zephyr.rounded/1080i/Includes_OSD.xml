@@ -2151,7 +2151,7 @@
                 <!-- OSD FOOTER INFO TIPS - CENTER - FOCUS - TIPS ON LEFT -->
 
                 <control type="grouplist">
-                    <visible>[ControlGroup(101).HasFocus() + [!String.IsEmpty(VideoPlayer.DBID) | !String.IsEmpty(MusicPlayer.DBID) | VideoPlayer.Content(livetv)]] | [Control.HasFocus(8207) + !String.IsEmpty(VideoPlayer.Plot)]</visible>
+                    <visible>ControlGroup(101).HasFocus() | [Control.HasFocus(8207) + !String.IsEmpty(VideoPlayer.Plot)]</visible>
                     <include>Animation_OSD_Fade_Tips</include>
 
                     <top>64</top>
@@ -2169,7 +2169,7 @@
                         <height>50</height>
                         <aspectratio align="center" aligny="center" scalediffuse="false">scale</aspectratio>
                         <texture flipy="false" colordiffuse="$VAR[Color_OSD_Button_Background]">special://skin/extras/icons/angle-down.png</texture>
-                        <visible>[ControlGroup(101).HasFocus() + [!String.IsEmpty(VideoPlayer.DBID) | !String.IsEmpty(MusicPlayer.DBID) | VideoPlayer.Content(livetv)]]</visible>
+                        <visible>ControlGroup(101).HasFocus()</visible>
                     </control>
                     <control type="image">
                         <width>50</width>
