@@ -11,7 +11,7 @@
     <color name="Dark1">FF141414</color>
     <color name="Dark2">B3141414</color>
     <color name="Dark3">4d141414</color>
-    <color name="Dark4">1F141414</color>
+    <color name="Dark4">14141414</color>
     <color name="Light1">FFDDDDDD</color>
     <color name="Light2">B3DDDDDD</color>
     <color name="Light3">4DDDDDDD</color>
@@ -20,17 +20,16 @@
     <color name="Black100">FF000000</color>
     <color name="Black70">B3000000</color>
     <color name="Black30">4D000000</color>
-    <color name="Black12">1F000000</color>
+    <color name="Black12">11000000</color>
 
     <color name="White100">FFDDDDDD</color>
-    <color name="ArtPlate">FF5A5A5A</color>
     <color name="White70">B3DDDDDD</color>
     <color name="White30">4DDDDDDD</color>
     <color name="White12">1FDDDDDD</color>
 
     <color name="Background">FFF0F0F0</color>
     <color name="BackgroundNew">DEF0F0F0</color>
-    <color name="BackgroundNewBlur">55F0F0F0</color>
+    <color name="BackgroundFlag">FFCCCCCC</color>
     <color name="BackgroundOverlay">FF808080</color>
 
     <color name="FanartFade">FFFFFFFF</color>
@@ -76,9 +75,7 @@
 
     <color name="UnWatchedIcons">E600BCD4</color>
 
-    <!-- plate behind non-poster art: dark so light add-on icons stay legible (was FFD4D4D4) -->
-    <color name="Fallback">FF5A5A5A</color>
-    <color name="IconOnFallback">FFE8E8E8</color>
+    <color name="Fallback">FFD4D4D4</color>
 
     <color name="OSD_Black">DF000000</color>
 
