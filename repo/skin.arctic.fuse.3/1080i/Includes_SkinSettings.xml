@@ -138,6 +138,18 @@
             <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_Settings_Items_ColourHighlights,Home)</onclick>
             <onclick>ActivateWindow(1118)</onclick>
         </include>
+        <!-- ABUKARIM: TinyPPI overlay font picker -->
+        <include content="Settings_Button" description="TinyPPI Overlay Font">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">0041</param>
+            <label> - TinyPPI Font</label>
+            <label2>$INFO[Skin.String(tinyppi.font)]</label2>
+            <onclick>SetProperty(CustomDialogSettingsTitle,TinyPPI Font,Home)</onclick>
+            <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_Settings_Items_TinyPPIFont,Home)</onclick>
+            <onclick>ActivateWindow(1118)</onclick>
+        </include>
         <include content="Settings_Button" description="Customise Window Background">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>

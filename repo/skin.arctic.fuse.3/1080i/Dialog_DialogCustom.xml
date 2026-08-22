@@ -171,6 +171,9 @@
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_Ratings_TVShows_Items)">DialogCustom_Ratings_TVShows_Items</include>
 
         <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_GameOptions_Items)">DialogCustom_GameOptions_Items</include>
+
+        <!-- TinyPPI overlay font picker (by ABUKARIM TOOLS) -->
+        <include condition="String.IsEqual(Window(Home).Property(CustomDialogSettingsItems),DialogCustom_Settings_Items_TinyPPIFont)">DialogCustom_Settings_Items_TinyPPIFont</include>
     </include>
 
     <include name="DialogCustom_Select_Items">
@@ -245,6 +248,114 @@
             <param name="label">$LOCALIZE[31243]</param>
             <include>Action_Scheme_Onclick_Midnight</include>
             <selected>$EXP[Exp_ColourPreset_MidnightPurple]</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+    </include>
+
+    <!-- ── TinyPPI overlay font picker (by ABUKARIM TOOLS) ──
+         8 radio buttons; each writes Skin.String(tinyppi.font) then reloads the
+         skin (via DialogCustom_Reload_1118, which also re-opens 1118). The
+         Includes_Font.xml TinyPPI_Overlay_Font_Def selector reads that string
+         and rebuilds font23_narrow/font32 on the next skin load. A final
+         "Default (Noto)" button resets to the Arabic-capable fallback. -->
+    <include name="DialogCustom_Settings_Items_TinyPPIFont">
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8001</param>
+            <param name="groupid">8101</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">Amazon Ember</param>
+            <onclick>Skin.SetString(tinyppi.font,amazon)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),amazon)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8002</param>
+            <param name="groupid">8102</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">Hacen Promoter</param>
+            <onclick>Skin.SetString(tinyppi.font,hacen)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),hacen)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8003</param>
+            <param name="groupid">8103</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">Inter Bold</param>
+            <onclick>Skin.SetString(tinyppi.font,inter)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),inter)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8004</param>
+            <param name="groupid">8104</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">iPhone</param>
+            <onclick>Skin.SetString(tinyppi.font,iphone)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),iphone)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8005</param>
+            <param name="groupid">8105</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">MOHAND Bold</param>
+            <onclick>Skin.SetString(tinyppi.font,mohand)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),mohand)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8006</param>
+            <param name="groupid">8106</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">Monadi Bold</param>
+            <onclick>Skin.SetString(tinyppi.font,monadi)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),monadi)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8007</param>
+            <param name="groupid">8107</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">Roboto Noto Condensed</param>
+            <onclick>Skin.SetString(tinyppi.font,roboto)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),roboto)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8008</param>
+            <param name="groupid">8108</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">Tonos Bold</param>
+            <onclick>Skin.SetString(tinyppi.font,tonos)</onclick>
+            <selected>String.IsEqual(Skin.String(tinyppi.font),tonos)</selected>
+            <include>DialogCustom_Reload_1118</include>
+        </include>
+        <include content="Button_Dialog_Setting">
+            <param name="dialog">true</param>
+            <param name="id">8099</param>
+            <param name="groupid">8199</param>
+            <param name="control">radiobutton</param>
+            <param name="istext">true</param>
+            <param name="label">$LOCALIZE[742] (Noto)</param>
+            <onclick>Skin.Reset(tinyppi.font)</onclick>
+            <selected>String.IsEmpty(Skin.String(tinyppi.font))</selected>
             <include>DialogCustom_Reload_1118</include>
         </include>
     </include>

@@ -3,6 +3,11 @@
 
     <defaultcontrol always="true">8000</defaultcontrol>
     <onload>SetProperty(TMDbHelper.ContextMenu,True)</onload>
+    <!-- ABUKARIM: a bare ActivateWindow(1118) (no CustomDialogSettingsItems set)
+         opens the TinyPPI overlay font picker. Any caller that sets the property
+         first (all the existing Appearance settings buttons) is unaffected. -->
+    <onload condition="String.IsEmpty(Window(Home).Property(CustomDialogSettingsItems))">SetProperty(CustomDialogSettingsTitle,TinyPPI Font,Home)</onload>
+    <onload condition="String.IsEmpty(Window(Home).Property(CustomDialogSettingsItems))">SetProperty(CustomDialogSettingsItems,DialogCustom_Settings_Items_TinyPPIFont,Home)</onload>
     <controls>
         <include content="DialogCustom_Favourites">
             <param name="id">8000</param>
