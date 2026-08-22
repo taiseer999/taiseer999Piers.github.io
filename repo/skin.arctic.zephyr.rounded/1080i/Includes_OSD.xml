@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<xml version="1.0" encoding="UTF-8"?>
 <includes>
 
     <!-- OSD - OBJECT -->
@@ -2515,24 +2515,34 @@
                     <param name="color" value="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Star]" />
                 </include>
                 <control type="image">
-                    <width>80</width>
+                   <width>80</width>
                     <height>40</height>
                     <centertop>50%</centertop>
                     <aspectratio aligny="center" align="center">keep</aspectratio>
                     <fadetime>ExtendedFlagIconsFadetime</fadetime>
                     <texture colordiffuse="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Dark1]" background="true">flags/rating/$VAR[Def_VideoPlayer_Flag_Color]/imdb/imdb.png</texture>
-                    <visible>[Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + !VideoPlayer.Content(livetv)]</visible>
+                    <visible>[Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + !VideoPlayer.Content(livetv)] + [!String.IsEmpty(VideoPlayer.Rating(imdb)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.Player.IMDb_Rating))]</visible>
                 </control>
 
-                <control type="label" description="Rating">
-                    <visible>Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + [Integer.IsGreater(VideoPlayer.Rating,0) | [Integer.IsGreater(VideoPlayer.UserRating,0) + Skin.HasSetting(userrating.override.kodi.rating.num)]]</visible>
+                <control type="label" description="IMDb Rating">
+                    <visible>Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + !VideoPlayer.Content(livetv) + !String.IsEmpty(VideoPlayer.Rating(imdb))</visible>
                     <width min="50">auto</width>
                     <height>40</height>
                     <centertop>50%</centertop>
                     <left>10</left>
                     <font>Medium</font>
                     <textcolor>$VAR[Color_OSD_Panel_White70]</textcolor>
-                    <label>$VAR[Label_OSD_Player_Rating_Video]</label>
+                    <label>$INFO[VideoPlayer.Rating(imdb),, ]</label>
+                </control>
+                <control type="label" description="IMDb Rating TMDbHelper Fallback">
+                    <visible>Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + !VideoPlayer.Content(livetv) + String.IsEmpty(VideoPlayer.Rating(imdb)) + !String.IsEmpty(Window(Home).Property(TMDbHelper.Player.IMDb_Rating))</visible>
+                    <width min="50">auto</width>
+                    <height>40</height>
+                    <centertop>50%</centertop>
+                    <left>10</left>
+                    <font>Medium</font>
+                    <textcolor>$VAR[Color_OSD_Panel_White70]</textcolor>
+                    <label>$INFO[Window(Home).Property(TMDbHelper.Player.IMDb_Rating),, ]</label>
                 </control>
             </control>
 
