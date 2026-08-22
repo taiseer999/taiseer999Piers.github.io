@@ -2515,18 +2515,23 @@
                     <param name="color" value="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Star]" />
                 </include>
                 <control type="image">
-                    <include>Def_Flag_Image</include>
-                    <width>70</width>
+                    <width>80</width>
+                    <height>40</height>
+                    <centertop>50%</centertop>
+                    <aspectratio aligny="center" align="center">keep</aspectratio>
+                    <fadetime>ExtendedFlagIconsFadetime</fadetime>
                     <texture colordiffuse="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Dark1]" background="true">flags/rating/$VAR[Def_VideoPlayer_Flag_Color]/imdb/imdb.png</texture>
                     <visible>[Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + !VideoPlayer.Content(livetv)]</visible>
                 </control>
 
                 <control type="label" description="Rating">
                     <visible>Skin.HasSetting(show.osd.video.rating) + Skin.HasSetting(show.osd.video.numeric.rating) + [Integer.IsGreater(VideoPlayer.Rating,0) | [Integer.IsGreater(VideoPlayer.UserRating,0) + Skin.HasSetting(userrating.override.kodi.rating.num)]]</visible>
-                    <width>auto</width>
-                    <textcolor>$VAR[Color_OSD_Panel_White70]</textcolor>
-                    <include>Def_Flag_Label</include>
+                    <width min="50">auto</width>
+                    <height>40</height>
+                    <centertop>50%</centertop>
+                    <left>10</left>
                     <font>Medium</font>
+                    <textcolor>$VAR[Color_OSD_Panel_White70]</textcolor>
                     <label>$VAR[Label_OSD_Player_Rating_Video]</label>
                 </control>
             </control>
