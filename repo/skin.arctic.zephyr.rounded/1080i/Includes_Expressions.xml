@@ -657,6 +657,11 @@
         | [VideoPlayer.IsFullscreen + String.IsEqual(VideoPlayer.HdrType,hdr10) + !String.Contains(Player.FileNameAndPath,hdr10plus)]
     </expression>
 
+    <expression name="IsVideoHDR">
+        [String.Contains(ListItem.HdrType,hdr) + !String.IsEqual(ListItem.HdrType,hdr10) + !String.Contains(ListItem.FileNameAndPath,hdr10plus)]
+        | [VideoPlayer.IsFullscreen + String.Contains(VideoPlayer.HdrType,hdr) + !String.IsEqual(VideoPlayer.HdrType,hdr10) + !String.Contains(Player.FileNameAndPath,hdr10plus)]
+    </expression>
+
     <expression name="IsVideoHLG">
         String.IsEqual(ListItem.HdrType,hlg)
         | [VideoPlayer.IsFullscreen + String.IsEqual(VideoPlayer.HdrType,hlg)]

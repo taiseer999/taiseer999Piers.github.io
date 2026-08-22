@@ -2349,26 +2349,11 @@
                 <height>64</height>
                 <align>right</align>
 
-                <itemgap>6</itemgap>
+                <itemgap>20</itemgap>
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
-                 <!-- VIDEO - ASPECT RATIO -->
-
-                <control type="grouplist">
-                    <visible>Skin.HasSetting(show.osd.video.flags.icons) + !String.IsEmpty(VideoPlayer.VideoAspect)</visible>
-                    <width>90</width>
-                    <height>80</height>\\
-                    <orientation>vertical</orientation>
-                    <centertop>71%</centertop>
-                    <itemgap>-8</itemgap>
-                    <control type="image">
-                        <height>50\</height>
-                        <aspectratio aligny="center" align="center">keep</aspectratio>
-                        <texture background="true" colordiffuse="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Dark1]">flags/video/$VAR[Def_VideoPlayer_Flag_Color]/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
-                    </control>
-                </control>
-
+                
                 <!-- VIDEO - RESOLUTION -->
 
                 <control type="image" description="Video Resolution">
@@ -2385,6 +2370,22 @@
                     <width>68</width>
                     <include>Def_Flag_Image_Without_Label</include>
                     <texture background="true" colordiffuse="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Dark1]" fallback="flags/fallback.png">flags/video/$VAR[Def_VideoPlayer_Flag_Color]/videocodec/$INFO[VideoPlayer.VideoCodec].png</texture>
+                </control>
+
+                 <!-- VIDEO - ASPECT RATIO -->
+
+                <control type="grouplist">
+                    <visible>Skin.HasSetting(show.osd.video.flags.icons) + !String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+                    <width>90</width>
+                    <height>80</height>\\
+                    <orientation>vertical</orientation>
+                    <centertop>71%</centertop>
+                    <itemgap>-8</itemgap>
+                    <control type="image">
+                        <height>50\</height>
+                        <aspectratio aligny="center" align="center">keep</aspectratio>
+                        <texture background="true" colordiffuse="$VAR[Def_VideoPlayer_Flag_Colordiffuse_Dark1]">flags/video/$VAR[Def_VideoPlayer_Flag_Color]/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
+                    </control>
                 </control>
 
                 <!-- HDR -->
