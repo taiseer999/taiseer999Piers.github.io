@@ -2,6 +2,16 @@
 <fonts>
     <fontset id="Default" unicode="false" idloc="15109">
         <include>VideoLyrics_Fonts</include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
         <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
         <font>
             <name>font23_narrow</name>
@@ -321,6 +331,16 @@
     </fontset>
     <fontset id="ايفون" unicode="false">
         <include>VideoLyrics_Fonts</include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
         <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
         <font>
             <name>font23_narrow</name>
@@ -640,6 +660,16 @@
     </fontset>
     <fontset id="تونس" unicode="true">
         <include>VideoLyrics_Fonts</include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
         <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
         <font>
             <name>font23_narrow</name>

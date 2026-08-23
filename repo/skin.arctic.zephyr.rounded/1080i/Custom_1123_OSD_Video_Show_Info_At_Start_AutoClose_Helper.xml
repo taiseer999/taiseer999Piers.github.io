@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="dialog" id="1123">
+
+    <!-- OSDVIDEO_SHOW_AT_START_INFO AUTOCLOSE HELPER -->
+    <!-- Clears the at-start info property once the configured timeout has elapsed -->
+
+    <visible>!String.IsEmpty(Window(Home).Property(OSDVideo_Show_AT_START_INFO)) + Skin.HasSetting(show.osd.video.info.at.start) + Window.IsActive(fullscreenvideo) + !Window.IsVisible(videoosd) + !Window.IsVisible(fullscreeninfo) + !VideoPlayer.Content(livetv)</visible>
+
+    <visible>[Integer.IsGreaterOrEqual(Player.Time(secs),4) + [String.IsEmpty(Skin.String(Value_Show_OSD_At_Start_Timeout)) | Integer.IsEqual(Skin.String(Value_Show_OSD_At_Start_Timeout),3)]] | [Integer.IsGreaterOrEqual(Player.Time(secs),6) + Integer.IsEqual(Skin.String(Value_Show_OSD_At_Start_Timeout),5)] | [Integer.IsGreaterOrEqual(Player.Time(secs),8) + Integer.IsEqual(Skin.String(Value_Show_OSD_At_Start_Timeout),7)] | [Integer.IsGreaterOrEqual(Player.Time(secs),11) + Integer.IsEqual(Skin.String(Value_Show_OSD_At_Start_Timeout),10)]</visible>
+
+    <onload>ClearProperty(OSDVideo_Show_AT_START_INFO,Home)</onload>
+    <controls/>
+</window>
