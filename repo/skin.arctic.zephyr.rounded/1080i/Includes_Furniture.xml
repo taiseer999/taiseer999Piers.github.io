@@ -1277,7 +1277,7 @@
                         <control type="label">
                             <centertop>58</centertop>
                             <align>left</align>
-                            <font>Flag</font>
+                            <font>RobotoNotoCJKsc-Regular</font>
                             <width>auto</width>
                             <textcolor>Dark2</textcolor>
                             <label>$INFO[System.Date]</label>
@@ -1291,7 +1291,7 @@
                         <include>Animation_Fade_In_WeatherDelay</include>
 
                         <top>-2</top>
-                        <left>118</left>
+                        <left>100</left>
                         <width>50</width>
                         <height>50</height>
                         <align>center</align>
@@ -1761,7 +1761,7 @@
                     <control type="label">
                         <centertop>58</centertop>
                         <align>right</align>
-                        <font>Flag</font>
+                        <font>RobotoNotoCJKsc-Regular</font>
                         <width>auto</width>
                         <textcolor>Dark2</textcolor>
                         <label>$INFO[System.Date]</label>
@@ -1939,7 +1939,7 @@
 
                     <include>Animation_Fade_In_WeatherDelay</include>
 
-                    <right>210</right>
+                    <right>160</right>
                     <height>100</height>
                     <width>500</width>
                     <align>right</align>
@@ -1966,7 +1966,7 @@
                         <width min="20" max="54">auto</width>
                         <height>54</height>
                         <bottom>42</bottom>
-                        <align>right</align>
+                        <left>20</left>
                         <include>Def_Feature_Weather_Icon</include>
                     </control>
                 </control>
@@ -2006,8 +2006,8 @@
                 </control>
             </control>
             <control type="label">
-                <centertop>24</centertop>
-                <right>135</right>
+                <centertop>30</centertop>
+                <right>120</right>
                 <align>right</align>
                 <font>LargeBold</font>
                 <textcolor>Dark1</textcolor>
@@ -2028,7 +2028,7 @@
             <control type="label">
                 <centertop>64</centertop>
                 <right>View_List_Side</right>
-                <font>Flag</font>
+                <font>RobotoNotoCJKsc-Regular</font>
                 <textcolor>Dark2</textcolor>
                 <align>right</align>
                 <width>50%</width>
