@@ -564,7 +564,19 @@
             <param name="id">011</param>
             <label>$LOCALIZE[14086]</label>
         </include>
-        
+
+         <include content="Settings_Button" description="Video OSD extras">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">0022</param>
+            <param name="control">radiobutton</param>
+            <param name="slevel">2</param>
+            <label>$LOCALIZE[31996]</label>
+            <onclick>Skin.ToggleSetting(ExtraOSD)</onclick>
+            <selected>Skin.HasSetting(ExtraOSD)</selected>
+        </include>
+
         <include content="Settings_Button" description="Autoclose OSD timeout">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>

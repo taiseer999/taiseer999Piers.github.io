@@ -14,6 +14,7 @@
     <controls>
 
         <control type="group">
+            <include condition="Skin.HasSetting(ExtraOSD)">ExtraOSD</include>
             <include condition="Skin.HasSetting(osd.useleftCodecLogos)">CodecLogosLeftOSD</include>
             <include condition="Skin.HasSetting(osd.usecenterCodecLogos)">CodecLogosCenterOSD</include>
             <include condition="Skin.HasSetting(osd.userightCodecLogos)">CodecLogosRightOSD</include>
@@ -40,7 +41,20 @@
                                 <param name="include_right">false</param>
                                 <param name="textcolor">panel_fg_90</param>
                                 <param name="top">780</param>
+                                <param name="visible">!Skin.HasSetting(ExtraOSD)</param>
                             </include>
+                            <control type="label">
+                                <visible>Skin.HasSetting(ExtraOSD)</visible>
+                                <label>$VAR[Label_OSD_Header]</label>
+                                <font>font_midi_bold</font>
+                                <textcolor>panel_fg_90</textcolor>
+                                <height>40</height>
+                                <top>780</top>
+                                <left>view_pad</left>
+                                <right>view_pad</right>
+                                <align>right</align>
+                                <scroll>true</scroll>
+                            </control>
                         </control>
                     </control>
 

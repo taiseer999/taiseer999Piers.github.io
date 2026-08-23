@@ -2457,3 +2457,9 @@ msgstr "مرتفع"
 msgctxt "#31626"
 msgid "Hub clearlogo on right (watermark)"
 msgstr "شعار المجموعة على اليمين (علامة مائية)"
+
+
+#: /1080i/Includes_Extra.xml
+msgctxt "#31996"
+msgid "Video OSD extras"
+msgstr "ايقونات فيديو OSD"

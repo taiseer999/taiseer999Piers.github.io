@@ -2463,3 +2463,9 @@ msgstr ""
 msgctxt "#31626"
 msgid "Hub clearlogo on right (watermark)"
 msgstr ""
+
+
+#: /1080i/Includes_Extra.xml
+msgctxt "#31996"
+msgid "Video OSD extras"
+msgstr ""

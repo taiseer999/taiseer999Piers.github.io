@@ -3,6 +3,16 @@
     <fontset id="Default" unicode="false">
         <include>Font_Default</include>
         <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
+        <font>
             <name>font10</name>
             <filename>inter-r.ttf</filename>
             <size>21</size>
@@ -31,6 +41,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="الجزيرة" unicode="true">
         <include content="Font_Default">
@@ -55,6 +75,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="امازون" unicode="true">
         <include content="Font_Default">
@@ -79,6 +109,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="APPLE" unicode="true">
         <include content="Font_Default">
@@ -103,6 +143,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="المهند" unicode="true">
         <include content="Font_Default">
@@ -128,6 +178,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="حسن" unicode="true">
         <include content="Font_Default">
@@ -152,6 +212,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="تونس" unicode="true">
         <include content="Font_Default">
@@ -176,6 +246,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
     <fontset id="RobotoNotoCondensed" unicode="true">
         <include content="Font_Default">
@@ -200,6 +280,16 @@
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
     </fontset>
 </fonts>
 

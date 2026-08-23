@@ -911,5 +911,6 @@
                 <param name="colordiffuse">dialog_fg_90</param>
             </include>
         </control>
+
     </controls>
 </window>

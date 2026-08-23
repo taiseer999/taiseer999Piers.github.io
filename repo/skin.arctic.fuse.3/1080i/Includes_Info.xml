@@ -117,6 +117,7 @@
         <param name="service">ListItem</param>
         <param name="override_movie">false</param>
         <param name="override_tvshow">false</param>
+        <param name="ratings_visible">true</param>
         <definition>
 
             <control type="group">
@@ -165,73 +166,73 @@
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">Movies</param>
                         <param name="item">Item01</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">Movies</param>
                         <param name="item">Item02</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">Movies</param>
                         <param name="item">Item03</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="Skin.HasSetting(TMDBHelper.Service)">
                         <param name="content">Movies</param>
                         <param name="item">Item04</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="Skin.HasSetting(TMDBHelper.Service)">
                         <param name="content">Movies</param>
                         <param name="item">Item05</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="Skin.HasSetting(TMDBHelper.Service)">
                         <param name="content">Movies</param>
                         <param name="item">Item06</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">TVShows</param>
                         <param name="item">Item01</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">TVShows</param>
                         <param name="item">Item02</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="$EXP[Exp_TMDbHelper_IsData]">
                         <param name="content">TVShows</param>
                         <param name="item">Item03</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="Skin.HasSetting(TMDBHelper.Service)">
                         <param name="content">TVShows</param>
                         <param name="item">Item04</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="Skin.HasSetting(TMDBHelper.Service)">
                         <param name="content">TVShows</param>
                         <param name="item">Item05</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
                     <include content="Info_Meta_Ratings" condition="Skin.HasSetting(TMDBHelper.Service)">
                         <param name="content">TVShows</param>
                         <param name="item">Item06</param>
-                        <param name="visible">String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
                         <param name="service">$PARAM[service]</param>
                     </include>
 

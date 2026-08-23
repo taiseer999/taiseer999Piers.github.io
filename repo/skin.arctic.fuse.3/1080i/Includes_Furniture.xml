@@ -140,12 +140,15 @@
         <param name="include_right">true</param>
         <param name="textcolor">main_fg_90</param>
         <param name="top">40</param>
+        <param name="left">view_pad</param>
         <param name="showlogo">false</param>
+        <param name="visible">true</param>
         <definition>
             <control type="group">
+                <visible>$PARAM[visible]</visible>
                 <top>$PARAM[top]</top>
                 <height>80</height>
-                <left>view_pad</left>
+                <left>$PARAM[left]</left>
                 <right>view_pad</right>
                 <include content="Furniture_Header_Left" condition="$PARAM[include_left]">
                     <param name="label">$PARAM[label]</param>
@@ -253,9 +256,10 @@
         <param name="infolabel_audiochannels">ListItem.AudioChannels</param>
         <param name="align">right</param>
         <param name="itemgap">20</param>
+        <param name="visible">true</param>
         <definition>
             <control type="grouplist">
-                <visible>!String.IsEmpty($PARAM[infolabel_videoresolution])</visible>
+                <visible>!String.IsEmpty($PARAM[infolabel_videoresolution]) + [$PARAM[visible]]</visible>
                 <orientation>horizontal</orientation>
                 <align>center</align>
                 <itemgap>$PARAM[itemgap]</itemgap>

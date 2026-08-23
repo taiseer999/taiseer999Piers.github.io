@@ -24,33 +24,33 @@
         </include>
         <include content="Hub_Wall_Widget">
             <param name="id">503</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.502.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.502.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-16cedd65)</param>
-        </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">504</param>
-            <param name="content">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=resume.json&amp;plugin_category=resume&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
-            <param name="include">List_Square_Row</param>
+            <param name="content">plugin://plugin.video.themoviedb.helper/?info=trakt_ondeck&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
+            <param name="include">List_Landscape_Row</param>
             <param name="target">videos</param>
             <param name="sortby"/>
             <param name="sortorder">ascending</param>
             <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-d7eb7815)</param>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-a5d84f0b)</param>
         </include>
         <include content="Hub_Wall_Widget">
-            <param name="id">505</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</param>
+            <param name="id">504</param>
+            <param name="content">plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
             <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.504.Target)]</param>
+            <param name="target">videos</param>
             <param name="sortby"/>
             <param name="sortorder">ascending</param>
             <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-e26c7fda)</param>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-e55b79f7)</param>
+        </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">505</param>
+            <param name="content">plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;list_name=%D9%82%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%85&amp;tmdb_id=None&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
+            <param name="include">List_Landscape_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-4a7a364e)</param>
         </include>
         <include content="Hub_Wall_Widget">
             <param name="id">506</param>
@@ -61,16 +61,6 @@
             <param name="sortorder">ascending</param>
             <param name="limit"/>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-ee901122)</param>
-        </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">507</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.506.FolderPath)]</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.506.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-0b71810e)</param>
         </include>
         <animation effect="slide" start="0" end="0,260" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
         <animation effect="slide" end="0" start="0,260" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
@@ -96,30 +86,30 @@
             <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
         <item>
-            <label>$INFO[Window.Property(WidgetMeta.502.Label)]</label>
-            <property name="guid">guid-16cedd65</property>
+            <label>الحلقات</label>
+            <property name="guid">guid-a5d84f0b</property>
             <property name="widget_id">$NUMBER[503]</property>
             <property name="show_overlay">true</property>
             <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.502.Target)],$INFO[Window.Property(WidgetMeta.502.FolderPath)],return)</onclick>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=trakt_ondeck&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
         </item>
         <item>
-            <label>قيد التقدم المسلسلات</label>
-            <property name="guid">guid-d7eb7815</property>
+            <label>الحلقات القادمة</label>
+            <property name="guid">guid-e55b79f7</property>
             <property name="widget_id">$NUMBER[504]</property>
             <property name="show_overlay">true</property>
             <property name="hide_overlay"/>
-            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=resume.json&amp;plugin_category=resume&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
         </item>
         <item>
-            <label>$INFO[Window.Property(WidgetMeta.504.Label)]</label>
-            <property name="guid">guid-e26c7fda</property>
+            <label>المسلسلات</label>
+            <property name="guid">guid-4a7a364e</property>
             <property name="widget_id">$NUMBER[505]</property>
             <property name="show_overlay">true</property>
             <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.504.Target)],$INFO[Window.Property(WidgetMeta.504.FolderPath)],return)</onclick>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;list_name=%D9%82%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%85&amp;tmdb_id=None&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating</visible>
         </item>
         <item>
@@ -130,15 +120,6 @@
             <property name="hide_overlay"/>
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+tv.json&amp;plugin_category=My+TV&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(506).NumItems,0) | Container(506).IsUpdating</visible>
-        </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.506.Label)]</label>
-            <property name="guid">guid-0b71810e</property>
-            <property name="widget_id">$NUMBER[507]</property>
-            <property name="show_overlay">true</property>
-            <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.506.Target)],$INFO[Window.Property(WidgetMeta.506.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(507).NumItems,0) | Container(507).IsUpdating</visible>
         </item>
     </include>
     <!-- Combined Info -->
@@ -160,9 +141,6 @@
         </include>
         <include content="Hub_Wall_Info">
             <param name="id">506</param>
-        </include>
-        <include content="Hub_Wall_Info">
-            <param name="id">507</param>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -191,36 +169,36 @@
         </include>
         <include content="Hub_Combined_Widget">
             <param name="id">503</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.502.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.502.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-16cedd65)</param>
-        </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">504</param>
-            <param name="content">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=resume.json&amp;plugin_category=resume&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
-            <param name="include">List_Square_Row</param>
+            <param name="content">plugin://plugin.video.themoviedb.helper/?info=trakt_ondeck&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
+            <param name="include">List_Landscape_Row</param>
             <param name="target">videos</param>
             <param name="sortby"/>
             <param name="sortorder">ascending</param>
             <param name="limit"/>
             <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-d7eb7815)</param>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-a5d84f0b)</param>
         </include>
         <include content="Hub_Combined_Widget">
-            <param name="id">505</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</param>
+            <param name="id">504</param>
+            <param name="content">plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
             <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.504.Target)]</param>
+            <param name="target">videos</param>
             <param name="sortby"/>
             <param name="sortorder">ascending</param>
             <param name="limit"/>
             <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-e26c7fda)</param>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-e55b79f7)</param>
+        </include>
+        <include content="Hub_Combined_Widget">
+            <param name="id">505</param>
+            <param name="content">plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;list_name=%D9%82%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%85&amp;tmdb_id=None&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
+            <param name="include">List_Landscape_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="autoscroll">False</param>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-4a7a364e)</param>
         </include>
         <include content="Hub_Combined_Widget">
             <param name="id">506</param>
@@ -232,17 +210,6 @@
             <param name="limit"/>
             <param name="autoscroll">False</param>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-ee901122)</param>
-        </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">507</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.506.FolderPath)]</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.506.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-0b71810e)</param>
         </include>
     </include>
     <!-- Wall Widgets Selector -->
@@ -266,30 +233,30 @@
             <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
         <item>
-            <label>$INFO[Window.Property(WidgetMeta.502.Label)]</label>
-            <property name="guid">guid-16cedd65</property>
+            <label>الحلقات</label>
+            <property name="guid">guid-a5d84f0b</property>
             <property name="widget_id">$NUMBER[503]</property>
             <property name="show_overlay"/>
             <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.502.Target)],$INFO[Window.Property(WidgetMeta.502.FolderPath)],return)</onclick>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=trakt_ondeck&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
         </item>
         <item>
-            <label>قيد التقدم المسلسلات</label>
-            <property name="guid">guid-d7eb7815</property>
+            <label>الحلقات القادمة</label>
+            <property name="guid">guid-e55b79f7</property>
             <property name="widget_id">$NUMBER[504]</property>
             <property name="show_overlay"/>
             <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=resume.json&amp;plugin_category=resume&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
         </item>
         <item>
-            <label>$INFO[Window.Property(WidgetMeta.504.Label)]</label>
-            <property name="guid">guid-e26c7fda</property>
+            <label>المسلسلات</label>
+            <property name="guid">guid-4a7a364e</property>
             <property name="widget_id">$NUMBER[505]</property>
             <property name="show_overlay"/>
             <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.504.Target)],$INFO[Window.Property(WidgetMeta.504.FolderPath)],return)</onclick>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;list_name=%D9%82%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%85&amp;tmdb_id=None&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating</visible>
         </item>
         <item>
@@ -300,15 +267,6 @@
             <property name="hide_overlay">true</property>
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+tv.json&amp;plugin_category=My+TV&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(506).NumItems,0) | Container(506).IsUpdating</visible>
-        </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.506.Label)]</label>
-            <property name="guid">guid-0b71810e</property>
-            <property name="widget_id">$NUMBER[507]</property>
-            <property name="show_overlay"/>
-            <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.506.Target)],$INFO[Window.Property(WidgetMeta.506.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(507).NumItems,0) | Container(507).IsUpdating</visible>
         </item>
     </include>
     <!-- Combined Info -->
@@ -330,9 +288,6 @@
         </include>
         <include content="Hub_Combined_Info">
             <param name="id">506</param>
-        </include>
-        <include content="Hub_Combined_Info">
-            <param name="id">507</param>
         </include>
     </include>
     <!-- Standard Widgets -->
@@ -393,14 +348,14 @@
             <include content="Widget_Row">
                 <param name="id">503</param>
                 <param name="groupid">703</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.502.Label)]</param>
+                <param name="label">الحلقات</param>
                 <param name="usewidgetlabel">False</param>
-                <param name="include">List_Poster_Row</param>
+                <param name="include">List_Landscape_Row</param>
                 <param name="grouplistid">602</param>
                 <param name="refocus">SetFocus(302)</param>
                 <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(502)]</param>
-                <param name="altvisible">Control.HasFocus(502)</param>
+                <param name="visible">[True] + [True]</param>
+                <param name="altvisible">False</param>
                 <param name="busy_isupdating">True</param>
                 <param name="widgetfade_include">true</param>
                 <param name="widgetfade_disable">false</param>
@@ -411,7 +366,7 @@
                 <include content="Widget_NoResults">
                     <param name="id">503</param>
                 </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.502.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.502.FolderPath)]</content>
+                <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=trakt_ondeck&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(503) | System.IdleTime(3)]</param>
                 </include>
@@ -419,9 +374,9 @@
             <include content="Widget_Row">
                 <param name="id">504</param>
                 <param name="groupid">704</param>
-                <param name="label">قيد التقدم المسلسلات</param>
+                <param name="label">الحلقات القادمة</param>
                 <param name="usewidgetlabel">False</param>
-                <param name="include">List_Square_Row</param>
+                <param name="include">List_Landscape_Row</param>
                 <param name="grouplistid">602</param>
                 <param name="refocus">SetFocus(302)</param>
                 <param name="detailed">False</param>
@@ -437,7 +392,7 @@
                 <include content="Widget_NoResults">
                     <param name="id">504</param>
                 </include>
-                <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=resume.json&amp;plugin_category=resume&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
+                <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes&amp;tmdb_type=tv&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(504) | System.IdleTime(3)]</param>
                 </include>
@@ -445,14 +400,14 @@
             <include content="Widget_Row">
                 <param name="id">505</param>
                 <param name="groupid">705</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.504.Label)]</param>
+                <param name="label">المسلسلات</param>
                 <param name="usewidgetlabel">False</param>
                 <param name="include">List_Landscape_Row</param>
                 <param name="grouplistid">602</param>
                 <param name="refocus">SetFocus(302)</param>
                 <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(504)]</param>
-                <param name="altvisible">Control.HasFocus(504)</param>
+                <param name="visible">[True] + [True]</param>
+                <param name="altvisible">False</param>
                 <param name="busy_isupdating">True</param>
                 <param name="widgetfade_include">true</param>
                 <param name="widgetfade_disable">false</param>
@@ -463,7 +418,7 @@
                 <include content="Widget_NoResults">
                     <param name="id">505</param>
                 </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.504.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</content>
+                <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress&amp;tmdb_type=tv&amp;list_name=%D9%82%D9%8A%D8%AF+%D8%A7%D9%84%D8%AA%D9%82%D8%AF%D9%85&amp;tmdb_id=None&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(505) | System.IdleTime(3)]</param>
                 </include>
@@ -492,32 +447,6 @@
                 <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=my+tv.json&amp;plugin_category=My+TV&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(506) | System.IdleTime(3)]</param>
-                </include>
-            </include>
-            <include content="Widget_Row">
-                <param name="id">507</param>
-                <param name="groupid">707</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.506.Label)]</param>
-                <param name="usewidgetlabel">False</param>
-                <param name="include">List_Landscape_Row</param>
-                <param name="grouplistid">602</param>
-                <param name="refocus">SetFocus(302)</param>
-                <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(506)]</param>
-                <param name="altvisible">Control.HasFocus(506)</param>
-                <param name="busy_isupdating">True</param>
-                <param name="widgetfade_include">true</param>
-                <param name="widgetfade_disable">false</param>
-                <param name="widgetconstants_affix">_detailed</param>
-                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
-                <description/>
-                <include content="Widget_NoResults">
-                    <param name="id">507</param>
-                </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.506.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.506.FolderPath)]</content>
-                <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(507) | System.IdleTime(3)]</param>
                 </include>
             </include>
         </include>
@@ -557,18 +486,8 @@
         <include content="Hub_Wall_Widget">
             <param name="id">504</param>
             <param name="content">$INFO[Window.Property(WidgetMeta.503.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
+            <param name="include">List_Square_Row</param>
             <param name="target">$INFO[Window.Property(WidgetMeta.503.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-8686730c)</param>
-        </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">505</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.504.Target)]</param>
             <param name="sortby"/>
             <param name="sortorder">ascending</param>
             <param name="limit"/>
@@ -608,21 +527,12 @@
         </item>
         <item>
             <label>$INFO[Window.Property(WidgetMeta.503.Label)]</label>
-            <property name="guid">guid-8686730c</property>
+            <property name="guid">guid-2adbcab5</property>
             <property name="widget_id">$NUMBER[504]</property>
             <property name="show_overlay">true</property>
             <property name="hide_overlay"/>
             <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.503.Target)],$INFO[Window.Property(WidgetMeta.503.FolderPath)],return)</onclick>
             <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
-        </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.504.Label)]</label>
-            <property name="guid">guid-2adbcab5</property>
-            <property name="widget_id">$NUMBER[505]</property>
-            <property name="show_overlay">true</property>
-            <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.504.Target)],$INFO[Window.Property(WidgetMeta.504.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating</visible>
         </item>
     </include>
     <!-- Combined Info -->
@@ -638,9 +548,6 @@
         </include>
         <include content="Hub_Wall_Info">
             <param name="id">504</param>
-        </include>
-        <include content="Hub_Wall_Info">
-            <param name="id">505</param>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -681,19 +588,8 @@
         <include content="Hub_Combined_Widget">
             <param name="id">504</param>
             <param name="content">$INFO[Window.Property(WidgetMeta.503.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
+            <param name="include">List_Square_Row</param>
             <param name="target">$INFO[Window.Property(WidgetMeta.503.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-8686730c)</param>
-        </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">505</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.504.Target)]</param>
             <param name="sortby"/>
             <param name="sortorder">ascending</param>
             <param name="limit"/>
@@ -732,21 +628,12 @@
         </item>
         <item>
             <label>$INFO[Window.Property(WidgetMeta.503.Label)]</label>
-            <property name="guid">guid-8686730c</property>
+            <property name="guid">guid-2adbcab5</property>
             <property name="widget_id">$NUMBER[504]</property>
             <property name="show_overlay"/>
             <property name="hide_overlay">true</property>
             <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.503.Target)],$INFO[Window.Property(WidgetMeta.503.FolderPath)],return)</onclick>
             <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
-        </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.504.Label)]</label>
-            <property name="guid">guid-2adbcab5</property>
-            <property name="widget_id">$NUMBER[505]</property>
-            <property name="show_overlay"/>
-            <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.504.Target)],$INFO[Window.Property(WidgetMeta.504.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating</visible>
         </item>
     </include>
     <!-- Combined Info -->
@@ -762,9 +649,6 @@
         </include>
         <include content="Hub_Combined_Info">
             <param name="id">504</param>
-        </include>
-        <include content="Hub_Combined_Info">
-            <param name="id">505</param>
         </include>
     </include>
     <!-- Standard Widgets -->
@@ -853,7 +737,7 @@
                 <param name="groupid">704</param>
                 <param name="label">$INFO[Window.Property(WidgetMeta.503.Label)]</param>
                 <param name="usewidgetlabel">False</param>
-                <param name="include">List_Poster_Row</param>
+                <param name="include">List_Square_Row</param>
                 <param name="grouplistid">602</param>
                 <param name="refocus">SetFocus(302)</param>
                 <param name="detailed">False</param>
@@ -872,32 +756,6 @@
                 <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.503.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.503.FolderPath)]</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(504) | System.IdleTime(3)]</param>
-                </include>
-            </include>
-            <include content="Widget_Row">
-                <param name="id">505</param>
-                <param name="groupid">705</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.504.Label)]</param>
-                <param name="usewidgetlabel">False</param>
-                <param name="include">List_Poster_Row</param>
-                <param name="grouplistid">602</param>
-                <param name="refocus">SetFocus(302)</param>
-                <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(504)]</param>
-                <param name="altvisible">Control.HasFocus(504)</param>
-                <param name="busy_isupdating">True</param>
-                <param name="widgetfade_include">true</param>
-                <param name="widgetfade_disable">false</param>
-                <param name="widgetconstants_affix">_detailed</param>
-                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
-                <description/>
-                <include content="Widget_NoResults">
-                    <param name="id">505</param>
-                </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.504.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</content>
-                <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(505) | System.IdleTime(3)]</param>
                 </include>
             </include>
         </include>
@@ -944,16 +802,6 @@
             <param name="limit"/>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-123096f8)</param>
         </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">505</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.504.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-c1a03d70)</param>
-        </include>
         <animation effect="slide" start="0" end="0,260" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
         <animation effect="slide" end="0" start="0,260" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
     </include>
@@ -995,15 +843,6 @@
             <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.503.Target)],$INFO[Window.Property(WidgetMeta.503.FolderPath)],return)</onclick>
             <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
         </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.504.Label)]</label>
-            <property name="guid">guid-c1a03d70</property>
-            <property name="widget_id">$NUMBER[505]</property>
-            <property name="show_overlay">true</property>
-            <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.504.Target)],$INFO[Window.Property(WidgetMeta.504.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating</visible>
-        </item>
     </include>
     <!-- Combined Info -->
     <include name="skinvariables-1102widgets-wall-info">
@@ -1018,9 +857,6 @@
         </include>
         <include content="Hub_Wall_Info">
             <param name="id">504</param>
-        </include>
-        <include content="Hub_Wall_Info">
-            <param name="id">505</param>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -1069,17 +905,6 @@
             <param name="autoscroll">False</param>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-123096f8)</param>
         </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">505</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.504.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-c1a03d70)</param>
-        </include>
     </include>
     <!-- Wall Widgets Selector -->
     <include name="skinvariables-1102widgets-combined-selector">
@@ -1119,15 +944,6 @@
             <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.503.Target)],$INFO[Window.Property(WidgetMeta.503.FolderPath)],return)</onclick>
             <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
         </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.504.Label)]</label>
-            <property name="guid">guid-c1a03d70</property>
-            <property name="widget_id">$NUMBER[505]</property>
-            <property name="show_overlay"/>
-            <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.504.Target)],$INFO[Window.Property(WidgetMeta.504.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating</visible>
-        </item>
     </include>
     <!-- Combined Info -->
     <include name="skinvariables-1102widgets-combined-info">
@@ -1142,9 +958,6 @@
         </include>
         <include content="Hub_Combined_Info">
             <param name="id">504</param>
-        </include>
-        <include content="Hub_Combined_Info">
-            <param name="id">505</param>
         </include>
     </include>
     <!-- Standard Widgets -->
@@ -1254,32 +1067,6 @@
                     <param name="condition">[!Control.HasFocus(504) | System.IdleTime(3)]</param>
                 </include>
             </include>
-            <include content="Widget_Row">
-                <param name="id">505</param>
-                <param name="groupid">705</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.504.Label)]</param>
-                <param name="usewidgetlabel">False</param>
-                <param name="include">List_Landscape_Row</param>
-                <param name="grouplistid">602</param>
-                <param name="refocus">SetFocus(302)</param>
-                <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(504)]</param>
-                <param name="altvisible">Control.HasFocus(504)</param>
-                <param name="busy_isupdating">True</param>
-                <param name="widgetfade_include">true</param>
-                <param name="widgetfade_disable">false</param>
-                <param name="widgetconstants_affix">_detailed</param>
-                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
-                <description/>
-                <include content="Widget_NoResults">
-                    <param name="id">505</param>
-                </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.504.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.504.FolderPath)]</content>
-                <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(505) | System.IdleTime(3)]</param>
-                </include>
-            </include>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -1296,16 +1083,6 @@
         </include>
         <include content="Hub_Wall_Widget">
             <param name="id">502</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.501.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.501.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-37c9604f)</param>
-        </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">503</param>
             <param name="content">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
             <param name="include">List_Square_Row</param>
             <param name="target">videos</param>
@@ -1313,16 +1090,6 @@
             <param name="sortorder">ascending</param>
             <param name="limit"/>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-dd6445be)</param>
-        </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">504</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.503.FolderPath)]</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.503.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-1fcaf68c)</param>
         </include>
         <animation effect="slide" start="0" end="0,260" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
         <animation effect="slide" end="0" start="0,260" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
@@ -1339,31 +1106,13 @@
             <visible>!Integer.IsEqual(Container(501).NumItems,0) | Container(501).IsUpdating</visible>
         </item>
         <item>
-            <label>$INFO[Window.Property(WidgetMeta.501.Label)]</label>
-            <property name="guid">guid-37c9604f</property>
+            <label>مسلسلات</label>
+            <property name="guid">guid-dd6445be</property>
             <property name="widget_id">$NUMBER[502]</property>
             <property name="show_overlay">true</property>
             <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.501.Target)],$INFO[Window.Property(WidgetMeta.501.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
-        </item>
-        <item>
-            <label>مسلسلات</label>
-            <property name="guid">guid-dd6445be</property>
-            <property name="widget_id">$NUMBER[503]</property>
-            <property name="show_overlay">true</property>
-            <property name="hide_overlay"/>
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
-            <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
-        </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.503.Label)]</label>
-            <property name="guid">guid-1fcaf68c</property>
-            <property name="widget_id">$NUMBER[504]</property>
-            <property name="show_overlay">true</property>
-            <property name="hide_overlay"/>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.503.Target)],$INFO[Window.Property(WidgetMeta.503.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
+            <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
     </include>
     <!-- Combined Info -->
@@ -1373,12 +1122,6 @@
         </include>
         <include content="Hub_Wall_Info">
             <param name="id">502</param>
-        </include>
-        <include content="Hub_Wall_Info">
-            <param name="id">503</param>
-        </include>
-        <include content="Hub_Wall_Info">
-            <param name="id">504</param>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -1396,17 +1139,6 @@
         </include>
         <include content="Hub_Combined_Widget">
             <param name="id">502</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.501.FolderPath)]</param>
-            <param name="include">List_Poster_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.501.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-37c9604f)</param>
-        </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">503</param>
             <param name="content">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</param>
             <param name="include">List_Square_Row</param>
             <param name="target">videos</param>
@@ -1415,17 +1147,6 @@
             <param name="limit"/>
             <param name="autoscroll">False</param>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-dd6445be)</param>
-        </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">504</param>
-            <param name="content">$INFO[Window.Property(WidgetMeta.503.FolderPath)]</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">$INFO[Window.Property(WidgetMeta.503.Target)]</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-1fcaf68c)</param>
         </include>
     </include>
     <!-- Wall Widgets Selector -->
@@ -1440,31 +1161,13 @@
             <visible>!Integer.IsEqual(Container(501).NumItems,0) | Container(501).IsUpdating</visible>
         </item>
         <item>
-            <label>$INFO[Window.Property(WidgetMeta.501.Label)]</label>
-            <property name="guid">guid-37c9604f</property>
+            <label>مسلسلات</label>
+            <property name="guid">guid-dd6445be</property>
             <property name="widget_id">$NUMBER[502]</property>
             <property name="show_overlay"/>
             <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.501.Target)],$INFO[Window.Property(WidgetMeta.501.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
-        </item>
-        <item>
-            <label>مسلسلات</label>
-            <property name="guid">guid-dd6445be</property>
-            <property name="widget_id">$NUMBER[503]</property>
-            <property name="show_overlay"/>
-            <property name="hide_overlay">true</property>
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
-            <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
-        </item>
-        <item>
-            <label>$INFO[Window.Property(WidgetMeta.503.Label)]</label>
-            <property name="guid">guid-1fcaf68c</property>
-            <property name="widget_id">$NUMBER[504]</property>
-            <property name="show_overlay"/>
-            <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow($INFO[Window.Property(WidgetMeta.503.Target)],$INFO[Window.Property(WidgetMeta.503.FolderPath)],return)</onclick>
-            <visible>!Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating</visible>
+            <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
     </include>
     <!-- Combined Info -->
@@ -1474,12 +1177,6 @@
         </include>
         <include content="Hub_Combined_Info">
             <param name="id">502</param>
-        </include>
-        <include content="Hub_Combined_Info">
-            <param name="id">503</param>
-        </include>
-        <include content="Hub_Combined_Info">
-            <param name="id">504</param>
         </include>
     </include>
     <!-- Standard Widgets -->
@@ -1514,32 +1211,6 @@
             <include content="Widget_Row">
                 <param name="id">502</param>
                 <param name="groupid">702</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.501.Label)]</param>
-                <param name="usewidgetlabel">False</param>
-                <param name="include">List_Poster_Row</param>
-                <param name="grouplistid">602</param>
-                <param name="refocus">SetFocus(302)</param>
-                <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(501)]</param>
-                <param name="altvisible">Control.HasFocus(501)</param>
-                <param name="busy_isupdating">True</param>
-                <param name="widgetfade_include">true</param>
-                <param name="widgetfade_disable">false</param>
-                <param name="widgetconstants_affix">_detailed</param>
-                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
-                <description/>
-                <include content="Widget_NoResults">
-                    <param name="id">502</param>
-                </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.501.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.501.FolderPath)]</content>
-                <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(502) | System.IdleTime(3)]</param>
-                </include>
-            </include>
-            <include content="Widget_Row">
-                <param name="id">503</param>
-                <param name="groupid">703</param>
                 <param name="label">مسلسلات</param>
                 <param name="usewidgetlabel">False</param>
                 <param name="include">List_Square_Row</param>
@@ -1556,37 +1227,11 @@
                 <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
                 <description/>
                 <include content="Widget_NoResults">
-                    <param name="id">503</param>
+                    <param name="id">502</param>
                 </include>
                 <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(503) | System.IdleTime(3)]</param>
-                </include>
-            </include>
-            <include content="Widget_Row">
-                <param name="id">504</param>
-                <param name="groupid">704</param>
-                <param name="label">$INFO[Window.Property(WidgetMeta.503.Label)]</param>
-                <param name="usewidgetlabel">False</param>
-                <param name="include">List_Landscape_Row</param>
-                <param name="grouplistid">602</param>
-                <param name="refocus">SetFocus(302)</param>
-                <param name="detailed">False</param>
-                <param name="visible">[True] + [Control.IsVisible(503)]</param>
-                <param name="altvisible">Control.HasFocus(503)</param>
-                <param name="busy_isupdating">True</param>
-                <param name="widgetfade_include">true</param>
-                <param name="widgetfade_disable">false</param>
-                <param name="widgetconstants_affix">_detailed</param>
-                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
-                <description/>
-                <include content="Widget_NoResults">
-                    <param name="id">504</param>
-                </include>
-                <content sortby="" sortorder="ascending" target="$INFO[Window.Property(WidgetMeta.503.Target)]" limit="" browse="$VAR[Defs_BrowseLimitedLists]">$INFO[Window.Property(WidgetMeta.503.FolderPath)]</content>
-                <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(504) | System.IdleTime(3)]</param>
+                    <param name="condition">[!Control.HasFocus(502) | System.IdleTime(3)]</param>
                 </include>
             </include>
         </include>
@@ -4804,18 +4449,18 @@
     <!-- Options Tray Items -->
     <include name="skinvariables-powertray-staticitems">
         <item>
-            <label>Speed</label>
+            <label>Speed Test</label>
             <icon>special://skin/extras/icons/Speed.png</icon>
-            <property name="path">PlayMedia(plugin://script.ezmaintenanceplus/?url=ur&amp;action=speedtest&amp;name=%5BCOLOR+white%5D%5BB%5DSPEEDTEST%5B%2FB%5D%5B%2FCOLOR%5D&amp;icon=%2FUsers%2Ftaiseerashouri%2FLibrary%2FApplication+Support%2FKodi%2Faddons%2Fscript.ezmaintenanceplus%2Ficon.png&amp;fanart=%2FUsers%2Ftaiseerashouri%2FLibrary%2FApplication+Support%2FKodi%2Faddons%2Fscript.ezmaintenanceplus%2Ffanart.jpg&amp;description=)</property>
+            <property name="path">plugin://plugin.program.abukarimtools/?mode=speedtest</property>
             <property name="menu">powertray</property>
             <property name="mode"/>
             <property name="node"/>
             <property name="item">$NUMBER[0]</property>
             <property name="guid">guid-d7efdb0e</property>
-            <property name="target"/>
+            <property name="target">programs</property>
             <property name="fanart"/>
             <onclick>Close</onclick>
-            <onclick>PlayMedia(plugin://script.ezmaintenanceplus/?url=ur&amp;action=speedtest&amp;name=%5BCOLOR+white%5D%5BB%5DSPEEDTEST%5B%2FB%5D%5B%2FCOLOR%5D&amp;icon=%2FUsers%2Ftaiseerashouri%2FLibrary%2FApplication+Support%2FKodi%2Faddons%2Fscript.ezmaintenanceplus%2Ficon.png&amp;fanart=%2FUsers%2Ftaiseerashouri%2FLibrary%2FApplication+Support%2FKodi%2Faddons%2Fscript.ezmaintenanceplus%2Ffanart.jpg&amp;description=)</onclick>
+            <onclick>ActivateWindow(programs,plugin://plugin.program.abukarimtools/?mode=speedtest,return)</onclick>
             <visible>True</visible>
         </item>
         <item>

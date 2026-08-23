@@ -318,7 +318,7 @@
         <control type="image">
             <bottom>0</bottom>
             <height>256</height>
-            <texture colordiffuse="panel_bg_70" border="4,0,4,0">common/gradient-v.png</texture>
+            <texture colordiffuse="panel_bg_50" border="4,0,4,0">common/gradient-v.png</texture>
             <include>Animation_OSD_Fullscreen_Change</include>
             <visible>Window.IsActive(DialogSeekBar.xml) | Window.IsVisible(1152)</visible>
         </control>
@@ -326,7 +326,7 @@
         <control type="image">
             <bottom>0</bottom>
             <height>768</height>
-            <texture colordiffuse="panel_bg_70" border="4,0,4,0">common/gradient-v.png</texture>
+            <texture colordiffuse="panel_bg_50" border="4,0,4,0">common/gradient-v.png</texture>
             <include>Animation_OSD_Fullscreen_Change</include>
             <visible>Window.IsActive(DialogSeekBar.xml) | Window.IsVisible(1152)</visible>
             <visible>Window.IsActive(videoosd) | Window.IsActive(musicosd) | Window.IsActive(1140) | Window.IsActive(1141) | Window.IsActive(1142) | Window.IsActive(1143) | Window.IsActive(1144) | Window.IsActive(1145) | Window.IsActive(1146) | Window.IsActive(1147) | Window.IsActive(1148) | Window.IsActive(1149) | Window.IsActive(1159) | Window.IsVisible(videobookmarks) | Window.IsVisible(pvrosdguide) | Window.IsVisible(pvrosdchannels) | Window.IsVisible(1152) | Window.IsActive(script-upnext-stillwatching.xml) | Window.IsActive(script-upnext-upnext.xml)</visible>
@@ -541,6 +541,7 @@
         <param name="align">bottom</param>
         <param name="landscape_visible">!Skin.HasSetting(OSD.DisableLandscapeOnInfo)</param>
         <param name="plot_visible">!Skin.HasSetting(OSD.DisablePlotRatingsOnInfo)</param>
+        <param name="ratings_visible">true</param>
         <definition>
             <control type="grouplist">
                 <bottom>40</bottom>
@@ -632,6 +633,7 @@
                     <param name="service">Player</param>
                     <param name="override_tvshow">VideoPlayer.Content(episodes)</param>
                     <param name="override_movie">VideoPlayer.Content(movies)</param>
+                    <param name="ratings_visible">$PARAM[ratings_visible]</param>
                 </include>
 
                 <control type="group" description="Avoid grouplist chop with spacer">
@@ -789,6 +791,7 @@
                     <param name="infolabel_videocodec">VideoPlayer.VideoCodec</param>
                     <param name="infolabel_audiocodec">VideoPlayer.AudioCodec</param>
                     <param name="infolabel_audiochannels">VideoPlayer.AudioChannels</param>
+                    <param name="visible">!Skin.HasSetting(ExtraOSD)</param>
                     <param name="itemgap">$PARAM[itemgap]</param>
                     <param name="align">$PARAM[align]</param>
                 </include>
