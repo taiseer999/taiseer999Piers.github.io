@@ -1,0 +1,25 @@
+Arctic Zephyr Rounded - port of upstream v2.2.29 into fork v3.4
+================================================================
+
+COPY these into your fork's 1080i/ (overwrite existing):
+  Includes_Defs.xml          (+ Def_Flag_Airing variable  - TV show status flag image)
+  Includes_Colors.xml        (Color_Flag_Next_Aired now status-aware: teal/red/blue)
+  Includes_Furniture.xml     (Next_Aired flags use $VAR[Def_Flag_Airing]; also keeps clock AM/PM fixes)
+  Includes_Dialogs.xml       (Settings button: 1260 for Music info, 1261 for Video info)
+
+ADD these NEW files into 1080i/:
+  Custom_1260_DialogInfo_Music_Settings.xml   (id 1260 - new split Music info-settings dialog)
+  Custom_1261_DialogInfo_Video_Settings.xml   (id 1261 - new split Video info-settings dialog)
+  Custom_1262_DialogInfo_Video_Helper_Trailer_Youtube_Fullscreen.xml  (id 1262 - your trailer dialog, renumbered from 1261)
+
+DELETE these OLD files from 1080i/:
+  Custom_1260_DialogInfo_Settings.xml                                  (old single combined dialog - superseded)
+  Custom_1261_DialogInfo_Video_Helper_Trailer_Youtube_Fullscreen.xml  (old id-1261 trailer - replaced by 1262 above)
+
+WHY the renumber: upstream split the info-settings dialog into two windows
+(1260 Music + 1261 Video). Your fork already had the trailer helper at id 1261,
+so it moves to 1262 - exactly as upstream did. Your Custom_1199_Overlay.xml and
+DialogBusy.xml already referenced the new 1262 name, so no change needed there.
+
+Textures (airing.png / airing_ended.png / airing_cancel.png) are already inside
+your Textures.xbt - no asset work required.

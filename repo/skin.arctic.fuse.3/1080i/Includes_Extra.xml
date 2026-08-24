@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
+	<variable name="Image_VideoPlayer_HDRType_Strip">
+		<value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision) | String.Contains(Player.Filenameandpath,.dv.) | String.Contains(Player.Filenameandpath,dolby.vision) | String.Contains(Player.Filenameandpath,dovi)">flags/colorful/other/dolbyvision.png</value>
+		<value condition="String.Contains(Player.Filenameandpath,hdr10plus) | String.Contains(Player.Filenameandpath,hdr10+) | String.Contains(Player.Filenameandpath,.hdrplus.) | String.Contains(Player.Filenameandpath,.12bit.)">flags/colorful/other/hdr10plus.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10) | String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">flags/colorful/other/hdr10.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hlg) | String.Contains(Player.Process(amlogic.eoft_gamut),HLG)">flags/colorful/other/hlg.png</value>
+		<value condition="!String.IsEmpty(VideoPlayer.HdrType) | String.Contains(Player.Filenameandpath,hdr)">flags/colorful/other/hdr.png</value>
+	</variable>
+
 	<include name="ExtraOSD">
 		
           <control type="group">
@@ -27,15 +35,6 @@
                     <texture colordiffuse="panel_fg_100">flags/colorful/other/3D.png</texture>
                     <visible>VideoPlayer.IsStereoscopic</visible>
                 </control>
-                <control type="image" id="78880">
-                    <fadetime>100</fadetime>
-                    <centertop>50%</centertop>
-                    <width>70</width>
-                    <height>42</height>
-                    <aspectratio align="left">keep</aspectratio>
-                    <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_HDRCodec]</texture>
-                    <visible>!String.IsEmpty($VAR[Image_VideoPlayer_HDRCodec])</visible>
-                </control>
                 <control type="image" id="78881">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
@@ -53,6 +52,15 @@
                     <aspectratio>keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">flags/colorful/resolution/$INFO[VideoPlayer.VideoResolution].png</texture>
                     <visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
+                </control>
+                <control type="image" id="78880">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>70</width>
+                    <height>42</height>
+                    <aspectratio align="left">keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_HDRType_Strip]</texture>
+                    <visible>!String.IsEmpty($VAR[Image_VideoPlayer_HDRType_Strip])</visible>
                 </control>
                 <control type="image" id="78883">
                     <fadetime>100</fadetime>
@@ -123,9 +131,9 @@
                    </control>
 				   <control type="image">
 					<centertop>50%</centertop>
-					<left>66</left>
-					<width>30</width>
-					<height>30</height>
+					<centerleft>64</centerleft>
+					<width>34</width>
+					<height>24</height>
 					<aspectratio>keep</aspectratio>
 					<texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.AudioLanguage,flags/colorful/other/language/,.png]</texture>
 				   </control>
@@ -144,11 +152,11 @@
                    </control>
 				   <control type="image">
 					<centertop>50%</centertop>
-					<left>66</left>
-					<width>30</width>
-					<height>30</height>
+					<centerleft>64</centerleft>
+					<width>34</width>
+					<height>24</height>
 					<aspectratio>keep</aspectratio>
-					<texture fallback="flags/colorful/language/other/fallback.png">$INFO[VideoPlayer.SubtitlesLanguage,flags/colorful/other/language/,.png]</texture>
+					<texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.SubtitlesLanguage,flags/colorful/other/language/,.png]</texture>
 					<visible>!String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
 				   </control>
                    <control type="image" id="subtitleflag">
