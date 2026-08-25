@@ -7,6 +7,7 @@
 		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10) | String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">flags/colorful/other/hdr10.png</value>
 		<value condition="String.IsEqual(VideoPlayer.HdrType,hlg) | String.Contains(Player.Process(amlogic.eoft_gamut),HLG)">flags/colorful/other/hlg.png</value>
 		<value condition="!String.IsEmpty(VideoPlayer.HdrType) | String.Contains(Player.Filenameandpath,hdr)">flags/colorful/other/hdr.png</value>
+		<value>flags/colorful/other/sdr.png</value>
 	</variable>
 
 	<include name="ExtraOSD">

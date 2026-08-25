@@ -1188,7 +1188,7 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
-                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama2.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre_First"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)]" /></include>
@@ -1213,9 +1213,9 @@
                 <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="64" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
-                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="rectangle-list.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Episode)]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="rectangle-list1.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Episode)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Num_Episode"><param name="id" value="$PARAM[id]" /></include>
-                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="Drama2.png" /><param name="left" value="20" /><param name="width" value="54" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name)) | !String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Genre)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Genre"><param name="id" value="$PARAM[id]" /></include>
 
                 <include content="Home_Clean_TvShows_Indicator" condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(home.style.horizontal.clean)">
