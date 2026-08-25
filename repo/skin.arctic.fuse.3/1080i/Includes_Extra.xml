@@ -60,7 +60,6 @@
                     <height>42</height>
                     <aspectratio align="left">keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_HDRType_Strip]</texture>
-                    <visible>!String.IsEmpty($VAR[Image_VideoPlayer_HDRType_Strip])</visible>
                 </control>
                 <control type="image" id="78883">
                     <fadetime>100</fadetime>
@@ -131,7 +130,7 @@
                    </control>
 				   <control type="image">
 					<centertop>50%</centertop>
-					<centerleft>64</centerleft>
+					<centerleft>67</centerleft>
 					<width>34</width>
 					<height>24</height>
 					<aspectratio>keep</aspectratio>
@@ -152,7 +151,7 @@
                    </control>
 				   <control type="image">
 					<centertop>50%</centertop>
-					<centerleft>64</centerleft>
+					<centerleft>67</centerleft>
 					<width>34</width>
 					<height>24</height>
 					<aspectratio>keep</aspectratio>
