@@ -159,15 +159,6 @@
 					<texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.SubtitlesLanguage,flags/colorful/other/language/,.png]</texture>
 					<visible>!String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
 				   </control>
-				   <control type="image">
-					<centertop>50%</centertop>
-					<centerleft>67</centerleft>
-					<width>34</width>
-					<height>24</height>
-					<aspectratio>keep</aspectratio>
-					<texture>flags/colorful/other/language/ara.png</texture>
-					<visible>VideoPlayer.SubtitlesEnabled + String.IsEmpty(VideoPlayer.SubtitlesLanguage) + [String.Contains(VideoPlayer.Subtitles,ara) | String.Contains(VideoPlayer.Subtitles,arabic) | String.Contains(VideoPlayer.Subtitles, ar )]</visible>
-				   </control>
                    <control type="image" id="subtitleflag">
                    	<visible>!VideoPlayer.SubtitlesEnabled</visible>			
                     <fadetime>100</fadetime>
