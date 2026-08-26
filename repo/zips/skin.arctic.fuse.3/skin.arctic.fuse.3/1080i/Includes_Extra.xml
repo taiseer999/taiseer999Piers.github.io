@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+	<variable name="Image_VideoPlayer_HDRType_Strip">
+		<value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision) | String.Contains(Player.Filenameandpath,.dv.) | String.Contains(Player.Filenameandpath,dolby.vision) | String.Contains(Player.Filenameandpath,dovi)">flags/colorful/other/dolbyvision.png</value>
+		<value condition="String.Contains(Player.Filenameandpath,hdr10plus) | String.Contains(Player.Filenameandpath,hdr10+) | String.Contains(Player.Filenameandpath,.hdrplus.) | String.Contains(Player.Filenameandpath,.12bit.)">flags/colorful/other/hdr10plus.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10) | String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">flags/colorful/other/hdr10.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hlg) | String.Contains(Player.Process(amlogic.eoft_gamut),HLG)">flags/colorful/other/hlg.png</value>
+		<value condition="!String.IsEmpty(VideoPlayer.HdrType) | String.Contains(Player.Filenameandpath,hdr)">flags/colorful/other/hdr.png</value>
+		<value>flags/colorful/other/sdr.png</value>
+	</variable>
+
+	<include name="ExtraOSD">
+		
+          <control type="group">
+	         <visible>Window.IsVisible(VideoOSD.xml)</visible>
+	         <visible>!Window.IsVisible(MusicOSD.xml)</visible>
+	         <visible>!Window.IsVisible(VideoFullScreen.xml) | !Window.IsVisible(Custom_1141_OSD_Cast.xml)</visible>
+	         <visible>!Window.IsVisible(VideoOSDBookmarks.xml)</visible>
+	         <visible>!Window.IsVisible(Custom_1140_OSD_Playlist.xml)</visible>
+	         <top>540</top>
+			 <left>view_pad</left>
+              <control type="grouplist">
+                <top>20</top>
+                <orientation>horizontal</orientation>
+                <width>1000</width>
+                <align>left</align>
+                <itemgap>15</itemgap>
+                <usecontrolcoords>true</usecontrolcoords>
+                <control type="image">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>70</width>
+                    <height>42</height>
+                    <aspectratio align="left">keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/other/3D.png</texture>
+                    <visible>VideoPlayer.IsStereoscopic</visible>
+                </control>
+                <control type="image" id="78881">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>70</width>
+                    <height>42</height>
+                    <aspectratio align="left">keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_RipSource]</texture>
+                    <visible>!String.IsEmpty($VAR[Image_VideoPlayer_RipSource])</visible>
+                </control>
+                <control type="image" id="78882">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>80</width>
+                    <height>42</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/resolution/$INFO[VideoPlayer.VideoResolution].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
+                </control>
+                <control type="image" id="78880">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>70</width>
+                    <height>42</height>
+                    <aspectratio align="left">keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_HDRType_Strip]</texture>
+                </control>
+                <control type="image" id="78883">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>70</width>
+                    <height>42</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/source/$INFO[VideoPlayer.VideoCodec].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.VideoCodec)</visible>
+                </control>
+                <control type="image" id="788814">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>90</width>
+                    <height>58</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+                </control>
+                <control type="group">
+                    <width>90</width>
+                    <height>58</height>
+                    <centertop>49.7%</centertop>
+                    <visible>!String.IsEmpty(Player.Process(VideoFPS)) + Integer.IsGreater(Player.Process(VideoFPS),0)</visible>
+                    <control type="image">
+                        <texture colordiffuse="panel_fg_100">flags/colorful/other/fps.png</texture>
+                        <aspectratio align="center">keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <height>32</height>
+                        <bottom>10</bottom>
+                        <textcolor>panel_fg_100</textcolor>
+                        <font>font_hint</font>
+                        <label>$INFO[Player.Process(VideoFPS)]</label>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                    </control>
+                </control>
+                <control type="image" id="78884">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>70</width>
+                    <height>42</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_AudioCodec]</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.AudioCodec)</visible>
+                </control>
+                <control type="image" id="78870">
+                    <left>7</left>
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                   <height>43</height>
+                    <width>65</width>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_AudioChannels]</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.AudioChannels)</visible>
+                </control>
+                <control type="group">
+					<width>90</width>
+					<visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
+                   <control type="image" id="audioflag">
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>90</width>
+                    <height>58</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/other/soun.png</texture>
+                   </control>
+				   <control type="image">
+					<centertop>50%</centertop>
+					<centerleft>67</centerleft>
+					<width>34</width>
+					<height>24</height>
+					<aspectratio>keep</aspectratio>
+					<texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.AudioLanguage,flags/colorful/other/language/,.png]</texture>
+				   </control>
+                </control>
+                <control type="group">
+					<width>90</width>
+					<visible>!String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
+                   <control type="image" id="subtitleflag">
+                   	<visible>VideoPlayer.SubtitlesEnabled</visible>
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>90</width>
+                    <height>58</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/other/subt.png</texture>
+                   </control>
+				   <control type="image">
+					<centertop>50%</centertop>
+					<centerleft>67</centerleft>
+					<width>34</width>
+					<height>24</height>
+					<aspectratio>keep</aspectratio>
+					<texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.SubtitlesLanguage,flags/colorful/other/language/,.png]</texture>
+					<visible>!String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
+				   </control>
+                   <control type="image" id="subtitleflag">
+                   	<visible>!VideoPlayer.SubtitlesEnabled</visible>			
+                    <fadetime>100</fadetime>
+                    <centertop>50%</centertop>
+                    <width>90</width>
+                    <height>58</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture colordiffuse="panel_fg_100">flags/colorful/other/subtd.png</texture>
+                   </control>
+                </control>
+                <include content="Animation_SlideIn_Dialog">
+                    <param name="posy">48</param>
+                </include>
+			</control>
+		  </control>
+		  </include>
+</includes>
