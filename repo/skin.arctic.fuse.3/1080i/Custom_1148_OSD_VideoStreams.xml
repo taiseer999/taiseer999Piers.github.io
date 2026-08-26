@@ -59,6 +59,7 @@
                                 <include content="OSD_Codecs">
                                     <param name="textcolor_top">dialog_fg_90</param>
                                     <param name="textcolor_sub">dialog_fg_70</param>
+                                    <param name="visible">true</param>
                                 </include>
                             </control>
                             <control type="group">
@@ -66,6 +67,7 @@
                                 <include content="OSD_Codecs">
                                     <param name="textcolor_top">$VAR[ColorSelected]</param>
                                     <param name="textcolor_sub">$VAR[ColorSelected]</param>
+                                    <param name="visible">true</param>
                                 </include>
                             </control>
                         </control>

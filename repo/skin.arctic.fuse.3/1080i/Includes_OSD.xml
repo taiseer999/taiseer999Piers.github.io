@@ -779,6 +779,7 @@
         <param name="textcolor_top">panel_fg_90</param>
         <param name="itemgap">15</param>
         <param name="align">center</param>
+        <param name="visible">!Skin.HasSetting(ExtraOSD)</param>
         <definition>
             <control type="group">
                 <centertop>50%</centertop>
@@ -791,7 +792,7 @@
                     <param name="infolabel_videocodec">VideoPlayer.VideoCodec</param>
                     <param name="infolabel_audiocodec">VideoPlayer.AudioCodec</param>
                     <param name="infolabel_audiochannels">VideoPlayer.AudioChannels</param>
-                    <param name="visible">!Skin.HasSetting(ExtraOSD)</param>
+                    <param name="visible">$PARAM[visible]</param>
                     <param name="itemgap">$PARAM[itemgap]</param>
                     <param name="align">$PARAM[align]</param>
                 </include>
