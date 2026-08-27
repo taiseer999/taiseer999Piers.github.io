@@ -2364,3 +2364,8 @@ msgstr "Disk-Art"
 msgctxt "#31999"
 msgid "VHS Art"
 msgstr "VHS-Art"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31627"
+msgid "Codec logos"
+msgstr ""

@@ -2464,6 +2464,11 @@ msgctxt "#31626"
 msgid "Hub clearlogo on right (watermark)"
 msgstr ""
 
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31627"
+msgid "Codec logos"
+msgstr ""
+
 
 #: /1080i/Includes_Extra.xml
 msgctxt "#31996"

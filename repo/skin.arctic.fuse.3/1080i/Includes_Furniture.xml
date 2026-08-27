@@ -285,7 +285,7 @@
                     <height>48</height>
                     <width>71</width>
                     <centertop>50%</centertop>
-                    <visible>!String.IsEmpty($PARAM[infolabel_videocodec])</visible>
+                    <visible>!String.IsEmpty($PARAM[infolabel_videocodec]) + !Skin.HasSetting(Furniture.DisableCodecLogos)</visible>
                 </control>
                 <control type="image">
                     <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiocodec],flags/colorful/audio/,.png]</texture>
@@ -293,7 +293,7 @@
                     <height>48</height>
                     <width>71</width>
                     <centertop>50%</centertop>
-                    <visible>!String.IsEmpty($PARAM[infolabel_audiocodec])</visible>
+                    <visible>!String.IsEmpty($PARAM[infolabel_audiocodec]) + !Skin.HasSetting(Furniture.DisableCodecLogos)</visible>
                 </control>
                 <control type="image" id="77881">
                     <fadetime>100</fadetime>

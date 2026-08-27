@@ -325,6 +325,18 @@
             <onclick>Skin.ToggleSetting(Footer.EnableCodecs)</onclick>
             <selected>Skin.HasSetting(Footer.EnableCodecs)</selected>
         </include>
+        <include content="Settings_Button" description="Codec Logos">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">002B</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <param name="enabled">Skin.HasSetting(Footer.EnableCodecs)</param>
+            <label>$LOCALIZE[31627]</label>
+            <onclick>Skin.ToggleSetting(Furniture.DisableCodecLogos)</onclick>
+            <selected>!Skin.HasSetting(Furniture.DisableCodecLogos)</selected>
+        </include>
         <include content="Settings_Button" description="Now Playing">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>

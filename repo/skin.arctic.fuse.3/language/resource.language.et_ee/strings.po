@@ -2265,3 +2265,8 @@ msgstr "Lisafunktsioonid"
 msgctxt "#31605"
 msgid "Next aired"
 msgstr "Järgmisena eetris"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31627"
+msgid "Codec logos"
+msgstr ""

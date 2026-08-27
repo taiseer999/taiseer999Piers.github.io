@@ -2304,3 +2304,8 @@ msgstr "更多"
 msgctxt "#31605"
 msgid "Next aired"
 msgstr "下次播出"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31627"
+msgid "Codec logos"
+msgstr ""

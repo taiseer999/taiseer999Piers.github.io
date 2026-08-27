@@ -2294,3 +2294,8 @@ msgstr "Supplémentaire"
 msgctxt "#31605"
 msgid "Next aired"
 msgstr "Prochaine diffusion"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31627"
+msgid "Codec logos"
+msgstr ""

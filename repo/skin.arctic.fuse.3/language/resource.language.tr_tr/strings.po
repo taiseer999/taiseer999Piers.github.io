@@ -2294,3 +2294,8 @@ msgstr "Ek"
 msgctxt "#31605"
 msgid "Next aired"
 msgstr "Sonraki yayın tarihi"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31627"
+msgid "Codec logos"
+msgstr ""
