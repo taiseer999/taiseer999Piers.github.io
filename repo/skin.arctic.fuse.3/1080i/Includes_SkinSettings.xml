@@ -329,7 +329,7 @@
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">002B</param>
+            <param name="id">013</param>
             <param name="dialog">false</param>
             <param name="control">radiobutton</param>
             <param name="enabled">Skin.HasSetting(Footer.EnableCodecs)</param>

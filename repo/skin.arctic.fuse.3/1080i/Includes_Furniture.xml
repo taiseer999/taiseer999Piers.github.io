@@ -259,7 +259,7 @@
         <param name="visible">true</param>
         <definition>
             <control type="grouplist">
-                <visible>!String.IsEmpty($PARAM[infolabel_videoresolution]) + [$PARAM[visible]]</visible>
+                <visible>!String.IsEmpty($PARAM[infolabel_videoresolution]) + [$PARAM[visible]] + !Skin.HasSetting(Furniture.DisableCodecLogos)</visible>
                 <orientation>horizontal</orientation>
                 <align>center</align>
                 <itemgap>$PARAM[itemgap]</itemgap>
@@ -285,7 +285,7 @@
                     <height>48</height>
                     <width>71</width>
                     <centertop>50%</centertop>
-                    <visible>!String.IsEmpty($PARAM[infolabel_videocodec]) + !Skin.HasSetting(Furniture.DisableCodecLogos)</visible>
+                    <visible>!String.IsEmpty($PARAM[infolabel_videocodec])</visible>
                 </control>
                 <control type="image">
                     <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiocodec],flags/colorful/audio/,.png]</texture>
@@ -293,7 +293,7 @@
                     <height>48</height>
                     <width>71</width>
                     <centertop>50%</centertop>
-                    <visible>!String.IsEmpty($PARAM[infolabel_audiocodec]) + !Skin.HasSetting(Furniture.DisableCodecLogos)</visible>
+                    <visible>!String.IsEmpty($PARAM[infolabel_audiocodec])</visible>
                 </control>
                 <control type="image" id="77881">
                     <fadetime>100</fadetime>
