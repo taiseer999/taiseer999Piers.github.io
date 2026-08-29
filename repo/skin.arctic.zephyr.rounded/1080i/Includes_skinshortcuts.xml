@@ -1,6 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
+    <!-- SKINSHORTCUTS - LABEL DIALOG - HEADER -->
+
+    <variable name="Label_Header_SkinShortcuts_Title">
+        <value condition="!String.IsEmpty(Window(Home).Property(header-widget))">$LOCALIZE[31354] : $INFO[Container(211).ListItem.Label]</value>
+        <value condition="String.IsEqual(Window.Property(menuname),mainmenu)">$LOCALIZE[31080] : $INFO[Container(211).ListItem.Label]</value>
+        <value condition="String.IsEqual(Window.Property(menuname),powermenu)">$LOCALIZE[31270] : $INFO[Container(211).ListItem.Label]</value>
+        <value condition="String.IsEqual(Window.Property(menuname),searchmenulist)">$LOCALIZE[31635] : $INFO[Container(211).ListItem.Label]</value>
+        <value>$ADDON[script.skinshortcuts 32072] : $INFO[Container(211).ListItem.Label]</value>
+    </variable>
+
+    <variable name="Label_SkinShortcuts_Menu_Name">
+        <value condition="String.IsEqual(Window.Property(menuname),mainmenu)">$LOCALIZE[10000]</value>
+        <value condition="String.IsEqual(Window.Property(menuname),powermenu)">$LOCALIZE[33060]</value>
+        <value condition="String.IsEqual(Window.Property(menuname),searchmenulist)">$LOCALIZE[137]</value>
+    </variable>
+
+    <variable name="Label_SkinShortcuts_Footer_Tips">
+        <value condition="Control.HasFocus(302)">$LOCALIZE[117]: $INFO[Container(211).ListItem.Label]</value>
+        <value condition="Control.HasFocus(301)">$ADDON[script.skinshortcuts 32000]</value>
+        <value condition="Control.HasFocus(303)">$ADDON[script.skinshortcuts 32002]</value>
+        <value condition="Control.HasFocus(304)">$ADDON[script.skinshortcuts 32003]</value>
+        <value condition="Control.HasFocus(306)">$LOCALIZE[19284]</value>
+        <value condition="Control.HasFocus(313)">$VAR[Label_SkinShortcuts_Tips_Widget_Status]</value>
+        <value condition="Control.HasFocus(401)">$ADDON[script.skinshortcuts 32048]</value>
+        <value condition="Control.HasFocus(307)">$LOCALIZE[31638]</value>
+        <value condition="Control.HasFocus(305)">$LOCALIZE[13334]</value>
+        <value condition="Control.HasFocus(406)">$LOCALIZE[31637]</value>
+        <value condition="Control.HasFocus(405)">$ADDON[script.skinshortcuts 32072]</value>
+        <value condition="Control.HasFocus(310) | Control.HasFocus(4990)">$ADDON[script.skinshortcuts 32045]</value>
+        <value condition="Control.HasFocus(308)">$ADDON[script.skinshortcuts 32037]</value>
+        <value condition="Control.HasFocus(312)">$ADDON[script.skinshortcuts 32028]</value>
+        <value condition="Control.HasFocus(4001)">$ADDON[script.skinshortcuts 32044]</value>
+        <value condition="Control.HasFocus(4307)">$ADDON[script.skinshortcuts 32172]</value>
+        <value condition="Control.HasFocus(9901)">$LOCALIZE[31189]</value>
+        <value condition="Control.HasFocus(9411)">$LOCALIZE[31289]</value>
+        <value condition="Control.HasFocus(9902)">$LOCALIZE[31559]</value>
+        <value condition="Control.HasFocus(9903)">$LOCALIZE[581]</value>
+        <value condition="Control.HasFocus(9904)">$LOCALIZE[580]</value>
+        <value condition="Control.HasFocus(4196)">$LOCALIZE[31256]</value>
+        <value condition="Control.HasFocus(9907)">$LOCALIZE[31000]</value>
+        <value condition="Control.HasFocus(41911)">$LOCALIZE[31257]</value>
+    </variable>
+
+    <variable name="Label_SkinShortcuts_Tips_Widget_Status">
+        <value condition="!String.IsEqual(Container(211).ListItem.Property(skinshortcuts-disabled),True)">$LOCALIZE[1223]</value>
+        <value>$LOCALIZE[305]</value>
+    </variable>
+
     <!-- SKINSHORTCUTS - SHOW WIDGET MENU -->
 
     <expression name="Script_SkinShortcuts_Widget">[String.EndsWith(Window.Property(menuname),.1) | String.EndsWith(Window.Property(menuname),.3) | String.EndsWith(Window.Property(menuname),.4) | String.EndsWith(Window.Property(menuname),.5) | String.EndsWith(Window.Property(menuname),.6) | String.EndsWith(Window.Property(menuname),.7) | String.EndsWith(Window.Property(menuname),.8) | String.EndsWith(Window.Property(menuname),.9) | String.EndsWith(Window.Property(menuname),.10)]</expression>
@@ -115,16 +163,6 @@
         <value condition="String.IsEqual(Container(211).ListItem.Property(widgetlisttype),list)">$LOCALIZE[31258]</value>
     </variable>
 
-    <!-- SKINSHORTCUTS - LABEL DIALOG - HEADER -->
-
-    <variable name="Label_Header_SkinShortcuts_Title">
-        <value condition="!String.IsEmpty(Window(Home).Property(header-widget))">$LOCALIZE[31354] : $INFO[Container(211).ListItem.Label]</value>
-        <value condition="String.IsEqual(Window.Property(menuname),mainmenu)">$LOCALIZE[31080] : $INFO[Container(211).ListItem.Label]</value>
-        <value condition="String.IsEqual(Window.Property(menuname),powermenu)">$LOCALIZE[31270]</value>
-        <value condition="String.IsEqual(Window.Property(menuname),searchmenu)">$LOCALIZE[31635]</value>
-        <value>$ADDON[script.skinshortcuts 32072] : $INFO[Container(211).ListItem.Label]</value>
-    </variable>
-
     <!-- SCRIPT SKINSHORTCUTS - BUTTON MENU -->
 
     <include name="Def_Skinshortcuts_Button_Title_Right_Side">
@@ -132,6 +170,7 @@
         <height>66</height>
         <align>left</align>
         <textoffsetx>20</textoffsetx>
+        <textcolor>$VAR[Color_Label_Settings_Title]</textcolor>
         <disabledcolor>Black70</disabledcolor>
         <font>Button</font>
         <enable>false</enable>
@@ -189,8 +228,6 @@
 
         <control type="button" id="$PARAM[buttonid2]" description="Set HUB WIDGET">
             <visible>String.IsEqual(Container(211).ListItem.Label2,Hub $PARAM[hubid]) | String.IsEqual(Container(211).ListItem.Property(Path),ActivateWindow($PARAM[hubid]))</visible>
-            <visible>String.IsEmpty(Window(Home).Property(skinshortcuts-Widget))</visible>
-
             <include>Def_Skinshortcuts_Button_Menu_Right_Side</include>
             <label>31200</label>
             <label2>$INFO[Skin.String(Widget.$PARAM[hubid].Label)]</label2>
@@ -208,12 +245,9 @@
 
         <control type="button" id="$PARAM[buttonid2]99" description="Set HUB WIDGET">
             <visible>String.IsEqual(Container(211).ListItem.Label2,Hub $PARAM[hubid]) | String.IsEqual(Container(211).ListItem.Property(Path),ActivateWindow($PARAM[hubid]))</visible>
-            <visible>String.IsEmpty(Window(Home).Property(skinshortcuts-Widget))</visible>
-
             <include>Def_Skinshortcuts_Button_Menu_Right_Side</include>
             <label>$LOCALIZE[31441]</label>
             <label2>$INFO[Skin.String(Widget.$PARAM[hubid].Content)]</label2>
-
             <onclick>RunScript(script.skin.info.service,dialog=select,heading=$LOCALIZE[31441],items=$LOCALIZE[2]|$LOCALIZE[1]|$LOCALIZE[3],executebuiltin_0=Skin.SetString(Widget.$PARAM[hubid].Content,music),executebuiltin_1=Skin.SetString(Widget.$PARAM[hubid].Content,pictures),executebuiltin_2=Skin.SetString(Widget.$PARAM[hubid].Content,videos))</onclick>
         </control>
 
@@ -221,11 +255,8 @@
 
         <control type="button" id="$PARAM[buttonid1]" description="Set HUB">
             <visible>String.IsEqual(Container(211).ListItem.Label2,Hub $PARAM[hubid]) | String.IsEqual(Container(211).ListItem.Property(Path),ActivateWindow($PARAM[hubid]))</visible>
-            <visible>String.IsEmpty(Window(Home).Property(skinshortcuts-Widget))</visible>
-
             <include>Def_Skinshortcuts_Button_Menu_Right_Side</include>
             <label>31134</label>
-
             <onclick>RunScript(script.skinshortcuts,type=manage&amp;menu=x$PARAM[hubid])</onclick>
         </control>
     </include>

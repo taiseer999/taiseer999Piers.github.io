@@ -717,7 +717,7 @@
                 <bottom>$PARAM[bottom]</bottom>
 
                 <control type="group">
-                    <visible>!String.IsEmpty(ListItem.DBID)</visible>
+                    <visible>!String.IsEmpty(ListItem.DBID) + String.IsEmpty(Window(Home).Property(ListVideoForCast))</visible>
                     <visible>[!String.IsEmpty(Window(Home).Property(view_extended)) + !Skin.HasSetting(filter.video.only.local)] | [!Window.IsVisible(DialogVideoInfo.xml) + $EXP[IsTMDbHelperItem] + !Window.IsVisible(Home)] | [!Window.IsVisible(DialogVideoInfo.xml) + $EXP[IsJlomMovieBDID] + !Window.IsVisible(Home)]</visible>
 
                     <control type="image">
@@ -1183,7 +1183,7 @@
 
                 <!-- SLIDE UP - HOME - HIDE WITH NOWPLAYING - ENABLE  / HOME CLEAN - WITH MAIN MENU HIDDEN -->
 
-                <animation type="Conditional" condition="[Skin.HasSetting(hide.home.menu.with.nowplaying.extended) + Player.HasMedia + $EXP[Extended_Now_Playing_Is_Enable] + [ControlGroup(777).HasFocus() | !$EXP[Extended_Now_Playing_Helper_AutoShow]] + !$EXP[Home_Menu_Is_Focus] + !Control.HasFocus(9099) + !ControlGroup(301).HasFocus() + Window.IsVisible(Home) + !$EXP[View_Info_Dialog] + !Window.IsVisible(MyPVRGuide.xml) + !Window.IsVisible(DialogContextMenu.xml)] | [Skin.HasSetting(home.style.horizontal.clean) + Skin.HasSetting(hide.home.menu) + !$EXP[Home_Menu_Is_Focus] + !Control.HasFocus(9099)]" reversible="true">
+                <animation type="Conditional" condition="[Skin.HasSetting(hide.home.menu.with.nowplaying.extended) + Player.HasMedia + $EXP[Extended_Now_Playing_Is_Enable] + [ControlGroup(777).HasFocus() | !$EXP[Extended_Now_Playing_Helper_AutoShow]] + !$EXP[Home_Menu_Is_Focus] + !$EXP[Home_Search_Is_Focus] + !ControlGroup(301).HasFocus() + Window.IsVisible(Home) + !$EXP[View_Info_Dialog] + !Window.IsVisible(MyPVRGuide.xml) + !Window.IsVisible(DialogContextMenu.xml)] | [Skin.HasSetting(home.style.horizontal.clean) + Skin.HasSetting(hide.home.menu) + !$EXP[Home_Menu_Is_Focus] + !$EXP[Home_Search_Is_Focus]]" reversible="true">
                     <effect type="slide" start="0,0" end="-115,0" tween="sine" easing="out" time="250" delay="0" />
                     <effect type="fade" start="100" end="0" time="150" delay="0" />
                 </animation>

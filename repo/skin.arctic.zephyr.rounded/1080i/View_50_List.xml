@@ -13,6 +13,8 @@
         <param name="width" value="$PARAM[width]" default="PosterW" />
         <param name="height" value="$PARAM[height]" default="PosterH" />
         <param name="texture" value="$PARAM[texture]"  default="$VAR[Image_Poster]" />
+        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="Fallback" />
+        <param name="colordiffuse_border" value="$PARAM[colordiffuse_border]" default="$VAR[Color_Border_Widget]" />
         <param name="condition_fadetime" value="$PARAM[condition_fadetime]"  default="true" />
 
         <definition>
@@ -25,7 +27,8 @@
                 <height>$PARAM[height]</height>
 
                 <include content="Def_Art_Full_Background_b24">
-                    <param name="colordiffuse" value="Fallback" />
+                    <param name="colordiffuse" value="$PARAM[colordiffuse]" />
+                    <param name="colordiffuse_border" value="$PARAM[colordiffuse_border]" />
                 </include>
 
                 <!-- ALL OTHERS -->
@@ -35,7 +38,17 @@
                     <param name="texture" value="$PARAM[texture]" />
                     <param name="texture_diffuse" value="poster_w428_h640_b24" />
                     <param name="condition_fadetime" value="$PARAM[condition_fadetime]" />
-                    <param name="visible" value="!$EXP[IsYoutubeItem]" />
+                    <param name="visible" value="!$EXP[IsYoutubeItem] + !String.IsEqual(ListItem.DBType,musicvideo) + !Container.Content(studios)" />
+                </include>
+
+                <!-- STUDIOS -->
+
+                <include content="Def_Art_Icon_Image">
+                    <param name="aspectratio" value="keep" />
+                    <param name="texture" value="$PARAM[texture]" />
+                    <param name="texture_diffuse" value="square_w640_h640_b24" />
+                    <param name="condition_fadetime" value="$PARAM[condition_fadetime]" />
+                    <param name="visible" value="Container.Content(studios)" />
                 </include>
 
                 <!-- YOUTUBE -->
@@ -47,7 +60,7 @@
                     <param name="texture" value="$VAR[Image_Square_50_List]" />
                     <param name="texture_diffuse" value="poster_w428_h640_b24" />
                     <param name="condition_fadetime" value="$PARAM[condition_fadetime]" />
-                    <param name="visible" value="!ListItem.IsParentFolder + $EXP[IsYoutubeItem]" />
+                    <param name="visible" value="!ListItem.IsParentFolder + [$EXP[IsYoutubeItem] | String.IsEqual(ListItem.DBType,musicvideo)]" />
                 </include>
             </control>
         </definition>
@@ -61,6 +74,8 @@
         <param name="width" value="$PARAM[width]" default="PosterH" />
         <param name="height" value="$PARAM[height]" default="PosterH" />
         <param name="texture" value="$PARAM[texture]"  default="$VAR[Image_Square_50_List]" />
+        <param name="colordiffuse" value="$PARAM[colordiffuse]" default="Fallback" />
+        <param name="colordiffuse_border" value="$PARAM[colordiffuse_border]" default="$VAR[Color_Border_Widget]" />
         <param name="condition_fadetime" value="$PARAM[condition_fadetime]"  default="true" />
 
         <definition>
@@ -73,7 +88,8 @@
                 <height>$PARAM[height]</height>
 
                 <include content="Def_Art_Full_Background_b24">
-                    <param name="colordiffuse" value="Fallback" />
+                    <param name="colordiffuse" value="$PARAM[colordiffuse]" />
+                    <param name="colordiffuse_border" value="$PARAM[colordiffuse_border]" />
                 </include>
 
                 <!-- ALL OTHERS -->
@@ -83,7 +99,7 @@
                     <param name="texture" value="$PARAM[texture]" />
                     <param name="texture_diffuse" value="square_w640_h640_b24" />
                     <param name="condition_fadetime" value="$PARAM[condition_fadetime]" />
-                    <param name="visible" value="![Container.Content(images) | Container.Content(favourites) | $EXP[IsYoutubeItem]]" />
+                    <param name="visible" value="![Container.Content(images) | Container.Content(favourites) | $EXP[IsYoutubeItem] | Container.Content(studios)]" />
                 </include>
 
                 <!-- FAVOURITES -->
@@ -94,6 +110,16 @@
                     <param name="texture_diffuse" value="square_w640_h640_b24" />
                     <param name="condition_fadetime" value="$PARAM[condition_fadetime]" />
                     <param name="visible" value="Container.Content(favourites)" />
+                </include>
+
+                <!-- STUDIOS -->
+
+                <include content="Def_Art_Icon_Image">
+                    <param name="aspectratio" value="keep" />
+                    <param name="texture" value="$PARAM[texture]" />
+                    <param name="texture_diffuse" value="square_w640_h640_b24" />
+                    <param name="condition_fadetime" value="$PARAM[condition_fadetime]" />
+                    <param name="visible" value="Container.Content(studios)" />
                 </include>
 
                 <!-- PICS -->
@@ -714,7 +740,7 @@
     <!--                   LAYOUTS                   -->
     <!-- =========================================== -->
 
-    <!-- LAYOUT - 550 - FAVOURITES / VIDEO / PLUGINS - 50 57 516 524 - VIDEO  -->
+    <!-- LAYOUT - 550 - FAVOURITES / VIDEO / MUSIC VIDEO / PLUGINS - 50 57 516 524 - VIDEO  -->
 
     <include name="layout_list_item_video">
 
@@ -753,7 +779,7 @@
             <font>InfoNetflix</font>
             <textcolor>Dark1</textcolor>
             <selectedcolor>Dark1</selectedcolor>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$VAR[Label_View_List_Label]</label>
             <visible>!ListItem.HasVideoVersions + !ListItem.IsParentFolder</visible>
         </control>
 
@@ -804,7 +830,7 @@
             <height>68</height>
             <font>SymbolList</font>
             <label>$VAR[Label_List_Watched]</label>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets)</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | Container.Content(musicvideos)</visible>
             <visible>!ListItem.IsParentFolder + !String.IsEmpty(ListItem.DBType)</visible>
             <visible>!$EXP[IsVideoVersionsList] + !Skin.HasSetting(hide.markers)</visible>
         </control>
@@ -822,7 +848,7 @@
             <selectedcolor>Dark1</selectedcolor>
             <label>$VAR[Label_View_List_Rating]</label>
             <visible>!$EXP[IsAnPlugin] | $EXP[IsTMDbHelper] | $EXP[IsPluginJLOM]</visible>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)] | Container.Content(musicvideos)</visible>
             <visible>!Container.Content(seasons) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561]) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
             <visible>!Skin.HasSetting(hide.video.ratings) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561])</visible>
             <visible>!$EXP[IsVideoVersionsList]</visible>
@@ -841,7 +867,7 @@
             <selectedcolor>Dark1</selectedcolor>
             <label>$INFO[ListItem.Label2]</label>
             <visible>!Container.SortMethod(1)</visible>
-            <visible>Container.Content(actors) | Container.Content(directors)</visible>
+            <visible>Container.Content(actors) | Container.Content(directors) | Container.Content(artists)</visible>
         </control>
     </include>
 
@@ -882,7 +908,7 @@
             <font>InfoNetflix</font>
             <textcolor>Selected</textcolor>
             <selectedcolor>Selected</selectedcolor>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$VAR[Label_View_List_Label]</label>
             <visible>!ListItem.HasVideoVersions + !ListItem.IsParentFolder</visible>
         </control>
 
@@ -933,7 +959,7 @@
             <height>68</height>
             <font>SymbolList</font>
             <label>$VAR[Label_List_Watched_Focus]</label>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets)</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | Container.Content(musicvideos)</visible>
             <visible>!ListItem.IsParentFolder + !String.IsEmpty(ListItem.DBType)</visible>
             <visible>!$EXP[IsVideoVersionsList] + !Skin.HasSetting(hide.markers)</visible>
         </control>
@@ -951,7 +977,7 @@
             <selectedcolor>Selected</selectedcolor>
             <label>$VAR[Label_View_List_Rating]</label>
             <visible>!$EXP[IsAnPlugin] | $EXP[IsTMDbHelper] | $EXP[IsPluginJLOM]</visible>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)] | Container.Content(musicvideos)</visible>
             <visible>!Container.Content(seasons) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561]) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
             <visible>!Skin.HasSetting(hide.video.ratings) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561])</visible>
             <visible>!$EXP[IsVideoVersionsList]</visible>
@@ -970,7 +996,7 @@
             <selectedcolor>Selected</selectedcolor>
             <label>$INFO[ListItem.Label2]</label>
             <visible>!Container.SortMethod(1)</visible>
-            <visible>Container.Content(actors) | Container.Content(directors)</visible>
+            <visible>Container.Content(actors) | Container.Content(directors) | Container.Content(artists)</visible>
         </control>
     </include>
 
@@ -1012,7 +1038,7 @@
             <aligny>center</aligny>
             <height>64</height>
             <font>InfoNetflix</font>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$VAR[Label_View_List_Label]</label>
             <textcolor>Dark1</textcolor>
             <selectedcolor>Dark1</selectedcolor>
             <visible>!ListItem.HasVideoVersions + !Container.Content(episodes) + !Container.Content(tvshows)</visible>
@@ -1024,7 +1050,7 @@
             <aligny>center</aligny>
             <height>64</height>
             <font>InfoNetflix</font>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$VAR[Label_View_List_Label]</label>
             <textcolor>Dark1</textcolor>
             <selectedcolor>Dark1</selectedcolor>
             <visible>Container.Content(episodes) | Container.Content(tvshows)</visible>
@@ -1080,7 +1106,7 @@
             <height>68</height>
             <font>SymbolList</font>
             <label>$VAR[Label_List_Watched]</label>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets)</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | Container.Content(musicvideos)</visible>
             <visible>!ListItem.IsParentFolder + !String.IsEmpty(ListItem.DBType)</visible>
             <visible>!$EXP[IsVideoVersionsList] + !Skin.HasSetting(hide.markers)</visible>
         </control>
@@ -1099,7 +1125,7 @@
             <selectedcolor>Dark1</selectedcolor>
             <label>$VAR[Label_View_List_Rating]</label>
             <visible>!$EXP[IsAnPlugin] | $EXP[IsTMDbHelper] | $EXP[IsPluginJLOM]</visible>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)] | Container.Content(musicvideos)</visible>
             <visible>!Container.Content(seasons) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561]) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
             <visible>!Skin.HasSetting(hide.video.ratings) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561])</visible>
             <visible>!$EXP[IsVideoVersionsList]</visible>
@@ -1117,13 +1143,13 @@
             <textcolor>Dark1</textcolor>
             <selectedcolor>Dark1</selectedcolor>
             <label>$INFO[ListItem.Label2]</label>
-            <visible>Container.Content(actors) | Container.Content(directors)</visible>
+            <visible>Container.Content(actors) | Container.Content(directors) | Container.Content(artists)</visible>
         </control>
 
         <!-- SECOND LINE - LABEL -->
 
         <control type="label">
-            <visible>[!Skin.HasSetting(list.show.filename) | [Skin.HasSetting(list.show.filename) + ![Container.Content(movies) | Container.Content(tvshows)]]]</visible>
+            <visible>!Skin.HasSetting(list.show.filename)</visible>
             <top>30</top>
             <left>120</left>
             <width>800</width>
@@ -1139,7 +1165,7 @@
 
         <control type="label">
             <visible>Skin.HasSetting(list.show.filename) + !ListItem.IsParentFolder</visible>
-            <visible>Container.Content(movies) | Container.Content(tvshows)</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(musicvideos)</visible>
             <top>30</top>
             <left>120</left>
             <width>800</width>
@@ -1193,7 +1219,7 @@
             <font>InfoNetflix</font>
             <textcolor>Selected</textcolor>
             <selectedcolor>Selected</selectedcolor>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$VAR[Label_View_List_Label]</label>
             <visible>!ListItem.HasVideoVersions + !Container.Content(episodes) + !Container.Content(tvshows)</visible>
         </control>
         <control type="label">
@@ -1205,7 +1231,7 @@
             <font>InfoNetflix</font>
             <textcolor>Selected</textcolor>
             <selectedcolor>Selected</selectedcolor>
-            <label>$INFO[ListItem.Label]</label>
+            <label>$VAR[Label_View_List_Label]</label>
             <visible>Container.Content(episodes) | Container.Content(tvshows)</visible>
         </control>
 
@@ -1259,7 +1285,7 @@
             <height>68</height>
             <font>SymbolList</font>
             <label>$VAR[Label_List_Watched_Focus]</label>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets)</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | Container.Content(musicvideos)</visible>
             <visible>!ListItem.IsParentFolder + !String.IsEmpty(ListItem.DBType)</visible>
             <visible>!$EXP[IsVideoVersionsList] + !Skin.HasSetting(hide.markers)</visible>
         </control>
@@ -1278,7 +1304,7 @@
             <selectedcolor>Selected</selectedcolor>
             <label>$VAR[Label_View_List_Rating]</label>
             <visible>!$EXP[IsAnPlugin] | $EXP[IsTMDbHelper] | $EXP[IsPluginJLOM]</visible>
-            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(songs) | Container.Content(albums) | Container.Content(videos) | Container.Content(videoversions) | Container.Content(sets) | [Container.Content(Seasons) + Control.IsVisible(5161)] | Container.Content(musicvideos)</visible>
             <visible>!Container.Content(seasons) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561]) | [Container.Content(Seasons) + Control.IsVisible(5161)]</visible>
             <visible>!Skin.HasSetting(hide.video.ratings) | String.IsEqual(Container.SortMethod,$LOCALIZE[553]) | String.IsEqual(Container.SortMethod,$LOCALIZE[561])</visible>
             <visible>!$EXP[IsVideoVersionsList]</visible>
@@ -1297,7 +1323,7 @@
             <selectedcolor>Selected</selectedcolor>
             <label>$INFO[ListItem.Label2]</label>
             <visible>!Container.SortMethod(1)</visible>
-            <visible>Container.Content(actors) | Container.Content(directors)</visible>
+            <visible>Container.Content(actors) | Container.Content(directors) | Container.Content(artists)</visible>
         </control>
 
         <!-- SECOND LINE - LABEL -->
@@ -1319,7 +1345,7 @@
 
         <control type="label">
             <visible>Skin.HasSetting(list.show.filename) + !ListItem.IsParentFolder</visible>
-            <visible>Container.Content(movies) | Container.Content(tvshows)</visible>
+            <visible>Container.Content(movies) | Container.Content(tvshows) | Container.Content(musicvideos)</visible>
             <top>30</top>
             <left>120</left>
             <width max="700">auto</width>
@@ -1369,7 +1395,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -1379,7 +1405,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -1555,7 +1581,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -1565,7 +1591,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -1696,7 +1722,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -1706,7 +1732,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -1919,7 +1945,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -1929,7 +1955,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -2080,7 +2106,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -2090,7 +2116,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -2223,7 +2249,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -2233,7 +2259,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -2336,7 +2362,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -2346,7 +2372,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -2548,7 +2574,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_play.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_play.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>!Player.Paused</visible>
         </control>
@@ -2558,7 +2584,7 @@
             <width>32</width>
             <height>32</height>
             <aspectratio aligny="top">keep</aspectratio>
-            <texture colordiffuse="Selected">indicator/playlist_pause.png</texture>
+            <texture colordiffuse="Selected">dialog/indicator/playlist_pause.png</texture>
             <visible>ListItem.IsPlaying</visible>
             <visible>Player.Paused</visible>
         </control>
@@ -2892,7 +2918,7 @@
                     <width>32</width>
                     <height>32</height>
                     <aspectratio aligny="top">keep</aspectratio>
-                    <texture colordiffuse="$VAR[Color_Indicator_Version]">$VAR[Image_Addons_AutoUpdateable_Icon]</texture>
+                    <texture colordiffuse="$VAR[Color_Addon_Autoupdate]">$VAR[Image_Addons_AutoUpdateable_Icon]</texture>
                     <animation effect="slide" start="0" end="57" time="0" condition="Window.IsVisible(MyPrograms.xml)">Conditional</animation>
                     <visible>!ListItem.IsFolder + Container.Content(addons)</visible>
                     <visible>!ListItem.IsAutoUpdateable</visible>
