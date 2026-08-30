@@ -1113,6 +1113,22 @@
             <param name="item">$PARAM[item]</param>
             <param name="content">$PARAM[content]</param>
         </include>
+        <include content="DialogCustom_Ratings_Items_Template">
+            <param name="id">8013</param>
+            <param name="groupid">8113</param>
+            <param name="label">Local rating</param>
+            <param name="type">UserRating</param>
+            <param name="item">$PARAM[item]</param>
+            <param name="content">$PARAM[content]</param>
+        </include>
+        <include content="DialogCustom_Ratings_Items_Template">
+            <param name="id">8014</param>
+            <param name="groupid">8114</param>
+            <param name="label">MyAnimeList local</param>
+            <param name="type">MyAnimeListLocal</param>
+            <param name="item">$PARAM[item]</param>
+            <param name="content">$PARAM[content]</param>
+        </include>
         <include content="Button_Dialog_Setting">
             <param name="id">8020</param>
             <param name="groupid">8120</param>
@@ -1315,6 +1331,16 @@
             <selected>!Skin.HasSetting(VideoInfo.Widgets.DisableSeasons)</selected>
             <label>$LOCALIZE[33054]</label>
             <visible>$EXP[Exp_TMDbHelper_IsData]</visible>
+        </include>
+        <!-- Personnages locaux (AF3 custom) - characterart character row toggle -->
+        <include content="Settings_Button">
+            <param name="id">8046</param>
+            <param name="control">radiobutton</param>
+            <param name="dialog">true</param>
+            <onclick>Skin.ToggleSetting(VideoInfo.Widgets.DisableCharacters)</onclick>
+            <selected>!Skin.HasSetting(VideoInfo.Widgets.DisableCharacters)</selected>
+            <label>Personnages</label>
+            <visible>System.HasAddon(plugin.video.af3.characterart)</visible>
         </include>
         <include content="Settings_Button">
             <param name="id">8037</param>

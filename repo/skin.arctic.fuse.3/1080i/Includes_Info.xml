@@ -1,4 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- =====================================================================
+     CUSTOM MOD (v17+) - "Local rating" decimal fix - by user + Claude AI
+     =====================================================================
+     CONTEXT: Skin setting "Ratings > TV Shows > ItemXX" can be set to
+     "Local rating" (label shown in skin settings UI). Internally this is
+     stored as Skin.String(CustomRating.TVShows.ItemXX) = "UserRating"
+     (misleading name chosen by the original skin author - do not confuse
+     with Kodi's native ListItem.UserRating infolabel, which is a
+     DIFFERENT thing: the personal star rating, stored as a whole number
+     in Kodi's library DB).
+
+     PROBLEM FIXED: the user's tvshow.nfo has a custom named rating
+     (e.g. <rating name="Yunus" default="true"><value>9.5</value>...)
+     with decimal precision. The ORIGINAL skin code for the "Local
+     rating" option used $INFO[...UserRating] (Kodi's rounded whole-number
+     field) instead of the NFO's actual default-flagged rating, so it
+     displayed "9" instead of "9.5".
+
+     FIX: search this file for "Local rating (skin setting labeled" to
+     find the 2 areas that were changed:
+       1) tvshow-level / Info view: now reads $INFO[...Rating] (the
+          generic/default-flagged rating infolabel - has full decimal
+          precision) instead of $INFO[...UserRating].
+       2) Season/Episode level: Kodi does not expose a per-season/episode
+          rating natively, and the script.skinvariables addon's
+          "ratings.<name>.rating_rounded" property (Container 9810) does
+          NOT reliably expose a usable non-rounded value at this level.
+          So a NEW hidden widget container (id 9812 in Includes_Views.xml,
+          variable "Path_LocalYunusRating_Item") calls the
+          plugin.video.af3.characterart addon (already bundled, see
+          resources/lib/characterart.py -> list_rating()) with
+          rating=yunus, which re-reads tvshow.nfo directly and returns
+          the exact decimal value as a ListItem property. This IS
+          specific to the rating name "Yunus" - if the NFO's rating name
+          ever changes, update rating=yunus in Includes_Views.xml
+          (Path_LocalYunusRating_Item) accordingly.
+
+     All the generic Kodi UserRating fallback blocks (still present,
+     used when NO NFO-based local rating is available at all) were each
+     given an extra exclusion clause so they only show if the more
+     precise value above is empty - preventing duplicate/wrong badges.
+
+     KNOWN CAVEAT: the Season/Episode plugin lookup (point 2) adds a
+     small delay when switching between shows/seasons, since it reads
+     tvshow.nfo from disk on every focus change. Optimize with caching
+     if this becomes noticeable.
+
+     IF THE SKIN IS UPDATED: re-apply the changes described above by
+     diffing this file against the new Includes_Info.xml, and re-add the
+     Container id="9812" block + Path_LocalYunusRating_Item variable in
+     Includes_Views.xml (search for "9812" and "Path_LocalYunusRating").
+     ===================================================================== -->
+
 <includes>
 
     <include name="Info_Meta_Object">
@@ -87,6 +140,98 @@
                 <param name="icon">flags/$VAR[Color_Directory]/ratings/letterboxd.png</param>
                 <param name="label">$INFO[Window(Home).Property(TMDbHelper.$PARAM[service].Letterboxd_Rating)]</param>
                 <param name="visible">[$PARAM[visible]] + !String.IsEmpty(Window(Home).Property(TMDbHelper.$PARAM[service].Letterboxd_Rating))</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <!-- Local MyAnimeList rating from Kodi/NFO named rating: <rating name="myanimelist">.
+                 This is independent from AF3/TMDbHelper external MAL/MDbList ratings, so it still appears when external ratings are missing for season rows. -->
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],MyAnimeListLocal)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/myanimelist.png</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Rating(myanimelist)]</param>
+                <param name="visible">[$PARAM[visible]] + !String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(myanimelist)) + !String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0) + !String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="icon_w">32</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],MyAnimeListLocal)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/myanimelist.png</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Rating(MyAnimeList)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(myanimelist)) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0.0)] + !String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(MyAnimeList)) + !String.IsEqual($PARAM[container]$PARAM[listitem].Rating(MyAnimeList),0) + !String.IsEqual($PARAM[container]$PARAM[listitem].Rating(MyAnimeList),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="icon_w">32</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],MyAnimeListLocal)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/myanimelist.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Rating(myanimelist)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(myanimelist)) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0.0)] + !String.IsEmpty(Container(9810).ListItem.Rating(myanimelist)) + !String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0) + !String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="icon_w">32</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],MyAnimeListLocal)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/myanimelist.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(myanimelist)) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0.0)] + [String.IsEmpty(Container(9810).ListItem.Rating(myanimelist)) | String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0) | String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0.0)] + !String.IsEmpty(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded)) + !String.IsEqual(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded),0) + !String.IsEqual(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="icon_w">32</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],MyAnimeListLocal)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/myanimelist.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded)]</param>
+                <param name="visible">[$PARAM[visible]] + String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(myanimelist)) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0.0)] + [String.IsEmpty(Container(9810).ListItem.Rating(myanimelist)) | String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0) | String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0.0)] + [String.IsEmpty(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded)) | String.IsEqual(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded),0) | String.IsEqual(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded),0.0)] + !String.IsEmpty(Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded)) + !String.IsEqual(Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded),0) + !String.IsEqual(Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="icon_w">32</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],MyAnimeListLocal)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/myanimelist.png</param>
+                <param name="label">$INFO[Container(9811).ListItem.Property(rating)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(myanimelist)) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(myanimelist),0.0)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating(MyAnimeList)) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(MyAnimeList),0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating(MyAnimeList),0.0)] + [String.IsEmpty(Container(9810).ListItem.Rating(myanimelist)) | String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0) | String.IsEqual(Container(9810).ListItem.Rating(myanimelist),0.0)] + [String.IsEmpty(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded)) | String.IsEqual(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded),0) | String.IsEqual(Container(9810).ListItem.Property(item.ratings.myanimelist.rating_rounded),0.0)] + [String.IsEmpty(Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded)) | String.IsEqual(Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded),0) | String.IsEqual(Container(9810).ListItem.Property(tvshowid.item.ratings.myanimelist.rating_rounded),0.0)] + !String.IsEmpty(Container(9811).ListItem.Property(rating)) + !String.IsEqual(Container(9811).ListItem.Property(rating),0) + !String.IsEqual(Container(9811).ListItem.Property(rating),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="icon_w">32</param>
+            </include>
+            <!-- Local rating (skin setting labeled "Local rating", internally called "UserRating"):
+                 uses the NFO's default-flagged rating (full decimal precision), NOT Kodi's native
+                 UserRating star field which only stores whole numbers. -->
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Rating]</param>
+                <param name="visible">[$PARAM[visible]] + !String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) + !String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) + !String.IsEmpty(Container(9810).ListItem.Rating) + !String.IsEqual(Container(9810).ListItem.Rating,0) + !String.IsEqual(Container(9810).ListItem.Rating,0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <!-- Season/Episode: read the tvshow.nfo directly via the CharacterArt helper plugin (Container 9812),
+                 since these DBTypes don't expose the named "Yunus" rating through a direct infolabel. -->
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[Container(9812).ListItem.Property(rating)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + !String.IsEmpty(Container(9812).ListItem.Property(rating)) + !String.IsEqual(Container(9812).ListItem.Property(rating),0) + !String.IsEqual(Container(9812).ListItem.Property(rating),0.0)</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <!-- Fallback to Kodi's native UserRating (rounded, whole number) only if no Yunus rating was found above. -->
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].UserRating]</param>
+                <param name="visible">[$PARAM[visible]] + !String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating) + !String.IsEqual($PARAM[container]$PARAM[listitem].UserRating,0) + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0.0)] + [String.IsEmpty(Container(9812).ListItem.Property(rating)) | String.IsEqual(Container(9812).ListItem.Property(rating),0) | String.IsEqual(Container(9812).ListItem.Property(rating),0.0)]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.UserRating]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating) | String.IsEqual($PARAM[container]$PARAM[listitem].UserRating,0)] + !String.IsEmpty(Container(9810).ListItem.UserRating) + !String.IsEqual(Container(9810).ListItem.UserRating,0) + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0.0)] + [String.IsEmpty(Container(9812).ListItem.Property(rating)) | String.IsEqual(Container(9812).ListItem.Property(rating),0) | String.IsEqual(Container(9812).ListItem.Property(rating),0.0)]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Property(item.userrating)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating) | String.IsEqual($PARAM[container]$PARAM[listitem].UserRating,0)] + [String.IsEmpty(Container(9810).ListItem.UserRating) | String.IsEqual(Container(9810).ListItem.UserRating,0)] + !String.IsEmpty(Container(9810).ListItem.Property(item.userrating)) + !String.IsEqual(Container(9810).ListItem.Property(item.userrating),0) + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0.0)] + [String.IsEmpty(Container(9812).ListItem.Property(rating)) | String.IsEqual(Container(9812).ListItem.Property(rating),0) | String.IsEqual(Container(9812).ListItem.Property(rating),0.0)]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Property(userrating)]</param>
+                <param name="visible">[$PARAM[visible]] + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating) | String.IsEqual($PARAM[container]$PARAM[listitem].UserRating,0)] + [String.IsEmpty(Container(9810).ListItem.UserRating) | String.IsEqual(Container(9810).ListItem.UserRating,0)] + [String.IsEmpty(Container(9810).ListItem.Property(item.userrating)) | String.IsEqual(Container(9810).ListItem.Property(item.userrating),0)] + !String.IsEmpty(Container(9810).ListItem.Property(userrating)) + !String.IsEqual(Container(9810).ListItem.Property(userrating),0) + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0.0)] + [String.IsEmpty(Container(9812).ListItem.Property(rating)) | String.IsEqual(Container(9812).ListItem.Property(rating),0) | String.IsEqual(Container(9812).ListItem.Property(rating),0.0)]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <include content="Info_Meta_Object" condition="Skin.String(CustomRating.$PARAM[content].$PARAM[item],UserRating) | Skin.String(CustomRating.$PARAM[content].$PARAM[item],LocalRating)">
+                <param name="icon">flags/$VAR[Color_Directory]/ratings/kodi.png</param>
+                <param name="label">$INFO[Container(9810).ListItem.Property(tvshowid.item.userrating)]</param>
+                <param name="visible">[$PARAM[visible]] + String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) + [String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating) | String.IsEqual($PARAM[container]$PARAM[listitem].UserRating,0)] + [String.IsEmpty(Container(9810).ListItem.UserRating) | String.IsEqual(Container(9810).ListItem.UserRating,0)] + [String.IsEmpty(Container(9810).ListItem.Property(item.userrating)) | String.IsEqual(Container(9810).ListItem.Property(item.userrating),0)] + [String.IsEmpty(Container(9810).ListItem.Property(userrating)) | String.IsEqual(Container(9810).ListItem.Property(userrating),0)] + !String.IsEmpty(Container(9810).ListItem.Property(tvshowid.item.userrating)) + !String.IsEqual(Container(9810).ListItem.Property(tvshowid.item.userrating),0) + [String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0) | String.IsEqual($PARAM[container]$PARAM[listitem].Rating,0.0)] + [String.IsEmpty(Container(9812).ListItem.Property(rating)) | String.IsEqual(Container(9812).ListItem.Property(rating),0) | String.IsEqual(Container(9812).ListItem.Property(rating),0.0)]</param>
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
             </include>
         </definition>

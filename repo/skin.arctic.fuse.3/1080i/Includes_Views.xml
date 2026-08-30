@@ -163,9 +163,81 @@
     <expression name="View_Row_Info_Details_Expression">[$EXP[View_Mode_Rows_Expression] | $EXP[View_Mode_List_Flix_Expression] | $EXP[View_Mode_Comb_Flix_Expression]]</expression>
 
     <expression name="View_Scrollbar_Horizontal_Expression">[$EXP[View_Mode_Rows_Expression] | $EXP[View_Mode_Comb_Flix_Expression]]</expression>
+
+    <!-- Custom mod: delayed large poster preview for the Seasons row.
+         The preview fades in after 5 seconds without navigation.
+         It is anchored low/right of the screen and hides instantly while moving to avoid texture flicker. -->
+    <expression name="View_SeasonPreview_Focus_Expression">Control.HasFocus(500) | Control.HasFocus(501) | Control.HasFocus(502) | Control.HasFocus(503) | Control.HasFocus(504) | Control.HasFocus(505) | Control.HasFocus(520) | Control.HasFocus(521) | Control.HasFocus(522) | Control.HasFocus(523) | Control.HasFocus(524)</expression>
+    <expression name="View_SeasonPreview_Moving_Expression">Container(500).OnNext | Container(500).OnPrevious | Container(501).OnNext | Container(501).OnPrevious | Container(502).OnNext | Container(502).OnPrevious | Container(503).OnNext | Container(503).OnPrevious | Container(504).OnNext | Container(504).OnPrevious | Container(505).OnNext | Container(505).OnPrevious | Container(520).OnNext | Container(520).OnPrevious | Container(521).OnNext | Container(521).OnPrevious | Container(522).OnNext | Container(522).OnPrevious | Container(523).OnNext | Container(523).OnPrevious | Container(524).OnNext | Container(524).OnPrevious</expression>
+
+    <variable name="Image_View_SeasonPreview_Poster">
+        <value condition="!String.IsEmpty(ListItem.Art(season.poster))">$INFO[ListItem.Art(season.poster)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(poster))">$INFO[ListItem.Art(poster)]</value>
+        <value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
+        <value condition="!String.StartsWith(ListItem.Icon,Default)">$INFO[ListItem.Icon]</value>
+    </variable>
+
+
+    <variable name="Label_View_SeasonPreview_Episodes">
+        <!-- Compact episode count shown as a tiny overlay on the delayed season poster preview.
+             Prefer the real total when Kodi exposes it; fall back to the same UnWatchedEpisodes
+             property used by the skin's existing season poster indicator. -->
+        <value condition="!String.IsEmpty(ListItem.Property(totalepisodes))">$INFO[ListItem.Property(totalepisodes)]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(TotalEpisodes))">$INFO[ListItem.Property(TotalEpisodes)]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(EpisodeCount))">$INFO[ListItem.Property(EpisodeCount)]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(episodes))">$INFO[ListItem.Property(episodes)]</value>
+        <value condition="String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.Episode)">$INFO[ListItem.Episode]</value>
+        <value condition="!String.IsEmpty(ListItem.Property(UnWatchedEpisodes))">$INFO[ListItem.Property(UnWatchedEpisodes)]</value>
+    </variable>
     <expression name="View_Scrollbar_Vertical_Flix_Expression">[$EXP[View_Mode_List_Flix_Expression]]</expression>
     <expression name="View_Scrollbar_Vertical_Full_Expression">[$EXP[View_Mode_List_Full_Expression] | $EXP[View_Mode_Comb_Full_Expression] | $EXP[View_Mode_Comb_Tall_Expression]]</expression>
     <expression name="View_Scrollbar_Vertical_Wall_Expression">[$EXP[View_Mode_Wall_Expression]]</expression>
+
+    <variable name="Path_LocalRating_ParentItem">
+        <!-- Focused TV show rows need a direct dbitem lookup; ListItem.UserRating can be empty in some library views. -->
+        <value condition="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.DBID)">plugin://script.skinvariables/?info=get_dbitem_tvshow_details&amp;dbid=$INFO[ListItem.DBID]&amp;reload=$INFO[ListItem.DBID]</value>
+        <!-- For season/episode rows, prefer the parent TV show when Kodi exposes its DBID. -->
+        <value condition="[String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + !String.IsEmpty(ListItem.TVShowDBID)">plugin://script.skinvariables/?info=get_dbitem_tvshow_details&amp;dbid=$INFO[ListItem.TVShowDBID]&amp;reload=$INFO[ListItem.TVShowDBID]</value>
+        <!-- Some skins/library nodes expose the 'All seasons' poster as DBType=season with the TV show DBID. -->
+        <value condition="String.IsEqual(ListItem.DBType,season) + String.IsEmpty(ListItem.Season) + !String.IsEmpty(ListItem.DBID)">plugin://script.skinvariables/?info=get_dbitem_tvshow_details&amp;dbid=$INFO[ListItem.DBID]&amp;reload=$INFO[ListItem.DBID]</value>
+        <!-- Fallback for season rows when only the season DBID is available. -->
+        <value condition="String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.DBID)">plugin://script.skinvariables/?info=get_dbitem_season_details&amp;dbid=$INFO[ListItem.DBID]&amp;reload=$INFO[ListItem.DBID]</value>
+        <!-- Fallback for episode rows when only the episode DBID is available. -->
+        <value condition="String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.DBID)">plugin://script.skinvariables/?info=get_dbitem_episode_details&amp;dbid=$INFO[ListItem.DBID]&amp;reload=$INFO[ListItem.DBID]</value>
+        <!-- Fallback for contexts where Kodi exposes the TV show DBID directly without a DBType. -->
+        <value condition="!String.IsEmpty(ListItem.TVShowDBID)">plugin://script.skinvariables/?info=get_dbitem_tvshow_details&amp;dbid=$INFO[ListItem.TVShowDBID]&amp;reload=$INFO[ListItem.TVShowDBID]</value>
+    </variable>
+
+    <variable name="Path_LocalMALRating_Item">
+        <!-- Dedicated helper lookup for local MyAnimeList rating.
+             This is used especially in Seasons view, where the focused season item often does not expose the tvshow NFO rating directly. -->
+        <value condition="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=tvshow&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="[String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + !String.IsEmpty(ListItem.TVShowDBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=$INFO[ListItem.DBType]&amp;dbid=$INFO[ListItem.DBID]&amp;tvshowdbid=$INFO[ListItem.TVShowDBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=season&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=episode&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="!String.IsEmpty(ListItem.FolderPath)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.FolderPath]</value>
+    </variable>
+
+    <variable name="Path_LocalYunusRating_Item">
+        <!-- ================================================================
+             CUSTOM MOD - part of the "Local rating" decimal fix.
+             See the big comment block at the top of Includes_Info.xml for
+             full context. In short: Season/Episode items don't natively
+             expose the tvshow.nfo's custom-named rating (here: "Yunus")
+             with decimal precision via Kodi infolabels, so this hidden
+             widget (id 9812 below) calls the bundled
+             plugin.video.af3.characterart addon, which re-parses
+             tvshow.nfo directly and returns the exact value as a
+             ListItem property ("rating"), read in Includes_Info.xml via
+             Container(9812).ListItem.Property(rating).
+             If the NFO's rating name ever changes from "Yunus", update
+             rating=yunus in every plugin:// URL below accordingly. -->
+        <value condition="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=tvshow&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="[String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + !String.IsEmpty(ListItem.TVShowDBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=$INFO[ListItem.DBType]&amp;dbid=$INFO[ListItem.DBID]&amp;tvshowdbid=$INFO[ListItem.TVShowDBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=season&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=episode&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
+        <value condition="!String.IsEmpty(ListItem.FolderPath)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.FolderPath]</value>
+    </variable>
 
     <include name="View_Row_Line">
         <control type="group">
@@ -200,9 +272,123 @@
         </control>
     </include>
 
+    <include name="View_Season_Poster_Preview">
+        <control type="group">
+            <!-- View_Row_Info is anchored at view_pad / info_panel_w, so these coordinates intentionally overflow the info panel to place the preview bottom-right on the screen. -->
+            <left>1410</left>
+            <top>450</top>
+            <width>340</width>
+            <height>500</height>
+            <visible>Container.Content(seasons)</visible>
+            <visible>$EXP[View_SeasonPreview_Focus_Expression]</visible>
+            <visible>!$EXP[View_SeasonPreview_Moving_Expression]</visible>
+            <visible>!String.IsEmpty(ListItem.Art(season.poster)) | !String.IsEmpty(ListItem.Art(poster)) | !String.IsEmpty(ListItem.Art(tvshow.poster)) | !String.StartsWith(ListItem.Icon,Default)</visible>
+            <animation effect="fade" start="100" end="0" time="0" condition="$EXP[View_SeasonPreview_Moving_Expression]">Conditional</animation>
+            <animation effect="fade" start="0" end="100" time="250" delay="5000" reversible="false">Visible</animation>
+            <animation effect="zoom" start="96" end="100" center="auto" time="250" delay="5000" tween="cubic" easing="out" reversible="false">Visible</animation>
+            <animation effect="fade" start="100" end="0" time="0" reversible="false">Hidden</animation>
+            <include content="Object_BigPoster">
+                <param name="icon">$VAR[Image_View_SeasonPreview_Poster]</param>
+                <param name="diffuse">diffuse/poster_w560_h820.png</param>
+                <param name="fadetime">0</param>
+                <param name="aspectratio">scale</param>
+            </include>
+            <!-- Minimal episode count overlay: compact glass badge placed top-right to avoid covering poster titles. -->
+            <control type="group">
+                <left>220</left>
+                <top>14</top>
+                <width>108</width>
+                <height>32</height>
+                <visible>!String.IsEmpty(ListItem.Property(totalepisodes)) | !String.IsEmpty(ListItem.Property(TotalEpisodes)) | !String.IsEmpty(ListItem.Property(EpisodeCount)) | !String.IsEmpty(ListItem.Property(episodes)) | [String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.Episode)] | !String.IsEmpty(ListItem.Property(UnWatchedEpisodes))</visible>
+                <animation effect="fade" start="0" end="100" time="160" delay="5150" reversible="false">Visible</animation>
+                <animation effect="slide" start="8,0" end="0,0" time="200" delay="5150" tween="cubic" easing="out" reversible="false">Visible</animation>
+                <animation effect="fade" start="100" end="0" time="0" reversible="false">Hidden</animation>
+                <!-- Fixed dark glass pill: keeps the transparent look without depending on theme colors. -->
+                <control type="image">
+                    <left>1</left>
+                    <top>1</top>
+                    <width>108</width>
+                    <height>32</height>
+                    <texture colordiffuse="44000000" border="16">common/box.png</texture>
+                </control>
+                <control type="image">
+                    <width>108</width>
+                    <height>32</height>
+                    <texture colordiffuse="66000000" border="16">common/box.png</texture>
+                </control>
+                <control type="image">
+                    <width>108</width>
+                    <height>32</height>
+                    <texture colordiffuse="24FFFFFF" border="16">common/box-outline.png</texture>
+                </control>
+                <control type="label">
+                    <width>108</width>
+                    <height>32</height>
+                    <font>font_hint_bold</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <shadowcolor>CC000000</shadowcolor>
+                    <label>$VAR[Label_View_SeasonPreview_Episodes] ÉP.</label>
+                </control>
+            </control>
+        </control>
+    </include>
+
     <include name="View_Row_Info">
         <control type="group">
             <visible>!Integer.IsEqual(Container.NumItems,0)</visible>
+
+            <!-- CUSTOM MOD: Kodi NFO clearart for TV shows, displayed in the upper-right corner.
+                 Uses Kodi's ListItem.Art(clearart) first, with tvshow.clearart as fallback. -->
+            <control type="image">
+                <left>1350</left>
+                <top>-20</top>
+                <width>420</width>
+                <height>240</height>
+                <aspectratio>keep</aspectratio>
+                <fadetime>200</fadetime>
+                <texture background="true">$INFO[ListItem.Art(clearart)]</texture>
+                <visible>String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.Art(clearart))</visible>
+            </control>
+            <control type="image">
+                <left>1350</left>
+                <top>-20</top>
+                <width>420</width>
+                <height>240</height>
+                <aspectratio>keep</aspectratio>
+                <fadetime>200</fadetime>
+                <texture background="true">$INFO[ListItem.Art(tvshow.clearart)]</texture>
+                <visible>String.IsEqual(ListItem.DBType,tvshow) + String.IsEmpty(ListItem.Art(clearart)) + !String.IsEmpty(ListItem.Art(tvshow.clearart))</visible>
+            </control>
+            <control type="list" id="9810">
+                <left>-1000</left>
+                <top>-1000</top>
+                <width>1</width>
+                <height>1</height>
+                <itemlayout width="1" height="1" />
+                <focusedlayout width="1" height="1" />
+                <content target="videos">$VAR[Path_LocalRating_ParentItem]</content>
+            </control>
+            <control type="list" id="9811">
+                <left>-1000</left>
+                <top>-1000</top>
+                <width>1</width>
+                <height>1</height>
+                <itemlayout width="1" height="1" />
+                <focusedlayout width="1" height="1" />
+                <content target="videos">$VAR[Path_LocalMALRating_Item]</content>
+            </control>
+            <!-- CUSTOM MOD: hidden widget for the "Local rating" decimal fix, see Path_LocalYunusRating_Item above. -->
+            <control type="list" id="9812">
+                <left>-1000</left>
+                <top>-1000</top>
+                <width>1</width>
+                <height>1</height>
+                <itemlayout width="1" height="1" />
+                <focusedlayout width="1" height="1" />
+                <content target="videos">$VAR[Path_LocalYunusRating_Item]</content>
+            </control>
             <include>Info_Panel_Dimensions</include>
             <include content="Info_Panel">
                 <param name="visible">String.IsEmpty(Window.Property(TMDBHelper.WidgetContainer))</param>
@@ -211,6 +397,7 @@
                 <param name="visible_meta">$EXP[View_Row_Info_Details_Expression]</param>
             </include>
             <include>View_Combined_Info_Panel</include>
+            <include>View_Season_Poster_Preview</include>
         </control>
     </include>
 
