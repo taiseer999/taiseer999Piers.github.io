@@ -224,10 +224,10 @@
                         <width>1278</width>
                         <textoffsetx>30</textoffsetx>
                         <textcolor>Dark3</textcolor>
-                        <textureradionofocus colordiffuse="Dark3">buttons/radio-off.png</textureradionofocus>
-                        <textureradiooffdisabled colordiffuse="Black12">buttons/radio-off.png</textureradiooffdisabled>
-                        <textureradioofffocus colordiffuse="Selected">buttons/radio-off.png</textureradioofffocus>
-                        <textureradiooffnofocus colordiffuse="Dark3">buttons/radio-off.png</textureradiooffnofocus>
+                        <textureradionofocus colordiffuse="Dark3">dialog/buttons/radio-off.png</textureradionofocus>
+                        <textureradiooffdisabled colordiffuse="Black12">dialog/buttons/radio-off.png</textureradiooffdisabled>
+                        <textureradioofffocus colordiffuse="Selected">dialog/buttons/radio-off.png</textureradioofffocus>
+                        <textureradiooffnofocus colordiffuse="Dark3">dialog/buttons/radio-off.png</textureradiooffnofocus>
                         <include>Def_Settings_Button_Focus_Select_Right_Side</include>
                         <label>$LOCALIZE[31334]</label>
                         <onclick>ActivateWindow(1288)</onclick>
@@ -1733,6 +1733,7 @@
                 <!-- IS PLAYING -->
 
                 <control type="radiobutton" id="9599">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1746,6 +1747,7 @@
                 <!-- IN PROGRESS -->
 
                 <control type="radiobutton" id="9586">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1756,6 +1758,7 @@
                     <onclick>Skin.ToggleSetting(hide.markers.inprogress)</onclick>
                 </control>
                 <control type="radiobutton" id="95861">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1766,6 +1769,7 @@
                     <visible>!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(hide.markers.inprogress)</visible>
                 </control>
                 <control type="radiobutton" id="95862">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1779,6 +1783,7 @@
                 <!-- FLAG UNWATCHED ICON -->
 
                 <control type="radiobutton" id="9587">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1793,6 +1798,7 @@
                 <!-- FLAG UNWATCHED BANNER -->
 
                 <control type="radiobutton" id="95882">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1806,6 +1812,7 @@
                 <!-- FLAG WATCHED -->
 
                 <control type="radiobutton" id="9588">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1818,6 +1825,7 @@
                 </control>
 
                 <control type="radiobutton" id="95881">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>
@@ -1831,6 +1839,7 @@
                 <!-- FLAG NEW CONTENT -->
 
                 <control type="radiobutton" id="9589">
+                    <width>1278</width>
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_standard</include>
                     <include>Def_Settings_Button_Focus_Select_Right_Side</include>

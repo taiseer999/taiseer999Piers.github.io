@@ -763,6 +763,10 @@
 
     <expression name="Exp_View_Flag_Watched_Album_Song">[[!String.IsEqual(ListItem.DBType,album) + !String.IsEqual(ListItem.DBType,song)] | [[String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song)] + Skin.HasSetting(show.markers.watched.music)]]</expression>
 
+    <!-- PORT (from master): watched-percent progress bar on poster/widget tiles -->
+    <expression name="ShowProgressBarPercentPlayed">Integer.IsGreater(ListItem.PercentPlayed,1) + !Integer.IsGreater(ListItem.PercentPlayed,99) + !Skin.HasSetting(hide.markers) + !Skin.HasSetting(hide.markers.inprogress)</expression>
+    <expression name="ShowProgressBarPercentTvShowsPlayed">Integer.IsGreater(ListItem.Property(WatchedEpisodePercent),1) + !Integer.IsGreater(ListItem.Property(WatchedEpisodePercent),99) + !Skin.HasSetting(hide.markers) + !Skin.HasSetting(hide.markers.inprogress)</expression>
+
     <expression name="IsAlbumIsPlaying">
         [[String.IsEqual(MusicPlayer.Album,ListItem.Label) + String.IsEqual(ListItem.DBType,album)] | [String.IsEqual(MusicPlayer.Artist,ListItem.Label) + String.IsEqual(ListItem.DBType,artist)]]
     </expression>

@@ -2081,7 +2081,7 @@
                 <include content="Def_Image_Notification">
                     <param name="texture_diffuse" value="circle_72" />
                     <param name="colordiffuse" value="Dark2" />
-                    <param name="texture" value="kaitoast/info.png" />
+                    <param name="texture" value="dialog/kaitoast/info.png" />
                 </include>
                 <control type="label">
                     <top>12</top>

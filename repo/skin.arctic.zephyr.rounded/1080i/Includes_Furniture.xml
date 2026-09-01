@@ -265,7 +265,7 @@
                     <visible>ListItem.IsPlaying | $EXP[IsAlbumIsPlaying]</visible>
                     <visible>!Skin.HasSetting(hide.markers.isplaying)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_Is_Playing]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_Is_Playing]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IN PROGRESS  -->
@@ -273,7 +273,7 @@
                 <control type="image">
                     <visible>[ListItem.IsResumable | $EXP[IsTVShowInProgress]] + !ListItem.IsPlaying + !Skin.HasSetting(hide.markers.inprogress)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_In_Progress]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_In_Progress]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS WATCHED  -->
@@ -283,7 +283,7 @@
                     <visible>[Container.Content(actors) + Window.IsVisible(DialogVideoInfo.xml)] | !Container.Content(actors)</visible>
                     <visible>$EXP[Exp_View_Flag_Watched_Album_Song]</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_Watched]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_Watched]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS UNWATCHED  -->
@@ -296,7 +296,7 @@
                     <visible>![Control.IsVisible(9550) | Control.IsVisible(9557)]</visible>
                     <visible>[Container.Content(actors) + Window.IsVisible(DialogVideoInfo.xml)] | !Container.Content(actors)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_UnWatched]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_UnWatched]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS NEW  -->
@@ -304,7 +304,7 @@
                 <control type="image">
                     <visible>!ListItem.IsResumable + !$EXP[IsTVShowInProgress] + !ListItem.IsPlaying + [String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]]] + !Skin.HasSetting(hide.markers.newcontent)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_New]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_New]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- LABEL MOVIE IN PROGRESS  -->
@@ -691,6 +691,95 @@
                     <include>Def_Image_Poster_Rating_Info_Right</include>
                     <texture background="true" colordiffuse="$VAR[Color_Indicator_DBType]">buttonsdialogs/$INFO[ListItem.DBType].png</texture>
                 </control>
+            </control>
+        </definition>
+    </include>
+
+    <!-- PORT (from master v2.3): watched-percent resume bar for poster/widget tiles.
+         PercentPlayed for movies/videos/episodes, WatchedEpisodePercent for tvshows. -->
+    <include name="Layout_Poster_Progress_Bar_PercentPlayed">
+        <param name="left" value="$PARAM[left]" default="20" />
+        <param name="right" value="$PARAM[right]" default="20" />
+        <param name="height" value="$PARAM[height]" default="8" />
+        <param name="small" value="$PARAM[small]" default="false" />
+        <param name="middle" value="$PARAM[middle]" default="false" />
+        <param name="bottom_small" value="$PARAM[bottom_small]" default="110" />
+        <param name="bottom_middle" value="$PARAM[bottom_middle]" default="85" />
+        <param name="bottom" value="$PARAM[bottom]" default="20" />
+        <param name="colordiffuse_background" value="$PARAM[colordiffuse_background]" default="$VAR[Color_Widget_Progress_Bar_Background]" />
+        <param name="visible" value="$PARAM[visible]" default="true" />
+
+        <definition>
+            <control type="progress">
+                <visible>$PARAM[visible]</visible>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
+                <visible>$EXP[ShowProgressBarPercentPlayed]</visible>
+
+                <left>$PARAM[left]</left>
+                <right>$PARAM[right]</right>
+                <height>$PARAM[height]</height>
+                <include content="Def_Bottom" condition="$PARAM[small]">
+                   <param name="bottom" value="$PARAM[bottom_small]" />
+                </include>
+                <include content="Def_Bottom" condition="$PARAM[middle]">
+                   <param name="bottom" value="$PARAM[bottom_middle]" />
+                </include>
+                <bottom>$PARAM[bottom]</bottom>
+                <info>ListItem.PercentPlayed</info>
+                <texturebg colordiffuse="$PARAM[colordiffuse_background]" border="8,0,8,0">progress/progress-nib.png</texturebg>
+            </control>
+
+            <control type="progress">
+                <visible>$PARAM[visible]</visible>
+                <visible>String.IsEqual(ListItem.DBType,tvshow)</visible>
+                <visible>$EXP[ShowProgressBarPercentTvShowsPlayed]</visible>
+
+                <left>$PARAM[left]</left>
+                <right>$PARAM[right]</right>
+                <height>$PARAM[height]</height>
+                <include content="Def_Bottom" condition="$PARAM[small]">
+                   <param name="bottom" value="$PARAM[bottom_small]" />
+                </include>
+                <include content="Def_Bottom" condition="$PARAM[middle]">
+                   <param name="bottom" value="$PARAM[bottom_middle]" />
+                </include>
+                <bottom>$PARAM[bottom]</bottom>
+                <info>ListItem.Property(WatchedEpisodePercent)</info>
+                <texturebg colordiffuse="$PARAM[colordiffuse_background]" border="8,0,8,0">progress/progress-nib.png</texturebg>
+            </control>
+        </definition>
+    </include>
+
+    <include name="Layout_Poster_Progress_Bar_PVR">
+        <param name="left" value="$PARAM[left]" default="20" />
+        <param name="right" value="$PARAM[right]" default="20" />
+        <param name="height" value="$PARAM[height]" default="8" />
+        <param name="small" value="$PARAM[small]" default="false" />
+        <param name="middle" value="$PARAM[middle]" default="false" />
+        <param name="bottom_small" value="$PARAM[bottom_small]" default="110" />
+        <param name="bottom_middle" value="$PARAM[bottom_middle]" default="85" />
+        <param name="bottom" value="$PARAM[bottom]" default="20" />
+        <param name="colordiffuse_background" value="$PARAM[colordiffuse_background]" default="$VAR[Color_Widget_Progress_Bar_Background]" />
+        <param name="visible" value="$PARAM[visible]" default="true" />
+
+        <definition>
+            <control type="progress">
+                <visible>$PARAM[visible]</visible>
+                <visible>String.StartsWith(ListItem.Path,pvr://channels) + !String.IsEqual(ListItem.Path,pvr://channels/tv/)</visible>
+                <visible>Integer.IsGreater(ListItem.Progress,1) + !Integer.IsGreater(ListItem.Progress,99)</visible>
+
+                <left>$PARAM[left]</left>
+                <right>$PARAM[right]</right>
+                <height>$PARAM[height]</height>
+                <include content="Def_Bottom" condition="$PARAM[small]">
+                   <param name="bottom" value="$PARAM[bottom_small]" />
+                </include>
+                <include content="Def_Bottom" condition="$PARAM[middle]">
+                   <param name="bottom" value="$PARAM[bottom_middle]" />
+                </include>
+                <bottom>$PARAM[bottom]</bottom>
+                <info>ListItem.Progress</info>
+                <texturebg colordiffuse="$PARAM[colordiffuse_background]" border="8,0,8,0">progress/progress-nib.png</texturebg>
             </control>
         </definition>
     </include>
