@@ -10,7 +10,7 @@
                 <left>-1920</left>
                 <width>1</width>
                 <height>1</height>
-                <visible>!String.IsEmpty($VAR[Path_OSD_NextRecommendation])</visible>
+                <visible>Integer.IsLess(VideoPlayer.PlaylistPosition,VideoPlayer.PlaylistLength) | VideoPlayer.Content(movies) | VideoPlayer.Content(episodes)</visible>
                 <itemlayout width="1" height="1" />
                 <focusedlayout width="1" height="1" />
                 <content target="videos">$VAR[Path_OSD_NextRecommendation]</content>

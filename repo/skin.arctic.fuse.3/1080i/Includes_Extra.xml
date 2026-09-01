@@ -43,7 +43,7 @@
                     <height>42</height>
                     <aspectratio align="left">keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_RipSource]</texture>
-                    <visible>!String.IsEmpty($VAR[Image_VideoPlayer_RipSource])</visible>
+                    <visible>Player.HasVideo + [String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.FileNameAndPath,webdl) | String.Contains(Player.FileNameAndPath,WEBRip) | String.Contains(Player.FileNameAndPath,blu-ray) | String.Contains(Player.FileNameAndPath,bluray) | String.Contains(Player.FileNameAndPath,bdrip) | String.Contains(Player.FileNameAndPath,bd25) | String.Contains(Player.FileNameAndPath,bd50) | String.Contains(Player.FileNameAndPath,2160p) | String.Contains(Player.FileNameAndPath,UHD) | String.Contains(Player.FileNameAndPath,4K) | String.Contains(Player.FileNameAndPath,hddvd) | String.Contains(Player.FileNameAndPath,hd-dvd) | String.Contains(Player.FileNameAndPath,dvd) | String.Contains(Player.FileNameAndPath,vhs) | String.Contains(Player.FileNameAndPath,hdtv) | String.Contains(Player.FileNameAndPath,pdtv) | String.Contains(Player.FileNameAndPath,dsr) | String.Contains(Player.FileNameAndPath,sdtv) | !String.IsEmpty(Skin.String(FallbackSourceFlag))]</visible>
                 </control>
                 <control type="image" id="78882">
                     <fadetime>100</fadetime>
