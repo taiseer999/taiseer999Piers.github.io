@@ -1,0 +1,106 @@
+Media-status (watched-percent progress bar) port  -  fork 3.5.31 -> 3.5.32
+Ported from upstream master (Arctic: Zephyr - Rounded v2.3.00)
+
+WHAT WAS MISSING
+  The fork rendered only a PVR resume bar (ListItem.Progress) inline in
+  Square/Thumb/Fanart/Landscape widgets. Poster widgets (the "Continue
+  Watching" episode row) had NO resume bar at all, and nothing used
+  ListItem.PercentPlayed / WatchedEpisodePercent - so movie/episode/tvshow
+  resume progress never showed on home widget tiles.
+
+WHAT WAS ADDED (all additive - no existing behaviour changed)
+  Includes_Expressions.xml
+    + ShowProgressBarPercentPlayed
+    + ShowProgressBarPercentTvShowsPlayed
+  Includes_Colors.xml
+    + Color_Widget_Progress_Bar_Background   (8FBBBBBB)
+  Includes_Furniture.xml
+    + Layout_Poster_Progress_Bar_PercentPlayed   (movies/videos/episodes via
+      ListItem.PercentPlayed; tvshows via WatchedEpisodePercent)
+    + Layout_Poster_Progress_Bar_PVR             (reusable PVR bar)
+  Includes_Widgets.xml
+    Wired the two includes into Def_Widget_Poster / _Square / _Thumb /
+    _Fanart / _Landscape, using the same bottom/small/middle offsets as
+    upstream. Existing inline PVR bars were left intact.
+
+DELIBERATELY NOT PORTED
+  Layout_Poster_Indicator_Status (upstream's unified watched-flag/banner).
+  The fork already reimplements this as split _Icon / _Banner includes with
+  Arabic-oriented variables and different texture paths (misc/... vs
+  dialog/misc/...). Porting upstream's version would break the fork's
+  working status flags. The two systems are independent.
+
+ARABIC
+  No new user-facing (#3xxxx) strings are introduced by this feature, so no
+  translation work was required. ar_sa is already 100% complete vs en_gb
+  (0 untranslated entries, verified).
+
+ASSETS
+  progress/progress-nib.png is already inside Textures.xbt - no asset work.
+
+-----------------------------------------------------------------
+3.5.33 FIX - Media status settings rows were not selectable
+-----------------------------------------------------------------
+Symptom: In Skin Settings > Furniture > Media status, the sub-rows
+(Is playing / In progress / Unwatched / Watched / New / etc.) took
+focus (highlighted) but pressing OK did nothing.
+
+Cause: all ten Media-status radiobuttons (ids 9599, 9586, 95861,
+95862, 9587, 95882, 9588, 95881, 9589) were missing an explicit
+<width>. Every other row in the Furniture settings grouplist
+declares <width>1278</width>; the grouplist uses
+usecontrolcoords=true, so a row with no width gets a zero-width hit
+area - it draws and highlights but has no clickable region, so OK
+never reaches its <onclick>.
+
+Fix: added <width>1278</width> to those ten rows, matching every
+other row in the panel. No logic changed.
+
+-----------------------------------------------------------------
+3.5.34 FIX - Invisible toggle indicators (radio on/off etc.)
+-----------------------------------------------------------------
+Symptom: radiobutton on/off markers, sliders, scrollbars, indicator
+and nowplaying glyphs, the color-picker box and volume/mute icons all
+rendered blank across the skin (e.g. settings toggles had no visible
+on/off state).
+
+Cause: a fork-wide regression had stripped the "dialog/" prefix from
+many texture paths, but those textures live under dialog/... inside
+Textures.xbt. Kodi could not find e.g. buttons/radio-on.png (real
+path dialog/buttons/radio-on.png), so it drew nothing.
+
+Fix: restored the correct prefix on 44 texture paths (171 refs),
+matching upstream master exactly:
+  buttons/*        -> dialog/buttons/*
+  buttons/mute.png    -> dialog/volume/mute.png
+  buttons/volume.png  -> dialog/volume/volume.png
+  addonstatus/*    -> dialog/addonstatus/*
+  indicator/*      -> dialog/indicator/*
+  kaitoast/*       -> dialog/kaitoast/*
+  misc/*           -> dialog/misc/*   (incl. banner_status_overlay.png)
+  nowplaying/*     -> dialog/nowplaying/*
+  scrollbar/*      -> dialog/scrollbar/*
+  slider/*         -> dialog/slider/*
+Kodi built-in defaults and external resource-addon images were left
+untouched.
+
+-----------------------------------------------------------------
+3.5.35 FIX - Media status marker glyph (clock / check / new) blank
+-----------------------------------------------------------------
+Symptom: after 3.5.34 the corner status marker drew only a solid dot
+- the glyph inside it (in-progress clock, watched check, new, etc.)
+was missing.
+
+Cause: Layout_Poster_Indicator_Status_Icon and
+Def_Media_Status_Banner_Symbol render the status glyph with
+<font>SymbolPoster</font> (and the disc uses SymbolPosterBackground),
+but neither font was defined in ANY fontset of the fork's Font.xml.
+Kodi fell back to the default font, which lacks those private-use
+codepoints (e.g. U+F484), so the glyph rendered blank. symbol.ttf
+was already present and contains all needed glyphs; only the font
+definitions were missing. (Pre-existing in 3.5.31 - not caused by
+the media-status port.)
+
+Fix: added SymbolPoster (size 20) and SymbolPosterBackground
+(size 40), both -> symbol.ttf, to all three fontsets (Default,
+ايفون, تونس), matching upstream master.
