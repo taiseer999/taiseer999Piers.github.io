@@ -710,7 +710,7 @@
     <include name="Layout_Poster_Circle_Progress">
         <param name="top" value="$PARAM[top]" default="1" />
         <param name="right" value="$PARAM[right]" default="1" />
-        <param name="size" value="$PARAM[size]" default="48" />
+        <param name="size" value="$PARAM[size]" default="65" />
 
         <definition>
             <control type="group">

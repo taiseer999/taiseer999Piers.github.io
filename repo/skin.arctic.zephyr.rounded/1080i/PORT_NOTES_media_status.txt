@@ -168,3 +168,12 @@ was too small (font WatchedIconSmall, size 20). Added a dedicated
 font CircleMarkerNumber (RobotoNotoCJKsc-Bold, size 26) to all
 three fontsets and pointed the three marker labels at it. Size 26
 bold fills the 48px disc cleanly without touching the ring.
+
+-----------------------------------------------------------------
+3.5.39 - AF3 circle marker: 2x larger
+-----------------------------------------------------------------
+Doubled the AF3 circle marker: Layout_Poster_Circle_Progress
+default size param 48 -> 96 (all width/height derive from it, so
+every ring, disc, number and checkmark scale together). Number
+font CircleMarkerNumber scaled 26 -> 48 in all three fontsets to
+keep the percentage/count proportional in the larger disc.
