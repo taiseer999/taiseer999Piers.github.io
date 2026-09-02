@@ -338,6 +338,12 @@
         <value>FF808080</value>
     </variable>
 
+    <!-- PORT (AF3): color for the circular progress/watched ring marker -->
+    <variable name="ColorWatchedProgress">
+        <value condition="!String.IsEmpty(Skin.String(watchedprogresscolor.name))">$INFO[Skin.String(watchedprogresscolor.name)]</value>
+        <value>ff03b585</value>
+    </variable>
+
     <variable name="Color_Widget_Progress_Bar_Background">
         <value>8FBBBBBB</value>
     </variable>

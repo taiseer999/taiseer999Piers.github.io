@@ -695,6 +695,117 @@
         </definition>
     </include>
 
+    <!-- ============================================================
+         PORT (AF3): circular progress-ring media-status marker.
+         Optional alternative to the glyph marker, enabled by skin
+         setting  furniture.markers.af3 . Uses loose PNG frames
+         media/progress/circle/pNN.png + media/indicator/*.
+         ============================================================ -->
+    <variable name="Defs_PercentPlayed_AF3">
+        <value condition="!String.IsEmpty(ListItem.Property(WatchedEpisodePercent)) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),0) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),100)">$INFO[ListItem.Property(WatchedEpisodePercent)]</value>
+        <value condition="!String.IsEmpty(ListItem.PercentPlayed) + [!Integer.IsEqual(ListItem.PercentPlayed,0) | ListItem.IsResumable]">$INFO[ListItem.PercentPlayed]</value>
+        <value>0</value>
+    </variable>
+
+    <include name="Layout_Poster_Circle_Progress">
+        <param name="top" value="$PARAM[top]" default="1" />
+        <param name="right" value="$PARAM[right]" default="1" />
+        <param name="size" value="$PARAM[size]" default="48" />
+
+        <definition>
+            <control type="group">
+                <visible>!Container.Content(years) + !$EXP[Home_More_Item]</visible>
+                <visible>String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)</visible>
+                <top>$PARAM[top]</top>
+                <right>$PARAM[right]</right>
+                <width>$PARAM[size]</width>
+                <height>$PARAM[size]</height>
+
+                <!-- dark circular backing -->
+                <control type="image">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <texture colordiffuse="ff333333">indicator/circle-colordiffuse.png</texture>
+                    <visible>$EXP[ShowProgressBarPercentPlayed] | $EXP[ShowProgressBarPercentTvShowsPlayed] | [Integer.IsGreater(ListItem.Playcount,0) + !Skin.HasSetting(hide.markers.watched)]</visible>
+                </control>
+
+                <!-- IN PROGRESS: partial ring by percent -->
+                <control type="image">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,episode)] + $EXP[ShowProgressBarPercentPlayed]</visible>
+                    <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">$VAR[Defs_PercentPlayed_AF3,progress/circle/p,.png]</texture>
+                    <aspectratio align="center" aligny="center">keep</aspectratio>
+                </control>
+                <control type="image">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <visible>String.IsEqual(ListItem.DBType,tvshow) + $EXP[ShowProgressBarPercentTvShowsPlayed] + !Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0)</visible>
+                    <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">$VAR[Defs_PercentPlayed_AF3,progress/circle/p,.png]</texture>
+                    <aspectratio align="center" aligny="center">keep</aspectratio>
+                </control>
+
+                <!-- WATCHED: full ring + checkmark -->
+                <control type="group">
+                    <visible>Integer.IsGreater(ListItem.Playcount,0) + !Skin.HasSetting(hide.markers.watched) + !$EXP[ShowProgressBarPercentPlayed] + !$EXP[ShowProgressBarPercentTvShowsPlayed]</visible>
+                    <control type="image">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">progress/circle/p100.png</texture>
+                        <aspectratio align="center" aligny="center">keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <bordersize>12</bordersize>
+                        <texture colordiffuse="$VAR[ColorWatchedProgress]">indicator/checkmark.png</texture>
+                    </control>
+                </control>
+
+                <!-- IN PROGRESS: percentage number centered in the ring -->
+                <control type="label">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <font>CircleMarkerNumber</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,episode)] + $EXP[ShowProgressBarPercentPlayed]</visible>
+                    <label>$INFO[ListItem.PercentPlayed,,%]</label>
+                </control>
+                <control type="label">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <font>CircleMarkerNumber</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <visible>String.IsEqual(ListItem.DBType,tvshow) + $EXP[ShowProgressBarPercentTvShowsPlayed] + !Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0)</visible>
+                    <label>$INFO[ListItem.Property(WatchedEpisodePercent),,%]</label>
+                </control>
+
+                <!-- UNWATCHED EPISODES: count centered in the disc (tvshow/season) -->
+                <control type="group">
+                    <visible>[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season)] + Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0) + !Skin.HasSetting(hide.markers.newcontent)</visible>
+                    <control type="image">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <texture colordiffuse="ff333333">indicator/circle-colordiffuse.png</texture>
+                    </control>
+                    <control type="label">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <font>CircleMarkerNumber</font>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+                    </control>
+                </control>
+            </control>
+        </definition>
+    </include>
+
     <!-- PORT (from master v2.3): watched-percent resume bar for poster/widget tiles.
          PercentPlayed for movies/videos/episodes, WatchedEpisodePercent for tvshows. -->
     <include name="Layout_Poster_Progress_Bar_PercentPlayed">

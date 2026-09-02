@@ -104,3 +104,67 @@ the media-status port.)
 Fix: added SymbolPoster (size 20) and SymbolPosterBackground
 (size 40), both -> symbol.ttf, to all three fontsets (Default,
 ايفون, تونس), matching upstream master.
+
+-----------------------------------------------------------------
+3.5.36 FEATURE - AF3-style circular progress marker (optional)
+-----------------------------------------------------------------
+Ported the circular progress-ring media-status marker from
+Arctic Fuse 3 (v5.9.10.5) as an OPTIONAL alternative to the
+existing font-glyph marker. The glyph system is untouched and
+remains the default.
+
+What it looks like: a dark backing disc with a green ring that
+fills clockwise by resume percent (ListItem.PercentPlayed for
+movies/videos/episodes, WatchedEpisodePercent for tvshows), and
+a full green ring + checkmark for watched items.
+
+Added:
+  media/progress/circle/p0.png .. p100.png   (101 loose frames, from AF3)
+  media/indicator/checkmark.png, circle-diffuse.png,
+    circle-colordiffuse.png                  (from AF3)
+  Includes_Colors.xml    : ColorWatchedProgress (default ff03b585,
+                           user-overridable via watchedprogresscolor.name)
+  Includes_Furniture.xml : Defs_PercentPlayed_AF3 variable +
+                           Layout_Poster_Circle_Progress include
+  Widgets + all poster views: each existing
+    Layout_Poster_Indicator_Status_Icon call now also offers
+    Layout_Poster_Circle_Progress, switched by skin setting
+    furniture.markers.af3 (glyph when off, circle when on).
+    Banner mode is unaffected.
+  SkinSettings.xml       : new toggle (id 95901) under
+                           Furniture > Media status:
+                           "Circle progress marker"
+
+NOT ported: AF3's Object_Control / script.skinvariables framework
+and the extra AF3 states (timers/library/collection). The port is
+self-contained and needs no external script.
+
+Enable: Settings > Skin Settings > Furniture > Media status >
+        Circle progress marker.
+
+-----------------------------------------------------------------
+3.5.37 - AF3 circle marker: percentage number + episode count
+-----------------------------------------------------------------
+Extended Layout_Poster_Circle_Progress (the furniture.markers.af3
+marker) with two centered overlays, font WatchedIconSmall:
+
+  - IN PROGRESS: the resume percentage as a number inside the ring
+      movies/videos/episodes -> ListItem.PercentPlayed %
+      tvshows               -> WatchedEpisodePercent %  (only when
+                               there are no unwatched episodes)
+  - UNWATCHED EPISODES: the UnWatchedEpisodes count centered in the
+      disc for tvshow/season (takes priority over the progress ring,
+      matching AF3). Hidden when hide.markers.newcontent is set.
+
+Priority per item: unwatched-episode count > progress ring/number >
+watched check. Only affects the AF3 marker; glyph and banner modes
+unchanged.
+
+-----------------------------------------------------------------
+3.5.38 - AF3 circle marker: larger, bolder number
+-----------------------------------------------------------------
+The percentage/episode-count number inside the AF3 circle marker
+was too small (font WatchedIconSmall, size 20). Added a dedicated
+font CircleMarkerNumber (RobotoNotoCJKsc-Bold, size 26) to all
+three fontsets and pointed the three marker labels at it. Size 26
+bold fills the 48px disc cleanly without touching the ring.

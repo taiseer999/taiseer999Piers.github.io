@@ -1730,6 +1730,20 @@
                     <onclick condition="Skin.HasSetting(hide.markers)">Skin.Reset(hide.markers)</onclick>
                 </control>
 
+                <!-- CIRCLE PROGRESS MARKER (AF3 style) -->
+
+                <control type="radiobutton" id="95901">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(5)</visible>
+                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <label>$LOCALIZE[31219]Circle progress marker</label>
+                    <align>left</align>
+                    <enable>!Skin.HasSetting(hide.markers)</enable>
+                    <selected>Skin.HasSetting(furniture.markers.af3)</selected>
+                    <onclick>Skin.ToggleSetting(furniture.markers.af3)</onclick>
+                </control>
+
                 <!-- IS PLAYING -->
 
                 <control type="radiobutton" id="9599">

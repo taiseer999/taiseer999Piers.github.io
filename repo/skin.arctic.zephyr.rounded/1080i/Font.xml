@@ -212,6 +212,11 @@
             <size>40</size>
         </font>
         <font>
+            <name>CircleMarkerNumber</name>
+            <filename>RobotoNotoCJKsc-Bold.ttf</filename>
+            <size>10</size>
+        </font>
+        <font>
             <name>MiniBadge</name>
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>20</size>
@@ -551,6 +556,11 @@
             <size>40</size>
         </font>
         <font>
+            <name>CircleMarkerNumber</name>
+            <filename>RobotoNotoCJKsc-Bold.ttf</filename>
+            <size>10</size>
+        </font>
+        <font>
             <name>MiniBadge</name>
             <filename>iphone.ttf</filename>
             <size>20</size>
@@ -888,6 +898,11 @@
             <name>SymbolPosterBackground</name>
             <filename>symbol.ttf</filename>
             <size>40</size>
+        </font>
+        <font>
+            <name>CircleMarkerNumber</name>
+            <filename>RobotoNotoCJKsc-Bold.ttf</filename>
+            <size>10</size>
         </font>
         <font>
             <name>MiniBadge</name>

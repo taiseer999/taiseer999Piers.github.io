@@ -1318,7 +1318,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- PLAYED - PROGRESS BAR (ported) -->
@@ -1569,7 +1570,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- PLAYED - PROGRESS BAR (ported) -->
@@ -1762,7 +1764,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- PLAYED - PROGRESS BAR (ported) -->
@@ -1972,7 +1975,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- PLAYED - PROGRESS BAR (ported) -->
@@ -2107,7 +2111,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- PLAYED - PROGRESS BAR (ported) -->
@@ -2168,7 +2173,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- WIDGET "MORE" -->
