@@ -1327,8 +1327,7 @@ msgctxt "#31320"
 msgid "Square"
 msgstr "مربّع"
 
-#: /1080i/Includes_SkinSettings.xml
-#: /1080i/Settings.xml
+##: /1080i/Includes_SkinSettings.xml /1080i/Settings.xml
 msgctxt "#31321"
 msgid "Customise viewtypes"
 msgstr "أنواع العرض"
@@ -1729,8 +1728,7 @@ msgctxt "#31430"
 msgid "Customise style"
 msgstr "تخصيص النمط"
 
-#: /1080i/SkinSettings.xml 
-#: /1080i/Includes_Views_Row.xml
+#: /1080i/SkinSettings.xml /1080i/Includes_Views_Row.xml
 msgctxt "#31431"
 msgid "Circle"
 msgstr "دائرة"
@@ -1740,8 +1738,7 @@ msgctxt "#31432"
 msgid "Adaptive"
 msgstr "تكيّفي"
 
-#: /1080i/Includes_SkinSettings.xml
-#: /1080i/Settings.xml
+#: /1080i/Includes_SkinSettings.xml /1080i/Settings.xml
 msgctxt "#31434"
 msgid "Customise video OSD"
 msgstr "OSD الفيديو"
