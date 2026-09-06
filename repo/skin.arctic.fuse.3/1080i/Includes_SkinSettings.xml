@@ -62,6 +62,18 @@
             <onclick>Skin.ToggleSetting(HomeSwitcher.EnableIcons)</onclick>
             <visible>!Skin.HasSetting(HomeSwitcher.Vertical)</visible>
         </include>
+        <include content="Settings_Button" description="Node Icons Monochrome">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">006</param>
+            <param name="dialog">false</param>
+            <param name="control">radiobutton</param>
+            <label>Monochrome Node Icons</label>
+            <onclick condition="!Skin.HasSetting(NodeIcons.Mono)">RunScript(special://skin/extras/toggle_icons.py,mono)</onclick>
+            <onclick condition="Skin.HasSetting(NodeIcons.Mono)">RunScript(special://skin/extras/toggle_icons.py,color)</onclick>
+            <selected>Skin.HasSetting(NodeIcons.Mono)</selected>
+        </include>
        <include content="Settings_Button" description="Header">
             <param name="dialog">false</param>
             <param name="window">skinsettings</param>
