@@ -331,6 +331,20 @@
                    <label>$LOCALIZE[31380]</label>
                 </control>
 
+                <!-- ICON SEARCH - SHOW / HIDE / DISABLE -->
+
+                <control type="button" id="9257" description="search icon behavior">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(2)</visible>
+                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <label>$LOCALIZE[137]</label>
+                    <label2>$VAR[Label_Setting_Home_Header_Search_State]</label2>
+                    <onclick condition="String.IsEmpty(Skin.String(home_search_state))">Skin.SetString(home_search_state,1)</onclick>
+                    <onclick condition="String.IsEqual(Skin.String(home_search_state),1)">Skin.SetString(home_search_state,2)</onclick>
+                    <onclick condition="String.IsEqual(Skin.String(home_search_state),2)">Skin.Reset(home_search_state)</onclick>
+                </control>
+
                 <!-- SHOW PICTURE PROFILE -->
 
                 <control type="radiobutton" id="9256" description="profile picture">
@@ -1716,6 +1730,20 @@
 
                 <!-- INDICATORS -->
 
+                <!-- MEDIA STATUS - COLOR / MONOCHROME - VIEWS LIST -->
+
+                <control type="button" id="9264" description="media status color views list">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(5)</visible>
+                    <include>Def_Skin_Settings_Level_standard</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <align>left</align>
+                    <label>$LOCALIZE[31356] - $LOCALIZE[535]:</label>
+                    <label2>$VAR[Label_Setting_Color_Marker_Views_List]</label2>
+                    <selected>!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)</selected>
+                    <onclick>Skin.ToggleSetting(enable.furniture.markers.view.list.monochrome)</onclick>
+                </control>
+
                 <control type="button" id="9590">
                     <visible>Container(3000).HasFocus(5)</visible>
                     <include>Def_Skin_Settings_Level_base</include>
@@ -2408,6 +2436,18 @@
                     <label>$LOCALIZE[31603]</label>
                     <selected>Skin.HasSetting(hide.osd.video.tips)</selected>
                     <onclick>Skin.ToggleSetting(hide.osd.video.tips)</onclick>
+                </control>
+
+                <!-- HIDE PLOT / POSTER IN INFO -->
+
+                <control type="radiobutton" id="9214" description="hide osd info plot poster">
+                    <width>1278</width>
+                    <visible>Container(3000).HasFocus(7)</visible>
+                    <include>Def_Skin_Settings_Level_base</include>
+                    <include>Def_Settings_Button_Focus_Select_Right_Side</include>
+                    <label>$LOCALIZE[207] / $LOCALIZE[20021]</label>
+                    <selected>!Skin.HasSetting(hide.osd.info.plot.poster)</selected>
+                    <onclick>Skin.ToggleSetting(hide.osd.info.plot.poster)</onclick>
                 </control>
 
                 <!-- SHOW INFO AT PLAYBACK START -->

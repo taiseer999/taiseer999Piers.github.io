@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="skin.arctic.zephyr.rounded" version="3.5.45" name="Arctic: Zephyr - Rounded" provider-name="jurialmunkey, beatmasterrs, nanomani, Abukarim">
+<addon id="skin.arctic.zephyr.rounded" version="3.5.46" name="Arctic: Zephyr - Rounded" provider-name="jurialmunkey, beatmasterrs, nanomani, Abukarim">
     <requires>
         <import addon="xbmc.gui" version="5.18.0"/>
         <import addon="script.skinshortcuts" version="3.0.0"/>
@@ -49,6 +49,13 @@
         <description lang="en">Arctic: Zephyr - Rounded is based on original Arctic: Zephyr skin, created by jurialmunkey and Arctic: Zephyr Reloaded  skin by beatmasterrs.</description>
         <description lang="es">Arctic : Zephyr - Rounded se basa en la skin original Arctic : Zephyr, creada por jurialmunkey y Arctic : Zephyr Reloaded por beatmasterrs.</description>
         <description lang="fr">Arctic: Zephyr - Rounded est basé sur le skin original Arctic: Zephyr, créé par jurialmunkey et Arctic: Zephyr Reloaded par beatmasterrs.</description>
+        <news>v3.5.46
+- Home: new setting to choose the "Search" icon behavior (show, hide, or disable)
+- Views list: new setting to choose "Media Status" colors (color or monochrome)
+- OSD: new setting to hide the plot and poster in "Info"
+- Piers (Kodi v22): added "Ungroup" button to the Video Version Manager dialog
+- Minor cosmetic adjustments and small fixes
+</news>
     </extension>
 </addon>
 

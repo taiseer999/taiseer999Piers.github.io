@@ -1405,6 +1405,7 @@
                             <width>160</width>
                             <height>160</height>
                             <texture colordiffuse="White70">$VAR[Image_Header_Background]</texture>
+                            <visible>$EXP[Has_Home_Profil_Image] | String.IsEmpty(Skin.String(home_search_state))</visible>
                             <animation effect="fade" start="100" end="40" condition="!Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                             <animation effect="fade" start="100" end="90" condition="Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                         </control>
@@ -1414,7 +1415,7 @@
                             <width>88</width>
                             <height>88</height>
                             <texture colordiffuse="PanelWhite100" border="12">special://skin/extras/icons/search.png</texture>
-                            <visible>!$EXP[Has_Home_Profil_Image]</visible>
+                            <visible>!$EXP[Has_Home_Profil_Image] + String.IsEmpty(Skin.String(home_search_state))</visible>
                             <animation effect="fade" start="100" end="40" condition="!Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                             <animation effect="fade" start="100" end="90" condition="Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                         </control>
@@ -1424,12 +1425,12 @@
                             <width>88</width>
                             <height>88</height>
                             <texture diffuse="common/circle80.png">$INFO[System.ProfileThumb]</texture>
-                            <visible>$EXP[Has_Home_Profil_Image]</visible>
+                            <visible>$EXP[Has_Home_Profil_Image] + String.IsEmpty(Skin.String(home_search_state))</visible>
                         </control>
                     </control>
 
                     <control type="group">
-                        <visible>Control.HasFocus(9099)</visible>
+                        <visible>Control.HasFocus(9099) + String.IsEmpty(Skin.String(home_search_state))</visible>
 
                         <control type="image">
                             <width>160</width>

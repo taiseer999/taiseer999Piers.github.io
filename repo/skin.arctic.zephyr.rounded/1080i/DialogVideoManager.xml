@@ -264,6 +264,12 @@
                     <param name="label" value="$LOCALIZE[40023]" />
                     <param name="visible" value="Window.IsVisible(managevideoversions)" />
                 </include>
+                <!-- KODI v22 - UNGROUP VERSION (return version to library as a standalone movie) -->
+                <include content="Def_Dialog_Button_Action">
+                    <param name="id" value="29" />
+                    <param name="label" value="$LOCALIZE[40046]" />
+                    <param name="visible" value="Window.IsVisible(managevideoversions)" />
+                </include>
             </control>
 
             <!-- PATH ITEM -->

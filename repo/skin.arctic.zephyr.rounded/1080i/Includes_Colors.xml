@@ -248,6 +248,37 @@
         <value>FF333333</value>
     </variable>
 
+    <!-- MEDIA STATUS - VIEWS LIST - COLOR / MONOCHROME -->
+
+    <variable name="Color_Indicator_Monochrome_View_List">
+        <value>Dark2</value>
+    </variable>
+
+    <variable name="Color_Indicator_In_Progress_View_List">
+        <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$VAR[Color_Indicator_Background_In_Progress]</value>
+        <value>$VAR[Color_Indicator_Monochrome_View_List]</value>
+    </variable>
+
+    <variable name="Color_Indicator_Watched_View_List">
+        <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$VAR[Color_Indicator_Background_Watched]</value>
+        <value>$VAR[Color_Indicator_Monochrome_View_List]</value>
+    </variable>
+
+    <variable name="Color_Indicator_UnWatched_View_List">
+        <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$VAR[Color_Indicator_Background_UnWatched]</value>
+        <value>$VAR[Color_Indicator_Monochrome_View_List]</value>
+    </variable>
+
+    <variable name="Color_Indicator_New_View_List">
+        <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$VAR[Color_Indicator_Background_New]</value>
+        <value>$VAR[Color_Indicator_Monochrome_View_List]</value>
+    </variable>
+
+    <variable name="Color_Indicator_Is_Playing_View_List">
+        <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$VAR[Color_Indicator_Background_Is_Playing]</value>
+        <value>$VAR[Color_Indicator_Monochrome_View_List]</value>
+    </variable>
+
     <!-- CUSTOM COLOR -->
 
     <variable name="ColorHighlight.name.own">
