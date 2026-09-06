@@ -89,7 +89,6 @@
         <definition>
             <control type="group">
                 <height>1080</height>
-                <visible allowhiddenfocus="$PARAM[allowhiddenfocus]">$PARAM[visible]</visible>
                 <include content="$PARAM[include]">
                     <param name="id">$PARAM[id]</param>
                     <param name="control">panel</param>
@@ -119,18 +118,21 @@
                     <onfocus condition="$PARAM[home_switcher]">SetProperty(HomeSwitcher.IsVisible,True,Home)</onfocus>
                     <onfocus>SetProperty(InfoPanel.FullSwitch,Wall,Home)</onfocus>
                     <content sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]" target="$PARAM[target]" limit="$PARAM[limit]" browse="$VAR[Defs_BrowseLimitedLists]">$PARAM[content]</content>
+                    <visible allowhiddenfocus="$PARAM[allowhiddenfocus]">$PARAM[visible]</visible>
                 </include>
                 <include content="Widget_Busy">
                     <param name="visible">Container($PARAM[id]).IsUpdating + Integer.IsEqual(Container($PARAM[id]).NumItems)</param>
                     <param name="include">$PARAM[include]</param>
                     <top>250</top>
                     <left>view_pad</left>
+                    <visible allowhiddenfocus="$PARAM[allowhiddenfocus]">$PARAM[visible]</visible>
                 </include>
                 <include content="Widget_Busy">
                     <param name="visible">Container($PARAM[id]).IsUpdating + Integer.IsEqual(Container($PARAM[id]).NumItems)</param>
                     <param name="include">$PARAM[include]</param>
                     <top>600</top>
                     <left>view_pad</left>
+                    <visible allowhiddenfocus="$PARAM[allowhiddenfocus]">$PARAM[visible]</visible>
                 </include>
             </control>
         </definition>
@@ -266,39 +268,6 @@
                         <param name="visible_plot">false</param>
                         <param name="visible_meta">false</param>
                         <param name="include_details">false</param>
-                        <!-- ClearLogo.HubRight ON: the left-column logo is suppressed here and
-                             redrawn right-anchored + dimmed by the control below. -->
-                        <param name="include_title">!Skin.HasSetting(ClearLogo.HubRight)</param>
-                        <param name="container">Container($PARAM[id]).</param>
-                    </include>
-                </control>
-            </control>
-            <!-- ClearLogo.HubRight: repositioned hub clearlogo. Drawn right-anchored in the fanart
-                 band above the widget row and dimmed to read as a watermark. Entirely separate
-                 from the details block on the left, which is why the block above simply drops its
-                 own logo (include_title=false) when this is active. Ported from
-                 Purple-Drain/skin.arctic.fuse.3 (right-align + watermark-dim variant). -->
-            <control type="group">
-                <visible>Skin.HasSetting(ClearLogo.HubRight)</visible>
-                <include>Home_Slide_Animation</include>
-                <!-- Box at Info_Title's own info_title_w width, right edge inset by view_pad, so
-                     its left edge sits at 1840-640=x1200 and it ends flush with the right inset.
-                     top places it in the band just above the widget row. -->
-                <right>view_pad</right>
-                <width>info_title_w</width>
-                <top>view_pad</top>
-                <height>600</height>
-                <control type="group">
-                    <top>430</top>
-                    <include content="Info_Panel">
-                        <param name="visible">[!$EXP[Exp_InfoDialogs] + Integer.IsEqual(Window.Property(TMDBHelper.WidgetContainer),$PARAM[id])]</param>
-                        <param name="visible_line">false</param>
-                        <param name="visible_plot">false</param>
-                        <param name="visible_meta">false</param>
-                        <param name="include_details">false</param>
-                        <!-- Hug the RIGHT edge of the box, and fade to a watermark. -->
-                        <param name="align">right</param>
-                        <param name="logo_diffuse">E0FFFFFF</param>
                         <param name="container">Container($PARAM[id]).</param>
                     </include>
                 </control>
