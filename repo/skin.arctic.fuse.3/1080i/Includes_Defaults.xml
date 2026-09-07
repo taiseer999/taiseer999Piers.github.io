@@ -228,6 +228,11 @@
         <include>defs_dialog_button</include>
     </include>
 
+    <include name="defs_dialog_colorbutton">
+        <include>defs_dialog_button</include>
+        <texturecolordisabledmask colordiffuse="$VAR[Color_DialogBorder]">buttons/colorpicker.png</texturecolordisabledmask>
+    </include>
+
     <default type="grouplist">
         <scrolltime tween="quadratic">400</scrolltime>
         <usecontrolcoords>true</usecontrolcoords>
