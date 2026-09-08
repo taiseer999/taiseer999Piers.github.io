@@ -265,7 +265,7 @@
                     <visible>ListItem.IsPlaying | $EXP[IsAlbumIsPlaying]</visible>
                     <visible>!Skin.HasSetting(hide.markers.isplaying)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_Is_Playing]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_Is_Playing]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IN PROGRESS  -->
@@ -273,7 +273,7 @@
                 <control type="image">
                     <visible>[ListItem.IsResumable | $EXP[IsTVShowInProgress]] + !ListItem.IsPlaying + !Skin.HasSetting(hide.markers.inprogress)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_In_Progress]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_In_Progress]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS WATCHED  -->
@@ -283,7 +283,7 @@
                     <visible>[Container.Content(actors) + Window.IsVisible(DialogVideoInfo.xml)] | !Container.Content(actors)</visible>
                     <visible>$EXP[Exp_View_Flag_Watched_Album_Song]</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_Watched]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_Watched]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS UNWATCHED  -->
@@ -296,7 +296,7 @@
                     <visible>![Control.IsVisible(9550) | Control.IsVisible(9557)]</visible>
                     <visible>[Container.Content(actors) + Window.IsVisible(DialogVideoInfo.xml)] | !Container.Content(actors)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_UnWatched]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_UnWatched]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- FLAG IS NEW  -->
@@ -304,7 +304,7 @@
                 <control type="image">
                     <visible>!ListItem.IsResumable + !$EXP[IsTVShowInProgress] + !ListItem.IsPlaying + [String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]]] + !Skin.HasSetting(hide.markers.newcontent)</visible>
                     <include>Def_Media_Status_Banner_Background</include>
-                    <texture colordiffuse="$VAR[Color_Indicator_Background_New]" background="true">misc/banner_status_overlay.png</texture>
+                    <texture colordiffuse="$VAR[Color_Indicator_Background_New]" background="true">dialog/misc/banner_status_overlay.png</texture>
                 </control>
 
                 <!-- LABEL MOVIE IN PROGRESS  -->
@@ -691,6 +691,206 @@
                     <include>Def_Image_Poster_Rating_Info_Right</include>
                     <texture background="true" colordiffuse="$VAR[Color_Indicator_DBType]">buttonsdialogs/$INFO[ListItem.DBType].png</texture>
                 </control>
+            </control>
+        </definition>
+    </include>
+
+    <!-- ============================================================
+         PORT (AF3): circular progress-ring media-status marker.
+         Optional alternative to the glyph marker, enabled by skin
+         setting  furniture.markers.af3 . Uses loose PNG frames
+         media/progress/circle/pNN.png + media/indicator/*.
+         ============================================================ -->
+    <variable name="Defs_PercentPlayed_AF3">
+        <value condition="!String.IsEmpty(ListItem.Property(WatchedEpisodePercent)) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),0) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),100)">$INFO[ListItem.Property(WatchedEpisodePercent)]</value>
+        <value condition="!String.IsEmpty(ListItem.PercentPlayed) + [!Integer.IsEqual(ListItem.PercentPlayed,0) | ListItem.IsResumable]">$INFO[ListItem.PercentPlayed]</value>
+        <value>0</value>
+    </variable>
+
+    <include name="Layout_Poster_Circle_Progress">
+        <param name="top" value="$PARAM[top]" default="1" />
+        <param name="right" value="$PARAM[right]" default="1" />
+        <param name="size" value="$PARAM[size]" default="65" />
+
+        <definition>
+            <control type="group">
+                <visible>!Container.Content(years) + !$EXP[Home_More_Item]</visible>
+                <visible>String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)</visible>
+                <top>$PARAM[top]</top>
+                <right>$PARAM[right]</right>
+                <width>$PARAM[size]</width>
+                <height>$PARAM[size]</height>
+
+                <!-- dark circular backing -->
+                <control type="image">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <texture colordiffuse="ff333333">indicator/circle-colordiffuse.png</texture>
+                    <visible>$EXP[ShowProgressBarPercentPlayed] | $EXP[ShowProgressBarPercentTvShowsPlayed] | [Integer.IsGreater(ListItem.Playcount,0) + !Skin.HasSetting(hide.markers.watched)]</visible>
+                </control>
+
+                <!-- IN PROGRESS: partial ring by percent -->
+                <control type="image">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,episode)] + $EXP[ShowProgressBarPercentPlayed]</visible>
+                    <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">$VAR[Defs_PercentPlayed_AF3,progress/circle/p,.png]</texture>
+                    <aspectratio align="center" aligny="center">keep</aspectratio>
+                </control>
+                <control type="image">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <visible>String.IsEqual(ListItem.DBType,tvshow) + $EXP[ShowProgressBarPercentTvShowsPlayed] + !Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0)</visible>
+                    <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">$VAR[Defs_PercentPlayed_AF3,progress/circle/p,.png]</texture>
+                    <aspectratio align="center" aligny="center">keep</aspectratio>
+                </control>
+
+                <!-- WATCHED: full ring + checkmark -->
+                <control type="group">
+                    <visible>Integer.IsGreater(ListItem.Playcount,0) + !Skin.HasSetting(hide.markers.watched) + !$EXP[ShowProgressBarPercentPlayed] + !$EXP[ShowProgressBarPercentTvShowsPlayed]</visible>
+                    <control type="image">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <texture colordiffuse="$VAR[ColorWatchedProgress]" diffuse="indicator/circle-diffuse.png" background="true" flipx="true" flipy="true">progress/circle/p100.png</texture>
+                        <aspectratio align="center" aligny="center">keep</aspectratio>
+                    </control>
+                    <control type="image">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <bordersize>12</bordersize>
+                        <texture colordiffuse="$VAR[ColorWatchedProgress]">indicator/checkmark.png</texture>
+                    </control>
+                </control>
+
+                <!-- IN PROGRESS: percentage number centered in the ring -->
+                <control type="label">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <font>CircleMarkerNumber</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,episode)] + $EXP[ShowProgressBarPercentPlayed]</visible>
+                    <label>$INFO[ListItem.PercentPlayed,,%]</label>
+                </control>
+                <control type="label">
+                    <width>$PARAM[size]</width>
+                    <height>$PARAM[size]</height>
+                    <font>CircleMarkerNumber</font>
+                    <align>center</align>
+                    <aligny>center</aligny>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <visible>String.IsEqual(ListItem.DBType,tvshow) + $EXP[ShowProgressBarPercentTvShowsPlayed] + !Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0)</visible>
+                    <label>$INFO[ListItem.Property(WatchedEpisodePercent),,%]</label>
+                </control>
+
+                <!-- UNWATCHED EPISODES: count centered in the disc (tvshow/season) -->
+                <control type="group">
+                    <visible>[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season)] + Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0) + !Skin.HasSetting(hide.markers.newcontent)</visible>
+                    <control type="image">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <texture colordiffuse="ff333333">indicator/circle-colordiffuse.png</texture>
+                    </control>
+                    <control type="label">
+                        <width>$PARAM[size]</width>
+                        <height>$PARAM[size]</height>
+                        <font>CircleMarkerNumber</font>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <label>$INFO[ListItem.Property(UnWatchedEpisodes)]</label>
+                    </control>
+                </control>
+            </control>
+        </definition>
+    </include>
+
+    <!-- PORT (from master v2.3): watched-percent resume bar for poster/widget tiles.
+         PercentPlayed for movies/videos/episodes, WatchedEpisodePercent for tvshows. -->
+    <include name="Layout_Poster_Progress_Bar_PercentPlayed">
+        <param name="left" value="$PARAM[left]" default="20" />
+        <param name="right" value="$PARAM[right]" default="20" />
+        <param name="height" value="$PARAM[height]" default="8" />
+        <param name="small" value="$PARAM[small]" default="false" />
+        <param name="middle" value="$PARAM[middle]" default="false" />
+        <param name="bottom_small" value="$PARAM[bottom_small]" default="110" />
+        <param name="bottom_middle" value="$PARAM[bottom_middle]" default="85" />
+        <param name="bottom" value="$PARAM[bottom]" default="20" />
+        <param name="colordiffuse_background" value="$PARAM[colordiffuse_background]" default="$VAR[Color_Widget_Progress_Bar_Background]" />
+        <param name="visible" value="$PARAM[visible]" default="true" />
+
+        <definition>
+            <control type="progress">
+                <visible>$PARAM[visible]</visible>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
+                <visible>$EXP[ShowProgressBarPercentPlayed]</visible>
+
+                <left>$PARAM[left]</left>
+                <right>$PARAM[right]</right>
+                <height>$PARAM[height]</height>
+                <include content="Def_Bottom" condition="$PARAM[small]">
+                   <param name="bottom" value="$PARAM[bottom_small]" />
+                </include>
+                <include content="Def_Bottom" condition="$PARAM[middle]">
+                   <param name="bottom" value="$PARAM[bottom_middle]" />
+                </include>
+                <bottom>$PARAM[bottom]</bottom>
+                <info>ListItem.PercentPlayed</info>
+                <texturebg colordiffuse="$PARAM[colordiffuse_background]" border="8,0,8,0">progress/progress-nib.png</texturebg>
+            </control>
+
+            <control type="progress">
+                <visible>$PARAM[visible]</visible>
+                <visible>String.IsEqual(ListItem.DBType,tvshow)</visible>
+                <visible>$EXP[ShowProgressBarPercentTvShowsPlayed]</visible>
+
+                <left>$PARAM[left]</left>
+                <right>$PARAM[right]</right>
+                <height>$PARAM[height]</height>
+                <include content="Def_Bottom" condition="$PARAM[small]">
+                   <param name="bottom" value="$PARAM[bottom_small]" />
+                </include>
+                <include content="Def_Bottom" condition="$PARAM[middle]">
+                   <param name="bottom" value="$PARAM[bottom_middle]" />
+                </include>
+                <bottom>$PARAM[bottom]</bottom>
+                <info>ListItem.Property(WatchedEpisodePercent)</info>
+                <texturebg colordiffuse="$PARAM[colordiffuse_background]" border="8,0,8,0">progress/progress-nib.png</texturebg>
+            </control>
+        </definition>
+    </include>
+
+    <include name="Layout_Poster_Progress_Bar_PVR">
+        <param name="left" value="$PARAM[left]" default="20" />
+        <param name="right" value="$PARAM[right]" default="20" />
+        <param name="height" value="$PARAM[height]" default="8" />
+        <param name="small" value="$PARAM[small]" default="false" />
+        <param name="middle" value="$PARAM[middle]" default="false" />
+        <param name="bottom_small" value="$PARAM[bottom_small]" default="110" />
+        <param name="bottom_middle" value="$PARAM[bottom_middle]" default="85" />
+        <param name="bottom" value="$PARAM[bottom]" default="20" />
+        <param name="colordiffuse_background" value="$PARAM[colordiffuse_background]" default="$VAR[Color_Widget_Progress_Bar_Background]" />
+        <param name="visible" value="$PARAM[visible]" default="true" />
+
+        <definition>
+            <control type="progress">
+                <visible>$PARAM[visible]</visible>
+                <visible>String.StartsWith(ListItem.Path,pvr://channels) + !String.IsEqual(ListItem.Path,pvr://channels/tv/)</visible>
+                <visible>Integer.IsGreater(ListItem.Progress,1) + !Integer.IsGreater(ListItem.Progress,99)</visible>
+
+                <left>$PARAM[left]</left>
+                <right>$PARAM[right]</right>
+                <height>$PARAM[height]</height>
+                <include content="Def_Bottom" condition="$PARAM[small]">
+                   <param name="bottom" value="$PARAM[bottom_small]" />
+                </include>
+                <include content="Def_Bottom" condition="$PARAM[middle]">
+                   <param name="bottom" value="$PARAM[bottom_middle]" />
+                </include>
+                <bottom>$PARAM[bottom]</bottom>
+                <info>ListItem.Progress</info>
+                <texturebg colordiffuse="$PARAM[colordiffuse_background]" border="8,0,8,0">progress/progress-nib.png</texturebg>
             </control>
         </definition>
     </include>
@@ -1205,6 +1405,7 @@
                             <width>160</width>
                             <height>160</height>
                             <texture colordiffuse="White70">$VAR[Image_Header_Background]</texture>
+                            <visible>$EXP[Has_Home_Profil_Image] | String.IsEmpty(Skin.String(home_search_state))</visible>
                             <animation effect="fade" start="100" end="40" condition="!Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                             <animation effect="fade" start="100" end="90" condition="Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                         </control>
@@ -1214,7 +1415,7 @@
                             <width>88</width>
                             <height>88</height>
                             <texture colordiffuse="PanelWhite100" border="12">special://skin/extras/icons/search.png</texture>
-                            <visible>!$EXP[Has_Home_Profil_Image]</visible>
+                            <visible>!$EXP[Has_Home_Profil_Image] + String.IsEmpty(Skin.String(home_search_state))</visible>
                             <animation effect="fade" start="100" end="40" condition="!Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                             <animation effect="fade" start="100" end="90" condition="Skin.HasSetting(show.home.header.clock.left)">Conditional</animation>
                         </control>
@@ -1224,12 +1425,12 @@
                             <width>88</width>
                             <height>88</height>
                             <texture diffuse="common/circle80.png">$INFO[System.ProfileThumb]</texture>
-                            <visible>$EXP[Has_Home_Profil_Image]</visible>
+                            <visible>$EXP[Has_Home_Profil_Image] + String.IsEmpty(Skin.String(home_search_state))</visible>
                         </control>
                     </control>
 
                     <control type="group">
-                        <visible>Control.HasFocus(9099)</visible>
+                        <visible>Control.HasFocus(9099) + String.IsEmpty(Skin.String(home_search_state))</visible>
 
                         <control type="image">
                             <width>160</width>

@@ -376,11 +376,11 @@
         <!-- <value condition="ListItem.IsPlaying + !Skin.HasSetting(hide.markers.isplaying) + !Player.Paused">[COLOR=$VAR[Color_Indicator_Background_Is_Playing]]&#62811;[/COLOR]</value> -->
         <!-- <value condition="ListItem.IsPlaying + !Skin.HasSetting(hide.markers.isplaying) + Player.Paused">[COLOR=$VAR[Color_Indicator_Background_Is_Playing]]&#62813;[/COLOR]</value> -->
         <value condition="[ListItem.IsResumable | $EXP[IsTVShowInProgress]] + Skin.HasSetting(hide.markers.inprogress)"></value>
-        <value condition="ListItem.IsResumable | $EXP[IsTVShowInProgress]">[COLOR=$VAR[Color_Indicator_Background_In_Progress]]&#62596;[/COLOR]</value>
+        <value condition="ListItem.IsResumable | $EXP[IsTVShowInProgress]">[COLOR=$VAR[Color_Indicator_In_Progress_View_List]]&#62596;[/COLOR]</value>
         <value condition="Integer.IsGreater(ListItem.Playcount,0) + Skin.HasSetting(hide.markers.watched)"></value>
-        <value condition="Integer.IsGreater(ListItem.Playcount,0)">[COLOR=$VAR[Color_Indicator_Background_Watched]]&#10003;[/COLOR]</value>
-        <value condition="Integer.IsEqual(ListItem.Playcount,0) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]] + !Skin.HasSetting(hide.markers.newcontent)">[COLOR=$VAR[Color_Indicator_Background_New]]&#62079;[/COLOR]</value>
-        <value condition="Integer.IsEqual(ListItem.Playcount,0)">[COLOR=$VAR[Color_Indicator_Background_UnWatched]]&#61833;[/COLOR]</value>
+        <value condition="Integer.IsGreater(ListItem.Playcount,0)">[COLOR=$VAR[Color_Indicator_Watched_View_List]]&#10003;[/COLOR]</value>
+        <value condition="Integer.IsEqual(ListItem.Playcount,0) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]] + !Skin.HasSetting(hide.markers.newcontent)">[COLOR=$VAR[Color_Indicator_New_View_List]]&#62079;[/COLOR]</value>
+        <value condition="Integer.IsEqual(ListItem.Playcount,0)">[COLOR=$VAR[Color_Indicator_UnWatched_View_List]]&#61833;[/COLOR]</value>
     </variable>
 
     <variable name="Label_List_Watched_Focus">
@@ -3171,5 +3171,16 @@
         <value condition="Container.Content(Seasons) + Control.IsVisible(5161)">$INFO[Container(5161).CurrentItem]$INFO[Container(5161).NumItems, / ,]</value>
         <value condition="Container.Content(Seasons) + Control.IsVisible(5261)">$INFO[Container(5261).CurrentItem]$INFO[Container(5261).NumItems, / ,]</value>
         <value>$INFO[Container.CurrentItem]$INFO[Container.NumItems, / ,]</value>
+    </variable>
+
+    <variable name="Label_Setting_Home_Header_Search_State">
+        <value condition="String.IsEqual(Skin.String(home_search_state),1)">$LOCALIZE[31386]</value>
+        <value condition="String.IsEqual(Skin.String(home_search_state),2)">$LOCALIZE[24021]</value>
+        <value>$LOCALIZE[31641]</value>
+    </variable>
+
+    <variable name="Label_Setting_Color_Marker_Views_List">
+        <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$LOCALIZE[737]</value>
+        <value>$LOCALIZE[19662]</value>
     </variable>
 </includes>

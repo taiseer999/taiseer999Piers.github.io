@@ -37,18 +37,18 @@
     <color name="PanelBlack30">4D000000</color>
 
     <color name="MenuSlide">FF2D2E2E</color>
-    <color name="InfoBackground">B3050505</color>
+    <color name="InfoBackground">B3000000</color>
 
-    <color name="Background">FF050505</color>
-    <color name="BackgroundNew">D9050505</color>
-    <color name="BackgroundNewBlur">B3050505</color>
-    <color name="BackgroundOverlay">FF181818</color>
+    <color name="Background">FF000000</color>
+    <color name="BackgroundNew">D9000000</color>
+    <color name="BackgroundNewBlur">B3000000</color>
+    <color name="BackgroundOverlay">FF000000</color>
 
     <color name="FanartFade">FFFFFFFF</color>
     <color name="FanartFadeBlur">FFFFFFFF</color>
-    <color name="FloorFade">FF181818</color>
-    <color name="FloorFade2">CC050505</color>
-    <color name="FloorFadeBlur">CC050505</color>
+    <color name="FloorFade">FF000000</color>
+    <color name="FloorFade2">CC000000</color>
+    <color name="FloorFadeBlur">CC000000</color>
 
     <color name="Fallback">FF2D2E2E</color>
     <color name="IconOnFallback">CCC5C5C5</color>

@@ -2588,3 +2588,7 @@ msgstr "أيقونات قائمة صغيرة"
 msgctxt "#31638"
 msgid "Show info bar when playback starts"
 msgstr "إظهار شريط المعلومات عند بدء التشغيل"
+
+msgctxt "#31641"
+msgid "Show"
+msgstr "إظهار"

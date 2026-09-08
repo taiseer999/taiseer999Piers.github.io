@@ -1318,8 +1318,17 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
+
+            <!-- PLAYED - PROGRESS BAR (ported) -->
+            <include content="Layout_Poster_Progress_Bar_PercentPlayed">
+                <param name="bottom" value="20" />
+            </include>
+            <include content="Layout_Poster_Progress_Bar_PVR">
+                <param name="bottom" value="20" />
+            </include>
 
             <!-- WIDGET "MORE" -->
 
@@ -1561,8 +1570,16 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
+
+            <!-- PLAYED - PROGRESS BAR (ported) -->
+            <include content="Layout_Poster_Progress_Bar_PercentPlayed">
+                <param name="bottom" value="20" />
+                <param name="middle" value="$PARAM[middle]" />
+                <param name="bottom_middle" value="85" />
+            </include>
 
             <!-- WIDGET "MORE" -->
 
@@ -1747,8 +1764,16 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
+
+            <!-- PLAYED - PROGRESS BAR (ported) -->
+            <include content="Layout_Poster_Progress_Bar_PercentPlayed">
+                <param name="bottom" value="20" />
+                <param name="small" value="$PARAM[small]" />
+                <param name="bottom_small" value="110" />
+            </include>
 
             <!-- WIDGET "MORE" -->
 
@@ -1950,8 +1975,16 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
+
+            <!-- PLAYED - PROGRESS BAR (ported) -->
+            <include content="Layout_Poster_Progress_Bar_PercentPlayed">
+                <param name="bottom" value="20" />
+                <param name="small" value="$PARAM[small]" />
+                <param name="bottom_small" value="110" />
+            </include>
 
             <!-- WIDGET "MORE" -->
 
@@ -2078,8 +2111,14 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
+
+            <!-- PLAYED - PROGRESS BAR (ported) -->
+            <include content="Layout_Poster_Progress_Bar_PercentPlayed">
+                <param name="bottom" value="20" />
+            </include>
         </definition>
     </include>
 
@@ -2134,7 +2173,8 @@
 
             <!-- WATCHED STATUS -->
 
-            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + !Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Indicator_Status_Icon</include>
+            <include condition="!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative) + Skin.HasSetting(furniture.markers.af3)">Layout_Poster_Circle_Progress</include>
             <include condition="!Skin.HasSetting(hide.markers) + Skin.HasSetting(furniture.markers.alternative)">Layout_Poster_Indicator_Status_Banner</include>
 
             <!-- WIDGET "MORE" -->

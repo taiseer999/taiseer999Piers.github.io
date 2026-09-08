@@ -132,8 +132,6 @@
             <onup condition="$EXP[Home_Is_Horizontal]">SetProperty(first_menu,1,Home)</onup>
 
             <onclick>ClearProperty(GlobalSearchWindowOpen,Home)</onclick>
-            <!-- <onclick>ActivateWindow(1146)</onclick> -->
-            <onclick>ActivateWindow(1147)</onclick>
             <onclick>ActivateWindow(1146)</onclick>
             <onclick>ClearProperty(AnimationDirection,Home)</onclick>
         </control>

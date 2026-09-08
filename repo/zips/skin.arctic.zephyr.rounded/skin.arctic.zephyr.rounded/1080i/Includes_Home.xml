@@ -259,7 +259,8 @@
             <onleft condition="!String.IsEmpty(Container(300).ListItemNoWrap(-1).Label)">SetProperty(AnimationDirection,Left,Home)</onleft>
             <onleft condition="!String.IsEmpty(Container(300).ListItemNoWrap(-1).Label)">Control.Move(300,-1)</onleft>
 
-            <onleft condition="String.IsEmpty(Container(300).ListItemNoWrap(-1).Label)">9099</onleft>
+            <onleft condition="String.IsEmpty(Container(300).ListItemNoWrap(-1).Label) + !String.IsEqual(Skin.String(home_search_state),2)">9099</onleft>
+            <onleft condition="String.IsEmpty(Container(300).ListItemNoWrap(-1).Label) + String.IsEqual(Skin.String(home_search_state),2)">SetFocus(300,$INFO[Container(300).NumItems])</onleft>
 
             <!-- MAIN MENU - ON RIGHT -->
 
@@ -2081,7 +2082,7 @@
                 <include content="Def_Image_Notification">
                     <param name="texture_diffuse" value="circle_72" />
                     <param name="colordiffuse" value="Dark2" />
-                    <param name="texture" value="kaitoast/info.png" />
+                    <param name="texture" value="dialog/kaitoast/info.png" />
                 </include>
                 <control type="label">
                     <top>12</top>
