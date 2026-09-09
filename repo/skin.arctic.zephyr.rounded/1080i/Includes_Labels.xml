@@ -2879,8 +2879,11 @@
 
     <variable name="Label_Skin_Settings_Skin_Font_Selected">
         <value condition="String.IsEqual(Skin.String(settingskinfont),1)">Default ($LOCALIZE[571])</value>
-        <value condition="String.IsEqual(Skin.String(settingskinfont),2)">Fallback</value>
-        <value condition="String.IsEqual(Skin.String(settingskinfont),3)">Fallback bold</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),2)">$LOCALIZE[31650]</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),3)">$LOCALIZE[31651]</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),101)">$LOCALIZE[31652]</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),102)">$LOCALIZE[31653]</value>
+        <value condition="String.IsEqual(Skin.String(settingskinfont),103)">$LOCALIZE[31654]</value>
         <value condition="String.IsEqual(Skin.String(settingskinfont),4)">Arial</value>
         <value condition="String.IsEqual(Skin.String(settingskinfont),5)">Arial 2</value>
         <value condition="String.IsEqual(Skin.String(settingskinfont),6)">AZ Reloaded</value>

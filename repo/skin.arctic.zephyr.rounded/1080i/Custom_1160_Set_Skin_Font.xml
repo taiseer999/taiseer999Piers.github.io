@@ -99,33 +99,66 @@
                         <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(SetupWizardDirection,Next,Home)</onclick>
                         <include condition="String.IsEqual(Skin.String(settingskinfont),1)">Def_Item_Selected</include>
                         <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=Default,noconfirm=true),00:01,silent)</onclick>
-                        <onclick>Close</onclick>
+                        <onclick>Dialog.Close(all,false)</onclick>
                     </item>
 
                     <!-- ايفون -->
 
                     <item id="2">
-                        <label>ايفون</label>
+                        <label>$LOCALIZE[31650]</label>
                         <onclick condition="!System.HasAddon(script.skin.info.service)">InstallAddon(script.skin.info.service)</onclick>
                         <onclick>Skin.SetString(settingskinfont,2)</onclick>
                         <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(reloadsetupwizard,1160,Home)</onclick>
                         <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(SetupWizardDirection,Next,Home)</onclick>
                         <include condition="String.IsEqual(Skin.String(settingskinfont),2)">Def_Item_Selected</include>
-                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=ايفون,noconfirm=true),00:01,silent)</onclick>
-                        <onclick>Close</onclick>
+                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=iphone,noconfirm=true),00:01,silent)</onclick>
+                        <onclick>Dialog.Close(all,false)</onclick>
                     </item>
 
                     <!-- تونس -->
 
                     <item id="3">
-                        <label>تونس</label>
+                        <label>$LOCALIZE[31651]</label>
                         <onclick condition="!System.HasAddon(script.skin.info.service)">InstallAddon(script.skin.info.service)</onclick>
                         <onclick>Skin.SetString(settingskinfont,3)</onclick>
                         <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(reloadsetupwizard,1160,Home)</onclick>
                         <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(SetupWizardDirection,Next,Home)</onclick>
                         <include condition="String.IsEqual(Skin.String(settingskinfont),3)">Def_Item_Selected</include>
-                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=تونس,noconfirm=true),00:01,silent)</onclick>
-                        <onclick>Close</onclick>
+                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=tunis,noconfirm=true),00:01,silent)</onclick>
+                        <onclick>Dialog.Close(all,false)</onclick>
+                    </item>
+
+                    <item id="4">
+                        <label>$LOCALIZE[31652]</label>
+                        <onclick condition="!System.HasAddon(script.skin.info.service)">InstallAddon(script.skin.info.service)</onclick>
+                        <onclick>Skin.SetString(settingskinfont,101)</onclick>
+                        <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(reloadsetupwizard,1160,Home)</onclick>
+                        <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(SetupWizardDirection,Next,Home)</onclick>
+                        <include condition="String.IsEqual(Skin.String(settingskinfont),101)">Def_Item_Selected</include>
+                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=amazon,noconfirm=true),00:01,silent)</onclick>
+                        <onclick>Dialog.Close(all,false)</onclick>
+                    </item>
+
+                    <item id="5">
+                        <label>$LOCALIZE[31653]</label>
+                        <onclick condition="!System.HasAddon(script.skin.info.service)">InstallAddon(script.skin.info.service)</onclick>
+                        <onclick>Skin.SetString(settingskinfont,102)</onclick>
+                        <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(reloadsetupwizard,1160,Home)</onclick>
+                        <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(SetupWizardDirection,Next,Home)</onclick>
+                        <include condition="String.IsEqual(Skin.String(settingskinfont),102)">Def_Item_Selected</include>
+                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=hacen,noconfirm=true),00:01,silent)</onclick>
+                        <onclick>Dialog.Close(all,false)</onclick>
+                    </item>
+
+                    <item id="6">
+                        <label>$LOCALIZE[31654]</label>
+                        <onclick condition="!System.HasAddon(script.skin.info.service)">InstallAddon(script.skin.info.service)</onclick>
+                        <onclick>Skin.SetString(settingskinfont,103)</onclick>
+                        <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(reloadsetupwizard,1160,Home)</onclick>
+                        <onclick condition="$EXP[Condition_Show_Button_Setup_Wizard]">SetProperty(SetupWizardDirection,Next,Home)</onclick>
+                        <include condition="String.IsEqual(Skin.String(settingskinfont),103)">Def_Item_Selected</include>
+                        <onclick>AlarmClock(DelaySkinFont1,RunScript(script.skin.info.service,action=set_setting,setting=lookandfeel.font,value=jazeerah,noconfirm=true),00:01,silent)</onclick>
+                        <onclick>Dialog.Close(all,false)</onclick>
                     </item>
                 </content>
             </control>

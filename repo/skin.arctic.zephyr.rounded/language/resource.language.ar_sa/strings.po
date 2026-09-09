@@ -2592,3 +2592,23 @@ msgstr "إظهار شريط المعلومات عند بدء التشغيل"
 msgctxt "#31641"
 msgid "Show"
 msgstr "إظهار"
+
+msgctxt "#31650"
+msgid "iPhone (ايفون)"
+msgstr "ايفون"
+
+msgctxt "#31651"
+msgid "Tunis (تونس)"
+msgstr "تونس"
+
+msgctxt "#31652"
+msgid "Amazon Ember"
+msgstr "أمازون إمبر"
+
+msgctxt "#31653"
+msgid "Hacen Promoter"
+msgstr "حاسن بروموتر"
+
+msgctxt "#31654"
+msgid "Jazeerah"
+msgstr "الجزيرة"

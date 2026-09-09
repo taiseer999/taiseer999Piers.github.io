@@ -2593,3 +2593,23 @@ msgstr ""
 msgctxt "#31641"
 msgid "Show"
 msgstr ""
+
+msgctxt "#31650"
+msgid "iPhone (ايفون)"
+msgstr ""
+
+msgctxt "#31651"
+msgid "Tunis (تونس)"
+msgstr ""
+
+msgctxt "#31652"
+msgid "Amazon Ember"
+msgstr ""
+
+msgctxt "#31653"
+msgid "Hacen Promoter"
+msgstr ""
+
+msgctxt "#31654"
+msgid "Jazeerah"
+msgstr ""
