@@ -1211,7 +1211,7 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
-                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="42" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="42" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered) | !String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="rectangle-list1.png" /><param name="left" value="0" /><param name="width" value="42" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Episode)]" /></include>
@@ -1370,7 +1370,7 @@
                 <orientation>horizontal</orientation>
                 <usecontrolcoords>true</usecontrolcoords>
 
-                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="42" /><param name="visible" value="[!String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
+                <include content="Def_Home_Sub_Title_Icon"><param name="icon" value="calendar-day.png" /><param name="left" value="0" /><param name="width" value="42" /><param name="visible" value="[!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) | !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered) | !String.IsEmpty(Container($PARAM[id]).ListItem.Year)]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Year"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_Mpaa"><param name="id" value="$PARAM[id]" /></include>
                 <include content="Def_Home_Label_Widget_Sub_Title_DateAdded"><param name="id" value="$PARAM[id]" /></include>

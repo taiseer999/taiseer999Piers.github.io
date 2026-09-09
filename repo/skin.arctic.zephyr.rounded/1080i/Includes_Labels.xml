@@ -529,6 +529,13 @@
         <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Year))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Year)]</value>
     </variable>
 
+    <variable name="Label_Premiered_Full">
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Premiered)]</value>
+        <value condition="!String.IsEmpty(ListItem.Premiered)">$INFO[ListItem.Premiered]</value>
+        <value condition="!String.IsEmpty(ListItem.Year)">$INFO[ListItem.Year]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Year))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Year)]</value>
+    </variable>
+
     <variable name="Label_Favourites_Type">
         <value condition="String.Contains(ListItem.FolderPath,ActivateWindow) + String.Contains(ListItem.FolderPath,10002)">$LOCALIZE[1]</value>
         <value condition="String.Contains(ListItem.FolderPath,ActivateWindow) + String.Contains(ListItem.FolderPath,10502)">$LOCALIZE[292]</value>
@@ -768,7 +775,7 @@
         <!-- TVSHOWS -->
 
         <!-- <value condition="Container.Content(tvshows)">$INFO[ListItem.Year]$VAR[Label_Episodes_Number,  •  , $LOCALIZE[20453]]$VAR[Label_Rating_Flix,  •  ]</value> -->
-        <value condition="Container.Content(tvshows)">$INFO[ListItem.Year]$VAR[Label_Episodes_Number,  •  , $LOCALIZE[20453]]$VAR[Label_Genre,  •  ,]</value>
+        <value condition="Container.Content(tvshows)">$VAR[Label_Premiered_Full]$VAR[Label_Episodes_Number,  •  , $LOCALIZE[20453]]$VAR[Label_Genre,  •  ,]</value>
 
         <!-- SEASONS -->
 
@@ -803,7 +810,7 @@
         <value condition="Container.Content(movies) + String.IsEmpty(ListItem.DBType) + !ListItem.IsFolder + !$EXP[IsPluginShortlist] + !$EXP[IsLibraryGenie]">$LOCALIZE[561] $LOCALIZE[13280]$VAR[Label_Duration_Time_Check,  •  ,]</value>
         <!-- <value condition="Container.Content(movies) | Container.Content(sets) | String.IsEqual(ListItem.DBType,movie)">$INFO[ListItem.Year]$VAR[Label_Genre,  •  ,]$VAR[Label_Duration_Time_Check,  •  ,]$VAR[Label_Rating_Flix,  •  ]</value> -->
 
-        <value condition="Container.Content(movies) | Container.Content(sets) | String.IsEqual(ListItem.DBType,movie)">$VAR[Label_Year]$VAR[Label_Genre,  •  ,]$VAR[Label_Duration_Time_Check,  •  ,]</value>
+        <value condition="Container.Content(movies) | Container.Content(sets) | String.IsEqual(ListItem.DBType,movie)">$VAR[Label_Premiered_Full]$VAR[Label_Genre,  •  ,]$VAR[Label_Duration_Time_Check,  •  ,]</value>
 
         <!-- APPLE PODCAST -->
 

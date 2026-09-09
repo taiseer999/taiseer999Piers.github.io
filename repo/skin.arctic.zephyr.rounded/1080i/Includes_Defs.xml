@@ -1740,10 +1740,20 @@
     </include>
 
     <include name="Def_Home_Label_Widget_Sub_Title_Year">
-        <control type="label">
+        <control type="label" description="Full premiered date from TMDbHelper prop">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Premiered)]</label>
+            <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered))</visible>
+        </control>
+        <control type="label" description="Full premiered date from ListItem">
+            <include>Widgets_Item_Sub_Title_Definition</include>
+            <label>$INFO[Container($PARAM[id]).ListItem.Premiered]</label>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) + !String.IsEmpty(Container($PARAM[id]).ListItem.Premiered)</visible>
+        </control>
+        <control type="label" description="Year fallback when no premiered date">
             <include>Widgets_Item_Sub_Title_Definition</include>
             <label>$INFO[Container($PARAM[id]).ListItem.Year,,]</label>
-            <visible>!String.IsEmpty(Container($PARAM[id]).ListItem.Year)</visible>
+            <visible>String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Premiered)) + String.IsEmpty(Container($PARAM[id]).ListItem.Premiered) + !String.IsEmpty(Container($PARAM[id]).ListItem.Year)</visible>
         </control>
     </include>
 
