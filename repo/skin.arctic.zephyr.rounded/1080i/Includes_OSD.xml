@@ -2594,13 +2594,13 @@
                     <top>830r</top>
                     <width>100%</width>
                     <height>870</height>
-                    <texture>common/fsinfoscreen.png</texture>
+                    <include>Texture_OSD_Background</include>
                 </control>
                 <control type="image">
                     <top>830r</top>
                     <width>100%</width>
                     <height>870</height>
-                    <texture>common/fsinfoscreen.png</texture>
+                    <include>Texture_OSD_Background</include>
                     <animation effect="fade" start="80" end="80" time="0" condition="true">Conditional</animation>
                 </control>
             </control>
@@ -2930,7 +2930,7 @@
                     <top>830r</top>
                     <width>100%</width>
                     <height>870</height>
-                    <texture>common/fsinfoscreen.png</texture>
+                    <include>Texture_OSD_Background</include>
                     <animation effect="fade" start="0" end="100" time="250">Visible</animation>
                     <animation effect="fade" end="0" start="100" time="250">Hidden</animation>
                     <visible>!Window.IsVisible(script-cu-lrclyrics-main.xml) | [Window.IsVisible(script-cu-lrclyrics-main.xml) + !Skin.HasSetting(hideseekbaronlyrics)]</visible>
@@ -2939,7 +2939,7 @@
                     <top>830r</top>
                     <width>100%</width>
                     <height>870</height>
-                    <texture>common/fsinfoscreen.png</texture>
+                    <include>Texture_OSD_Background</include>
                     <animation effect="fade" start="80" end="80" condition="true">Conditional</animation>
                     <animation effect="fade" start="0" end="100" time="250">Visible</animation>
                     <animation effect="fade" end="0" start="100" time="250">Hidden</animation>

@@ -2594,6 +2594,10 @@ msgctxt "#31641"
 msgid "Show"
 msgstr ""
 
+msgctxt "#31640"
+msgid "Prevent reload"
+msgstr ""
+
 msgctxt "#31650"
 msgid "iPhone (ايفون)"
 msgstr ""
