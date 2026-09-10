@@ -1,6 +1,350 @@
 <?xml version='1.0' encoding='utf-8'?>
 <fonts>
-    <fontset id="Default" unicode="false">
+    <fontset id="Default" unicode="true">
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
+        <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
+        <font>
+            <name>font23_narrow</name>
+            <filename>Noto-Regular.ttf</filename>
+            <size>22</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>Noto-Bold.ttf</filename>
+            <size>30</size>
+        </font>
+        <font>
+            <name>WatchedStates</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>20</size>
+        </font>
+        <font>
+            <name>SubTitleBold</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>30</size>
+        </font>
+        <font>
+            <name>SubTitleBoldXL</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>36</size>
+        </font>
+        <font>
+            <name>WatchedIcon</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>22</size>
+            
+        </font>
+        <font>
+            <name>WatchedIconSmall</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>20</size>
+        </font>
+        <font>
+            <name>Music_Big</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>80</size>
+            <style>lighten</style>
+            
+        </font>
+        <font>
+            <name>Music_Bigger</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>170</size>
+            <style>lighten</style>
+            
+        </font>
+        <font>
+            <name>Music_Biggest</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>260</size>
+            <style>lighten</style>
+            
+        </font>
+        <font>
+            <name>Null</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>0</size>
+        </font>
+        <font>
+            <name>LargeRobotoNotoCJKsc-Regular</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>44</size>
+            
+        </font>
+        <font>
+            <name>Large</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>44</size>
+            
+        </font>
+        <font>
+            <name>LargeX2</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>70</size>
+            
+        </font>
+        <font>
+            <name>LargeNew</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>53</size>
+            
+        </font>
+        <font>
+            <name>LargeNetflix</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>50</size>
+            
+        </font>
+        <font>
+            <name>EpisodeNumber</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>92</size>
+            
+        </font>
+        <font>
+            <name>Lyrics</name>
+            <style>lighten</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>46</size>
+            
+        </font>
+        <font>
+            <name>Medium</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>34</size>
+            
+            <linespacing>1.12</linespacing>
+        </font>
+        <font>
+            <name>MediumRobotoNotoCJKsc-Regular</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>34</size>
+            
+        </font>
+        <font>
+            <name>Small</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>28</size>
+            
+        </font>
+        <font>
+            <name>Small33</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>28</size>
+            
+        </font>
+        <font>
+            <name>SmallRobotoNotoCJKsc-Regular</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>28</size>
+            
+        </font>
+        <font>
+            <name>Tiny</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>25</size>
+            
+            <linespacing>1.0</linespacing>
+        </font>
+        <font>
+            <name>TinyBadge</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>23</size>
+            
+            <linespacing>1.12</linespacing>
+        </font>
+        <font>
+            <name>Tiny24</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>28</size>
+            
+            <linespacing>1.20</linespacing>
+        </font>
+        <font>
+            <name>TinyPlot</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>28</size>
+            
+            <linespacing>0.90</linespacing>
+        </font>
+        <font>
+            <name>TinyRobotoNotoCJKsc-Regular</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>25</size>
+            
+        </font>
+        <font>
+            <name>Mini</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>23</size>
+            
+        </font>
+        <font>
+            <name>SymbolList</name>
+            <filename>symbol.ttf</filename>
+            <size>22</size>
+        </font>
+        <font>
+            <name>SymbolPoster</name>
+            <filename>symbol.ttf</filename>
+            <size>20</size>
+        </font>
+        <font>
+            <name>SymbolPosterBackground</name>
+            <filename>symbol.ttf</filename>
+            <size>40</size>
+        </font>
+        <font>
+            <name>CircleMarkerNumber</name>
+            <filename>RobotoNotoCJKsc-Bold.ttf</filename>
+            <size>14</size>
+        </font>
+        <font>
+            <name>MiniBadge</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>20</size>
+            
+        </font>
+        <font>
+            <name>Hint</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>19</size>
+            
+        </font>
+        <font>
+            <name>HintRobotoNotoCJKsc-Regular</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>20</size>
+            <aspect>0.85</aspect>
+        </font>
+        <font>
+            <name>Button</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>27</size>
+            
+        </font>
+        <font>
+            <name>Flag</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>RobotoNotoCJKsc-Regular</style>
+            <size>23</size>
+            
+        </font>
+        <font>
+            <name>EPGTimeline</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <style>uppercase</style>
+            <size>19</size>
+            
+        </font>
+        <font>
+            <name>Home</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>30</size>
+            
+        </font>
+        <font>
+            <name>HomeFO</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>44</size>
+            
+        </font>
+        <font>
+            <name>HomeIcon</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>26</size>
+            
+        </font>
+        <font>
+            <name>HomeLarge</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>34</size>
+            
+        </font>
+        <font>
+            <name>WidgetSelector</name>
+            <style>uppercase</style>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>21</size>
+            
+        </font>
+        <font>
+            <name>ChannelInfo</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>26</size>
+            
+        </font>
+        <font>
+            <name>Progress</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>21</size>
+            
+        </font>
+        <font>
+            <name>Name1</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>32</size>
+            
+        </font>
+        <font>
+            <name>font13</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>28</size>
+            
+        </font>
+        <font>
+            <name>BannerInProgress</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>26</size>
+            
+        </font>
+        <font>
+            <name>font14</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>36</size>
+        </font>
+        <font>
+            <name>Clock</name>
+            <filename>AmazonEmberV2-Medium.ttf</filename>
+            <size>130</size>
+            
+        </font>
+        <font>
+            <name>font_tiny_iconic</name>
+            <filename>fa-solid-900.ttf</filename>
+            <size>22</size>
+        </font>
+        <font>
+            <name>font_tiny_top</name>
+            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
+            <size>25</size>
+        </font>
+    </fontset>
+
+    <fontset id="Oldie" unicode="false">
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -1029,350 +1373,6 @@
             <size>25</size>
         </font>
     </fontset>
-
-    <fontset id="Amazon Ember" unicode="true">
-        <font>
-            <name>font23_narrow</name>
-            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
-            <size>32</size>
-        </font>
-        <!-- TinyPPI overlay fonts (by ABUKARIM TOOLS) - fixed Noto, Arabic-capable, size-compensated -->
-        <font>
-            <name>font23_narrow</name>
-            <filename>Noto-Regular.ttf</filename>
-            <size>22</size>
-        </font>
-        <font>
-            <name>font32</name>
-            <filename>Noto-Bold.ttf</filename>
-            <size>30</size>
-        </font>
-        <font>
-            <name>WatchedStates</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>20</size>
-        </font>
-        <font>
-            <name>SubTitleBold</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>30</size>
-        </font>
-        <font>
-            <name>SubTitleBoldXL</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>36</size>
-        </font>
-        <font>
-            <name>WatchedIcon</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>22</size>
-            
-        </font>
-        <font>
-            <name>WatchedIconSmall</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>20</size>
-        </font>
-        <font>
-            <name>Music_Big</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>80</size>
-            <style>lighten</style>
-            
-        </font>
-        <font>
-            <name>Music_Bigger</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>170</size>
-            <style>lighten</style>
-            
-        </font>
-        <font>
-            <name>Music_Biggest</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>260</size>
-            <style>lighten</style>
-            
-        </font>
-        <font>
-            <name>Null</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>0</size>
-        </font>
-        <font>
-            <name>LargeRobotoNotoCJKsc-Regular</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>44</size>
-            
-        </font>
-        <font>
-            <name>Large</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>44</size>
-            
-        </font>
-        <font>
-            <name>LargeX2</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>70</size>
-            
-        </font>
-        <font>
-            <name>LargeNew</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>53</size>
-            
-        </font>
-        <font>
-            <name>LargeNetflix</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>50</size>
-            
-        </font>
-        <font>
-            <name>EpisodeNumber</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>92</size>
-            
-        </font>
-        <font>
-            <name>Lyrics</name>
-            <style>lighten</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>46</size>
-            
-        </font>
-        <font>
-            <name>Medium</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>34</size>
-            
-            <linespacing>1.12</linespacing>
-        </font>
-        <font>
-            <name>MediumRobotoNotoCJKsc-Regular</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>34</size>
-            
-        </font>
-        <font>
-            <name>Small</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>28</size>
-            
-        </font>
-        <font>
-            <name>Small33</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>28</size>
-            
-        </font>
-        <font>
-            <name>SmallRobotoNotoCJKsc-Regular</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>28</size>
-            
-        </font>
-        <font>
-            <name>Tiny</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>25</size>
-            
-            <linespacing>1.3</linespacing>
-        </font>
-        <font>
-            <name>TinyBadge</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>23</size>
-            
-            <linespacing>1.12</linespacing>
-        </font>
-        <font>
-            <name>Tiny24</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>28</size>
-            
-            <linespacing>1.20</linespacing>
-        </font>
-        <font>
-            <name>TinyPlot</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>28</size>
-            
-            <linespacing>1.22</linespacing>
-        </font>
-        <font>
-            <name>TinyRobotoNotoCJKsc-Regular</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>25</size>
-            
-        </font>
-        <font>
-            <name>Mini</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>23</size>
-            
-        </font>
-        <font>
-            <name>SymbolList</name>
-            <filename>symbol.ttf</filename>
-            <size>22</size>
-        </font>
-        <font>
-            <name>SymbolPoster</name>
-            <filename>symbol.ttf</filename>
-            <size>20</size>
-        </font>
-        <font>
-            <name>SymbolPosterBackground</name>
-            <filename>symbol.ttf</filename>
-            <size>40</size>
-        </font>
-        <font>
-            <name>CircleMarkerNumber</name>
-            <filename>RobotoNotoCJKsc-Bold.ttf</filename>
-            <size>14</size>
-        </font>
-        <font>
-            <name>MiniBadge</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>20</size>
-            
-        </font>
-        <font>
-            <name>Hint</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>19</size>
-            
-        </font>
-        <font>
-            <name>HintRobotoNotoCJKsc-Regular</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>20</size>
-            <aspect>0.85</aspect>
-        </font>
-        <font>
-            <name>Button</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>27</size>
-            
-        </font>
-        <font>
-            <name>Flag</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>RobotoNotoCJKsc-Regular</style>
-            <size>23</size>
-            
-        </font>
-        <font>
-            <name>EPGTimeline</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <style>uppercase</style>
-            <size>19</size>
-            
-        </font>
-        <font>
-            <name>Home</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>30</size>
-            
-        </font>
-        <font>
-            <name>HomeFO</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>44</size>
-            
-        </font>
-        <font>
-            <name>HomeIcon</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>26</size>
-            
-        </font>
-        <font>
-            <name>HomeLarge</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>34</size>
-            
-        </font>
-        <font>
-            <name>WidgetSelector</name>
-            <style>uppercase</style>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>21</size>
-            
-        </font>
-        <font>
-            <name>ChannelInfo</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>26</size>
-            
-        </font>
-        <font>
-            <name>Progress</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>21</size>
-            
-        </font>
-        <font>
-            <name>Name1</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>32</size>
-            
-        </font>
-        <font>
-            <name>font13</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>28</size>
-            
-        </font>
-        <font>
-            <name>BannerInProgress</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>26</size>
-            
-        </font>
-        <font>
-            <name>font14</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>36</size>
-        </font>
-        <font>
-            <name>Clock</name>
-            <filename>AmazonEmberV2-Medium.ttf</filename>
-            <size>130</size>
-            
-        </font>
-        <font>
-            <name>font_tiny_iconic</name>
-            <filename>fa-solid-900.ttf</filename>
-            <size>22</size>
-        </font>
-        <font>
-            <name>font_tiny_top</name>
-            <filename>RobotoNotoCJKsc-Regular.ttf</filename>
-            <size>25</size>
-        </font>
-    </fontset>
     <fontset id="Hacen Promoter" unicode="true">
         <font>
             <name>font23_narrow</name>
@@ -1896,7 +1896,7 @@
             <filename>Jazeerah.ttf</filename>
             <size>28</size>
             
-            <linespacing>1.22</linespacing>
+            <linespacing>1.1</linespacing>
         </font>
         <font>
             <name>TinyRobotoNotoCJKsc-Regular</name>
