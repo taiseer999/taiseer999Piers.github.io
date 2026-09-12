@@ -86,28 +86,29 @@
             <size>32</size>
         </font>
     </fontset>
-    <fontset id="امازون" unicode="true">
+    <fontset id="منادي" unicode="true">
         <include content="Font_Default">
-            <param name="font_black">AmazonEmberV2-Bold.ttf</param>
-            <param name="font_bold">AmazonEmberV2-Bold.ttf</param>
-            <param name="font_regular">AmazonEmberV2-Medium.ttf</param>
-            <param name="style_light">light</param>
-            <param name="size_hint">17</param>
-            <param name="size_hint">15</param>
-            <param name="size_tiny">21</param>
-            <param name="size_mini">22</param>
-            <param name="size_main">29</param>
-            <param name="size_midi">34</param>
-            <param name="size_head">36</param>
-            <param name="size_huge">41</param>
-            <param name="size_main_x2">54</param>
-            <param name="size_huge_x2">84</param>
-            <param name="size_midi_x2">62</param>
-            <param name="plot_linespacing_head">1.03</param>
-            <param name="plot_linespacing_midi">1.45</param>
-            <param name="plot_linespacing_main">0.9</param>
-            <param name="plot_linespacing_mini">1.20</param>
-            <param name="plot_linespacing_tiny">1.11</param>
+            <param name="font_black">monadi BOLD.ttf</param>
+        <param name="font_bold">monadi BOLD.ttf</param>
+        <param name="font_regular">monadi-reg.ttf</param>
+        <param name="style_light" />
+        <param name="size_hint">17</param>
+        <param name="size_tiny">21</param>
+        <param name="size_mini">25</param>
+        <param name="size_main">30</param>
+        <param name="size_midi">36</param>
+        <param name="size_head">37</param>
+        <param name="size_huge">43</param>
+        <param name="size_main_x2">56</param>
+        <param name="size_huge_x2">83</param>
+        <param name="size_midi_x2">64</param>
+
+
+        <param name="plot_linespacing_head">1.169</param>
+        <param name="plot_linespacing_midi">1.455</param>
+        <param name="plot_linespacing_main">1.1</param>
+        <param name="plot_linespacing_mini">1.31</param>
+        <param name="plot_linespacing_tiny">1.23</param>
         </include>
         <font>
             <name>font23_narrow</name>
