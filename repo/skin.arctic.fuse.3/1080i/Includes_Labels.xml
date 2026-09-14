@@ -1234,6 +1234,7 @@
         <value condition="!String.IsEmpty(Window(Home).Property(TMDBHelper.ListItem.base_plot))">$INFO[Window(Home).Property(TMDBHelper.ListItem.base_plot)]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Plot))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Plot)]</value>
         <value condition="!String.IsEmpty(Window(Home).Property(TMDBHelper.ListItem.biography))">$INFO[Window(Home).Property(TMDBHelper.ListItem.biography)]</value>
+        <value condition="!String.IsEmpty(ListItem.Plot)">$INFO[ListItem.Plot]</value>
     </variable>
       <variable name="NetworkVar">
         <value condition="String.Contains(Network.IPAddress,1)">[COLOR dodgerblue][/COLOR]</value>
