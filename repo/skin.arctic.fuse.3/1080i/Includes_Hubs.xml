@@ -73,6 +73,8 @@
                     <param name="sortby">$PARAM[sortby]</param>
                     <param name="sortorder">$PARAM[sortorder]</param>
                     <param name="target">$PARAM[target]</param>
+                    <param name="limit">25</param>
+                    <param name="browse">$VAR[Defs_BrowseLimitedLists]</param>
                 </include>
                 <nested />
             </include>
