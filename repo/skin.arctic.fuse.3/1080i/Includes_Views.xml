@@ -208,36 +208,7 @@
         <value condition="!String.IsEmpty(ListItem.TVShowDBID)">plugin://script.skinvariables/?info=get_dbitem_tvshow_details&amp;dbid=$INFO[ListItem.TVShowDBID]&amp;reload=$INFO[ListItem.TVShowDBID]</value>
     </variable>
 
-    <variable name="Path_LocalMALRating_Item">
-        <!-- Dedicated helper lookup for local MyAnimeList rating.
-             This is used especially in Seasons view, where the focused season item often does not expose the tvshow NFO rating directly. -->
-        <value condition="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=tvshow&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="[String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + !String.IsEmpty(ListItem.TVShowDBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=$INFO[ListItem.DBType]&amp;dbid=$INFO[ListItem.DBID]&amp;tvshowdbid=$INFO[ListItem.TVShowDBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=season&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;dbtype=episode&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="!String.IsEmpty(ListItem.FolderPath)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=myanimelist&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.FolderPath]</value>
-    </variable>
 
-    <variable name="Path_LocalYunusRating_Item">
-        <!-- ================================================================
-             CUSTOM MOD - part of the "Local rating" decimal fix.
-             See the big comment block at the top of Includes_Info.xml for
-             full context. In short: Season/Episode items don't natively
-             expose the tvshow.nfo's custom-named rating (here: "Yunus")
-             with decimal precision via Kodi infolabels, so this hidden
-             widget (id 9812 below) calls the bundled
-             plugin.video.af3.characterart addon, which re-parses
-             tvshow.nfo directly and returns the exact value as a
-             ListItem property ("rating"), read in Includes_Info.xml via
-             Container(9812).ListItem.Property(rating).
-             If the NFO's rating name ever changes from "Yunus", update
-             rating=yunus in every plugin:// URL below accordingly. -->
-        <value condition="String.IsEqual(ListItem.DBType,tvshow) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=tvshow&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="[String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + !String.IsEmpty(ListItem.TVShowDBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=$INFO[ListItem.DBType]&amp;dbid=$INFO[ListItem.DBID]&amp;tvshowdbid=$INFO[ListItem.TVShowDBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="String.IsEqual(ListItem.DBType,season) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=season&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.DBID)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;dbtype=episode&amp;dbid=$INFO[ListItem.DBID]&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.DBID]</value>
-        <value condition="!String.IsEmpty(ListItem.FolderPath)">plugin://plugin.video.af3.characterart/?info=rating&amp;rating=yunus&amp;folder=$INFO[ListItem.FolderPath]&amp;file=$INFO[ListItem.FileNameAndPath]&amp;reload=$INFO[ListItem.FolderPath]</value>
-    </variable>
 
     <include name="View_Row_Line">
         <control type="group">
@@ -370,25 +341,11 @@
                 <focusedlayout width="1" height="1" />
                 <content target="videos">$VAR[Path_LocalRating_ParentItem]</content>
             </control>
-            <control type="list" id="9811">
-                <left>-1000</left>
-                <top>-1000</top>
-                <width>1</width>
-                <height>1</height>
-                <itemlayout width="1" height="1" />
-                <focusedlayout width="1" height="1" />
-                <content target="videos">$VAR[Path_LocalMALRating_Item]</content>
-            </control>
-            <!-- CUSTOM MOD: hidden widget for the "Local rating" decimal fix, see Path_LocalYunusRating_Item above. -->
-            <control type="list" id="9812">
-                <left>-1000</left>
-                <top>-1000</top>
-                <width>1</width>
-                <height>1</height>
-                <itemlayout width="1" height="1" />
-                <focusedlayout width="1" height="1" />
-                <content target="videos">$VAR[Path_LocalYunusRating_Item]</content>
-            </control>
+            <!-- CUSTOM MOD REMOVED (speed): hidden lists 9811/9812 called
+                 plugin.video.af3.characterart (not installed); each focused
+                 card fired two failing plugin lookups that blocked the widget
+                 until timeout. Container(9812) rating reads in Includes_Info.xml
+                 now resolve empty and fall back to normal Rating/UserRating. -->
             <include>Info_Panel_Dimensions</include>
             <include content="Info_Panel">
                 <param name="visible">String.IsEmpty(Window.Property(TMDBHelper.WidgetContainer))</param>
