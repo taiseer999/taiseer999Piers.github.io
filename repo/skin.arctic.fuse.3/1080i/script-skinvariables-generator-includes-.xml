@@ -1091,6 +1091,16 @@
             <param name="limit"/>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-dd6445be)</param>
         </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">503</param>
+            <param name="content">plugin://plugin.video.dexhub/?action=continue</param>
+            <param name="include">List_Landscape_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-bbfe0eda)</param>
+        </include>
         <animation effect="slide" start="0" end="0,260" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
         <animation effect="slide" end="0" start="0,260" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
     </include>
@@ -1114,6 +1124,15 @@
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
+        <item>
+            <label>Continue Watching</label>
+            <property name="guid">guid-bbfe0eda</property>
+            <property name="widget_id">$NUMBER[503]</property>
+            <property name="show_overlay">true</property>
+            <property name="hide_overlay"/>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.dexhub/?action=continue,return)</onclick>
+            <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
+        </item>
     </include>
     <!-- Combined Info -->
     <include name="skinvariables-1103widgets-wall-info">
@@ -1122,6 +1141,9 @@
         </include>
         <include content="Hub_Wall_Info">
             <param name="id">502</param>
+        </include>
+        <include content="Hub_Wall_Info">
+            <param name="id">503</param>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -1148,6 +1170,17 @@
             <param name="autoscroll">False</param>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-dd6445be)</param>
         </include>
+        <include content="Hub_Combined_Widget">
+            <param name="id">503</param>
+            <param name="content">plugin://plugin.video.dexhub/?action=continue</param>
+            <param name="include">List_Landscape_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="autoscroll">False</param>
+            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-bbfe0eda)</param>
+        </include>
     </include>
     <!-- Wall Widgets Selector -->
     <include name="skinvariables-1103widgets-combined-selector">
@@ -1169,6 +1202,15 @@
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
+        <item>
+            <label>Continue Watching</label>
+            <property name="guid">guid-bbfe0eda</property>
+            <property name="widget_id">$NUMBER[503]</property>
+            <property name="show_overlay"/>
+            <property name="hide_overlay">true</property>
+            <onclick>ActivateWindow(videos,plugin://plugin.video.dexhub/?action=continue,return)</onclick>
+            <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
+        </item>
     </include>
     <!-- Combined Info -->
     <include name="skinvariables-1103widgets-combined-info">
@@ -1177,6 +1219,9 @@
         </include>
         <include content="Hub_Combined_Info">
             <param name="id">502</param>
+        </include>
+        <include content="Hub_Combined_Info">
+            <param name="id">503</param>
         </include>
     </include>
     <!-- Standard Widgets -->
@@ -1232,6 +1277,32 @@
                 <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(502) | System.IdleTime(3)]</param>
+                </include>
+            </include>
+            <include content="Widget_Row">
+                <param name="id">503</param>
+                <param name="groupid">703</param>
+                <param name="label">Continue Watching</param>
+                <param name="usewidgetlabel">False</param>
+                <param name="include">List_Landscape_Row</param>
+                <param name="grouplistid">602</param>
+                <param name="refocus">SetFocus(302)</param>
+                <param name="detailed">False</param>
+                <param name="visible">[True] + [True]</param>
+                <param name="altvisible">False</param>
+                <param name="busy_isupdating">True</param>
+                <param name="widgetfade_include">true</param>
+                <param name="widgetfade_disable">false</param>
+                <param name="widgetconstants_affix">_detailed</param>
+                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
+                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
+                <description/>
+                <include content="Widget_NoResults">
+                    <param name="id">503</param>
+                </include>
+                <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.dexhub/?action=continue</content>
+                <include content="Defs_AutoScroll" condition="False">
+                    <param name="condition">[!Control.HasFocus(503) | System.IdleTime(3)]</param>
                 </include>
             </include>
         </include>
@@ -4601,6 +4672,81 @@
             <param name="allowhiddenfocus">true</param>
         </include>
     </include>
+    <!-- Search Wall Extended -->
+    <include name="skinvariables-searchwidgets-wall">
+        <include content="Hub_Wall_Widget">
+            <param name="id">502</param>
+            <param name="content">$VAR[Path_SearchTerm_SingleEncoded,videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22,%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D]</param>
+            <param name="include">List_Poster_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">true</param>
+            <param name="allowhiddenfocus">true</param>
+            <param name="allowhiddenfocus_visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-c3f7938a)</param>
+        </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">503</param>
+            <param name="content">$VAR[Path_SearchTerm_SingleEncoded,videodb://tvshows/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22,%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D]</param>
+            <param name="include">List_Poster_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">true</param>
+            <param name="allowhiddenfocus">true</param>
+            <param name="allowhiddenfocus_visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-cb2a4d7d)</param>
+        </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">504</param>
+            <param name="content">$VAR[Path_SearchTerm_SingleEncoded,musicdb://albums/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22album%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22,%22%5D%7D%5D%7D%2C%22type%22%3A%22albums%22%7D]</param>
+            <param name="include">List_Square_Row</param>
+            <param name="target">music</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">true</param>
+            <param name="allowhiddenfocus">true</param>
+            <param name="allowhiddenfocus_visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-16f2fc1c)</param>
+        </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">505</param>
+            <param name="content">$VAR[Path_SearchTerm_SingleEncoded,musicdb://artists/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22artist%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22,%22%5D%7D%5D%7D%2C%22type%22%3A%22artists%22%7D]</param>
+            <param name="include">List_Square_Row</param>
+            <param name="target">music</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">true</param>
+            <param name="allowhiddenfocus">true</param>
+            <param name="allowhiddenfocus_visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-e725f389)</param>
+        </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">506</param>
+            <param name="content">$VAR[Path_SearchTerm_DoubleEncoded,plugin://plugin.video.themoviedb.helper?info=search&amp;tmdb_type=movie&amp;query=,&amp;nextpage=false&amp;cacheonly=true]</param>
+            <param name="include">List_Poster_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">true</param>
+            <param name="allowhiddenfocus">true</param>
+            <param name="allowhiddenfocus_visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-d2d4c383)</param>
+        </include>
+        <include content="Hub_Wall_Widget">
+            <param name="id">507</param>
+            <param name="content">$VAR[Path_SearchTerm_DoubleEncoded,plugin://plugin.video.themoviedb.helper?info=search&amp;tmdb_type=tv&amp;query=,&amp;nextpage=false&amp;cacheonly=true]</param>
+            <param name="include">List_Poster_Row</param>
+            <param name="target">videos</param>
+            <param name="sortby"/>
+            <param name="sortorder">ascending</param>
+            <param name="limit"/>
+            <param name="visible">true</param>
+            <param name="allowhiddenfocus">true</param>
+            <param name="allowhiddenfocus_visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-3ddd2fa3)</param>
+        </include>
+    </include>
     <!-- Search Widgets -->
     <include name="skinvariables-searchwidgets-standard">
         <include content="Hub_Widgets_Grouplist">
@@ -4609,7 +4755,7 @@
                 <param name="groupid">702</param>
                 <param name="label">Movies</param>
                 <param name="include">List_Poster_Row</param>
-                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-c3f7938a) | String.IsEmpty(Container(601).ListItem.Property(guid)) | Skin.HasSetting(Search.DisableCombined)]</param>
+                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-c3f7938a) | String.IsEmpty(Container(601).ListItem.Property(guid)) | String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Standard)]</param>
                 <param name="altvisible">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_isupdating">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_visible">[Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating]</param>
@@ -4633,7 +4779,7 @@
                 <param name="groupid">703</param>
                 <param name="label">TV Shows</param>
                 <param name="include">List_Poster_Row</param>
-                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-cb2a4d7d) | String.IsEmpty(Container(601).ListItem.Property(guid)) | Skin.HasSetting(Search.DisableCombined)]</param>
+                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-cb2a4d7d) | String.IsEmpty(Container(601).ListItem.Property(guid)) | String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Standard)]</param>
                 <param name="altvisible">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_isupdating">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_visible">[Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating]</param>
@@ -4657,7 +4803,7 @@
                 <param name="groupid">704</param>
                 <param name="label">Albums</param>
                 <param name="include">List_Square_Row</param>
-                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-16f2fc1c) | String.IsEmpty(Container(601).ListItem.Property(guid)) | Skin.HasSetting(Search.DisableCombined)]</param>
+                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-16f2fc1c) | String.IsEmpty(Container(601).ListItem.Property(guid)) | String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Standard)]</param>
                 <param name="altvisible">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_isupdating">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_visible">[Integer.IsEqual(Container(504).NumItems,0) | Container(504).IsUpdating]</param>
@@ -4681,7 +4827,7 @@
                 <param name="groupid">705</param>
                 <param name="label">Artists</param>
                 <param name="include">List_Square_Row</param>
-                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-e725f389) | String.IsEmpty(Container(601).ListItem.Property(guid)) | Skin.HasSetting(Search.DisableCombined)]</param>
+                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-e725f389) | String.IsEmpty(Container(601).ListItem.Property(guid)) | String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Standard)]</param>
                 <param name="altvisible">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_isupdating">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_visible">[Integer.IsEqual(Container(505).NumItems,0) | Container(505).IsUpdating]</param>
@@ -4705,7 +4851,7 @@
                 <param name="groupid">706</param>
                 <param name="label">Movies (TMDb)</param>
                 <param name="include">List_Poster_Row</param>
-                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-d2d4c383) | String.IsEmpty(Container(601).ListItem.Property(guid)) | Skin.HasSetting(Search.DisableCombined)]</param>
+                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-d2d4c383) | String.IsEmpty(Container(601).ListItem.Property(guid)) | String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Standard)]</param>
                 <param name="altvisible">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_isupdating">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_visible">[Integer.IsEqual(Container(506).NumItems,0) | Container(506).IsUpdating]</param>
@@ -4729,7 +4875,7 @@
                 <param name="groupid">707</param>
                 <param name="label">TV Shows (TMDb)</param>
                 <param name="include">List_Poster_Row</param>
-                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-3ddd2fa3) | String.IsEmpty(Container(601).ListItem.Property(guid)) | Skin.HasSetting(Search.DisableCombined)]</param>
+                <param name="visible">[String.IsEqual(Container(601).ListItem.Property(guid),guid-3ddd2fa3) | String.IsEmpty(Container(601).ListItem.Property(guid)) | String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Standard)]</param>
                 <param name="altvisible">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_isupdating">[!String.IsEmpty(Control.GetLabel(3000).index(1)) + [Control.HasFocus(3000) | Control.HasFocus(301)] + System.IdleTime(1) + !System.IdleTime(2)]</param>
                 <param name="busy_visible">[Integer.IsEqual(Container(507).NumItems,0) | Container(507).IsUpdating]</param>
@@ -4753,84 +4899,183 @@
     <!-- Search Selector -->
     <include name="skinvariables-searchwidgets-selector">
         <item>
-            <label>Movies</label>
+            <label>Movies$INFO[Container(502).NumItems, (,)]</label>
             <icon>special://skin/extras/icons/film.png</icon>
             <property name="guid">guid-c3f7938a</property>
             <property name="widget_id">$NUMBER[502]</property>
             <property name="show_artwork">true</property>
             <property name="widget_numitems">$INFO[Container(502).NumItems]</property>
-            <visible>!Integer.IsEqual(Container(502).NumItems,0)</visible>
-            <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <visible>!Integer.IsEqual(Container(502).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(502).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(502).IsUpdating</visible> -->
         </item>
         <item>
-            <label>TV Shows</label>
+            <label>TV Shows$INFO[Container(503).NumItems, (,)]</label>
             <icon>special://skin/extras/icons/tv.png</icon>
             <property name="guid">guid-cb2a4d7d</property>
             <property name="widget_id">$NUMBER[503]</property>
             <property name="show_artwork">true</property>
             <property name="widget_numitems">$INFO[Container(503).NumItems]</property>
-            <visible>!Integer.IsEqual(Container(503).NumItems,0)</visible>
-            <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <visible>!Integer.IsEqual(Container(503).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(503).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(503).IsUpdating</visible> -->
         </item>
         <item>
-            <label>Albums</label>
+            <label>Albums$INFO[Container(504).NumItems, (,)]</label>
             <icon>special://skin/extras/icons/songs.png</icon>
             <property name="guid">guid-16f2fc1c</property>
             <property name="widget_id">$NUMBER[504]</property>
             <property name="show_artwork">true</property>
             <property name="widget_numitems">$INFO[Container(504).NumItems]</property>
-            <visible>!Integer.IsEqual(Container(504).NumItems,0)</visible>
-            <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <visible>!Integer.IsEqual(Container(504).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(504).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(504).IsUpdating</visible> -->
         </item>
         <item>
-            <label>Artists</label>
+            <label>Artists$INFO[Container(505).NumItems, (,)]</label>
             <icon>special://skin/extras/icons/songs.png</icon>
             <property name="guid">guid-e725f389</property>
             <property name="widget_id">$NUMBER[505]</property>
             <property name="show_artwork">true</property>
             <property name="widget_numitems">$INFO[Container(505).NumItems]</property>
-            <visible>!Integer.IsEqual(Container(505).NumItems,0)</visible>
-            <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <visible>!Integer.IsEqual(Container(505).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(505).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(505).IsUpdating</visible> -->
         </item>
         <item>
-            <label>Movies (TMDb)</label>
+            <label>Movies (TMDb)$INFO[Container(506).NumItems, (,)]</label>
             <icon>special://skin/extras/icons/film.png</icon>
             <property name="guid">guid-d2d4c383</property>
             <property name="widget_id">$NUMBER[506]</property>
             <property name="show_artwork">true</property>
             <property name="widget_numitems">$INFO[Container(506).NumItems]</property>
-            <visible>!Integer.IsEqual(Container(506).NumItems,0)</visible>
-            <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <visible>!Integer.IsEqual(Container(506).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(506).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(506).IsUpdating</visible> -->
         </item>
         <item>
-            <label>TV Shows (TMDb)</label>
+            <label>TV Shows (TMDb)$INFO[Container(507).NumItems, (,)]</label>
             <icon>special://skin/extras/icons/tv.png</icon>
             <property name="guid">guid-3ddd2fa3</property>
             <property name="widget_id">$NUMBER[507]</property>
             <property name="show_artwork">true</property>
             <property name="widget_numitems">$INFO[Container(507).NumItems]</property>
-            <visible>!Integer.IsEqual(Container(507).NumItems,0)</visible>
-            <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <visible>!Integer.IsEqual(Container(507).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(507).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(507).IsUpdating</visible> -->
+        </item>
+    </include>
+    <!-- Search Selector -->
+    <include name="skinvariables-searchwidgets-wall-selector">
+        <item>
+            <label>Movies$INFO[Container(502).NumItems, (,)]</label>
+            <icon>special://skin/extras/icons/film.png</icon>
+            <property name="guid">guid-c3f7938a</property>
+            <property name="widget_id">$NUMBER[502]</property>
+            <property name="show_artwork">true</property>
+            <property name="widget_numitems">$INFO[Container(502).NumItems]</property>
+            <visible>!Integer.IsEqual(Container(502).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(502).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(502).IsUpdating</visible> -->
+        </item>
+        <item>
+            <label>TV Shows$INFO[Container(503).NumItems, (,)]</label>
+            <icon>special://skin/extras/icons/tv.png</icon>
+            <property name="guid">guid-cb2a4d7d</property>
+            <property name="widget_id">$NUMBER[503]</property>
+            <property name="show_artwork">true</property>
+            <property name="widget_numitems">$INFO[Container(503).NumItems]</property>
+            <visible>!Integer.IsEqual(Container(503).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(503).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(503).IsUpdating</visible> -->
+        </item>
+        <item>
+            <label>Albums$INFO[Container(504).NumItems, (,)]</label>
+            <icon>special://skin/extras/icons/songs.png</icon>
+            <property name="guid">guid-16f2fc1c</property>
+            <property name="widget_id">$NUMBER[504]</property>
+            <property name="show_artwork">true</property>
+            <property name="widget_numitems">$INFO[Container(504).NumItems]</property>
+            <visible>!Integer.IsEqual(Container(504).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(504).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(504).IsUpdating</visible> -->
+        </item>
+        <item>
+            <label>Artists$INFO[Container(505).NumItems, (,)]</label>
+            <icon>special://skin/extras/icons/songs.png</icon>
+            <property name="guid">guid-e725f389</property>
+            <property name="widget_id">$NUMBER[505]</property>
+            <property name="show_artwork">true</property>
+            <property name="widget_numitems">$INFO[Container(505).NumItems]</property>
+            <visible>!Integer.IsEqual(Container(505).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(505).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(505).IsUpdating</visible> -->
+        </item>
+        <item>
+            <label>Movies (TMDb)$INFO[Container(506).NumItems, (,)]</label>
+            <icon>special://skin/extras/icons/film.png</icon>
+            <property name="guid">guid-d2d4c383</property>
+            <property name="widget_id">$NUMBER[506]</property>
+            <property name="show_artwork">true</property>
+            <property name="widget_numitems">$INFO[Container(506).NumItems]</property>
+            <visible>!Integer.IsEqual(Container(506).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(506).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(506).IsUpdating</visible> -->
+        </item>
+        <item>
+            <label>TV Shows (TMDb)$INFO[Container(507).NumItems, (,)]</label>
+            <icon>special://skin/extras/icons/tv.png</icon>
+            <property name="guid">guid-3ddd2fa3</property>
+            <property name="widget_id">$NUMBER[507]</property>
+            <property name="show_artwork">true</property>
+            <property name="widget_numitems">$INFO[Container(507).NumItems]</property>
+            <visible>!Integer.IsEqual(Container(507).NumItems,0) | String.IsEmpty(Control.GetLabel(3000).index(1))</visible>
+            <!-- <visible>!Integer.IsEqual(Container(507).NumItems,0)</visible> -->
+            <!-- <visible>!String.IsEmpty(Control.GetLabel(3000).index(1))</visible> -->
+            <visible>String.IsEqual(Container(3003).ListItem.Property(mode),search) | !String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)</visible>
+            <!-- <visible>!Container(507).IsUpdating</visible> -->
         </item>
     </include>
     <!-- Search Extended -->
     <include name="skinvariables-searchwidgets-info">
-        <include content="Hub_Combined_Info">
+        <include content="Search_Info">
             <param name="id">502</param>
         </include>
-        <include content="Hub_Combined_Info">
+        <include content="Search_Info">
             <param name="id">503</param>
         </include>
-        <include content="Hub_Combined_Info">
+        <include content="Search_Info">
             <param name="id">504</param>
         </include>
-        <include content="Hub_Combined_Info">
+        <include content="Search_Info">
             <param name="id">505</param>
         </include>
-        <include content="Hub_Combined_Info">
+        <include content="Search_Info">
             <param name="id">506</param>
         </include>
-        <include content="Hub_Combined_Info">
+        <include content="Search_Info">
             <param name="id">507</param>
         </include>
     </include>

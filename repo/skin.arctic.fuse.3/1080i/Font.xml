@@ -125,13 +125,13 @@
         <include content="Font_Default">
             <param name="font_black">iphone.ttf</param>
             <param name="font_bold">iphone.ttf</param>
-            <param name="font_regular">iphone.ttf</param>
+            <param name="font_regular">iphone-Regular.ttf</param>
             <param name="style_light">light</param>
             <param name="size_hint">17</param>
             <param name="size_hint">15</param>
             <param name="size_tiny">21</param>
             <param name="size_mini">22</param>
-            <param name="size_main">30</param>
+            <param name="size_main">28</param>
             <param name="size_midi">35</param>
             <param name="size_head">38</param>
             <param name="size_huge">43</param>
@@ -140,7 +140,7 @@
             <param name="size_midi_x2">64</param>
             <param name="plot_linespacing_head">1.03</param>
             <param name="plot_linespacing_midi">1.45</param>
-            <param name="plot_linespacing_main">1.2</param>
+            <param name="plot_linespacing_main">1.1</param>
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
@@ -159,7 +159,7 @@
         <include content="Font_Default">
             <param name="font_black">MOHANDbold.ttf</param>
             <param name="font_bold">MOHANDbold.ttf</param>
-            <param name="font_regular">MOHANDbold.ttf</param>
+            <param name="font_regular">MOHAND-Regular.ttf</param>
             <param name="style_light">light</param>
             <param name="style_light">light</param>
             <param name="size_hint">17</param>
@@ -209,7 +209,7 @@
             <param name="size_midi_x2">64</param>
             <param name="plot_linespacing_head">1.03</param>
             <param name="plot_linespacing_midi">1.45</param>
-            <param name="plot_linespacing_main">1.15</param>
+            <param name="plot_linespacing_main">1.0</param>
             <param name="plot_linespacing_mini">1.20</param>
             <param name="plot_linespacing_tiny">1.11</param>
         </include>
@@ -234,7 +234,7 @@
             <param name="size_hint">15</param>
             <param name="size_tiny">21</param>
             <param name="size_mini">22</param>
-            <param name="size_main">30</param>
+            <param name="size_main">28</param>
             <param name="size_midi">35</param>
             <param name="size_head">42</param>
             <param name="size_huge">43</param>
