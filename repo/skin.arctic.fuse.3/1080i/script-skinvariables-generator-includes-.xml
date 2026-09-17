@@ -1091,16 +1091,6 @@
             <param name="limit"/>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-dd6445be)</param>
         </include>
-        <include content="Hub_Wall_Widget">
-            <param name="id">503</param>
-            <param name="content">plugin://plugin.video.dexhub/?action=continue</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">videos</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-bbfe0eda)</param>
-        </include>
         <animation effect="slide" start="0" end="0,260" time="400" tween="quadratic" reversible="false" condition="$EXP[Exp_Hubs_Spotlight_SlideDown]">Conditional</animation>
         <animation effect="slide" end="0" start="0,260" time="400" tween="quadratic" reversible="false" condition="![$EXP[Exp_Hubs_Spotlight_SlideDown]]">Conditional</animation>
     </include>
@@ -1124,15 +1114,6 @@
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
-        <item>
-            <label>Continue Watching</label>
-            <property name="guid">guid-bbfe0eda</property>
-            <property name="widget_id">$NUMBER[503]</property>
-            <property name="show_overlay">true</property>
-            <property name="hide_overlay"/>
-            <onclick>ActivateWindow(videos,plugin://plugin.video.dexhub/?action=continue,return)</onclick>
-            <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
-        </item>
     </include>
     <!-- Combined Info -->
     <include name="skinvariables-1103widgets-wall-info">
@@ -1141,9 +1122,6 @@
         </include>
         <include content="Hub_Wall_Info">
             <param name="id">502</param>
-        </include>
-        <include content="Hub_Wall_Info">
-            <param name="id">503</param>
         </include>
     </include>
     <!-- Wall Widgets -->
@@ -1170,17 +1148,6 @@
             <param name="autoscroll">False</param>
             <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-dd6445be)</param>
         </include>
-        <include content="Hub_Combined_Widget">
-            <param name="id">503</param>
-            <param name="content">plugin://plugin.video.dexhub/?action=continue</param>
-            <param name="include">List_Landscape_Row</param>
-            <param name="target">videos</param>
-            <param name="sortby"/>
-            <param name="sortorder">ascending</param>
-            <param name="limit"/>
-            <param name="autoscroll">False</param>
-            <param name="visible">String.IsEqual(Container(601).ListItem.Property(guid),guid-bbfe0eda)</param>
-        </include>
     </include>
     <!-- Wall Widgets Selector -->
     <include name="skinvariables-1103widgets-combined-selector">
@@ -1202,15 +1169,6 @@
             <onclick>ActivateWindow(videos,plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true,return)</onclick>
             <visible>!Integer.IsEqual(Container(502).NumItems,0) | Container(502).IsUpdating</visible>
         </item>
-        <item>
-            <label>Continue Watching</label>
-            <property name="guid">guid-bbfe0eda</property>
-            <property name="widget_id">$NUMBER[503]</property>
-            <property name="show_overlay"/>
-            <property name="hide_overlay">true</property>
-            <onclick>ActivateWindow(videos,plugin://plugin.video.dexhub/?action=continue,return)</onclick>
-            <visible>!Integer.IsEqual(Container(503).NumItems,0) | Container(503).IsUpdating</visible>
-        </item>
     </include>
     <!-- Combined Info -->
     <include name="skinvariables-1103widgets-combined-info">
@@ -1219,9 +1177,6 @@
         </include>
         <include content="Hub_Combined_Info">
             <param name="id">502</param>
-        </include>
-        <include content="Hub_Combined_Info">
-            <param name="id">503</param>
         </include>
     </include>
     <!-- Standard Widgets -->
@@ -1277,32 +1232,6 @@
                 <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.themoviedb.helper/?info=dir_custom_node&amp;filename=koreantvab.json&amp;basedir=special%3A%2F%2Fprofile%2Faddon_data%2Fplugin.video.themoviedb.helper%2Fnodes%2F&amp;reload=$INFO[Window(Home).Property(TMDbHelper.Widgets.Reload)]&amp;widget=true</content>
                 <include content="Defs_AutoScroll" condition="False">
                     <param name="condition">[!Control.HasFocus(502) | System.IdleTime(3)]</param>
-                </include>
-            </include>
-            <include content="Widget_Row">
-                <param name="id">503</param>
-                <param name="groupid">703</param>
-                <param name="label">Continue Watching</param>
-                <param name="usewidgetlabel">False</param>
-                <param name="include">List_Landscape_Row</param>
-                <param name="grouplistid">602</param>
-                <param name="refocus">SetFocus(302)</param>
-                <param name="detailed">False</param>
-                <param name="visible">[True] + [True]</param>
-                <param name="altvisible">False</param>
-                <param name="busy_isupdating">True</param>
-                <param name="widgetfade_include">true</param>
-                <param name="widgetfade_disable">false</param>
-                <param name="widgetconstants_affix">_detailed</param>
-                <onfocus>ClearProperty(HomeSwitcher.IsVisible,Home)</onfocus>
-                <onfocus>ClearProperty(InfoPanel.FullSwitch,Home)</onfocus>
-                <description/>
-                <include content="Widget_NoResults">
-                    <param name="id">503</param>
-                </include>
-                <content sortby="" sortorder="ascending" target="videos" limit="" browse="$VAR[Defs_BrowseLimitedLists]">plugin://plugin.video.dexhub/?action=continue</content>
-                <include content="Defs_AutoScroll" condition="False">
-                    <param name="condition">[!Control.HasFocus(503) | System.IdleTime(3)]</param>
                 </include>
             </include>
         </include>
