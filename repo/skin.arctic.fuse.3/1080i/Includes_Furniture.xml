@@ -97,8 +97,8 @@
                 </control>
                 <control type="image">
                     <width>20</width>
-                    <height>20</height>
-                    <top>28</top>
+                    <height>22</height>
+                    <top>29</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
                     <texture>$VAR[SysStats_RAM_Icon]</texture>
