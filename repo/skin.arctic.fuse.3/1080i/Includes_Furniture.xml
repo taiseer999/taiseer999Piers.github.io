@@ -78,7 +78,7 @@
                 <width>600</width>
                 <align>right</align>
                 <orientation>horizontal</orientation>
-                <itemgap>8</itemgap>
+                <itemgap>2</itemgap>
                 <usecontrolcoords>true</usecontrolcoords>
                 <control type="image">
                     <width>24</width>
@@ -96,9 +96,9 @@
                     <label>$INFO[System.CPUTemperature]</label>
                 </control>
                 <control type="image">
-                    <width>20</width>
-                    <height>22</height>
-                    <top>29</top>
+                    <width>22</width>
+                    <height>25</height>
+                    <top>27</top>
                     <left>14</left>
                     <aspectratio>keep</aspectratio>
                     <texture>$VAR[SysStats_RAM_Icon]</texture>
@@ -112,19 +112,19 @@
                     <label>$INFO[system.memory(used.percent)]</label>
                 </control>
                 <control type="image">
-                    <width>25</width>
-                    <height>25</height>
-                    <top>27</top>
-                    <left>0</left>
+                    <width>30</width>
+                    <height>30</height>
+                    <top>26</top>
+                    <left>6</left>
                     <aspectratio>keep</aspectratio>
                     <texture>$VAR[SysStats_Connected_Icon]</texture>
                     <visible>String.Contains(Network.IPAddress,1)</visible>
                 </control>
                 <control type="image">
-                    <width>25</width>
-                    <height>25</height>
-                    <top>27</top>
-                    <left>0</left>
+                    <width>30</width>
+                    <height>30</height>
+                    <top>26</top>
+                    <left>6</left>
                     <aspectratio>keep</aspectratio>
                     <texture>$VAR[SysStats_Disconnected_Icon]</texture>
                     <visible>!String.Contains(Network.IPAddress,1)</visible>
