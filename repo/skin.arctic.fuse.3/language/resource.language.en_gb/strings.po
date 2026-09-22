@@ -780,9 +780,19 @@ msgctxt "#31161"
 msgid "Flyer"
 msgstr ""
 
+#: /shortcuts/skinviewtypes.json
+msgctxt "#31163"
+msgid "Combined Flyer"
+msgstr ""
+
 #: /1080i/SkinSettings.xml
 msgctxt "#31165"
 msgid "Seekbar behaviour on delayed pause"
+msgstr ""
+
+#: /1080i/Includes_Views_Row.xml
+msgctxt "#31164"
+msgid "Row Placard"
 msgstr ""
 
 #: /1080i/SkinSettings.xml
@@ -818,6 +828,11 @@ msgstr ""
 #: /1080i/SkinSettings.xml
 msgctxt "#31173"
 msgid "Scroll"
+msgstr ""
+
+#: /1080i/Includes_Actions.xml
+msgctxt "#31172"
+msgid "Placard"
 msgstr ""
 
 msgctxt "#31174"

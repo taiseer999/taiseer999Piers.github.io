@@ -8,6 +8,7 @@
         "504":  "31100",
         "505":  "31563",
         "506":  "31156",
+        "509":  "31164",
 
         "580":  "31120",
         "581":  "31479",
@@ -27,6 +28,7 @@
         "522":  "31004",
         "523":  "31005",
         "524":  "31006",
+        "526":  "31163",
         "527":  "31580",
         "528":  "31021"
     },
@@ -38,6 +40,7 @@
         "504":  "special://skin/extras/viewtypes/row-board.jpg",
         "505":  "special://skin/extras/viewtypes/row-card.jpg",
         "506":  "special://skin/extras/viewtypes/row-flyer.jpg",
+        "509":  "special://skin/extras/viewtypes/row-placard.jpg",
 
         "580":  "special://skin/extras/viewtypes/list-basic.jpg",
         "581":  "special://skin/extras/viewtypes/list-media.jpg",
@@ -57,12 +60,13 @@
         "522":  "special://skin/extras/viewtypes/combined-poster.jpg",
         "523":  "special://skin/extras/viewtypes/combined-circle.jpg",
         "524":  "special://skin/extras/viewtypes/combined-board.jpg",
+        "526":  "special://skin/extras/viewtypes/combined-flyer.jpg",
         "527":  "special://skin/extras/viewtypes/combined-list.jpg",
         "528":  "special://skin/extras/viewtypes/combined-expanded.jpg"
     },
     "groups": {
         "31007": {
-            "viewtypes": ["500","501","502","503","504","505", "506"],
+            "viewtypes": ["500","501","502","503","504","505", "506", "509"],
             "icon": "special://skin/extras/icons/table-columns.png"
         },
         "535": {
@@ -74,7 +78,7 @@
             "icon": "special://skin/extras/icons/table-cells.png"
         },
         "31083": {
-            "viewtypes": ["520","521","522","523","524","527","528"],
+            "viewtypes": ["520","521","522","523","524","526","527","528"],
             "icon": "special://skin/extras/icons/view-combined.png"
         }
     },
@@ -93,25 +97,25 @@
         },
         "movies": {
             "rule": "Container.Content(movies)",
-            "viewtypes": ["501", "502", "503", "504", "505", "506", "511", "512", "513", "514", "516", "580", "581", "582", "583", "584"],
+            "viewtypes": ["501", "502", "503", "504", "505", "506", "509", "511", "512", "513", "514", "516", "580", "581", "582", "583", "584"],
             "library": "502",
             "plugins": "502"
         },
         "sets": {
             "rule": "Container.Content(sets)",
-            "viewtypes": ["501", "502", "503", "504", "505", "506", "511", "512", "513", "514", "516", "521", "522", "523", "524", "527", "528", "580", "581", "582", "583", "584"],
+            "viewtypes": ["501", "502", "503", "504", "505", "506", "509", "511", "512", "513", "514", "516", "521", "522", "523", "524", "526", "527", "528", "580", "581", "582", "583", "584"],
             "library": "502",
             "plugins": "502"
         },
         "tvshows": {
             "rule": "!String.IsEqual(Container.Property(param.info),episode_groups) + Container.Content(tvshows)",
-            "viewtypes": ["501", "502", "503", "504", "505", "506", "511", "512", "513", "514", "516", "521", "522", "524", "527", "528", "580", "581", "582", "583", "584"],
+            "viewtypes": ["501", "502", "503", "504", "505", "506", "509", "511", "512", "513", "514", "516", "521", "522", "524", "526", "527", "528", "580", "581", "582", "583", "584"],
             "library": "502",
             "plugins": "502"
         },
         "episode-groups-tvshows": {
             "rule": "String.IsEqual(Container.Property(param.info),episode_groups) + Container.Content(tvshows)",
-            "viewtypes": ["501", "502", "503", "504", "505", "506", "511", "512", "513", "514", "516", "521", "522", "524", "527", "528", "580", "581", "582", "583", "584"],
+            "viewtypes": ["501", "502", "503", "504", "505", "506", "509", "511", "512", "513", "514", "516", "521", "522", "524", "526", "527", "528", "580", "581", "582", "583", "584"],
             "library": "502",
             "plugins": "502"
         },
@@ -135,13 +139,13 @@
         },
         "videoversions": {
             "rule": "Container.Content(videoversions)",
-            "viewtypes": ["501", "502", "503", "504", "505", "506", "511", "512", "513", "514", "516", "521", "522", "523", "524", "527", "528", "580", "581", "582", "583", "584"],
+            "viewtypes": ["501", "502", "503", "504", "505", "506", "509", "511", "512", "513", "514", "516", "521", "522", "523", "524", "526", "527", "528", "580", "581", "582", "583", "584"],
             "library": "521",
             "plugins": "521"
         },
         "genres": {
             "rule": "!Window.IsVisible(MyMusicNav.xml) + Container.Content(genres)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
@@ -153,7 +157,7 @@
         },
         "years": {
             "rule": "!Window.IsVisible(MyMusicNav.xml) + Container.Content(years)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
@@ -165,43 +169,43 @@
         },
         "studios": {
             "rule": "Container.Content(studios)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
         "directors": {
             "rule": "Container.Content(directors)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
         "countries": {
             "rule": "Container.Content(countries)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
         "tags": {
             "rule": "Container.Content(tags)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
         "roles": {
             "rule": "Container.Content(roles)",
-            "viewtypes": ["500", "503", "510", "513", "520", "521", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "520", "521", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
         "actors": {
             "rule": "Container.Content(actors)",
-            "viewtypes": ["502", "506", "512", "516", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["502", "506", "512", "516", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "502",
             "plugins": "502"
         },
         "playlists": {
             "rule": "Container.Content(playlists)",
-            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "527", "528", "580"],
+            "viewtypes": ["500", "503", "510", "513", "521", "522", "523", "524", "526", "527", "528", "580"],
             "library": "500",
             "plugins": "500"
         },
