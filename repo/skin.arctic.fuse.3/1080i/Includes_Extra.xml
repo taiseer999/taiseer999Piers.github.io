@@ -30,8 +30,8 @@
                 <control type="image">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
-                    <width>70</width>
-                    <height>42</height>
+                    <width>90</width>
+                    <height>60</height>
                     <aspectratio align="left">keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">flags/colorful/other/3D.png</texture>
                     <visible>VideoPlayer.IsStereoscopic</visible>
@@ -39,8 +39,8 @@
                 <control type="image" id="78881">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
-                    <width>70</width>
-                    <height>42</height>
+                    <width>90</width>
+                    <height>90</height>
                     <aspectratio align="left">keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_RipSource]</texture>
                     <visible>!String.IsEmpty($VAR[Image_VideoPlayer_RipSource])</visible>
@@ -48,8 +48,8 @@
                 <control type="image" id="78882">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
-                    <width>80</width>
-                    <height>42</height>
+                    <height>110</height>
+                    <width>110</width>
                     <aspectratio>keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">flags/colorful/resolution/$INFO[VideoPlayer.VideoResolution].png</texture>
                     <visible>!String.IsEmpty(VideoPlayer.VideoResolution)</visible>
@@ -57,8 +57,8 @@
                 <control type="image" id="78880">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
-                    <width>70</width>
-                    <height>42</height>
+                    <height>110</height>
+                    <width>110</width>
                     <aspectratio align="left">keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_HDRType_Strip]</texture>
                 </control>
