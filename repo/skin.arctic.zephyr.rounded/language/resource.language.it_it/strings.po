@@ -2573,3 +2573,47 @@ msgstr ""
 msgctxt "#31638"
 msgid "Show info bar when playback starts"
 msgstr ""
+
+msgctxt "#31642"
+msgid "TMDb Movies"
+msgstr ""
+
+msgctxt "#31643"
+msgid "TMDb TV Shows"
+msgstr ""
+
+msgctxt "#31644"
+msgid "TMDb Collections"
+msgstr ""
+
+msgctxt "#31645"
+msgid "TMDb People"
+msgstr ""
+
+msgctxt "#31646"
+msgid "Dynamic"
+msgstr ""
+
+msgctxt "#31647"
+msgid "DOWN / UP key to return to the search bar"
+msgstr ""
+
+msgctxt "#31648"
+msgid "RIGHT open mini keyboard"
+msgstr ""
+
+msgctxt "#31649"
+msgid "LEFT / RIGHT key to return to the main menu"
+msgstr ""
+
+msgctxt "#31655"
+msgid "DOWN / UP key to return to the main menu"
+msgstr ""
+
+msgctxt "#31656"
+msgid "Dynamic search: TMDb results"
+msgstr ""
+
+msgctxt "#31657"
+msgid "Dynamic search: library results"
+msgstr ""

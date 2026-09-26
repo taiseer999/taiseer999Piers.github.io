@@ -1,0 +1,53 @@
+Search port  -  fork 3.5.66 -> 3.5.67
+Ported from AZR Omega (skin.arctic.zephyr.rounded-omega, v1.3.9)
+
+WHAT WAS PORTED
+  Custom_1147_Home_Search_List.xml    (replaces Custom_1147_Home_SearchDialog.xml, same id)
+      List of search providers + inline search bar (Wikipedia / Global search / Addons).
+      Items come from skinshortcuts v3 menu "searchmenu" (shortcuts/menus.xml),
+      editable from Skin settings > "Customise search menu".
+  Custom_1148_Home_Search_Dynamic.xml (new)
+      Search bar + T9 mini keyboard (RIGHT) + live result rows + result panel (LEFT on rows).
+  Includes_Keyboard.xml               (new, upstream as-is)
+  Includes_Search.xml                 (new) - static result rows. Upstream builds these with
+      skinshortcuts v1 "searchdynamenu"; the fork runs skinshortcuts v3, so they are static.
+      Row ids 5001-5014 are kept so the result panel / 381 / 382 buttons work unchanged.
+      Rows hide themselves when the library type is empty or TMDb Helper is disabled.
+
+SUPPORTING CHANGES
+  Includes_Layouts.xml   Def_Normal_Layout_Item(+_Focus): new param window_search (default false)
+  Includes_Home.xml      Widget_Title_Label: <definition> + window_search param, labels visible
+                         in Flix mode inside 1148; main menu clears Launch_local_Search/Show_Menu_Search
+  Includes_Widgets.xml   + Def_Search_Widget_Container
+  Includes_Objects.xml   + Object_Search_Bar, Object_Footer_Duo_Tips, Object_Footer_Right_Tips
+  Includes_Textures.xml  + Texture_Bar_Search_*, Texture_Icon_Search_*, Texture_Keyboard_Search_Background
+  Includes_Animations    + Animation_Label_Fade_In/Out, Animation_Vertical_Scrolltime_Widgets_Container,
+                           Animation_Horizontal_Scrolltime_Widgets_List (was referenced but undefined)
+  Includes_Colors.xml    + Color_Icon_Light, Color_Label_Edit_Search, Color_Label_Tips_Search,
+                           Color_Search_Bar_Border (referenced upstream, never defined there)
+  Includes_Labels.xml    + Label_Feature_Search_* tips, Label_Setting_Home_Header_Search_Type
+  Includes_Expressions   + Dialog_Keyboard_Is_Visible, View_Search_List, View_Search_Dynamic,
+                           View_Search_Panel_Result, View_Search_Background; View_Settings and
+                           View_Artwork_Condition extended like upstream
+  Includes_Background    search fallback fanart now also shown inside 1147 / 1148
+  Includes_Defs.xml      home search button opens 1147 or 1148 (Skin bool Show.Home.Search.Type.Dynamic);
+                         reset-defaults / first-run set Dynamic like upstream; + var border40
+  SkinSettings.xml       + 9258 search type, 9265 library rows, 9266 TMDb rows
+  DialogKeyboard / DialogBusy / script-globalsearch / Home.xml : property housekeeping from upstream
+  media/common/border40.png  extracted from upstream Textures.xbt (loose file, like media/progress)
+  shortcuts/menus.xml + 1080i/script-skinshortcuts-includes.xml : "searchmenu" menu (pre-built include)
+  strings.po (all langs): 31642-31649, 31655-31657  (upstream 31636 collided -> 31655). fr + ar translated.
+
+UNCHANGED
+  Custom_1146_Home_SearchDialog.xml still exists and is still used by the power-menu "Search" item,
+  favourites and the "Search" shortcut. New picker shortcuts: "Search - List" (1147), "Search - Dynamic" (1148).
+
+MEDIA STATUS ICON (same release)
+  Includes_Furniture.xml  Layout_Poster_Indicator_Status_Icon now = Omega "ICON" group
+                          (coloured disc + border ring + white glyph; playing / paused glyphs).
+                          Fork's DBType filter kept. Banner / AF3-circle / hidden modes untouched.
+  + Color_Background_Status_Poster, Color_Indicator_Status_Poster  (Includes_Colors)
+  + Image_Indicator_Icon_Background, Image_Indicator_Icon_Circle   (Includes_Images)
+  + Label_Icon_Status_Poster                                       (Includes_Labels)
+  + Def_Background_Media_Status_Icon_Top_Right, Def_Media_Status_Icon_Symbol_Circle (Includes_Defs)
+  (fork's Def_Media_Status_Icon_Symbol left as is; up_furn.xml is not loaded, not touched)

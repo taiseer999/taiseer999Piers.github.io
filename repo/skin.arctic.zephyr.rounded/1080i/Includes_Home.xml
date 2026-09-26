@@ -171,6 +171,8 @@
                     <onfocus>ClearProperty(controls_nowplaying_visible,Home)</onfocus>
                     <onfocus>ClearProperty(Set_User_Rating,Home)</onfocus>
                     <onfocus>ClearProperty(Launch_Search,Home)</onfocus>
+                    <onfocus>ClearProperty(Launch_local_Search,Home)</onfocus>
+                    <onfocus>ClearProperty(Show_Menu_Search,Home)</onfocus>
                     <onfocus>ClearProperty(Set_Back_Menu_300_After_SubMenu_302,Home)</onfocus>
 
                     <include condition="Skin.HasSetting(home.show.menu.icons)">Home_Horizontal_Main_Menu_Icon</include>
@@ -359,6 +361,8 @@
             <!-- OTHERS -->
 
             <onfocus>ClearProperty(Launch_Search,Home)</onfocus>
+            <onfocus>ClearProperty(Launch_local_Search,Home)</onfocus>
+            <onfocus>ClearProperty(Show_Menu_Search,Home)</onfocus>
             <onfocus>ClearProperty(ListItem_Trailer_Path,Home)</onfocus>
         </control>
 
@@ -491,6 +495,8 @@
                     <onfocus>ClearProperty(controls_nowplaying_visible,Home)</onfocus>
                     <onfocus>ClearProperty(Set_User_Rating,Home)</onfocus>
                     <onfocus>ClearProperty(Launch_Search,Home)</onfocus>
+                    <onfocus>ClearProperty(Launch_local_Search,Home)</onfocus>
+                    <onfocus>ClearProperty(Show_Menu_Search,Home)</onfocus>
                     <onfocus>ClearProperty(Set_Back_Menu_300_After_SubMenu_302,Home)</onfocus>
 
                     <orientation>vertical</orientation>
@@ -978,6 +984,8 @@
             <!-- OTHERS -->
 
             <onfocus>ClearProperty(Launch_Search,Home)</onfocus>
+            <onfocus>ClearProperty(Launch_local_Search,Home)</onfocus>
+            <onfocus>ClearProperty(Show_Menu_Search,Home)</onfocus>
             <onfocus>ClearProperty(ListItem_Trailer_Path,Home)</onfocus>
         </control>
 
@@ -1682,265 +1690,271 @@
     <!-- WIDGET - LABEL TILE -->
 
     <include name="Widget_Title_Label">
-        <visible>!Skin.HasSetting(hide.widget.title)</visible>
-        <visible>![!Skin.HasSetting(hide.home.nowplaying.extended.osd.control.button) + !String.IsEmpty(Window(Home).Property(controls_nowplaying_visible))]</visible>
+        <param name="window_search" default="false" />
 
-        <animation effect="fade" start="100" end="30" time="150" condition="!ControlGroup(301).HasFocus() + Skin.HasSetting(home.style.horizontal.clean)">Conditional</animation>
+        <definition>
+            <visible>!Skin.HasSetting(hide.widget.title)</visible>
+            <visible>![!Skin.HasSetting(hide.home.nowplaying.extended.osd.control.button) + !String.IsEmpty(Window(Home).Property(controls_nowplaying_visible))]</visible>
 
-        <include content="Animation_Fade_Out_Home_Fullscreen_Widget" condition="Skin.HasSetting(home.style.horizontal.clean)">
-            <param name="condition" value="$PARAM[animation_condition]" />
-        </include>
+            <animation effect="fade" start="100" end="30" time="150" condition="!ControlGroup(301).HasFocus() + Skin.HasSetting(home.style.horizontal.clean) + !$PARAM[window_search]">Conditional</animation>
 
-        <include>Animation_Vertical_Widgets_Label_Focus_Search</include>
-        <include>Animation_Home_Clean_Fade_Trailer_Is_Playing</include>
+            <include content="Animation_Fade_Out_Home_Fullscreen_Widget" condition="Skin.HasSetting(home.style.horizontal.clean) + !$PARAM[window_search]">
+                <param name="condition" value="$PARAM[animation_condition]" />
+            </include>
 
-        <height>40</height>
-        <width>1500</width>
-        <left>View_List_Side</left>
+            <include>Animation_Vertical_Widgets_Label_Focus_Search</include>
+            <include>Animation_Home_Clean_Fade_Trailer_Is_Playing</include>
 
-        <include content="Def_Top" condition="Skin.HasSetting(home.style.horizontal.clean) + !Skin.HasSetting(hide.widget.title)">
-            <param name="top" value="-40" />
-        </include>
-        <include content="Def_Top" condition="Skin.HasSetting(home.style.flix)">
-            <param name="top" value="-380" />
-        </include>
+            <height>40</height>
+            <width>1500</width>
+            <left>View_List_Side</left>
 
-        <top>-370</top>
+            <include content="Def_Top" condition="Skin.HasSetting(home.style.horizontal.clean) + !Skin.HasSetting(hide.widget.title) + !$PARAM[window_search]">
+                <param name="top" value="-40" />
+            </include>
+            <include content="Def_Top" condition="Skin.HasSetting(home.style.flix) + !$PARAM[window_search]">
+                <param name="top" value="-380" />
+            </include>
 
-        <itemgap>0</itemgap>
-        <orientation>horizontal</orientation>
-        <usecontrolcoords>true</usecontrolcoords>
+            <top>-370</top>
 
-        <include content="Widget_Bullet_Hightlight">
-            <param name="top" value="5" />
-            <param name="left" value="0" />
-            <param name="dimensions" value="30" />
-            <param name="visible" value="Control.HasFocus($PARAM[focusid])" />
-        </include>
+            <itemgap>0</itemgap>
+            <orientation>horizontal</orientation>
+            <usecontrolcoords>true</usecontrolcoords>
 
-        <control type="label">
-            <left>10</left>
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$PARAM[widget_label]</label>
-        </control>
+            <include content="Widget_Bullet_Hightlight">
+                <param name="top" value="5" />
+                <param name="left" value="0" />
+                <param name="dimensions" value="30" />
+                <param name="visible" value="Control.HasFocus($PARAM[focusid])" />
+            </include>
 
-        <!-- TV SHOWS  -->
+            <control type="label">
+                <left>10</left>
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$PARAM[widget_label]</label>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,      ]$INFO[Container($PARAM[id]).ListItem.Episode,      , $LOCALIZE[20360]]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>!String.StartsWith(ListItem.FolderPath,pvr://)</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,tvshow)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- TV SHOWS  -->
 
-        <!-- EPISODES -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,      ]$INFO[Container($PARAM[id]).ListItem.Episode,      , $LOCALIZE[20360]]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>!String.StartsWith(ListItem.FolderPath,pvr://)</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,tvshow)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,       ]$INFO[Container($PARAM[focusid]).ListItem.Label,      ]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>!String.StartsWith(ListItem.FolderPath,pvr://)</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,episode)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- EPISODES -->
 
-        <!-- MOVIES / VIDEOS -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.TvShowTitle,       ]$INFO[Container($PARAM[focusid]).ListItem.Label,      ]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>!String.StartsWith(ListItem.FolderPath,pvr://)</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,episode)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,       ]$INFO[Container($PARAM[focusid]).ListItem.Year,      ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),      ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name), / ,]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,movie) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,video)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- MOVIES / VIDEOS -->
 
-        <!-- MOVIES / VIDEOS - HOME FLIX -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.Label,       ]$INFO[Container($PARAM[focusid]).ListItem.Year,      ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.1.Name),      ]$INFO[Window(Home).Property(TMDbHelper.ListItem.Genre.2.Name), / ,]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,movie) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,video)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,       ]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,tvshow) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,movie) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,video) | String.IsEmpty(Container($PARAM[focusid]).ListItem.DBType) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,set)</visible>
-            <visible>Skin.HasSetting(home.style.flix) + Skin.HasSetting(show.home.flix.title.clearlogo)</visible>
-            <visible>![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo]</visible>
-        </control>
+            <!-- MOVIES / VIDEOS - HOME FLIX -->
 
-        <!-- SETS - ITEMS COUNT -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.Label,       ]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,tvshow) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,movie) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,video) | String.IsEmpty(Container($PARAM[focusid]).ListItem.DBType) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,set)</visible>
+                <visible>Skin.HasSetting(home.style.flix) + Skin.HasSetting(show.home.flix.title.clearlogo)</visible>
+                <visible>![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo]</visible>
+                <visible>!$EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.Years),  •  ,  •  ]$INFO[Container(44021).NumItems]$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.NumItems),/,] $LOCALIZE[31014]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>ListItem.IsCollection</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-            <visible>Integer.IsGreater(Container(44021).NumItems,0)</visible>
-        </control>
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.Years),  •  ,  •  ]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>ListItem.IsCollection</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-            <visible>!Integer.IsGreater(Container(44021).NumItems,0)</visible>
-        </control>
+            <!-- SETS - ITEMS COUNT -->
 
-        <!-- ALBUMS -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.Years),  •  ,  •  ]$INFO[Container(44021).NumItems]$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.NumItems),/,] $LOCALIZE[31014]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>ListItem.IsCollection</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+                <visible>Integer.IsGreater(Container(44021).NumItems,0)</visible>
+            </control>
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Window(Home).Property(TMDbHelper.ListItem.Set.Years),  •  ,  •  ]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>ListItem.IsCollection</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+                <visible>!Integer.IsGreater(Container(44021).NumItems,0)</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[ListItem.AlbumArtist,  •  ]$INFO[ListItem.Year,  •  ]$INFO[ListItem.Album,  •  ]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid]) + [String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,album) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,song)] + !String.IsEmpty(Container($PARAM[focusid]).ListItem.AlbumArtist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ALBUMS -->
 
-        <!-- ALBUMS - TITLES COUNT -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[ListItem.AlbumArtist,  •  ]$INFO[ListItem.Year,  •  ]$INFO[ListItem.Album,  •  ]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid]) + [String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,album) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,song)] + !String.IsEmpty(Container($PARAM[focusid]).ListItem.AlbumArtist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label" id="9967">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container(44022).NumItems,  •  , $LOCALIZE[134]]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>!Integer.IsGreater(Container($PARAM[id]).ListItem.Property(Album_Totaldiscs),1)</visible>
-            <visible>Integer.IsGreater(Container(44022).NumItems,0)</visible>
-            <visible>String.IsEqual(ListItem.DBType,album)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ALBUMS - TITLES COUNT -->
 
-        <!-- ALBUMS - DISC COUNT -->
+            <control type="label" id="9967">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container(44022).NumItems,  •  , $LOCALIZE[134]]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>!Integer.IsGreater(Container($PARAM[id]).ListItem.Property(Album_Totaldiscs),1)</visible>
+                <visible>Integer.IsGreater(Container(44022).NumItems,0)</visible>
+                <visible>String.IsEqual(ListItem.DBType,album)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label" id="9970">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container(44022).NumItems,  •  , $LOCALIZE[14087]]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>Integer.IsGreater(Container($PARAM[id]).ListItem.Property(Album_Totaldiscs),1)</visible>
-            <visible>Integer.IsGreater(Container(44022).NumItems,0)</visible>
-            <visible>String.IsEqual(ListItem.DBType,album)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ALBUMS - DISC COUNT -->
 
-        <!-- ARTIST -->
+            <control type="label" id="9970">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container(44022).NumItems,  •  , $LOCALIZE[14087]]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>Integer.IsGreater(Container($PARAM[id]).ListItem.Property(Album_Totaldiscs),1)</visible>
+                <visible>Integer.IsGreater(Container(44022).NumItems,0)</visible>
+                <visible>String.IsEqual(ListItem.DBType,album)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Label,  •  ,]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,artist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ARTIST -->
 
-        <!-- ARTIST - HOME FLIX -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.Label,  •  ,]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,artist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Artist,  •  ,]$INFO[Container($PARAM[focusid]).ListItem.Genre,  •  ,]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,artist) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,album)</visible>
-            <visible>Skin.HasSetting(home.style.flix) + Skin.HasSetting(show.home.flix.title.clearlogo)</visible>
-            <visible>![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo]</visible>
-        </control>
+            <!-- ARTIST - HOME FLIX -->
 
-        <!-- ARTIST - COUNT 1 ALBUM -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.Artist,  •  ,]$INFO[Container($PARAM[focusid]).ListItem.Genre,  •  ,]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,artist) | String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,album)</visible>
+                <visible>Skin.HasSetting(home.style.flix) + Skin.HasSetting(show.home.flix.title.clearlogo)</visible>
+                <visible>![$EXP[Video_Window_Home_Flix_Is_Active] + Player.HasMedia + Player.HasVideo]</visible>
+                <visible>!$EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>  •  </label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>Integer.IsGreater(Container(44024).NumItems,1)</visible>
-            <visible>String.IsEqual(ListItem.DBType,artist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
-        <control type="label" id="9968">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$VAR[Label_Home_Widget_Artist_One_Album]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>Integer.IsGreater(Container(44024).NumItems,1)</visible>
-            <visible>String.IsEqual(ListItem.DBType,artist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ARTIST - COUNT 1 ALBUM -->
 
-        <!-- ARTIST - COUNT MORE 1 ALBUM -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>  •  </label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>Integer.IsGreater(Container(44024).NumItems,1)</visible>
+                <visible>String.IsEqual(ListItem.DBType,artist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
+            <control type="label" id="9968">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$VAR[Label_Home_Widget_Artist_One_Album]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>Integer.IsGreater(Container(44024).NumItems,1)</visible>
+                <visible>String.IsEqual(ListItem.DBType,artist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>  •  </label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>Integer.IsEqual(Container(44024).NumItems,1)</visible>
-            <visible>String.IsEqual(ListItem.DBType,artist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
-        <control type="label" id="9969">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$VAR[Label_Home_Widget_Artist_Num_Albums]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>Integer.IsEqual(Container(44024).NumItems,1)</visible>
-            <visible>String.IsEqual(ListItem.DBType,artist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ARTIST - COUNT MORE 1 ALBUM -->
 
-        <!-- ARTIST - GENRE -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>  •  </label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>Integer.IsEqual(Container(44024).NumItems,1)</visible>
+                <visible>String.IsEqual(ListItem.DBType,artist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
+            <control type="label" id="9969">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$VAR[Label_Home_Widget_Artist_Num_Albums]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>Integer.IsEqual(Container(44024).NumItems,1)</visible>
+                <visible>String.IsEqual(ListItem.DBType,artist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Container($PARAM[focusid]).ListItem.Genre,  •  ,]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,artist)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- ARTIST - GENRE -->
 
-        <!-- WEATHER DAILY HOURLY -->
+            <control type="label">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Container($PARAM[focusid]).ListItem.Genre,  •  ,]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.DBType,artist)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label" id="9971">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$INFO[Weather.Data(Location),  •  ,]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.Property(WidgetType),Widget_Type_Weather_Daily) | String.IsEqual(Container($PARAM[focusid]).ListItem.Property(WidgetType),Widget_Type_Weather_Hourly)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- WEATHER DAILY HOURLY -->
 
-        <!-- PVR - COUNT CHANNEL IN GROUP -->
+            <control type="label" id="9971">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$INFO[Weather.Data(Location),  •  ,]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>String.IsEqual(Container($PARAM[focusid]).ListItem.Property(WidgetType),Widget_Type_Weather_Daily) | String.IsEqual(Container($PARAM[focusid]).ListItem.Property(WidgetType),Widget_Type_Weather_Hourly)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="label" id="9972">
-            <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
-            <label>$LOCALIZE[19173]$INFO[Container(44028).NumItems,  •  , $LOCALIZE[19019]]</label>
-            <include>Animation_Vertical_Widgets_Title</include>
-            <visible>Control.HasFocus($PARAM[focusid])</visible>
-            <visible>Integer.IsGreater(Container(44028).NumItems,1)</visible>
-            <visible>!Skin.HasSetting(home.style.flix)</visible>
-        </control>
+            <!-- PVR - COUNT CHANNEL IN GROUP -->
 
-        <!-- LOADING-SPINNER -->
+            <control type="label" id="9972">
+                <include content="Def_Home_Label_Widget_Title"><param name="focusid" value="$PARAM[focusid]" /></include>
+                <label>$LOCALIZE[19173]$INFO[Container(44028).NumItems,  •  , $LOCALIZE[19019]]</label>
+                <include>Animation_Vertical_Widgets_Title</include>
+                <visible>Control.HasFocus($PARAM[focusid])</visible>
+                <visible>Integer.IsGreater(Container(44028).NumItems,1)</visible>
+                <visible>!Skin.HasSetting(home.style.flix) | $EXP[View_Search_Dynamic]</visible>
+            </control>
 
-        <control type="image">
-            <description>Busy animation</description>
-            <visible>$PARAM[busy_visible] | !String.IsEmpty(Window(Home).Property(TMDbHelper.IsUpdating))</visible>
+            <!-- LOADING-SPINNER -->
 
-            <animation effect="rotate" condition="true" start="360" end="0" loop="true" time="1000" center="auto">Conditional</animation>
-            <include content="Animation_Common_Delay_Fade_In"><param name="delay" value="200" /></include>
-            <include>Animation_Vertical_Widgets_Title_Loading</include>
-            <include>Animation_Common_Fade_Out</include>
+            <control type="image">
+                <description>Busy animation</description>
+                <visible>$PARAM[busy_visible] | !String.IsEmpty(Window(Home).Property(TMDbHelper.IsUpdating))</visible>
 
-            <width>45</width>
-            <height>45</height>
-            <aspectratio>keep</aspectratio>
-            <texture colordiffuse="$VAR[Color_Loading_Spinner]">dialog/loading-spinner.png</texture>
-        </control>
+                <animation effect="rotate" condition="true" start="360" end="0" loop="true" time="1000" center="auto">Conditional</animation>
+                <include content="Animation_Common_Delay_Fade_In"><param name="delay" value="200" /></include>
+                <include>Animation_Vertical_Widgets_Title_Loading</include>
+                <include>Animation_Common_Fade_Out</include>
+
+                <width>45</width>
+                <height>45</height>
+                <aspectratio>keep</aspectratio>
+                <texture colordiffuse="$VAR[Color_Loading_Spinner]">dialog/loading-spinner.png</texture>
+            </control>
+        </definition>
     </include>
 
     <!-- WIDGET - ARROWS -->

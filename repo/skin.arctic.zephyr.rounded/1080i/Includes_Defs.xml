@@ -132,7 +132,8 @@
             <onup condition="$EXP[Home_Is_Horizontal]">SetProperty(first_menu,1,Home)</onup>
 
             <onclick>ClearProperty(GlobalSearchWindowOpen,Home)</onclick>
-            <onclick>ActivateWindow(1146)</onclick>
+            <onclick condition="!Skin.HasSetting(Show.Home.Search.Type.Dynamic)">ActivateWindow(1147)</onclick>
+            <onclick condition="Skin.HasSetting(Show.Home.Search.Type.Dynamic)">ActivateWindow(1148)</onclick>
             <onclick>ClearProperty(AnimationDirection,Home)</onclick>
         </control>
         <!-- BUTTON EDIT WIKI -->
@@ -3109,6 +3110,7 @@
         <onclick>Skin.SetString(fanart.fallback.image,special://skin/extras/backgrounds/pictures/pictures_5.jpg)</onclick>
         <onclick>Skin.SetString(fanart.fallback.game,special://skin/extras/backgrounds/games/games_3.jpg)</onclick>
         <onclick>Skin.SetString(fanart.fallback.search,special://skin/extras/backgrounds/search/search_2.jpg)</onclick>
+        <onclick>Skin.SetBool(Show.Home.Search.Type.Dynamic)</onclick>
         <onclick>Skin.SetString(fanart.fallback.youtube,special://skin/extras/backgrounds/addons/addons_6.jpg)</onclick>
         <onclick>Skin.SetString(fanart.fallback.podcasts,special://skin/extras/backgrounds/addons/addons_4.jpg)</onclick>
         <onclick>Skin.SetString(fanart.fallback.more,special://skin/extras/backgrounds/more/more_1.jpg)</onclick>
@@ -3503,6 +3505,7 @@
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(fanart.fallback.image,special://skin/extras/backgrounds/pictures/pictures_5.jpg)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(fanart.fallback.game,special://skin/extras/backgrounds/games/games_3.jpg)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(fanart.fallback.search,special://skin/extras/backgrounds/search/search_2.jpg)</onload>
+        <onload condition="!Skin.HasSetting(startup.init)">Skin.SetBool(Show.Home.Search.Type.Dynamic)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(fanart.fallback.youtube,special://skin/extras/backgrounds/addons/addons_6.jpg)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(fanart.fallback.podcasts,special://skin/extras/backgrounds/addons/addons_4.jpg)</onload>
         <onload condition="!Skin.HasSetting(startup.init)">Skin.SetString(fanart.fallback.more,special://skin/extras/backgrounds/more/more_1.jpg)</onload>
@@ -4029,4 +4032,33 @@
         <midtexture colordiffuse="Selected" border="4">progress/progress-end.png</midtexture>
         <righttexture colordiffuse="Selected" border="4">progress/progress-right.png</righttexture>
     </include>
+
+    <!-- ===== PORTED FROM AZR OMEGA : SEARCH LIST / DYNAMIC SEARCH ===== -->
+
+    <variable name="border40">
+        <value>common/border40.png</value>
+    </variable>
+
+
+    <!-- ===== PORTED FROM AZR OMEGA : MEDIA STATUS ICON (circle) ===== -->
+
+    <include name="Def_Background_Media_Status_Icon_Top_Right">
+        <top>14</top>
+        <right>14</right>
+        <align>right</align>
+        <aligny>center</aligny>
+        <width>38</width>
+        <height>38</height>
+    </include>
+
+    <include name="Def_Media_Status_Icon_Symbol_Circle">
+        <top>13</top>
+        <right>23</right>
+        <align>right</align>
+        <aligny>center</aligny>
+        <width>38</width>
+        <height>38</height>
+        <font>SymbolPoster</font>
+    </include>
+
 </includes>

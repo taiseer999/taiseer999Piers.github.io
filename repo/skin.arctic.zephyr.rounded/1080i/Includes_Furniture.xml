@@ -221,29 +221,60 @@
     <!-- ====================================================== -->
 
     <include name="Layout_Poster_Indicator_Status_Icon">
+        <!-- AZR Omega style: coloured disc + ring + white glyph (clock = in progress) -->
         <param name="top" value="$PARAM[top]" default="1" />
         <param name="right" value="$PARAM[right]" default="1" />
 
         <definition>
-            <control type="group">
-                <visible>!Container.Content(years) + !$EXP[Home_More_Item]</visible>
+            <!-- ICON -->
 
+            <control type="group">
+                <visible>!Skin.HasSetting(hide.markers) + !Skin.HasSetting(furniture.markers.alternative)</visible>
                 <visible>String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song)</visible>
+                <visible>!Container.Content(years) + !Container.Content(studios) + !$EXP[Home_More_Item]</visible>
 
                 <top>$PARAM[top]</top>
                 <right>$PARAM[right]</right>
 
                 <!-- BACKGROUND -->
-                <control type="label">
-                   <include>Def_Media_Status_Icon_Background</include>
-                   <label>$VAR[Label_Indicator_Status_Background_Icon]</label>
-                   <include>Animation_Fade_Background_Marker_Icon</include>
+
+                <control type="image">
+                    <include>Def_Background_Media_Status_Icon_Top_Right</include>
+                    <texture background="true" colordiffuse="$VAR[Color_Background_Status_Poster]">$VAR[Image_Indicator_Icon_Background]</texture>
+                </control>
+
+                <!-- CIRCLE -->
+
+                <control type="image">
+                    <include>Def_Background_Media_Status_Icon_Top_Right</include>
+                    <texture background="true" colordiffuse="$VAR[Color_Indicator_Status_Poster]">$VAR[Image_Indicator_Icon_Circle]</texture>
                 </control>
 
                 <!-- ICON -->
+
+                <!-- All others -->
                 <control type="label">
-                   <include>Def_Media_Status_Icon_Symbol</include>
-                   <label>$VAR[Label_Watched_Poster]</label>
+                    <visible>!ListItem.IsPlaying + !$EXP[IsAlbumIsPlaying] | [ListItem.IsPlaying + Skin.HasSetting(hide.markers.isplaying)]</visible>
+                    <include>Def_Media_Status_Icon_Symbol_Circle</include>
+                    <label>$VAR[Label_Icon_Status_Poster]</label>
+                </control>
+
+                <!-- Item is playing + Player not paused -->
+                <control type="label">
+                    <visible>!Skin.HasSetting(hide.markers.isplaying)</visible>
+                    <visible>ListItem.IsPlaying | $EXP[IsAlbumIsPlaying]</visible>
+                    <visible>!Player.Paused</visible>
+                    <include>Def_Media_Status_Icon_Symbol_Circle</include>
+                    <label>[COLOR=$VAR[Color_Indicator_Status_Poster]]&#62811;[/COLOR]</label>
+                </control>
+
+                <!-- Item is playing + Player paused -->
+                <control type="label">
+                    <visible>!Skin.HasSetting(hide.markers.isplaying)</visible>
+                    <visible>ListItem.IsPlaying | $EXP[IsAlbumIsPlaying]</visible>
+                    <visible>Player.Paused</visible>
+                    <include>Def_Media_Status_Icon_Symbol_Circle</include>
+                    <label>[COLOR=$VAR[Color_Indicator_Status_Poster]]&#62813;[/COLOR]</label>
                 </control>
             </control>
         </definition>

@@ -11,6 +11,7 @@
 
     <onload>RunScript(script.skinshortcuts,type=buildxml)</onload>
     <onload>RunScript(script.skinvariables,action=buildviews)</onload>
+    <onload>ClearProperty(Show_Menu_Search,Home)</onload>
 
     <!-- Clear stale TMDbHelper studio/network props so previous item's logo doesn't linger -->
     <onload>ClearProperty(TMDbHelper.ListItem.base_studio,Home)</onload>

@@ -538,4 +538,43 @@
 		<value condition="Skin.HasSetting(enable.furniture.flags.colored)">FF3498DB</value>
 		<value>Dark1</value>
     </variable>
+
+    <!-- ===== PORTED FROM AZR OMEGA : SEARCH LIST / DYNAMIC SEARCH ===== -->
+
+    <variable name="Color_Icon_Light">
+		<value>FFD6AD05</value>
+    </variable>
+
+    <variable name="Color_Label_Edit_Search">
+		<value condition="Control.HasFocus(90009)">Selected</value>
+		<value condition="Control.HasFocus(9992)">Dark2</value>
+		<value>Dark3</value>
+    </variable>
+
+    <variable name="Color_Label_Tips_Search">
+		<value>B3BBBBBB</value>
+    </variable>
+
+    <variable name="Color_Search_Bar_Border">
+        <value>White70</value>
+    </variable>
+
+
+    <!-- ===== PORTED FROM AZR OMEGA : MEDIA STATUS ICON (circle) ===== -->
+
+    <variable name="Color_Background_Status_Poster">
+        <!-- <value condition="Skin.HasSetting(hide.markers)"></value> -->
+        <value condition="[ListItem.IsPlaying | $EXP[IsAlbumIsPlaying]] + !Skin.HasSetting(hide.markers.isplaying)">$VAR[Color_Indicator_Background_Is_Playing]</value>
+        <!-- <value condition="[ListItem.IsResumable | $EXP[IsTVShowInProgress]] + Skin.HasSetting(hide.markers.inprogress)"></value> -->
+        <value condition="ListItem.IsResumable | $EXP[IsTVShowInProgress]">$VAR[Color_Indicator_Background_In_Progress]</value>
+        <!-- <value condition="Integer.IsGreater(ListItem.Playcount,0) + Skin.HasSetting(hide.markers.watched)"></value> -->
+        <value condition="Integer.IsGreater(ListItem.Playcount,0) + $EXP[Exp_View_Flag_Watched_Album_Song]">$VAR[Color_Indicator_Background_Watched]</value>
+        <value condition="Integer.IsEqual(ListItem.Playcount,0) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]] + !Skin.HasSetting(hide.markers.newcontent)">$VAR[Color_Indicator_Background_New]</value>
+        <value condition="Integer.IsEqual(ListItem.Playcount,0) + !$EXP[IsNewMovie] + !$EXP[IsNewTVShow] + !$EXP[IsNewEpisode] + !Skin.HasSetting(hide.markers.unwatched) + !$EXP[Home_More_Item]">$VAR[Color_Indicator_Background_UnWatched]</value>
+    </variable>
+
+    <variable name="Color_Indicator_Status_Poster">
+        <value>FFEDEDED</value>
+    </variable>
+
 </includes>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+    <!-- ================================================================== -->
+    <!--  DYNAMIC SEARCH (window 1148) - ported from AZR Omega              -->
+    <!--  Upstream builds these rows with skinshortcuts v1 (searchdynamenu).-->
+    <!--  This fork runs skinshortcuts v3, so the rows are static here.     -->
+    <!--  Row ids: list 5000+n, title group 5900+n, title grouplist 5800+n  -->
+    <!--  (the result panel 6060 and buttons 381/382 rely on 5001-5014).    -->
+    <!-- ================================================================== -->
+
+    <include name="Search_Dynamic_Widget_Row">
+        <param name="n" />
+        <param name="label" />
+        <param name="path" />
+        <param name="path2" />
+        <param name="target" default="videos" />
+        <param name="limit" default="$VAR[Value_Widget_Limit]" />
+        <param name="listtype" default="fixedlist" />
+        <param name="movement" default="7" />
+        <param name="Thumbnail" default="false" />
+        <param name="ThumbnailSmall" default="false" />
+        <param name="Fanart" default="false" />
+        <param name="FanartSmall" default="false" />
+        <param name="Square" default="false" />
+        <param name="SquareMiddle" default="false" />
+        <param name="SquareSmall" default="false" />
+        <param name="row_visible" default="true" />
+
+        <definition>
+
+            <!-- WIDGET - TITLE - LABEL -->
+
+            <control type="group" id="59$PARAM[n]">
+                <visible>[Integer.IsGreater(Container(50$PARAM[n]).NumItems,0) | Container(50$PARAM[n]).IsUpdating]</visible>
+                <visible>$PARAM[row_visible]</visible>
+
+                <control type="grouplist" id="58$PARAM[n]">
+                    <include content="Widget_Title_Label" condition="!Skin.HasSetting(hide.widget.title)">
+                        <param name="focusid" value="50$PARAM[n]" />
+                        <param name="idshort" value="50$PARAM[n]" />
+                        <param name="id" value="50$PARAM[n]" />
+                        <param name="animation_condition" value="!Control.HasFocus(50$PARAM[n])" />
+                        <param name="widget_label" value="$PARAM[label]" />
+                        <param name="busy_visible" value="Integer.IsEqual(Container(50$PARAM[n]).NumItems,0) | Container(50$PARAM[n]).IsUpdating" />
+                        <param name="window_search" value="true" />
+                    </include>
+                </control>
+            </control>
+
+            <!-- WIDGET - LIST -->
+
+            <control type="$PARAM[listtype]" id="50$PARAM[n]">
+                <include>Animation_Widget_Fade_In_Out</include>
+
+                <include content="Def_Search_Widget_Container">
+                    <param name="id" value="50$PARAM[n]" />
+                    <param name="height" value="325" />
+                    <param name="orientation" value="horizontal" />
+                    <param name="movement" value="$PARAM[movement]" />
+                    <param name="visible" value="!String.IsEmpty(Control.GetLabel(90009).index(1)) + $PARAM[row_visible]" />
+                    <param name="altvisible" value="[[System.IdleTime(1) + !System.IdleTime(2) + Control.HasFocus(90009) + !String.IsEqual(Window.Property(PreviousSearchTerm),Control.GetLabel(90009).index(1))] | !String.IsEmpty(Window(Home).Property(UpdateWidgetSearch))]" />
+                </include>
+
+                <!-- ITEM LAYOUTS -->
+
+                <include content="Def_Normal_Layout_Item">
+                    <param name="shortcutsclearlogo" value="true" />
+                    <param name="aspectratio" value="keep" />
+                    <param name="distance" value="10" />
+                    <param name="Thumbnail" value="$PARAM[Thumbnail]" />
+                    <param name="Fanart" value="$PARAM[Fanart]" />
+                    <param name="FanartSmall" value="$PARAM[FanartSmall]" />
+                    <param name="ThumbnailSmall" value="$PARAM[ThumbnailSmall]" />
+                    <param name="Square" value="$PARAM[Square]" />
+                    <param name="SquareMiddle" value="$PARAM[SquareMiddle]" />
+                    <param name="SquareSmall" value="$PARAM[SquareSmall]" />
+                    <param name="window_search" value="true" />
+                </include>
+
+                <!-- FOCUS LAYOUTS -->
+
+                <include content="Def_Normal_Layout_Item_Focus">
+                    <param name="shortcutsid" value="50$PARAM[n]" />
+                    <param name="shortcutsclearlogo" value="true" />
+                    <param name="aspectratio" value="keep" />
+                    <param name="distance" value="10" />
+                    <param name="Thumbnail" value="$PARAM[Thumbnail]" />
+                    <param name="Fanart" value="$PARAM[Fanart]" />
+                    <param name="FanartSmall" value="$PARAM[FanartSmall]" />
+                    <param name="ThumbnailSmall" value="$PARAM[ThumbnailSmall]" />
+                    <param name="Square" value="$PARAM[Square]" />
+                    <param name="SquareMiddle" value="$PARAM[SquareMiddle]" />
+                    <param name="SquareSmall" value="$PARAM[SquareSmall]" />
+                    <param name="window_search" value="true" />
+                </include>
+
+                <!-- CONTENT : prefix + typed term + suffix -->
+
+                <content target="$PARAM[target]" limit="$PARAM[limit]" browse="never">$INFO[Control.GetLabel(90009).index(1),$PARAM[path],$PARAM[path2]]</content>
+
+                <!-- MORE CONTENT -->
+
+                <include content="Def_Widget_Item_More_Content" condition="Skin.HasSetting(enable.morewidget)">
+                    <param name="id" value="50$PARAM[n]" />
+                    <param name="target" value="$PARAM[target]" />
+                    <param name="content" value="$INFO[Control.GetLabel(90009).index(1),$PARAM[path],$PARAM[path2]]" />
+                </include>
+            </control>
+        </definition>
+    </include>
+
+    <!-- ROWS (order = display order). Code from jurialmunkey / Arctic Horizon 2 via AZR Omega -->
+
+    <include name="Search_Dynamic_Widget_Rows">
+        <!-- 01 MOVIES -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="01" />
+            <param name="label" value="$LOCALIZE[342]" />
+            <param name="path" value="videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D" />
+            <param name="row_visible" value="Library.HasContent(movies) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 02 TV SHOWS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="02" />
+            <param name="label" value="$LOCALIZE[20343]" />
+            <param name="path" value="videodb://tvshows/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22tvshows%22%7D" />
+            <param name="row_visible" value="Library.HasContent(tvshows) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 03 EPISODES -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="03" />
+            <param name="label" value="$LOCALIZE[20360]" />
+            <param name="path" value="videodb://tvshows/titles/-1/-1/-1/-1/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22episodes%22%7D" />
+            <param name="ThumbnailSmall" value="true" />
+            <param name="movement" value="3" />
+            <param name="row_visible" value="Library.HasContent(tvshows) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 04 ACTOR -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="04" />
+            <param name="label" value="$LOCALIZE[344]" />
+            <param name="path" value="videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22actor%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D" />
+            <param name="row_visible" value="Library.HasContent(movies) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 05 DIRECTOR -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="05" />
+            <param name="label" value="$LOCALIZE[20348]" />
+            <param name="path" value="videodb://movies/titles/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22director%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22movies%22%7D" />
+            <param name="row_visible" value="Library.HasContent(movies) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 06 ALBUMS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="06" />
+            <param name="label" value="$LOCALIZE[132]" />
+            <param name="path" value="musicdb://albums/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22album%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22albums%22%7D" />
+            <param name="target" value="music" />
+            <param name="SquareMiddle" value="true" />
+            <param name="movement" value="6" />
+            <param name="row_visible" value="Library.HasContent(music) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 07 ARTISTS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="07" />
+            <param name="label" value="$LOCALIZE[133]" />
+            <param name="path" value="musicdb://artists/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22artist%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22artists%22%7D" />
+            <param name="target" value="music" />
+            <param name="SquareMiddle" value="true" />
+            <param name="movement" value="6" />
+            <param name="row_visible" value="Library.HasContent(music) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 08 SONGS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="08" />
+            <param name="label" value="$LOCALIZE[134]" />
+            <param name="path" value="musicdb://songs/?xsp=%7B%22order%22%3A%7B%22direction%22%3A%22ascending%22%2C%22ignorefolders%22%3A0%2C%22method%22%3A%22sorttitle%22%7D%2C%22rules%22%3A%7B%22and%22%3A%5B%7B%22field%22%3A%22title%22%2C%22operator%22%3A%22contains%22%2C%22value%22%3A%5B%22" />
+            <param name="path2" value="%22%5D%7D%5D%7D%2C%22type%22%3A%22songs%22%7D" />
+            <param name="target" value="music" />
+            <param name="SquareMiddle" value="true" />
+            <param name="movement" value="6" />
+            <param name="row_visible" value="Library.HasContent(music) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 09 MUSIC VIDEOS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="09" />
+            <param name="label" value="$LOCALIZE[20389]" />
+            <param name="path" value="videodb://musicvideos/titles/?xsp=%7b%22order%22%3a%7b%22direction%22%3a%22ascending%22%2c%22ignorefolders%22%3a0%2c%22method%22%3a%22sorttitle%22%7d%2c%22rules%22%3a%7b%22and%22%3a%5b%7b%22field%22%3a%22title%22%2c%22operator%22%3a%22contains%22%2c%22value%22%3a%5b%22" />
+            <param name="path2" value="%22%5d%7d%5d%7d%2c%22type%22%3a%22musicvideos%22%7d" />
+            <param name="ThumbnailSmall" value="true" />
+            <param name="movement" value="3" />
+            <param name="row_visible" value="Library.HasContent(musicvideos) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 10 MUSIC VIDEO ARTISTS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="10" />
+            <param name="label" value="$LOCALIZE[20389] $LOCALIZE[133]" />
+            <param name="path" value="videodb://musicvideos/titles/?xsp=%7b%22order%22%3a%7b%22direction%22%3a%22ascending%22%2c%22ignorefolders%22%3a0%2c%22method%22%3a%22sorttitle%22%7d%2c%22rules%22%3a%7b%22and%22%3a%5b%7b%22field%22%3a%22artist%22%2c%22operator%22%3a%22contains%22%2c%22value%22%3a%5b%22" />
+            <param name="path2" value="%22%5d%7d%5d%7d%2c%22type%22%3a%22musicvideos%22%7d" />
+            <param name="ThumbnailSmall" value="true" />
+            <param name="movement" value="3" />
+            <param name="row_visible" value="Library.HasContent(musicvideos) + !Skin.HasSetting(search.dynamic.hide.library)" />
+        </include>
+        <!-- 11 TMDB MOVIES -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="11" />
+            <param name="label" value="$LOCALIZE[31642]" />
+            <param name="path" value="plugin://plugin.video.themoviedb.helper?info=search&amp;type=movie&amp;query=" />
+            <param name="path2" value="&amp;nextpage=false&amp;fanarttv=false&amp;cacheonly=true" />
+            <param name="row_visible" value="System.AddonIsEnabled(plugin.video.themoviedb.helper) + !Skin.HasSetting(search.dynamic.hide.tmdb)" />
+        </include>
+        <!-- 12 TMDB TV SHOWS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="12" />
+            <param name="label" value="$LOCALIZE[31643]" />
+            <param name="path" value="plugin://plugin.video.themoviedb.helper?info=search&amp;type=tv&amp;query=" />
+            <param name="path2" value="&amp;nextpage=false&amp;fanarttv=false&amp;cacheonly=true" />
+            <param name="row_visible" value="System.AddonIsEnabled(plugin.video.themoviedb.helper) + !Skin.HasSetting(search.dynamic.hide.tmdb)" />
+        </include>
+        <!-- 13 TMDB COLLECTIONS -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="13" />
+            <param name="label" value="$LOCALIZE[31644]" />
+            <param name="path" value="plugin://plugin.video.themoviedb.helper?info=search&amp;type=collection&amp;query=" />
+            <param name="path2" value="&amp;nextpage=false&amp;fanarttv=false&amp;cacheonly=true" />
+            <param name="row_visible" value="System.AddonIsEnabled(plugin.video.themoviedb.helper) + !Skin.HasSetting(search.dynamic.hide.tmdb)" />
+        </include>
+        <!-- 14 TMDB PEOPLE -->
+        <include content="Search_Dynamic_Widget_Row">
+            <param name="n" value="14" />
+            <param name="label" value="$LOCALIZE[31645]" />
+            <param name="path" value="plugin://plugin.video.themoviedb.helper?info=search&amp;type=person&amp;query=" />
+            <param name="path2" value="&amp;nextpage=false&amp;fanarttv=false&amp;cacheonly=true" />
+            <param name="row_visible" value="System.AddonIsEnabled(plugin.video.themoviedb.helper) + !Skin.HasSetting(search.dynamic.hide.tmdb)" />
+        </include>
+    </include>
+
+</includes>

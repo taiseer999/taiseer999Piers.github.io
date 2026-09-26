@@ -206,6 +206,138 @@
 			<property name="submenuVisibility">power-quit</property>
 		</item>
 	</include>
+	<include name="skinshortcuts-searchmenu">
+		<item id="1">
+			<label>$LOCALIZE[14022]</label>
+			<icon>special://skin/extras/icons/database.png</icon>
+			<onclick>SetFocus(332)</onclick>
+			<visible>System.AddonIsEnabled(script.globalsearch)</visible>
+			<property name="id">1</property>
+			<property name="name">search-list-globalsearch</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">SetFocus(332)</property>
+			<property name="path">SetFocus(332)</property>
+			<property name="submenuVisibility">search-list-globalsearch</property>
+		</item>
+		<item id="2">
+			<label>TMDb Helper</label>
+			<icon>special://skin/extras/icons/tmdb.png</icon>
+			<onclick>ActivateWindow(videos,"plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None",return)</onclick>
+			<visible>System.AddonIsEnabled(plugin.video.themoviedb.helper)</visible>
+			<property name="id">2</property>
+			<property name="name">search-list-tmdbhelper</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(videos,"plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None",return)</property>
+			<property name="path">"plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None"</property>
+			<property name="submenuVisibility">search-list-tmdbhelper</property>
+		</item>
+		<item id="3">
+			<label>$LOCALIZE[31101]</label>
+			<icon>special://skin/extras/icons/youtube.png</icon>
+			<onclick>ActivateWindow(videos,"plugin://plugin.video.youtube/kodion/search/list/",return)</onclick>
+			<visible>System.AddonIsEnabled(plugin.video.youtube)</visible>
+			<property name="id">3</property>
+			<property name="name">search-list-youtube</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(videos,"plugin://plugin.video.youtube/kodion/search/list/",return)</property>
+			<property name="path">"plugin://plugin.video.youtube/kodion/search/list/"</property>
+			<property name="submenuVisibility">search-list-youtube</property>
+		</item>
+		<item id="4">
+			<label>$LOCALIZE[31477]</label>
+			<icon>special://skin/extras/icons/world.png</icon>
+			<onclick>SetFocus(330)</onclick>
+			<visible>System.AddonIsEnabled(script.wikipedia)</visible>
+			<property name="id">4</property>
+			<property name="name">search-list-wiki</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">SetFocus(330)</property>
+			<property name="path">SetFocus(330)</property>
+			<property name="submenuVisibility">search-list-wiki</property>
+		</item>
+		<item id="5">
+			<label>$LOCALIZE[10704]</label>
+			<icon>special://skin/extras/icons/tvguide.png</icon>
+			<onclick>ActivateWindow(TVSearch)</onclick>
+			<visible>PVR.HasTVChannels</visible>
+			<property name="id">5</property>
+			<property name="name">search-list-tv</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(TVSearch)</property>
+			<property name="path">ActivateWindow(TVSearch)</property>
+			<property name="submenuVisibility">search-list-tv</property>
+		</item>
+		<item id="6">
+			<label>$LOCALIZE[10510]</label>
+			<icon>special://skin/extras/icons/addons.png</icon>
+			<onclick>SetFocus(331)</onclick>
+			<property name="id">6</property>
+			<property name="name">search-list-addons</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">SetFocus(331)</property>
+			<property name="path">SetFocus(331)</property>
+			<property name="submenuVisibility">search-list-addons</property>
+		</item>
+		<item id="7">
+			<label>$LOCALIZE[31608]</label>
+			<icon>special://skin/extras/icons/apple.png</icon>
+			<onclick>ActivateWindow(videos,"plugin://plugin.audio.apple.podcasts/?action=search")</onclick>
+			<visible>System.AddonIsEnabled(plugin.audio.apple.podcasts)</visible>
+			<property name="id">7</property>
+			<property name="name">search-list-podcasts</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(videos,"plugin://plugin.audio.apple.podcasts/?action=search")</property>
+			<property name="path">"plugin://plugin.audio.apple.podcasts/?action=search"</property>
+			<property name="submenuVisibility">search-list-podcasts</property>
+		</item>
+		<item id="8">
+			<label>$LOCALIZE[19021]</label>
+			<icon>special://skin/extras/icons/radio.png</icon>
+			<onclick>ActivateWindow(videos,"plugin://plugin.audio.radiode/stations/search/")</onclick>
+			<visible>System.AddonIsEnabled(plugin.audio.radiode)</visible>
+			<property name="id">8</property>
+			<property name="name">search-list-radiode</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(videos,"plugin://plugin.audio.radiode/stations/search/")</property>
+			<property name="path">"plugin://plugin.audio.radiode/stations/search/"</property>
+			<property name="submenuVisibility">search-list-radiode</property>
+		</item>
+		<item id="9">
+			<label>Twitch</label>
+			<icon>special://skin/extras/icons/twitch.png</icon>
+			<onclick>ActivateWindow(videos,"plugin://plugin.video.twitch/?mode=search")</onclick>
+			<visible>System.AddonIsEnabled(plugin.video.twitch)</visible>
+			<property name="id">9</property>
+			<property name="name">search-list-twitch</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(videos,"plugin://plugin.video.twitch/?mode=search")</property>
+			<property name="path">"plugin://plugin.video.twitch/?mode=search"</property>
+			<property name="submenuVisibility">search-list-twitch</property>
+		</item>
+		<item id="10">
+			<label>$LOCALIZE[15016]</label>
+			<icon>special://skin/extras/icons/gamepad.png</icon>
+			<onclick>ActivateWindow(videos,"plugin://plugin.program.iagl/search")</onclick>
+			<visible>System.AddonIsEnabled(plugin.program.iagl)</visible>
+			<property name="id">10</property>
+			<property name="name">search-list-iagl</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">ActivateWindow(videos,"plugin://plugin.program.iagl/search")</property>
+			<property name="path">"plugin://plugin.program.iagl/search"</property>
+			<property name="submenuVisibility">search-list-iagl</property>
+		</item>
+		<item id="11">
+			<label>$LOCALIZE[31646]</label>
+			<icon>special://skin/extras/icons/update.png</icon>
+			<onclick>SetFocus(333)</onclick>
+			<property name="id">11</property>
+			<property name="name">search-list-dynamic</property>
+			<property name="menu">searchmenu</property>
+			<property name="action">SetFocus(333)</property>
+			<property name="path">SetFocus(333)</property>
+			<property name="submenuVisibility">search-list-dynamic</property>
+		</item>
+	</include>
 	<include name="skinshortcuts-mainmenu">
 		<item id="1">
 			<label>الأفلام</label>
@@ -454,17 +586,17 @@
 					<param name="backid" value="1601" />
 					<param name="AutoTime" value="" />
 					<param name="orientation" value="horizontal" />
-					<param name="movement" value="7" />
-					<param name="movement2" value="6" />
+					<param name="movement" value="2" />
+					<param name="movement2" value="1" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
 					<param name="aspectratio" value="keep" />
 					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
+					<param name="Thumbnail" value="true" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
 					<param name="ThumbnailSmall" value="false" />
@@ -483,7 +615,7 @@
 					<param name="shortcutsclearlogo" value="true" />
 					<param name="aspectratio" value="keep" />
 					<param name="distance" value="10" />
-					<param name="Thumbnail" value="false" />
+					<param name="Thumbnail" value="true" />
 					<param name="Fanart" value="false" />
 					<param name="FanartSmall" value="false" />
 					<param name="ThumbnailSmall" value="false" />
@@ -510,7 +642,7 @@
 				</include>
 			</control>
 			<control type="group" id="1501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]]</visible>
 				<control type="group" id="1401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1601" />
@@ -522,7 +654,7 @@
 				</control>
 			</control>
 			<control type="group" id="1701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1601)" />
@@ -548,7 +680,7 @@
 				</control>
 			</control>
 			<control type="group" id="1901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1601).NumItems,0) | Container(1601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -579,7 +711,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1602)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -631,7 +763,7 @@
 				</include>
 			</control>
 			<control type="group" id="1502">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]]</visible>
 				<control type="group" id="1402">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1602" />
@@ -643,7 +775,7 @@
 				</control>
 			</control>
 			<control type="group" id="1702">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1602)" />
@@ -669,7 +801,7 @@
 				</control>
 			</control>
 			<control type="group" id="1902">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1602).NumItems,0) | Container(1602).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -700,7 +832,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1603)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -752,7 +884,7 @@
 				</include>
 			</control>
 			<control type="group" id="1503">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]]</visible>
 				<control type="group" id="1403">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1603" />
@@ -764,7 +896,7 @@
 				</control>
 			</control>
 			<control type="group" id="1703">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1603)" />
@@ -790,7 +922,7 @@
 				</control>
 			</control>
 			<control type="group" id="1903">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1603).NumItems,0) | Container(1603).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -821,7 +953,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1604)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -873,7 +1005,7 @@
 				</include>
 			</control>
 			<control type="group" id="1504">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]]</visible>
 				<control type="group" id="1404">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1604" />
@@ -885,7 +1017,7 @@
 				</control>
 			</control>
 			<control type="group" id="1704">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1604)" />
@@ -911,7 +1043,7 @@
 				</control>
 			</control>
 			<control type="group" id="1904">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1604).NumItems,0) | Container(1604).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -942,7 +1074,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1605)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -994,7 +1126,7 @@
 				</include>
 			</control>
 			<control type="group" id="1505">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]]</visible>
 				<control type="group" id="1405">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1605" />
@@ -1006,7 +1138,7 @@
 				</control>
 			</control>
 			<control type="group" id="1705">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1605)" />
@@ -1032,7 +1164,7 @@
 				</control>
 			</control>
 			<control type="group" id="1905">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1605).NumItems,0) | Container(1605).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1063,7 +1195,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1606)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1115,7 +1247,7 @@
 				</include>
 			</control>
 			<control type="group" id="1506">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]]</visible>
 				<control type="group" id="1406">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1606" />
@@ -1127,7 +1259,7 @@
 				</control>
 			</control>
 			<control type="group" id="1706">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1606)" />
@@ -1153,7 +1285,7 @@
 				</control>
 			</control>
 			<control type="group" id="1906">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1606).NumItems,0) | Container(1606).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1184,7 +1316,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1607)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1236,7 +1368,7 @@
 				</include>
 			</control>
 			<control type="group" id="1507">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]]</visible>
 				<control type="group" id="1407">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1607" />
@@ -1248,7 +1380,7 @@
 				</control>
 			</control>
 			<control type="group" id="1707">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1607)" />
@@ -1274,7 +1406,7 @@
 				</control>
 			</control>
 			<control type="group" id="1907">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1607).NumItems,0) | Container(1607).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1305,7 +1437,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1608)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1357,7 +1489,7 @@
 				</include>
 			</control>
 			<control type="group" id="1508">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]]</visible>
 				<control type="group" id="1408">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1608" />
@@ -1369,7 +1501,7 @@
 				</control>
 			</control>
 			<control type="group" id="1708">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1608)" />
@@ -1395,7 +1527,7 @@
 				</control>
 			</control>
 			<control type="group" id="1908">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1608).NumItems,0) | Container(1608).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1426,7 +1558,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1609)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1478,7 +1610,7 @@
 				</include>
 			</control>
 			<control type="group" id="1509">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]]</visible>
 				<control type="group" id="1409">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1609" />
@@ -1490,7 +1622,7 @@
 				</control>
 			</control>
 			<control type="group" id="1709">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1609)" />
@@ -1516,7 +1648,7 @@
 				</control>
 			</control>
 			<control type="group" id="1909">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1609).NumItems,0) | Container(1609).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1547,7 +1679,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1610)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1599,7 +1731,7 @@
 				</include>
 			</control>
 			<control type="group" id="1510">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]]</visible>
 				<control type="group" id="1410">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1610" />
@@ -1611,7 +1743,7 @@
 				</control>
 			</control>
 			<control type="group" id="1710">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1610)" />
@@ -1637,7 +1769,7 @@
 				</control>
 			</control>
 			<control type="group" id="1910">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1610).NumItems,0) | Container(1610).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1668,7 +1800,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(1611)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1720,7 +1852,7 @@
 				</include>
 			</control>
 			<control type="group" id="1511">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]]</visible>
 				<control type="group" id="1411">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="1611" />
@@ -1732,7 +1864,7 @@
 				</control>
 			</control>
 			<control type="group" id="1711">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(1611)" />
@@ -1758,7 +1890,7 @@
 				</control>
 			</control>
 			<control type="group" id="1911">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies) + [Integer.IsGreater(Container(1611).NumItems,0) | Container(1611).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),movies)]" />
 				</include>
@@ -1810,7 +1942,7 @@
 					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1862,7 +1994,7 @@
 				</include>
 			</control>
 			<control type="group" id="2501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]]</visible>
 				<control type="group" id="2401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2601" />
@@ -1874,7 +2006,7 @@
 				</control>
 			</control>
 			<control type="group" id="2701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2601)" />
@@ -1900,7 +2032,7 @@
 				</control>
 			</control>
 			<control type="group" id="2901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2601).NumItems,0) | Container(2601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -1931,7 +2063,7 @@
 					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2602)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -1983,7 +2115,7 @@
 				</include>
 			</control>
 			<control type="group" id="2502">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]]</visible>
 				<control type="group" id="2402">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2602" />
@@ -1995,7 +2127,7 @@
 				</control>
 			</control>
 			<control type="group" id="2702">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2602)" />
@@ -2021,7 +2153,7 @@
 				</control>
 			</control>
 			<control type="group" id="2902">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2602).NumItems,0) | Container(2602).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2052,7 +2184,7 @@
 					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2603)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2104,7 +2236,7 @@
 				</include>
 			</control>
 			<control type="group" id="2503">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]]</visible>
 				<control type="group" id="2403">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2603" />
@@ -2116,7 +2248,7 @@
 				</control>
 			</control>
 			<control type="group" id="2703">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2603)" />
@@ -2142,7 +2274,7 @@
 				</control>
 			</control>
 			<control type="group" id="2903">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2603).NumItems,0) | Container(2603).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2173,7 +2305,7 @@
 					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2604)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2225,7 +2357,7 @@
 				</include>
 			</control>
 			<control type="group" id="2504">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]]</visible>
 				<control type="group" id="2404">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2604" />
@@ -2237,7 +2369,7 @@
 				</control>
 			</control>
 			<control type="group" id="2704">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2604)" />
@@ -2263,7 +2395,7 @@
 				</control>
 			</control>
 			<control type="group" id="2904">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2604).NumItems,0) | Container(2604).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2294,7 +2426,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2605)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2346,7 +2478,7 @@
 				</include>
 			</control>
 			<control type="group" id="2505">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]]</visible>
 				<control type="group" id="2405">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2605" />
@@ -2358,7 +2490,7 @@
 				</control>
 			</control>
 			<control type="group" id="2705">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2605)" />
@@ -2384,7 +2516,7 @@
 				</control>
 			</control>
 			<control type="group" id="2905">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2605).NumItems,0) | Container(2605).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2415,7 +2547,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2606)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2467,7 +2599,7 @@
 				</include>
 			</control>
 			<control type="group" id="2506">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]]</visible>
 				<control type="group" id="2406">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2606" />
@@ -2479,7 +2611,7 @@
 				</control>
 			</control>
 			<control type="group" id="2706">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2606)" />
@@ -2505,7 +2637,7 @@
 				</control>
 			</control>
 			<control type="group" id="2906">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2606).NumItems,0) | Container(2606).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2536,7 +2668,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2607)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2588,7 +2720,7 @@
 				</include>
 			</control>
 			<control type="group" id="2507">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]]</visible>
 				<control type="group" id="2407">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2607" />
@@ -2600,7 +2732,7 @@
 				</control>
 			</control>
 			<control type="group" id="2707">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2607)" />
@@ -2626,7 +2758,7 @@
 				</control>
 			</control>
 			<control type="group" id="2907">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2607).NumItems,0) | Container(2607).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2657,7 +2789,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(2608)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2709,7 +2841,7 @@
 				</include>
 			</control>
 			<control type="group" id="2508">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]]</visible>
 				<control type="group" id="2408">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="2608" />
@@ -2721,7 +2853,7 @@
 				</control>
 			</control>
 			<control type="group" id="2708">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(2608)" />
@@ -2747,7 +2879,7 @@
 				</control>
 			</control>
 			<control type="group" id="2908">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows) + [Integer.IsGreater(Container(2608).NumItems,0) | Container(2608).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),tvshows)]" />
 				</include>
@@ -2799,7 +2931,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(3601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2851,7 +2983,7 @@
 				</include>
 			</control>
 			<control type="group" id="3501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]]</visible>
 				<control type="group" id="3401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="3601" />
@@ -2863,7 +2995,7 @@
 				</control>
 			</control>
 			<control type="group" id="3701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(3601)" />
@@ -2889,7 +3021,7 @@
 				</control>
 			</control>
 			<control type="group" id="3901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3601).NumItems,0) | Container(3601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd)]" />
 				</include>
@@ -2920,7 +3052,7 @@
 					<param name="movement2" value="2" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(3602)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -2972,7 +3104,7 @@
 				</include>
 			</control>
 			<control type="group" id="3502">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]]</visible>
 				<control type="group" id="3402">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="3602" />
@@ -2984,7 +3116,7 @@
 				</control>
 			</control>
 			<control type="group" id="3702">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(3602)" />
@@ -3010,7 +3142,7 @@
 				</control>
 			</control>
 			<control type="group" id="3902">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3602).NumItems,0) | Container(3602).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd)]" />
 				</include>
@@ -3041,7 +3173,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(3603)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3093,7 +3225,7 @@
 				</include>
 			</control>
 			<control type="group" id="3503">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]]</visible>
 				<control type="group" id="3403">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="3603" />
@@ -3105,7 +3237,7 @@
 				</control>
 			</control>
 			<control type="group" id="3703">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(3603)" />
@@ -3131,7 +3263,7 @@
 				</control>
 			</control>
 			<control type="group" id="3903">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3603).NumItems,0) | Container(3603).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd)]" />
 				</include>
@@ -3162,7 +3294,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(3604)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3214,7 +3346,7 @@
 				</include>
 			</control>
 			<control type="group" id="3504">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]]</visible>
 				<control type="group" id="3404">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="3604" />
@@ -3226,7 +3358,7 @@
 				</control>
 			</control>
 			<control type="group" id="3704">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(3604)" />
@@ -3252,7 +3384,7 @@
 				</control>
 			</control>
 			<control type="group" id="3904">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd) + [Integer.IsGreater(Container(3604).NumItems,0) | Container(3604).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-894e16dd)]" />
 				</include>
@@ -3304,7 +3436,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(5601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3356,7 +3488,7 @@
 				</include>
 			</control>
 			<control type="group" id="5501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]]</visible>
 				<control type="group" id="5401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="5601" />
@@ -3368,7 +3500,7 @@
 				</control>
 			</control>
 			<control type="group" id="5701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(5601)" />
@@ -3394,7 +3526,7 @@
 				</control>
 			</control>
 			<control type="group" id="5901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5601).NumItems,0) | Container(5601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65)]" />
 				</include>
@@ -3425,7 +3557,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(5602)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3477,7 +3609,7 @@
 				</include>
 			</control>
 			<control type="group" id="5502">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]]</visible>
 				<control type="group" id="5402">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="5602" />
@@ -3489,7 +3621,7 @@
 				</control>
 			</control>
 			<control type="group" id="5702">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(5602)" />
@@ -3515,7 +3647,7 @@
 				</control>
 			</control>
 			<control type="group" id="5902">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5602).NumItems,0) | Container(5602).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65)]" />
 				</include>
@@ -3546,7 +3678,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(5603)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3598,7 +3730,7 @@
 				</include>
 			</control>
 			<control type="group" id="5503">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]]</visible>
 				<control type="group" id="5403">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="5603" />
@@ -3610,7 +3742,7 @@
 				</control>
 			</control>
 			<control type="group" id="5703">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(5603)" />
@@ -3636,7 +3768,7 @@
 				</control>
 			</control>
 			<control type="group" id="5903">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5603).NumItems,0) | Container(5603).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65)]" />
 				</include>
@@ -3667,7 +3799,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(5604)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3719,7 +3851,7 @@
 				</include>
 			</control>
 			<control type="group" id="5504">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]]</visible>
 				<control type="group" id="5404">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="5604" />
@@ -3731,7 +3863,7 @@
 				</control>
 			</control>
 			<control type="group" id="5704">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(5604)" />
@@ -3757,7 +3889,7 @@
 				</control>
 			</control>
 			<control type="group" id="5904">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5604).NumItems,0) | Container(5604).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65)]" />
 				</include>
@@ -3788,7 +3920,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(5605)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3840,7 +3972,7 @@
 				</include>
 			</control>
 			<control type="group" id="5505">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]]</visible>
 				<control type="group" id="5405">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="5605" />
@@ -3852,7 +3984,7 @@
 				</control>
 			</control>
 			<control type="group" id="5705">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(5605)" />
@@ -3878,7 +4010,7 @@
 				</control>
 			</control>
 			<control type="group" id="5905">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65) + [Integer.IsGreater(Container(5605).NumItems,0) | Container(5605).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),user-a814cc65)]" />
 				</include>
@@ -3930,7 +4062,7 @@
 					<param name="movement2" value="3" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(8601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="false">
 					<param name="shortcutsclearlogo" value="true" />
@@ -3984,7 +4116,7 @@
 				</include>
 			</control>
 			<control type="group" id="8501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]]</visible>
 				<control type="group" id="8401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="8601" />
@@ -3996,7 +4128,7 @@
 				</control>
 			</control>
 			<control type="group" id="8701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(8601)" />
@@ -4022,7 +4154,7 @@
 				</control>
 			</control>
 			<control type="group" id="8901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8601).NumItems,0) | Container(8601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather)]" />
 				</include>
@@ -4053,7 +4185,7 @@
 					<param name="movement2" value="3" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(8602)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="false">
 					<param name="shortcutsclearlogo" value="true" />
@@ -4107,7 +4239,7 @@
 				</include>
 			</control>
 			<control type="group" id="8502">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]]</visible>
 				<control type="group" id="8402">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="8602" />
@@ -4119,7 +4251,7 @@
 				</control>
 			</control>
 			<control type="group" id="8702">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(8602)" />
@@ -4145,7 +4277,7 @@
 				</control>
 			</control>
 			<control type="group" id="8902">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather) + [Integer.IsGreater(Container(8602).NumItems,0) | Container(8602).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),weather)]" />
 				</include>
@@ -4197,7 +4329,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(10601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -4249,7 +4381,7 @@
 				</include>
 			</control>
 			<control type="group" id="10501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]]</visible>
 				<control type="group" id="10401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="10601" />
@@ -4261,7 +4393,7 @@
 				</control>
 			</control>
 			<control type="group" id="10701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(10601)" />
@@ -4287,7 +4419,7 @@
 				</control>
 			</control>
 			<control type="group" id="10901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10601).NumItems,0) | Container(10601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs)]" />
 				</include>
@@ -4318,7 +4450,7 @@
 					<param name="movement2" value="6" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(10602)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -4370,7 +4502,7 @@
 				</include>
 			</control>
 			<control type="group" id="10502">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]]</visible>
 				<control type="group" id="10402">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="10602" />
@@ -4382,7 +4514,7 @@
 				</control>
 			</control>
 			<control type="group" id="10702">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(10602)" />
@@ -4408,7 +4540,7 @@
 				</control>
 			</control>
 			<control type="group" id="10902">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10602).NumItems,0) | Container(10602).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs)]" />
 				</include>
@@ -4439,7 +4571,7 @@
 					<param name="movement2" value="5" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(10603)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="true">
 					<param name="shortcutsclearlogo" value="true" />
@@ -4491,7 +4623,7 @@
 				</include>
 			</control>
 			<control type="group" id="10503">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]]</visible>
 				<control type="group" id="10403">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="10603" />
@@ -4503,7 +4635,7 @@
 				</control>
 			</control>
 			<control type="group" id="10703">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(10603)" />
@@ -4529,7 +4661,7 @@
 				</control>
 			</control>
 			<control type="group" id="10903">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs) + [Integer.IsGreater(Container(10603).NumItems,0) | Container(10603).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),programs)]" />
 				</include>
@@ -4581,7 +4713,7 @@
 					<param name="movement2" value="3" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(11601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="false">
 					<param name="shortcutsclearlogo" value="true" />
@@ -4635,7 +4767,7 @@
 				</include>
 			</control>
 			<control type="group" id="11501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]]</visible>
 				<control type="group" id="11401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="11601" />
@@ -4647,7 +4779,7 @@
 				</control>
 			</control>
 			<control type="group" id="11701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(11601)" />
@@ -4673,7 +4805,7 @@
 				</control>
 			</control>
 			<control type="group" id="11901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings) + [Integer.IsGreater(Container(11601).NumItems,0) | Container(11601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),settings)]" />
 				</include>
@@ -4725,7 +4857,7 @@
 					<param name="movement2" value="3" />
 					<param name="AutoScrollCondition" value="[Control.HasFocus(300) | Control.HasFocus(302) | Control.HasFocus(222) | Control.HasFocus(399) | Control.HasFocus(2011)] + Integer.IsGreater(,0) + System.IdleTime(1)" />
 					<param name="animation_condition" value="!Control.HasFocus(12601)" />
-					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]" />
+					<param name="visible" value="[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]]" />
 				</include>
 				<include content="Def_Normal_Layout_Item" condition="false">
 					<param name="shortcutsclearlogo" value="true" />
@@ -4779,7 +4911,7 @@
 				</include>
 			</control>
 			<control type="group" id="12501">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]]</visible>
 				<control type="group" id="12401">
 					<include content="Widget_Navigation_Arrows">
 						<param name="id" value="12601" />
@@ -4791,7 +4923,7 @@
 				</control>
 			</control>
 			<control type="group" id="12701">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]]</visible>
 				<visible>Skin.HasSetting(home.style.flix)</visible>
 				<include content="Animation_Fade_Out_Home_Fullscreen_Widget">
 					<param name="condition" value="!Control.HasFocus(12601)" />
@@ -4817,7 +4949,7 @@
 				</control>
 			</control>
 			<control type="group" id="12901">
-				<visible>[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]</visible>
+				<visible>[[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown) + [Integer.IsGreater(Container(12601).NumItems,0) | Container(12601).IsUpdating]]]</visible>
 				<include content="Animation_Widget_Direction" condition="$EXP[Home_Is_Vertical] + !Skin.HasSetting(home.disable.widget.animation)">
 					<param name="visible" value="[String.IsEqual(Container(300).ListItem.Property(submenuVisibility),shutdown)]" />
 				</include>

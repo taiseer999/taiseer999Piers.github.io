@@ -2579,3 +2579,47 @@ msgstr ""
 msgctxt "#31638"
 msgid "Show info bar when playback starts"
 msgstr ""
+
+msgctxt "#31642"
+msgid "TMDb Movies"
+msgstr "Films TMDb"
+
+msgctxt "#31643"
+msgid "TMDb TV Shows"
+msgstr "Séries TMDb"
+
+msgctxt "#31644"
+msgid "TMDb Collections"
+msgstr "Sagas TMDb"
+
+msgctxt "#31645"
+msgid "TMDb People"
+msgstr "Vedettes TMDb"
+
+msgctxt "#31646"
+msgid "Dynamic"
+msgstr "Dynamique"
+
+msgctxt "#31647"
+msgid "DOWN / UP key to return to the search bar"
+msgstr "BAS / HAUT pour revenir à la barre de recherche"
+
+msgctxt "#31648"
+msgid "RIGHT open mini keyboard"
+msgstr "DROITE ouvre le mini-clavier"
+
+msgctxt "#31649"
+msgid "LEFT / RIGHT key to return to the main menu"
+msgstr "GAUCHE / DROITE pour revenir au menu principal"
+
+msgctxt "#31655"
+msgid "DOWN / UP key to return to the main menu"
+msgstr "BAS / HAUT pour revenir au menu principal"
+
+msgctxt "#31656"
+msgid "Dynamic search: TMDb results"
+msgstr "Recherche dynamique : résultats TMDb"
+
+msgctxt "#31657"
+msgid "Dynamic search: library results"
+msgstr "Recherche dynamique : résultats de la médiathèque"

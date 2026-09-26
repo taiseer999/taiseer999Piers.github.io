@@ -256,4 +256,27 @@
     <include name="Texture_OSD_Background">
         <texture>common/fsinfoscreen.png</texture>
     </include>    
+
+    <!-- ===== PORTED FROM AZR OMEGA : SEARCH LIST / DYNAMIC SEARCH ===== -->
+
+    <include name="Texture_Bar_Search_Focus">
+        <texture border="40" colordiffuse="$VAR[Color_Focus]">common/menu.png</texture>
+    </include>
+
+    <include name="Texture_Bar_Search_NoFocus">
+        <texture border="40" colordiffuse="White70">common/menu.png</texture>
+    </include>
+
+    <include name="Texture_Icon_Search_Focus">
+        <texture colordiffuse="Selected">special://skin/extras/icons/search.png</texture>
+    </include>
+
+    <include name="Texture_Icon_Search_NoFocus">
+        <texture colordiffuse="PanelWhite70">special://skin/extras/icons/search.png</texture>
+    </include>
+
+    <include name="Texture_Keyboard_Search_Background">
+        <texture border="40" colordiffuse="White100">common/menu.png</texture>
+    </include>
+
 </includes>

@@ -769,4 +769,31 @@
     <include name="Animation_Fade_Background_Marker_Icon">
         <animation effect="fade" start="100" end="80" condition="true">Conditional</animation>
     </include>
+
+    <!-- ===== PORTED FROM AZR OMEGA : SEARCH LIST / DYNAMIC SEARCH ===== -->
+
+    <include name="Animation_Label_Fade_In">
+        <visible>$PARAM[visible]</visible>
+        <animation type="VisibleChange" reversible="false">
+            <effect type="fade" start="0" end="100" time="400" delay="2300"/>
+        </animation>
+        <animation type="Conditional" condition="true" reversible="false">
+            <effect type="fade" start="0" end="100" time="400" delay="2300"/>
+        </animation>
+    </include>
+
+    <include name="Animation_Label_Fade_Out">
+        <animation type="Conditional" condition="$PARAM[visible]" reversible="false">
+            <effect type="fade" start="100" end="0" time="400" delay="2000"/>
+        </animation>
+    </include>
+
+    <include name="Animation_Horizontal_Scrolltime_Widgets_List">
+        <scrolltime tween="quadratic">350</scrolltime>
+    </include>
+
+    <include name="Animation_Vertical_Scrolltime_Widgets_Container">
+        <scrolltime tween="quadratic">350</scrolltime>
+    </include>
+
 </includes>

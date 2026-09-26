@@ -106,6 +106,75 @@
         </item>
     </menu>
 
+    <!-- SEARCH MENU (window 1147 - Search List, ported from AZR Omega) -->
+
+    <menu name="searchmenu">
+        <item name="search-list-globalsearch">
+            <label>$LOCALIZE[14022]</label>
+            <action>SetFocus(332)</action>
+            <icon>special://skin/extras/icons/database.png</icon>
+            <visible>System.AddonIsEnabled(script.globalsearch)</visible>
+        </item>
+        <item name="search-list-tmdbhelper">
+            <label>TMDb Helper</label>
+            <action>ActivateWindow(videos,"plugin://plugin.video.themoviedb.helper/?info=dir_multisearch&amp;tmdb_type=None",return)</action>
+            <icon>special://skin/extras/icons/tmdb.png</icon>
+            <visible>System.AddonIsEnabled(plugin.video.themoviedb.helper)</visible>
+        </item>
+        <item name="search-list-youtube">
+            <label>$LOCALIZE[31101]</label>
+            <action>ActivateWindow(videos,"plugin://plugin.video.youtube/kodion/search/list/",return)</action>
+            <icon>special://skin/extras/icons/youtube.png</icon>
+            <visible>System.AddonIsEnabled(plugin.video.youtube)</visible>
+        </item>
+        <item name="search-list-wiki">
+            <label>$LOCALIZE[31477]</label>
+            <action>SetFocus(330)</action>
+            <icon>special://skin/extras/icons/world.png</icon>
+            <visible>System.AddonIsEnabled(script.wikipedia)</visible>
+        </item>
+        <item name="search-list-tv">
+            <label>$LOCALIZE[10704]</label>
+            <action>ActivateWindow(TVSearch)</action>
+            <icon>special://skin/extras/icons/tvguide.png</icon>
+            <visible>PVR.HasTVChannels</visible>
+        </item>
+        <item name="search-list-addons">
+            <label>$LOCALIZE[10510]</label>
+            <action>SetFocus(331)</action>
+            <icon>special://skin/extras/icons/addons.png</icon>
+        </item>
+        <item name="search-list-podcasts">
+            <label>$LOCALIZE[31608]</label>
+            <action>ActivateWindow(videos,"plugin://plugin.audio.apple.podcasts/?action=search")</action>
+            <icon>special://skin/extras/icons/apple.png</icon>
+            <visible>System.AddonIsEnabled(plugin.audio.apple.podcasts)</visible>
+        </item>
+        <item name="search-list-radiode">
+            <label>$LOCALIZE[19021]</label>
+            <action>ActivateWindow(videos,"plugin://plugin.audio.radiode/stations/search/")</action>
+            <icon>special://skin/extras/icons/radio.png</icon>
+            <visible>System.AddonIsEnabled(plugin.audio.radiode)</visible>
+        </item>
+        <item name="search-list-twitch">
+            <label>Twitch</label>
+            <action>ActivateWindow(videos,"plugin://plugin.video.twitch/?mode=search")</action>
+            <icon>special://skin/extras/icons/twitch.png</icon>
+            <visible>System.AddonIsEnabled(plugin.video.twitch)</visible>
+        </item>
+        <item name="search-list-iagl">
+            <label>$LOCALIZE[15016]</label>
+            <action>ActivateWindow(videos,"plugin://plugin.program.iagl/search")</action>
+            <icon>special://skin/extras/icons/gamepad.png</icon>
+            <visible>System.AddonIsEnabled(plugin.program.iagl)</visible>
+        </item>
+        <item name="search-list-dynamic">
+            <label>$LOCALIZE[31646]</label>
+            <action>SetFocus(333)</action>
+            <icon>special://skin/extras/icons/update.png</icon>
+        </item>
+    </menu>
+
     <!-- MAIN MENU -->
 
     <menu name="mainmenu" container="300">
@@ -978,6 +1047,12 @@
         <group name="custom" label="636" icon="special://skin/extras/icons/bars.png">
             <shortcut name="search" label="137" type="137" icon="special://skin/extras/icons/search.png">
                 <action>ActivateWindow(1146)</action>
+            </shortcut>
+            <shortcut name="search-list" label="$LOCALIZE[137] - $LOCALIZE[31258]" type="137" icon="special://skin/extras/icons/search.png">
+                <action>ActivateWindow(1147)</action>
+            </shortcut>
+            <shortcut name="search-dynamic" label="$LOCALIZE[137] - $LOCALIZE[31646]" type="137" icon="special://skin/extras/icons/search.png">
+                <action>ActivateWindow(1148)</action>
             </shortcut>
             <shortcut name="audio-profiles" label="Audio Profiles" type="0" icon="special://skin/extras/icons/headphones-simple.png" visible="System.HasAddon(script.audio.profiles) + System.AddonIsEnabled(script.audio.profiles)">
                 <action>runscript(script.audio.profiles,popup)</action>

@@ -4,8 +4,12 @@
 
     <onunload condition="!String.IsEmpty(Control.GetLabel(312).index(1))">AlarmClock(delay_add_search_history,RunScript(script.skinvariables,add_skinstring_history=SearchHistory,value=$INFO[Control.GetLabel(312).index(1)]),00:01,silent)</onunload>
 
+    <onunload>AlarmClock(delay_clear,ClearProperty(Launch_local_Search,Home),00:01,silent)</onunload>
+
     <controls>
-        <include>Background_Overlay</include>
+        <include content="Background_Overlay">
+            <param name="visible" value="![$EXP[View_Search_Dynamic] | $EXP[View_Search_List]]" />
+        </include>
 
         <control type="group">
             <visible>!Window.IsVisible(numericinput)</visible>

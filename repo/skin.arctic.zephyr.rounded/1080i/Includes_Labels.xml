@@ -3193,4 +3193,47 @@
         <value condition="!Skin.HasSetting(enable.furniture.markers.view.list.monochrome)">$LOCALIZE[737]</value>
         <value>$LOCALIZE[19662]</value>
     </variable>
+
+    <!-- ===== PORTED FROM AZR OMEGA : SEARCH LIST / DYNAMIC SEARCH ===== -->
+
+    <variable name="Label_Feature_Search_Dynamic_Bar_Tip">
+        <value condition="String.IsEmpty(Control.GetLabel(90009).index(1))">$LOCALIZE[31655]</value>
+    </variable>
+
+    <variable name="Label_Feature_Search_Dynamic_Bar_Tip_2">
+        <value condition="String.IsEmpty(Control.GetLabel(90009).index(1))">$LOCALIZE[31648]</value>
+    </variable>
+
+    <variable name="Label_Feature_Search_Keyboard_Tip">
+        <value condition="Container(9992).HasFocus(27)">$LOCALIZE[20182]</value>
+        <value condition="Container(9992).HasFocus(28)">$LOCALIZE[20181]</value>
+        <value condition="Container(9992).HasFocus(29)">$LOCALIZE[19232]</value>
+        <value condition="Container(9992).HasFocus(30)">$LOCALIZE[16106]</value>
+        <value condition="Container(9992).HasFocus(31)">$LOCALIZE[137] $LOCALIZE[31258]</value>
+        <value>$LOCALIZE[31647]</value>
+    </variable>
+
+    <variable name="Label_Feature_Search_List_Bar_Tip">
+        <value condition="Control.HasFocus(90009) + !String.IsEmpty(Control.GetLabel(90009).index(1))">$LOCALIZE[31540]</value>
+        <value condition="Control.HasFocus(3060)">$LOCALIZE[31649]</value>
+    </variable>
+
+    <variable name="Label_Setting_Home_Header_Search_Type">
+        <value condition="Skin.HasSetting(Show.Home.Search.Type.Dynamic)">$LOCALIZE[31646]</value>
+        <value>$LOCALIZE[31258]</value>
+    </variable>
+
+
+    <!-- ===== PORTED FROM AZR OMEGA : MEDIA STATUS ICON (circle) ===== -->
+
+    <variable name="Label_Icon_Status_Poster">
+        <value condition="Skin.HasSetting(hide.markers)"></value>
+        <value condition="[ListItem.IsResumable | $EXP[IsTVShowInProgress]] + Skin.HasSetting(hide.markers.inprogress)"></value>
+        <value condition="ListItem.IsResumable | $EXP[IsTVShowInProgress]">[COLOR=$VAR[Color_Indicator_Status_Poster]]&#61995;[/COLOR]</value>
+        <value condition="Integer.IsGreater(ListItem.Playcount,0) + Skin.HasSetting(hide.markers.watched)"></value>
+        <value condition="Integer.IsGreater(ListItem.Playcount,0) + $EXP[Exp_View_Flag_Watched_Album_Song]">[COLOR=$VAR[Color_Indicator_Status_Poster]]&#10003;[/COLOR]</value>
+        <value condition="Integer.IsEqual(ListItem.Playcount,0) + String.IsEqual(ListItem.Overlay,OverlayUnwatched.png) + [$EXP[IsNewMovie] | $EXP[IsNewTVShow] | $EXP[IsNewEpisode]] + !Skin.HasSetting(hide.markers.newcontent)">[COLOR=$VAR[Color_Indicator_Status_Poster]]&#62079;[/COLOR]</value>
+        <value condition="Integer.IsEqual(ListItem.Playcount,0) + !$EXP[IsNewMovie] + !$EXP[IsNewTVShow] + !$EXP[IsNewEpisode] + !Skin.HasSetting(hide.markers.unwatched) + !$EXP[Home_More_Item]">[COLOR=$VAR[Color_Indicator_Status_Poster]]&#61833;[/COLOR]</value>
+    </variable>
+
 </includes>
