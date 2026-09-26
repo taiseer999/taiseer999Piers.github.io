@@ -98,39 +98,6 @@
             <include condition="String.IsEqual(Skin.String(tinyppi.font),tonos)">TinyPPI_Font_Tonos</include>
             <include condition="String.IsEmpty(Skin.String(tinyppi.font)) | [!String.IsEqual(Skin.String(tinyppi.font),amazon) + !String.IsEqual(Skin.String(tinyppi.font),hacen) + !String.IsEqual(Skin.String(tinyppi.font),inter) + !String.IsEqual(Skin.String(tinyppi.font),iphone) + !String.IsEqual(Skin.String(tinyppi.font),mohand) + !String.IsEqual(Skin.String(tinyppi.font),monadi) + !String.IsEqual(Skin.String(tinyppi.font),roboto) + !String.IsEqual(Skin.String(tinyppi.font),tonos)]">TinyPPI_Font_Default</include>
 
-
-            <font>
-                <name>font_infotag_bold</name>
-                <filename>monadit.ttf</filename>
-                <size>24</size>
-                <style>uppercase</style>
-            </font>
-
-
-            <font>
-                <name>font_infotag_reg</name>
-                <filename>monaditreg.ttf</filename>
-                <size>24</size>
-                <style>uppercase</style>
-            </font>
-
-
-            <font>
-                <name>font_Topbar_bold</name>
-                <filename>monadi BOLD.ttf</filename>
-                <size>38</size>
-                <style>uppercase</style>
-            </font>
-
-
-            <font>
-                <name>font_Topbarinfo</name>
-                <filename>monadi-reg.ttf</filename>
-                <size>29</size>
-                <style>uppercase</style>
-            </font>
-
-
             <font>
                 <name>font_midi_iconic</name>
                 <filename>fa-solid-900.ttf</filename>
