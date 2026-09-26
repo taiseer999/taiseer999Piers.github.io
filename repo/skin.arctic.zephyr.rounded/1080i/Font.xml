@@ -344,7 +344,7 @@
         </font>
     </fontset>
 
-    <fontset id="Oldie" unicode="false">
+    <fontset id="Al-Mohannad" unicode="false">
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -503,7 +503,7 @@
             <filename>RobotoNotoCJKsc-Regular.ttf</filename>
             <size>28</size>
             
-            <linespacing>1.08</linespacing>
+            <linespacing>0.9</linespacing>
         </font>
         <font>
             <name>TinyBadge</name>
