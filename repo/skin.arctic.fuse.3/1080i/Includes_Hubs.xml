@@ -1030,7 +1030,7 @@
         </include>
     </include>
 
-    <include name="Hub_Widget_Splash">
+     <include name="Hub_Widget_Splash">
         <param name="condition">false</param>
         <param name="label">$LOCALIZE[31427] [LOWERCASE]$LOCALIZE[31103][/LOWERCASE]</param>
         <param name="busyspinner">true</param>
@@ -1038,6 +1038,7 @@
             <control type="group">
                 <visible>$PARAM[condition]</visible>
                 <include>Background_StartUp</include>
+                <control type="videowindow" />
                 <include>Object_StartUp_Logo</include>
                 <control type="label">
                     <centertop>610</centertop>
@@ -1055,6 +1056,7 @@
                     <param name="haslabel">false</param>
                 </include>
             </control>
+
         </definition>
     </include>
 
