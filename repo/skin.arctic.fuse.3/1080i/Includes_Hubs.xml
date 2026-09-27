@@ -285,6 +285,10 @@
                     <param name="visible_plot">true</param>
                     <param name="visible_meta">true</param>
                     <param name="include_title">false</param>
+                    <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (hub) -->
+                    <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (hub) -->
+                    <param name="plottop">54</param>
+                    <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (hub) -->
                     <param name="container">Container($PARAM[id]).</param>
                 </include>
             </control>
@@ -343,6 +347,10 @@
             <include>Info_Panel_Dimensions</include>
             <include content="Info_Panel">
                 <param name="container">Container(301).</param>
+                <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (spotlight) -->
+                <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (spotlight) -->
+                <param name="plottop">54</param>
+                <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (spotlight) -->
                 <param name="visible_line">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_plot">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_meta">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
