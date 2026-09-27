@@ -95,7 +95,7 @@
                         <left>-40</left>
                         <width>160</width>
                         <height>160</height>
-                        <texture colordiffuse="White70">$VAR[Image_Header_Background]</texture>
+                        <include>Texture_Header_Common_Background_Icon</include>
                         <animation effect="fade" start="100" end="90" condition="true">Conditional</animation>
                     </control>
                     <control type="image">
@@ -211,6 +211,7 @@
 
                     <control type="group">
                         <visible>Container.Content(artists)</visible>
+
                         <top>DialogInfo_Top</top>
                         <left>DialogInfo_Square_Left</left>
 
@@ -395,12 +396,10 @@
 
                     <control type="group">
                         <visible>Container.Content(albums)</visible>
-                        <control type="group">
-                            <top>77</top>
-                            <include>Furniture_DialogInfo_Audio_Flags</include>
-                        </control>
-                        <left>DialogInfo_Square_Left</left>
+
                         <top>DialogInfo_Top</top>
+                        <left>DialogInfo_Square_Left</left>
+
                         <control type="grouplist">
                             <itemgap>0</itemgap>
                             <include content="Def_Dialog_Square_Info_Line">
@@ -468,12 +467,10 @@
 
                     <control type="group">
                         <visible>Container.Content(songs)</visible>
-                        <control type="group">
-                            <top>77</top>
-                            <include>Furniture_DialogInfo_Audio_Flags</include>
-                        </control>
-                        <left>DialogInfo_Square_Left</left>
+
                         <top>DialogInfo_Top</top>
+                        <left>DialogInfo_Square_Left</left>
+
                         <control type="grouplist">
                             <itemgap>0</itemgap>
                             <include content="Def_Dialog_Square_Info_Line">
@@ -520,6 +517,15 @@
                             <label fallback="19055">$INFO[ListItem.Property(Artist_Description)]$INFO[Window(Home).Property(ResetScroll)]</label>
                         </control>
                     </control>
+
+                    <!-- FLAG AUDIO -->
+
+                    <control type="group">
+                        <visible>Container.Content(albums) | Container.Content(songs)</visible>
+                        <top>376</top>
+                        <left>DialogInfo_Square_Left</left>
+                        <include>Furniture_DialogInfo_Audio_Flags</include>
+                    </control>
                 </control>
 
                 <!-- ARROWS -->
@@ -556,7 +562,7 @@
                     </control>
                     <control type="image">
                         <include content="Def_Padding"><param name="pad" value="-9" /></include>
-                        <texture border="32" colordiffuse="$VAR[Color_Border_Widget]" infill="false">$VAR[border24]</texture>
+                        <texture border="32" colordiffuse="$VAR[Color_Widget_Border]" infill="false">$VAR[border24]</texture>
                         <visible>Skin.HasSetting(hide.global.shadows)</visible>
                     </control>
                     <control type="image">
@@ -578,15 +584,15 @@
                     <include content="Def_Dialog_Info_List_Updating">
                         <param name="visible" value="String.IsEqual(Window(Home).Property(moviecontent),4)" />
                         <param name="controlid" value="9503" />
-                        <param name="centerleft" value="50%" />
-                        <param name="centertop" value="50%" />
+                        <param name="centerleft" value="-262" />
+                        <param name="centertop" value="104" />
                         <param name="label_spinner" value="$LOCALIZE[13513] ..." />
                     </include>
 
                     <!-- FANART LIST -->
 
                     <control type="fixedlist" id="9503">
-                        <include>Animation_Scrolltime_Details_List</include>
+                        <include>Animation_Horizontal_Scrolltime_Fanart_Cast_Square_Dialog_Info</include>
 
                         <top>0</top>
                         <left>0</left>
