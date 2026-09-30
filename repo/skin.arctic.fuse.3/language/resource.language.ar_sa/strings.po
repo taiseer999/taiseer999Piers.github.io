@@ -2496,3 +2496,8 @@ msgstr "شعارات الترميز"
 msgctxt "#31996"
 msgid "Video OSD extras"
 msgstr "ايقونات فيديو OSD"
+
+#: /1080i/SkinSettings.xml
+msgctxt "#31980"
+msgid "Left"
+msgstr "يسار"

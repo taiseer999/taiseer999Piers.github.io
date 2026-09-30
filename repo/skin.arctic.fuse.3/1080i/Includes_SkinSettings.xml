@@ -71,7 +71,6 @@
             <param name="control">button</param>
             <label>$LOCALIZE[31208]</label>
             <label2>$VAR[Label_SkinSettings_Header]</label2>
-            <visible>!Skin.HasSetting(HomeSwitcher.Vertical)</visible>
 
             <onclick condition="Skin.HasSetting(HomeSwitcher.DisableHeader)">Skin.Reset(HomeSwitcher.DisableDate)</onclick>
             <onclick condition="Skin.HasSetting(HomeSwitcher.DisableHeader)">Skin.Reset(HomeSwitcher.DisableHeader)</onclick>

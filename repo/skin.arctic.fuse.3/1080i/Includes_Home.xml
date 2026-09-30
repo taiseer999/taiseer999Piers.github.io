@@ -6,6 +6,11 @@
         <value condition="String.IsEmpty(Skin.String(HomeSwitcher.OnUp))">$LOCALIZE[1034]</value>
     </variable>
 
+    <variable name="Label_Setting_SideMenuLeftAction">
+        <value condition="Skin.String(HomeSwitcher.OnLeft,options)">$LOCALIZE[33063]</value>
+        <value>$LOCALIZE[1034]</value>
+    </variable>
+
     <variable name="Home_Icon_home">
         <value condition="!String.IsEmpty(Skin.String(HomeSwitcher.Home.Icon))">$INFO[Skin.String(HomeSwitcher.Home.Icon)]</value>
         <value>special://skin/extras/icons/home.png</value>
@@ -222,7 +227,8 @@
     <include name="Home_Vert_Movement">
         <onleft>SetProperty(Bumper.Direction,Left,Home)</onleft>
         <!-- <onleft>ActivateWindow(1180)</onleft> -->
-        <onleft>ActivateWindow(1181)</onleft>
+        <onleft condition="Skin.String(HomeSwitcher.OnLeft,options)">ActivateWindow(1170)</onleft>
+        <onleft condition="String.IsEmpty(Skin.String(HomeSwitcher.OnLeft))">ActivateWindow(1181)</onleft>
         <oninfo>ActivateWindow(1181)</oninfo>
 
         <!-- <onright condition="![String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined)]">SetFocus($INFO[Window.Property(TMDBHelper.WidgetContainer)],0,absolute)</onright>

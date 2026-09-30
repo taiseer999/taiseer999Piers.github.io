@@ -2500,3 +2500,8 @@ msgstr ""
 msgctxt "#31996"
 msgid "Video OSD extras"
 msgstr ""
+
+#: /1080i/SkinSettings.xml
+msgctxt "#31980"
+msgid "Left"
+msgstr ""

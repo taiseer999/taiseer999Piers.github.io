@@ -718,6 +718,24 @@
         <animation effect="slide" end="0" start="0,240" time="400" tween="quadratic" reversible="false" condition="![!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301)]">Conditional</animation>
     </include>
 
+    <!-- ABUKARIM: top bar (date/time/stats) in side menu mode -->
+    <include name="Hub_Vert_Header">
+        <control type="group">
+            <visible>!$EXP[Exp_InfoDialogs]</visible>
+            <visible>!String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) | Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301)</visible>
+            <include>Home_Animation</include>
+            <!-- date raised so it clears the clearlogo -->
+            <include content="Furniture_Header">
+                <param name="label">$VAR[Home_Header_Label]</param>
+                <param name="include_right">false</param>
+                <param name="top">0</param>
+            </include>
+            <include content="Furniture_Header">
+                <param name="include_left">false</param>
+            </include>
+        </control>
+    </include>
+
     <include name="Hub_Window_Background">
         <include>Hub_Window_Refocus_Buttons</include>
         <include>Background</include>
@@ -803,6 +821,7 @@
                     <visible>!$EXP[Exp_InfoDialogs]</visible>
                     <include>Furniture_Footer_Right</include>
                 </control>
+                <include condition="Skin.HasSetting(HomeSwitcher.Vertical) + !Skin.HasSetting(HomeSwitcher.DisableHeader)">Hub_Vert_Header</include>
             </control>
 
         </definition>
@@ -871,6 +890,7 @@
                     <visible>!$EXP[Exp_InfoDialogs]</visible>
                     <include>Furniture_Footer_Right</include>
                 </control>
+                <include condition="Skin.HasSetting(HomeSwitcher.Vertical) + !Skin.HasSetting(HomeSwitcher.DisableHeader)">Hub_Vert_Header</include>
             </control>
 
         </definition>
