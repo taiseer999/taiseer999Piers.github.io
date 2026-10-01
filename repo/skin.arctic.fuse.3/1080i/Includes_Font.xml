@@ -97,6 +97,13 @@
             <include condition="String.IsEqual(Skin.String(tinyppi.font),roboto)">TinyPPI_Font_Roboto</include>
             <include condition="String.IsEqual(Skin.String(tinyppi.font),tonos)">TinyPPI_Font_Tonos</include>
             <include condition="String.IsEmpty(Skin.String(tinyppi.font)) | [!String.IsEqual(Skin.String(tinyppi.font),amazon) + !String.IsEqual(Skin.String(tinyppi.font),hacen) + !String.IsEqual(Skin.String(tinyppi.font),inter) + !String.IsEqual(Skin.String(tinyppi.font),iphone) + !String.IsEqual(Skin.String(tinyppi.font),mohand) + !String.IsEqual(Skin.String(tinyppi.font),monadi) + !String.IsEqual(Skin.String(tinyppi.font),roboto) + !String.IsEqual(Skin.String(tinyppi.font),tonos)]">TinyPPI_Font_Default</include>
+              <!-- Font for codec flag -->
+            <font>
+                <name>font_infotag_bold</name>
+                <filename>LeagueSpartan-ExtraBold.ttf</filename>
+                <size>24</size>
+                <style>uppercase</style>
+            </font>
 
             <font>
                 <name>font_midi_iconic</name>
