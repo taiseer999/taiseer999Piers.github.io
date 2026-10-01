@@ -67,7 +67,7 @@
                 <control type="image" id="78883">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
-                    <width>104</width>
+                    <width>85</width>
                     <height>56</height>
                     <aspectratio>keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">flags/colorful/source/$INFO[VideoPlayer.VideoCodec].png</texture>
@@ -113,8 +113,8 @@
                 <control type="image" id="78870">
                     <fadetime>100</fadetime>
                     <centertop>50%</centertop>
-                    <width>90</width>
-                    <height>60</height>
+                    <width>78</width>
+                    <height>78</height>
                     <aspectratio>keep</aspectratio>
                     <texture colordiffuse="panel_fg_100">$VAR[Image_VideoPlayer_AudioChannels]</texture>
                     <visible>!String.IsEmpty(VideoPlayer.AudioChannels)</visible>
