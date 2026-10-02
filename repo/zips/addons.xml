@@ -774,7 +774,7 @@ v3.5.46
 - Minor cosmetic adjustments and small fixes
 </news>
     </extension>
-</addon><addon id="skin.bald" version="0.10.1+piers.5.1" name="Bald" provider-name="dangerouslaser">
+</addon><addon id="skin.bald" version="0.11.0" name="Bald" provider-name="dangerouslaser">
 	<requires>
 		<import addon="xbmc.gui" version="5.18.0" />
 		<import addon="xbmc.python" version="3.0.1" />
