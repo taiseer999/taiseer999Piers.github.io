@@ -59,7 +59,7 @@
 		<font>
 			<name>font40_title</name>
 			<filename>Mohand-Bold.ttf</filename>
-			<size>40</size>
+			<size>35</size>
 		</font>
 		<!-- Bald type scale (docs/SPEC.md section 3) -->
 		<!-- Clock (spec 300; lightest static face is 400) -->
@@ -78,7 +78,7 @@
 		<font>
 			<name>Bald_CaptionTitle</name>
 			<filename>Mohand-Bold.ttf</filename>
-			<size>40</size>
+			<size>35</size>
 			<linespacing>0.826</linespacing>
 		</font>
 		<!-- Caption meta -->
@@ -111,9 +111,9 @@
 		<font>
 			<name>Bald_MenuItem</name>
 			<filename>Mohand-Bold.ttf</filename>
-			<size>36</size>
+			<size>38</size>
 		</font>
-		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 46 -->
+		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 38 -->
 		<font>
 			<name>Bald_SettingsCategory</name>
 			<filename>Mohand-Bold.ttf</filename>
@@ -265,7 +265,7 @@
 		<font>
 			<name>font40_title</name>
 			<filename>iPhone-Bold.ttf</filename>
-			<size>40</size>
+			<size>35</size>
 		</font>
 		<!-- Bald type scale (docs/SPEC.md section 3) -->
 		<!-- Clock (spec 300; lightest static face is 400) -->
@@ -284,7 +284,7 @@
 		<font>
 			<name>Bald_CaptionTitle</name>
 			<filename>iPhone-Bold.ttf</filename>
-			<size>40</size>
+			<size>35</size>
 			<linespacing>0.874</linespacing>
 		</font>
 		<!-- Caption meta -->
@@ -316,9 +316,9 @@
 		<font>
 			<name>Bald_MenuItem</name>
 			<filename>iPhone-Bold.ttf</filename>
-			<size>36</size>
+			<size>38</size>
 		</font>
-		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 46 -->
+		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 38 -->
 		<font>
 			<name>Bald_SettingsCategory</name>
 			<filename>iPhone-Bold.ttf</filename>
@@ -474,7 +474,7 @@
 		<font>
 			<name>font40_title</name>
 			<filename>Tonos-Bold.ttf</filename>
-			<size>40</size>
+			<size>35</size>
 		</font>
 		<!-- Bald type scale (docs/SPEC.md section 3) -->
 		<!-- Clock (spec 300; lightest static face is 400) -->
@@ -493,7 +493,7 @@
 		<font>
 			<name>Bald_CaptionTitle</name>
 			<filename>Tonos-Bold.ttf</filename>
-			<size>40</size>
+			<size>35</size>
 			<linespacing>0.847</linespacing>
 		</font>
 		<!-- Caption meta -->
@@ -526,9 +526,9 @@
 		<font>
 			<name>Bald_MenuItem</name>
 			<filename>Tonos-Bold.ttf</filename>
-			<size>36</size>
+			<size>38</size>
 		</font>
-		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 46 -->
+		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 38 -->
 		<font>
 			<name>Bald_SettingsCategory</name>
 			<filename>Tonos-Bold.ttf</filename>
