@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Shared buttons. Started from Kodi 22 Estuary's Includes_Buttons.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt);
+     restyled with Bald tokens and fonts, sizes and parameters kept so the windows that use them keep their layout.
+     Icon textures stay Estuary's, tinted with Bald ink. -->
+<includes>
+	<include name="DefaultSettingButton">
+		<param name="height">70</param>
+		<param name="textoffsetx">40</param>
+		<definition>
+			<textoffsetx>$PARAM[textoffsetx]</textoffsetx>
+			<top>0</top>
+			<height>$PARAM[height]</height>
+			<aligny>center</aligny>
+			<textcolor>bald_ink60</textcolor>
+			<focusedcolor>bald_ink</focusedcolor>
+			<invalidcolor>bald_accent</invalidcolor>
+			<selectedcolor>bald_accent</selectedcolor>
+			<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+			<texturenofocus />
+		</definition>
+	</include>
+	<include name="DefaultSettingLabel">
+		<left>0</left>
+		<top>0</top>
+		<height>75</height>
+		<label></label>
+		<align>center</align>
+		<aligny>center</aligny>
+		<font>Bald_RowLabel</font>
+		<textcolor>bald_ink60</textcolor>
+	</include>
+	<include name="DefaultDialogButton">
+		<param name="width">300</param>
+		<param name="height">72</param>
+		<param name="wrapmultiline">false</param>
+		<param name="font">Bald_Section</param>
+		<param name="onclick"></param>
+		<param name="visible">true</param>
+		<param name="enable">true</param>
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<width>$PARAM[width]</width>
+				<height>$PARAM[height]</height>
+				<label>$PARAM[label]</label>
+				<font>$PARAM[font]</font>
+				<onclick>$PARAM[onclick]</onclick>
+				<wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
+				<align>center</align>
+				<aligny>center</aligny>
+				<textcolor>bald_ink</textcolor>
+				<focusedcolor>bald_field</focusedcolor>
+				<texturefocus border="27" colordiffuse="bald_ink">bald/pill.png</texturefocus>
+				<texturenofocus border="27" colordiffuse="bald_ink45">bald/pill_outline.png</texturenofocus>
+				<visible>$PARAM[visible]</visible>
+				<enable>$PARAM[enable]</enable>
+			</control>
+		</definition>
+	</include>
+	<!-- DialogNumeric's keys: the keyboard's key look. -->
+	<include name="KeyboardButton">
+		<include>Bald_KeyboardButton</include>
+	</include>
+	<!-- textoffsetx 7 keeps the centred key text's width now that the button default is 27. -->
+	<include name="Bald_KeyboardButton">
+		<width>120</width><height>120</height><textoffsetx>7</textoffsetx><textoffsety>27</textoffsety>
+		<texturefocus colordiffuse="bald_ink">buttons/roundbutton-fo.png</texturefocus><texturenofocus />
+		<align>center</align><aligny>top</aligny><font>Bald_KeyboardKey</font><textcolor>bald_ink</textcolor><focusedcolor>bald_field</focusedcolor>
+	</include>
+	<include name="Bald_KeyboardAction">
+		<param name="width">350</param><param name="height">72</param><param name="label"></param>
+		<definition><control type="button" id="$PARAM[id]"><width>$PARAM[width]</width><height>$PARAM[height]</height><label>$PARAM[label]</label><font>Bald_Section</font><align>center</align><aligny>center</aligny><textcolor>bald_ink</textcolor><focusedcolor>bald_field</focusedcolor><texturefocus border="27" colordiffuse="bald_ink">bald/pill.png</texturefocus><texturenofocus border="27" colordiffuse="bald_ink45">bald/pill_outline.png</texturenofocus></control></definition>
+	</include>
+	<include name="ButtonMenuList">
+		<left>0</left>
+		<top>80</top>
+		<width>600</width>
+		<height>700</height>
+		<onleft>9000</onleft>
+		<onright>9000</onright>
+		<onup>9000</onup>
+		<ondown>9000</ondown>
+		<orientation>vertical</orientation>
+		<itemlayout height="70" width="600">
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>600</width>
+				<height>70</height>
+				<texture colordiffuse="bald_field">bald/white.png</texture>
+			</control>
+			<control type="label">
+				<left>0</left>
+				<textoffsetx>20</textoffsetx>
+				<top>0</top>
+				<width>600</width>
+				<height>70</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>Bald_Section</font>
+				<textcolor>bald_ink70</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</itemlayout>
+		<focusedlayout height="70" width="600">
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>600</width>
+				<height>70</height>
+				<texture colordiffuse="bald_field">bald/white.png</texture>
+			</control>
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>600</width>
+				<height>70</height>
+				<texture colordiffuse="bald_ink10">bald/white.png</texture>
+			</control>
+			<control type="label">
+				<left>0</left>
+				<textoffsetx>20</textoffsetx>
+				<top>0</top>
+				<width>600</width>
+				<height>70</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>Bald_Section</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</focusedlayout>
+	</include>
+</includes>

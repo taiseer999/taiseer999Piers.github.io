@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- From Kodi 22 Estuary's DialogColorPicker.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt), with a Bald interior
+     (docs/NOTES.md, "Media windows restyle"). Kodi binds 1 (heading, in DialogBackgroundCommons), 6 (swatch panel)
+     and 7 (Cancel); 61 is the panel's scrollbar and 9001 the action column. -->
+<window>
+	<defaultcontrol always="true">6</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<depth>DepthOSD</depth>
+	<controls>
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<height>790</height>
+			<width>1220</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1220" />
+				<param name="height" value="790" />
+				<param name="header_label" value="" />
+				<param name="header_id" value="1" />
+			</include>
+			<!-- Swatches: 130 x 64, rounded like Bald tiles, over Estuary's checkerboard so transparent colours read.
+			     Focus pops the swatch to 1.12 and rings it in ink. -->
+			<control type="panel" id="6">
+				<left>40</left>
+				<top>100</top>
+				<width>876</width>
+				<height>616</height>
+				<onup>6</onup>
+				<ondown>6</ondown>
+				<onleft>9001</onleft>
+				<onright>61</onright>
+				<orientation>vertical</orientation>
+				<pagecontrol>61</pagecontrol>
+				<scrolltime tween="cubic" easing="out">300</scrolltime>
+				<viewtype label="100">icon</viewtype>
+				<itemlayout height="88" width="146">
+					<include>Bald_ColorSwatch</include>
+				</itemlayout>
+				<focusedlayout height="88" width="146">
+					<control type="group">
+						<animation type="Focus" condition="$EXP[Bald_FullMotion]">
+							<effect type="zoom" start="100" end="112" center="73,44" time="280" tween="back" easing="out" />
+						</animation>
+						<animation type="Unfocus" condition="$EXP[Bald_FullMotion]">
+							<effect type="zoom" start="112" end="100" center="73,44" time="220" tween="cubic" easing="out" />
+						</animation>
+						<include>Bald_ColorSwatch</include>
+						<control type="image">
+							<left>2</left><top>6</top><width>142</width><height>76</height>
+							<texture border="8" colordiffuse="bald_ink">bald/focus_ring.png</texture>
+							<visible>Control.HasFocus(6)</visible>
+						</control>
+					</control>
+				</focusedlayout>
+			</control>
+			<control type="scrollbar" id="61">
+				<left>932</left>
+				<top>100</top>
+				<height>616</height>
+				<onleft condition="Control.IsVisible(6)">6</onleft>
+				<onright>9001</onright>
+				<include>Bald_MediaScrollbarLook</include>
+			</control>
+			<!-- Selected colour: name and value. -->
+			<control type="grouplist">
+				<left>48</left>
+				<top>730</top>
+				<width>860</width>
+				<height>40</height>
+				<orientation>horizontal</orientation>
+				<itemgap>14</itemgap>
+				<control type="label">
+					<width>auto</width><height>40</height><aligny>center</aligny>
+					<font>Bald_RowLabel</font><textcolor>bald_ink60</textcolor>
+					<label>$LOCALIZE[737]</label>
+				</control>
+				<control type="label">
+					<width>auto</width><height>40</height><aligny>center</aligny>
+					<font>Bald_Section</font><textcolor>bald_ink</textcolor>
+					<label>$INFO[Container(6).ListItem.Label]$INFO[Container(6).ListItem.Label2, · #,]</label>
+				</control>
+			</control>
+			<control type="label">
+				<left>960</left>
+				<top>730</top>
+				<width>220</width>
+				<height>40</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>Bald_Hint</font>
+				<textcolor>bald_ink60</textcolor>
+				<label>$VAR[Bald_MediaCount]</label>
+			</control>
+			<control type="grouplist" id="9001">
+				<left>960</left>
+				<top>100</top>
+				<width>220</width>
+				<onleft>61</onleft>
+				<onright>6</onright>
+				<itemgap>dialogbuttons_itemgap</itemgap>
+				<include content="DefaultDialogButton">
+					<param name="id" value="7" />
+					<param name="width" value="220" />
+					<param name="label" value="$LOCALIZE[222]" />
+				</include>
+			</control>
+		</control>
+	</controls>
+</window>

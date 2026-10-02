@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- From Kodi 22 Estuary's DialogMusicInfo.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt), restyled in the Bald
+     info language (docs/NOTES.md, "Media windows restyle"; docs/SPEC.md 5.20). Serves musicinformation (albums and
+     artists) and songinformation. Kodi binds 6 Refresh, 7 Your rating, 8 Play, 10 Choose art, 12 Artist / album
+     information and 50 (the song, album or artist list); it sets their labels and shows or hides 7, 8 and 12
+     itself, so those carry no <visible>. 41 (details), 130 (description button), 400 (description text), 120
+     (fanart), 13 (play next, albums) and 9000 (action row) are the skin's own. List 50 draws an album's tracks as
+     rows (disc-track numbers on multi-disc albums), an artist's discography as square covers, and a song's
+     contributors as the cast circles.
+     As in Estuary, a song dialog opened over an album dialog draws nothing of its own. -->
+<window>
+	<defaultcontrol always="true">9000</defaultcontrol>
+	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
+	<onunload>ClearProperty(infobackground,home)</onunload>
+	<controls>
+		<control type="group">
+			<visible>![Window.Is(songinformation) + Window.IsActive(musicinformation)]</visible>
+			<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="130" tween="sine" easing="inout">WindowClose</animation>
+			<include content="Bald_MediaBackdrop">
+				<param name="art">$INFO[ListItem.Art(fanart)]</param>
+			</include>
+		</control>
+		<control type="group">
+			<visible>![Window.Is(songinformation) + Window.IsActive(musicinformation)]</visible>
+			<animation effect="fade" start="100" end="0" time="130" tween="sine" easing="inout">WindowClose</animation>
+			<!-- Cover -->
+			<control type="group">
+				<left>Bald_SafeLeft</left>
+				<top>150</top>
+				<include content="Bald_AnimInfoIn"><param name="delay">380</param></include>
+				<control type="image">
+					<width>400</width>
+					<height>400</height>
+					<texture colordiffuse="bald_tile_placeholder">bald/white.png</texture>
+				</control>
+				<control type="image">
+					<width>400</width>
+					<height>400</height>
+					<aspectratio aligny="top">keep</aspectratio>
+					<fadetime>300</fadetime>
+					<texture background="true">$VAR[MusicInfoThumbVar]</texture>
+				</control>
+			</control>
+			<!-- Identity: title, meta line, genre accent, description. -->
+			<control type="group">
+				<left>544</left>
+				<top>150</top>
+				<control type="label">
+					<width>1280</width>
+					<height>90</height>
+					<aligny>center</aligny>
+					<font>Bald_InfoTitle</font>
+					<textcolor>bald_ink</textcolor>
+					<scroll>true</scroll>
+					<label>$VAR[Bald_MusicInfoTitle]</label>
+					<include content="Bald_AnimInfoIn"><param name="delay">380</param></include>
+				</control>
+				<control type="label">
+					<top>104</top>
+					<width>1280</width>
+					<height>32</height>
+					<aligny>center</aligny>
+					<font>Bald_InfoMeta</font>
+					<textcolor>bald_ink</textcolor>
+					<label>$VAR[Bald_MusicInfoMeta]</label>
+					<include content="Bald_AnimInfoIn"><param name="delay">440</param></include>
+				</control>
+				<control type="label">
+					<top>146</top>
+					<width>1280</width>
+					<height>26</height>
+					<aligny>center</aligny>
+					<font>Bald_InfoGenre</font>
+					<textcolor>bald_accent</textcolor>
+					<label>$INFO[ListItem.Genre]</label>
+					<include content="Bald_AnimInfoIn"><param name="delay">480</param></include>
+				</control>
+				<control type="group">
+					<top>198</top>
+					<include content="Bald_AnimInfoIn"><param name="delay">520</param></include>
+					<!-- Select opens the whole description in Kodi's text viewer; focus shows a quiet row behind it. -->
+					<control type="button" id="130">
+						<left>-24</left>
+						<top>-16</top>
+						<width>1128</width>
+						<height>170</height>
+						<label></label>
+						<texturefocus colordiffuse="bald_ink10">bald/white.png</texturefocus>
+						<texturenofocus />
+						<onup>noop</onup>
+						<ondown>9000</ondown>
+						<onleft>noop</onleft>
+						<onright>noop</onright>
+						<onclick>SetProperty(TextViewer_Header,$LOCALIZE[21821],home)</onclick>
+						<onclick>SetProperty(TextViewer_Text,$ESCVAR[Bald_MusicInfoText],home)</onclick>
+						<onclick condition="!String.IsEmpty(Control.GetLabel(400))">ActivateWindow(1102)</onclick>
+						<visible>!String.IsEmpty(Control.GetLabel(400))</visible>
+					</control>
+					<!-- Description: 4 lines of 34 px. -->
+					<control type="label" id="400">
+						<width>1080</width>
+						<height>134</height>
+						<wrapmultiline>true</wrapmultiline>
+						<aligny>top</aligny>
+						<font>Bald_InfoPlot</font>
+						<textcolor>bald_ink80</textcolor>
+						<label>$VAR[Bald_MusicInfoText]</label>
+					</control>
+				</control>
+			</control>
+			<!-- Actions. Kodi labels 6, 7, 8, 10 and 12, and hides 7, 8 and 12 for artists. -->
+			<control type="grouplist" id="9000">
+				<left>Bald_SafeLeft</left>
+				<top>590</top>
+				<width>1728</width>
+				<height>70</height>
+				<orientation>horizontal</orientation>
+				<itemgap>14</itemgap>
+				<onleft>noop</onleft>
+				<onright>noop</onright>
+				<onup condition="!String.IsEmpty(Control.GetLabel(400))">130</onup>
+				<ondown condition="Integer.IsGreater(Container(50).NumItems,0)">50</ondown>
+				<ondown condition="!Integer.IsGreater(Container(50).NumItems,0)">41</ondown>
+				<include content="Bald_AnimInfoIn"><param name="delay">560</param></include>
+				<include content="Bald_MediaAction">
+					<param name="id">8</param>
+					<param name="label">$LOCALIZE[208]</param>
+				</include>
+				<!-- Play next: the album right after the song that is playing (QueueMedia's playnext; without it Kodi
+				     appends the album to the end of the queue). -->
+				<include content="Bald_MediaAction">
+					<param name="id">13</param>
+					<param name="label">$LOCALIZE[10008]</param>
+					<param name="onclick">QueueMedia(musicdb://albums/$INFO[ListItem.DBID]/,isdir,playnext)</param>
+					<param name="visible">String.IsEqual(ListItem.DBType,album) + !String.IsEmpty(ListItem.DBID)</param>
+				</include>
+				<include content="Bald_MediaAction">
+					<param name="id">7</param>
+					<param name="label">$LOCALIZE[38023]</param>
+				</include>
+				<include content="Bald_MediaAction">
+					<param name="id">12</param>
+					<param name="label">$LOCALIZE[21891]</param>
+				</include>
+				<include content="Bald_MediaAction">
+					<param name="id">120</param>
+					<param name="label">$LOCALIZE[31028]</param>
+					<param name="onclick">SetProperty(fanart,$ESCINFO[ListItem.Art(fanart)],home)</param>
+					<param name="visible">String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album)</param>
+					<param name="enable">!String.IsEmpty(ListItem.Art(fanart))</param>
+					<onclick>ActivateWindow(1104)</onclick>
+				</include>
+				<include content="Bald_MediaAction">
+					<param name="id">6</param>
+					<param name="label">$LOCALIZE[184]</param>
+				</include>
+				<include content="Bald_MediaAction">
+					<param name="id">10</param>
+					<param name="label">$LOCALIZE[13511]</param>
+				</include>
+			</control>
+			<!-- Songs, albums or artists, and the details list. -->
+			<control type="group">
+				<top>680</top>
+				<include content="Bald_AnimInfoIn"><param name="delay">620</param></include>
+				<include content="Bald_MediaCaption">
+					<param name="label">$VAR[Bald_MusicListCaption]</param>
+					<param name="left">96</param>
+					<param name="width">1160</param>
+				</include>
+				<control type="panel" id="50">
+					<left>76</left>
+					<top>40</top>
+					<width>1188</width>
+					<height>236</height>
+					<onup>9000</onup>
+					<ondown>noop</ondown>
+					<onright>41</onright>
+					<onleft>noop</onleft>
+					<orientation>horizontal</orientation>
+					<scrolltime tween="cubic" easing="out">440</scrolltime>
+					<!-- An artist's discography: a row of square covers. -->
+					<itemlayout width="200" height="236" condition="Container.Content(albums)">
+						<include content="Bald_MusicInfoCover" />
+					</itemlayout>
+					<focusedlayout width="200" height="236" condition="Container.Content(albums)">
+						<include content="Bald_MusicInfoCover">
+							<param name="ink">bald_ink</param>
+							<param name="diffuse">bald_ink</param>
+							<param name="focused">Control.HasFocus(50)</param>
+						</include>
+					</focusedlayout>
+					<itemlayout width="594" height="59" condition="!Container.Content(artists)">
+						<include content="Bald_MusicInfoRow" />
+					</itemlayout>
+					<focusedlayout width="594" height="59" condition="!Container.Content(artists)">
+						<include>Bald_MediaFocusRow</include>
+						<include content="Bald_MusicInfoRow">
+							<param name="ink">bald_ink</param>
+							<param name="meta">bald_ink70</param>
+							<param name="scroll">true</param>
+						</include>
+					</focusedlayout>
+					<itemlayout width="240" height="236" condition="Container.Content(artists)">
+						<include content="Bald_CastItem" />
+					</itemlayout>
+					<focusedlayout width="240" height="236" condition="Container.Content(artists)">
+						<include content="Bald_CastItem">
+							<param name="focused">Control.HasFocus(50)</param>
+						</include>
+					</focusedlayout>
+				</control>
+				<include content="Bald_MediaCaption">
+					<param name="label">$LOCALIZE[31664]</param>
+					<param name="left">1296</param>
+					<param name="width">528</param>
+				</include>
+				<control type="list" id="41">
+					<left>1276</left>
+					<top>40</top>
+					<width>548</width>
+					<height>236</height>
+					<onleft condition="Integer.IsGreater(Container(50).NumItems,0)">50</onleft>
+					<onright>noop</onright>
+					<onup>9000</onup>
+					<ondown>noop</ondown>
+					<scrolltime tween="cubic" easing="out">200</scrolltime>
+					<include content="Bald_MediaDetailLayout">
+						<param name="width">548</param>
+						<param name="height">59</param>
+						<param name="label_top">4</param>
+						<param name="value_top">28</param>
+					</include>
+					<content>
+						<include condition="String.IsEqual(ListItem.DBTYPE,artist)">MusicInfoArtistInfo</include>
+						<include condition="String.IsEqual(ListItem.DBTYPE,album)">MusicInfoAlbumInfo</include>
+						<include condition="String.IsEqual(ListItem.DBTYPE,song)">MusicInfoSongInfo</include>
+					</content>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Values of Bald_Logo for each configured row, while the menu previews its screen (Bald.Row.<screen>). -->
+<contents>
+    <items>
+        <item>
+            <items menu="{menu}" item="{node}" mode="{mode}">
+                <item>
+                    <condition>{item_logo}!=off</condition>
+                    <template>generator/logo.xmltemplate</template>
+                    <value name="row_id">$MATH[{base} + 1 + {item_x}]</value>
+                    <value name="prefix">$EXP[Bald_Preview{title}] + String.IsEqual(Window(home).Property(Bald.Row.{screen}),$MATH[{base} + 1 + {item_x}])</value>
+                </item>
+                <!-- Row field "logo" = off: no clearlogo on the art frame for this row. -->
+                <item>
+                    <condition>{item_logo}==off</condition>
+                    <template>&lt;value condition="{prefix}"&gt;&lt;/value&gt;</template>
+                    <value name="prefix">$EXP[Bald_Preview{title}] + String.IsEqual(Window(home).Property(Bald.Row.{screen}),$MATH[{base} + 1 + {item_x}])</value>
+                </item>
+            </items>
+        </item>
+    </items>
+</contents>

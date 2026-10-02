@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Started from Kodi 22's bundled Estuary (skin.estuary, GPL-2.0-or-later; see LICENSE-Estuary.txt).
+     Bald: the event log as 100 px rows (icon, title, date and two lines of description) at the safe margin, with its
+     actions as a fixed options column at x 1440. Kodi binds the list 50, 20 (clear), 21 (level, whose label Kodi
+     sets), 22 (only this level) and 4 (sort order); 60 is the list's page control. -->
+<window>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<views>50</views>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" easing="inout" condition="$EXP[infodialog_active]">Conditional</animation>
+			<control type="group">
+				<visible>Control.IsVisible(50)</visible>
+				<include>Bald_BrowseViewIn</include>
+				<control type="list" id="50">
+					<left>Bald_SafeLeft</left>
+					<top>Bald_ContentTop</top>
+					<width>1140</width>
+					<height>600</height>
+					<onleft>50</onleft>
+					<onright>9000</onright>
+					<onup>50</onup>
+					<ondown>50</ondown>
+					<viewtype label="535">list</viewtype>
+					<pagecontrol>60</pagecontrol>
+					<scrolltime tween="cubic" easing="out">440</scrolltime>
+					<itemlayout height="100">
+						<include content="Bald_EventLogRow" />
+					</itemlayout>
+					<focusedlayout height="100">
+						<include content="Bald_BrowseRowDot"><param name="top">22</param><param name="visible">Control.HasFocus(50)</param></include>
+						<include content="Bald_EventLogRow"><param name="ink">bald_ink</param><param name="diffuse">bald_ink</param></include>
+					</focusedlayout>
+				</control>
+			</control>
+			<control type="scrollbar" id="60">
+				<left>1252</left>
+				<top>Bald_ContentTop</top>
+				<width>4</width>
+				<height>600</height>
+				<onleft>50</onleft>
+				<onright>9000</onright>
+				<include content="Bald_BrowseScrollbarStyle" />
+				<visible>Control.IsVisible(50)</visible>
+			</control>
+			<control type="group">
+				<left>Bald_RightColumn</left>
+				<top>292</top>
+				<include>Bald_BrowseFade</include>
+				<control type="grouplist" id="9000">
+					<orientation>vertical</orientation>
+					<width>440</width>
+					<height>400</height>
+					<itemgap>6</itemgap>
+					<onup>9000</onup>
+					<ondown>9000</ondown>
+					<onleft>50</onleft>
+					<onright>9000</onright>
+					<usecontrolcoords>true</usecontrolcoords>
+					<control type="togglebutton" id="4">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31032]: $LOCALIZE[584]</label>
+						<altlabel>$LOCALIZE[31032]: $LOCALIZE[585]</altlabel>
+					</control>
+					<control type="button" id="21">
+						<description>Minimum level (Kodi sets the label)</description>
+						<include>MediaMenuItemsCommon</include>
+						<label></label>
+					</control>
+					<control type="radiobutton" id="22">
+						<description>Only this level (Kodi sets the label)</description>
+						<include>MediaMenuItemsCommon</include>
+					</control>
+					<control type="button" id="20">
+						<description>Clear</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[192]</label>
+					</control>
+					<control type="button" id="501">
+						<description>Logging settings</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[5]</label>
+						<onclick>ActivateWindow(systemsettings,logging)</onclick>
+					</control>
+				</control>
+			</control>
+		</control>
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="$LOCALIZE[31067]" />
+			<param name="sublabel" value="" />
+			<param name="top" value="108" />
+		</include>
+		<include content="BottomBar" />
+		<control type="group">
+			<left>800</left>
+			<top>Bald_HintTop</top>
+			<visible>Control.HasFocus(50)</visible>
+			<include>Bald_BrowseFade</include>
+			<include content="Bald_InfoHintPair">
+				<param name="width">1024</param>
+				<param name="first">$VAR[Bald_KeyInfo]$LOCALIZE[31664]</param>
+				<param name="second">$LOCALIZE[31661]$VAR[Bald_KeyRight]</param>
+			</include>
+		</control>
+	</controls>
+</window>

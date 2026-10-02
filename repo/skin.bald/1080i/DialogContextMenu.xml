@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald context menu: drawn as the Home menu (docs/SPEC.md 5.1 "Menu (open)"): 1440, 392, width 420, 56 px items,
+     6 px gap, unfocused items at 34% and 6 px left, in fade 380 and slide 40 px over 480 after 120, out 160.
+     Over Home the caption slides out as for the main menu (Bald_OverlayOpen); elsewhere a dark scrim sits behind it.
+     Kodi (CGUIDialogContextMenu) fills grouplist 996 with copies of button 1000, and centres the dialog on the focused
+     control using background image 999's size, clamped to the screen. 999 is invisible and taller than the screen by
+     the list's maximum height (1080 + 304): Kodi shrinks it by the list's unused height, and it must stay at least
+     screen-sized so the clamp always lands the dialog at 0,0 and these coordinates are absolute. -->
+<window>
+	<defaultcontrol>996</defaultcontrol>
+	<!-- $ADDON is expanded in labels/actions, not in String.IsEqual's literal operand. -->
+	<onload condition="System.HasAddon(plugin.video.jellyfin)">SetProperty(Bald.JellyfinOptions,$ADDON[plugin.video.jellyfin 30401],contextmenu)</onload>
+	<onload condition="System.HasAddon(plugin.video.jellyfin)">SetProperty(Bald.JellyfinTranscode,$ADDON[plugin.video.jellyfin 30402],contextmenu)</onload>
+	<coordinates>
+		<left>0</left>
+		<top>0</top>
+	</coordinates>
+	<controls>
+		<control type="image" id="999">
+			<width>1920</width>
+			<height>1384</height>
+			<texture colordiffuse="00FFFFFF">bald/white.png</texture>
+		</control>
+		<!-- Scrim when not over Home (library windows still use Estuary's layouts). -->
+		<control type="group">
+			<visible>!Window.IsVisible(home)</visible>
+			<include>Bald_MenuScrim</include>
+		</control>
+		<!-- Clicking outside the menu closes it (mouse). -->
+		<control type="button">
+			<width>1920</width>
+			<height>1080</height>
+			<texturefocus />
+			<texturenofocus />
+			<onclick>Action(close)</onclick>
+		</control>
+		<control type="group">
+			<include>Bald_MenuMotion</include>
+			<!-- Starts 10 px left of the menu column (1430) because grouplists clip, and the focus dot sits at 1440. -->
+			<control type="grouplist" id="996">
+				<left>1430</left>
+				<top>392</top>
+				<width>450</width>
+				<!-- Five 56 px buttons plus four 6 px gaps. No partial sixth item; notes stay below the viewport. -->
+				<height max="304">auto</height>
+				<orientation>vertical</orientation>
+				<itemgap>6</itemgap>
+				<scrolltime>0</scrolltime>
+				<usecontrolcoords>true</usecontrolcoords>
+				<!-- Kodi wires the intermediate buttons; with no onup/ondown here the ends wrap, like Home's menu. -->
+			</control>
+			<include content="Bald_MenuNote"><param name="id">995</param><param name="text">$VAR[Bald_ContextNote]</param></include>
+		</control>
+		<!-- Button template: 56 px menu item. Unfocused 34%; focused full ink, sliding 6 px right (320), with the accent dot. -->
+		<control type="button" id="1000">
+			<!-- At 1434 (list at 1430 plus 4) so that after the 6 px focus slide the dot sits at 1440, like the Home menu's;
+			     text lands at 1460 unfocused and 1466 focused, also as in the Home menu. -->
+			<left>4</left>
+			<width>446</width>
+			<height>56</height>
+			<include>Bald_MenuButtonLook</include>
+		</control>
+	</controls>
+</window>

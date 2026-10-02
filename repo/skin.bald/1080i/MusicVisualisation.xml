@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bald Now Playing (docs/NOTES.md, "Music"; pieces in Includes_Bald_Music.xml): the album cover large at the safe
+     margin, the song's title, artist, album, year and genre, codec flags, the progress with elapsed and remaining
+     times and what plays next, over the blurred artist fanart. A visualisation, when Kodi runs one, plays behind the
+     screen dimmed to 40%, and has the screen to itself once Kodi stops showing the song's info (Info toggles that);
+     the music OSD (MusicOSD.xml) and the seek layer (DialogSeekBar.xml) open over the lower quarter, which the screen
+     leaves free. Started from Kodi 22 Estuary's MusicVisualisation.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt).
+     Kodi (CGUIWindowVisualisation) binds 2, the visualisation. -->
+<window>
+	<defaultcontrol></defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<onload condition="System.AddonIsEnabled(script.artistslideshow) + !Skin.HasSetting(hide_background_fanart)">RunScript(script.artistslideshow)</onload>
+	<!-- The blur follows the playing item (list 5500). -->
+	<include content="Bald_FollowContainerOnLoad"><param name="id">5500</param><param name="window">visualisation</param></include>
+	<include content="Bald_UnfollowContainerOnUnload"><param name="window">visualisation</param></include>
+	<controls>
+		<include>Bald_NowPlayingFollowList</include>
+		<control type="group">
+			<include>Bald_MediaOpenClose</include>
+			<include>Bald_NowPlayingBackdrop</include>
+		</control>
+		<control type="visualisation" id="2">
+			<include>FullScreenDimensions</include>
+			<visible>Player.HasAudio</visible>
+		</control>
+		<!-- The visualisation dims to 40% under the full screen. -->
+		<control type="image">
+			<width>1920</width><height>1080</height>
+			<texture colordiffuse="bald_field60">bald/white.png</texture>
+			<visible>Visualisation.Enabled + $EXP[Bald_NowPlayingFull]</visible>
+			<animation type="Visible"><effect type="fade" start="0" end="100" time="800" tween="sine" easing="inout" /></animation>
+			<animation type="Hidden"><effect type="fade" start="100" end="0" time="800" tween="sine" easing="inout" /></animation>
+		</control>
+		<control type="group">
+			<visible>$EXP[Bald_NowPlayingFull] + !MusicPlayer.Content(livetv)</visible>
+			<animation type="Visible" condition="$EXP[Bald_FullMotion]" reversible="false">
+				<effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" />
+				<effect type="slide" start="0,18" end="0,0" time="560" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Visible" condition="$EXP[Bald_ReduceMotion]" reversible="false">
+				<effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Hidden" reversible="false">
+				<effect type="fade" start="100" end="0" time="380" tween="sine" easing="inout" />
+			</animation>
+			<animation type="WindowClose">
+				<effect type="fade" start="100" end="0" time="130" tween="sine" easing="inout" />
+			</animation>
+			<!-- Idle: a dim, and a step round a 12 x 8 px square every 3 minutes (Bald_IdleDrift), so nothing burns in over
+			     a long album. -->
+			<include content="Bald_IdleDrift"><param name="x">12</param><param name="y">8</param></include>
+			<animation type="Conditional" condition="$EXP[Bald_NowPlayingIdle]">
+				<effect type="fade" start="100" end="70" time="600" tween="sine" easing="inout" />
+			</animation>
+			<include>Bald_NowPlayingContent</include>
+			<include>Bald_NowPlayingHints</include>
+		</control>
+	</controls>
+</window>

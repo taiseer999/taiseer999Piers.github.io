@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Kodi's settings hub (window settings), drawn in Bald's settings scaffold (Includes_Bald_Configure.xml): every
+     settings page, Bald Settings and the system tools in one sidebar list, with a note and Open for the focused one.
+     Started from Kodi 22 Estuary's Settings.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). Kodi binds no control
+     ids in this window (CGUIWindowSettings is a plain window); every entry is an action. -->
+<window>
+	<include>Bald_CurtainHandoff</include>
+	<defaultcontrol>9000</defaultcontrol>
+	<backgroundcolor>bald_field</backgroundcolor>
+	<controls>
+		<include content="Bald_SettingsFrame"><param name="title">$LOCALIZE[5]</param></include>
+		<control type="list" id="9000">
+			<include content="Bald_SettingsCategories"><param name="id">9000</param><param name="right">9001</param></include>
+			<content>
+				<item>
+					<label>$LOCALIZE[31730]</label>
+					<label2>$LOCALIZE[31951]</label2>
+					<onclick>ActivateWindow(1115)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[14200]</label>
+					<label2>$LOCALIZE[31952]</label2>
+					<onclick>ActivateWindow(PlayerSettings)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[14211]</label>
+					<label2>$LOCALIZE[31953]</label2>
+					<onclick>ActivateWindow(MediaSettings)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[14204]</label>
+					<label2>$LOCALIZE[31954]</label2>
+					<onclick>ActivateWindow(PVRSettings)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[14036]</label>
+					<label2>$LOCALIZE[31955]</label2>
+					<onclick>ActivateWindow(ServiceSettings)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[15016]</label>
+					<label2>$LOCALIZE[31956]</label2>
+					<onclick>ActivateWindow(GameSettings)</onclick>
+					<visible>System.GetBool(gamesgeneral.enable)</visible>
+				</item>
+				<item>
+					<label>$LOCALIZE[14206]</label>
+					<label2>$LOCALIZE[31957]</label2>
+					<onclick>ActivateWindow(InterfaceSettings)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[13200]</label>
+					<label2>$LOCALIZE[31958]</label2>
+					<onclick>ActivateWindow(Profiles)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[13000]</label>
+					<label2>$LOCALIZE[31959]</label2>
+					<onclick>ActivateWindow(SystemSettings)</onclick>
+				</item>
+				<item>
+					<label>CoreELEC</label>
+					<label2>$LOCALIZE[31734]</label2>
+					<onclick>RunAddon(service.coreelec.settings)</onclick>
+					<visible>System.AddonIsEnabled(service.coreelec.settings)</visible>
+				</item>
+				<item>
+					<label>LibreELEC</label>
+					<label2>$LOCALIZE[31735]</label2>
+					<onclick>RunAddon(service.libreelec.settings)</onclick>
+					<visible>System.AddonIsEnabled(service.libreelec.settings)</visible>
+				</item>
+				<item>
+					<label>$LOCALIZE[24001]</label>
+					<label2>$LOCALIZE[31737]</label2>
+					<onclick>ActivateWindow(addonbrowser)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[10003]</label>
+					<label2>$LOCALIZE[31960]</label2>
+					<onclick>ActivateWindow(filemanager)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[130]</label>
+					<label2>$LOCALIZE[31961]</label2>
+					<onclick>ActivateWindow(systeminfo)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[31067]</label>
+					<label2>$LOCALIZE[31962]</label2>
+					<onclick>ActivateWindow(eventlog)</onclick>
+				</item>
+			</content>
+		</control>
+		<include content="Bald_SettingsDetail">
+			<param name="heading">$INFO[Container(9000).ListItem.Label]</param>
+			<param name="note">$INFO[Container(9000).ListItem.Label2]</param>
+			<include content="Bald_SettingsOpen"><param name="list">9000</param></include>
+		</include>
+		<include content="Bald_SettingsHints"><param name="first">$VAR[Bald_KeyBack]$LOCALIZE[31963]</param><param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31666]</param></include>
+	</controls>
+</window>

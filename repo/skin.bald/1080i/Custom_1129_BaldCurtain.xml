@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Curtain: a true crossfade between Bald's full windows (Bald_CurtainChange, Includes_Bald_Common.xml).
+     Kodi never draws two full windows at once: it plays the old window's WindowClose, then initializes the new one
+     (MyVideoNav fetches its first folder before drawing anything), so the change showed a few frames of bare
+     background and a colour cut. A modeless dialog keeps drawing through that swap, so this one covers it:
+       - it shows as soon as the change starts (Window.Next, valid only while windows are changing) and fades in over
+         the outgoing window's close, holding the blurred background as it was when it opened (Bald.CurtainBlur);
+       - the outgoing window's onunload sets Bald.Curtain, which keeps it up once Window.Next has been reset;
+       - the incoming window skips its own WindowOpen while Bald.Curtain is set (Bald_AnimWindowDepth), so it is fully
+         drawn underneath, and clears Bald.Curtain in its onload; the curtain then fades away over it.
+     No focus: a dialog with a <visible> condition is modeless and takes no input. -->
+<window type="dialog" id="1129">
+	<visible>$EXP[Bald_CurtainChange] | !String.IsEmpty(Window(home).Property(Bald.Curtain))</visible>
+	<zorder>0</zorder>
+	<onload>SetProperty(Bald.CurtainBlur,$ESCVAR[Bald_BlurImage],home)</onload>
+	<!-- Safety: whatever happens, the curtain lifts after 2 s (it normally lifts within about half a second), so it can
+	     never stay over the screen if the window it waits for does not load. -->
+	<onload>CancelAlarm(bald_curtain,true)</onload>
+	<onload>AlarmClock(bald_curtain,ClearProperty(Bald.Curtain,home),00:02,silent)</onload>
+	<onunload>CancelAlarm(bald_curtain,true)</onunload>
+	<onunload>ClearProperty(Bald.CurtainBlur,home)</onunload>
+	<animation type="WindowOpen">
+		<effect type="fade" start="0" end="100" time="140" tween="sine" easing="inout" />
+	</animation>
+	<animation type="WindowClose">
+		<effect type="fade" start="100" end="0" delay="150" time="360" tween="sine" easing="inout" />
+	</animation>
+	<controls>
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<texture colordiffuse="bald_field">bald/white.png</texture>
+			<visible>!$EXP[Bald_VideoBackdropOn]</visible>
+		</control>
+		<!-- With background video the curtain is the dimmed video itself, so window changes still never show a bare frame. -->
+		<include>Bald_VideoBackdrop</include>
+		<!-- The blur as the curtain opened; no fadetime and not loaded in the background, so it is there at once. -->
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<aspectratio>scale</aspectratio>
+			<texture>$VAR[Bald_CurtainBlur]</texture>
+			<visible>$EXP[Bald_BlurOn] + $EXP[Bald_HasBlur] + !$EXP[Bald_VideoBackdropOn]</visible>
+			<colordiffuse>$VAR[Bald_BlurDiffuse]</colordiffuse>
+		</control>
+	</controls>
+</window>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Skin text viewer (window 1102): add-on news, PVR and music descriptions. Callers set the home window properties
+     TextViewer_Header and TextViewer_Text, then ActivateWindow(1102). Started from Kodi 22 Estuary's
+     Custom_1102_TextViewer.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). Kodi binds nothing here; 1 (heading),
+     2000 (text), 3000 (2000's page control) and 1000 (remote focus) are the skin's own.
+     Layout and arrows: Bald_TextViewerPanel in Includes_Bald_Overlays.xml, shared with DialogTextViewer.xml. -->
+<window type="dialog" id="1102">
+	<defaultcontrol always="true">1000</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<controls>
+		<include content="Bald_TextViewerPanel">
+			<param name="header_label" value="$INFO[Window(home).Property(TextViewer_Header)]" />
+			<param name="textbox_id" value="2000" />
+			<param name="text" value="$INFO[Window(home).Property(TextViewer_Text)]" />
+		</include>
+	</controls>
+</window>

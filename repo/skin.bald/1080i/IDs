@@ -1,0 +1,514 @@
+BALD CONTROL-ID MAP
+Plain-text reference, not loaded by Kodi. Control IDs are scoped to their window, so the
+same number can mean different things in different windows (e.g. 9000, 9100, 50).
+Keep this file in step when adding or moving IDs in Bald-native files.
+Last surveyed: 2026-09-28.
+
+
+KODI CONTRACT IDS (Kodi or an add-on binds these by number; do not renumber)
+
+Video information (DialogVideoInfo.xml, window movieinformation)
+8		Play button (hidden; kept for Kodi's playback handling)
+9		Resume button (hidden)
+11		Trailer button (hidden)
+50		Cast list (Bald_InfoCastPage in Includes_Bald_InfoPages.xml)
+
+Context menu (DialogContextMenu.xml)
+996		Button grouplist Kodi fills with menu entries
+1000	Button template Kodi clones for each entry
+999		Background image Kodi sizes to the entry count
+
+Video library (MyVideoNav.xml)
+50-55, 500-504	Estuary fallback views, kept for non-Bald content
+10		Watched-status cycle (SendClick(10) from the library options list)
+11, 16, 203, 612, 619, 621-624
+		Estuary side-panel controls inside grouplist 9000, bound by Kodi's video window
+
+TV guide (MyPVRGuide.xml)
+11		Channel-group list (kept off-screen; Bald_PVRGuideTools draws the visible one)
+28		Channel-groups button (hidden; Bald_PVRGuideTools in Includes_PVR.xml)
+29, 30	Hidden labels Kodi fills; 30 is echoed as the footer hint
+50		EPG grid (Bald_EpgGrid, control_id param)
+1, 2	Label 1 and image 2 inside the EPG grid's layouts, numbered as Estuary numbers them
+63		EPG grid group
+
+Live TV windows (MyPVRChannels, MyPVRRecordings, MyPVRTimers, MyPVRSearch, MyPVRProviders; CGUIWindowPVRBase,
+CGUIMediaWindow and each window's class). Bald chrome from Includes_Bald_PVR.xml.
+50		The window's list (view 50, Bald_PVRList)
+3, 4	Sort method and direction buttons (hidden; SendClick(3) and Container.SetSortDirection)
+28		Channel-groups button (hidden; SendClick(28) from the Channels options)
+29, 30	Header labels Kodi fills (group or search, provider or result count); off-screen
+6		Channels: show hidden channels toggle
+31		Channels: filter toggle (onclick "right" returns to the list, as in Estuary)
+5, 7	Recordings: group items, show deleted toggles
+10		Recordings: show-mode button (Kodi relabels it)
+8		Timers: hide disabled toggle
+		Bald chrome: 9000 options grouplist (menucontrol), 73 list scrollbar (page control only),
+		9010 channel-group option, 9020 sort by, 9021 order, 100-105 other Live TV windows
+		(Channels, Guide, Recordings, Timers, Timer rules, Search; Estuary's quick-navigation ids),
+		302 go to playlist (Recordings)
+
+Channel switcher and mini guide (DialogPVRChannelsOSD, DialogPVRChannelGuide; CGUIDialogPVRItemsViewBase)
+11		Channel list / programme list
+60		Its scrollbar (page control only)
+2		Estuary's header label, kept off-screen (Kodi does not write it)
+
+Programme and recording information (DialogPVRInfo; CGUIDialogPVRGuideInfo, CGUIDialogPVRRecordingInfo)
+4		Find similar
+5		Switch to channel
+6		Record / stop recording / delete timer (Kodi relabels it)
+8		Play recording
+9		Add timer
+10		Play programme
+11		Set reminder
+		Bald chrome: 5000 action grouplist, 138 plot button (opens the text viewer, 1102),
+		102 show fanart (1104)
+
+Guide controls (DialogPVRGuideControls; Kodi binds none, PVRGuideControlsHelpTextVar reads them)
+200		Bar group; 201, 202, 203 programme, channel and group pill rows
+600-605	First programme, 12 hours back, now, 12 hours forward, last programme, date
+70040-70042	First, playing and last channel
+70043-70045	Previous, next and choose channel group
+
+Radio RDS information (DialogPVRRadioRDSInfo)
+		No ids; Kodi's optional 10, 21, 22 and 70 are absent, as in Estuary.
+
+Channel manager (DialogPVRChannelManager; CGUIDialogPVRChannelManager)
+2		Heading
+4, 5, 6	OK, Apply, Cancel
+7, 8, 9	Active, name (edit), logo
+12, 13, 14	Use guide, guide source (spinner), parental lock
+20		Channel list
+30, 31, 34, 35	Group manager, new channel, TV/radio toggle, refresh logos
+		Bald chrome: 60 channel scrollbar, 9000 action grouplist, 9001 channel options heading,
+		9002 channel options grouplist, 9003 misc options grouplist
+
+Channel group manager (DialogPVRGroupManager; CGUIDialogPVRGroupManager)
+1		Heading
+11, 12, 13	Ungrouped channels, group members, groups
+20, 21, 22	Current group (hidden), ungrouped and in-group headings
+25		Hide group toggle
+26, 27, 28	New, rename, delete group
+29		OK
+34, 35	TV/radio toggle, regenerate thumbnail
+		Bald chrome: 71, 72, 73 list scrollbars (Estuary's focus route between columns),
+		9000 action grouplist
+
+Settings pages (SettingsCategory.xml; CGUIDialogSettingsBase and CGUIWindowSettingsCategory)
+2		Heading label (the sidebar title; Kodi writes the section name)
+3		Category grouplist; Kodi fills it with clones of 10, ids -200 upward
+5		Settings grouplist; Kodi fills it with clones of 7-9 and 11-15, ids -180 upward
+6		Help text for the focused category or setting
+7		Button template (lists, actions, labels, popup sliders, "Reset above settings to default")
+8		Radio button template (toggles)
+9		Spinner template (spincontrolex)
+10		Category button template
+11		Separator template (image)
+12		Edit template (optional to Kodi; without it Kodi builds edits from 7)
+13		Slider template (sliderex; also range settings)
+14		Group title template (label)
+15		Colour button template
+20		Settings level button (Kodi sets its label; onclick SettingsLevelChange)
+60		Settings scrollbar (5's pagecontrol; not a focus target)
+
+Profiles (SettingsProfile.xml; CGUIWindowSettingsProfile)
+2		Profile list (Kodi binds the profiles and "Add profile...", and handles clicks)
+4		Login screen toggle
+5		Automatic login button
+		Bald chrome: 9000 sidebar list (static items 1 General, 2 Profiles pick the pane),
+		9100 detail group, 9001 General rows grouplist
+
+System information (SettingsSystemInfo.xml; CGUIWindowSystemInfo)
+2-13	Text lines Kodi fills for the focused section
+30		Privacy policy text
+40		Section heading (the detail heading)
+52, 53	App name and version, build date
+60		Privacy policy scrollbar (30's pagecontrol)
+94-101	Section buttons: 94 Storage, 95 Summary, 96 Network, 97 Video, 98 Hardware, 99 PVR,
+		100 Privacy policy, 101 Thank you
+102		Thank-you group; 103 its QR multiimage
+104		Memory, CPU and version group (hidden on the thank-you page)
+		Bald chrome: 9000 section grouplist
+
+Global Search (script-globalsearch.xml, script.globalsearch 9.x)
+50		Results list
+990		New search button (right-hand options menu)
+991		Category / section label
+999		Status label
+9000	Category list (right-hand options menu)
+		The add-on requires all five and owns their data and actions.
+61		Live TV channel matches (Bald Helper, Bald_LiveSearchLists)
+62		Live TV programme matches (Bald Helper, Bald_LiveSearchLists)
+9101-9102	Live TV entries of the options (Bald_SearchLiveButton)
+
+Select dialogs (DialogSelect.xml via Includes_DialogSelect.xml and Includes_Bald_Foundations.xml)
+1		Heading label (DialogBackgroundCommons header_id)
+3		Simple list (Bald_SelectSimpleList); the game saves panel in gamesaves
+6		Detailed list (Bald_SelectDetailedItem rows, or Bald_SelectStreamList for the stream pickers)
+5, 8	Extra buttons Kodi labels and shows on demand; 7 Cancel (Bald_SelectButtons)
+61		Page indicator of 3 and 6 (Bald_SelectScrollbar)
+9001	Action grouplist (skin-side, not bound by Kodi)
+10820-10826, 10828
+		Game saves (CDialogGameSaves): 10820 heading, 10822 caption, 10823 emulator name, 10824 emulator
+		icon, 10825 new save, 10826 cancel, 10828 emulator version
+10811, 10812
+		Game video pickers (CDialogGameVideoSelect): 10811 thumbnail panel, 10812 description
+
+
+LIBRARY VIEWS (MyVideoNav.xml <views>; one container per view mode)
+
+Hundreds digit 5, tens digit is the content level, units digit the layout.
+510-519	Movies
+  510	Posters (View_510_Bald_Posters.xml)
+  511	Wall, 8x2 panel (View_511_Bald_Wall.xml)
+  512	Wall with preview, 5x2 panel (View_512_Bald_WallPreview.xml)
+  513	Compact list (View_513_Bald_CompactList.xml)
+  514	Artwork list (View_514_Bald_ArtworkList.xml)
+  515	Poster low, horizontal list (View_515_Bald_PosterLow.xml)
+520-529	TV series
+  520	Series (View_520_Bald_TV.xml)
+  521	Series wall (View_521_Bald_TV_Alternates.xml)
+  522	Series compact
+  523	Series poster low
+530-539	TV seasons
+  530	Seasons (View_520_Bald_TV.xml)
+  531	Seasons compact (View_521_Bald_TV_Alternates.xml). Estuary's CommonScrollbars scrollbar 531
+		(Includes.xml) is 5198 in Bald, so the id is used once (Container.SetViewMode, letters.py).
+  532	Series page (View_521_Bald_TV_Alternates.xml): the view list is drawn as the TV info page's
+		season tabs. Its episode row is 5302, the same id as the info page's row (ids are per window),
+		so the shared Includes_Bald_InfoTV.xml row, cards and detail work unchanged in MyVideoNav.
+		scripts/info.py (seriesmeta) reads the show from 532 (SERIES_PAGE).
+540-549	TV episodes
+  540	Episodes (View_520_Bald_TV.xml)
+  541	Episodes compact (View_521_Bald_TV_Alternates.xml)
+  542	Episodes wall
+550-559	Music (MyMusicNav.xml <views>; View_550_Bald_Music.xml, Includes_Bald_Music.xml). One view serves
+		several content types: Kodi keeps a view per type (musicnavartists, musicnavalbums, musicnavsongs).
+  550	Covers, 5x2 panel of square covers with the preview column (artists, albums)
+  551	Compact list with the preview column (artists, albums, songs, genres, years, roles, sources)
+  552	Artwork list with the large fanart frame (artists, albums)
+500-599	scripts/letters.py accepts only this range from RunScript(skin.bald,letters,<id>) and Bald Helper's bald.letters|<id>.
+		Each letter-mode entry passes the id of the container it sits on.
+
+TV guide chrome (MyPVRGuide.xml, Bald_EpgGrid and Bald_PVRGuideTools in Includes_PVR.xml)
+60		EPG grid scrollbar (the grid's pagecontrol)
+9000	Tools drawer grouplist (the window's menucontrol)
+9009-9016	Drawer buttons (Bald_PVRGuideToolButton, id param): 9009 Return to guide, 9010 Jump to now,
+		9011 Channel group, 9014 Choose date, 9015 Search, 9016 Exit Live TV; 9012-9013 unused
+
+Music library (MyMusicNav.xml; CGUIWindowMusicNav, CGUIWindowMusicBase and CGUIMediaWindow, checked against xbmc
+master = Kodi 22). Kodi binds: 2 view as, 3 sort by, 4 sort order, 5 type, 7 playlists, 8 search, 9 scan, 11 rip,
+12 item count, 15 filter label, 16 party mode, 17 manual info, 19 filter, 20 update library (Estuary ships 3, 4, 8,
+16, 19 in its menu; the Bald options send clicks to 3, 4, 8, 16 and 19). The library chrome below (9000, 9150,
+9151, 9160) is the same in MyMusicNav, with 9150's items from Bald_MusicOptionItems and 9160's letters read on
+the music window. Estuary menu ids kept: 203, 612, 619, 621, 622, 624.
+
+Library chrome (MyVideoNav.xml and View_510_Bald_Posters.xml, shared by all Bald views)
+9000	Estuary side panel grouplist (non-Bald content)
+9150	Library options list
+9151	Hidden bridge for Kodi's Menu action: focuses 9150 in a Bald view, else 9000
+9160	Letter mode (alphabet strip)
+		No control routes Select: with Bald Helper's keymap (addons/script.bald.helper), Select starts the skin
+		timer bald_library_select (Timers.xml), which runs Info on a focused library TV show and Select otherwise.
+
+
+BROWSE WINDOWS (restyled Estuary windows and views; Includes_Bald_Browse.xml, docs/SPEC.md 5.19)
+No new ids: every id below is Estuary's, kept for Kodi or for Estuary's own routes.
+Media windows (MyVideoNav, AddonBrowser, MyPrograms, MyFavourites, MyPlaylist; GUIMediaWindow)
+3, 4		Sort by and order buttons (hidden, in MediaMenuCommon); the menus SendClick them
+8		Search (MediaMenuSearchButton)
+19, 199		Filter (keyboard / advanced)
+9000		Options menu grouplist (menucontrol); 6051-6053 its view, sort and order rows
+6130, 6131	Estuary's mouse strips for the menu (kept, inert with mouse input off)
+14100-14106	Now-playing transport row (MediaMenuNowPlaying)
+18900, 7700, 23000	Header sort summary, now-playing sub label, fast-scroll letter (TopBar)
+31111, 32111	Background fanart group and image (DefaultBackground)
+Views and their page controls
+50 (50600), 51 (5199), 52 (5198), 53 (5199), 54 (5198), 55 (5198), 500 (5198), 501 (5198),
+502 (502600), 503 (503600), 504 (5198; 50401 its detail label)
+20000		View 51's hidden animation helper
+15599		Now-playing text in view 503's column
+5000		InfoList's default id (MyGames' collection list); the browse preview's movie-set list has no id
+AddonBrowser.xml	5 settings, 7 hide foreign, 8 hide incompatible, 9 check for updates
+DialogAddonInfo.xml	6 install/uninstall, 7 enable/disable, 8 update, 9 settings, 10 dependencies, 12 open,
+		13 auto-update, 14 versions, 50 screenshots, 5000 description block, 9000 actions
+FileManager.xml		20, 21 lists; 60, 61 their page controls; 101, 102 path labels
+EventLog.xml		50 list, 60 its page control, 4 sort order, 20 clear, 21 level, 22 this level only,
+		501 logging settings, 9000 options column
+MyPlaylist.xml		20 shuffle, 21 save, 22 clear, 26 repeat
+SmartPlaylistEditor.xml	2 heading, 10 rules, 12 name, 16-19, 22-25, 20 OK, 21 Cancel; 500, 9001 grouplists
+SmartPlaylistRule.xml	2 heading, 15 field, 16 operator, 17 value, 20 browse, 18 OK, 19 Cancel
+
+HOME (Home.xml, Includes_Bald_Home.xml)
+
+9000	Main menu grouplist; its entries in order: Home, the hubs, Live TV, Search, Settings, Power
+9001	Menu entry: Home
+9011-9018	Menu entries: hub slots 1-8 (Bald_HomeMenuHub; hidden while the slot is empty or the hub is turned off)
+9004	Menu entry: Live TV
+9005	Menu entry: Search
+9006	Menu entry: Settings
+9007	Menu entry: Power (Kodi's shutdown menu)
+		9002 and 9003 (the old Movies and TV shows entries) are retired; Movies and TV shows are hubs now.
+9021-9028	Invisible bridges: focus opens hub slot 1-8's target (Bald_HubBridge; Right, or Select without rows)
+9029	Invisible bridge: focus opens the TV guide (Live TV's Right)
+9050	Live TV row base; rows 9051-9070
+9100	Home screen row base; rows 9101-9120
+9200, 9300, 9400, 9500, 9600, 9700, 9800, 9900
+		Hub slot 1-8 row bases; rows base + 1 to base + 20:
+		slot 1: 9201-9220, slot 2: 9301-9320, slot 3: 9401-9420, slot 4: 9501-9520,
+		slot 5: 9601-9620, slot 6: 9701-9720, slot 7: 9801-9820, slot 8: 9901-9920.
+		Slot n is the hub at position n in the Home Screens list, so ids follow the order, not the hub.
+		Migrated installs keep Movies in slot 1 (9201+) and TV shows in slot 2 (9301+), their old ids.
+		Rows are Bald_Row fixedlists, one per configured row (base + 1 onward, at most
+		twenty per screen: the widget editor hides Add widget at 20). Skin Variables
+		builds them and their bindings into script-skinvariables-generator-includes.xml
+		from shortcuts/generator/ (bases in screens.xml); Includes_Bald_HomeDefaults.xml
+		(tools/build_home_defaults.py) stands in until the first build. An empty slot
+		builds no controls. None of these ranges meets another: 9001-9029 menu and
+		bridges, 9051-9070, 9101-9120, then x01-x20 per hundred up to 9920, and the fixed
+		9180 and 9193-9199 below sit above 9120.
+		A weather row (Choose content > Weather: weather://daily or weather://hourly) is one of these
+		row ids too; its tiles are static items (Includes_Bald_Weather.xml) and add no control ids.
+9180	Startup splash: hidden list of random fanart that drives the background
+9193	Home hidden: shows while focus is stranded on one of Home's rows (Timers.xml bald_home_start reads it)
+9194	Startup splash: shows once every row has loaded (Timers.xml bald_preload reads it)
+9195	Startup splash: focus lifts the splash and moves on to row 1 (or the menu), or while Home is hidden to
+		the start screen's first row; bald_home_start also focuses it
+9198	Startup splash: holds focus and ignores keys while the splash shows
+9199	Idle-wake button: the idle timer parks focus here, any key returns to the row
+0		Bald_MenuNote label default (no id)
+
+
+VIDEO INFORMATION PAGES (DialogVideoInfo.xml, Includes_Bald_InfoPages.xml, Includes_Bald_InfoTV.xml)
+
+5000	Overview action grouplist
+5001-5004	Actions: Resume, Start over, Play, Trailer (Bald_InfoAction, id param)
+5050	Cast page focus target
+5100	Recommendations list
+5150	Recommendations fallback focus target (keeps the page escapable while empty)
+5200	Recommendations backdrop group
+5201, 5202, 5204, 5205	Cast / recommendations page groups and image
+		TV Overview (Includes_Bald_InfoTV.xml) reuses 5000 and 5001-5004:
+		Resume S E, Play S E, next episode (script), Trailer
+5301	TV season tabs list (videodb://tvshows/titles/<id>/)
+5302	TV episode row (fixedlist; follows the selected tab's folder path)
+		scripts/info.py (tvinfo) selects the opening season and episode in 5301 and 5302.
+		5302 is also the library Series page's episode row (MyVideoNav, view 532).
+5303-5308	Cast page details: value labels of director, writer, genre, video, audio, subtitles
+		(Bald_Detail, id param); each shows "Not available" while its label is empty.
+5309-5999	Free for new info-page IDs; record them above.
+
+
+PLAYBACK (Includes_Bald_Playback.xml and the player windows that use it; docs/SPEC.md 5.16)
+Kodi binds these by number (checked against xbmc master):
+DialogSeekBar.xml (CGUIDialogSeekBar)
+401		File progress slider: the seek-preview nib (Kodi selects the position, the seek target while seeking)
+402		EPG event progress slider: the Live TV seek-preview nib
+403		Timeshift progress slider
+40000	Seek state label (Estuary's id, kept hidden)
+VideoFullScreen.xml (CGUIWindowFullScreen)
+0		View-mode group Kodi shows and hides; 10, 11, 12 its three lines
+1		Buffering indicator group and its parts (Estuary's numbering)
+DialogSlider.xml (CGUIDialogSlider)
+10		Heading; 11 slider; 12 value; 13, 14 mouse step buttons (skin actions)
+VideoOSDBookmarks.xml (CGUIDialogVideoBookmarks)
+2		Create bookmark; 3 clear bookmarks; 4 set episode bookmark (Kodi enables it)
+11		Bookmark list; 9001 button row
+DialogSubtitles.xml (CGUIDialogSubtitles)
+100		Service name (popup heading); 110 service logo; 120 results; 130 local subtitles notice;
+		140 status; 150 services; 160 manual search; 73 results page control; 250 surface group
+MusicOSD.xml (CGUIDialogMusicOSD)
+500, 501	Visualisation and lock buttons (bound by Kodi, not drawn, as in Estuary)
+Skin ids, kept as Estuary numbers them (skin actions and navigation refer to them):
+MusicOSD.xml (the video OSD is in VIDEO OSD below)
+200		Button rows group; 201 transport grouplist; 202 tools grouplist
+600-608	Previous, rewind, play/pause, stop, forward, next, record
+70040, 70041, 70048	Channels, guide, settings
+70050-70055	Music: RDS, playlist, rating, repeat, random, lyrics
+6000	Seek group; 87 hidden seek button (Up from the buttons)
+PlayerControls.xml
+201		Button grouplist; 600, 602, 603, 605, 607 buttons; 704 repeat button
+23		Progress; 87 hidden seek button (Bald_PlaybackFocusTrack)
+Custom_1101_SettingsDialog.xml (window 1101) and Includes_SettingsDialog.xml
+1		Heading; 11000 row group (default); 11100 row grouplist; 22101-22110 rows
+Custom_1110_TempoControl.xml (window 1110)
+11, 12	Slower and faster buttons
+DialogFullScreenInfo.xml
+999		Full-screen button (step, chapter or big step, OSD)
+
+
+VIDEO OSD (Includes_Bald_OSD.xml; docs/SPEC.md 5.16, "Video OSD")
+The seek layer is DialogSeekBar.xml (401, 402, 403 and 40000 under PLAYBACK above).
+VideoOSD.xml (CGUIDialogVideoOSD binds none) and the companion panels 1120-1124, which repeat the row
+201		Transport grouplist: 602 play/pause, 600 back (Live TV: guide), 607 forward (Live TV: record), 603 stop
+202		Tools grouplist: 804 disc menu, 70045 teletext, 70047 3D (when they apply), 70043 information,
+		70060 audio, 70061 subtitles, 70063 process info (Bald Process Info or TinyPPI, when installed; opens its dialog), 70062 video
+87		Seek slider over the lifted bar (files; action seek); 88 the same for Live TV (action pvr.seek)
+		Estuary's 601, 606, 608, 698, 200, 6000, 799 and 70040-70042, 70044, 70046, 70048 are retired in the video
+		OSD: rewind and fast forward live in the video panel, record and guide moved onto 607 and 600, channels,
+		playlist and bookmarks into the down chain, streams and settings into the audio, subtitle and video buttons.
+Custom_1120_OSDInfoPanel.xml (window 1120): the information button's panel (the details are 1128)
+Custom_1121_OSDAudioStreams.xml (window 1121)
+8110	Audio stream list (script.skinvariables get_player_streams)
+Custom_1122_OSDSubtitleStreams.xml (window 1122)
+8120	Subtitle stream list
+Custom_1123_OSDVideoPanel.xml (window 1123)
+8130	Panel grouplist; 8131 process-info button (codec flags); 8132 speed row (tempo or FF/RW scale)
+Custom_1124_OSDNextItem.xml (window 1124)
+8140	Hidden list: the next episode of the season (videodb, one item)
+Custom_1125_OSDPlaylist.xml (window 1125, down chain)
+8150	Playlist or season row (the bald_osd_playlist_focus timer moves it to what plays next)
+Custom_1126_OSDCast.xml (window 1126, down chain; TMDb Helper)
+8160	Cast or crew row
+Custom_1127_OSDInfoOverlay.xml (window 1127) and Custom_1128_OSDDetails.xml (window 1128)
+		No controls with ids: art, logo, info line and plot.
+VideoOSDBookmarks.xml: 2, 3, 4, 11 as under PLAYBACK; 9001 action row
+script-upnext-upnext.xml, script-upnext-stillwatching.xml (service.upnext)
+3012	Play now / still watching (the add-on binds it)
+3013	Close or stop / cancel (the add-on binds it and relabels it)
+3014	Countdown progress (the add-on sets its percentage)
+8170	Button grouplist
+Custom_1119_BaldPlayback.xml (window 1119, Bald Settings, Playback)
+9700	Category list; static items 1-4 (Controls, Pause, Info overlay, Down from the controls)
+9800	Row grouplist
+9801-9809	Controls: close after, time display, clearlogo, media flags and plot on the controls, background shading, background video and its dim, 9809 the clock
+9811, 9812	Pause: when paused, pause delay
+9821, 9822	Info overlay: artwork, plot
+9832-9835	Down from the controls: channels, playlist and episodes, bookmarks, cast and crew
+
+DIALOGS AND CUSTOM WINDOWS
+
+DialogContextMenu.xml
+995		Context note label (Bald_MenuNote)
+
+Settings.xml (Kodi's settings hub; Kodi binds no ids here)
+9000	Entry list (Bald_SettingsCategories); every entry is an onclick action
+9001	Open button (Bald_SettingsOpen)
+
+Custom_1110_TempoControl.xml (window 1110): see PLAYBACK
+
+Custom_1115_BaldSettings.xml (window 1115) and SkinSettings.xml (Kodi's "Configure skin...")
+		Both draw Bald_SettingsHome (Includes_Bald_Configure.xml).
+9000	Section list
+9001	Button
+9090	Settings level button (Bald_SettingsLevelButton), under the sidebar in 1115-1119 and SkinSettings.xml:
+		cycles Skin.String(Bald.SettingsLevel) through Basic, Standard (unset), Advanced, Expert; Down from the
+		last sidebar entry reaches it. Rows above the chosen level hide (Bald_ConfigureRow, Bald_SettingRow).
+
+Custom_1116_BaldHomeWidgets.xml (window 1116)
+9100	List
+9200	Action grouplist; 9201-9211 buttons (9210 sort by, 9211 order)
+
+Custom_1117_BaldHomeScreens.xml (window 1117)
+9300	Sidebar list; static items 1 Home, 10-17 hub positions 0-7 (Bald_HubCategory), 20-27 Live TV before hub
+		position 0-7 and 2 Live TV after the hubs (one shows, Bald.LiveTVAfter), 4 Search, 5 Settings, 6 Power, 3 Add hub
+9390	Hidden 1 x 1 list of the hubs menu (Skin Variables); the sidebar reads its items
+9400	Action grouplist: 9401 show in the main menu, 9402 configure widgets, 9403 rename, 9404 open
+		target, 9405 clear target, 9406 move up, 9407 move down, 9408 remove hub, 9409 add hub, 9410 / 9411 move Live TV
+		up / down, 9412 background image, 9413 clear background image, 9414 Power's menu entries (opens 1131)
+
+Custom_1118_BaldAppearance.xml (window 1118)
+9500	Category list; static items 1, 2, 6, 3, 7 and 5 (Artwork, Information, Ratings, Behavior, Date & time,
+		Typography; item 4 was "Estuary windows", folded into the others); the item ids pick the rows (Bald_SettingRow)
+9600	Row grouplist
+9601-9609	Artwork: clearlogos, blurred backgrounds (9608 strength, 9609 brightness), fanart behind other library pages, music video
+		posters; genre background, weather background and weather icon packs
+9611-9615	Information: media flags, row item count, titles in list views, profile name and
+		temperature in page headers
+9616-9620	Information, spoiler protection (Includes_Bald_Spoilers.xml): 9616 hide spoilers for unwatched
+		items, 9617 blur episode thumbnails, 9618 hide episode plots, 9619 hide movie plots, 9620 Live TV
+9621-9628	Behavior: ambient movement, navigation hints, reset hint, preload Home at startup,
+		scroll long plots, recommended Kodi settings; 9627 open TV shows on their info page (Bald Helper
+		enabled), 9628 the same row while Bald Helper is missing or disabled (installs or enables it)
+9629	Behavior: Select on a hub opens its library (Bald.HubSelectOpens; listed after 9623)
+9630	Behavior: Home opens on its rows (Bald.HomeStartsOnRows; unset opens on the menu)
+9631	Typography: font (fontset)
+9638	Typography: text size (lookandfeel.skinzoom: default, large, larger; listed after 9631)
+9632-9634	Date & time (Includes_Bald_Common.xml, Clock): 9632 time format (region, 12 hours, 24 hours), 9633 date
+		with the clock, 9634 clock on Home
+9635-9637	Information (listed after 9612): 9635 titles on Home tiles (none, on focus, always), 9636 watched marks,
+		9637 progress marks (both: TV episode cards, Home row tiles, list rows)
+9641-9663	Ratings (Includes_Bald_Ratings.xml): 9641 show ratings; 9657 online ratings from TMDb Helper,
+		9658 TMDb Helper settings (both listed after 9641); sources 9642 IMDb, 9643 TMDb,
+		9644 Rotten Tomatoes critics, 9645 Rotten Tomatoes audience, 9646 Metacritic, 9647 Trakt,
+		9648 TVDb, then TMDb Helper only 9659 Letterboxd, 9660 Metacritic users, 9661 MyAnimeList,
+		9662 Roger Ebert, 9663 MDbList score (listed after 9648), 9649 my rating, 9650 default rating;
+		surfaces 9651 information screens, 9652 Home, 9653 library views, 9654 player info overlay;
+		9655 vote counts; 9656 default rating source (listed after 9650)
+9680	Behavior: idle after (Bald.IdleTime: 1, 2, 5, 10 minutes or off; listed before 9621)
+9681	Behavior: reduce motion (Bald.ReduceMotion; listed after 9621)
+
+GLOBAL OVERLAYS (Includes_Bald_Overlays.xml)
+
+DialogNotification.xml (CGUIDialogKaiToast)
+400		Icon image (Kodi sets the add-on or default icon)
+401		Caption label
+402		Message fadelabel (must stay a fadelabel: Kodi waits for it to finish scrolling)
+
+DialogExtendedProgressBar.xml (CGUIDialogExtendedProgressBar)
+30		Task title label
+31		Task step label (hidden when empty or already part of 30)
+32		Progress bar (Kodi makes it visible once a percentage is reported)
+
+DialogBusy.xml (CGUIDialogBusy, CGUIDialogBusyNoCancel)
+		Kodi 22 binds no ids.
+
+DialogVolumeBar.xml (CGUIDialogVolumeBar) and Custom_1103_VolumeSlider.xml (window 1103)
+29999	Hidden Player.Volume progress; its label is the volume percentage
+11		Volume slider (1103 only; its defaultcontrol)
+
+DialogTextViewer.xml (CGUIDialogTextViewer) and Custom_1102_TextViewer.xml (window 1102), Bald_TextViewerPanel
+1		Heading label (Kodi binds it in DialogTextViewer; 1102 fills it from a home property)
+5		Text box (DialogTextViewer; Kodi binds it)
+2000	Text box (1102; the skin fills it from a home property)
+3000	Hidden scrollbar, the text box's page control
+1000	Hidden button that holds remote focus: Select closes, Up and Down page
+22002	Full-panel button under the controls (DialogBackgroundCommons), so a click inside the panel does not close it
+
+Custom_1130_BaldSearch.xml (window 1130): Bald's Search (Includes_Bald_Search.xml)
+71-77	Library results: 71 movies, 72 TV shows, 73 episodes, 74 music videos, 75 artists, 76 albums, 77 songs
+61		Live TV channel matches; 62 Live TV programme matches (Bald_LiveSearchLists)
+9100	Options list: New search and the categories with results
+9198	Where focus waits for the results (Timers.xml, bald_search_focus)
+
+Custom_1131_BaldPowerMenu.xml (window 1131): Customization > Power > Power menu, the power menu's entries
+9100	The entries (Skin Variables menu "power")
+9200	The focused entry's options (9201 shown, 9202 rename, 9203 command, 9204/9205 move, 9206 add, 9207 remove,
+	9208 restore the default menu)
+
+Free custom window numbers start at 1132.
+
+
+MEDIA WINDOWS (restyled Estuary copies; Includes_Bald_Media.xml adds no fixed ids)
+
+Kodi binds these (xbmc master, Kodi 22); the rest are the skin's own, kept as Estuary numbers them.
+DialogColorPicker.xml		1 heading, 6 swatch panel, 7 Cancel; 61 scrollbar, 9001 actions
+DialogMediaSource.xml		2 heading, 10 paths, 11 Browse, 12 name, 13 Add, 14 Remove, 18 OK, 19 Cancel;
+		60 scrollbar, 9000 and 9001 action grouplists
+DialogVideoManager.xml		2 title, 50 assets, 21 Play, 22 Add version, 23 Add extra, 24 Rename version,
+		25 Set default, 26 Remove, 27 Choose art, 28 Rename extra (29 Ungroup not shown, as in Estuary);
+		60 scrollbar, 100 list group, 101 actions
+LoginScreen.xml		52 profiles, 2 heading and 3 selected-profile counter (both new in Bald; Kodi fills them);
+		20 power button
+SlideShow.xml		10 hidden label whose font Kodi uses for its load-error message (new in Bald)
+DialogPictureInfo.xml		5 details list; 9000 group, 60 scrollbar
+MusicVisualisation.xml		2 visualisation; 5500 the playing item as a one-item list for Bald Helper to follow
+		(Bald_NowPlayingFollowList, Includes_Bald_Music.xml; Bald.FocusContainer on the visualisation window)
+DialogMusicInfo.xml		6 Refresh, 7 Your rating, 8 Play, 10 Choose art, 12 Artist / album information,
+		50 songs / albums / artists; 13 play next (albums, QueueMedia), 41 details list, 120 fanart,
+		130 description button, 400 description label, 9000 action row
+GameOSD.xml		1103 menu (one per variant group), 1101 help text; 1, 10, 20, 1000, 1100, 2000 groups,
+		2200 / 2201 scrollbars
+DialogGameControllers.xml (Includes_Games.xml)
+		Controllers: 2, 3, 5, 7, 8, 9, 10, 17-22, 31, 32; 61, 62 scrollbars, 9001 actions
+		Ports: 2, 3, 18, 19; 62, 9001. Players: 2, 3, 4, 7, 18; 10 actions, 61 scrollbar
+		Disc manager: 3 menu (items 108323-108327), 108321 disc list, 108322 scrollbar
+MyWeather.xml		Kodi binds none that Estuary or Bald ship. 9100 tab row (Now, Daily, Hourly, Maps), 20 current
+		conditions (Select: next location), 15100 daily, 15200 hourly, 2000 maps grouplist, 7001-7005 map
+		groups, 70010-70059 maps (in group 700N: 700N0 button ... 700N9 heading), 9170 hidden current-conditions
+		list the backdrop follows, 10000 Menu to weather settings
+MyPics.xml		6 slideshow, 7 recursive slideshow, 9 shuffle (Estuary side panel, unchanged)
+MyMusicPlaylistEditor.xml	6 load, 7 save, 8 clear, 50 files, 100 playlist; 60 / 61 scrollbars, 9000 actions
+
+Custom_1129_BaldCurtain.xml (window 1129, modeless dialog; curtain prototype)
+		No ids: a field and the held blur, shown while Home and the video library change places.

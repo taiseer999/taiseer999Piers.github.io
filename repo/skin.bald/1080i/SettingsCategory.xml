@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Kodi's settings pages (Player, Media, PVR & Live TV, Services, Games, Interface, System), drawn in Bald's settings
+     scaffold (Includes_Bald_Configure.xml). Started from Kodi 22 Estuary's SettingsCategory.xml (GPL-2.0-or-later, see
+     LICENSE-Estuary.txt).
+     Kodi (CGUIDialogSettingsBase, CGUIWindowSettingsCategory) binds these ids:
+       2 heading label, 3 category grouplist, 5 settings grouplist, 6 help text,
+       7 button, 8 radio button, 9 spinner, 10 category button, 11 separator, 12 edit, 13 slider, 14 group title and
+       15 colour button templates (hidden; cloned per category and setting), 20 settings level button.
+     Kodi appends "Reset above settings to default" to every category as a clone of template 7. -->
+<window>
+	<include>Bald_CurtainHandoff</include>
+	<defaultcontrol>3</defaultcontrol>
+	<backgroundcolor>bald_field</backgroundcolor>
+	<controls>
+		<include content="Bald_SettingsFrame">
+			<param name="title_id">2</param>
+		</include>
+		<control type="grouplist" id="3">
+			<description>category buttons</description>
+			<include>Bald_SettingsCategoryGroup</include>
+			<onright>5</onright>
+			<onup>3</onup>
+			<ondown>20</ondown>
+		</control>
+		<control type="button" id="10">
+			<description>category button template</description>
+			<include>Bald_SettingsCategoryButton</include>
+		</control>
+		<!-- Settings level: Kodi sets the label (Basic, Standard, Advanced, Expert) and cycles it on click. -->
+		<include content="Bald_SettingsLevel">
+			<param name="id">20</param>
+			<param name="type">radiobutton</param>
+			<param name="up">3</param>
+			<param name="right">5</param>
+			<param name="down">3</param>
+			<onclick>SettingsLevelChange</onclick>
+		</include>
+		<control type="grouplist" id="5">
+			<include>Bald_AnimSettingsWindow</include>
+			<description>settings</description>
+			<left>686</left>
+			<top>192</top>
+			<width>1106</width>
+			<height>628</height>
+			<orientation>vertical</orientation>
+			<itemgap>6</itemgap>
+			<scrolltime tween="cubic" easing="out">320</scrolltime>
+			<pagecontrol>60</pagecontrol>
+			<onleft>3</onleft>
+			<onright>noop</onright>
+			<onup>5</onup>
+			<ondown>5</ondown>
+		</control>
+		<control type="scrollbar" id="60">
+			<include>Bald_SettingsScrollbar</include>
+			<onleft>5</onleft>
+		</control>
+		<control type="button" id="7">
+			<description>button template</description>
+			<include>Bald_SettingsTemplate</include>
+		</control>
+		<control type="radiobutton" id="8">
+			<description>radio button template</description>
+			<include>Bald_SettingsTemplate</include>
+		</control>
+		<control type="spincontrolex" id="9">
+			<description>spinner template</description>
+			<include>Bald_SettingsSpinner</include>
+		</control>
+		<control type="image" id="11">
+			<description>separator template</description>
+			<include>Bald_SettingsSeparator</include>
+		</control>
+		<control type="edit" id="12">
+			<description>edit template</description>
+			<include>Bald_SettingsTemplate</include>
+		</control>
+		<control type="sliderex" id="13">
+			<description>slider template</description>
+			<include>Bald_SettingsSlider</include>
+		</control>
+		<control type="label" id="14">
+			<description>group title template</description>
+			<include>Bald_SettingsGroupTitle</include>
+		</control>
+		<control type="colorbutton" id="15">
+			<description>colour button template</description>
+			<include>Bald_SettingsColorButton</include>
+		</control>
+		<control type="textbox" id="6">
+			<description>help for the focused category or setting</description>
+			<include>Bald_SettingsHelp</include>
+		</control>
+		<include content="Bald_SettingsHints"><param name="first">$VAR[Bald_KeyBack]$LOCALIZE[31738]</param><param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31747]</param></include>
+	</controls>
+</window>

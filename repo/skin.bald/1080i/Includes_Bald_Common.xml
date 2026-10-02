@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald components shared by Home, the info dialog and the library views.
+
+     Item prefix. Includes that read an item take `container`, the text placed before ListItem: empty for the
+     window's or layout's own item (ListItem.*), or "Container(511)." for a list's focused item
+     (Container(511).ListItem.*). -->
+<includes>
+	<!-- ============ Navigation hints ============ -->
+	<!-- A hint shows the key it names and says what it does: $VAR[Bald_KeyDown]$LOCALIZE[31771] reads "▼ Cast & details",
+	     $VAR[Bald_KeySelect]$LOCALIZE[31663] "○ Play". A Right key follows its name ("Scroll by letters ▶") and a hint
+	     for both Left and Right has one either side ("◀ Jump letters ▶"), so a footer reads left to right: Left's hint
+	     first, then Up's, the other keys', Down's, and Right's last. The keys are glyphs Bald's fonts carry in the
+	     Private Use Area (tools/hint_keys.py): filled triangles for the arrows, Lucide's circle, undo-2, info and menu
+	     for Select, Back, Info and Menu, centred on the capitals with the space to the name built in. -->
+	<variable name="Bald_KeyUp"><value>&#xE100;</value></variable>
+	<variable name="Bald_KeyDown"><value>&#xE101;</value></variable>
+	<variable name="Bald_KeyLeft"><value>&#xE102;</value></variable>
+	<variable name="Bald_KeyRight"><value>&#xE103;</value></variable>
+	<variable name="Bald_KeyUpDown"><value>&#xE105;</value></variable>
+	<variable name="Bald_KeySelect"><value>&#xE106;</value></variable>
+	<variable name="Bald_KeyBack"><value>&#xE107;</value></variable>
+	<variable name="Bald_KeyInfo"><value>&#xE108;</value></variable>
+	<variable name="Bald_KeyMenu"><value>&#xE109;</value></variable>
+
+	<!-- ============ Shared conditions ============ -->
+	<!-- Expression bodies are wrapped in [...] so a name negates and combines safely wherever it is used. -->
+	<expression name="Bald_HasTMDbHelper">[System.HasAddon(plugin.video.themoviedb.helper)]</expression>
+	<!-- Background video (Playback › Background video, on unless Bald.OSD.NoBackgroundVideo): while video plays behind
+	     Bald's windows, it shows full screen and dimmed in place of the field and the blurred backdrop. Bald_Field is
+	     the field that gives way to it; Bald_VideoBackdrop draws it (a window's first layer, or the curtain). -->
+	<expression name="Bald_VideoBackdropOn">[Player.HasVideo + !Skin.HasSetting(Bald.OSD.NoBackgroundVideo)]</expression>
+	<include name="Bald_VideoBackdrop">
+		<control type="group">
+			<visible>$EXP[Bald_VideoBackdropOn]</visible>
+			<control type="videowindow"><width>1920</width><height>1080</height></control>
+			<!-- Dim level: Skin.String(Bald.OSD.BackgroundVideoDim) 60, 70 or 90; anything else (empty) is 80, so an
+			     unexpected value never leaves the video undimmed. -->
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_video_dim">bald/white.png</texture><visible>!Skin.String(Bald.OSD.BackgroundVideoDim,60) + !Skin.String(Bald.OSD.BackgroundVideoDim,70) + !Skin.String(Bald.OSD.BackgroundVideoDim,90)</visible></control>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_video_dim60">bald/white.png</texture><visible>Skin.String(Bald.OSD.BackgroundVideoDim,60)</visible></control>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_video_dim70">bald/white.png</texture><visible>Skin.String(Bald.OSD.BackgroundVideoDim,70)</visible></control>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_video_dim90">bald/white.png</texture><visible>Skin.String(Bald.OSD.BackgroundVideoDim,90)</visible></control>
+		</control>
+	</include>
+	<!-- Reduce motion (Appearance › Behavior, Bald.ReduceMotion, off by default): zooms and slides become plain fades,
+	     for slower boxes. Every timed slide or zoom is gated on Bald_FullMotion; its twin under Bald_ReduceMotion keeps
+	     only the fades, with the same timings, or, where the move holds a layout (poster rows, the info handoff, the OSD
+	     rising for its panels, the playback speed marker), makes the move instantly. Kodi has no per-effect
+	     conditions, so the twins are whole animations. Instant layout steps (time 0) and list scrolling stay. -->
+	<expression name="Bald_FullMotion">[!Skin.HasSetting(Bald.ReduceMotion)]</expression>
+	<expression name="Bald_ReduceMotion">[Skin.HasSetting(Bald.ReduceMotion)]</expression>
+	<!-- Window changes fade without their move: over background video (a slide flashed the video undimmed) and under
+	     Reduce motion. -->
+	<expression name="Bald_FadeOnly">[$EXP[Bald_VideoBackdropOn] | $EXP[Bald_ReduceMotion]]</expression>
+	<include name="Bald_Field">
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<texture colordiffuse="bald_field">bald/white.png</texture>
+			<visible>!$EXP[Bald_VideoBackdropOn]</visible>
+		</control>
+	</include>
+	<!-- Idle (Appearance › Behavior, Skin.String(Bald.IdleTime)): how long Home and Now Playing wait untouched before
+	     the idle state (Home closes its menu, parks focus on the wake button, expands its art frame over the rows,
+	     Bald_IdleExpand, and, with Ambient movement on, advances the row; Now Playing dims). Empty is 1 minute
+	     (docs/SPEC.md 5.1), then 2, 5 or 10; "off" never goes idle. Any other value counts as 1 minute. Timers.xml
+	     repeats these bodies literally ($EXP does not trigger there; tests/test_idle.py keeps them equal). -->
+	<!-- Window(home).Property(Bald.IdlePreview), set, counts as idle reached: a test switch to show ambient mode
+	     without waiting (SetProperty(Bald.IdlePreview,1,home); clear it and press a key to wake). -->
+	<expression name="Bald_IdleReached">[[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))]</expression>
+	<!-- The burn-in drift keeps its guard with idle off: it then starts after the default minute. -->
+	<expression name="Bald_DriftIdle">[[[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] | [System.IdleTime(60) + Skin.String(Bald.IdleTime,off)]]</expression>
+	<variable name="Bald_IdleTimeLabel">
+		<value condition="Skin.String(Bald.IdleTime,off)">$LOCALIZE[351]</value>
+		<value condition="Skin.String(Bald.IdleTime,2)">2 $LOCALIZE[31710]</value>
+		<value condition="Skin.String(Bald.IdleTime,5)">5 $LOCALIZE[31710]</value>
+		<value condition="Skin.String(Bald.IdleTime,10)">10 $LOCALIZE[31710]</value>
+		<value>1 $LOCALIZE[31710]</value>
+	</variable>
+	<!-- Idle burn-in guard: while Home or Now Playing sits idle, the content steps round a small square (x, y px), one
+	     corner every 3 minutes (Timers.xml bald_drift loops every 12 minutes). Each step is instant and the screen is
+	     still in between, so Kodi redraws the whole screen once per step instead of every frame, as a continuous
+	     pulsing drift made it. -->
+	<expression name="Bald_DriftStep1">[Skin.TimerIsRunning(bald_drift) + Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(bald_drift),180) + Integer.IsLess(Skin.TimerElapsedSecs(bald_drift),360)]</expression>
+	<expression name="Bald_DriftStep2">[Skin.TimerIsRunning(bald_drift) + Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(bald_drift),360) + Integer.IsLess(Skin.TimerElapsedSecs(bald_drift),540)]</expression>
+	<expression name="Bald_DriftStep3">[Skin.TimerIsRunning(bald_drift) + Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(bald_drift),540)]</expression>
+	<include name="Bald_IdleDrift">
+		<param name="x">2</param>
+		<param name="y">2</param>
+		<definition>
+			<animation type="Conditional" condition="$EXP[Bald_DriftStep1]"><effect type="slide" start="0,0" end="$PARAM[x],0" time="0" tween="cubic" easing="out" /></animation>
+			<animation type="Conditional" condition="$EXP[Bald_DriftStep2]"><effect type="slide" start="0,0" end="$PARAM[x],$PARAM[y]" time="0" tween="cubic" easing="out" /></animation>
+			<animation type="Conditional" condition="$EXP[Bald_DriftStep3]"><effect type="slide" start="0,0" end="0,$PARAM[y]" time="0" tween="cubic" easing="out" /></animation>
+		</definition>
+	</include>
+	<!-- A window's base: the field, or the dimmed video behind it. -->
+	<include name="Bald_WindowBase">
+		<include>Bald_Field</include>
+		<include>Bald_VideoBackdrop</include>
+	</include>
+	<!-- Bald Helper (addons/script.bald.helper) is installed and enabled: it blurs the backgrounds (Bald.Blur) and owns
+	     Bald's keymaps. TMDb Helper's blur is the fallback without it. -->
+	<expression name="Bald_HasHelper">[System.HasAddon(script.bald.helper) + System.AddonIsEnabled(script.bald.helper)]</expression>
+	<!-- Bald Helper is running and serves the skin's latency-sensitive actions (its service sets the property once it
+	     has loaded scripts/info.py and clears it when it stops). Call sites send NotifyAll(skin.bald,bald.<action>|...)
+	     while this holds and RunScript(skin.bald,...) otherwise; see addons/script.bald.helper/resources/lib/actions.py. -->
+	<expression name="Bald_HelperActions">[$EXP[Bald_HasHelper] + String.IsEqual(Window(home).Property(Bald.Helper.Actions),1)]</expression>
+
+	<!-- ============ Following an item ============ -->
+	<!-- The background follows the focused item of the container a window names in its Bald.FocusContainer property
+	     (Bald Helper's blur, resources/lib/blur.py); with none, Bald Helper follows a media window's view or the info
+	     dialog's own item. TMDb Helper follows the same container in its TMDbHelper.WidgetContainer, for its blur
+	     without Bald Helper and for its online ratings (Includes_Bald_Ratings.xml) with or without it:
+	       - Bald Helper absent: TMDb Helper blurs, so it must follow;
+	       - Bald Helper present and online ratings on: TMDb Helper's ListItem monitor still publishes the ratings of
+	         the item it follows (TMDbHelper.ListItem.*), so it must follow too (its blur is off, Home.xml);
+	       - Bald Helper present and online ratings off: TMDb Helper has nothing to do, so it is not told.
+	     Clears are unconditional. One include per event, as an include cannot choose its tag. -->
+	<expression name="Bald_TMDbHelperFollows">[!$EXP[Bald_HasHelper] | $EXP[Bald_RatingsOnline]]</expression>
+	<include name="Bald_FollowContainer">
+		<param name="condition">true</param>
+		<definition>
+			<onfocus condition="$PARAM[condition]">SetProperty(Bald.FocusContainer,$PARAM[id],$PARAM[window])</onfocus>
+			<onfocus condition="[$PARAM[condition]] + $EXP[Bald_TMDbHelperFollows]">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],$PARAM[window])</onfocus>
+		</definition>
+	</include>
+	<include name="Bald_FollowContainerOnUp">
+		<param name="condition">true</param>
+		<definition>
+			<onup condition="$PARAM[condition]">SetProperty(Bald.FocusContainer,$PARAM[id],$PARAM[window])</onup>
+			<onup condition="[$PARAM[condition]] + $EXP[Bald_TMDbHelperFollows]">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],$PARAM[window])</onup>
+		</definition>
+	</include>
+	<include name="Bald_FollowContainerOnDown">
+		<param name="condition">true</param>
+		<definition>
+			<ondown condition="$PARAM[condition]">SetProperty(Bald.FocusContainer,$PARAM[id],$PARAM[window])</ondown>
+			<ondown condition="[$PARAM[condition]] + $EXP[Bald_TMDbHelperFollows]">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],$PARAM[window])</ondown>
+		</definition>
+	</include>
+	<include name="Bald_FollowContainerOnBack">
+		<param name="condition">true</param>
+		<definition>
+			<onback condition="$PARAM[condition]">SetProperty(Bald.FocusContainer,$PARAM[id],$PARAM[window])</onback>
+			<onback condition="[$PARAM[condition]] + $EXP[Bald_TMDbHelperFollows]">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],$PARAM[window])</onback>
+		</definition>
+	</include>
+	<include name="Bald_FollowContainerOnLoad">
+		<param name="condition">true</param>
+		<definition>
+			<onload condition="$PARAM[condition]">SetProperty(Bald.FocusContainer,$PARAM[id],$PARAM[window])</onload>
+			<onload condition="[$PARAM[condition]] + $EXP[Bald_TMDbHelperFollows]">SetProperty(TMDbHelper.WidgetContainer,$PARAM[id],$PARAM[window])</onload>
+		</definition>
+	</include>
+	<include name="Bald_UnfollowContainer">
+		<param name="condition">true</param>
+		<definition>
+			<onunfocus condition="$PARAM[condition]">ClearProperty(Bald.FocusContainer,$PARAM[window])</onunfocus>
+			<onunfocus condition="$PARAM[condition]">ClearProperty(TMDbHelper.WidgetContainer,$PARAM[window])</onunfocus>
+		</definition>
+	</include>
+	<include name="Bald_UnfollowContainerOnFocus">
+		<param name="condition">true</param>
+		<definition>
+			<onfocus condition="$PARAM[condition]">ClearProperty(Bald.FocusContainer,$PARAM[window])</onfocus>
+			<onfocus condition="$PARAM[condition]">ClearProperty(TMDbHelper.WidgetContainer,$PARAM[window])</onfocus>
+		</definition>
+	</include>
+	<include name="Bald_UnfollowContainerOnUp">
+		<param name="condition">true</param>
+		<definition>
+			<onup condition="$PARAM[condition]">ClearProperty(Bald.FocusContainer,$PARAM[window])</onup>
+			<onup condition="$PARAM[condition]">ClearProperty(TMDbHelper.WidgetContainer,$PARAM[window])</onup>
+		</definition>
+	</include>
+	<include name="Bald_UnfollowContainerOnDown">
+		<param name="condition">true</param>
+		<definition>
+			<ondown condition="$PARAM[condition]">ClearProperty(Bald.FocusContainer,$PARAM[window])</ondown>
+			<ondown condition="$PARAM[condition]">ClearProperty(TMDbHelper.WidgetContainer,$PARAM[window])</ondown>
+		</definition>
+	</include>
+	<include name="Bald_UnfollowContainerOnLoad">
+		<param name="condition">true</param>
+		<definition>
+			<onload condition="$PARAM[condition]">ClearProperty(Bald.FocusContainer,$PARAM[window])</onload>
+			<onload condition="$PARAM[condition]">ClearProperty(TMDbHelper.WidgetContainer,$PARAM[window])</onload>
+		</definition>
+	</include>
+	<include name="Bald_UnfollowContainerOnUnload">
+		<param name="condition">true</param>
+		<definition>
+			<onunload condition="$PARAM[condition]">ClearProperty(Bald.FocusContainer,$PARAM[window])</onunload>
+			<onunload condition="$PARAM[condition]">ClearProperty(TMDbHelper.WidgetContainer,$PARAM[window])</onunload>
+		</definition>
+	</include>
+	<expression name="Bald_ShowClearlogo">[!Skin.HasSetting(Bald.HideClearlogo)]</expression>
+	<expression name="Bald_ShowMediaFlags">[!Skin.HasSetting(Bald.HideMediaFlags)]</expression>
+	<!-- Watch-state marks (Appearance › Information): the watched check and the progress bar on TV episode cards and the
+	     Resume / Watched note in list rows. Negative names, so unset shows them. -->
+	<expression name="Bald_ShowWatchedMarks">[!Skin.HasSetting(Bald.HideWatchedMarks)]</expression>
+	<expression name="Bald_ShowProgressMarks">[!Skin.HasSetting(Bald.HideProgressMarks)]</expression>
+	<!-- Global Search's right-hand options menu has focus (script-globalsearch.xml sets it on its own window). -->
+	<expression name="Bald_SearchMenuOpen">[!String.IsEmpty(Window.Property(Bald.SearchMenu))]</expression>
+	<!-- Live TV in Search (script-globalsearch.xml): Bald Helper's channel (61) and programme (62) matches. The Live TV
+	     entries of the options pick one (Window.Property(Bald.SearchLive): channels or programmes); with no library
+	     results, the channels show by themselves, else the programmes. -->
+	<expression name="Bald_SearchCanLive">[System.HasPVRAddon + $EXP[Bald_HasHelper]]</expression>
+	<!-- Only once Global Search has finished (its category label, 991, hides): not while its results are still coming. -->
+	<expression name="Bald_SearchLiveOnly">[String.IsEmpty(Window.Property(Bald.SearchLive)) + Integer.IsEqual(Container(50).NumItems,0) + !Control.IsVisible(991)]</expression>
+	<expression name="Bald_SearchLiveChannels">[String.IsEqual(Window.Property(Bald.SearchLive),channels) | [$EXP[Bald_SearchLiveOnly] + Integer.IsGreater(Container(61).NumItems,0)]]</expression>
+	<expression name="Bald_SearchLiveProgrammes">[String.IsEqual(Window.Property(Bald.SearchLive),programmes) | [$EXP[Bald_SearchLiveOnly] + Integer.IsEqual(Container(61).NumItems,0) + Integer.IsGreater(Container(62).NumItems,0)]]</expression>
+	<expression name="Bald_SearchLiveShown">[$EXP[Bald_SearchLiveChannels] | $EXP[Bald_SearchLiveProgrammes]]</expression>
+	<variable name="Bald_SearchLiveHeading">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$LOCALIZE[19029]</value>
+		<value>$LOCALIZE[369]</value>
+	</variable>
+	<variable name="Bald_SearchLiveColumn2">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$LOCALIZE[31795]</value>
+		<value>$LOCALIZE[555]</value>
+	</variable>
+	<variable name="Bald_SearchLiveColumn3">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$LOCALIZE[19030]</value>
+		<value>$LOCALIZE[19029]</value>
+	</variable>
+	<variable name="Bald_SearchLiveLogo">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$INFO[Container(61).ListItem.Art(thumb)]</value>
+		<value>$INFO[Container(62).ListItem.Art(thumb)]</value>
+	</variable>
+	<variable name="Bald_SearchLiveTitle">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$INFO[Container(61).ListItem.Label]</value>
+		<value>$INFO[Container(62).ListItem.Label]</value>
+	</variable>
+	<!-- "510 · News at Noon" (a channel: its number and what is on); "Thu 9:00 PM · NBC Boston" (a programme). -->
+	<variable name="Bald_SearchLiveMeta">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$INFO[Container(61).ListItem.Property(number)]$INFO[Container(61).ListItem.Label2, · ]</value>
+		<value>$INFO[Container(62).ListItem.Property(when)]$INFO[Container(62).ListItem.Label2, · ]</value>
+	</variable>
+	<variable name="Bald_SearchCount">
+		<value condition="$EXP[Bald_SearchLiveChannels]">$INFO[Container(61).CurrentItem] / $INFO[Container(61).NumItems]</value>
+		<value condition="$EXP[Bald_SearchLiveProgrammes]">$INFO[Container(62).CurrentItem] / $INFO[Container(62).NumItems]</value>
+		<value>$INFO[Container(50).CurrentItem] / $INFO[Container(50).NumItems]</value>
+	</variable>
+	<!-- Bald's Live TV search (Custom_1130_BaldLiveSearch.xml): Channels · On TV, the list that shows in full ink. -->
+	<variable name="Bald_LiveSearchTrail">
+		<value condition="$EXP[Bald_SearchLiveProgrammes]">$LOCALIZE[19019]     ·     [COLOR bald_ink]$LOCALIZE[31793][/COLOR]</value>
+		<value>[COLOR bald_ink]$LOCALIZE[19019][/COLOR]     ·     $LOCALIZE[31793]</value>
+	</variable>
+	<!-- Select on a channel or a programme on now plays it; on a later programme it offers to record it or switch. -->
+	<variable name="Bald_SearchSelectHint">
+		<value condition="$EXP[Bald_SearchLiveChannels] | [$EXP[Bald_SearchLiveProgrammes] + String.IsEqual(Container(62).ListItem.Property(now),true)]">$VAR[Bald_KeySelect]$LOCALIZE[208]</value>
+		<value condition="$EXP[Bald_SearchLiveProgrammes]">$VAR[Bald_KeySelect]$LOCALIZE[31794]</value>
+		<value>$VAR[Bald_KeyInfo]$LOCALIZE[31664]</value>
+	</variable>
+	<!-- Search's Live TV matches (script-globalsearch.xml, and Bald's own Live TV search, Custom_1130_BaldLiveSearch.xml):
+	     the column headings, the channel (61) and programme (62) lists and, separately, their preview. A list sets
+	     Window.Property(Bald.SearchLive) as it takes focus, which picks what the headings and preview show. -->
+	<include name="Bald_LiveSearch">
+		<param name="query" />
+		<param name="channels_left">990</param><param name="channels_right">61</param>
+		<param name="programmes_left">990</param><param name="programmes_right">62</param>
+		<definition>
+				<!-- Live TV matches from Bald Helper (resources/lib/livetv.py), in the results' place when chosen in the options
+				     (Bald_SearchLiveChannels, Bald_SearchLiveProgrammes). Both stay visible, faded out, while another list shows:
+				     Kodi fills only a visible list, and the options need their counts. -->
+				<control type="group">
+					<left>Bald_SafeLeft</left><top>180</top>
+					<visible>$EXP[Bald_SearchLiveShown]</visible>
+					<control type="label"><left>26</left><width>600</width><height>28</height><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$VAR[Bald_SearchLiveHeading]</label></control>
+					<control type="label"><left>652</left><width>180</width><height>28</height><align>right</align><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$VAR[Bald_SearchLiveColumn2]</label></control>
+					<control type="label"><left>856</left><width>260</width><height>28</height><align>right</align><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$VAR[Bald_SearchLiveColumn3]</label></control>
+				</control>
+			<include content="Bald_LiveSearchLists">
+				<param name="query">$PARAM[query]</param>
+				<param name="channels_left">$PARAM[channels_left]</param><param name="channels_right">$PARAM[channels_right]</param>
+				<param name="programmes_left">$PARAM[programmes_left]</param><param name="programmes_right">$PARAM[programmes_right]</param>
+			</include>
+		</definition>
+	</include>
+	<!-- The channel (61) and programme (62) lists alone: Global Search's window (above) and Bald's Search
+	     (Custom_1130_BaldSearch.xml), which says when each shows and which property its focus sets. -->
+	<include name="Bald_LiveSearchLists">
+		<param name="query" />
+		<param name="channels_left">990</param><param name="channels_right">61</param>
+		<param name="programmes_left">990</param><param name="programmes_right">62</param>
+		<param name="channels_shown">$EXP[Bald_SearchLiveChannels]</param>
+		<param name="programmes_shown">$EXP[Bald_SearchLiveProgrammes]</param>
+		<param name="focus_property">Bald.SearchLive</param>
+		<definition>
+				<control type="list" id="61">
+					<left>Bald_SafeLeft</left><top>Bald_ContentTop</top><width>1140</width><height>624</height>
+					<visible>$EXP[Bald_SearchCanLive]</visible>
+					<animation effect="fade" start="100" end="0" time="0" condition="![$PARAM[channels_shown]]">Conditional</animation>
+					<onfocus>SetProperty($PARAM[focus_property],channels)</onfocus><onfocus>ClearProperty(Bald.SearchMenu)</onfocus><onup>61</onup><ondown>61</ondown><onleft>$PARAM[channels_left]</onleft><onright>$PARAM[channels_right]</onright>
+					<onclick>RunPlugin(plugin://script.bald.helper/?action=play_channel&amp;channelid=$INFO[ListItem.Property(channelid)])</onclick>
+					<scrolltime tween="cubic" easing="out">440</scrolltime>
+					<itemlayout width="1140" height="48">
+						<control type="image"><left>26</left><top>6</top><width>64</width><height>36</height><aspectratio>keep</aspectratio><texture background="true">$INFO[ListItem.Art(thumb)]</texture></control>
+						<control type="label"><left>106</left><width>530</width><height>48</height><aligny>center</aligny><font>Bald_Section</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.Label]</label></control>
+						<control type="label"><left>652</left><width>180</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.Property(number)]</label></control>
+						<control type="label"><left>856</left><width>260</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink60</textcolor><label>$INFO[ListItem.Label2]</label></control>
+					</itemlayout>
+					<focusedlayout width="1140" height="48">
+						<control type="image"><left>0</left><top>20</top><width>8</width><height>8</height><texture colordiffuse="bald_accent">bald/dot.png</texture><visible>Control.HasFocus(61)</visible></control>
+						<control type="image"><left>26</left><top>6</top><width>64</width><height>36</height><aspectratio>keep</aspectratio><texture background="true">$INFO[ListItem.Art(thumb)]</texture></control>
+						<control type="label"><left>106</left><width>530</width><height>48</height><aligny>center</aligny><font>Bald_Section</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.Label]</label></control>
+						<control type="label"><left>652</left><width>180</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.Property(number)]</label></control>
+						<control type="label"><left>856</left><width>260</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.Label2]</label></control>
+					</focusedlayout>
+					<content target="videos" browse="never">plugin://script.bald.helper/?info=livetv_channels&amp;query=$PARAM[query]</content>
+				</control>
+				<control type="list" id="62">
+					<left>Bald_SafeLeft</left><top>Bald_ContentTop</top><width>1140</width><height>624</height>
+					<visible>$EXP[Bald_SearchCanLive]</visible>
+					<animation effect="fade" start="100" end="0" time="0" condition="![$PARAM[programmes_shown]]">Conditional</animation>
+					<onfocus>SetProperty($PARAM[focus_property],programmes)</onfocus><onfocus>ClearProperty(Bald.SearchMenu)</onfocus><onup>62</onup><ondown>62</ondown><onleft>$PARAM[programmes_left]</onleft><onright>$PARAM[programmes_right]</onright>
+					<onclick>RunPlugin(plugin://script.bald.helper/?action=programme&amp;channelid=$INFO[ListItem.Property(channelid)]&amp;broadcastid=$INFO[ListItem.Property(broadcastid)]&amp;now=$INFO[ListItem.Property(now)])</onclick>
+					<scrolltime tween="cubic" easing="out">440</scrolltime>
+					<itemlayout width="1140" height="48">
+						<control type="label"><left>26</left><width>610</width><height>48</height><aligny>center</aligny><font>Bald_Section</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.Label]</label></control>
+						<control type="label"><left>652</left><width>180</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.Property(when)]</label></control>
+						<control type="label"><left>856</left><width>260</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink60</textcolor><label>$INFO[ListItem.Label2]</label></control>
+					</itemlayout>
+					<focusedlayout width="1140" height="48">
+						<control type="image"><left>0</left><top>20</top><width>8</width><height>8</height><texture colordiffuse="bald_accent">bald/dot.png</texture><visible>Control.HasFocus(62)</visible></control>
+						<control type="label"><left>26</left><width>610</width><height>48</height><aligny>center</aligny><font>Bald_Section</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.Label]</label></control>
+						<control type="label"><left>652</left><width>180</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.Property(when)]</label></control>
+						<control type="label"><left>856</left><width>260</width><height>48</height><align>right</align><aligny>center</aligny><font>Bald_CaptionMeta</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.Label2]</label></control>
+					</focusedlayout>
+					<content target="videos" browse="never">plugin://script.bald.helper/?info=livetv_programmes&amp;query=$PARAM[query]</content>
+				</control>
+		</definition>
+	</include>
+	<include name="Bald_LiveSearchPreview">
+			<!-- The Live TV match's preview: the channel logo, then the programme or channel, when and where, and the plot. -->
+			<control type="group">
+				<visible>!$EXP[Bald_SearchMenuOpen] + $EXP[Bald_SearchLiveShown]</visible>
+				<animation type="Visible"><effect type="fade" start="0" end="100" time="380" delay="140" tween="sine" easing="inout" /></animation>
+				<control type="image"><left>Bald_PreviewLeft</left><top>Bald_ContentTop</top><width>528</width><height>297</height><texture colordiffuse="bald_placeholder">bald/white.png</texture></control>
+				<control type="image"><left>Bald_PreviewLeft</left><top>Bald_ContentTop</top><width>528</width><height>297</height><texture background="true">$VAR[Bald_SearchLiveLogo]</texture><aspectratio align="center" aligny="center">keep</aspectratio></control>
+				<control type="label"><left>Bald_PreviewLeft</left><top>548</top><width>528</width><height>88</height><font>Bald_CaptionTitle</font><textcolor>bald_ink</textcolor><wrapmultiline>true</wrapmultiline><label>$VAR[Bald_SearchLiveTitle]</label></control>
+				<control type="label"><left>Bald_PreviewLeft</left><top>636</top><width>528</width><height>28</height><font>Bald_CaptionMeta</font><textcolor>bald_ink70</textcolor><label>$VAR[Bald_SearchLiveMeta]</label></control>
+				<control type="textbox"><left>Bald_PreviewLeft</left><top>686</top><width>528</width><height>144</height><font>Bald_CaptionPlot</font><textcolor>bald_ink80</textcolor><label>$INFO[Container(62).ListItem.Property(plot)]</label><visible>$EXP[Bald_SearchLiveProgrammes]</visible></control>
+			</control>
+	</include>
+	<!-- A Live TV entry of Search's options (script-globalsearch.xml): Select shows its list (Bald.SearchLive) and
+	     focuses it. Left, Right and Back return to what shows, a Live TV list or the results. -->
+	<include name="Bald_SearchLiveButton">
+		<param name="id" /><param name="top" /><param name="dot_top" /><param name="list" /><param name="kind" /><param name="label" />
+		<param name="up" /><param name="down_if" /><param name="down" />
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<left>Bald_RightColumn</left><top>$PARAM[top]</top><width>420</width><height>56</height>
+				<label>$PARAM[label]</label>
+				<visible>$EXP[Bald_SearchMenuOpen] + Integer.IsGreater(Container($PARAM[list]).NumItems,0)</visible>
+				<include>Bald_AnimMenuShows</include>
+				<font>Bald_MenuItem</font><align>left</align><aligny>center</aligny><textoffsetx>26</textoffsetx>
+				<textcolor>bald_ink34</textcolor><focusedcolor>bald_ink</focusedcolor><texturefocus /><texturenofocus />
+				<onfocus>SetProperty(Bald.SearchMenu,true)</onfocus>
+				<onclick>SetProperty(Bald.SearchLive,$PARAM[kind])</onclick>
+				<onclick>ClearProperty(Bald.SearchMenu)</onclick>
+				<onclick>SetFocus($PARAM[list])</onclick>
+				<onup condition="Control.IsVisible($PARAM[up])">$PARAM[up]</onup>
+				<onup condition="!Control.IsVisible($PARAM[up])">9000</onup>
+				<ondown condition="$PARAM[down_if]">$PARAM[down]</ondown>
+				<ondown condition="![$PARAM[down_if]]">990</ondown>
+				<onleft>ClearProperty(Bald.SearchMenu)</onleft><onleft condition="$EXP[Bald_SearchLiveChannels]">61</onleft><onleft condition="$EXP[Bald_SearchLiveProgrammes]">62</onleft><onleft condition="!$EXP[Bald_SearchLiveShown]">50</onleft>
+				<onright>ClearProperty(Bald.SearchMenu)</onright><onright condition="$EXP[Bald_SearchLiveChannels]">61</onright><onright condition="$EXP[Bald_SearchLiveProgrammes]">62</onright><onright condition="!$EXP[Bald_SearchLiveShown]">50</onright>
+				<onback>ClearProperty(Bald.SearchMenu)</onback><onback condition="$EXP[Bald_SearchLiveChannels]">61</onback><onback condition="$EXP[Bald_SearchLiveProgrammes]">62</onback><onback condition="!$EXP[Bald_SearchLiveShown]">50</onback>
+			</control>
+			<control type="image"><left>Bald_RightColumn</left><top>$PARAM[dot_top]</top><width>8</width><height>8</height><texture colordiffuse="bald_accent">bald/dot.png</texture><visible>Control.HasFocus($PARAM[id])</visible></control>
+			<!-- The count, in the categories' note type (a button's second label takes the menu type). -->
+			<control type="label"><left>1764</left><top>$PARAM[top]</top><width>70</width><height>56</height><align>right</align><aligny>center</aligny><font>Bald_MenuNote</font><textcolor>bald_ink45</textcolor><label>$INFO[Container($PARAM[list]).NumItems]</label><visible>Control.IsVisible($PARAM[id]) + !Control.HasFocus($PARAM[id])</visible><include>Bald_AnimMenuShows</include></control>
+			<control type="label"><left>1764</left><top>$PARAM[top]</top><width>70</width><height>56</height><align>right</align><aligny>center</aligny><font>Bald_MenuNote</font><textcolor>bald_ink70</textcolor><label>$INFO[Container($PARAM[list]).NumItems]</label><visible>Control.HasFocus($PARAM[id])</visible></control>
+		</definition>
+	</include>
+
+	<!-- ============ Clock ============ -->
+	<!-- Appearance › Date & time. Skin.String(Bald.ClockFormat): empty follows Kodi's region (its time format decides
+	     12 or 24 hours), 12 or 24 forces one. Kodi 22 has no format that forces a 24-hour hour: System.Time(hh) is the
+	     region's hour (h in a 12-hour region), so Bald_Clock24 names the hour from the 24 one-hour System.Time(start,end)
+	     ranges (minute of day, end exclusive; 23:00-00:00 wraps). System.Time(h) is always the 12-hour hour. -->
+	<!-- The big clock (Home, the player's seek layer): hours and minutes, no AM or PM, as the region's hh:mm. -->
+	<variable name="Bald_Clock">
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),12)">$INFO[System.Time(h)]:$INFO[System.Time(mm)]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),24)">$VAR[Bald_Clock24]</value>
+		<value>$INFO[System.Time(hh:mm)]</value>
+	</variable>
+	<!-- The small clock in page headers (Live TV, the guide, the login screen): with AM or PM on a 12-hour clock
+	     (Kodi's own 378 and 379, the words its region settings use), as the region's plain System.Time. -->
+	<variable name="Bald_ClockTime">
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),12) + System.Time(00:00,12:00)">$INFO[System.Time(h)]:$INFO[System.Time(mm)] $LOCALIZE[378]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),12)">$INFO[System.Time(h)]:$INFO[System.Time(mm)] $LOCALIZE[379]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),24)">$VAR[Bald_Clock24]</value>
+		<value>$INFO[System.Time]</value>
+	</variable>
+	<variable name="Bald_ClockFormatLabel">
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),12)">$LOCALIZE[12383]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.ClockFormat),24)">$LOCALIZE[12384]</value>
+		<value>$LOCALIZE[14271]</value>
+	</variable>
+	<variable name="Bald_Clock24">
+		<value condition="System.Time(00:00,01:00)">00:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(01:00,02:00)">01:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(02:00,03:00)">02:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(03:00,04:00)">03:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(04:00,05:00)">04:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(05:00,06:00)">05:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(06:00,07:00)">06:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(07:00,08:00)">07:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(08:00,09:00)">08:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(09:00,10:00)">09:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(10:00,11:00)">10:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(11:00,12:00)">11:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(12:00,13:00)">12:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(13:00,14:00)">13:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(14:00,15:00)">14:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(15:00,16:00)">15:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(16:00,17:00)">16:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(17:00,18:00)">17:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(18:00,19:00)">18:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(19:00,20:00)">19:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(20:00,21:00)">20:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(21:00,22:00)">21:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(22:00,23:00)">22:$INFO[System.Time(mm)]</value>
+		<value condition="System.Time(23:00,00:00)">23:$INFO[System.Time(mm)]</value>
+		<value>$INFO[System.Time(hh:mm)]</value>
+	</variable>
+	<!-- Headers that pair the date with the time: the date goes when Appearance turns the date off (Bald.HideClockDate). -->
+	<variable name="Bald_ClockDateTime">
+		<value condition="Skin.HasSetting(Bald.HideClockDate)">$VAR[Bald_ClockTime]</value>
+		<value>$INFO[System.Date] · $VAR[Bald_ClockTime]</value>
+	</variable>
+	<expression name="Bald_ShowClockDate">[!Skin.HasSetting(Bald.HideClockDate)]</expression>
+	<expression name="Bald_ShowHomeClock">[!Skin.HasSetting(Bald.HideHomeClock)]</expression>
+
+	<!-- ============ Weather in headers ============ -->
+	<!-- Appearance › Information, "Weather in headers and on Home" (Bald.HeaderWeather): the temperature and conditions
+	     end each page header's right-hand meta line (sort, clock) and sit under Home's date. -->
+	<expression name="Bald_HeaderWeatherOn">[Skin.HasSetting(Bald.HeaderWeather) + !String.IsEmpty(Weather.Plugin) + Weather.IsFetched]</expression>
+	<variable name="Bald_HeaderWeather">
+		<value condition="$EXP[Bald_HeaderWeatherOn]">$INFO[Weather.Temperature]$INFO[Weather.Conditions, · ,]</value>
+	</variable>
+	<!-- The same, appended to a meta line. -->
+	<variable name="Bald_HeaderWeatherSuffix">
+		<value condition="$EXP[Bald_HeaderWeatherOn]">$INFO[Weather.Temperature, · ,]$INFO[Weather.Conditions, · ,]</value>
+	</variable>
+
+	<!-- ============ Artwork fallbacks ============ -->
+	<!-- Named by what they pick, suffixed with the container id when they read Container(id).ListItem.* (Kodi variables
+	     take no params); the plain names read ListItem.*, so they follow the list layout or window that uses them. -->
+	<!-- Landscape art: fanart, else the show's, else the thumb (not a hidden still, Includes_Bald_Spoilers.xml). Home row
+	     tiles and the info dialog's own backdrop. -->
+	<variable name="Bald_ItemFanart">
+		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.fanart))">$INFO[ListItem.Art(tvshow.fanart)]</value>
+		<value condition="$EXP[Bald_SpoilerThumb]">$VAR[Bald_SpoilerArt]</value>
+		<value>$INFO[ListItem.Art(thumb)]</value>
+	</variable>
+	<!-- Clearlogo, else the show's. -->
+	<variable name="Bald_ItemLogo">
+		<value condition="!String.IsEmpty(ListItem.Art(clearlogo))">$INFO[ListItem.Art(clearlogo)]</value>
+		<value>$INFO[ListItem.Art(tvshow.clearlogo)]</value>
+	</variable>
+	<!-- Thumbnail-style landscape art (Home rows with the Thumbnail style): an episode's still (Bald_EpisodeThumb), else
+	     the item's landscape art, else the fanart chain. A movie's thumb is usually its poster, so it is not used. -->
+	<variable name="Bald_ItemThumbnail">
+		<value condition="String.IsEqual(ListItem.DBType,episode)">$VAR[Bald_EpisodeThumb]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(landscape)) + !$EXP[Bald_SpoilerThumb]">$INFO[ListItem.Art(landscape)]</value>
+		<value>$VAR[Bald_ItemFanart]</value>
+	</variable>
+	<!-- Episode still: thumb, else fanart, else the show's fanart. The library's Bald_EpisodeThumb540/541/542 end on the
+	     folder's Container.Art(tvshow.fanart) instead, which the TV info episode list does not have. A hidden still
+	     (Includes_Bald_Spoilers.xml) is the show's art, under Bald_SpoilerStill. -->
+	<variable name="Bald_EpisodeThumb">
+		<value condition="$EXP[Bald_SpoilerThumb]">$VAR[Bald_SpoilerArt]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+		<value>$INFO[ListItem.Art(tvshow.fanart)]</value>
+	</variable>
+
+	<!-- ============ Meta lines ============ -->
+	<!-- One-line captions for the library views, as the <label> of the caller's label control. Home's caption and the
+	     info dialog format their own lines (hours and minutes, season counts, the show title), see docs/NOTES.md. -->
+	<!-- Movie: "2019 · 132 min · Drama". -->
+	<include name="Bald_MetaLibraryMovie">
+		<param name="container" />
+		<definition>
+			<label>$INFO[$PARAM[container]ListItem.Year]$INFO[$PARAM[container]ListItem.Duration(mins), · , $LOCALIZE[31710]]$INFO[$PARAM[container]ListItem.Genre, · ,]</label>
+		</definition>
+	</include>
+	<!-- Episode: "S1 E2 · 2024-03-03 · 52 min". -->
+	<include name="Bald_MetaLibraryEpisode">
+		<param name="container" />
+		<definition>
+			<label>S$INFO[$PARAM[container]ListItem.Season] E$INFO[$PARAM[container]ListItem.Episode] · $INFO[$PARAM[container]ListItem.Premiered]$INFO[$PARAM[container]ListItem.Duration(mins), · , $LOCALIZE[31710]]</label>
+		</definition>
+	</include>
+
+	<!-- ============ Media flags ============ -->
+	<!-- One outlined media flag chip. Defaults are the caption chip (26 px, Bald_Flag); the info Overview passes
+	     30 px and Bald_FlagL. -->
+	<include name="Bald_FlagChip">
+		<param name="label" />
+		<param name="visible">true</param>
+		<param name="height">26</param>
+		<param name="font">Bald_Flag</param>
+		<definition>
+			<control type="button">
+				<width>auto</width>
+				<height>$PARAM[height]</height>
+				<label>$PARAM[label]</label>
+				<font>$PARAM[font]</font>
+				<textoffsetx>10</textoffsetx>
+				<aligny>center</aligny>
+				<textcolor>bald_ink</textcolor>
+				<disabledcolor>bald_ink</disabledcolor>
+				<texturenofocus border="6" colordiffuse="bald_ink45">bald/chip.png</texturenofocus>
+				<texturefocus border="6" colordiffuse="bald_ink45">bald/chip.png</texturefocus>
+				<enable>false</enable>
+				<visible>$PARAM[visible]</visible>
+			</control>
+		</definition>
+	</include>
+	<!-- The flag chips for one item, as children of the caller's horizontal grouplist (hidden chips take no space).
+	     The <visible> applies to that grouplist: the Media flags setting hides every chip row. -->
+	<include name="Bald_MediaFlags">
+		<param name="container" />
+		<param name="height">26</param>
+		<param name="font">Bald_Flag</param>
+		<definition>
+			<visible>$EXP[Bald_ShowMediaFlags]</visible>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">4K</param><param name="visible">String.IsEqual($PARAM[container]ListItem.VideoResolution,4K)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">1080p</param><param name="visible">String.IsEqual($PARAM[container]ListItem.VideoResolution,1080)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">Dolby Vision</param><param name="visible">String.IsEqual($PARAM[container]ListItem.HdrType,dolbyvision)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">HDR10</param><param name="visible">String.IsEqual($PARAM[container]ListItem.HdrType,hdr10)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">HDR10+</param><param name="visible">String.StartsWith($PARAM[container]ListItem.HdrType,hdr10) + !String.IsEqual($PARAM[container]ListItem.HdrType,hdr10)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">HLG</param><param name="visible">String.IsEqual($PARAM[container]ListItem.HdrType,hlg)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">$MAP[DefaultCodecMap, $PARAM[container]ListItem.AudioCodec]</param><param name="visible">!String.IsEmpty($PARAM[container]ListItem.AudioCodec)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">7.1</param><param name="visible">String.IsEqual($PARAM[container]ListItem.AudioChannels,8)</param></include>
+			<include content="Bald_FlagChip"><param name="height">$PARAM[height]</param><param name="font">$PARAM[font]</param><param name="label">5.1</param><param name="visible">String.IsEqual($PARAM[container]ListItem.AudioChannels,6)</param></include>
+		</definition>
+	</include>
+	<!-- Moving between full windows (Home, the library, settings): only the content moves, the backgrounds stay still,
+	     and Kodi finishes one window's close before the next opens, so nothing flashes. Leaving: 160 FADE and a 40 px
+	     move over 180. Arriving: 380 FADE and a 40 px move over 480. Deeper moves right to left; back moves left to right.
+	     back_in: the opening window is being returned to. back_out: the closing window is going back. -->
+	<!-- The curtain (Custom_1129_BaldCurtain.xml) covers every change between two of Bald's full windows: Home, the
+	     video and music libraries, the TV guide, Kodi's settings hub and pages, and Bald Settings and its pages.
+	     Window.Next is only valid while windows change. Global Search is a script window and keeps its own transition. -->
+	<expression name="Bald_CurtainWindow">[Window.IsActive(home) | Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(tvguide) | Window.IsActive(settings) | Window.IsActive(1115) | Window.IsActive(skinsettings) | Window.IsActive(1116) | Window.IsActive(1117) | Window.IsActive(1118) | Window.IsActive(1119) | Window.IsActive(1131) | Window.IsActive(profiles) | Window.IsActive(systeminfo) | Window.IsActive(systemsettings) | Window.IsActive(servicesettings) | Window.IsActive(pvrsettings) | Window.IsActive(playersettings) | Window.IsActive(mediasettings) | Window.IsActive(interfacesettings) | Window.IsActive(gamesettings) | Window.IsActive(appearancesettings)]</expression>
+	<expression name="Bald_CurtainNext">[Window.Next(home) | Window.Next(videos) | Window.Next(music) | Window.Next(tvguide) | Window.Next(settings) | Window.Next(1115) | Window.Next(skinsettings) | Window.Next(1116) | Window.Next(1117) | Window.Next(1118) | Window.Next(1119) | Window.Next(1131) | Window.Next(profiles) | Window.Next(systeminfo) | Window.Next(systemsettings) | Window.Next(servicesettings) | Window.Next(pvrsettings) | Window.Next(playersettings) | Window.Next(mediasettings) | Window.Next(interfacesettings) | Window.Next(gamesettings) | Window.Next(appearancesettings)]</expression>
+	<expression name="Bald_CurtainChange">[$EXP[Bald_CurtainWindow] + $EXP[Bald_CurtainNext]]</expression>
+	<!-- Each curtain window lifts the curtain once it is drawn, and holds it up when it is left for another. -->
+	<include name="Bald_CurtainHandoff">
+		<onload>ClearProperty(Bald.Curtain,home)</onload>
+		<onunload condition="$EXP[Bald_CurtainNext]">SetProperty(Bald.Curtain,1,home)</onunload>
+		<!-- TMDb Helper's blur: the last one seen, for windows without one of their own (Bald_BlurImage). Bald Helper
+		     keeps its own (Bald.Blur.Last). -->
+		<onunload condition="!$EXP[Bald_HasHelper] + !String.IsEmpty(Window(home).Property(TMDbHelper.ListItem.BlurImage))">SetProperty(Bald.LastBlur,$ESCINFO[Window(home).Property(TMDbHelper.ListItem.BlurImage)],home)</onunload>
+	</include>
+	<include name="Bald_AnimWindowDepth">
+		<param name="back_in">false</param>
+		<param name="back_out">false</param>
+		<definition>
+			<!-- Not under the Home <-> library curtain (Custom_1129_BaldCurtain.xml): the window is already fully drawn
+			     when the curtain fades away. The condition is read when the open is queued, before the onload clears it.
+			     With background video (Bald_VideoBackdropOn) the slide is dropped and only the fade stays: a window that
+			     vanished at once left frames with nothing drawn, which on CoreELEC show the video undimmed (a flash).
+			     Reduce motion drops it the same way (Bald_FadeOnly). -->
+			<animation type="WindowOpen" condition="![$PARAM[back_in]] + String.IsEmpty(Window(home).Property(Bald.Curtain)) + !$EXP[Bald_FadeOnly]">
+				<effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" />
+				<effect type="slide" start="40,0" end="0,0" time="480" tween="cubic" easing="out" />
+			</animation>
+			<animation type="WindowOpen" condition="$PARAM[back_in] + String.IsEmpty(Window(home).Property(Bald.Curtain)) + !$EXP[Bald_FadeOnly]">
+				<effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" />
+				<effect type="slide" start="-40,0" end="0,0" time="480" tween="cubic" easing="out" />
+			</animation>
+			<animation type="WindowClose" condition="![$PARAM[back_out]] + !$EXP[Bald_FadeOnly]">
+				<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+				<effect type="slide" start="0,0" end="-40,0" time="180" tween="cubic" easing="out" />
+			</animation>
+			<animation type="WindowClose" condition="$PARAM[back_out] + !$EXP[Bald_FadeOnly]">
+				<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+				<effect type="slide" start="0,0" end="40,0" time="180" tween="cubic" easing="out" />
+			</animation>
+			<animation type="WindowOpen" condition="String.IsEmpty(Window(home).Property(Bald.Curtain)) + $EXP[Bald_FadeOnly]">
+				<effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" />
+			</animation>
+			<animation type="WindowClose" condition="$EXP[Bald_FadeOnly]">
+				<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+</includes>

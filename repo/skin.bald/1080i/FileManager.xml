@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Started from Kodi 22's bundled Estuary (skin.estuary, GPL-2.0-or-later; see LICENSE-Estuary.txt).
+     Bald: two compact file lists side by side at the safe margins, each under its current path, on the field. Kodi
+     binds the lists 20 and 21 and the path labels 101 and 102; 60 and 61 are their page controls. -->
+<window>
+	<defaultcontrol always="true">20</defaultcontrol>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="group">
+			<include>Bald_BrowseFade</include>
+			<control type="label" id="101">
+				<left>Bald_SafeLeft</left>
+				<top>180</top>
+				<width>816</width>
+				<height>28</height>
+				<font>Bald_CaptionMeta</font>
+				<textcolor>bald_ink60</textcolor>
+				<label></label>
+				<haspath>true</haspath>
+			</control>
+			<control type="label" id="102">
+				<left>1008</left>
+				<top>180</top>
+				<width>816</width>
+				<height>28</height>
+				<font>Bald_CaptionMeta</font>
+				<textcolor>bald_ink60</textcolor>
+				<label></label>
+				<haspath>true</haspath>
+			</control>
+			<control type="group">
+				<left>Bald_SafeLeft</left>
+				<include content="FileManagerPanel">
+					<param name="list_id" value="20" />
+					<param name="scrollbar_id" value="60" />
+					<param name="onleft_id" value="20" />
+					<param name="onright_id" value="21" />
+					<param name="width" value="816" />
+					<param name="top" value="222" />
+					<param name="bottom" value="234" />
+				</include>
+				<control type="scrollbar" id="60">
+					<left>836</left>
+					<top>Bald_ContentTop</top>
+					<width>4</width>
+					<height>624</height>
+					<onleft>20</onleft>
+					<onright>21</onright>
+					<include content="Bald_BrowseScrollbarStyle" />
+				</control>
+			</control>
+			<control type="image">
+				<left>944</left>
+				<top>518</top>
+				<width>32</width>
+				<height>32</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="bald_ink45">icons/file-manager/left-right.png</texture>
+			</control>
+			<control type="group">
+				<left>1008</left>
+				<include content="FileManagerPanel">
+					<param name="list_id" value="21" />
+					<param name="scrollbar_id" value="61" />
+					<param name="onleft_id" value="20" />
+					<param name="onright_id" value="21" />
+					<param name="width" value="816" />
+					<param name="top" value="222" />
+					<param name="bottom" value="234" />
+				</include>
+				<control type="scrollbar" id="61">
+					<left>-24</left>
+					<top>Bald_ContentTop</top>
+					<width>4</width>
+					<height>624</height>
+					<onleft>20</onleft>
+					<onright>21</onright>
+					<include content="Bald_BrowseScrollbarStyle" />
+				</control>
+			</control>
+		</control>
+		<include content="TopBar">
+			<param name="breadcrumbs_label" value="$LOCALIZE[7]" />
+			<param name="sublabel" value="" />
+			<param name="top" value="108" />
+		</include>
+		<include content="BottomBar">
+			<param name="count">$INFO[Container(20).CurrentItem]$INFO[Container(20).NumItems, / ,]</param>
+		</include>
+		<control type="label">
+			<left>1008</left>
+			<top>Bald_HintTop</top>
+			<width>816</width>
+			<height>24</height>
+			<align>right</align>
+			<font>Bald_Hint</font>
+			<textcolor>bald_ink60</textcolor>
+			<label>$INFO[Container(21).CurrentItem]$INFO[Container(21).NumItems, / ,]</label>
+			<include>Bald_BrowseFade</include>
+		</control>
+	</controls>
+</window>

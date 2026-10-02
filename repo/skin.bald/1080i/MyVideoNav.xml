@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<views>510,511,512,513,514,515,520,521,522,523,530,531,532,540,541,542,504,50,51,52,53,54,55,500,501,502</views>
+	<menucontrol>9151</menucontrol>
+	<!-- With Bald Helper's "Open TV shows on their info page" on, Select here starts the skin timer bald_library_select
+	     (Timers.xml), which opens a focused TV show's information and passes anything else on as Select. Its focus
+	     condition lists the <views> ids above: keep the two in step (tests/test_bald_helper.py). -->
+	<include content="Bald_UnfollowContainerOnLoad"><param name="window">videos</param></include>
+	<!-- Opened from Home: remember the folder, whose heading is the hub's name if a hub opened it (Bald_InHubFolder).
+	     Kodi fetches the first folder before the onload runs (CGUIMediaWindow::OnInitWindow). -->
+	<onload condition="Window.Previous(home)">SetProperty(Bald.HubPath,$ESCINFO[Container.FolderPath],home)</onload>
+	<include content="Bald_UnfollowContainerOnUnload"><param name="window">videos</param></include>
+	<include>Bald_CurtainHandoff</include>
+	<onload condition="$EXP[Bald_HasTMDbHelper] + !Skin.HasSetting(TMDbHelper.UseLocalWidgetContainer)">Skin.SetBool(TMDbHelper.UseLocalWidgetContainer)</onload>
+	<!-- Blur: Bald Helper's, else TMDb Helper's, never both (Home.xml). -->
+	<onload condition="$EXP[Bald_HasTMDbHelper] + !$EXP[Bald_HasHelper] + !Skin.HasSetting(TMDbHelper.EnableBlur)">Skin.SetBool(TMDbHelper.EnableBlur)</onload>
+	<onload condition="$EXP[Bald_HasHelper] + Skin.HasSetting(TMDbHelper.EnableBlur)">Skin.Reset(TMDbHelper.EnableBlur)</onload>
+	<!-- Estuary remains a fallback for content we have not redesigned; movie and TV libraries always enter a Bald view
+	     (here on entry, and from an Estuary view on a folder change, Bald_BaldViewRedirect). -->
+	<onload condition="Container.Content(movies) + !$EXP[Bald_LibraryMovieView]">Container.SetViewMode(510)</onload>
+	<onload condition="Container.Content(tvshows) + !$EXP[Bald_LibrarySeriesView]">Container.SetViewMode(520)</onload>
+	<onload condition="Container.Content(seasons) + !$EXP[Bald_LibrarySeasonView]">Container.SetViewMode(530)</onload>
+	<onload condition="Container.Content(episodes) + !$EXP[Bald_LibraryEpisodeView]">Container.SetViewMode(540)</onload>
+	<controls>
+		<!-- Route Kodi's Menu action without duplicating native menu/control IDs. -->
+		<control type="button" id="9151">
+			<include>HiddenObject</include>
+			<onfocus condition="$EXP[Bald_LibraryViewActive]">SetFocus(9150)</onfocus>
+			<onfocus condition="!$EXP[Bald_LibraryViewActive]">SetFocus(9000)</onfocus>
+		</control>
+		<!-- Bald_VideoBackdrop draws the video, so DefaultBackground leaves its own videowindow out. -->
+		<include content="DefaultBackground"><param name="video">false</param></include>
+		<include>Bald_VideoBackdrop</include>
+		<control type="group">
+			<!-- Entered from Home (in from the right); returned to from anything deeper, such as playback. Leaving for Home
+			     is back (out to the right). -->
+			<include content="Bald_AnimWindowDepth">
+				<param name="back_in">!Window.Previous(home)</param>
+				<param name="back_out">Window.Next(home)</param>
+			</include>
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" easing="inout" condition="$EXP[infodialog_active]">Conditional</animation>
+			<include>View_510_Bald_Posters</include>
+			<include>View_511_Bald_Wall</include>
+			<include>View_512_Bald_WallPreview</include>
+			<include>View_513_Bald_CompactList</include>
+			<include>View_514_Bald_ArtworkList</include>
+			<include>View_515_Bald_PosterLow</include>
+			<include>View_520_Bald_Series</include>
+			<include>View_521_Bald_SeriesWall</include>
+			<include>View_522_Bald_SeriesCompact</include>
+			<include>View_523_Bald_SeriesPosterLow</include>
+			<include>View_530_Bald_Seasons</include>
+			<include>View_531_Bald_SeasonsCompact</include>
+			<include>View_532_Bald_SeriesPage</include>
+			<include>View_540_Bald_Episodes</include>
+			<include>View_541_Bald_EpisodesCompact</include>
+			<include>View_542_Bald_EpisodesWall</include>
+			<control type="group"><visible>$EXP[Bald_LibraryViewActive]</visible><include>Bald_LibraryOptions</include><include>Bald_LibraryLetters</include></control>
+			<include>View_50_List</include>
+			<include>View_51_Poster</include>
+			<include>View_52_IconWall</include>
+			<include>View_53_Shift</include>
+			<include>View_54_InfoWall</include>
+			<include>View_55_WideList</include>
+			<include>View_500_Wall</include>
+			<include>View_501_Banner</include>
+			<include>View_502_FanArt</include>
+			<include>View_504_MediaList</include>
+			<!-- Estuary views: the shared preview column for the list and wall views that do not draw their own. -->
+			<include content="ListThumbInfoPanel"><param name="visible">Control.IsVisible(55) | Control.IsVisible(504) | Control.IsVisible(54)</param></include>
+			<control type="group">
+				<visible>!$EXP[Bald_LibraryViewActive]</visible>
+				<include content="TopBar"><param name="breadcrumbs_label" value="$VAR[BreadcrumbsVideoVar]" /><param name="top" value="108" /></include>
+				<include content="BottomBar"><param name="info_visible" value="true" /></include>
+			</control>
+			<include>CommonScrollbars</include>
+			<control type="group"><visible>!$EXP[Bald_LibraryViewActive]</visible><include>MediaMenuMouseOverlay</include></control>
+			<control type="group">
+				<include>MediaMenuCommon</include>
+				<visible>!$EXP[Bald_LibraryViewActive]</visible>
+				<control type="grouplist" id="9000">
+					<top>50</top>
+					<include>MediaMenuListCommon</include>
+					<control type="button" id="10">
+						<description>Watched Toggle</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[20367]</label>
+						<label2>$INFO[Container.NumItems]</label2>
+						<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.content(seasons) | Container.Content(episodes) | Container.Content(MusicVideos)</visible>
+					</control>
+					<control type="label" id="203">
+						<include>MediaMenuLabelCommon</include>
+						<label>$LOCALIZE[31020]</label>
+					</control>
+					<control type="radiobutton" id="16">
+						<description>PartyMode</description>
+						<label>$LOCALIZE[589]</label>
+						<include>MediaMenuItemsCommon</include>
+						<visible>Container.Content(MusicVideos)</visible>
+					</control>
+					<control type="radiobutton" id="11">
+						<description>Unlock Shares</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[20336]</label>
+						<onclick>mastermode</onclick>
+						<selected>system.ismaster</selected>
+						<visible>system.haslocks</visible>
+					</control>
+					<control type="togglebutton" id="619">
+						<description>Update library</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[653]</label>
+						<onclick>UpdateLibrary(video)</onclick>
+						<visible>!Container.Content(addons)+ String.IsEmpty(Container.PluginName)</visible>
+						<altlabel>$LOCALIZE[13353]</altlabel>
+						<usealttexture>library.isscanningvideo</usealttexture>
+					</control>
+					<control type="button" id="612">
+						<description>Go to playlist</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31056]</label>
+						<onclick>ActivateWindow(videoplaylist)</onclick>
+						<visible>Integer.IsGreater(Playlist.Length(video),0)</visible>
+					</control>
+					<control type="button" id="621">
+						<description>Get more</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[21452]</label>
+						<onclick>ActivateWindow(addonbrowser,addons://more/video/,return)</onclick>
+						<visible>Container.Content(addons)</visible>
+					</control>
+					<control type="button" id="622">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31117]</label>
+						<onclick condition="System.AddonIsEnabled(plugin.library.node.editor)">ActivateWindow(programs,plugin://plugin.library.node.editor/?ltype=video,return)</onclick>
+						<onclick condition="System.HasAddon(plugin.library.node.editor) + !System.AddonIsEnabled(plugin.library.node.editor)">EnableAddon(plugin.library.node.editor)</onclick>
+						<onclick condition="!System.HasAddon(plugin.library.node.editor)">InstallAddon(plugin.library.node.editor)</onclick>
+						<visible>Container.Content() + String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<control type="button" id="623">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31009]</label>
+						<onclick>InstallAddon(resource.images.studios.white)</onclick>
+						<visible>Container.Content(studios) + !System.AddonIsEnabled(resource.images.studios.white)</visible>
+					</control>
+					<control type="button" id="624">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[10140]</label>
+						<onclick>Addon.OpenSettings($INFO[Container.PluginName])</onclick>
+						<visible>!String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<include>MediaMenuNowPlaying</include>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

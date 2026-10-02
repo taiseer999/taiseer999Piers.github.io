@@ -1,0 +1,46 @@
+"""Kodi settings Bald recommends, applied with the user's consent.
+
+RunScript(skin.bald,recommended)         Bald Settings > Appearance > Behavior: offer them, or say they are in place.
+RunScript(skin.bald,recommended,prompt)  Home, once: offer them only if any differ, and stay quiet otherwise.
+
+Both change core settings through JSON-RPC (Settings.GetSettingValue / SetSettingValue) and only after a yes.
+"""
+try:
+    from info import rpc  # RunScript: scripts/ is on sys.path
+except ImportError:  # the tests import it as scripts.recommended
+    from scripts.info import rpc
+
+# (setting id, recommended value). Values checked against Kodi 22's settings.xml (flattentvshows: 0 never, 1 if only one
+# season, 2 always) and the video select action enum (KODI::VIDEO::GUILIB::Action: 0 choose, 3 show information, 7 queue,
+# 8 play).
+RECOMMENDED = (
+    ("filelists.showparentdiritems", False),  # No ".." item at the top of every list
+    ("myvideos.selectaction", 3),             # Select on a movie or episode shows its information
+    ("videolibrary.flattentvshows", 0),       # Never skip a show's seasons, so the Series page view (532) is reached
+                                              # for one-season shows too (Kodi's default, 1, skips them)
+)
+# Bald's en_gb strings (31837-31841).
+TITLE, PROMPT, APPLY, ALREADY, DONE = 31837, 31838, 31839, 31840, 31841
+STRING_IDS = (TITLE, PROMPT, APPLY, ALREADY, DONE)
+
+
+def pending(xbmc):
+    """The recommended settings Kodi does not have yet, as (id, value)."""
+    return [(setting, value) for setting, value in RECOMMENDED
+            if (rpc(xbmc, "Settings.GetSettingValue", {"setting": setting}) or {}).get("value") != value]
+
+
+def apply(xbmc, xbmcgui, mode=""):
+    text = xbmc.getLocalizedString
+    dialog = xbmcgui.Dialog()
+    todo = pending(xbmc)
+    if not todo:
+        if mode != "prompt":
+            dialog.notification(text(TITLE), text(ALREADY))
+        return False
+    if not dialog.yesno(text(TITLE), text(PROMPT), yeslabel=text(APPLY)):
+        return False
+    for setting, value in todo:
+        rpc(xbmc, "Settings.SetSettingValue", {"setting": setting, "value": value})
+    dialog.notification(text(TITLE), text(DONE))
+    return True

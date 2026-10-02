@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Started from Kodi 22's bundled Estuary (skin.estuary, GPL-2.0-or-later; see LICENSE-Estuary.txt).
+     Bald: a full-width wall of square icons and covers with their labels (files, sources, genres, tags, years,
+     studios, playlists, favourites and plain folders), 8 columns in the Bald tile language. Id, viewtype, visibility,
+     page control (Estuary's 531, here 5198) and navigation are Estuary's. -->
+<includes>
+	<include name="View_52_IconWall">
+		<control type="group">
+			<visible>Control.IsVisible(52)</visible>
+			<include>Bald_BrowseViewIn</include>
+			<control type="panel" id="52">
+				<include>Bald_BaldViewRedirect</include>
+				<left>Bald_BrowseWallLeft</left>
+				<top>Bald_BrowseWallTop</top>
+				<width>1728</width>
+				<height>648</height>
+				<orientation>vertical</orientation>
+				<onleft>9000</onleft>
+				<onright>5198</onright>
+				<pagecontrol>5198</pagecontrol>
+				<preloaditems>2</preloaditems>
+				<onup>52</onup>
+				<ondown>52</ondown>
+				<scrolltime tween="cubic" easing="out">440</scrolltime>
+				<visible>Container.Content() | Container.Content(files) | Container.Content(tags) | Container.Content(years) | Container.Content(roles) | Container.Content(sources) | Container.Content(genres) | Container.Content(countries) | Container.Content(studios) | Container.Content(playlists) | Container.Content(favourites) | Container.Content(unknown)</visible>
+				<viewtype label="31099">icon</viewtype>
+				<include>Bald_BrowseDim</include>
+				<include content="Bald_BrowseWallLayouts"><param name="c">52</param></include>
+			</control>
+		</control>
+	</include>
+</includes>

@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald settings scaffold, shared by Bald Settings (1115 and SkinSettings), the widget editor (1116), Home Screens (1117)
+     and Appearance (1118). Two panes over the field and blurred backdrop: a 590 px sidebar with the title and a category
+     list drawn as the Home menu (accent dot, Bald_MenuItem, unfocused at 34%), and a detail pane at x 686 with the
+     focused category's heading, a Bald_MenuNote description and its rows. Hints sit on the info dialog's y 954 line,
+     right-aligned to the 1824 safe edge. Control IDs stay in the windows; these includes supply layout and styling. -->
+<includes>
+	<!-- ============ Window transitions ============
+	     Moving between settings windows: the content (title, lists, detail, hints) leaves in 160 FADE and a 40 px move,
+	     and the next window's content arrives in 380 FADE and a 40 px move over 480. Going deeper moves right to left;
+	     going back (to the parent window, or Home) moves left to right. Kodi finishes a window's close animation before
+	     the next window opens, and the field, backdrop and sidebar panel never animate, so nothing flashes between them.
+	     Hierarchy: Home > Settings hub > Bald Settings (1115 / skinsettings), Kodi's settings pages, Profiles,
+	     System info > Home Screens (1117) > Power menu (1131), Appearance (1118), Playback (1119), Add-ons > Widgets (1116). -->
+	<!-- The opening window is receiving a Back from one of its children. -->
+	<expression name="Bald_SettingsBackIn">[[Window.IsActive(settings) + [Window.Previous(1115) | Window.Previous(skinsettings) | Window.Previous(profiles) | Window.Previous(systeminfo) | Window.Previous(systemsettings) | Window.Previous(servicesettings) | Window.Previous(pvrsettings) | Window.Previous(playersettings) | Window.Previous(mediasettings) | Window.Previous(interfacesettings) | Window.Previous(gamesettings) | Window.Previous(appearancesettings)]] | [[Window.IsActive(1115) | Window.IsActive(skinsettings)] + [Window.Previous(1117) | Window.Previous(1118) | Window.Previous(1119) | Window.Previous(addonbrowser)]] | [Window.IsActive(1117) + [Window.Previous(1116) | Window.Previous(1131)]]]</expression>
+	<!-- The closing window is going back to its parent (or Home). -->
+	<expression name="Bald_SettingsBackOut">[Window.Next(home) | Window.Next(settings) | [[Window.Next(1115) | Window.Next(skinsettings)] + [Window.IsVisible(1117) | Window.IsVisible(1118) | Window.IsVisible(1119)]] | [Window.Next(1117) + [Window.IsVisible(1116) | Window.IsVisible(1131)]]]</expression>
+	<include name="Bald_AnimSettingsWindow">
+		<include content="Bald_AnimWindowDepth">
+			<param name="back_in">$EXP[Bald_SettingsBackIn]</param>
+			<param name="back_out">$EXP[Bald_SettingsBackOut]</param>
+		</include>
+	</include>
+
+	<!-- Field, backdrop, sidebar and title. -->
+	<include name="Bald_SettingsFrame">
+		<param name="title" />
+		<!-- Kodi's settings windows fill their heading label by id (SettingsCategory: 2). -->
+		<param name="title_id">0</param>
+		<definition>
+			<include>Bald_WindowBase</include>
+			<include>Bald_BackdropImage</include>
+			<control type="image">
+				<width>590</width>
+				<height>1080</height>
+				<texture colordiffuse="bald_field60">bald/white.png</texture>
+			</control>
+			<control type="label" id="$PARAM[title_id]">
+				<left>Bald_SafeLeft</left>
+				<top>96</top>
+				<width>494</width>
+				<height>48</height>
+				<aligny>center</aligny>
+				<font>Bald_CaptionTitle</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$PARAM[title]</label>
+				<include>Bald_AnimSettingsWindow</include>
+			</control>
+		</definition>
+	</include>
+
+	<!-- Body of a sidebar category list: <control type="list" id="..."> + this + <content>. Rows are 62 px, the Home
+	     menu's pitch. The selected category keeps its dot and dims while focus is in the detail pane. -->
+	<include name="Bald_SettingsCategories">
+		<param name="id" />
+		<param name="right" />
+		<param name="font">Bald_MenuItem</param>
+		<definition>
+			<include>Bald_AnimSettingsWindow</include>
+			<left>Bald_SafeLeft</left>
+			<top>192</top>
+			<width>494</width>
+			<height>682</height>
+			<orientation>vertical</orientation>
+			<scrolltime tween="cubic" easing="out">320</scrolltime>
+			<onright>$PARAM[right]</onright>
+			<itemlayout height="62">
+				<control type="label">
+					<left>20</left>
+					<width>454</width>
+					<height>62</height>
+					<aligny>center</aligny>
+					<font>$PARAM[font]</font>
+					<textcolor>bald_ink34</textcolor>
+					<label>$INFO[ListItem.Label]</label>
+				</control>
+			</itemlayout>
+			<focusedlayout height="62">
+				<control type="group">
+					<animation type="Conditional" condition="!Control.HasFocus($PARAM[id])">
+						<effect type="fade" start="100" end="55" time="240" tween="sine" easing="inout" />
+					</animation>
+					<control type="image">
+						<top>26</top>
+						<width>10</width>
+						<height>10</height>
+						<texture colordiffuse="bald_accent">bald/dot.png</texture>
+					</control>
+					<control type="label">
+						<left>26</left>
+						<width>448</width>
+						<height>62</height>
+						<aligny>center</aligny>
+						<font>$PARAM[font]</font>
+						<textcolor>bald_ink</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<animation type="Focus" condition="$EXP[Bald_FullMotion]" reversible="false">
+							<effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" />
+							<effect type="slide" start="-6,0" end="0,0" time="320" tween="cubic" easing="out" />
+						</animation>
+						<animation type="Focus" condition="$EXP[Bald_ReduceMotion]" reversible="false">
+							<effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" />
+						</animation>
+					</control>
+				</control>
+			</focusedlayout>
+		</definition>
+	</include>
+
+	<!-- Detail pane: heading and note for the focused category; the window's rows go in as nested content. -->
+	<include name="Bald_SettingsDetail">
+		<param name="heading" />
+		<param name="note" />
+		<!-- Kodi's System info window fills its heading label by id (40). -->
+		<param name="heading_id">0</param>
+		<definition>
+			<control type="group">
+				<include>Bald_AnimSettingsWindow</include>
+				<left>686</left>
+				<top>192</top>
+				<width>1138</width>
+				<height>736</height>
+				<control type="label" id="$PARAM[heading_id]">
+					<width>1138</width>
+					<height>62</height>
+					<aligny>center</aligny>
+					<font>Bald_CaptionTitle</font>
+					<textcolor>bald_ink</textcolor>
+					<label>$PARAM[heading]</label>
+				</control>
+				<include content="Bald_MenuNote">
+					<param name="text">$PARAM[note]</param>
+					<param name="x">0</param>
+					<param name="y">78</param>
+					<param name="width">720</param>
+				</include>
+				<nested />
+			</control>
+		</definition>
+	</include>
+
+	<!-- Body of a detail-pane row list: <control type="grouplist" id="..."> + this + rows. Eight 56 px rows with 6 px
+	     gaps fit above the hint line; longer lists scroll. 6 px wider than the rows, which slide 6 px on focus. -->
+	<include name="Bald_SettingsRows">
+		<param name="left" />
+		<definition>
+			<top>216</top>
+			<width>726</width>
+			<height>520</height>
+			<orientation>vertical</orientation>
+			<itemgap>6</itemgap>
+			<scrolltime tween="cubic" easing="out">320</scrolltime>
+			<usecontrolcoords>true</usecontrolcoords>
+			<onleft>$PARAM[left]</onleft>
+		</definition>
+	</include>
+
+	<!-- The widget editor's Style value (1116): the selected row's style field, empty meaning fanart. -->
+	<variable name="Bald_WidgetStyleLabel">
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(style),thumbnail)">$LOCALIZE[31721]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(style),logo)">$LOCALIZE[31722]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(style),poster)">$LOCALIZE[31723]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(style),square)">$LOCALIZE[31729]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(style),text)">$LOCALIZE[31728]</value>
+		<value>$LOCALIZE[31720]</value>
+	</variable>
+	<!-- The widget editor's Sort by and Order values (1116): the selected row's sortby / sortorder, empty meaning the
+	     path's own order and Kodi's ascending. -->
+	<variable name="Bald_WidgetSortLabel">
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),title)">$LOCALIZE[556]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),year)">$LOCALIZE[562]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),rating)">$LOCALIZE[563]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),dateadded)">$LOCALIZE[570]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),lastplayed)">$LOCALIZE[568]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),playcount)">$LOCALIZE[567]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),time)">$LOCALIZE[180]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortby),random)">$LOCALIZE[590]</value>
+		<value condition="!String.IsEmpty(Container(9100).ListItem.Property(sortby))">$INFO[Container(9100).ListItem.Property(sortby)]</value>
+		<value>$LOCALIZE[571]</value>
+	</variable>
+	<variable name="Bald_WidgetOrderLabel">
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(sortorder),descending)">$LOCALIZE[585]</value>
+		<value>$LOCALIZE[584]</value>
+	</variable>
+	<!-- The widget editor's selected row is a weather row (Choose content > Weather, Includes_Bald_Weather.xml): it has
+	     no path to limit or sort and a fixed style, so those rows of the editor hide, and the note describes the row
+	     instead of showing its path. -->
+	<expression name="Bald_WidgetIsWeather">[String.StartsWith(Container(9100).ListItem.Property(path),weather://)]</expression>
+	<variable name="Bald_WidgetNote">
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(path),weather://daily)">$LOCALIZE[31452]</value>
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(path),weather://hourly)">$LOCALIZE[31453]</value>
+		<value>$INFO[Container(9100).ListItem.Property(path)]</value>
+	</variable>
+	<!-- The widget editor's Clearlogo on artwork value (1116): the selected row's logo field, empty meaning on. -->
+	<variable name="Bald_WidgetLogoLabel">
+		<value condition="String.IsEqual(Container(9100).ListItem.Property(logo),off)">$LOCALIZE[31725]</value>
+		<value>$LOCALIZE[31724]</value>
+	</variable>
+
+	<!-- ============ Home Screens (1117): the hubs ============ -->
+	<!-- One sidebar entry per hub slot: the hub at position n (0-7) of the live hubs list 9390, shown while it exists.
+	     Its properties carry what the detail rows act on: the Skin Variables url of that entry, its open target path
+	     and its "disabled" field. The ids 10-17 keep hub entries apart from Home (1), Live TV (2) and Add hub (3). -->
+	<!-- Home Screens' Live TV entry where Home's menu places it: before hub `after` (0-based) when Bald.LiveTVAfter is
+	     that many and the hub exists; else the item after the hubs (Custom_1117, Bald_LiveTVAtEnd). -->
+	<include name="Bald_LiveTVCategory">
+		<param name="after" />
+		<definition>
+			<item id="2$PARAM[after]">
+				<label>$LOCALIZE[31700]</label>
+				<property name="kind">livetv</property>
+				<property name="note">$LOCALIZE[31205]</property>
+				<visible>String.IsEqual(Skin.String(Bald.LiveTVAfter),$PARAM[after]) + Integer.IsGreater(Container(9390).NumItems,$PARAM[after]) + $EXP[Bald_HasHubs]</visible>
+			</item>
+		</definition>
+	</include>
+	<!-- Home Screens' selected entry is one with rows (Home, a hub, Live TV), or one whose background image is set here
+	     (Home, Live TV, Search, Settings, Power: Bald.Art.<kind>; a hub keeps its own in its "image" field). -->
+	<expression name="Bald_ScreenCategorySelected">[String.IsEqual(Container(9300).ListItem.Property(kind),home) | String.IsEqual(Container(9300).ListItem.Property(kind),livetv) | $EXP[Bald_HubCategorySelected]]</expression>
+	<expression name="Bald_ArtKindSelected">[String.IsEqual(Container(9300).ListItem.Property(kind),home) | String.IsEqual(Container(9300).ListItem.Property(kind),livetv) | String.IsEqual(Container(9300).ListItem.Property(kind),search) | String.IsEqual(Container(9300).ListItem.Property(kind),settings) | String.IsEqual(Container(9300).ListItem.Property(kind),power)]</expression>
+	<expression name="Bald_ScreenArtSet">[[$EXP[Bald_HubCategorySelected] + !String.IsEmpty(Container(9300).ListItem.Property(image))] | [String.IsEqual(Container(9300).ListItem.Property(kind),home) + !String.IsEmpty(Skin.String(Bald.Art.home))] | [String.IsEqual(Container(9300).ListItem.Property(kind),livetv) + !String.IsEmpty(Skin.String(Bald.Art.livetv))] | [String.IsEqual(Container(9300).ListItem.Property(kind),search) + !String.IsEmpty(Skin.String(Bald.Art.search))] | [String.IsEqual(Container(9300).ListItem.Property(kind),settings) + !String.IsEmpty(Skin.String(Bald.Art.settings))] | [String.IsEqual(Container(9300).ListItem.Property(kind),power) + !String.IsEmpty(Skin.String(Bald.Art.power))]]</expression>
+	<variable name="Bald_ScreenArtImage">
+		<value condition="$EXP[Bald_HubCategorySelected] + !String.IsEmpty(Container(9300).ListItem.Property(image))">$INFO[Container(9300).ListItem.Property(image)]</value>
+		<value condition="String.IsEqual(Container(9300).ListItem.Property(kind),home) + !String.IsEmpty(Skin.String(Bald.Art.home))">$INFO[Skin.String(Bald.Art.home)]</value>
+		<value condition="String.IsEqual(Container(9300).ListItem.Property(kind),livetv) + !String.IsEmpty(Skin.String(Bald.Art.livetv))">$INFO[Skin.String(Bald.Art.livetv)]</value>
+		<value condition="String.IsEqual(Container(9300).ListItem.Property(kind),search) + !String.IsEmpty(Skin.String(Bald.Art.search))">$INFO[Skin.String(Bald.Art.search)]</value>
+		<value condition="String.IsEqual(Container(9300).ListItem.Property(kind),settings) + !String.IsEmpty(Skin.String(Bald.Art.settings))">$INFO[Skin.String(Bald.Art.settings)]</value>
+		<value condition="String.IsEqual(Container(9300).ListItem.Property(kind),power) + !String.IsEmpty(Skin.String(Bald.Art.power))">$INFO[Skin.String(Bald.Art.power)]</value>
+	</variable>
+	<!-- The row's value: whether an image is chosen (the picture itself shows beside the rows, Custom_1117). -->
+	<variable name="Bald_ScreenArtLabel">
+		<value condition="$EXP[Bald_ScreenArtSet]">$LOCALIZE[31786]</value>
+		<value>$LOCALIZE[231]</value>
+	</variable>
+	<!-- Live TV comes after every hub: unset, or moved past the last hub there is. -->
+	<expression name="Bald_LiveTVAtEnd">[String.IsEmpty(Skin.String(Bald.LiveTVAfter)) | [String.IsEqual(Skin.String(Bald.LiveTVAfter),0) + !Integer.IsGreater(Container(9390).NumItems,0)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),1) + !Integer.IsGreater(Container(9390).NumItems,1)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),2) + !Integer.IsGreater(Container(9390).NumItems,2)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),3) + !Integer.IsGreater(Container(9390).NumItems,3)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),4) + !Integer.IsGreater(Container(9390).NumItems,4)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),5) + !Integer.IsGreater(Container(9390).NumItems,5)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),6) + !Integer.IsGreater(Container(9390).NumItems,6)] | [String.IsEqual(Skin.String(Bald.LiveTVAfter),7) + !Integer.IsGreater(Container(9390).NumItems,7)] | !$EXP[Bald_HasHubs]]</expression>
+	<!-- Home Screens lists at least one hub (not Skin Variables' empty-list placeholder). -->
+	<expression name="Bald_HasHubs">[Integer.IsGreater(Container(9390).NumItems,0) + String.IsEmpty(Container(9390).ListItemAbsolute(0).Property(blank))]</expression>
+	<include name="Bald_HubCategory">
+		<param name="n" />
+		<definition>
+			<item id="1$PARAM[n]">
+				<label>$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Label]</label>
+				<property name="kind">hub</property>
+				<!-- The entry's index as Skin Variables lists it (its "item" property), not the bare number: Kodi reads a
+				     plain number in a static item's label or property as a string id (2 would be "Music"), and $NUMBER[]
+				     resolves to nothing there. Without it the widget editor opens the hubs list itself as the row list. -->
+				<property name="slot">$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Property(item)]</property>
+				<property name="url">$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Property(url)]</property>
+				<property name="path">$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Property(path)]</property>
+				<property name="disabled">$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Property(disabled)]</property>
+				<property name="image">$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Property(image)]</property>
+				<property name="guid">$INFO[Container(9390).ListItemAbsolute($PARAM[n]).Property(guid)]</property>
+				<property name="note">$LOCALIZE[31204]</property>
+				<visible>Integer.IsGreater(Container(9390).NumItems,$PARAM[n]) + String.IsEmpty(Container(9390).ListItemAbsolute($PARAM[n]).Property(blank))</visible>
+			</item>
+		</definition>
+	</include>
+	<!-- The widget editor's (1116) plugin URL for the focused row. Skin Variables 2.2.4 loses the node when it lists a
+	     nested list: resolving it assigns a tuple to its string-only node setter, which falls back to no node, so each
+	     listed row's own "url" has no node= and an action on it edits the top-level hubs list (it replaced hubs). A
+	     function call with node= in its URL resolves the right list, so a hub's rows are addressed here from the hub's
+	     index (Bald.ConfigureItem) and the row's index (its "item" property). Home's and Live TV's rows are top-level
+	     menus, whose own url is right. -->
+	<variable name="Bald_WidgetItemUrl">
+		<value condition="!String.IsEmpty(Window(home).Property(Bald.ConfigureItem))">plugin://script.skinvariables/?info=get_shortcuts_node&amp;menu=$INFO[Window(home).Property(Bald.ConfigureNode)]&amp;skin=skin.bald&amp;mode=$INFO[Window(home).Property(Bald.ConfigureMode)]&amp;item=$INFO[Container(9100).ListItem.Property(item)]&amp;node=$INFO[Window(home).Property(Bald.ConfigureItem)]</value>
+		<value>$INFO[Container(9100).ListItem.Property(url)]</value>
+	</variable>
+	<!-- Power menu (1131): the focused entry's note, Kodi's own (a "kind") or the user's command. -->
+	<variable name="Bald_PowerEntryNote">
+		<value condition="!String.IsEmpty(Container(9100).ListItem.Property(kind))">$LOCALIZE[31176]</value>
+		<value>$LOCALIZE[31177]</value>
+	</variable>
+	<expression name="Bald_HubCategorySelected">[String.IsEqual(Container(9300).ListItem.Property(kind),hub)]</expression>
+	<!-- Eight hubs fill the eight Home slots (shortcuts/generator/screens.xml). -->
+	<expression name="Bald_HubsFull">[Integer.IsGreater(Container(9390).NumItems,7)]</expression>
+	<!-- The selected hub is not the last one (Move down). -->
+	<expression name="Bald_HubHasNext">[[String.IsEqual(Container(9300).ListItem.Property(slot),0) + Integer.IsGreater(Container(9390).NumItems,1)] | [String.IsEqual(Container(9300).ListItem.Property(slot),1) + Integer.IsGreater(Container(9390).NumItems,2)] | [String.IsEqual(Container(9300).ListItem.Property(slot),2) + Integer.IsGreater(Container(9390).NumItems,3)] | [String.IsEqual(Container(9300).ListItem.Property(slot),3) + Integer.IsGreater(Container(9390).NumItems,4)] | [String.IsEqual(Container(9300).ListItem.Property(slot),4) + Integer.IsGreater(Container(9390).NumItems,5)] | [String.IsEqual(Container(9300).ListItem.Property(slot),5) + Integer.IsGreater(Container(9390).NumItems,6)] | [String.IsEqual(Container(9300).ListItem.Property(slot),6) + Integer.IsGreater(Container(9390).NumItems,7)]]</expression>
+	<variable name="Bald_HubTargetLabel">
+		<value condition="!String.IsEmpty(Container(9300).ListItem.Property(path))">$INFO[Container(9300).ListItem.Property(path)]</value>
+		<value>$LOCALIZE[231]</value>
+	</variable>
+	<!-- Add hub: Skin Variables' browser over grouping://hubs/ (shortcuts/skinvariables-shortcut-config.json: video and
+	     music library nodes, Bald playlists, add-ons, channel groups, and the builtins Favourites, Pictures, Programs,
+	     Add-ons, Weather and Radio) picks what the hub opens and names the hub after it. With hubs, do_new appends after position 98 (Python's insert past the end appends);
+	     with none, the list holds only Skin Variables' placeholder, and do_choose on item 0 fills it rather than adding
+	     a second entry. -->
+	<include name="Bald_AddHubActions">
+		<onclick condition="!String.IsEmpty(Container(9390).ListItemAbsolute(0).Property(blank))">SetProperty(Bald.WidgetsDirty,1,home)</onclick><onclick condition="!String.IsEmpty(Container(9390).ListItemAbsolute(0).Property(blank))">RunPlugin(plugin://script.skinvariables/?info=get_shortcuts_node&amp;menu=hubs&amp;skin=skin.bald&amp;mode=submenu&amp;item=0&amp;func=do_choose&amp;&amp;grouping::grouping://hubs/&amp;&amp;use_rawpath::True)</onclick>
+		<onclick condition="String.IsEmpty(Container(9390).ListItemAbsolute(0).Property(blank)) + !$EXP[Bald_HubsFull]">SetProperty(Bald.WidgetsDirty,1,home)</onclick><onclick condition="String.IsEmpty(Container(9390).ListItemAbsolute(0).Property(blank)) + !$EXP[Bald_HubsFull]">RunPlugin(plugin://script.skinvariables/?info=get_shortcuts_node&amp;menu=hubs&amp;skin=skin.bald&amp;mode=submenu&amp;item=98&amp;func=do_new&amp;&amp;grouping::grouping://hubs/&amp;&amp;use_rawpath::True)</onclick>
+	</include>
+
+	<!-- The widget editor (1116) and Home Screens (1117): every Skin Variables action marks the rows changed
+	     (Bald.WidgetsDirty on Home, set before the action's RunPlugin), and closing the window stamps
+	     Bald.WidgetsStamp only then, so Home rebuilds (and Skin Variables reloads the skin) only after a change. -->
+	<include name="Bald_StampWidgetsOnUnload">
+		<onunload condition="!String.IsEmpty(Window(home).Property(Bald.WidgetsDirty))">Skin.SetString(Bald.WidgetsStamp,$INFO[System.Date(yyyy-mm-dd)]_$INFO[System.Time(hh:mm:ss)])</onunload>
+		<onunload>ClearProperty(Bald.WidgetsDirty,home)</onunload>
+		<!-- The rows may have changed: Home starts fresh instead of returning to the row it was left on. -->
+		<onunload>ClearProperty(Bald.Left,home)</onunload>
+	</include>
+
+	<!-- Appearance > Typography (1118): the current fontset (Skin.Font is lookandfeel.font, a Font.xml fontset id). -->
+	<!-- Appearance > Information: how list views name a title with a different original title (ListLabelVar). -->
+	<variable name="Bald_OriginalTitleLabel">
+		<value condition="String.IsEqual(Skin.String(Bald.OriginalTitle),original)">$LOCALIZE[31049]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.OriginalTitle),originalfirst)">$LOCALIZE[31050]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.OriginalTitle),localisedfirst)">$LOCALIZE[31051]</value>
+		<value>$LOCALIZE[571]</value>
+	</variable>
+	<!-- Appearance > Artwork image packs: the chosen pack's name, or what shows without one. -->
+	<variable name="Bald_GenreFanartName">
+		<value condition="!String.IsEmpty(Skin.String(Bald.GenreFanart.path))">$INFO[Skin.String(Bald.GenreFanart.name)]</value>
+		<value>$LOCALIZE[231]</value>
+	</variable>
+	<variable name="Bald_WeatherFanartName">
+		<value condition="!String.IsEmpty(Skin.String(Bald.WeatherFanart.path))">$INFO[Skin.String(Bald.WeatherFanart.name)]</value>
+		<value>$LOCALIZE[231]</value>
+	</variable>
+	<!-- Without a chosen pack the weather icons are Bald's own (media/bald/weather, WeatherOutlookIconPrefixVar); the
+	     picker's Default entry returns to them. -->
+	<variable name="Bald_WeatherIconsName">
+		<value condition="!String.IsEmpty(Skin.String(Bald.WeatherIcons.path))">$INFO[Skin.String(Bald.WeatherIcons.name)]</value>
+		<value>$LOCALIZE[31433]</value>
+	</variable>
+	<variable name="Bald_FontName">
+		<value condition="String.IsEqual(Skin.Font,InstrumentSans)">$LOCALIZE[31940]</value>
+		<value condition="String.IsEqual(Skin.Font,Arial)">$LOCALIZE[31415]</value>
+		<value>$LOCALIZE[31941]</value>
+	</variable>
+	<!-- Typography, text size (9638): Skin.String(Bald.TextSize) is Kodi's lookandfeel.skinzoom, kept in step by the
+	     font and text size script and Bald Helper; a zoom set in Kodi's own settings shows as its number. -->
+	<variable name="Bald_TextSizeLabel">
+		<value condition="String.IsEqual(Skin.String(Bald.TextSize),4)">$LOCALIZE[31431]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.TextSize),8)">$LOCALIZE[31432]</value>
+		<value condition="!String.IsEmpty(Skin.String(Bald.TextSize)) + !String.IsEqual(Skin.String(Bald.TextSize),0)">$INFO[Skin.String(Bald.TextSize),, %]</value>
+		<value>$LOCALIZE[571]</value>
+	</variable>
+
+	<!-- One settings row (button or radiobutton), in the Home menu's focus language: unfocused at 50%, focused full ink
+	     with the accent dot, sliding 6 px right. A radiobutton's state is a dot at the right: accent on, dim off. -->
+	<include name="Bald_ConfigureButton">
+		<param name="width">720</param>
+		<definition>
+			<include content="Bald_SettingsRowStyle"><param name="width">$PARAM[width]</param></include>
+			<radiowidth>12</radiowidth>
+			<radioheight>12</radioheight>
+			<textureradioonfocus colordiffuse="bald_accent">bald/dot.png</textureradioonfocus>
+			<textureradioonnofocus colordiffuse="bald_accent">bald/dot.png</textureradioonnofocus>
+			<textureradioofffocus colordiffuse="bald_ink34">bald/dot.png</textureradioofffocus>
+			<textureradiooffnofocus colordiffuse="bald_ink28">bald/dot.png</textureradiooffnofocus>
+			<textureradioondisabled colordiffuse="bald_ink28">bald/dot.png</textureradioondisabled>
+			<textureradiooffdisabled colordiffuse="bald_ink10">bald/dot.png</textureradiooffdisabled>
+		</definition>
+	</include>
+
+	<!-- The row look alone, without the radio state dots: for a radiobutton whose state means nothing (the settings
+	     level button), which then sets its radio textures empty itself. -->
+	<include name="Bald_SettingsRowStyle">
+		<param name="width">720</param>
+		<definition>
+			<width>$PARAM[width]</width>
+			<height>56</height>
+			<font>Bald_Section</font>
+			<textoffsetx>26</textoffsetx>
+			<aligny>center</aligny>
+			<textcolor>bald_ink45</textcolor>
+			<focusedcolor>bald_ink</focusedcolor>
+			<disabledcolor>bald_ink28</disabledcolor>
+			<!-- menu_dot.png is 440 x 56 with the dot in its first 10 px: the left border keeps it round at any width. -->
+			<texturefocus border="12,0,0,0" colordiffuse="bald_accent">bald/menu_dot.png</texturefocus>
+			<texturenofocus />
+			<animation type="Focus" condition="$EXP[Bald_FullMotion]" reversible="false">
+				<effect type="fade" start="50" end="100" time="240" tween="sine" easing="inout" />
+				<effect type="slide" start="0,0" end="6,0" time="320" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Focus" condition="$EXP[Bald_ReduceMotion]" reversible="false">
+				<effect type="fade" start="50" end="100" time="240" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Unfocus" condition="$EXP[Bald_FullMotion]">
+				<effect type="slide" start="6,0" end="0,0" time="320" tween="cubic" easing="out" />
+			</animation>
+		</definition>
+	</include>
+
+	<!-- ============ Settings level ============
+	     Bald's own settings mirror Kodi's settings levels: Basic, Standard, Advanced and Expert, chosen with the level
+	     button under each Bald settings sidebar (Bald_SettingsLevel) and kept in Skin.String(Bald.SettingsLevel), whose
+	     unset value is Standard. Every row declares its level (Bald_ConfigureRow, Bald_SettingRow) and shows while the
+	     chosen level is at least that; a category whose rows all sit above the chosen level hides with them.
+	       basic     what every user touches: editing Home's screens and rows, blurred backgrounds, show ratings, font,
+	                 background video
+	       standard  common customisation: artwork and information options, rating sources, OSD details and panels
+	       advanced  tuning: blur strength and brightness, dims and shading, delays, spoiler details, rating placement
+	       expert    diagnostics and obscure switches: rating provider keys, default rating source, hint reset,
+	                 preloading Home -->
+	<expression name="Bald_SettingsLevel_basic">[true]</expression>
+	<expression name="Bald_SettingsLevel_standard">[!Skin.String(Bald.SettingsLevel,basic)]</expression>
+	<expression name="Bald_SettingsLevel_advanced">[Skin.String(Bald.SettingsLevel,advanced) | Skin.String(Bald.SettingsLevel,expert)]</expression>
+	<expression name="Bald_SettingsLevel_expert">[Skin.String(Bald.SettingsLevel,expert)]</expression>
+	<variable name="Bald_SettingsLevelLabel">
+		<value condition="Skin.String(Bald.SettingsLevel,basic)">$LOCALIZE[10036]</value>
+		<value condition="Skin.String(Bald.SettingsLevel,advanced)">$LOCALIZE[10038]</value>
+		<value condition="Skin.String(Bald.SettingsLevel,expert)">$LOCALIZE[10039]</value>
+		<value>$LOCALIZE[10037]</value>
+	</variable>
+
+	<!-- The level button under the sidebar, with its caption: Kodi's settings pages (SettingsCategory 20, whose label
+	     and click Kodi supplies as nested content) and Bald's own settings windows (id 9090, with Bald_SettingsLevelCycle).
+	     Kodi's control 20 must be a radiobutton (<type>); its radio state means nothing and is drawn empty. Up returns
+	     to the sidebar <up>, Right enters the rows <right>. -->
+	<include name="Bald_SettingsLevel">
+		<param name="id">9090</param>
+		<param name="type">button</param>
+		<param name="up" />
+		<param name="right" />
+		<param name="down">noop</param>
+		<definition>
+			<control type="label">
+				<include>Bald_AnimSettingsWindow</include>
+				<left>122</left>
+				<top>908</top>
+				<width>372</width>
+				<height>24</height>
+				<aligny>center</aligny>
+				<font>Bald_Hint</font>
+				<textcolor>bald_ink45</textcolor>
+				<label>$LOCALIZE[31950]</label>
+			</control>
+			<control type="$PARAM[type]" id="$PARAM[id]">
+				<include>Bald_AnimSettingsWindow</include>
+				<description>settings level</description>
+				<left>Bald_SafeLeft</left>
+				<top>938</top>
+				<include content="Bald_SettingsRowStyle"><param name="width">398</param></include>
+				<textureradioonfocus />
+				<textureradioonnofocus />
+				<textureradioofffocus />
+				<textureradiooffnofocus />
+				<textureradioondisabled />
+				<textureradiooffdisabled />
+				<onup>$PARAM[up]</onup>
+				<onright>$PARAM[right]</onright>
+				<ondown>$PARAM[down]</ondown>
+				<onleft>noop</onleft>
+				<nested />
+			</control>
+		</definition>
+	</include>
+	<!-- Bald's level button: shows the level and cycles Basic, Standard (unset), Advanced, Expert, back to Basic. An
+	     unknown value goes back to Standard. Kodi decides every condition before it runs the actions, so one click
+	     moves one step. -->
+	<include name="Bald_SettingsLevelCycle">
+		<label>$VAR[Bald_SettingsLevelLabel]</label>
+		<onclick condition="String.IsEmpty(Skin.String(Bald.SettingsLevel))">Skin.SetString(Bald.SettingsLevel,advanced)</onclick>
+		<onclick condition="Skin.String(Bald.SettingsLevel,advanced)">Skin.SetString(Bald.SettingsLevel,expert)</onclick>
+		<onclick condition="Skin.String(Bald.SettingsLevel,expert)">Skin.SetString(Bald.SettingsLevel,basic)</onclick>
+		<onclick condition="!String.IsEmpty(Skin.String(Bald.SettingsLevel)) + !Skin.String(Bald.SettingsLevel,advanced) + !Skin.String(Bald.SettingsLevel,expert)">Skin.Reset(Bald.SettingsLevel)</onclick>
+	</include>
+	<!-- A Bald settings window's level button (9090) under sidebar list <list>, Right to the row grouplist <right>. -->
+	<include name="Bald_SettingsLevelButton">
+		<param name="list" />
+		<param name="right" />
+		<definition>
+			<include content="Bald_SettingsLevel">
+				<param name="up">$PARAM[list]</param>
+				<param name="right">$PARAM[right]</param>
+				<include>Bald_SettingsLevelCycle</include>
+			</include>
+		</definition>
+	</include>
+
+	<!-- A settings row of level <level> (basic, standard, advanced or expert): hidden while the chosen settings level is
+	     lower. Grouplists collapse hidden rows, so focus never lands on one. -->
+	<include name="Bald_ConfigureRow">
+		<param name="level" />
+		<param name="width">720</param>
+		<definition>
+			<include content="Bald_ConfigureButton"><param name="width">$PARAM[width]</param></include>
+			<visible>$EXP[Bald_SettingsLevel_$PARAM[level]]</visible>
+		</definition>
+	</include>
+
+	<!-- A row that belongs to one category: shown while category item <item> of list <list> is selected and the settings
+	     level reaches <level>. Rows are matched by the static item's id, never its label, so translated labels keep
+	     working. A further <visible> on the control is ANDed with this one. -->
+	<include name="Bald_SettingRow">
+		<param name="list" />
+		<param name="item" />
+		<param name="level" />
+		<param name="width">720</param>
+		<definition>
+			<include content="Bald_ConfigureRow"><param name="level">$PARAM[level]</param><param name="width">$PARAM[width]</param></include>
+			<visible>Container($PARAM[list]).HasFocus($PARAM[item])</visible>
+		</definition>
+	</include>
+
+	<!-- Appearance, Behavior, row 9628: why "Open TV shows on their info page" is not a switch yet. -->
+	<variable name="Bald_HelperNote">
+		<value condition="!System.HasAddon(script.bald.helper)">$LOCALIZE[31849]</value>
+		<value>$LOCALIZE[31866]</value>
+	</variable>
+
+	<!-- Estuary's image-pack picker actions for an Appearance button: run script.image.resource.select for skin string
+	     <property> and resource type <type>, enabling or installing the script first when needed. -->
+	<include name="Bald_ImageResourceActions">
+		<param name="property" />
+		<param name="type" />
+		<definition>
+			<onclick condition="System.AddonIsEnabled(script.image.resource.select)">RunScript(script.image.resource.select,property=$PARAM[property]&amp;type=$PARAM[type])</onclick>
+			<onclick condition="System.HasAddon(script.image.resource.select) + !System.AddonIsEnabled(script.image.resource.select)">EnableAddon(script.image.resource.select)</onclick>
+			<onclick condition="!System.HasAddon(script.image.resource.select)">InstallAddon(script.image.resource.select)</onclick>
+		</definition>
+	</include>
+
+	<!-- Footer hints, sentence case, on the y 954 line and right-aligned to x 1824 (1224 + 600). -->
+	<include name="Bald_SettingsHints">
+		<param name="first" />
+		<param name="second" />
+		<definition>
+			<control type="group">
+				<include>Bald_AnimSettingsWindow</include>
+				<left>1224</left>
+				<top>Bald_HintTop</top>
+				<include content="Bald_InfoHintPair">
+					<param name="first">$PARAM[first]</param>
+					<param name="second">$PARAM[second]</param>
+					<param name="width">600</param>
+				</include>
+			</control>
+		</definition>
+	</include>
+
+	<!-- The detail pane's Open button, for pages whose categories are actions: Select sends a click to list <list>. -->
+	<include name="Bald_SettingsOpen">
+		<param name="list" />
+		<param name="id">9001</param>
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<include>Bald_ConfigureButton</include>
+				<top>216</top>
+				<label>$LOCALIZE[502]</label>
+				<onleft>$PARAM[list]</onleft>
+				<onclick>SetFocus($PARAM[list])</onclick>
+				<onclick>Action(Select)</onclick>
+			</control>
+		</definition>
+	</include>
+
+	<!-- ============ Kodi's own settings windows ============
+	     SettingsCategory.xml (every core settings page), SettingsSystemInfo.xml and SettingsProfile.xml draw the same
+	     frame and sidebar. Kodi builds their category and setting rows by cloning template controls, so the styling
+	     lives on the templates below; ids and actions stay in the windows. -->
+
+	<!-- Body of a sidebar category button (SettingsCategory template 10, System info sections 94-101): a category row in
+	     the scaffold's list language, Bald_MenuItem at 34%, full ink with the accent dot on focus. 56 px buttons with a
+	     6 px gap keep the list's 62 px pitch. While focus is in the settings, Kodi keeps the current category button
+	     focused at half alpha (CGUIDialogSettingsBase::DoProcess), which is the scaffold's dimmed dot. There is no slide:
+	     Kodi re-focuses that button every time focus leaves it, and a slide would jump back and forth. -->
+	<include name="Bald_SettingsCategoryButton">
+		<definition>
+			<left>0</left>
+			<width>494</width>
+			<height>56</height>
+			<font>Bald_SettingsCategory</font>
+			<textoffsetx>26</textoffsetx>
+			<aligny>center</aligny>
+			<textcolor>bald_ink34</textcolor>
+			<focusedcolor>bald_ink</focusedcolor>
+			<disabledcolor>bald_ink10</disabledcolor>
+			<texturefocus border="12,0,0,0" colordiffuse="bald_accent">bald/menu_dot.png</texturefocus>
+			<texturenofocus />
+			<animation type="Focus" reversible="false">
+				<effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+
+	<!-- Body of the sidebar grouplist that holds category buttons (SettingsCategory 3, System info 9000). -->
+	<include name="Bald_SettingsCategoryGroup">
+		<param name="height">682</param>
+		<definition>
+			<include>Bald_AnimSettingsWindow</include>
+			<left>Bald_SafeLeft</left>
+			<top>192</top>
+			<width>494</width>
+			<height>$PARAM[height]</height>
+			<orientation>vertical</orientation>
+			<itemgap>6</itemgap>
+			<scrolltime tween="cubic" easing="out">320</scrolltime>
+		</definition>
+	</include>
+
+	<!-- Body of a setting template: the scaffold's row (Bald_ConfigureButton) at the settings pane's width. Kodi gives
+	     every clone the grouplist's width, and its value (label2, a spinner's or slider's value) sits right-aligned
+	     26 px in from the row's end. An invalid value is drawn in the accent. -->
+	<include name="Bald_SettingsTemplate">
+		<definition>
+			<include content="Bald_ConfigureButton"><param name="width">1106</param></include>
+			<invalidcolor>bald_accent</invalidcolor>
+		</definition>
+	</include>
+
+	<!-- Spinner (template 9): chevrons either side of the value, dim until the row is focused. Kodi draws the "down"
+	     texture on the left and "up" on the right; the left chevron is the right one flipped. -->
+	<include name="Bald_SettingsSpinner">
+		<definition>
+			<include>Bald_SettingsTemplate</include>
+			<spinwidth>16</spinwidth>
+			<spinheight>16</spinheight>
+			<textureup colordiffuse="bald_ink28">bald/chevron.png</textureup>
+			<textureupfocus colordiffuse="bald_ink">bald/chevron.png</textureupfocus>
+			<textureupdisabled colordiffuse="bald_ink10">bald/chevron.png</textureupdisabled>
+			<texturedown flipx="true" colordiffuse="bald_ink28">bald/chevron.png</texturedown>
+			<texturedownfocus flipx="true" colordiffuse="bald_ink">bald/chevron.png</texturedownfocus>
+			<texturedowndisabled flipx="true" colordiffuse="bald_ink10">bald/chevron.png</texturedowndisabled>
+		</definition>
+	</include>
+
+	<!-- Slider (template 13): a 4 px track with a 16 px nib, 240 px wide at the row's end, the value to its left. The
+	     track texture is 16 px tall so Kodi draws the nib at its own size (it scales the nib by the control height over
+	     the track texture's height). -->
+	<include name="Bald_SettingsSlider">
+		<definition>
+			<include>Bald_SettingsTemplate</include>
+			<sliderwidth>240</sliderwidth>
+			<sliderheight>16</sliderheight>
+			<texturesliderbar border="8,0,8,0" colordiffuse="bald_ink28">bald/slider_bar.png</texturesliderbar>
+			<texturesliderbardisabled border="8,0,8,0" colordiffuse="bald_ink10">bald/slider_bar.png</texturesliderbardisabled>
+			<textureslidernib colordiffuse="bald_ink60">bald/slider_nib.png</textureslidernib>
+			<textureslidernibfocus colordiffuse="bald_accent">bald/slider_nib.png</textureslidernibfocus>
+			<textureslidernibdisabled colordiffuse="bald_ink28">bald/slider_nib.png</textureslidernibdisabled>
+		</definition>
+	</include>
+
+	<!-- Colour button (template 15): the chosen colour as a 20 px dot 26 px in from the row's end, like a value. Kodi
+	     would put it flush right, where the 6 px focus slide would clip it; 1060 = 1106 - 26 - 20. -->
+	<include name="Bald_SettingsColorButton">
+		<definition>
+			<include>Bald_SettingsTemplate</include>
+			<colorposx>1060</colorposx>
+			<colorwidth>20</colorwidth>
+			<colorheight>20</colorheight>
+			<texturecolormask>bald/dot.png</texturecolormask>
+			<texturecolordisabledmask colordiffuse="bald_ink28">bald/dot.png</texturecolordisabledmask>
+		</definition>
+	</include>
+
+	<!-- Group title (template 14): a small section label over its group's rows, aligned with the row text. Labels
+	     have no bottom alignment in Kodi ("bottom" reads as top), so the text is pushed down with textoffsety. -->
+	<include name="Bald_SettingsGroupTitle">
+		<definition>
+			<width>1106</width>
+			<height>56</height>
+			<textoffsetx>26</textoffsetx>
+			<textoffsety>24</textoffsety>
+			<align>left</align>
+			<aligny>top</aligny>
+			<font>Bald_RowLabel</font>
+			<textcolor>bald_ink60</textcolor>
+			<label />
+		</definition>
+	</include>
+
+	<!-- Separator (template 11): a hairline between groups. -->
+	<include name="Bald_SettingsSeparator">
+		<definition>
+			<height>1</height>
+			<texture colordiffuse="bald_ink10">bald/white.png</texture>
+		</definition>
+	</include>
+
+	<!-- Thin page indicator for a settings grouplist (its pagecontrol), on the right safe edge. Not a focus target. -->
+	<include name="Bald_SettingsScrollbar">
+		<param name="top">192</param>
+		<param name="height">628</param>
+		<definition>
+			<include>Bald_AnimSettingsWindow</include>
+			<left>1820</left>
+			<top>$PARAM[top]</top>
+			<width>4</width>
+			<height>$PARAM[height]</height>
+			<orientation>vertical</orientation>
+			<showonepage>false</showonepage>
+			<texturesliderbackground colordiffuse="bald_ink10">bald/white.png</texturesliderbackground>
+			<texturesliderbar colordiffuse="bald_ink34">bald/white.png</texturesliderbar>
+			<texturesliderbarfocus colordiffuse="bald_ink">bald/white.png</texturesliderbarfocus>
+			<textureslidernib />
+			<textureslidernibfocus />
+			<animation type="Visible">
+				<effect type="fade" start="0" end="100" time="240" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Hidden">
+				<effect type="fade" start="100" end="0" time="240" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+
+	<!-- Help text for the focused category or setting (SettingsCategory 6), under the rows and above the hint line. -->
+	<include name="Bald_SettingsHelp">
+		<definition>
+			<include>Bald_AnimSettingsWindow</include>
+			<left>686</left>
+			<top>846</top>
+			<width>900</width>
+			<height>84</height>
+			<font>Bald_MenuNote</font>
+			<textcolor>bald_ink60</textcolor>
+			<autoscroll time="3000" delay="5000" repeat="5000">true</autoscroll>
+		</definition>
+	</include>
+
+	<!-- One row of Kodi's profile list (SettingsProfile 2): round avatar, name and last login, and a check on the profile
+	     in use (Kodi marks it selected). The last item is Kodi's "Add profile...", which has no avatar or date. Unfocused
+	     rows use <color> (45%); the focused row is full ink with the accent dot and fades in like a scaffold row. -->
+	<include name="Bald_SettingsProfileItem">
+		<param name="color">bald_ink45</param>
+		<param name="focused">false</param>
+		<definition>
+			<control type="group">
+				<animation type="Conditional" condition="$PARAM[focused] + !Control.HasFocus(2)">
+					<effect type="fade" start="100" end="55" time="240" tween="sine" easing="inout" />
+				</animation>
+				<control type="image">
+					<top>31</top>
+					<width>10</width>
+					<height>10</height>
+					<texture colordiffuse="bald_accent">bald/dot.png</texture>
+					<visible>$PARAM[focused]</visible>
+				</control>
+				<control type="group">
+					<animation type="Focus" reversible="false" condition="[$PARAM[focused]] + $EXP[Bald_FullMotion]">
+						<effect type="fade" start="50" end="100" time="240" tween="sine" easing="inout" />
+						<effect type="slide" start="-6,0" end="0,0" time="320" tween="cubic" easing="out" />
+					</animation>
+					<animation type="Focus" reversible="false" condition="[$PARAM[focused]] + $EXP[Bald_ReduceMotion]">
+						<effect type="fade" start="50" end="100" time="240" tween="sine" easing="inout" />
+					</animation>
+					<control type="image">
+						<left>26</left>
+						<top>12</top>
+						<width>48</width>
+						<height>48</height>
+						<aspectratio>scale</aspectratio>
+						<texture diffuse="bald/circle_112.png" fallback="DefaultUser.png">$INFO[ListItem.Icon]</texture>
+						<visible>!String.IsEqual(ListItem.Label,$LOCALIZE[20058])</visible>
+					</control>
+					<control type="label">
+						<left>90</left>
+						<top>10</top>
+						<width>560</width>
+						<height>30</height>
+						<aligny>center</aligny>
+						<font>Bald_Section</font>
+						<textcolor>$PARAM[color]</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<visible>!String.IsEqual(ListItem.Label,$LOCALIZE[20058])</visible>
+					</control>
+					<control type="label">
+						<left>26</left>
+						<width>624</width>
+						<height>72</height>
+						<aligny>center</aligny>
+						<font>Bald_Section</font>
+						<textcolor>$PARAM[color]</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<visible>String.IsEqual(ListItem.Label,$LOCALIZE[20058])</visible>
+					</control>
+					<control type="label">
+						<left>90</left>
+						<top>40</top>
+						<width>560</width>
+						<height>24</height>
+						<aligny>center</aligny>
+						<font>Bald_MenuNote</font>
+						<textcolor>bald_ink45</textcolor>
+						<label>$LOCALIZE[31029]: $INFO[ListItem.Label2]</label>
+						<visible>!String.IsEmpty(ListItem.Label2)</visible>
+					</control>
+					<control type="label">
+						<left>90</left>
+						<top>40</top>
+						<width>560</width>
+						<height>24</height>
+						<aligny>center</aligny>
+						<font>Bald_MenuNote</font>
+						<textcolor>bald_ink45</textcolor>
+						<label>$LOCALIZE[31029]: $LOCALIZE[13170]</label>
+						<visible>String.IsEmpty(ListItem.Label2) + !String.IsEqual(ListItem.Label,$LOCALIZE[20058])</visible>
+					</control>
+					<control type="image">
+						<left>668</left>
+						<top>24</top>
+						<width>24</width>
+						<height>24</height>
+						<texture colordiffuse="bald_accent">bald/check.png</texture>
+						<visible>ListItem.IsSelected</visible>
+					</control>
+				</control>
+			</control>
+		</definition>
+	</include>
+
+	<!-- One of System info's twelve text lines (ids 2-13), which Kodi fills every frame for the focused section. -->
+	<include name="Bald_SystemInfoLine">
+		<param name="id" />
+		<definition>
+			<control type="label" id="$PARAM[id]">
+				<width>1138</width>
+				<height>44</height>
+				<aligny>center</aligny>
+				<font>Bald_InfoPlot</font>
+				<textcolor>bald_ink80</textcolor>
+			</control>
+		</definition>
+	</include>
+
+	<!-- A System info meter in the sidebar: caption, value and a 4 px bar on one 372 px column. -->
+	<include name="Bald_SystemInfoMeter">
+		<param name="caption" />
+		<param name="value" />
+		<param name="info" />
+		<param name="visible">true</param>
+		<definition>
+			<control type="group">
+				<width>372</width>
+				<height>48</height>
+				<visible>$PARAM[visible]</visible>
+				<control type="label">
+					<width>372</width>
+					<height>28</height>
+					<aligny>center</aligny>
+					<font>Bald_DetailLabel</font>
+					<textcolor>bald_ink60</textcolor>
+					<label>$PARAM[caption]</label>
+				</control>
+				<control type="label">
+					<width>372</width>
+					<height>28</height>
+					<align>right</align>
+					<aligny>center</aligny>
+					<font>Bald_DetailLabel</font>
+					<textcolor>bald_ink80</textcolor>
+					<label>$PARAM[value]</label>
+				</control>
+				<control type="progress">
+					<top>34</top>
+					<width>372</width>
+					<height>4</height>
+					<texturebg border="2" colordiffuse="bald_ink10">bald/bar.png</texturebg>
+					<lefttexture />
+					<midtexture border="2" colordiffuse="bald_ink60">bald/bar.png</midtexture>
+					<righttexture />
+					<overlaytexture />
+					<info>$PARAM[info]</info>
+				</control>
+			</control>
+		</definition>
+	</include>
+
+	<!-- Bald Settings home, shared by window 1115 and Kodi's "Configure skin..." (SkinSettings.xml), so both open the
+	     same page with no redirect. -->
+	<include name="Bald_SettingsHome">
+		<include content="Bald_SettingsFrame"><param name="title">$LOCALIZE[31730]</param></include>
+		<control type="list" id="9000">
+			<include content="Bald_SettingsCategories"><param name="id">9000</param><param name="right">9001</param></include>
+			<ondown>9090</ondown>
+			<content>
+				<item>
+					<label>$LOCALIZE[31731]</label>
+					<label2>$LOCALIZE[31732]</label2>
+					<onclick>ActivateWindow(1117)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[480]</label>
+					<label2>$LOCALIZE[31733]</label2>
+					<onclick>ActivateWindow(1118)</onclick>
+				</item>
+				<item>
+					<label>$LOCALIZE[14086]</label>
+					<label2>$LOCALIZE[31649]</label2>
+					<onclick>ActivateWindow(1119)</onclick>
+				</item>
+				<item>
+					<label>CoreELEC</label>
+					<label2>$LOCALIZE[31734]</label2>
+					<onclick>RunAddon(service.coreelec.settings)</onclick>
+					<visible>System.AddonIsEnabled(service.coreelec.settings)</visible>
+				</item>
+				<item>
+					<label>LibreELEC</label>
+					<label2>$LOCALIZE[31735]</label2>
+					<onclick>RunAddon(service.libreelec.settings)</onclick>
+					<visible>System.AddonIsEnabled(service.libreelec.settings)</visible>
+				</item>
+				<item>
+					<label>$LOCALIZE[31736]</label>
+					<label2>$LOCALIZE[31737]</label2>
+					<onclick>ActivateWindow(addonbrowser)</onclick>
+				</item>
+			</content>
+		</control>
+		<include content="Bald_SettingsDetail">
+			<param name="heading">$INFO[Container(9000).ListItem.Label]</param>
+			<param name="note">$INFO[Container(9000).ListItem.Label2]</param>
+			<include content="Bald_SettingsOpen"><param name="list">9000</param></include>
+		</include>
+		<include content="Bald_SettingsLevelButton"><param name="list">9000</param><param name="right">9001</param></include>
+		<include content="Bald_SettingsHints"><param name="first">$VAR[Bald_KeyBack]$LOCALIZE[31738]</param><param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31666]</param></include>
+	</include>
+</includes>

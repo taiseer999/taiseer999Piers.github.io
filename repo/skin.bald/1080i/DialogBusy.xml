@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Busy indicator (CGUIDialogBusy and CGUIDialogBusyNoCancel both load this file). Started from Kodi 22 Estuary's
+     DialogBusy.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). Kodi 22 binds no control ids in either dialog, so
+     Estuary's percentage image (Control.GetLabel(10), a control the window never had) is gone.
+     Bald: a 60% field scrim (none over fullscreen video or games, where it would hide the picture) and a small field
+     capsule with three dots that brighten in turn (Bald_BusyDots). Hidden while CinemaVision runs, during startup and
+     while the player caches, as in Estuary. -->
+<window>
+	<include content="Bald_OverlayOpenClose">
+		<param name="offset" value="0,0" />
+	</include>
+	<controls>
+		<control type="group">
+			<visible>String.IsEmpty(Window(Home).Property(script.cinemavision.running))</visible>
+			<visible>!Window.IsActive(startup) + !Player.Caching</visible>
+			<animation effect="fade" time="240" tween="sine" easing="inout">VisibleChange</animation>
+			<control type="image">
+				<include>FullScreenDimensions</include>
+				<texture colordiffuse="bald_field60">bald/white.png</texture>
+				<visible>!Window.IsVisible(fullscreenvideo) + !Window.IsVisible(FullscreenGame)</visible>
+			</control>
+			<control type="group">
+				<depth>DepthMax</depth>
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>108</width>
+				<height>54</height>
+				<include content="Bald_OverlaySurface">
+					<param name="width" value="108" />
+					<param name="height" value="54" />
+					<param name="texture" value="bald/pill.png" />
+					<param name="border" value="27" />
+				</include>
+				<control type="group">
+					<left>24</left>
+					<top>21</top>
+					<include content="Bald_BusyDots">
+						<param name="size" value="12" />
+						<param name="second" value="24" />
+						<param name="third" value="48" />
+					</include>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

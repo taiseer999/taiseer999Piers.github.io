@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald video OSD, audio: the audio streams (script.skinvariables get_player_streams); Select switches stream
+     (set_player_audiostream). Up from the audio button enters the list, Down or Left or Right leaves it.
+     A companion panel of the video OSD (docs/SPEC.md 5.16, "Video OSD"; Includes_Bald_OSD.xml): VideoOSD opens it when
+     its button (70060) takes focus. The row is repeated with that button real and the others as stand-ins that
+     close this panel and focus the OSD's own button, so Left and Right keep moving along the row. -->
+<window type="dialog" id="1121">
+	<defaultcontrol always="true">70060</defaultcontrol>
+	<zorder>1</zorder>
+	<depth>DepthOSD</depth>
+	<controls>
+		<control type="group">
+			<include>Bald_OSDCompanionHide</include>
+			<include content="Bald_OSDStreamPanel">
+				<param name="id">8110</param>
+				<param name="button">70060</param>
+				<param name="type">audio</param>
+				<param name="method">set_player_audiostream</param>
+				<param name="heading">$LOCALIZE[292]</param>
+			</include>
+			<include content="Bald_OSDCompanionRow">
+				<param name="owner">1121</param>
+				<param name="audio">Panel</param>
+			</include>
+			<include>Bald_OSDHints</include>
+		</control>
+	</controls>
+</window>

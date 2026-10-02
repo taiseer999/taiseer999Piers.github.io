@@ -1,0 +1,478 @@
+# Kodi Media Center language file
+# Addon Name: Bald
+# Addon id: skin.bald
+# Addon Provider: dangerouslaser
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2025-06-28 05:29+0000\n"
+"Last-Translator: Minho Park <parkmino@gmail.com>\n"
+"Language-Team: Korean <https://kodi.weblate.cloud/projects/kodi-add-ons-skins/skin-estuary/ko_kr/>\n"
+"Language: ko_kr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.12.2\n"
+
+msgctxt "Addon Summary"
+msgid "Minimal, artwork-first skin for Kodi 22."
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "Bald is a minimal, artwork-first Kodi 22 skin with fluid motion. Utility windows are based on Kodi's Estuary by phil65 and Team Kodi."
+msgstr ""
+
+msgctxt "#31000"
+msgid "Now playing"
+msgstr "지금 재생 중"
+
+msgctxt "#31004"
+msgid "Change mode"
+msgstr "모드 변경"
+
+msgctxt "#31005"
+msgid "Watch as 2D"
+msgstr "2D로 감상"
+
+msgctxt "#31009"
+msgid "Download icons"
+msgstr "다운로드 아이콘"
+
+msgctxt "#31019"
+msgid "Forecast"
+msgstr "예보"
+
+msgctxt "#31020"
+msgid "Actions"
+msgstr "동작"
+
+msgctxt "#31021"
+msgid "Misc options"
+msgstr "기타 옵션"
+
+msgctxt "#31022"
+msgid "Sort by"
+msgstr "정렬 기준"
+
+msgctxt "#31023"
+msgid "Viewtype"
+msgstr "보기 형식"
+
+msgctxt "#31025"
+msgid "No favourites found. You can add items from media and other views by using the context menu."
+msgstr ""
+
+msgctxt "#31026"
+msgid "Timeshift"
+msgstr "타임시프트"
+
+msgctxt "#31028"
+msgid "Show fanart"
+msgstr "팬아트 표시"
+
+msgctxt "#31029"
+msgid "Last logged in"
+msgstr "마지막 로그인"
+
+#. Label to show the system memory usage
+msgctxt "#31030"
+msgid "System memory usage"
+msgstr "시스템 메모리 사용량"
+
+msgctxt "#31032"
+msgid "Order"
+msgstr "순서"
+
+msgctxt "#31033"
+msgid "Your rating"
+msgstr "내 평점"
+
+msgctxt "#31036"
+msgid "items"
+msgstr "항목"
+
+msgctxt "#31038"
+msgid "Rewind"
+msgstr "되감기"
+
+msgctxt "#31039"
+msgid "Fast forward"
+msgstr "빨리감기"
+
+msgctxt "#31042"
+msgid "Playlist options"
+msgstr "재생목록 옵션"
+
+msgctxt "#31043"
+msgid "Set the type and add rules to create a smart playlist. These playlists are dynamic and include all media items from your database which apply to your chosen rules."
+msgstr "스마트 재생목록을 만들려면 형식과 규칙을 설정합니다. 이 재생목록은 데이터베이스 에서 규칙에 해당되는 모든 미디어를 유동적으로 가져옵니다."
+
+msgctxt "#31044"
+msgid "Add group"
+msgstr "그룹 추가"
+
+msgctxt "#31045"
+msgid "Rename group"
+msgstr "그룸 이름 변경"
+
+msgctxt "#31046"
+msgid "Delete group"
+msgstr "그룹 삭제"
+
+msgctxt "#31049"
+msgid "Original title"
+msgstr ""
+
+msgctxt "#31050"
+msgid "Original title (Localised title)"
+msgstr ""
+
+msgctxt "#31051"
+msgid "Localised title (Original title)"
+msgstr ""
+
+msgctxt "#31052"
+msgid "filtered"
+msgstr "필터 설정됨"
+
+msgctxt "#31053"
+msgid "Arial based"
+msgstr "Arial 기반"
+
+msgctxt "#31056"
+msgid "Go to playlist"
+msgstr "재생목록 가기"
+
+msgctxt "#31057"
+msgid "Show login screen on startup"
+msgstr "시작할 때 로그인 화면 표시"
+
+msgctxt "#31058"
+msgid "Automatic Login on startup"
+msgstr "시작할 때 자동 로그인"
+
+msgctxt "#31065"
+msgid "Video playlist"
+msgstr "비디오 재생목록"
+
+msgctxt "#31066"
+msgid "Music playlist"
+msgstr "음악 재생목록"
+
+msgctxt "#31067"
+msgid "Event log"
+msgstr "이벤트 로그"
+
+msgctxt "#31068"
+msgid "Choose presets"
+msgstr "프리셋 선택"
+
+msgctxt "#31069"
+msgid "Last Updated"
+msgstr "마지막 업데이트"
+
+msgctxt "#31072"
+msgid "Power Options"
+msgstr "전원 옵션"
+
+msgctxt "#31073"
+msgid "Total length"
+msgstr "총 길이"
+
+msgctxt "#31074"
+msgid "Total duration"
+msgstr "총 재생시간"
+
+msgctxt "#31080"
+msgid "Ends at"
+msgstr "종료"
+
+#. Label to highlight that live stream is being played
+msgctxt "#31081"
+msgid "Live"
+msgstr "라이브"
+
+msgctxt "#31082"
+msgid "Lyrics add-on"
+msgstr "가사 애드온"
+
+msgctxt "#31083"
+msgid "Lyrics add-on settings"
+msgstr "가사 애드온 설정"
+
+msgctxt "#31084"
+msgid "Visualisation settings"
+msgstr "시각화 설정"
+
+msgctxt "#31089"
+msgid "Available groups"
+msgstr "사용 가능한 그룹"
+
+msgctxt "#31096"
+msgid "Local subtitle available"
+msgstr "로컬 자막 있음"
+
+msgctxt "#31097"
+msgid "Channel options"
+msgstr "채널 옵션"
+
+msgctxt "#31098"
+msgid "Select your Kodi user profile[CR]to login and continue"
+msgstr "로그인할 Kodi 사용자 프로파일을[CR]선택하고 계속하세요"
+
+#. viewtype name
+msgctxt "#31099"
+msgid "IconWall"
+msgstr "IconWall"
+
+#. viewtype name
+msgctxt "#31100"
+msgid "Shift"
+msgstr "Shift"
+
+#. viewtype name
+msgctxt "#31101"
+msgid "InfoWall"
+msgstr "InfoWall"
+
+#. viewtype name
+msgctxt "#31102"
+msgid "Wall"
+msgstr "Wall"
+
+msgctxt "#31103"
+msgid "Enter text here..."
+msgstr "여기에 문자열 입력..."
+
+msgctxt "#31106"
+msgid "Teletext"
+msgstr "문자다중방송"
+
+#. viewtype name
+msgctxt "#31107"
+msgid "WideList"
+msgstr "WideList"
+
+#. viewtype name
+msgctxt "#31108"
+msgid "MediaList"
+msgstr "미디어 목록"
+
+# empty strings from id 31108 to 31108
+msgctxt "#31109"
+msgid "Video streams"
+msgstr "비디오 스트림"
+
+msgctxt "#31112"
+msgid "Audio streams"
+msgstr "오디오 스트림"
+
+msgctxt "#31115"
+msgid "Subtitles streams"
+msgstr "자막 스트림"
+
+msgctxt "#31117"
+msgid "Edit nodes"
+msgstr "노드 편집"
+
+msgctxt "#31132"
+msgid "Select Program"
+msgstr "프로그램 선택"
+
+msgctxt "#31133"
+msgid "Select Resolution"
+msgstr "해상도 선택"
+
+msgctxt "#31135"
+msgid "Binary"
+msgstr "바이너리"
+
+msgctxt "#31136"
+msgid "Click here to see latest changes..."
+msgstr "변경 사항을 보려면 클릭하세요..."
+
+#. Label to show PVR info page
+msgctxt "#31137"
+msgid "PVR"
+msgstr "PVR"
+
+#. Label to show video decoder name
+msgctxt "#31139"
+msgid "Video decoder"
+msgstr "비디오 디코더"
+
+#. Label to show the video pixel format
+msgctxt "#31140"
+msgid "Pixel format"
+msgstr "픽셀 형식"
+
+msgctxt "#31141"
+msgid "Changes for version"
+msgstr "버전 변경 사항"
+
+msgctxt "#31142"
+msgid "Play speed"
+msgstr "재생 속도"
+
+msgctxt "#31150"
+msgid "Origin"
+msgstr "원본"
+
+msgctxt "#31154"
+msgid "Press OK to switch between locations"
+msgstr "위치를 변경하려면 OK를 누르세요"
+
+msgctxt "#31155"
+msgid "No bookmarks created yet."
+msgstr "생성된 북마크가 없습니다."
+
+msgctxt "#31161"
+msgid "Numeric pad"
+msgstr "숫자 패드"
+
+msgctxt "#31163"
+msgid "Show Fanart background"
+msgstr "팬아트 배경 보기"
+
+#. Label of a setting
+msgctxt "#31167"
+msgid "Animate background"
+msgstr "움직이는 배경"
+
+# empty strings from id 31177 to 31596
+#. Button to select Player Process Info window
+msgctxt "#31597"
+msgid "Player info"
+msgstr "플레이어 정보"
+
+#. Label to show player cache
+msgctxt "#31598"
+msgid "Player cache"
+msgstr "플레이어 캐시"
+
+#. Label to show the video codec name
+msgctxt "#31599"
+msgid "Audio decoder"
+msgstr "오디오 디코더"
+
+# empty strings from id 31170 to 31599
+#. Label to show the video codec name
+msgctxt "#31600"
+msgid "Video codec"
+msgstr "비디오 코덱"
+
+#. Label to show the video resolution
+msgctxt "#31601"
+msgid "Video resolution"
+msgstr "비디오 해상도"
+
+#. Label to show the video aspect
+msgctxt "#31602"
+msgid "Video aspect"
+msgstr "비디오 비율"
+
+#. Label to show the video bitrate
+msgctxt "#31603"
+msgid "Video bitrate"
+msgstr "비디오 비트레이트"
+
+#. Label to show the audio codec name
+msgctxt "#31604"
+msgid "Audio codec"
+msgstr "오디오 코덱"
+
+#. Label to show the number of audio channels
+msgctxt "#31605"
+msgid "Audio channels"
+msgstr "오디오 채널"
+
+#. Label to show the audio bitrate
+msgctxt "#31606"
+msgid "Audio bitrate"
+msgstr "오디오 비트레이트"
+
+#. Label to show the screen resolution
+msgctxt "#31607"
+msgid "Screen resolution"
+msgstr "화면 해상도"
+
+#. Label to show the system rendering speed
+msgctxt "#31608"
+msgid "System rendering speed"
+msgstr "시스템 렌더링 속도"
+
+#. Label to show the system CPU usage
+msgctxt "#31609"
+msgid "System CPU usage"
+msgstr "시스템 CPU 사용"
+
+#. Label to show the system info page
+msgctxt "#31611"
+msgid "System"
+msgstr "시스템"
+
+#. Label to show the subtitle decoder name
+msgctxt "#31613"
+msgid "Subtitle decoder"
+msgstr ""
+
+#. Label to show the subtitle codec name
+msgctxt "#31614"
+msgid "Subtitle codec"
+msgstr ""
+
+#. Label to show the subtitle language
+msgctxt "#31615"
+msgid "Subtitle language"
+msgstr ""
+
+#~ msgctxt "#31025"
+#~ msgid "No favourites found. You can add any item from media views to this list by using the context menu."
+#~ msgstr "즐겨찾기가 없습니다. 미디어 보기에서 컨텐스트 메뉴를 사용하여 항목을 추가할 수 있습니다."
+
+#~ msgctxt "#31149"
+#~ msgid "Select genre fanart pack"
+#~ msgstr "장르 팬아트 팩 선택"
+
+#~ msgctxt "#31112"
+#~ msgid "Toggle audio stream"
+#~ msgstr "오디오 스트림 전환"
+
+#~ msgctxt "#31115"
+#~ msgid "Toggle subtitle"
+#~ msgstr "자막 전환"
+
+#~ msgctxt "#31612"
+#~ msgid "Add version"
+#~ msgstr "버전 추가"
+
+#~ msgctxt "#31613"
+#~ msgid "Add extras"
+#~ msgstr "기타 추가"
+
+#~ msgctxt "#31614"
+#~ msgid "Set default"
+#~ msgstr "기본값으로 설정"
+
+#~ msgctxt "#31615"
+#~ msgid "Extras"
+#~ msgstr "기타"
+
+#~ msgctxt "#31059"
+#~ msgid "Select + X"
+#~ msgstr "Select + X"
+
+#~ msgctxt "#31060"
+#~ msgid "Select + Start"
+#~ msgstr "Select + Start"
+
+#~ msgctxt "#31137"
+#~ msgid "PVR info"
+#~ msgstr "PVR 정보"
+
+#~ msgctxt "#31138"
+#~ msgid "Player process info"
+#~ msgstr "플레이어 프로세스 정보"

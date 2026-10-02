@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald seek layer (docs/SPEC.md 5.16, "Video OSD"): the persistent bottom of the player. A field gradient, Home's
+     clock at the top right, a status line and the times either side of a thin accent bar with the cache line, chapter
+     and cut ticks and a seek-preview nib. The layer rests low and lifts when the OSD or a panel opens
+     (Bald_OSDLift); the info overlay (window 1127) takes its place. Shared pieces: Includes_Bald_OSD.xml and
+     Includes_Bald_Playback.xml. Started from Kodi 22 Estuary's DialogSeekBar.xml (GPL-2.0-or-later, see
+     LICENSE-Estuary.txt); the layout and visibility rules are Bald's.
+     Kodi (CGUIDialogSeekBar) selects the position of 401 (file progress, or the seek target while seeking), 402 (EPG
+     event progress with the seek offset) and 403 (timeshift progress). 40000 is Estuary's seek-state label, kept. -->
+<window>
+	<visible>Window.IsActive(fullscreenvideo) | Window.IsActive(visualisation)</visible>
+	<visible>!Window.IsActive(sliderdialog) + !Window.IsVisible(playerprocessinfo) + !Player.HasGame</visible>
+	<visible>$EXP[Bald_OSDSeekLayer]</visible>
+	<include>Bald_PlaybackAnimWindow</include>
+	<depth>DepthOSD</depth>
+	<zorder>0</zorder>
+	<controls>
+		<!-- Typed channel number, centred (Estuary's PVRChannelNumberInput). -->
+		<control type="label">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<font>Bald_Clock</font>
+			<textcolor>bald_ink</textcolor>
+			<label>$INFO[PVR.ChannelNumberInput]</label>
+			<visible>!String.IsEmpty(PVR.ChannelNumberInput)</visible>
+		</control>
+		<include>Bald_OSDScrims</include>
+		<!-- Clock, top right as on Home, with the finish time under it; gone while a panel opened with Down is up. -->
+		<control type="group">
+			<visible>!$EXP[infodialog_active] + !$EXP[Bald_OSDDownPanelUp]</visible>
+			<include>Bald_OSDAnimFade</include>
+			<control type="group"><include>Bald_OSDShade</include><include>Bald_PlaybackScrimTop</include></control>
+			<include>Bald_PlaybackClock</include>
+		</control>
+		<!-- The lifting block: music title, status line, times and bar. The info overlay replaces it; the Live TV lists
+		     push it aside. -->
+		<control type="group">
+			<visible>!Window.IsVisible(1127) + !$EXP[Bald_OSDPVRPanelUp]</visible>
+			<include>Bald_OSDAnimFade</include>
+			<include>Bald_OSDLift</include>
+			<include>Bald_OSDMusicTitle</include>
+			<include>Bald_OSDSeekBlock</include>
+			<!-- Estuary's seek-state label, kept for anything that reads it by id; not drawn. -->
+			<control type="label" id="40000">
+				<include>HiddenObject</include>
+			</control>
+		</control>
+	</controls>
+</window>

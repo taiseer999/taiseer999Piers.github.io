@@ -1,0 +1,2480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald Home: variables, animations and repeated control groups (docs/SPEC.md sections 4 and 5.1).
+
+     Animation model. Kodi animations are state-driven: Visible/Hidden animations fire on edges of a visibility
+     condition, Conditional animations expect their condition to hold. So every item-change transition is keyed to a
+     state that flips on each move and then holds: whether the current row's item position is odd or even
+     (Integer.IsOdd(Container(c).CurrentItem)). Each animated piece exists twice, an Odd and an Even instance:
+       - the incoming instance becomes visible and plays its Visible animation (fade, stagger, rise, zoom);
+       - the outgoing one hides. Images keep their old texture while a Hidden animation plays
+         (CGUIImage::UpdateInfo), so fanart and clearlogos fade out with the old picture. Labels cannot freeze,
+         so text has no Hidden animation and disappears at once.
+     Row swaps and the menu use Visible/Hidden on groups keyed to the Bald.Row and Bald.Menu properties.
+     Do not use Container.OnNext (true for one frame; a reversible="false" Conditional is reset when its condition
+     drops), skin timers (they run every 500 ms) or Container.Scrolling (briefly true at the end of every scroll).
+
+     State lives in Home window properties:
+       Bald.Row      id of the current row (Home 9101+, Live TV 9051+, hub slots 1-8 9201+ to 9901+, 1080i/IDs); art
+                     and caption follow it, not the focused control
+       Bald.Screen   the screen whose rows show: home, livetv or hub1 to hub8 (shortcuts/generator/screens.xml)
+       Bald.Menu     set while the menu is open
+       Bald.NudgeL/R flips between a and b to replay the row edge nudge -->
+<includes>
+	<!-- Curves (docs/SPEC.md section 4): move = cubic out, fade = sine inout, pop = back out. -->
+
+	<!-- ============ Info handoff (docs/SPEC.md 4 and 5.2) ============ -->
+	<!-- Info opens as a dialog over Home. Home does the handoff: the art frame zooms to full screen (translate -96,-120
+	     and scale 1.53846 in the prototype, i.e. zoom about 274,343), 640 move after 40, and back 540 after 30 when it
+	     closes (a poster row's nudge follows both, Bald_AnimPosterArt); Home chrome goes out 200 and returns 380 / 480
+	     after 440. Paired non-reversible Conditionals keep open and close timings separate; Kodi applies a
+	     Conditional's end state silently at window load. The dialog's own timings: Includes_Bald_Info.xml. -->
+	<constant name="Bald_InfoZoomDelay">40</constant>
+	<constant name="Bald_InfoZoomTime">640</constant>
+	<constant name="Bald_InfoReturnDelay">30</constant>
+	<constant name="Bald_InfoReturnTime">540</constant>
+	<expression name="Bald_InfoOpen">[Window.IsVisible(movieinformation) | !String.IsEmpty(Window(home).Property(Bald.InfoSwitch))]</expression>
+	<!-- Keep the outgoing art during exchanges; don't show a previous dialog's property on initial open. -->
+	<expression name="Bald_InfoArtReady">[!String.IsEmpty(Window(home).Property(Bald.InfoSwitch)) | [!String.IsEmpty(Window(movieinformation).Property(Bald.Identity)) + String.IsEqual(Window(movieinformation).Property(Bald.ArtIdentity),Window(movieinformation).Property(Bald.Identity))]]</expression>
+	<!-- A modal dialog is over Home. <visible> and animation conditions are evaluated without a window context, so
+	     under a modal dialog any Container(...) in them resolves against the dialog; Home guards on this. -->
+	<expression name="Bald_DialogOver">[System.HasActiveModalDialog | $EXP[Bald_InfoOpen] | Window.IsVisible(contextmenu)]</expression>
+	<!-- Reduce motion (Bald_ReduceMotion): the frame changes size at once and fades in at its new size instead. -->
+	<include name="Bald_AnimInfoFrame">
+		<animation type="Conditional" condition="[$EXP[Bald_InfoOpen]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="zoom" start="100" end="153.846" center="274,343" time="Bald_InfoZoomTime" delay="Bald_InfoZoomDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[$EXP[Bald_InfoOpen]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="zoom" start="100" end="153.846" center="274,343" time="0" delay="Bald_InfoZoomDelay" tween="cubic" easing="out" />
+			<effect type="fade" start="0" end="100" time="380" delay="Bald_InfoZoomDelay" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_InfoOpen]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="zoom" start="153.846" end="100" center="274,343" time="Bald_InfoReturnTime" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_InfoOpen]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="zoom" start="153.846" end="100" center="274,343" time="0" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+			<effect type="fade" start="0" end="100" time="380" delay="Bald_InfoReturnDelay" tween="sine" easing="inout" />
+		</animation>
+	</include>
+	<include name="Bald_AnimInfoChrome">
+		<animation type="Conditional" condition="[$EXP[Bald_InfoOpen]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="fade" start="100" end="0" time="200" tween="sine" easing="inout" />
+			<effect type="slide" start="0,0" end="24,0" time="220" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[$EXP[Bald_InfoOpen]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="fade" start="100" end="0" time="200" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_InfoOpen]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="fade" start="0" end="100" time="380" delay="440" tween="sine" easing="inout" />
+			<effect type="slide" start="24,0" end="0,0" time="480" delay="440" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_InfoOpen]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="fade" start="0" end="100" time="380" delay="440" tween="sine" easing="inout" />
+		</animation>
+	</include>
+	<!-- The logo scrim and clearlogo on the art leave with the chrome and come back once the frame has settled. -->
+	<include name="Bald_AnimInfoArtOverlay">
+		<animation type="Conditional" condition="$EXP[Bald_InfoOpen]" reversible="false">
+			<effect type="fade" start="100" end="0" time="200" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Conditional" condition="!$EXP[Bald_InfoOpen]" reversible="false">
+			<effect type="fade" start="0" end="100" time="500" delay="600" tween="sine" easing="inout" />
+		</animation>
+	</include>
+	<!-- The frame masks would cover the zoomed art: gone at once, back after the frame is home again. -->
+	<include name="Bald_AnimInfoMasks">
+		<animation type="Conditional" condition="$EXP[Bald_InfoOpen]" reversible="false">
+			<effect type="fade" start="100" end="0" time="60" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Conditional" condition="!$EXP[Bald_InfoOpen]" reversible="false">
+			<effect type="fade" start="0" end="100" time="80" delay="620" tween="sine" easing="inout" />
+		</animation>
+	</include>
+
+	<!-- ============ Poster rows: the art frame shrinks to 1248 x 576 ============ -->
+	<!-- Bald.RowStyle holds the displayed row's style: set by the row's onfocus, Home's onload, and the menu (the
+	     previewed screen's remembered row, Bald_PreviewRowStyle). A window property, not a Container condition, because
+	     <visible> and animation conditions have no window context under a modal dialog (see Bald_DialogOver).
+	     Kodi cannot animate a control's size, so on a poster row the bottom frame mask slides up 126 px, the art moves
+	     up 63 px so its crop stays centred in the smaller window, and the scrim and clearlogo move up 126 px to stay on
+	     the frame's bottom edge; all 540 move after 30 (Bald_InfoReturn*, the info close's frame return), and the
+	     reverse going back to a landscape row. The row swap runs meanwhile (out 140, in 360 / 440 after 170).
+	     Paired non-reversible Conditionals, as in Bald_AnimInfoFrame: the animation whose condition drops is reset
+	     (no transform), and the one whose condition rises starts from the state the other ended in. -->
+	<expression name="Bald_PosterRow">[String.IsEqual(Window(home).Property(Bald.RowStyle),poster) | String.IsEqual(Window(home).Property(Bald.RowStyle),square) | String.IsEqual(Window(home).Property(Bald.RowStyle),weather)]</expression>
+	<!-- A poster row's frame over background video: art layers of their own, 576 tall (Home.xml). -->
+	<expression name="Bald_VideoPosterFrame">[$EXP[Bald_VideoBackdropOn] + $EXP[Bald_PosterRow] + !$EXP[Bald_InfoOpen]]</expression>
+	<!-- The art layers (the art frame group, which also zooms for info). While info is open the nudge is undone in step
+	     with the zoom (640 move after 40), so the zoom about 274,343 maps the whole 1248 x 702 art to the screen exactly
+	     as on a landscape row; closing info nudges it again with the zoom back (540 after 30). -->
+	<include name="Bald_AnimPosterArt">
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow] + !$EXP[Bald_InfoOpen] + !$EXP[Bald_IdleZoom]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="slide" start="0,0" end="0,-63" time="Bald_InfoReturnTime" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow] + !$EXP[Bald_InfoOpen] + !$EXP[Bald_IdleZoom]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="slide" start="0,0" end="0,-63" time="0" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_PosterRow]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="slide" start="0,-63" end="0,0" time="Bald_InfoReturnTime" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_PosterRow]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="slide" start="0,-63" end="0,0" time="0" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow] + $EXP[Bald_InfoOpen]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="slide" start="0,-63" end="0,0" time="Bald_InfoZoomTime" delay="Bald_InfoZoomDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow] + $EXP[Bald_InfoOpen]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="slide" start="0,-63" end="0,0" time="0" delay="Bald_InfoZoomDelay" tween="cubic" easing="out" />
+		</animation>
+		<!-- Idle (Bald_IdleZoom): the nudge is undone in step with the idle zoom, so a poster row's art expands exactly
+		     as a landscape row's. Waking, the first Conditional above nudges it again, on its own timing, as the frame
+		     shrinks. A pure move: under Reduce motion the frame keeps its shape and the full-size copy fades over it. -->
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow] + $EXP[Bald_IdleZoom]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="slide" start="0,-63" end="0,0" time="Bald_IdleGrowTime" delay="Bald_IdleGrowDelay" tween="cubic" easing="out" />
+		</animation>
+	</include>
+	<!-- The frame's bottom edge: the bottom mask, and the logo scrim and clearlogo. -->
+	<include name="Bald_AnimPosterEdge">
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="slide" start="0,0" end="0,-126" time="Bald_InfoReturnTime" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[$EXP[Bald_PosterRow]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="slide" start="0,0" end="0,-126" time="0" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_PosterRow]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="slide" start="0,-126" end="0,0" time="Bald_InfoReturnTime" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_PosterRow]] + $EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="slide" start="0,-126" end="0,0" time="0" delay="Bald_InfoReturnDelay" tween="cubic" easing="out" />
+		</animation>
+	</include>
+	<!-- ============ Idle: the art frame expands (ambient mode) ============ -->
+	<!-- While Home sits idle the art frame grows from its rect to 96,120 1728 x 840 (96 / 120 px margins, as round the
+	     frame) and everything it covers fades out: the rows, caption, clock and date, section line (hidden, not dimmed).
+	     Bald_IdleExpand holds it: idle (Bald_Idle, Appearance › Behavior › Idle after; never with it off) and focus on
+	     the wake button 9199, where the idle timer parks it after closing the menu (so the displayed row style is the
+	     current row's). Never under a dialog or info (Bald_DialogOver), and never over background video: the masks
+	     cannot be drawn over video, so there only the row hints, count and menu hint fade (on plain Bald_Idle).
+	     Kodi cannot animate a size, and the shape changes (1248 x 702, a poster row's 1248 x 576 window onto it, to
+	     1728 x 840), so the expansion is three layers in step:
+	       - the frame group zooms uniformly by 1728 / 1248 = 138.462 % about 96,291.6: its left edge stays on 96 and the
+	         art's centre (y 471 on every row style, a poster row's nudge being undone in step, Bald_AnimPosterArt) lands
+	         on the big rect's centre, y 540. The zoomed 16:9 art spans y 54-1026, exactly the crop a 1728 x 840
+	         image with aspectratio scale takes of the same picture (the Reduce motion copy's), so the zoom alone is the
+	         big frame;
+	       - nothing else is drawn for the big frame: the zoomed art is the full-size picture (a copy faded in over the
+	         zoom sat at its final size over a still smaller frame, a double image mid-growth);
+	       - the idle masks (windows onto the background) cover the zoomed frame's overflow outside the big rect, and
+	         the frame's own masks fade out (they would cut into it).
+	     Timings are the Bald_Idle* constants below; tests/test_home_idle.py holds their relationships. Enter and wake
+	     are paired non-reversible Conditionals, as for the info handoff: the one whose condition rises starts from the
+	     end state the other would have reached. So a key pressed while the frame is still growing snaps it to full size
+	     before it shrinks (Kodi resets the dropped animation and cannot start the other part-way).
+	     Reduce motion (Bald_IdleZoom false): no zoom and the frame's masks stay; a full-size copy of the art crossfades
+	     over the frame and back over Bald_IdleGrowTime / Bald_IdleShrinkTime, with the same fades round it.
+	     The layers rest at a Conditional alpha of 0 rather than a <visible>, so their textures keep following the
+	     current item: Kodi still processes a control at alpha 0 but does not draw it (CGUIControl::DoProcess, Render). -->
+	<!-- Enter. The chrome fades out over the first step; everything else starts once it is out. -->
+	<constant name="Bald_IdleGrowDelay">300</constant>
+	<!-- The frame's zoom and a poster row's nudge undone (under Reduce motion, the full-size copy's crossfade). -->
+	<constant name="Bald_IdleGrowTime">900</constant>
+	<constant name="Bald_IdleOverlayOutTime">200</constant>
+	<constant name="Bald_IdleFrameMasksOutTime">150</constant>
+	<!-- The small clock, then the big clearlogo, as the frame settles. -->
+	<constant name="Bald_IdleClockInDelay">700</constant>
+	<constant name="Bald_IdleClockInTime">400</constant>
+	<constant name="Bald_IdleLogoInDelay">800</constant>
+	<constant name="Bald_IdleLogoInTime">500</constant>
+	<!-- Wake. The zoom back (under Reduce motion, the copy out) at once; the chrome waits for it. -->
+	<constant name="Bald_IdleShrinkTime">480</constant>
+	<constant name="Bald_IdleChromeBackTime">360</constant>
+	<!-- The frame's masks come back as it finishes shrinking (450-550), before the idle masks leave (600-680): both lay
+	     the same background, so they overlap and the art's edges are never uncovered (a gap between them showed the
+	     frame's overflow for a moment at the end of the wake). -->
+	<constant name="Bald_IdleFrameMasksBackDelay">450</constant>
+	<constant name="Bald_IdleFrameMasksBackTime">100</constant>
+	<constant name="Bald_IdleMasksOutDelay">600</constant>
+	<constant name="Bald_IdleMasksOutTime">80</constant>
+	<!-- The frame's logo scrim and clearlogo come back; the big clearlogo and small clock leave at once. -->
+	<constant name="Bald_IdleOverlayBackDelay">400</constant>
+	<constant name="Bald_IdleOverlayBackTime">400</constant>
+	<constant name="Bald_IdleCornerOutTime">150</constant>
+	<expression name="Bald_IdleExpand">[$EXP[Bald_Idle] + Control.HasFocus(9199) + !$EXP[Bald_VideoBackdropOn] + !$EXP[Bald_DialogOver] + !$EXP[Bald_MenuOpen]]</expression>
+	<expression name="Bald_IdleZoom">[$EXP[Bald_IdleExpand] + $EXP[Bald_FullMotion]]</expression>
+	<!-- The art frame group (Home.xml): grow and shrink. Pure moves: under Reduce motion the frame stays as it is. -->
+	<include name="Bald_AnimIdleFrame">
+		<animation type="Conditional" condition="[$EXP[Bald_IdleExpand]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="zoom" start="100" end="138.462" center="96,291.6" time="Bald_IdleGrowTime" delay="Bald_IdleGrowDelay" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Conditional" condition="[!$EXP[Bald_IdleExpand]] + $EXP[Bald_FullMotion]" reversible="false">
+			<effect type="zoom" start="138.462" end="100" center="96,291.6" time="Bald_IdleShrinkTime" tween="cubic" easing="out" />
+		</animation>
+	</include>
+	<!-- Something shown at rest that leaves while expanded (while when holds): out over out after out_delay, back over
+	     back after back_delay. -->
+	<include name="Bald_AnimIdleHide">
+		<param name="when">$EXP[Bald_IdleExpand]</param>
+		<param name="out" />
+		<param name="out_delay">0</param>
+		<param name="back" />
+		<param name="back_delay">0</param>
+		<definition>
+			<animation type="Conditional" condition="$PARAM[when]" reversible="false">
+				<effect type="fade" start="100" end="0" time="$PARAM[out]" delay="$PARAM[out_delay]" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Conditional" condition="!$PARAM[when]" reversible="false">
+				<effect type="fade" start="0" end="100" time="$PARAM[back]" delay="$PARAM[back_delay]" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<!-- A layer shown only while expanded: in over in after in_delay, out over out after out_delay as idle ends; alpha 0
+	     otherwise (the second Conditional's end state, applied at window load). -->
+	<include name="Bald_AnimIdleLayer">
+		<param name="in" />
+		<param name="in_delay">0</param>
+		<param name="out" />
+		<param name="out_delay">0</param>
+		<definition>
+			<animation type="Conditional" condition="$EXP[Bald_IdleExpand]" reversible="false">
+				<effect type="fade" start="0" end="100" time="$PARAM[in]" delay="$PARAM[in_delay]" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Conditional" condition="!$EXP[Bald_IdleExpand]" reversible="false">
+				<effect type="fade" start="100" end="0" time="$PARAM[out]" delay="$PARAM[out_delay]" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<!-- Everything the big frame covers (rows, caption, clock and date, section line): out first, back last. -->
+	<include name="Bald_AnimIdleChrome">
+		<include content="Bald_AnimIdleHide">
+			<param name="out">Bald_IdleGrowDelay</param>
+			<param name="back">Bald_IdleChromeBackTime</param>
+			<param name="back_delay">Bald_IdleShrinkTime</param>
+		</include>
+	</include>
+	<!-- The frame's logo scrim and clearlogo: out as the frame starts to grow (the big frame's own takes over in its
+	     corner), back once it is home again. -->
+	<include name="Bald_AnimIdleArtOverlay">
+		<include content="Bald_AnimIdleHide">
+			<param name="out">Bald_IdleOverlayOutTime</param>
+			<param name="out_delay">Bald_IdleGrowDelay</param>
+			<param name="back">Bald_IdleOverlayBackTime</param>
+			<param name="back_delay">Bald_IdleOverlayBackDelay</param>
+		</include>
+	</include>
+	<!-- The frame's own masks: out as the zoom starts, back as it ends. Only with the zoom: under Reduce motion they keep
+	     a poster row's frame its shape under the crossfade. -->
+	<include name="Bald_AnimIdleMasks">
+		<include content="Bald_AnimIdleHide">
+			<param name="when">$EXP[Bald_IdleZoom]</param>
+			<param name="out">Bald_IdleFrameMasksOutTime</param>
+			<param name="out_delay">Bald_IdleGrowDelay</param>
+			<param name="back">Bald_IdleFrameMasksBackTime</param>
+			<param name="back_delay">Bald_IdleFrameMasksBackDelay</param>
+		</include>
+	</include>
+	<!-- The expanded frame (Home.xml, over the frame masks, under the chrome). -->
+	<include name="Bald_IdleFrame">
+		<!-- Idle masks: the zoomed frame spills 66 px above and below the big rect (and its settle zoom a little round
+		     it), so the background is laid back over everything outside it, from the start until the frame has shrunk. -->
+		<control type="group">
+			<include content="Bald_AnimIdleLayer"><param name="in">0</param><param name="out">Bald_IdleMasksOutTime</param><param name="out_delay">Bald_IdleMasksOutDelay</param></include>
+			<include content="Bald_BackdropWindow"><param name="x">0</param><param name="y">0</param><param name="w">96</param><param name="h">1080</param></include>
+			<include content="Bald_BackdropWindow"><param name="x">1824</param><param name="y">0</param><param name="w">96</param><param name="h">1080</param></include>
+			<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">0</param><param name="w">1728</param><param name="h">120</param></include>
+			<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">960</param><param name="w">1728</param><param name="h">120</param></include>
+		</control>
+		<!-- Reduce motion only (no zoom): the frame's art (the current row's followed item, which ambient movement
+		     advances) at the big rect, cropped by aspectratio scale, crossfades over the frame and back; <fadetime>
+		     crossfades each new item as the frame's layers do. With the zoom there is no copy: the frame itself grows
+		     and the idle masks crop it to the big rect. -->
+		<control type="group">
+			<left>Bald_SafeLeft</left>
+			<top>120</top>
+			<width>1728</width>
+			<height>840</height>
+			<visible>$EXP[Bald_ReduceMotion]</visible>
+			<include content="Bald_AnimIdleLayer"><param name="in">Bald_IdleGrowTime</param><param name="in_delay">Bald_IdleGrowDelay</param><param name="out">Bald_IdleShrinkTime</param></include>
+			<control type="image">
+				<width>1728</width>
+				<height>840</height>
+				<aspectratio>scale</aspectratio>
+				<fadetime>700</fadetime>
+				<texture background="true">$VAR[Bald_Fanart]</texture>
+			</control>
+			<!-- Weather rows with a folder weather pack (before Bald Helper's pictures): the current conditions' pictures,
+			     as in the frame, under Reduce motion only. A second shuffled slideshow would show another picture than the
+			     frame's; with the zoom, the frame's own shows through instead ($VAR[Bald_Fanart] is empty then), cropped
+			     by the idle masks to the same rect. -->
+			<control type="multiimage">
+				<width>1728</width>
+				<height>840</height>
+				<aspectratio>scale</aspectratio>
+				<timeperimage>12000</timeperimage>
+				<fadetime>700</fadetime>
+				<randomize>true</randomize>
+				<imagepath background="true">$INFO[Skin.String(Bald.WeatherFanart.path)]$INFO[Weather.Data(Current.FanartCode)]</imagepath>
+				<visible>$EXP[Bald_WeatherFolderArt] + $EXP[Bald_ReduceMotion]</visible>
+				<animation type="Visible">
+					<effect type="fade" start="0" end="100" time="700" tween="sine" easing="inout" />
+				</animation>
+				<animation type="Hidden">
+					<effect type="fade" start="100" end="0" time="700" tween="sine" easing="inout" />
+				</animation>
+			</control>
+		</control>
+		<!-- The clearlogo in the big frame's lower left (64 px in, 56 px up), on the frame's logo scrim stretched to the
+		     big frame; in as the frame settles, out at once on waking. The live $VAR[Bald_Logo] follows ambient movement,
+		     crossfading. -->
+		<control type="group">
+			<left>Bald_SafeLeft</left>
+			<top>120</top>
+			<width>1728</width>
+			<height>840</height>
+			<include content="Bald_AnimIdleLayer"><param name="in">Bald_IdleLogoInTime</param><param name="in_delay">Bald_IdleLogoInDelay</param><param name="out">Bald_IdleCornerOutTime</param></include>
+			<control type="image">
+				<width>1728</width>
+				<height>840</height>
+				<texture>bald/scrim_logo.png</texture>
+				<visible>$EXP[Bald_ShowClearlogo] + $EXP[Bald_EffectiveHasLogo]</visible>
+				<animation type="Visible">
+					<effect type="fade" start="0" end="100" time="500" tween="sine" easing="inout" />
+				</animation>
+				<animation type="Hidden">
+					<effect type="fade" start="100" end="0" time="150" tween="sine" easing="inout" />
+				</animation>
+			</control>
+			<control type="image">
+				<left>64</left>
+				<top>614</top>
+				<width>560</width>
+				<height>170</height>
+				<aspectratio align="left" aligny="bottom">keep</aspectratio>
+				<fadetime>500</fadetime>
+				<texture background="true">$VAR[Bald_Logo]</texture>
+				<visible>$EXP[Bald_ShowClearlogo]</visible>
+			</control>
+		</control>
+		<!-- A small clock in the big frame's lower right, 32 px in from its right and bottom edges, over the logo scrim
+		     mirrored (pure black, so it never tints the art). The time as Appearance › Date & time sets it; hidden with
+		     Home's clock (Bald.HideHomeClock). In as the frame settles, out at once on waking. -->
+		<control type="group">
+			<left>Bald_SafeLeft</left>
+			<top>120</top>
+			<width>1728</width>
+			<height>840</height>
+			<visible>$EXP[Bald_ShowHomeClock]</visible>
+			<include content="Bald_AnimIdleLayer"><param name="in">Bald_IdleClockInTime</param><param name="in_delay">Bald_IdleClockInDelay</param><param name="out">Bald_IdleCornerOutTime</param></include>
+			<control type="image">
+				<left>1104</left>
+				<top>489</top>
+				<width>624</width>
+				<height>351</height>
+				<texture flipx="true">bald/scrim_logo.png</texture>
+			</control>
+			<control type="label">
+				<left>1196</left>
+				<top>768</top>
+				<width>500</width>
+				<height>40</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>Bald_InfoTagline</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$VAR[Bald_ClockTime]</label>
+			</control>
+		</control>
+	</include>
+
+	<!-- The displayed screen's current row style, and the style of the screen the menu previews (empty, a full frame,
+	     for entries without rows). Bald_RowStyle_<screen> is generated: the style of the row Bald.Row.<screen> names. -->
+	<variable name="Bald_ScreenRowStyle">
+		<value condition="$EXP[Bald_Screen_livetv]">$VAR[Bald_RowStyle_livetv]</value>
+		<value condition="$EXP[Bald_Screen_hub1]">$VAR[Bald_RowStyle_hub1]</value>
+		<value condition="$EXP[Bald_Screen_hub2]">$VAR[Bald_RowStyle_hub2]</value>
+		<value condition="$EXP[Bald_Screen_hub3]">$VAR[Bald_RowStyle_hub3]</value>
+		<value condition="$EXP[Bald_Screen_hub4]">$VAR[Bald_RowStyle_hub4]</value>
+		<value condition="$EXP[Bald_Screen_hub5]">$VAR[Bald_RowStyle_hub5]</value>
+		<value condition="$EXP[Bald_Screen_hub6]">$VAR[Bald_RowStyle_hub6]</value>
+		<value condition="$EXP[Bald_Screen_hub7]">$VAR[Bald_RowStyle_hub7]</value>
+		<value condition="$EXP[Bald_Screen_hub8]">$VAR[Bald_RowStyle_hub8]</value>
+		<value>$VAR[Bald_RowStyle_home]</value>
+	</variable>
+	<!-- Live TV without a PVR add-on shows no rows, so its preview keeps the full frame. -->
+	<variable name="Bald_PreviewRowStyle">
+		<value condition="$EXP[Bald_MenuPreview_home]">$VAR[Bald_RowStyle_home]</value>
+		<value condition="$EXP[Bald_MenuPreview_livetv] + System.HasPVRAddon">$VAR[Bald_RowStyle_livetv]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub1]">$VAR[Bald_RowStyle_hub1]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub2]">$VAR[Bald_RowStyle_hub2]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub3]">$VAR[Bald_RowStyle_hub3]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub4]">$VAR[Bald_RowStyle_hub4]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub5]">$VAR[Bald_RowStyle_hub5]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub6]">$VAR[Bald_RowStyle_hub6]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub7]">$VAR[Bald_RowStyle_hub7]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub8]">$VAR[Bald_RowStyle_hub8]</value>
+	</variable>
+
+	<!-- ============ Background ============ -->
+	<!-- The current row item's fanart, blurred (a 480 x 270 copy at Gaussian radius 40, cached) by Bald Helper, or by
+	     TMDb Helper without it, darkened for the OLED with colordiffuse. <fadetime> crossfades between titles and waits
+	     until the new image has loaded. -->
+	<include name="Bald_BackdropImage">
+		<!-- Still copy (curtain prototype): the same blur with no fadetime and loaded at once (a local file from the
+		     helper's blur cache), so a window's background is complete on its first frame, which the curtain lifts
+		     onto. The crossfading copy below still dissolves between titles. -->
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<aspectratio>scale</aspectratio>
+			<texture>$VAR[Bald_BlurImage]</texture>
+			<visible>$EXP[Bald_BlurOn] + $EXP[Bald_HasBlur] + !$EXP[Bald_VideoBackdropOn]</visible>
+			<colordiffuse>$VAR[Bald_BlurDiffuse]</colordiffuse>
+		</control>
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<aspectratio>scale</aspectratio>
+			<fadetime>800</fadetime>
+			<texture background="true">$VAR[Bald_BlurImage]</texture>
+			<!-- Optional enhancement: the field underneath is the supported no-helper fallback. -->
+			<visible>$EXP[Bald_BlurOn] + $EXP[Bald_HasBlur] + !$EXP[Bald_VideoBackdropOn]</visible>
+			<colordiffuse>$VAR[Bald_BlurDiffuse]</colordiffuse>
+		</control>
+	</include>
+	<!-- The blurred background. Bald Helper publishes Home's Bald.Blur (the followed item's blur, empty where there is
+	     no item: settings, the guide) and Bald.Blur.Last (the last non-empty one); without it, TMDb Helper publishes
+	     TMDbHelper.ListItem.BlurImage and Bald_CurtainHandoff keeps the last one as each window is left (Bald.LastBlur).
+	     Windows without an item show the last blur; Home and the library keep the plain field for an item without art. -->
+	<!-- The blurred background's brightness (Appearance › Background brightness, Skin.String(Bald.BlurBrightness)). -->
+	<variable name="Bald_BlurDiffuse">
+		<value condition="Skin.String(Bald.BlurBrightness,20)">bald_backdrop20</value>
+		<value condition="Skin.String(Bald.BlurBrightness,40)">bald_backdrop40</value>
+		<value condition="Skin.String(Bald.BlurBrightness,50)">bald_backdrop50</value>
+		<value>bald_backdrop</value>
+	</variable>
+	<variable name="Bald_BlurStrengthLabel">
+		<value condition="Skin.String(Bald.BlurStrength,light)">$LOCALIZE[31688]</value>
+		<value condition="Skin.String(Bald.BlurStrength,strong)">$LOCALIZE[31690]</value>
+		<value>$LOCALIZE[31689]</value>
+	</variable>
+	<variable name="Bald_BlurBrightnessLabel">
+		<value condition="Skin.String(Bald.BlurBrightness,20)">20%</value>
+		<value condition="Skin.String(Bald.BlurBrightness,40)">40%</value>
+		<value condition="Skin.String(Bald.BlurBrightness,50)">50%</value>
+		<value>30%</value>
+	</variable>
+	<expression name="Bald_BlurOn">[!Skin.HasSetting(Bald.DisableBlur) + [$EXP[Bald_HasHelper] | $EXP[Bald_HasTMDbHelper]]]</expression>
+	<expression name="Bald_BlurNow">[[$EXP[Bald_HasHelper] + !String.IsEmpty(Window(home).Property(Bald.Blur))] | [!$EXP[Bald_HasHelper] + !String.IsEmpty(Window(home).Property(TMDbHelper.ListItem.BlurImage))]]</expression>
+	<expression name="Bald_BlurLastSet">[[$EXP[Bald_HasHelper] + !String.IsEmpty(Window(home).Property(Bald.Blur.Last))] | [!$EXP[Bald_HasHelper] + !String.IsEmpty(Window(home).Property(Bald.LastBlur))]]</expression>
+	<expression name="Bald_BlurFallback">[!Window.IsActive(home) + !Window.IsActive(videos) + !$EXP[Bald_BlurNow]]</expression>
+	<expression name="Bald_HasBlur">[$EXP[Bald_BlurNow] | [$EXP[Bald_BlurFallback] + $EXP[Bald_BlurLastSet]]]</expression>
+	<variable name="Bald_BlurImage">
+		<value condition="$EXP[Bald_BlurFallback] + $EXP[Bald_HasHelper]">$INFO[Window(home).Property(Bald.Blur.Last)]</value>
+		<value condition="$EXP[Bald_BlurFallback]">$INFO[Window(home).Property(Bald.LastBlur)]</value>
+		<value condition="$EXP[Bald_HasHelper]">$INFO[Window(home).Property(Bald.Blur)]</value>
+		<value>$INFO[Window(home).Property(TMDbHelper.ListItem.BlurImage)]</value>
+	</variable>
+	<!-- Global Search's blur (script-globalsearch.xml): Bald Helper's on Home, else TMDb Helper's on the search window. -->
+	<variable name="Bald_SearchBlur">
+		<value condition="$EXP[Bald_HasHelper]">$INFO[Window(home).Property(Bald.Blur)]</value>
+		<value>$INFO[Window.Property(TMDbHelper.ListItem.BlurImage)]</value>
+	</variable>
+	<!-- The curtain's blur (Custom_1129_BaldCurtain.xml): as it was when the curtain opened, else the current one. -->
+	<variable name="Bald_CurtainBlur">
+		<value condition="!String.IsEmpty(Window(home).Property(Bald.CurtainBlur))">$INFO[Window(home).Property(Bald.CurtainBlur)]</value>
+		<value>$VAR[Bald_BlurImage]</value>
+	</variable>
+	<!-- Home's clock block, inside the right-column group at 1440,104 (Home.xml): three steps down in size and ink.
+	     - Clock: Bald_Clock 132, bald_ink. 5 px left of the column: the 132 px digits' side bearing (3 to 8 px, 5 on
+	       average) would otherwise set their ink right of the lines below; this lines them up optically.
+	     - Date: Bald_Date 22, bald_ink70, top 148 (baseline about 170, 24 px of clear space under the clock's baseline).
+	     - Weather: Bald_Hint 17, bald_ink45, top 181 (baseline about 198, 28 below the date's): smaller and dimmer than
+	       the date, and closer to it than the date is to the clock, so date and weather read as one pair under the time.
+	       With the date off it takes the date's place at top 150, its capitals where the date's would start.
+	     Everything ends by y 309 on screen, clear of the caption title (332 at the earliest) and the menu (395). No
+	     condition icon: at 17 px Bald's line icons are hairlines, a colour icon pack clashes with the ink steps, and
+	     the icon would break the shared left edge. -->
+	<include name="Bald_HomeClock">
+		<control type="label">
+			<left>-5</left>
+			<width>389</width>
+			<height>132</height>
+			<font>Bald_Clock</font>
+			<textcolor>bald_ink</textcolor>
+			<label>$VAR[Bald_Clock]</label>
+		</control>
+		<control type="label">
+			<top>148</top>
+			<height>30</height>
+			<font>Bald_Date</font>
+			<textcolor>bald_ink70</textcolor>
+			<label>$INFO[System.Date(DDDD)], $INFO[System.Date(MMMM D)]</label>
+			<visible>$EXP[Bald_ShowClockDate]</visible>
+		</control>
+		<include content="Bald_HomeClockWeather"><param name="top">181</param><param name="date">$EXP[Bald_ShowClockDate]</param></include>
+		<include content="Bald_HomeClockWeather"><param name="top">150</param><param name="date">!$EXP[Bald_ShowClockDate]</param></include>
+	</include>
+	<!-- The current weather (Bald_HeaderWeather, "59°F · Cloudy") on Home: under the date, or in its place. -->
+	<include name="Bald_HomeClockWeather">
+		<param name="top" />
+		<param name="date" />
+		<definition>
+			<control type="label">
+				<top>$PARAM[top]</top>
+				<height>24</height>
+				<font>Bald_Hint</font>
+				<textcolor>bald_ink45</textcolor>
+				<label>$VAR[Bald_HeaderWeather]</label>
+				<visible>$EXP[Bald_HeaderWeatherOn] + $PARAM[date]</visible>
+			</control>
+		</definition>
+	</include>
+	<!-- Shared note position and typography for the five-row Home and context menus. -->
+	<include name="Bald_MenuNote">
+		<param name="id">0</param>
+		<param name="text" />
+		<param name="x">1466</param><param name="y">714</param><param name="width">358</param>
+		<definition>
+			<control type="label" id="$PARAM[id]">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<width>$PARAM[width]</width>
+				<height>120</height>
+				<wrapmultiline>true</wrapmultiline>
+				<aligny>top</aligny>
+				<font>Bald_MenuNote</font>
+				<textcolor>bald_ink60</textcolor>
+				<label>$PARAM[text]</label>
+			</control>
+		</definition>
+	</include>
+	<!-- A window onto the background at x,y w x h: a grouplist clips to its bounds, and the full-screen image inside is
+	     offset back to 0,0, so it lines up exactly with the background. Used to mask the art frame's zoom overflow.
+	     Video cannot be copied into it, so with background video a frame mask is not drawn (the settle zoom is off
+	     then, Bald_ArtLayer); `panel` masks, which cover content under an overlay, stay as a plain field panel. -->
+	<include name="Bald_BackdropWindow">
+		<param name="x" />
+		<param name="y" />
+		<param name="w" />
+		<param name="h" />
+		<param name="panel">false</param>
+		<definition>
+			<control type="grouplist">
+				<visible>!$EXP[Bald_VideoBackdropOn] | $PARAM[panel]</visible>
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<width>$PARAM[w]</width>
+				<height>$PARAM[h]</height>
+				<usecontrolcoords>true</usecontrolcoords>
+				<control type="group">
+					<left>-$PARAM[x]</left>
+					<top>-$PARAM[y]</top>
+					<width>1920</width>
+					<height>1080</height>
+					<control type="image">
+						<width>1920</width>
+						<height>1080</height>
+						<texture colordiffuse="bald_field">bald/white.png</texture>
+					</control>
+					<include>Bald_BackdropImage</include>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<!-- Fixed screen-space masks cover the settling fanart zoom outside the 96,120,1248,702 frame (the info dialog's
+	     recommendations page; Home uses Bald_HomeFrameMasks). -->
+	<include name="Bald_ArtFrameMasks">
+		<include content="Bald_BackdropWindow"><param name="x">0</param><param name="y">80</param><param name="w">96</param><param name="h">782</param></include>
+		<include content="Bald_BackdropWindow"><param name="x">1344</param><param name="y">80</param><param name="w">60</param><param name="h">782</param></include>
+		<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">80</param><param name="w">1248</param><param name="h">40</param></include>
+		<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">822</param><param name="w">1248</param><param name="h">30</param></include>
+	</include>
+	<!-- Home's frame masks. Unlike Bald_ArtFrameMasks they reach the top of the screen, because on a poster row the art
+	     sits 63 px higher (Bald_AnimPosterArt), and the bottom mask is 156 px tall, so slid up 126 px
+	     (Bald_AnimPosterEdge) it covers 696-852: the frame becomes 120-696, 1248 x 576.
+	     Kodi clips a grouplist in unanimated coordinates and then applies the animation, so the sliding mask carries its
+	     view of the background with it, 126 px off. A second, fixed mask over 696-852 fades in once the slide has
+	     settled and out as it starts back, so a poster row rests on an aligned mask (docs/NOTES.md, Home row styles). -->
+	<include name="Bald_HomeFrameMasks">
+		<include content="Bald_BackdropWindow"><param name="x">0</param><param name="y">0</param><param name="w">96</param><param name="h">862</param></include>
+		<include content="Bald_BackdropWindow"><param name="x">1344</param><param name="y">0</param><param name="w">60</param><param name="h">862</param></include>
+		<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">0</param><param name="w">1248</param><param name="h">120</param></include>
+		<control type="group">
+			<include>Bald_AnimPosterEdge</include>
+			<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">822</param><param name="w">1248</param><param name="h">156</param></include>
+		</control>
+		<control type="group">
+			<visible>$EXP[Bald_PosterRow]</visible>
+			<animation type="Visible">
+				<effect type="fade" start="0" end="100" time="200" delay="370" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Hidden">
+				<effect type="fade" start="100" end="0" time="150" tween="sine" easing="inout" />
+			</animation>
+			<include content="Bald_BackdropWindow"><param name="x">96</param><param name="y">696</param><param name="w">1248</param><param name="h">156</param></include>
+		</control>
+	</include>
+
+	<!-- ============ Current-row variables (art frame) ============ -->
+	<!-- Per-row bindings come from Skin Variables for the configured rows only (shortcuts/generator/, built into
+	     script-skinvariables-generator-includes.xml, defaults in Includes_Bald_HomeDefaults.xml): $VAR[Bald_Fanart]
+	     and $VAR[Bald_Logo], and per screen the parity and logo expressions and the caption and clearlogo instances
+	     combined here. A row whose row field "logo" is off gets no clearlogo instances or logo branches, and an empty
+	     Bald_Logo value, so the frame shows no logo or logo scrim for it. -->
+	<expression name="Bald_ItemOdd">[$EXP[Bald_ItemOdd_home] | $EXP[Bald_ItemOdd_livetv] | $EXP[Bald_ItemOdd_hub1] | $EXP[Bald_ItemOdd_hub2] | $EXP[Bald_ItemOdd_hub3] | $EXP[Bald_ItemOdd_hub4] | $EXP[Bald_ItemOdd_hub5] | $EXP[Bald_ItemOdd_hub6] | $EXP[Bald_ItemOdd_hub7] | $EXP[Bald_ItemOdd_hub8]]</expression>
+	<expression name="Bald_HasLogo">[$EXP[Bald_HasLogo_home] | $EXP[Bald_HasLogo_livetv] | $EXP[Bald_HasLogo_hub1] | $EXP[Bald_HasLogo_hub2] | $EXP[Bald_HasLogo_hub3] | $EXP[Bald_HasLogo_hub4] | $EXP[Bald_HasLogo_hub5] | $EXP[Bald_HasLogo_hub6] | $EXP[Bald_HasLogo_hub7] | $EXP[Bald_HasLogo_hub8]]</expression>
+	<expression name="Bald_PreviewItemOdd">[$EXP[Bald_PreviewItemOdd_home] | $EXP[Bald_PreviewItemOdd_livetv] | $EXP[Bald_PreviewItemOdd_hub1] | $EXP[Bald_PreviewItemOdd_hub2] | $EXP[Bald_PreviewItemOdd_hub3] | $EXP[Bald_PreviewItemOdd_hub4] | $EXP[Bald_PreviewItemOdd_hub5] | $EXP[Bald_PreviewItemOdd_hub6] | $EXP[Bald_PreviewItemOdd_hub7] | $EXP[Bald_PreviewItemOdd_hub8]]</expression>
+	<expression name="Bald_PreviewHasLogo">[$EXP[Bald_PreviewHasLogo_home] | $EXP[Bald_PreviewHasLogo_livetv] | $EXP[Bald_PreviewHasLogo_hub1] | $EXP[Bald_PreviewHasLogo_hub2] | $EXP[Bald_PreviewHasLogo_hub3] | $EXP[Bald_PreviewHasLogo_hub4] | $EXP[Bald_PreviewHasLogo_hub5] | $EXP[Bald_PreviewHasLogo_hub6] | $EXP[Bald_PreviewHasLogo_hub7] | $EXP[Bald_PreviewHasLogo_hub8]]</expression>
+	<!-- Startup splash (docs/NOTES.md, Startup splash). Startup.xml sets Bald.Preload on Home when Kodi starts on Home
+	     with the Appearance setting on; Home draws the splash over itself and every configured row on every screen
+	     counts as visible while its list is still loading (Bald_Row), so all of them load behind it. It lifts once
+	     no row is loading (Timers.xml bald_preload reads the 9194 marker in Home.xml) or after a 10 s alarm.
+	     A row is loading until its provider has fetched: Container.IsUpdating holds from window load, when Kodi starts
+	     every list's job, until the visible list takes the result, so a row that loaded empty also counts as done.
+	     Rows of a hub or Live TV that is turned off in Home Screens still preload but are not waited for; Live TV rows
+	     need a PVR add-on (their Bald_Row enabled parameter), so without one they neither preload nor count. Under a
+	     modal dialog Container(...) here resolves against the dialog, so the splash waits for it to close. -->
+	<expression name="Bald_Preloading">[!String.IsEmpty(Window(home).Property(Bald.Preload))]</expression>
+	<expression name="Bald_RowsLoading">[[!$EXP[Bald_HomeHidden] + $EXP[Bald_RowsLoading_home]] | [System.HasPVRAddon + !Skin.HasSetting(Bald.Screen.HideLiveTV) + $EXP[Bald_RowsLoading_livetv]] | [$EXP[Bald_HubShown_hub1] + $EXP[Bald_RowsLoading_hub1]] | [$EXP[Bald_HubShown_hub2] + $EXP[Bald_RowsLoading_hub2]] | [$EXP[Bald_HubShown_hub3] + $EXP[Bald_RowsLoading_hub3]] | [$EXP[Bald_HubShown_hub4] + $EXP[Bald_RowsLoading_hub4]] | [$EXP[Bald_HubShown_hub5] + $EXP[Bald_RowsLoading_hub5]] | [$EXP[Bald_HubShown_hub6] + $EXP[Bald_RowsLoading_hub6]] | [$EXP[Bald_HubShown_hub7] + $EXP[Bald_RowsLoading_hub7]] | [$EXP[Bald_HubShown_hub8] + $EXP[Bald_RowsLoading_hub8]]]</expression>
+	<expression name="Bald_RowsLoaded">[!$EXP[Bald_DialogOver] + !$EXP[Bald_RowsLoading]]</expression>
+	<!-- The splash: random library fanart, darkened like Home's backdrop, crossfading (1000) every 4.5 s, with the
+	     wordmark centred. List 9180 drives it: random movies then random shows, ten each, auto-advancing. It sits inside
+	     the splash group, so it is processed (Kodi skips hidden lists) only while the splash shows, and draws nothing.
+	     With an empty library the image stays blank over the field. -->
+	<variable name="Bald_SplashFanart">
+		<value condition="!String.IsEmpty(Container(9180).ListItem.Art(fanart))">$INFO[Container(9180).ListItem.Art(fanart)]</value>
+		<value>$INFO[Container(9180).ListItem.Art(tvshow.fanart)]</value>
+	</variable>
+	<include name="Bald_Splash">
+		<control type="group">
+			<visible>$EXP[Bald_Preloading]</visible>
+			<animation type="Hidden">
+				<effect type="fade" start="100" end="0" time="600" tween="sine" easing="inout" />
+			</animation>
+			<control type="image">
+				<width>1920</width>
+				<height>1080</height>
+				<texture colordiffuse="bald_field">bald/white.png</texture>
+			</control>
+			<control type="list" id="9180">
+				<width>1</width>
+				<height>1</height>
+				<orientation>vertical</orientation>
+				<autoscroll time="4500">true</autoscroll>
+				<itemlayout width="1" height="1" />
+				<focusedlayout width="1" height="1" />
+				<content limit="10" browse="never">special://skin/playlists/random_movies.xsp</content>
+				<content limit="10" browse="never">special://skin/playlists/random_tvshows.xsp</content>
+			</control>
+			<control type="image">
+				<width>1920</width>
+				<height>1080</height>
+				<aspectratio>scale</aspectratio>
+				<fadetime>1000</fadetime>
+				<texture background="true">$VAR[Bald_SplashFanart]</texture>
+				<colordiffuse>bald_backdrop</colordiffuse>
+			</control>
+			<control type="label">
+				<width>1920</width>
+				<height>1080</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>Bald_Clock</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$LOCALIZE[31727]</label>
+				<animation type="WindowOpen">
+					<effect type="fade" start="0" end="100" time="400" tween="sine" easing="inout" />
+				</animation>
+			</control>
+		</control>
+	</include>
+	<include name="Bald_ConfiguredArtLogos">
+		<include>Bald_ConfiguredArtLogos_home</include>
+		<include>Bald_ConfiguredArtLogos_livetv</include>
+		<include>Bald_ConfiguredArtLogos_hub1</include>
+		<include>Bald_ConfiguredArtLogos_hub2</include>
+		<include>Bald_ConfiguredArtLogos_hub3</include>
+		<include>Bald_ConfiguredArtLogos_hub4</include>
+		<include>Bald_ConfiguredArtLogos_hub5</include>
+		<include>Bald_ConfiguredArtLogos_hub6</include>
+		<include>Bald_ConfiguredArtLogos_hub7</include>
+		<include>Bald_ConfiguredArtLogos_hub8</include>
+	</include>
+	<!-- Home onload: clear every configured row's row-start mark (see Bald_Row). -->
+	<include name="Bald_RowStartReset">
+		<include>Bald_RowStartReset_home</include>
+		<include>Bald_RowStartReset_livetv</include>
+		<include>Bald_RowStartReset_hub1</include>
+		<include>Bald_RowStartReset_hub2</include>
+		<include>Bald_RowStartReset_hub3</include>
+		<include>Bald_RowStartReset_hub4</include>
+		<include>Bald_RowStartReset_hub5</include>
+		<include>Bald_RowStartReset_hub6</include>
+		<include>Bald_RowStartReset_hub7</include>
+		<include>Bald_RowStartReset_hub8</include>
+	</include>
+	<!-- Every screen's configured rows: built per install by Skin Variables from the widget editor's lists; until the first
+	     build, Includes_Bald_HomeDefaults.xml supplies the shipped defaults (see Includes.xml). Empty hub slots build
+	     empty definitions. -->
+	<include name="Bald_GeneratedRows">
+		<include>Bald_Generated_HomeWidgets</include>
+		<include>Bald_Generated_LiveTVWidgets</include>
+		<include>Bald_Generated_Hub1Widgets</include>
+		<include>Bald_Generated_Hub2Widgets</include>
+		<include>Bald_Generated_Hub3Widgets</include>
+		<include>Bald_Generated_Hub4Widgets</include>
+		<include>Bald_Generated_Hub5Widgets</include>
+		<include>Bald_Generated_Hub6Widgets</include>
+		<include>Bald_Generated_Hub7Widgets</include>
+		<include>Bald_Generated_Hub8Widgets</include>
+	</include>
+	<include name="Bald_ConfiguredCaptions">
+		<include>Bald_ConfiguredCaptions_home</include>
+		<include>Bald_ConfiguredCaptions_livetv</include>
+		<include>Bald_ConfiguredCaptions_hub1</include>
+		<include>Bald_ConfiguredCaptions_hub2</include>
+		<include>Bald_ConfiguredCaptions_hub3</include>
+		<include>Bald_ConfiguredCaptions_hub4</include>
+		<include>Bald_ConfiguredCaptions_hub5</include>
+		<include>Bald_ConfiguredCaptions_hub6</include>
+		<include>Bald_ConfiguredCaptions_hub7</include>
+		<include>Bald_ConfiguredCaptions_hub8</include>
+	</include>
+	<expression name="Bald_MenuOpen">[!String.IsEmpty(Window(home).Property(Bald.Menu))]</expression>
+	<!-- The menu entry being previewed (Bald.MenuPreview), by screen; the Bald_Preview* names below also need the menu open. -->
+	<expression name="Bald_MenuPreview_home">[String.IsEqual(Window(home).Property(Bald.MenuPreview),home)]</expression>
+	<expression name="Bald_MenuPreview_hub1">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub1)]</expression>
+	<expression name="Bald_MenuPreview_hub2">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub2)]</expression>
+	<expression name="Bald_MenuPreview_hub3">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub3)]</expression>
+	<expression name="Bald_MenuPreview_hub4">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub4)]</expression>
+	<expression name="Bald_MenuPreview_hub5">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub5)]</expression>
+	<expression name="Bald_MenuPreview_hub6">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub6)]</expression>
+	<expression name="Bald_MenuPreview_hub7">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub7)]</expression>
+	<expression name="Bald_MenuPreview_hub8">[String.IsEqual(Window(home).Property(Bald.MenuPreview),hub8)]</expression>
+	<expression name="Bald_MenuPreview_livetv">[String.IsEqual(Window(home).Property(Bald.MenuPreview),livetv)]</expression>
+	<expression name="Bald_MenuPreview_search">[String.IsEqual(Window(home).Property(Bald.MenuPreview),search)]</expression>
+	<expression name="Bald_MenuPreview_settings">[String.IsEqual(Window(home).Property(Bald.MenuPreview),settings)]</expression>
+	<expression name="Bald_MenuPreview_power">[String.IsEqual(Window(home).Property(Bald.MenuPreview),power)]</expression>
+	<!-- The screen whose rows are showing (Bald.Screen), and whether a row is current (Bald.Row). -->
+	<expression name="Bald_Screen_livetv">[String.IsEqual(Window(home).Property(Bald.Screen),livetv)]</expression>
+	<expression name="Bald_Screen_hub1">[String.IsEqual(Window(home).Property(Bald.Screen),hub1)]</expression>
+	<expression name="Bald_Screen_hub2">[String.IsEqual(Window(home).Property(Bald.Screen),hub2)]</expression>
+	<expression name="Bald_Screen_hub3">[String.IsEqual(Window(home).Property(Bald.Screen),hub3)]</expression>
+	<expression name="Bald_Screen_hub4">[String.IsEqual(Window(home).Property(Bald.Screen),hub4)]</expression>
+	<expression name="Bald_Screen_hub5">[String.IsEqual(Window(home).Property(Bald.Screen),hub5)]</expression>
+	<expression name="Bald_Screen_hub6">[String.IsEqual(Window(home).Property(Bald.Screen),hub6)]</expression>
+	<expression name="Bald_Screen_hub7">[String.IsEqual(Window(home).Property(Bald.Screen),hub7)]</expression>
+	<expression name="Bald_Screen_hub8">[String.IsEqual(Window(home).Property(Bald.Screen),hub8)]</expression>
+	<expression name="Bald_HasRow">[!String.IsEmpty(Window(home).Property(Bald.Row))]</expression>
+	<expression name="Bald_PreviewHome">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_home]]</expression>
+	<!-- Live TV previews as a screen only with a PVR add-on; without one it keeps the current screen's art, as before. -->
+	<expression name="Bald_PreviewLiveTV">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_livetv] + System.HasPVRAddon]</expression>
+	<expression name="Bald_PreviewHub1">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub1]]</expression>
+	<expression name="Bald_PreviewHub2">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub2]]</expression>
+	<expression name="Bald_PreviewHub3">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub3]]</expression>
+	<expression name="Bald_PreviewHub4">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub4]]</expression>
+	<expression name="Bald_PreviewHub5">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub5]]</expression>
+	<expression name="Bald_PreviewHub6">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub6]]</expression>
+	<expression name="Bald_PreviewHub7">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub7]]</expression>
+	<expression name="Bald_PreviewHub8">[$EXP[Bald_MenuOpen] + $EXP[Bald_MenuPreview_hub8]]</expression>
+	<expression name="Bald_WidgetPreview">[$EXP[Bald_PreviewHome] | $EXP[Bald_PreviewLiveTV] | $EXP[Bald_PreviewHub1] | $EXP[Bald_PreviewHub2] | $EXP[Bald_PreviewHub3] | $EXP[Bald_PreviewHub4] | $EXP[Bald_PreviewHub5] | $EXP[Bald_PreviewHub6] | $EXP[Bald_PreviewHub7] | $EXP[Bald_PreviewHub8]]</expression>
+	<expression name="Bald_EffectiveItemOdd">[[$EXP[Bald_WidgetPreview] + $EXP[Bald_PreviewItemOdd]] | [!$EXP[Bald_WidgetPreview] + $EXP[Bald_ItemOdd]]]</expression>
+	<!-- The menu previews Search, Settings or Power with a background image of its own (Home Screens; Bald_Fanart shows
+	     it): the current row's clearlogo and its scrim stay off, since they belong to the art the image replaced. -->
+	<expression name="Bald_PreviewFixedArt">[$EXP[Bald_MenuOpen] + [[$EXP[Bald_MenuPreview_search] + !String.IsEmpty(Skin.String(Bald.Art.search))] | [$EXP[Bald_MenuPreview_settings] + !String.IsEmpty(Skin.String(Bald.Art.settings))] | [$EXP[Bald_MenuPreview_power] + !String.IsEmpty(Skin.String(Bald.Art.power))]]]</expression>
+	<expression name="Bald_EffectiveHasLogo">[[[$EXP[Bald_WidgetPreview] + $EXP[Bald_PreviewHasLogo]] | [!$EXP[Bald_WidgetPreview] + $EXP[Bald_HasLogo]]] + !$EXP[Bald_PreviewFixedArt]]</expression>
+	<!-- The main menu or the context menu (restyled as the same menu over Home) is open: the caption slides out,
+	     the section line hides, the rows dim. -->
+	<expression name="Bald_OverlayOpen">[$EXP[Bald_MenuOpen] | Window.IsVisible(contextmenu)]</expression>
+	<!-- Menu open on an entry that previews no rows (Search, Settings, Live TV without rows or PVR, a hub without rows):
+	     its label and note show in the row area instead. Bald_PreviewRows_<screen> is generated: previewed, enabled
+	     (Live TV needs a PVR add-on) and with rows. -->
+	<expression name="Bald_PreviewOther">[$EXP[Bald_MenuOpen] + !$EXP[Bald_MenuPreview_home] + !$EXP[Bald_PreviewRows_livetv] + !$EXP[Bald_PreviewRows_hub1] + !$EXP[Bald_PreviewRows_hub2] + !$EXP[Bald_PreviewRows_hub3] + !$EXP[Bald_PreviewRows_hub4] + !$EXP[Bald_PreviewRows_hub5] + !$EXP[Bald_PreviewRows_hub6] + !$EXP[Bald_PreviewRows_hub7] + !$EXP[Bald_PreviewRows_hub8]]</expression>
+	<variable name="Bald_MenuPreviewLabel">
+		<value condition="$EXP[Bald_MenuPreview_livetv]">$LOCALIZE[31700]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub1]">$VAR[Bald_HubLabel_hub1]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub2]">$VAR[Bald_HubLabel_hub2]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub3]">$VAR[Bald_HubLabel_hub3]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub4]">$VAR[Bald_HubLabel_hub4]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub5]">$VAR[Bald_HubLabel_hub5]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub6]">$VAR[Bald_HubLabel_hub6]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub7]">$VAR[Bald_HubLabel_hub7]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub8]">$VAR[Bald_HubLabel_hub8]</value>
+		<value condition="$EXP[Bald_MenuPreview_search]">$LOCALIZE[137]</value>
+		<value condition="$EXP[Bald_MenuPreview_settings]">$LOCALIZE[5]</value>
+		<value condition="$EXP[Bald_MenuPreview_power]">$LOCALIZE[33060]</value>
+	</variable>
+	<variable name="Bald_MenuPreviewNote">
+		<!-- The Home rows' labels, comma separated (generated; empty with no rows). -->
+		<value condition="$EXP[Bald_MenuPreview_home]">$VAR[Bald_RowsNote_home]</value>
+		<!-- Live TV: its rows' labels while they show, else that Select opens the guide. -->
+		<value condition="$EXP[Bald_PreviewRows_livetv]">$VAR[Bald_RowsNote_livetv]</value>
+		<value condition="$EXP[Bald_MenuPreview_livetv]">$LOCALIZE[31705]</value>
+		<!-- A hub: its rows' labels, else what Select does without rows (generated, Bald_HubNote_<screen>). -->
+		<value condition="$EXP[Bald_MenuPreview_hub1]">$VAR[Bald_HubNote_hub1]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub2]">$VAR[Bald_HubNote_hub2]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub3]">$VAR[Bald_HubNote_hub3]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub4]">$VAR[Bald_HubNote_hub4]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub5]">$VAR[Bald_HubNote_hub5]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub6]">$VAR[Bald_HubNote_hub6]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub7]">$VAR[Bald_HubNote_hub7]</value>
+		<value condition="$EXP[Bald_MenuPreview_hub8]">$VAR[Bald_HubNote_hub8]</value>
+		<value condition="$EXP[Bald_MenuPreview_search]">$LOCALIZE[31706]</value>
+		<value condition="$EXP[Bald_MenuPreview_settings]">$LOCALIZE[31707]</value>
+		<value condition="$EXP[Bald_MenuPreview_power]">$LOCALIZE[31709]</value>
+	</variable>
+	<expression name="Bald_Idle">[$EXP[Bald_IdleReached] + Window.IsActive(home)]</expression>
+	<!-- Each screen's name, for the breadcrumb that starts its rows' label line (Bald_Row): "Movies / In-progress movies". -->
+	<variable name="Bald_ScreenName_home"><value>$LOCALIZE[10000]</value></variable>
+	<variable name="Bald_ScreenName_livetv"><value>$LOCALIZE[31700]</value></variable>
+	<variable name="Bald_ScreenName_hub1"><value>$VAR[Bald_HubLabel_hub1]</value></variable>
+	<variable name="Bald_ScreenName_hub2"><value>$VAR[Bald_HubLabel_hub2]</value></variable>
+	<variable name="Bald_ScreenName_hub3"><value>$VAR[Bald_HubLabel_hub3]</value></variable>
+	<variable name="Bald_ScreenName_hub4"><value>$VAR[Bald_HubLabel_hub4]</value></variable>
+	<variable name="Bald_ScreenName_hub5"><value>$VAR[Bald_HubLabel_hub5]</value></variable>
+	<variable name="Bald_ScreenName_hub6"><value>$VAR[Bald_HubLabel_hub6]</value></variable>
+	<variable name="Bald_ScreenName_hub7"><value>$VAR[Bald_HubLabel_hub7]</value></variable>
+	<variable name="Bald_ScreenName_hub8"><value>$VAR[Bald_HubLabel_hub8]</value></variable>
+
+	<!-- ============ Home hidden (Home Screens > Home > Show in the main menu) ============ -->
+	<!-- Bald.Screen.HideHome takes Home out of the menu, but only while some hub is shown: Home never hides with nothing
+	     else to show. Its rows are then disabled (screens.xml "enabled": not shown, not preloaded, not waited for, and
+	     their onfocus sets no state, so the default control 9101, which Kodi still focuses first, changes nothing).
+	     Home's onload starts where Home would have been (docs/NOTES.md, Home hidden):
+	       the first shown hub with rows (menu order), else Live TV's rows (shown, a PVR add-on and rows), else the menu
+	       open on the first shown hub.
+	     Bald_Start* name that start: the screen, its first row, that row's style and the menu entry; with Home shown
+	     they are exactly Home's (home, 9101, Bald_RowStyle_home, 9001). -->
+	<expression name="Bald_HomeHidden">[Skin.HasSetting(Bald.Screen.HideHome) + [$EXP[Bald_HubShown_hub1] | $EXP[Bald_HubShown_hub2] | $EXP[Bald_HubShown_hub3] | $EXP[Bald_HubShown_hub4] | $EXP[Bald_HubShown_hub5] | $EXP[Bald_HubShown_hub6] | $EXP[Bald_HubShown_hub7] | $EXP[Bald_HubShown_hub8]]]</expression>
+	<expression name="Bald_HubShownRows_hub1">[$EXP[Bald_HubShown_hub1] + $EXP[Bald_HasRows_hub1]]</expression>
+	<expression name="Bald_HubShownRows_hub2">[$EXP[Bald_HubShown_hub2] + $EXP[Bald_HasRows_hub2]]</expression>
+	<expression name="Bald_HubShownRows_hub3">[$EXP[Bald_HubShown_hub3] + $EXP[Bald_HasRows_hub3]]</expression>
+	<expression name="Bald_HubShownRows_hub4">[$EXP[Bald_HubShown_hub4] + $EXP[Bald_HasRows_hub4]]</expression>
+	<expression name="Bald_HubShownRows_hub5">[$EXP[Bald_HubShown_hub5] + $EXP[Bald_HasRows_hub5]]</expression>
+	<expression name="Bald_HubShownRows_hub6">[$EXP[Bald_HubShown_hub6] + $EXP[Bald_HasRows_hub6]]</expression>
+	<expression name="Bald_HubShownRows_hub7">[$EXP[Bald_HubShown_hub7] + $EXP[Bald_HasRows_hub7]]</expression>
+	<expression name="Bald_HubShownRows_hub8">[$EXP[Bald_HubShown_hub8] + $EXP[Bald_HasRows_hub8]]</expression>
+	<expression name="Bald_LiveTVStarts">[!Skin.HasSetting(Bald.Screen.HideLiveTV) + $EXP[Bald_LiveTVRows]]</expression>
+	<expression name="Bald_StartHasRows">[[!$EXP[Bald_HomeHidden] + $EXP[Bald_HasRows_home]] | [$EXP[Bald_HomeHidden] + [$EXP[Bald_HubShownRows_hub1] | $EXP[Bald_HubShownRows_hub2] | $EXP[Bald_HubShownRows_hub3] | $EXP[Bald_HubShownRows_hub4] | $EXP[Bald_HubShownRows_hub5] | $EXP[Bald_HubShownRows_hub6] | $EXP[Bald_HubShownRows_hub7] | $EXP[Bald_HubShownRows_hub8] | $EXP[Bald_LiveTVStarts]]]]</expression>
+	<variable name="Bald_StartScreen">
+		<value condition="!$EXP[Bald_HomeHidden]">home</value>
+		<value condition="$EXP[Bald_HubShownRows_hub1]">hub1</value>
+		<value condition="$EXP[Bald_HubShownRows_hub2]">hub2</value>
+		<value condition="$EXP[Bald_HubShownRows_hub3]">hub3</value>
+		<value condition="$EXP[Bald_HubShownRows_hub4]">hub4</value>
+		<value condition="$EXP[Bald_HubShownRows_hub5]">hub5</value>
+		<value condition="$EXP[Bald_HubShownRows_hub6]">hub6</value>
+		<value condition="$EXP[Bald_HubShownRows_hub7]">hub7</value>
+		<value condition="$EXP[Bald_HubShownRows_hub8]">hub8</value>
+		<value condition="$EXP[Bald_LiveTVStarts]">livetv</value>
+		<value condition="$EXP[Bald_HubShown_hub1]">hub1</value>
+		<value condition="$EXP[Bald_HubShown_hub2]">hub2</value>
+		<value condition="$EXP[Bald_HubShown_hub3]">hub3</value>
+		<value condition="$EXP[Bald_HubShown_hub4]">hub4</value>
+		<value condition="$EXP[Bald_HubShown_hub5]">hub5</value>
+		<value condition="$EXP[Bald_HubShown_hub6]">hub6</value>
+		<value condition="$EXP[Bald_HubShown_hub7]">hub7</value>
+		<value condition="$EXP[Bald_HubShown_hub8]">hub8</value>
+		<value>home</value>
+	</variable>
+	<variable name="Bald_StartRow">
+		<value condition="!$EXP[Bald_HomeHidden]">9101</value>
+		<value condition="$EXP[Bald_HubShownRows_hub1]">9201</value>
+		<value condition="$EXP[Bald_HubShownRows_hub2]">9301</value>
+		<value condition="$EXP[Bald_HubShownRows_hub3]">9401</value>
+		<value condition="$EXP[Bald_HubShownRows_hub4]">9501</value>
+		<value condition="$EXP[Bald_HubShownRows_hub5]">9601</value>
+		<value condition="$EXP[Bald_HubShownRows_hub6]">9701</value>
+		<value condition="$EXP[Bald_HubShownRows_hub7]">9801</value>
+		<value condition="$EXP[Bald_HubShownRows_hub8]">9901</value>
+		<value condition="$EXP[Bald_LiveTVStarts]">9051</value>
+		<value />
+	</variable>
+	<variable name="Bald_StartRowStyle">
+		<value condition="!$EXP[Bald_HomeHidden]">$VAR[Bald_RowStyle_home]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub1]">$VAR[Bald_RowStyle_hub1]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub2]">$VAR[Bald_RowStyle_hub2]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub3]">$VAR[Bald_RowStyle_hub3]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub4]">$VAR[Bald_RowStyle_hub4]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub5]">$VAR[Bald_RowStyle_hub5]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub6]">$VAR[Bald_RowStyle_hub6]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub7]">$VAR[Bald_RowStyle_hub7]</value>
+		<value condition="$EXP[Bald_HubShownRows_hub8]">$VAR[Bald_RowStyle_hub8]</value>
+		<value condition="$EXP[Bald_LiveTVStarts]">$VAR[Bald_RowStyle_livetv]</value>
+		<value />
+	</variable>
+	<!-- The menu entry of the screen on show (Bald.Screen), else the start screen's: where focus goes when it is lost
+	     (Timers.xml bald_focus_lost). -->
+	<variable name="Bald_ScreenMenuEntry">
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),home) + !$EXP[Bald_HomeHidden]">9001</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),livetv) + System.HasPVRAddon + !Skin.HasSetting(Bald.Screen.HideLiveTV)">9004</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub1) + $EXP[Bald_HubShown_hub1]">9011</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub2) + $EXP[Bald_HubShown_hub2]">9012</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub3) + $EXP[Bald_HubShown_hub3]">9013</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub4) + $EXP[Bald_HubShown_hub4]">9014</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub5) + $EXP[Bald_HubShown_hub5]">9015</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub6) + $EXP[Bald_HubShown_hub6]">9016</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub7) + $EXP[Bald_HubShown_hub7]">9017</value>
+		<value condition="String.IsEqual(Window(home).Property(Bald.Screen),hub8) + $EXP[Bald_HubShown_hub8]">9018</value>
+		<value>$VAR[Bald_StartMenuEntry]</value>
+	</variable>
+	<variable name="Bald_StartMenuEntry">
+		<value condition="!$EXP[Bald_HomeHidden]">9001</value>
+		<value condition="$EXP[Bald_HubShown_hub1]">9011</value>
+		<value condition="$EXP[Bald_HubShown_hub2]">9012</value>
+		<value condition="$EXP[Bald_HubShown_hub3]">9013</value>
+		<value condition="$EXP[Bald_HubShown_hub4]">9014</value>
+		<value condition="$EXP[Bald_HubShown_hub5]">9015</value>
+		<value condition="$EXP[Bald_HubShown_hub6]">9016</value>
+		<value condition="$EXP[Bald_HubShown_hub7]">9017</value>
+		<value condition="$EXP[Bald_HubShown_hub8]">9018</value>
+		<value>9001</value>
+	</variable>
+	<!-- Focus left on a Home row while Home is hidden: only the default control 9101 at load, before the onload's
+	     SetFocus reaches the start row (a list that has never been shown has no items and cannot take focus yet), or a
+	     key pressed in that moment. Marker 9193 shows then, and Timers.xml bald_home_start moves focus on through 9195. -->
+	<expression name="Bald_HomeRowStranded">[$EXP[Bald_HomeHidden] + !$EXP[Bald_Preloading] + Integer.IsGreater(System.CurrentControlID,9100) + Integer.IsLess(System.CurrentControlID,9121)]</expression>
+
+	<!-- Where focus goes back to the rows (idle wake): the current row, or with no current row the menu's first entry
+	     (Home, or the first shown hub while Home is hidden). -->
+	<variable name="Bald_RowFocus">
+		<value condition="$EXP[Bald_HasRow]">$INFO[Window(home).Property(Bald.Row)]</value>
+		<value condition="$EXP[Bald_HomeHidden]">$VAR[Bald_StartMenuEntry]</value>
+		<value>9001</value>
+	</variable>
+	<variable name="Bald_NudgeLNext">
+		<value condition="String.IsEqual(Window(home).Property(Bald.NudgeL),a)">b</value>
+		<value>a</value>
+	</variable>
+	<variable name="Bald_NudgeRNext">
+		<value condition="String.IsEqual(Window(home).Property(Bald.NudgeR),a)">b</value>
+		<value>a</value>
+	</variable>
+
+	<!-- ============ Animations ============ -->
+	<!-- Caption element in: fade 380 and move 540 from 14 px left after a delay (180 settle plus the stagger).
+	     Visible plays when this Odd/Even instance takes over (an item change); on Home the Conditional plays when the
+	     row becomes current (a row swap), since the element's own visibility does not change then. Library and info
+	     captions (ignore_home_row true) have no Home row, so they leave the Conditional out. -->
+	<include name="Bald_AnimCaptionIn">
+		<param name="c" />
+		<param name="delay" />
+		<param name="ignore_home_row">false</param>
+		<definition>
+			<include content="Bald_AnimCaptionRow_$PARAM[ignore_home_row]"><param name="c">$PARAM[c]</param><param name="delay">$PARAM[delay]</param></include>
+			<animation type="Visible" condition="$EXP[Bald_FullMotion]">
+				<effect type="fade" start="0" end="100" time="380" delay="$PARAM[delay]" tween="sine" easing="inout" />
+				<effect type="slide" start="-14,0" end="0,0" time="540" delay="$PARAM[delay]" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Visible" condition="$EXP[Bald_ReduceMotion]">
+				<effect type="fade" start="0" end="100" time="380" delay="$PARAM[delay]" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<include name="Bald_AnimCaptionRow_false">
+		<param name="c" />
+		<param name="delay" />
+		<definition>
+			<animation type="Conditional" condition="[String.IsEqual(Window(home).Property(Bald.Row),$PARAM[c])] + $EXP[Bald_FullMotion]" reversible="false">
+				<effect type="fade" start="0" end="100" time="380" delay="$PARAM[delay]" tween="sine" easing="inout" />
+				<effect type="slide" start="-14,0" end="0,0" time="540" delay="$PARAM[delay]" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Conditional" condition="[String.IsEqual(Window(home).Property(Bald.Row),$PARAM[c])] + $EXP[Bald_ReduceMotion]" reversible="false">
+				<effect type="fade" start="0" end="100" time="380" delay="$PARAM[delay]" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<include name="Bald_AnimCaptionRow_true">
+		<param name="c" />
+		<param name="delay" />
+		<definition />
+	</include>
+	<!-- Row swap: out 140 fade and drop 18 px, then (after 170, as in the prototype) in 360 fade and 440 rise. -->
+	<include name="Bald_AnimRowSwap">
+		<animation type="Visible" condition="$EXP[Bald_FullMotion]">
+			<effect type="fade" start="0" end="100" time="360" delay="170" tween="sine" easing="inout" />
+			<effect type="slide" start="0,18" end="0,0" time="440" delay="170" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Visible" condition="$EXP[Bald_ReduceMotion]">
+			<effect type="fade" start="0" end="100" time="360" delay="170" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Hidden" condition="$EXP[Bald_FullMotion]">
+			<effect type="fade" start="100" end="0" time="140" tween="sine" easing="inout" />
+			<effect type="slide" start="0,0" end="0,18" time="140" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Hidden" condition="$EXP[Bald_ReduceMotion]">
+			<effect type="fade" start="100" end="0" time="140" tween="sine" easing="inout" />
+		</animation>
+	</include>
+	<!-- Row edge nudge: 14 px over 110, then back. -->
+	<include name="Bald_AnimNudge">
+		<param name="prop" />
+		<param name="x" />
+		<param name="back" />
+		<definition>
+			<animation type="Conditional" condition="[String.IsEqual(Window(home).Property($PARAM[prop]),a)] + $EXP[Bald_FullMotion]" reversible="false">
+				<effect type="slide" start="0,0" end="$PARAM[x],0" time="110" tween="cubic" easing="out" />
+				<effect type="slide" start="0,0" end="$PARAM[back],0" time="110" delay="110" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Conditional" condition="[String.IsEqual(Window(home).Property($PARAM[prop]),b)] + $EXP[Bald_FullMotion]" reversible="false">
+				<effect type="slide" start="0,0" end="$PARAM[x],0" time="110" tween="cubic" easing="out" />
+				<effect type="slide" start="0,0" end="$PARAM[back],0" time="110" delay="110" tween="cubic" easing="out" />
+			</animation>
+		</definition>
+	</include>
+	<!-- Things that hide while the menu is open: out 160, and back in 160 as the (reversible) Conditional reverses. -->
+	<include name="Bald_AnimMenuHides">
+		<animation type="Conditional" condition="$EXP[Bald_OverlayOpen]">
+			<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+		</animation>
+	</include>
+
+	<include name="Bald_AnimMenuShows">
+		<animation type="Visible" condition="$EXP[Bald_FullMotion]">
+			<effect type="fade" start="0" end="100" time="380" delay="120" tween="sine" easing="inout" />
+			<effect type="slide" start="40,0" end="0,0" time="480" delay="120" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Visible" condition="$EXP[Bald_ReduceMotion]">
+			<effect type="fade" start="0" end="100" time="380" delay="120" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Hidden" condition="$EXP[Bald_FullMotion]">
+			<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+			<effect type="slide" start="0,0" end="40,0" time="180" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Hidden" condition="$EXP[Bald_ReduceMotion]">
+			<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+		</animation>
+	</include>
+
+	<include name="Bald_AnimLogoIn">
+		<definition>
+			<animation type="Visible" condition="$EXP[Bald_FullMotion]">
+				<effect type="fade" start="0" end="100" time="520" delay="380" tween="sine" easing="inout" />
+				<effect type="slide" start="0,10" end="0,0" time="760" delay="380" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Visible" condition="$EXP[Bald_ReduceMotion]">
+				<effect type="fade" start="0" end="100" time="520" delay="380" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Hidden">
+				<effect type="fade" start="100" end="0" time="150" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<!-- Fanart layer for one parity. The incoming layer fades in (700) while settling from 1.05 (1500; not with
+	     background video, see Bald_BackdropWindow); the outgoing layer fades out (700) still showing the old art. A row
+	     swap that keeps the parity changes the visible layer's texture instead, which <fadetime> crossfades (it waits
+	     until the new image has loaded). -->
+	<include name="Bald_ArtLayer">
+		<param name="visible" />
+		<param name="texture">$VAR[Bald_Fanart]</param>
+		<param name="width">1248</param><param name="height">702</param><param name="center">624,351</param>
+		<definition>
+			<control type="image">
+				<width>$PARAM[width]</width>
+				<height>$PARAM[height]</height>
+				<aspectratio>scale</aspectratio>
+				<fadetime>700</fadetime>
+				<texture background="true">$PARAM[texture]</texture>
+				<visible>$PARAM[visible]</visible>
+				<animation type="Visible" condition="[!$EXP[Bald_VideoBackdropOn]] + $EXP[Bald_FullMotion]">
+					<effect type="fade" start="0" end="100" time="700" tween="sine" easing="inout" />
+					<effect type="zoom" start="105" end="100" center="$PARAM[center]" time="1500" tween="cubic" easing="out" />
+				</animation>
+				<animation type="Visible" condition="[!$EXP[Bald_VideoBackdropOn]] + $EXP[Bald_ReduceMotion]">
+					<effect type="fade" start="0" end="100" time="700" tween="sine" easing="inout" />
+				</animation>
+				<!-- Background video: no settle zoom, which the frame masks (not drawn over video) would have to hide. -->
+				<animation type="Visible" condition="$EXP[Bald_VideoBackdropOn]">
+					<effect type="fade" start="0" end="100" time="700" tween="sine" easing="inout" />
+				</animation>
+				<animation type="Hidden">
+					<effect type="fade" start="100" end="0" time="700" tween="sine" easing="inout" />
+				</animation>
+			</control>
+		</definition>
+	</include>
+
+	<!-- Dialog art (Home.xml): the live $VAR[Bald_Fanart] while a dialog is over Home, lingering (900, then out 250)
+	     while the parity layers settle after it closes. <cut>, when true as it hides, fades it out at once instead
+	     (the 702 copy giving way to a poster row's 576 frame over background video as info closes). -->
+	<include name="Bald_DialogArt">
+		<param name="height">702</param>
+		<param name="visible">$EXP[Bald_DialogOver]</param>
+		<param name="cut">false</param>
+		<definition>
+			<control type="image">
+				<width>1248</width>
+				<height>$PARAM[height]</height>
+				<aspectratio>scale</aspectratio>
+				<texture background="true">$VAR[Bald_Fanart]</texture>
+				<visible>$PARAM[visible]</visible>
+				<animation type="Hidden" condition="![$PARAM[cut]]">
+					<effect type="fade" start="100" end="0" time="250" delay="900" tween="sine" easing="inout" />
+				</animation>
+				<animation type="Hidden" condition="$PARAM[cut]">
+					<effect type="fade" start="100" end="0" time="130" tween="sine" easing="inout" />
+				</animation>
+			</control>
+		</definition>
+	</include>
+
+	<!-- Clearlogo on the art for one row and parity: fade 520 and rise 10 px over 760, 380 after the art starts;
+	     the outgoing logo fades out (150) still showing the old picture. The group follows the row (current, or the
+	     previewed screen's remembered row), so Kodi skips the images of every other row each frame; it carries the
+	     row's in and out motion, and the images their own for a change of item within the row. The item's clearlogo,
+	     else its show's, else (container_logo, library pages) the listing's show clearlogo, which Home, with no media
+	     container, never has. -->
+	<include name="Bald_ArtLogo">
+		<param name="c" />
+		<param name="p" />
+		<param name="ignore_home_row">false</param>
+		<param name="preview">false</param>
+		<param name="container_logo">true</param>
+		<param name="x">52</param><param name="y">486</param><param name="width">560</param><param name="height">170</param>
+		<definition>
+			<control type="group">
+				<visible>$PARAM[ignore_home_row] | $PARAM[preview] | [!$EXP[Bald_WidgetPreview] + !$EXP[Bald_PreviewFixedArt] + String.IsEqual(Window(home).Property(Bald.Row),$PARAM[c])]</visible>
+				<include>Bald_AnimLogoIn</include>
+				<control type="image">
+					<left>$PARAM[x]</left>
+					<top>$PARAM[y]</top>
+					<width>$PARAM[width]</width>
+					<height>$PARAM[height]</height>
+					<aspectratio align="left" aligny="bottom">keep</aspectratio>
+					<texture background="true">$INFO[Container($PARAM[c]).ListItem.Art(clearlogo)]</texture>
+					<visible>$EXP[Bald_ShowClearlogo] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + !String.IsEmpty(Container($PARAM[c]).ListItem.Art(clearlogo))</visible>
+					<include>Bald_AnimLogoIn</include>
+				</control>
+				<control type="image">
+					<left>$PARAM[x]</left>
+					<top>$PARAM[y]</top>
+					<width>$PARAM[width]</width>
+					<height>$PARAM[height]</height>
+					<aspectratio align="left" aligny="bottom">keep</aspectratio>
+					<texture background="true">$INFO[Container($PARAM[c]).ListItem.Art(tvshow.clearlogo)]</texture>
+					<visible>$EXP[Bald_ShowClearlogo] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + String.IsEmpty(Container($PARAM[c]).ListItem.Art(clearlogo)) + !String.IsEmpty(Container($PARAM[c]).ListItem.Art(tvshow.clearlogo))</visible>
+					<include>Bald_AnimLogoIn</include>
+				</control>
+				<control type="image">
+					<left>$PARAM[x]</left><top>$PARAM[y]</top><width>$PARAM[width]</width><height>$PARAM[height]</height><aspectratio align="left" aligny="bottom">keep</aspectratio>
+					<texture background="true">$INFO[Container.Art(tvshow.clearlogo)]</texture>
+					<visible>$PARAM[container_logo] + $EXP[Bald_ShowClearlogo] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + String.IsEmpty(Container($PARAM[c]).ListItem.Art(clearlogo)) + String.IsEmpty(Container($PARAM[c]).ListItem.Art(tvshow.clearlogo)) + !String.IsEmpty(Container.Art(tvshow.clearlogo))</visible>
+					<include>Bald_AnimLogoIn</include>
+				</control>
+			</control>
+		</definition>
+	</include>
+
+	<!-- ============ Caption (per row and parity, bound to that row's container) ============ -->
+	<include name="Bald_Caption">
+		<param name="c" />
+		<param name="p" />
+		<param name="ignore_home_row">false</param>
+		<param name="preview">false</param>
+		<param name="x">1420</param><param name="title_y">332</param><param name="body_y">464</param>
+		<param name="width">384</param><param name="clip_width">440</param><param name="title_height">132</param>
+		<!-- The surface setting that shows the rating row (Includes_Bald_Ratings.xml): Home by default; the library
+		     views pass $EXP[Bald_RatingsLibrary] and More like this $EXP[Bald_RatingsInfo]. -->
+		<param name="ratings">$EXP[Bald_RatingsHome]</param>
+		<definition>
+			<control type="group">
+				<visible>$PARAM[ignore_home_row] | $PARAM[preview] | String.IsEqual(Window(home).Property(Bald.Row),$PARAM[c])</visible>
+				<animation type="Hidden" condition="$EXP[Bald_FullMotion]">
+					<effect type="fade" start="100" end="0" time="130" tween="sine" easing="inout" />
+					<effect type="slide" start="0,0" end="-14,0" time="130" tween="cubic" easing="out" />
+				</animation>
+				<animation type="Hidden" condition="$EXP[Bald_ReduceMotion]">
+					<effect type="fade" start="100" end="0" time="130" tween="sine" easing="inout" />
+				</animation>
+				<!-- Title: wraps up to 3 lines (44 px each) and grows upward. The textbox sizes to its text and this
+				     grouplist bottom-aligns it (align right = end of a vertical grouplist), so the last line always
+				     ends at 464, where a one-line title ends, and the rest of the caption never moves. -->
+				<control type="grouplist">
+					<left>$PARAM[x]</left>
+					<top>$PARAM[title_y]</top>
+					<width>$PARAM[clip_width]</width>
+					<height>$PARAM[title_height]</height>
+					<orientation>vertical</orientation>
+					<align>right</align>
+					<usecontrolcoords>true</usecontrolcoords>
+					<control type="textbox">
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height max="$PARAM[title_height]">auto</height>
+						<font>Bald_CaptionTitle</font>
+						<textcolor>bald_ink</textcolor>
+						<label>$INFO[Container($PARAM[c]).ListItem.TVShowTitle]</label>
+						<visible>String.IsEqual(Container($PARAM[c]).ListItem.DBType,episode) + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem)</visible>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">180</param></include>
+					</control>
+					<control type="textbox">
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height max="$PARAM[title_height]">auto</height>
+						<font>Bald_CaptionTitle</font>
+						<textcolor>bald_ink</textcolor>
+						<label>$INFO[Container($PARAM[c]).ListItem.Title]</label>
+						<visible>!String.IsEqual(Container($PARAM[c]).ListItem.DBType,episode) + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem)</visible>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">180</param></include>
+					</control>
+				</control>
+				<control type="grouplist">
+					<!-- Starts 20 px left of the caption so the 14 px slide-in is not clipped (grouplists clip). -->
+					<left>$PARAM[x]</left>
+					<top>$PARAM[body_y]</top>
+					<width>$PARAM[clip_width]</width>
+					<height>396</height>
+					<orientation>vertical</orientation>
+					<itemgap>0</itemgap>
+					<usecontrolcoords>true</usecontrolcoords>
+					<!-- Meta: one label per item type -->
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param>
+						<param name="c">$PARAM[c]</param>
+						<param name="p">$PARAM[p]</param>
+						<param name="label">S$INFO[Container($PARAM[c]).ListItem.Season] E$INFO[Container($PARAM[c]).ListItem.Episode]$INFO[Container($PARAM[c]).ListItem.Title,$COMMA ,]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,episode)</param>
+					</include>
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param>
+						<param name="c">$PARAM[c]</param>
+						<param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Year,,$COMMA ]$LOCALIZE[31711]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,tvshow) + String.IsEqual(Container($PARAM[c]).ListItem.Property(TotalSeasons),1)</param>
+					</include>
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param>
+						<param name="c">$PARAM[c]</param>
+						<param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Year]$INFO[Container($PARAM[c]).ListItem.Property(TotalSeasons),$COMMA , $LOCALIZE[31712]]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,tvshow) + !String.IsEqual(Container($PARAM[c]).ListItem.Property(TotalSeasons),1)</param>
+					</include>
+					<!-- Seasons show only this line; shows show it under the year and season count. -->
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param><param name="c">$PARAM[c]</param><param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Property(WatchedEpisodes)]$INFO[Container($PARAM[c]).ListItem.Property(TotalEpisodes), / , $LOCALIZE[31713]]</param>
+						<param name="visible">[String.IsEqual(Container($PARAM[c]).ListItem.DBType,season) | String.IsEqual(Container($PARAM[c]).ListItem.DBType,tvshow)]</param>
+					</include>
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param>
+						<param name="c">$PARAM[c]</param>
+						<param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Year,,$COMMA ]$INFO[Container($PARAM[c]).ListItem.Duration(h),,h ]$INFO[Container($PARAM[c]).ListItem.Duration(mm),,m]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,movie) + Integer.IsGreaterOrEqual(Container($PARAM[c]).ListItem.Duration(mins),60)</param>
+					</include>
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param>
+						<param name="c">$PARAM[c]</param>
+						<param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Year]$INFO[Container($PARAM[c]).ListItem.Duration(mins),$COMMA , $LOCALIZE[31710]]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,movie) + !Integer.IsGreaterOrEqual(Container($PARAM[c]).ListItem.Duration(mins),60)</param>
+					</include>
+					<!-- Music (a music row): an album's artist and year, a song's artist and album. -->
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param><param name="c">$PARAM[c]</param><param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Artist]$INFO[Container($PARAM[c]).ListItem.Year,$COMMA ,]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,album)</param>
+					</include>
+					<include content="Bald_CaptionMeta"><param name="ignore_home_row">$PARAM[ignore_home_row]</param>
+						<param name="width">$PARAM[width]</param><param name="c">$PARAM[c]</param><param name="p">$PARAM[p]</param>
+						<param name="label">$INFO[Container($PARAM[c]).ListItem.Artist]$INFO[Container($PARAM[c]).ListItem.Album,$COMMA ,]</param>
+						<param name="visible">String.IsEqual(Container($PARAM[c]).ListItem.DBType,song)</param>
+					</include>
+					<!-- Progress: a movie or episode part way through, a bar and the time left ("36m left", Bald Helper's
+					     Bald.Remaining; Kodi has no time-left label for a list item). Progress marks (Bald_ShowProgressMarks).
+					     Shows and seasons have their episodes-watched line above instead. The bar is one progress control
+					     whose own background is the track, so the fill always lies exactly on it. -->
+					<control type="group">
+						<top>12</top>
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height>24</height>
+						<visible>$EXP[Bald_ShowProgressMarks] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + Container($PARAM[c]).ListItem.IsResumable</visible>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">275</param></include>
+						<control type="progress">
+							<top>10</top>
+							<width>160</width>
+							<height>4</height>
+							<texturebg border="2" colordiffuse="bald_mark_track">bald/bar.png</texturebg>
+							<lefttexture />
+							<midtexture border="2" colordiffuse="bald_ink">bald/bar.png</midtexture>
+							<righttexture />
+							<info>Container($PARAM[c]).ListItem.PercentPlayed</info>
+						</control>
+						<control type="label">
+							<left>174</left>
+							<width>210</width>
+							<height>24</height>
+							<aligny>center</aligny>
+							<font>Bald_Progress</font>
+							<textcolor>bald_ink70</textcolor>
+							<label>$INFO[Window(home).Property(Bald.Remaining),, $LOCALIZE[31417]]</label>
+							<!-- Only once Bald Helper's value is this item's (Bald.Remaining.For): the bar holds the line's
+							     place at once, and the time fades in without first showing the previous item's. -->
+							<visible>String.IsEqual(Window(home).Property(Bald.Remaining.For),Container($PARAM[c]).ListItem.FileNameAndPath)</visible>
+							<animation effect="fade" start="0" end="100" time="160" tween="sine" easing="inout">Visible</animation>
+						</control>
+					</control>
+					<!-- Media flags: movies only -->
+					<control type="grouplist">
+						<top>10</top>
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height>26</height>
+						<orientation>horizontal</orientation>
+						<itemgap>8</itemgap>
+						<visible>$EXP[Bald_ShowMediaFlags] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + String.IsEqual(Container($PARAM[c]).ListItem.DBType,movie) + [String.IsEqual(Container($PARAM[c]).ListItem.VideoResolution,4K) | String.IsEqual(Container($PARAM[c]).ListItem.VideoResolution,1080) | !String.IsEmpty(Container($PARAM[c]).ListItem.HdrType) | !String.IsEmpty(Container($PARAM[c]).ListItem.AudioCodec) | String.IsEqual(Container($PARAM[c]).ListItem.AudioChannels,6) | String.IsEqual(Container($PARAM[c]).ListItem.AudioChannels,8)]</visible>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">275</param></include>
+						<include content="Bald_MediaFlags"><param name="container">Container($PARAM[c]).</param></include>
+					</control>
+					<!-- Ratings: every item type; closes up when the item has none to show. -->
+					<include content="Bald_RatingsRow">
+						<param name="container">Container($PARAM[c]).</param>
+						<param name="visible">$PARAM[ratings] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem)</param>
+						<param name="left">20</param>
+						<param name="top">10</param>
+						<param name="width">$PARAM[width]</param>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">288</param></include>
+					</include>
+					<!-- Accent line -->
+					<control type="label">
+						<top>8</top>
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height>24</height>
+						<font>Bald_Accent</font>
+						<textcolor>bald_accent</textcolor>
+						<label>$INFO[Container($PARAM[c]).ListItem.Genre]</label>
+						<visible>Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem)</visible>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">300</param></include>
+					</control>
+					<!-- Plot: Kodi draws ceil(height / line height) lines, so 116 / 30 gives 4. No ellipsis is possible, see docs/NOTES.md. -->
+					<control type="label">
+						<top>18</top>
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height>116</height>
+						<wrapmultiline>true</wrapmultiline>
+						<aligny>top</aligny>
+						<font>Bald_CaptionPlot</font>
+						<textcolor>bald_ink80</textcolor>
+						<label>$INFO[Container($PARAM[c]).ListItem.Plot]</label>
+						<visible>Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + [!String.IsEqual(Container($PARAM[c]).ListItem.DBType,season) | !String.IsEmpty(Container($PARAM[c]).ListItem.Plot)] + ![$EXP[Bald_ShowProgressMarks] + Container($PARAM[c]).ListItem.IsResumable]</visible>
+						<include content="Bald_SpoilerPlotShown"><param name="item">Container($PARAM[c]).ListItem.</param></include>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">350</param></include>
+					</control>
+					<!-- With the progress line showing (a part-watched movie or episode) the plot keeps to three lines, so the
+					     caption ends where it does for any other item and never reaches the hints below. -->
+					<control type="label">
+						<top>18</top>
+						<left>20</left>
+						<width>$PARAM[width]</width>
+						<height>87</height>
+						<wrapmultiline>true</wrapmultiline>
+						<aligny>top</aligny>
+						<font>Bald_CaptionPlot</font>
+						<textcolor>bald_ink80</textcolor>
+						<label>$INFO[Container($PARAM[c]).ListItem.Plot]</label>
+						<visible>Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + [!String.IsEqual(Container($PARAM[c]).ListItem.DBType,season) | !String.IsEmpty(Container($PARAM[c]).ListItem.Plot)] + [$EXP[Bald_ShowProgressMarks] + Container($PARAM[c]).ListItem.IsResumable]</visible>
+						<include content="Bald_SpoilerPlotShown"><param name="item">Container($PARAM[c]).ListItem.</param></include>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">350</param></include>
+					</control>
+					<!-- The plot of an unwatched item under the spoiler protection (Includes_Bald_Spoilers.xml). -->
+					<include content="Bald_SpoilerNote">
+						<param name="item">Container($PARAM[c]).ListItem.</param>
+						<param name="visible">Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem)</param>
+						<param name="left">20</param>
+						<param name="top">18</param>
+						<param name="width">$PARAM[width]</param>
+						<param name="height">30</param>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">350</param></include>
+					</include>
+					<control type="label">
+						<top>18</top><left>20</left><width>$PARAM[width]</width><height>116</height><wrapmultiline>true</wrapmultiline><aligny>top</aligny><font>Bald_CaptionPlot</font><textcolor>bald_ink80</textcolor>
+						<label>$INFO[Container.ShowPlot]</label>
+						<visible>Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem) + String.IsEqual(Container($PARAM[c]).ListItem.DBType,season) + String.IsEmpty(Container($PARAM[c]).ListItem.Plot)</visible>
+						<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">350</param></include>
+					</control>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="Bald_CaptionMeta">
+		<param name="width">384</param>
+		<param name="ignore_home_row">false</param>
+		<param name="c" />
+		<param name="p" />
+		<param name="label" />
+		<param name="visible" />
+		<definition>
+			<control type="label">
+				<left>20</left>
+				<top>14</top>
+				<width>$PARAM[width]</width>
+				<height>26</height>
+				<font>Bald_CaptionMeta</font>
+				<textcolor>bald_ink80</textcolor>
+				<label>$PARAM[label]</label>
+				<visible>$PARAM[visible] + Integer.Is$PARAM[p](Container($PARAM[c]).CurrentItem)</visible>
+				<include content="Bald_AnimCaptionIn"><param name="c">$PARAM[c]</param><param name="ignore_home_row">$PARAM[ignore_home_row]</param><param name="delay">250</param></include>
+			</control>
+		</definition>
+	</include>
+
+	<!-- ============ Rows ============ -->
+	<!-- A landscape tile: 176 x 99, 3 px corners, drawn 10 px inside its 192 px slot so the pop and ring are not clipped.
+	     Geometry and art are parameters so the TV info episode cards (320 x 180) reuse it; the defaults are Home's row tile.
+	     The ring sits 3 px outside the tile. `spoiler` is true where the art is an episode's still (Bald_EpisodeThumb):
+	     a hidden still gets Bald_SpoilerStill over the show's art, with the episode's number in the middle unless
+	     `spoiler_number` is false. -->
+	<include name="Bald_LandscapeTile">
+		<param name="diffuse">bald_tile_dim</param>
+		<param name="ring">false</param>
+		<param name="spoiler">false</param>
+		<param name="spoiler_number">true</param>
+		<param name="art">$VAR[Bald_ItemFanart]</param>
+		<param name="x">10</param>
+		<param name="y">10</param>
+		<param name="w">176</param>
+		<param name="h">99</param>
+		<param name="ring_x">7</param>
+		<param name="ring_y">7</param>
+		<param name="ring_w">182</param>
+		<param name="ring_h">105</param>
+		<definition>
+			<control type="image">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<width>$PARAM[w]</width>
+				<height>$PARAM[h]</height>
+				<texture colordiffuse="bald_tile_placeholder">bald/tile.png</texture>
+			</control>
+			<control type="image">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<width>$PARAM[w]</width>
+				<height>$PARAM[h]</height>
+				<aspectratio scalediffuse="false">scale</aspectratio>
+				<texture diffuse="bald/tile.png" colordiffuse="$PARAM[diffuse]" background="true">$PARAM[art]</texture>
+			</control>
+			<include content="Bald_SpoilerStill">
+				<param name="visible">$PARAM[spoiler]</param>
+				<param name="x">$PARAM[x]</param>
+				<param name="y">$PARAM[y]</param>
+				<param name="w">$PARAM[w]</param>
+				<param name="h">$PARAM[h]</param>
+				<param name="diffuse">$PARAM[diffuse]</param>
+				<param name="number">$PARAM[spoiler_number]</param>
+			</include>
+			<control type="image">
+				<left>$PARAM[ring_x]</left>
+				<top>$PARAM[ring_y]</top>
+				<width>$PARAM[ring_w]</width>
+				<height>$PARAM[ring_h]</height>
+				<texture border="8" colordiffuse="bald_ink">bald/focus_ring.png</texture>
+				<visible>$PARAM[ring]</visible>
+			</control>
+			<include content="Bald_TileLogoPreload"><param name="x">$PARAM[x]</param><param name="y">$PARAM[y]</param></include>
+		</definition>
+	</include>
+	<!-- Invisible clearlogo: loads each visible tile's logo into Kodi's texture cache before it is focused,
+	     so the art-frame logo is ready when its fade-in starts (a fadetime on the logo ghosted old logos). -->
+	<include name="Bald_TileLogoPreload">
+		<param name="x">10</param>
+		<param name="y">10</param>
+		<definition>
+			<control type="image">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<width>56</width>
+				<height>17</height>
+				<aspectratio>keep</aspectratio>
+				<texture colordiffuse="00FFFFFF" background="true">$VAR[Bald_ItemLogo]</texture>
+			</control>
+		</definition>
+	</include>
+
+	<!-- ============ Row styles ============ -->
+	<!-- Each Home row has a style, set in the widget editor (the Skin Variables row field "style") and passed to
+	     Bald_Row by the generator: fanart (the default, also for rows saved without a style), thumbnail, logo, poster,
+	     square or text; a weather row (Includes_Bald_Weather.xml) is always weather.
+	     Bald_RowTiles_<style> fills the row's fixedlist: its position and size, and its item layouts. -->
+	<include name="Bald_RowTiles_fanart">
+		<include content="Bald_RowLandscape" />
+	</include>
+	<include name="Bald_RowTiles_thumbnail">
+		<include content="Bald_RowLandscape"><param name="art">$VAR[Bald_ItemThumbnail]</param><param name="spoiler">String.IsEqual(ListItem.DBType,episode)</param></include>
+	</include>
+	<include name="Bald_RowTiles_logo">
+		<include content="Bald_RowLandscape"><param name="overlay">Bald_TileLogo</param><param name="show_title">false</param><param name="marks">Bald_TileOverlayNone</param></include>
+	</include>
+	<!-- Text: fanart-sized tiles that show the item's name instead of art (channel groups, genres, folders); the big art
+	     frame is unchanged. The tile is the empty-art placeholder box with Bald_TileText over it. -->
+	<include name="Bald_RowTiles_text">
+		<include content="Bald_RowLandscape"><param name="art" /><param name="overlay">Bald_TileText</param><param name="cover">false</param><param name="show_title">false</param><param name="marks">Bald_TileOverlayNone</param></include>
+	</include>
+	<!-- Landscape row: 176 x 99 tiles in 192 px slots. art is the tile texture; overlay names an include drawn over each
+	     tile (it gets the tile's diffuse); cover shows an album's or song's square cover over the tile (Bald_TileCover);
+	     show_title allows the item's name on the tile (Bald_TileTitle; logo and text rows name their items already);
+	     marks names the watch-state marks' include (Bald_TileMarks; logo and text rows pass Bald_TileOverlayNone). -->
+	<include name="Bald_RowLandscape">
+		<param name="art">$VAR[Bald_RowItemArt]</param>
+		<param name="spoiler">false</param>
+		<param name="overlay">Bald_TileOverlayNone</param>
+		<param name="cover">true</param>
+		<param name="show_title">true</param>
+		<param name="marks">Bald_TileMarks</param>
+		<definition>
+			<left>86</left>
+			<top>884</top>
+			<width>1258</width>
+			<height>119</height>
+			<itemlayout width="192" height="119">
+				<include content="Bald_LandscapeTile"><param name="art">$PARAM[art]</param><param name="spoiler">$PARAM[spoiler]</param></include>
+				<include content="$PARAM[overlay]" />
+				<include content="Bald_TileCover"><param name="shown">$PARAM[cover]</param></include>
+				<include content="Bald_TileTitle"><param name="visible">$PARAM[show_title] + $EXP[Bald_TileTitlesAlways]</param></include>
+				<include content="$PARAM[marks]" />
+			</itemlayout>
+			<focusedlayout width="192" height="119">
+				<control type="group">
+					<!-- Tile focus pop: 280 pop to 1.05. While the menu is open the tile settles back and dims. -->
+					<animation type="Focus" condition="$EXP[Bald_FullMotion]" reversible="false">
+						<effect type="zoom" start="100" end="105" center="98,59" time="280" tween="back" easing="out" />
+						<effect type="fade" start="55" end="100" time="300" tween="sine" easing="inout" />
+					</animation>
+					<animation type="Focus" condition="$EXP[Bald_ReduceMotion]" reversible="false">
+						<effect type="fade" start="55" end="100" time="300" tween="sine" easing="inout" />
+					</animation>
+					<!-- The settle zoom always runs; the dim is dropped over background video (no partial fade there). -->
+					<animation type="Conditional" condition="[$EXP[Bald_OverlayOpen]] + $EXP[Bald_FullMotion]">
+						<effect type="zoom" start="100" end="95.2" center="98,59" time="300" tween="cubic" easing="out" />
+					</animation>
+					<animation type="Conditional" condition="[$EXP[Bald_OverlayOpen]] + !$EXP[Bald_VideoBackdropOn]">
+						<effect type="fade" start="100" end="66" time="300" tween="sine" easing="inout" />
+					</animation>
+					<include content="Bald_LandscapeTile">
+						<param name="art">$PARAM[art]</param>
+						<param name="spoiler">$PARAM[spoiler]</param>
+						<param name="diffuse">FFFFFFFF</param>
+						<param name="ring">!$EXP[Bald_OverlayOpen]</param>
+					</include>
+					<include content="$PARAM[overlay]"><param name="diffuse">FFFFFFFF</param></include>
+					<include content="Bald_TileCover"><param name="shown">$PARAM[cover]</param><param name="diffuse">FFFFFFFF</param></include>
+					<include content="Bald_TileTitle"><param name="visible">$PARAM[show_title] + $EXP[Bald_TileTitlesFocused]</param><param name="diffuse">bald_ink</param></include>
+					<include content="$PARAM[marks]"><param name="diffuse">bald_ink</param></include>
+				</control>
+			</focusedlayout>
+		</definition>
+	</include>
+	<!-- Poster row: the library's Poster-low rail (View_515_Bald_PosterLow.xml, docs/SPEC.md 5.10): 140 x 210 posters
+	     (Bald_PosterLowTile) in 156 px slots, eight across the 1248 px frame width, under an art frame that
+	     Bald_PosterRow shrinks to 1248 x 576. Episodes fall back to the season's, then the show's poster
+	     (Bald_LibraryPoster). -->
+	<!-- 1247 wide, not 1248: Kodi's fixedlist lets the cursor reach min(focus slot + movement, items per page), and it
+	     counts (width - slot) / slot + 1 items per page. At 1248 that is 8, so from slot 5 the cursor reached slot 8, one
+	     past the eighth tile, and the row's last item was focused off-screen. At 1247 it counts 7 and stops on the
+	     eighth tile; all eight still draw (Kodi draws what fits the width), the last one pixel short. -->
+	<include name="Bald_RowTiles_poster">
+		<left>Bald_SafeLeft</left>
+		<top>Bald_LowRailTop</top>
+		<width>1247</width>
+		<height>234</height>
+		<itemlayout width="156" height="234">
+			<include content="Bald_PosterLowTile" />
+			<include content="Bald_TileLogoPreload"><param name="x">12</param><param name="y">12</param></include>
+			<include content="Bald_TileTitle"><param name="visible">$EXP[Bald_TileTitlesAlways]</param><param name="diffuse">bald_poster_dim</param><param name="x">12</param><param name="y">12</param><param name="w">140</param><param name="h">210</param><param name="label_y">180</param><param name="label_w">124</param><param name="mask">bald/white.png</param><param name="pop">102.5</param><param name="center">78,117</param></include>
+			<include content="Bald_TileMarks"><param name="diffuse">bald_poster_dim</param><param name="check_x">120</param><param name="check_y">20</param><param name="pop">102.5</param><param name="center">78,117</param></include>
+		</itemlayout>
+		<focusedlayout width="156" height="234">
+			<control type="group">
+				<!-- While the menu is open the focused poster dims like a landscape tile. -->
+				<animation type="Conditional" condition="[$EXP[Bald_OverlayOpen]] + !$EXP[Bald_VideoBackdropOn]">
+					<effect type="fade" start="100" end="66" time="300" tween="sine" easing="inout" />
+				</animation>
+				<include content="Bald_PosterLowTile">
+					<param name="diffuse">bald_ink</param>
+					<param name="focused">!$EXP[Bald_OverlayOpen]</param>
+				</include>
+				<include content="Bald_TileLogoPreload"><param name="x">12</param><param name="y">12</param></include>
+				<include content="Bald_TileTitle"><param name="visible">$EXP[Bald_TileTitlesFocused]</param><param name="diffuse">bald_ink</param><param name="x">12</param><param name="y">12</param><param name="w">140</param><param name="h">210</param><param name="label_y">180</param><param name="label_w">124</param><param name="mask">bald/white.png</param><param name="pop">102.5</param><param name="center">78,117</param></include>
+				<include content="Bald_TileMarks"><param name="diffuse">bald_ink</param><param name="check_x">120</param><param name="check_y">20</param><param name="pop">102.5</param><param name="center">78,117</param></include>
+			</control>
+		</focusedlayout>
+	</include>
+	<!-- Square row (album covers, artists): the poster rail and its shrunken art frame (Bald_PosterRow), with 184 x 184
+	     tiles in 208 px slots, six across the 1248 px frame width, top-aligned with the posters. Focus travels to slot 2,
+	     as on landscape rows (six and a half tiles show there too). -->
+	<variable name="Bald_SquareArt">
+		<value condition="[String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,artist)] + !String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(poster)) | !String.IsEmpty(ListItem.Art(tvshow.poster)) | $EXP[Bald_SpoilerThumb]">$VAR[Bald_LibraryPoster]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
+		<value>$INFO[ListItem.Icon]</value>
+	</variable>
+	<!-- art is the tile texture; overlay names an include drawn over it with the tile's diffuse (a weather tile's face). -->
+	<include name="Bald_SquareTile">
+		<param name="diffuse">bald_poster_dim</param>
+		<param name="focused">false</param>
+		<param name="art">$VAR[Bald_SquareArt]</param>
+		<param name="overlay">Bald_TileOverlayNone</param>
+		<definition>
+			<control type="group">
+				<animation type="Focus" condition="$EXP[Bald_FullMotion]"><effect type="zoom" start="100" end="102.5" center="104,104" time="280" tween="back" easing="out" /></animation>
+				<control type="image"><left>12</left><top>12</top><width>184</width><height>184</height><texture colordiffuse="bald_placeholder">bald/white.png</texture></control>
+				<control type="image"><left>12</left><top>12</top><width>184</width><height>184</height><aspectratio>scale</aspectratio><texture background="true" colordiffuse="$PARAM[diffuse]">$PARAM[art]</texture></control>
+				<include content="$PARAM[overlay]"><param name="diffuse">$PARAM[diffuse]</param></include>
+				<control type="image"><left>9</left><top>9</top><width>190</width><height>190</height><texture border="8" colordiffuse="bald_ink">bald/focus_ring.png</texture><visible>$PARAM[focused]</visible></control>
+			</control>
+		</definition>
+	</include>
+	<include name="Bald_RowTiles_square">
+		<include content="Bald_RowSquare" />
+	</include>
+	<!-- Weather (Includes_Bald_Weather.xml): square tiles showing the tile's label, weather icon and label2 instead of
+	     art, on the square row's rail and frame. -->
+	<include name="Bald_RowTiles_weather">
+		<!-- Without a weather service, or while it fetches, the row holds one tile; like any short row it starts at the
+		     safe margin (Bald_Row, aligny). -->
+		<include content="Bald_RowSquare"><param name="art" /><param name="overlay">Bald_WeatherTileFace</param><param name="caption">Bald_TileOverlayNone</param><param name="marks">Bald_TileOverlayNone</param></include>
+	</include>
+	<!-- A square row's tiles: art and overlay as Bald_SquareTile's, caption the name on the tile (Bald_TileTitle) and
+	     marks the watch-state marks (Bald_TileMarks); a weather row passes Bald_TileOverlayNone for both. -->
+	<include name="Bald_RowSquare">
+		<param name="art">$VAR[Bald_SquareArt]</param>
+		<param name="overlay">Bald_TileOverlayNone</param>
+		<param name="caption">Bald_TileTitle</param>
+		<param name="marks">Bald_TileMarks</param>
+		<definition>
+			<left>Bald_SafeLeft</left>
+			<top>Bald_LowRailTop</top>
+			<width>1248</width>
+			<height>234</height>
+			<itemlayout width="208" height="234">
+				<include content="Bald_SquareTile"><param name="art">$PARAM[art]</param><param name="overlay">$PARAM[overlay]</param></include>
+				<include content="Bald_TileLogoPreload"><param name="x">12</param><param name="y">12</param></include>
+				<include content="$PARAM[caption]"><param name="visible">$EXP[Bald_TileTitlesAlways]</param><param name="diffuse">bald_poster_dim</param><param name="x">12</param><param name="y">12</param><param name="w">184</param><param name="h">184</param><param name="label_y">154</param><param name="label_w">168</param><param name="mask">bald/white.png</param><param name="pop">102.5</param><param name="center">104,104</param></include>
+				<include content="$PARAM[marks]"><param name="diffuse">bald_poster_dim</param><param name="check_x">164</param><param name="check_y">20</param><param name="pop">102.5</param><param name="center">104,104</param></include>
+			</itemlayout>
+			<focusedlayout width="208" height="234">
+				<control type="group">
+					<animation type="Conditional" condition="[$EXP[Bald_OverlayOpen]] + !$EXP[Bald_VideoBackdropOn]">
+						<effect type="fade" start="100" end="66" time="300" tween="sine" easing="inout" />
+					</animation>
+					<include content="Bald_SquareTile">
+						<param name="diffuse">bald_ink</param>
+						<param name="focused">!$EXP[Bald_OverlayOpen]</param>
+						<param name="art">$PARAM[art]</param>
+						<param name="overlay">$PARAM[overlay]</param>
+					</include>
+					<include content="Bald_TileLogoPreload"><param name="x">12</param><param name="y">12</param></include>
+					<include content="$PARAM[caption]"><param name="visible">$EXP[Bald_TileTitlesFocused]</param><param name="diffuse">bald_ink</param><param name="x">12</param><param name="y">12</param><param name="w">184</param><param name="h">184</param><param name="label_y">154</param><param name="label_w">168</param><param name="mask">bald/white.png</param><param name="pop">102.5</param><param name="center">104,104</param></include>
+					<include content="$PARAM[marks]"><param name="diffuse">bald_ink</param><param name="check_x">164</param><param name="check_y">20</param><param name="pop">102.5</param><param name="center">104,104</param></include>
+				</control>
+			</focusedlayout>
+		</definition>
+	</include>
+	<!-- Row label line (label, count, row hints): 12 px above the tiles, as on landscape rows. -->
+	<include name="Bald_RowLabelTop_fanart">
+		<top>856</top>
+	</include>
+	<include name="Bald_RowLabelTop_thumbnail">
+		<include>Bald_RowLabelTop_fanart</include>
+	</include>
+	<include name="Bald_RowLabelTop_logo">
+		<include>Bald_RowLabelTop_fanart</include>
+	</include>
+	<include name="Bald_RowLabelTop_text">
+		<include>Bald_RowLabelTop_fanart</include>
+	</include>
+	<include name="Bald_RowLabelTop_poster">
+		<top>712</top>
+	</include>
+	<include name="Bald_RowLabelTop_square">
+		<include>Bald_RowLabelTop_poster</include>
+	</include>
+	<include name="Bald_RowLabelTop_weather">
+		<include>Bald_RowLabelTop_poster</include>
+	</include>
+	<!-- Titles on Home tiles (Appearance › Information, Skin.String(Bald.TileTitles)): empty is Bald's default, no title on
+	     the tiles (the caption names the focused item); focus puts the name on the focused tile while the row has focus;
+	     always on every tile. -->
+	<expression name="Bald_TileTitlesAlways">[String.IsEqual(Skin.String(Bald.TileTitles),always)]</expression>
+	<expression name="Bald_TileTitlesFocused">[$EXP[Bald_TileTitlesAlways] | [String.IsEqual(Skin.String(Bald.TileTitles),focus) + !$EXP[Bald_OverlayOpen]]]</expression>
+	<variable name="Bald_TileTitlesLabel">
+		<value condition="String.IsEqual(Skin.String(Bald.TileTitles),focus)">$LOCALIZE[31338]</value>
+		<value condition="String.IsEqual(Skin.String(Bald.TileTitles),always)">$LOCALIZE[20422]</value>
+		<value>$LOCALIZE[20420]</value>
+	</variable>
+	<!-- The item's name over a bottom scrim inside a tile, as on the TV episode cards: x, y, w, h are the tile's rectangle
+	     in its slot, mask its corners (bald/tile.png for the 3 px landscape corners, bald/white.png for square ones),
+	     label_y and label_w the one-line name 8 px in (h - 30, w - 16) and diffuse the text colour (the tile's own, dim
+	     unfocused, full ink focused). Posters and squares pop inside their own include, so their title pops with them
+	     (pop 102.5 about the tile's centre); a landscape tile's whole focused layout pops, so its title keeps pop 100. -->
+	<include name="Bald_TileTitle">
+		<param name="visible">false</param>
+		<param name="diffuse">bald_tile_dim</param>
+		<param name="x">10</param>
+		<param name="y">10</param>
+		<param name="w">176</param>
+		<param name="h">99</param>
+		<param name="label_y">69</param>
+		<param name="label_w">160</param>
+		<param name="mask">bald/tile.png</param>
+		<param name="pop">100</param>
+		<param name="center">98,59</param>
+		<definition>
+			<control type="group">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<visible>$PARAM[visible] + !String.IsEmpty(ListItem.Label)</visible>
+				<animation type="Focus" condition="$EXP[Bald_FullMotion]"><effect type="zoom" start="100" end="$PARAM[pop]" center="$PARAM[center]" time="280" tween="back" easing="out" /></animation>
+				<control type="image">
+					<width>$PARAM[w]</width>
+					<height>$PARAM[h]</height>
+					<texture diffuse="$PARAM[mask]" colordiffuse="bald_scrim">bald/scrim_card.png</texture>
+				</control>
+				<control type="label">
+					<left>8</left>
+					<top>$PARAM[label_y]</top>
+					<width>$PARAM[label_w]</width>
+					<height>22</height>
+					<font>Bald_CastName</font>
+					<textcolor>$PARAM[diffuse]</textcolor>
+					<label>$INFO[ListItem.Label]</label>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="Bald_TileOverlayNone">
+		<definition />
+	</include>
+	<!-- Watch-state marks on a Home tile (fanart, thumbnail, poster and square rows; not logo, text or weather rows,
+	     which pass Bald_TileOverlayNone instead). The TV episode cards' language (Bald_InfoTVEpisodeCard) at tile size:
+	     the check (bald/check.png, 14 px) on a dot (bald/dot.png, 24 px) 8 px in from the top right corner, and a 4 px
+	     bar (bald/bar.png) 8 px in from the sides and the bottom edge. Every colour is opaque, as the tile's own dim is
+	     (bald_tile_dim), so nothing shows background video through: the dot is bald_field, the bar's track
+	     bald_mark_track (bald_ink28 over the field) and the check and fill take diffuse, the tile's dim unfocused and
+	     full ink focused (track follows: bald_mark_track_dim unfocused).
+	     Drawn after Bald_TileTitle so the title's scrim never darkens them; the bar lies below the title's line.
+	     The tile's rectangle in its slot is x, y, w, h (as Bald_TileTitle's); the include takes the marks' places from
+	     it (skin XML has no arithmetic): check_x = x + w - 32, check_y = y + 8, bar_x = x + 8, bar_y = y + h - 8,
+	     bar_w = w - 16. The defaults are the landscape tile's (10, 10, 176, 99). pop and center are Bald_TileTitle's: posters and squares pop
+	     inside their own include (102.5 about the tile's centre) and the marks pop with them; a landscape tile's whole
+	     focused layout pops, so its marks keep pop 100. The pop is a pure zoom, so Reduce motion simply drops it.
+	     Which items: video items only (Bald_TileMarkItem; music has play counts too). Resume wins, as in list rows:
+	     an item part way through (ListItem.IsResumable) shows the bar at ListItem.PercentPlayed and no check. A TV show
+	     or season with some but not all episodes watched shows the bar at ListItem.Property(WatchedEpisodePercent)
+	     (Kodi sets it with WatchedEpisodes and UnWatchedEpisodes; a progress control reads a numeric property). The
+	     check needs ListItem.PlayCount above 0, which Kodi sets on a show or season only when every episode is
+	     watched and on a movie set (ListItem.IsCollection) only when every movie is (GroupUtils); a set has no
+	     percentage, so it gets the check but no bar. Each mark follows its Appearance switch (Bald_ShowWatchedMarks,
+	     Bald_ShowProgressMarks). -->
+	<expression name="Bald_TileMarkItem">[!String.IsEqual(ListItem.DBType,album) + !String.IsEqual(ListItem.DBType,song) + !String.IsEqual(ListItem.DBType,artist) + !$EXP[Bald_FavouriteItem]]</expression>
+	<expression name="Bald_TileShowInProgress">[[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season)] + Integer.IsGreater(ListItem.Property(WatchedEpisodes),0) + Integer.IsGreater(ListItem.Property(UnWatchedEpisodes),0)]</expression>
+	<expression name="Bald_TileInProgress">[ListItem.IsResumable | $EXP[Bald_TileShowInProgress]]</expression>
+	<expression name="Bald_TileWatched">[Integer.IsGreater(ListItem.PlayCount,0) + !$EXP[Bald_TileInProgress]]</expression>
+	<include name="Bald_TileMarks">
+		<param name="diffuse">bald_tile_dim</param>
+		
+		<param name="check_x">154</param>
+		<param name="check_y">18</param>
+		
+		
+		
+		<param name="pop">100</param>
+		<param name="center">98,59</param>
+		<definition>
+			<control type="group">
+				<visible>$EXP[Bald_TileMarkItem]</visible>
+				<animation type="Focus" condition="$EXP[Bald_FullMotion]"><effect type="zoom" start="100" end="$PARAM[pop]" center="$PARAM[center]" time="280" tween="back" easing="out" /></animation>
+				<control type="group">
+					<left>$PARAM[check_x]</left>
+					<top>$PARAM[check_y]</top>
+					<visible>$EXP[Bald_TileWatched] + $EXP[Bald_ShowWatchedMarks]</visible>
+					<control type="image">
+						<width>24</width>
+						<height>24</height>
+						<texture colordiffuse="bald_field">bald/dot.png</texture>
+					</control>
+					<control type="image">
+						<left>5</left>
+						<top>5</top>
+						<width>14</width>
+						<height>14</height>
+						<texture colordiffuse="$PARAM[diffuse]">bald/check.png</texture>
+					</control>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<!-- Music in a landscape row. Tile art: the item's fanart, the show's, then (albums and songs) the artist's
+	     fanart, else the thumb (an album's cover, an artist's photo); Bald_ItemFanart without the artist step is
+	     shared with the library views. An album or song also shows its square cover, 99 x 99, centred over the tile
+	     (the cover alone would be cropped to a strip by the 16:9 tile); artists keep their fanart. Not on Text rows. -->
+	<variable name="Bald_RowItemArt">
+		<value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.fanart))">$INFO[ListItem.Art(tvshow.fanart)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(artist.fanart))">$INFO[ListItem.Art(artist.fanart)]</value>
+		<value condition="$EXP[Bald_SpoilerThumb]">$VAR[Bald_SpoilerArt]</value>
+		<value>$INFO[ListItem.Art(thumb)]</value>
+	</variable>
+	<expression name="Bald_MusicCoverItem">[[String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song)] + !String.IsEmpty(ListItem.Art(thumb))]</expression>
+	<include name="Bald_TileCover">
+		<param name="shown">true</param>
+		<param name="diffuse">bald_tile_dim</param>
+		<definition>
+			<control type="image">
+				<left>49</left>
+				<top>10</top>
+				<width>99</width>
+				<height>99</height>
+				<aspectratio>scale</aspectratio>
+				<texture colordiffuse="$PARAM[diffuse]" background="true">$INFO[ListItem.Art(thumb)]</texture>
+				<visible>$PARAM[shown] + $EXP[Bald_MusicCoverItem]</visible>
+			</control>
+		</definition>
+	</include>
+	<!-- The item's name inside a text-style tile (the tile is 176 x 99 at 10,10): centred, up to two lines, 12 px in,
+	     in the row label's semibold. Its colour is the tile's diffuse, dim unfocused and full ink focused, like the art
+	     on other tiles. -->
+	<include name="Bald_TileText">
+		<param name="diffuse">bald_tile_dim</param>
+		<definition>
+			<control type="label">
+				<left>22</left>
+				<top>10</top>
+				<width>152</width>
+				<height>99</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<wrapmultiline>true</wrapmultiline>
+				<font>Bald_RowLabel</font>
+				<textcolor>$PARAM[diffuse]</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</definition>
+	</include>
+	<!-- Fanart + logo: the item's clearlogo (else the show's, Bald_ItemLogo) at the tile's bottom left, 8 px in, at most
+	     100 x 34, over the logo scrim clipped to the tile's corners. Hidden without a logo or with clearlogos turned off
+	     (Appearance). -->
+	<include name="Bald_TileLogo">
+		<param name="diffuse">bald_tile_dim</param>
+		<definition>
+			<control type="group">
+				<visible>$EXP[Bald_ShowClearlogo] + [!String.IsEmpty(ListItem.Art(clearlogo)) | !String.IsEmpty(ListItem.Art(tvshow.clearlogo))]</visible>
+				<control type="image">
+					<left>10</left>
+					<top>10</top>
+					<width>176</width>
+					<height>99</height>
+					<texture diffuse="bald/tile.png">bald/scrim_logo.png</texture>
+				</control>
+				<control type="image">
+					<left>18</left>
+					<top>67</top>
+					<width>100</width>
+					<height>34</height>
+					<aspectratio align="left" aligny="bottom">keep</aspectratio>
+					<texture colordiffuse="$PARAM[diffuse]" background="true">$VAR[Bald_ItemLogo]</texture>
+				</control>
+			</control>
+		</definition>
+	</include>
+
+	<!-- Row start for a short row (NumItems 2 to slot; see aligny in Bald_Row): a fresh fixedlist has its last item
+	     selected, at position NumItems - 1, so move it back that many items to item 1. One action per count, because
+	     Control.Move takes a number and a move past item 1 would wrap (CGUIBaseContainer, GUI_MSG_MOVE_OFFSET moves
+	     with wrap around). A row of one item needs no move. The conditions exclude each other and the full row's own
+	     start (item slot + 1 at position slot), so at most one move runs. Marks the row as started like the full row's
+	     start does; used by Bald_Row's onfocus and the generated Bald_RowStart_<id> (shortcuts/generator/row-parts.xmltemplate). -->
+	<include name="Bald_RowStartShort_2">
+		<param name="id" />
+		<definition>
+			<include content="Bald_RowStartShortCount"><param name="id">$PARAM[id]</param><param name="n">2</param><param name="move">1</param></include>
+		</definition>
+	</include>
+	<include name="Bald_RowStartShort_5">
+		<param name="id" />
+		<definition>
+			<include content="Bald_RowStartShortCount"><param name="id">$PARAM[id]</param><param name="n">2</param><param name="move">1</param></include>
+			<include content="Bald_RowStartShortCount"><param name="id">$PARAM[id]</param><param name="n">3</param><param name="move">2</param></include>
+			<include content="Bald_RowStartShortCount"><param name="id">$PARAM[id]</param><param name="n">4</param><param name="move">3</param></include>
+			<include content="Bald_RowStartShortCount"><param name="id">$PARAM[id]</param><param name="n">5</param><param name="move">4</param></include>
+		</definition>
+	</include>
+	<!-- n items, the last selected: move back move (n - 1) items. -->
+	<include name="Bald_RowStartShortCount">
+		<param name="id" />
+		<param name="n" />
+		<param name="move" />
+		<definition>
+			<onfocus condition="String.IsEmpty(Window(home).Property(Bald.Start$PARAM[id])) + Integer.IsEqual(Container($PARAM[id]).NumItems,$PARAM[n]) + Integer.IsEqual(Container($PARAM[id]).CurrentItem,$PARAM[n])">SetProperty(Bald.Start$PARAM[id],1,home)</onfocus>
+			<onfocus condition="String.IsEmpty(Window(home).Property(Bald.Start$PARAM[id])) + Integer.IsEqual(Container($PARAM[id]).NumItems,$PARAM[n]) + Integer.IsEqual(Container($PARAM[id]).CurrentItem,$PARAM[n])">Control.Move($PARAM[id],-$PARAM[move])</onfocus>
+		</definition>
+	</include>
+	<!-- Home's hint line: the y 954 line, right-aligned on the right column's edge (x 1824), where every other Bald
+	     screen keeps its navigation hints. A chevron and where that key goes, pairs
+	     joined by the 32 px dot as Bald_InfoHintPair joins them. Each part is at most 176 px (with an ellipsis), so a
+	     pair never runs past the column (176 + 32 + 176 in 384). Shown while "Always show navigation hints" is on, or
+	     until the menu has been opened three times (Bald_HomeHintsShown). -->
+	<expression name="Bald_HomeHintsShown">[!Skin.HasSetting(Bald.AutoHideMenuHint) | !String.IsEqual(Skin.String(Bald.MenuOpens),3)]</expression>
+	<include name="Bald_HomeHintLine">
+		<param name="visible" />
+		<param name="first" />
+		<param name="second" />
+		<param name="second_visible">true</param>
+		<definition>
+			<control type="grouplist">
+				<left>Bald_RightColumn</left>
+				<top>Bald_HintTop</top>
+				<width>384</width>
+				<height>24</height>
+				<orientation>horizontal</orientation>
+				<align>right</align>
+				<itemgap>0</itemgap>
+				<visible>$PARAM[visible] + !$EXP[Bald_DialogOver] + $EXP[Bald_HomeHintsShown]</visible>
+				<animation effect="fade" time="200" tween="sine" easing="inout">VisibleChange</animation>
+				<include>Bald_AnimInfoChrome</include>
+				<include>Bald_AnimIdleChrome</include>
+				<!-- Over background video the idle frame is not drawn, so the hints fade out on their own. -->
+				<animation type="Conditional" condition="$EXP[Bald_Idle]">
+					<effect type="fade" start="100" end="0" time="600" tween="sine" easing="inout" />
+				</animation>
+				<control type="label"><width min="1" max="176">auto</width><height>24</height><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$PARAM[first]</label></control>
+				<control type="label"><width>32</width><height>24</height><align>center</align><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>·</label><visible>$PARAM[second_visible]</visible></control>
+				<control type="label"><width min="1" max="176">auto</width><height>24</height><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$PARAM[second]</label><visible>$PARAM[second_visible]</visible></control>
+			</control>
+		</definition>
+	</include>
+	<!-- The hints of a row built without the generator's chains: "Menu" above, nothing below. -->
+	<variable name="Bald_RowHintMenu">
+		<value>$LOCALIZE[31787]</value>
+	</variable>
+	<variable name="Bald_RowHintNone">
+		<value></value>
+	</variable>
+	<expression name="Bald_RowHintNoNext">[false]</expression>
+	<!-- A row's hints on Home's hint line while it has focus: ˄ and the row Up reaches (the previous row with items, or
+	     "Menu" from the first), then ˅ and the row Down reaches (hidden when Down goes nowhere). prev and next name the
+	     generated chains Bald_RowPrevFrom_<screen>_<n> and Bald_RowNextFrom_<screen>_<n>, has_next
+	     Bald_RowHasNextFrom_<screen>_<n> (shortcuts/generator/screen.xml): bare names, which this include reads as a
+	     variable and an expression. Beside the row's group rather than in it, so they cross-fade in place as focus moves
+	     between rows instead of sliding with the row swap. Hidden while the menu is open (Up and Down move the menu then;
+	     the menu has its own hints) and under a dialog (Container() conditions resolve in the dialog there, so the chains
+	     would read every row as empty). -->
+	<include name="Bald_RowHints">
+		<param name="id" />
+		<param name="screen">home</param>
+		<param name="enabled">true</param>
+		<param name="prev">Bald_RowHintMenu</param>
+		<param name="next">Bald_RowHintNone</param>
+		<param name="has_next">Bald_RowHintNoNext</param>
+		<definition>
+			<include content="Bald_HomeHintLine">
+				<param name="visible">$PARAM[enabled] + String.IsEqual(Window(home).Property(Bald.Screen),$PARAM[screen]) + String.IsEqual(Window(home).Property(Bald.Row),$PARAM[id]) + !$EXP[Bald_MenuOpen]</param>
+				<param name="first">$VAR[Bald_KeyUp]$VAR[$PARAM[prev]]</param>
+				<param name="second">$VAR[Bald_KeyDown]$VAR[$PARAM[next]]</param>
+				<param name="second_visible">$EXP[$PARAM[has_next]]</param>
+			</include>
+		</definition>
+	</include>
+	<!-- The menu's hints: ‹ Featured while Left enters the focused entry's rows (it has some), › Browse while Right opens
+	     a hub's library or other target, › Guide while Right opens Live TV's guide. With Appearance › Behavior's swap,
+	     Left and Right both enter the rows and Select opens the target, so only ‹ Featured shows. -->
+	<expression name="Bald_MenuHintFeatured">[[Control.HasFocus(9001) + $EXP[Bald_HasRows_home]] | [Control.HasFocus(9004) + $EXP[Bald_LiveTVRows]] | [Control.HasFocus(9011) + $EXP[Bald_HasRows_hub1]] | [Control.HasFocus(9012) + $EXP[Bald_HasRows_hub2]] | [Control.HasFocus(9013) + $EXP[Bald_HasRows_hub3]] | [Control.HasFocus(9014) + $EXP[Bald_HasRows_hub4]] | [Control.HasFocus(9015) + $EXP[Bald_HasRows_hub5]] | [Control.HasFocus(9016) + $EXP[Bald_HasRows_hub6]] | [Control.HasFocus(9017) + $EXP[Bald_HasRows_hub7]] | [Control.HasFocus(9018) + $EXP[Bald_HasRows_hub8]]]</expression>
+	<expression name="Bald_MenuHintBrowse">[[Control.HasFocus(9011) + $EXP[Bald_HubHasOpen_hub1] + !$EXP[Bald_HubSwap_hub1]] | [Control.HasFocus(9012) + $EXP[Bald_HubHasOpen_hub2] + !$EXP[Bald_HubSwap_hub2]] | [Control.HasFocus(9013) + $EXP[Bald_HubHasOpen_hub3] + !$EXP[Bald_HubSwap_hub3]] | [Control.HasFocus(9014) + $EXP[Bald_HubHasOpen_hub4] + !$EXP[Bald_HubSwap_hub4]] | [Control.HasFocus(9015) + $EXP[Bald_HubHasOpen_hub5] + !$EXP[Bald_HubSwap_hub5]] | [Control.HasFocus(9016) + $EXP[Bald_HubHasOpen_hub6] + !$EXP[Bald_HubSwap_hub6]] | [Control.HasFocus(9017) + $EXP[Bald_HubHasOpen_hub7] + !$EXP[Bald_HubSwap_hub7]] | [Control.HasFocus(9018) + $EXP[Bald_HubHasOpen_hub8] + !$EXP[Bald_HubSwap_hub8]]]</expression>
+	<expression name="Bald_MenuHintGuide">[Control.HasFocus(9004) + !$EXP[Bald_LiveTVSwap]]</expression>
+	<variable name="Bald_MenuHintRight">
+		<value condition="$EXP[Bald_MenuHintGuide]">$LOCALIZE[31790]$VAR[Bald_KeyRight]</value>
+		<value condition="$EXP[Bald_MenuHintBrowse]">$LOCALIZE[31789]$VAR[Bald_KeyRight]</value>
+	</variable>
+	<!-- The first place holds whichever hint shows, so a lone one still ends on the edge without a dot. -->
+	<variable name="Bald_MenuHintFirst">
+		<value condition="$EXP[Bald_MenuHintFeatured]">$VAR[Bald_KeyLeft]$LOCALIZE[31788]</value>
+		<value>$VAR[Bald_MenuHintRight]</value>
+	</variable>
+	<include name="Bald_MenuHints">
+		<include content="Bald_HomeHintLine">
+			<param name="visible">$EXP[Bald_MenuOpen] + [$EXP[Bald_MenuHintFeatured] | $EXP[Bald_MenuHintBrowse] | $EXP[Bald_MenuHintGuide]]</param>
+			<param name="first">$VAR[Bald_MenuHintFirst]</param>
+			<param name="second">$VAR[Bald_MenuHintRight]</param>
+			<param name="second_visible">$EXP[Bald_MenuHintFeatured] + [$EXP[Bald_MenuHintBrowse] | $EXP[Bald_MenuHintGuide]]</param>
+		</include>
+	</include>
+	<!-- A home row: label line plus fixedlist. Pass <content> elements as children. style picks the tiles and the
+	     label line's position (Bald_RowTiles_<style>, Bald_RowLabelTop_<style>, see Row styles above). Focus travels
+	     to slot (2 landscape, 5 poster), then the row scrolls (440 move); start is the item a fresh fixedlist selects
+	     there (slot + 1). Only the current row is visible; the others keep focus reachable with allowhiddenfocus.
+	     menu is the screen's main-menu entry (Up from the first row, Back); a row shows only while enabled holds (Live
+	     TV rows need a PVR add-on). -->
+	<include name="Bald_Row">
+		<param name="id" />
+		<param name="y" />
+		<param name="label" />
+		<param name="index" />
+		<param name="prev">Bald_RowHintMenu</param>
+		<param name="next">Bald_RowHintNone</param>
+		<param name="has_next">Bald_RowHintNoNext</param>
+		<param name="screen">home</param>
+		<param name="menu">9001</param>
+		<param name="enabled">true</param>
+		<param name="up" />
+		<param name="down">noop</param>
+		<param name="style">fanart</param>
+		<param name="slot">2</param>
+		<param name="start">3</param>
+		<definition>
+			<control type="group">
+				<visible>$PARAM[enabled] + [[String.IsEqual(Window(home).Property(Bald.Screen),$PARAM[screen]) + String.IsEqual(Window(home).Property(Bald.Row),$PARAM[id]) + !$EXP[Bald_MenuOpen]] | [$EXP[Bald_MenuOpen] + String.IsEqual(Window(home).Property(Bald.MenuPreview),$PARAM[screen]) + String.IsEqual(Window(home).Property(Bald.Row.$PARAM[screen]),$PARAM[id])]]</visible>
+				<include>Bald_AnimRowSwap</include>
+				<include>Bald_AnimInfoChrome</include>
+				<animation type="Conditional" condition="[$EXP[Bald_OverlayOpen]] + !$EXP[Bald_VideoBackdropOn]">
+					<effect type="fade" start="100" end="60" time="360" tween="sine" easing="inout" />
+				</animation>
+				<include>Bald_AnimIdleChrome</include>
+				<!-- Row label line: the screen's name as a breadcrumb, the label and the count (Bald.ShowRowCount); the row's hints are
+				     on Home's hint line (Bald_RowHints). -->
+				<control type="grouplist">
+					<left>Bald_SafeLeft</left>
+					<include content="Bald_RowLabelTop_$PARAM[style]" />
+					<width>1248</width>
+					<height>26</height>
+					<orientation>horizontal</orientation>
+					<itemgap>14</itemgap>
+					<!-- Labels are top-aligned and offset so their baselines match (Instrument Sans ascender = font size). -->
+					<usecontrolcoords>true</usecontrolcoords>
+					<!-- The breadcrumb: the screen's name and a slash at 60% ink, then the row's label. -->
+					<control type="label">
+						<width min="1" max="240">auto</width>
+						<height>26</height>
+						<aligny>top</aligny>
+						<font>Bald_RowLabel</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$VAR[Bald_ScreenName_$PARAM[screen]]</label>
+					</control>
+					<control type="label">
+						<width>auto</width>
+						<height>26</height>
+						<aligny>top</aligny>
+						<font>Bald_RowLabel</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>/</label>
+					</control>
+					<control type="label">
+						<width min="1" max="560">auto</width>
+						<height>26</height>
+						<aligny>top</aligny>
+						<font>Bald_RowLabel</font>
+						<textcolor>bald_ink</textcolor>
+						<label>$PARAM[label]</label>
+					</control>
+					<control type="label">
+						<top>3</top>
+						<width>auto</width>
+						<height>26</height>
+						<aligny>top</aligny>
+						<font>Bald_Hint</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$INFO[Container($PARAM[id]).CurrentItem]$INFO[Container($PARAM[id]).NumItems, $LOCALIZE[31708] ,]</label>
+						<!-- Off unless Appearance turns it on; hidden, the grouplist closes up and the label ends the line. -->
+						<visible>Skin.HasSetting(Bald.ShowRowCount)</visible>
+						<animation type="Conditional" condition="$EXP[Bald_Idle]">
+							<effect type="fade" start="100" end="0" time="600" tween="sine" easing="inout" />
+						</animation>
+					</control>
+				</control>
+			</control>
+			<include content="Bald_RowHints">
+				<param name="id">$PARAM[id]</param>
+				<param name="screen">$PARAM[screen]</param>
+				<param name="enabled">$PARAM[enabled]</param>
+				<param name="prev">$PARAM[prev]</param>
+				<param name="next">$PARAM[next]</param>
+				<param name="has_next">$PARAM[has_next]</param>
+			</include>
+			<control type="fixedlist" id="$PARAM[id]">
+				<!-- Position, size and item layouts come from the row's style. -->
+				<include content="Bald_RowTiles_$PARAM[style]" />
+				<!-- Kodi does not process hidden lists, so a row also counts as visible until its items load;
+				     that lets it load (and the row-start timer fix its selection) before it is first shown. Not while a
+				     dialog is up: <visible> has no window context then, and NumItems would read empty for every row.
+				     Behind the startup splash every row, on every screen, counts as visible until its list has fetched
+				     (Bald_Preloading, see Bald_RowsLoaded), so it hides again before the splash lifts. -->
+				<visible allowhiddenfocus="true">$PARAM[enabled] + [[String.IsEqual(Window(home).Property(Bald.Screen),$PARAM[screen]) + [[String.IsEqual(Window(home).Property(Bald.Row),$PARAM[id]) + !$EXP[Bald_MenuOpen]] | [!Integer.IsGreater(Container($PARAM[id]).NumItems,0) + !$EXP[Bald_DialogOver]]]] | [$EXP[Bald_MenuOpen] + String.IsEqual(Window(home).Property(Bald.MenuPreview),$PARAM[screen]) + String.IsEqual(Window(home).Property(Bald.Row.$PARAM[screen]),$PARAM[id])] | [$EXP[Bald_Preloading] + Container($PARAM[id]).IsUpdating]]</visible>
+				<include>Bald_AnimRowSwap</include>
+				<include>Bald_AnimInfoChrome</include>
+				<animation type="Conditional" condition="[$EXP[Bald_OverlayOpen]] + !$EXP[Bald_VideoBackdropOn]">
+					<effect type="fade" start="100" end="60" time="360" tween="sine" easing="inout" />
+				</animation>
+				<include>Bald_AnimIdleChrome</include>
+				<include content="Bald_AnimNudge"><param name="prop">Bald.NudgeL</param><param name="x">14</param><param name="back">-14</param></include>
+				<include content="Bald_AnimNudge"><param name="prop">Bald.NudgeR</param><param name="x">-14</param><param name="back">14</param></include>
+				<orientation>horizontal</orientation>
+				<focusposition>$PARAM[slot]</focusposition>
+				<movement>$PARAM[slot]</movement>
+				<!-- Short rows start at the safe margin. A fixedlist lets the cursor range over
+				     [slot - movement, slot + movement] (0 to 2 x slot here) and, with fewer items than that range holds,
+				     narrows it until it fits (CGUIFixedListContainer::GetCursorRange). By default it narrows from both
+				     sides towards the focus slot, so a row of one landscape tile sat at slot 2, and every row shorter
+				     than the range (up to 4 items on a landscape or square row, up to 8 on a poster row, whose range
+				     the 8-slot page ends) began one or more slots in.
+				     Kodi 22's aligny (xbmc/xbmc 7025f71, "items vertical alignment", also for horizontal lists: top is the
+				     start) set to top narrows it from the end only: the range becomes 0 to NumItems - 1, the offset stays
+				     0, so item 1 is always at slot 0 and Right walks the cursor across the row without scrolling, with the
+				     edge nudge at its last item. A row long enough to fill the range never narrows it, so it behaves as
+				     before. This replaces a conditional slide of the list, which would have needed per-style slot widths,
+				     an animation per item count, and would have moved the nudge and focus pop off their slots.
+				     The fresh selection moves too: Kodi starts the cursor at the focus slot, and a row of NumItems up to
+				     slot has it clamped to the last item (NumItems - 1). Row start below brings that back to item 1 as
+				     well (Bald_RowStartShort_<slot>). -->
+				<aligny>top</aligny>
+				<scrolltime tween="cubic" easing="out">440</scrolltime>
+				<!-- Not while Home loads back onto a menu entry: Kodi focuses the default control (row 1) before it sets the
+				     controls' initial animation states and before the onload runs (CGUIWindow::OnInitWindow), so this focus
+				     would make row 1's state the frame's starting shape, and the return to a hub of another style would
+				     then resize it. -->
+				<!-- Nor from a disabled row: Home's rows while Home is hidden get that same default focus, and must not make
+				     themselves the current row over the screen Home starts on (Bald_HomeHidden). -->
+				<onfocus condition="!$EXP[Bald_Restoring] + $PARAM[enabled]">SetProperty(Bald.Row,$PARAM[id],home)</onfocus>
+				<onfocus condition="!$EXP[Bald_Restoring] + $PARAM[enabled]">SetProperty(Bald.Row.$PARAM[screen],$PARAM[id],home)</onfocus>
+				<include content="Bald_FollowContainer"><param name="id">$PARAM[id]</param><param name="window">home</param><param name="condition">!$EXP[Bald_Restoring] + $PARAM[enabled]</param></include>
+				<!-- The art frame's shape follows the displayed row's style (Bald_PosterRow). -->
+				<onfocus condition="!$EXP[Bald_Restoring] + $PARAM[enabled]">SetProperty(Bald.RowStyle,$PARAM[style],home)</onfocus>
+				<!-- Row start: a fixedlist first selects item slot + 1 (start) at its focus slot. The row above moves this one back while
+				     it is hidden (generated onfocus, see shortcuts/generator/screen.xml) and Timers.xml covers the rows shown
+				     before they are focused; if the row is still pristine when it gains focus, move it here. Loaded rows are
+				     marked once focused, so a later item 3 at slot 2 is the viewer's own. Home clears the marks in onload.
+				     Conditions are evaluated before any of these actions run (CGUIAction::ExecuteActions). -->
+				<onfocus condition="String.IsEmpty(Window(home).Property(Bald.Start$PARAM[id])) + String.IsEqual(Container($PARAM[id]).CurrentItem,$PARAM[start]) + String.IsEqual(Container($PARAM[id]).Position,$PARAM[slot])">Control.Move($PARAM[id],-$PARAM[slot])</onfocus>
+				<include content="Bald_RowStartShort_$PARAM[slot]"><param name="id">$PARAM[id]</param></include>
+				<onfocus condition="Integer.IsGreater(Container($PARAM[id]).NumItems,0)">SetProperty(Bald.Start$PARAM[id],1,home)</onfocus>
+				<!-- Opening the menu is screen-relative: focus the active screen's own entry (menu) instead of
+				     resetting the navigation model to Home. -->
+				<onup condition="Integer.IsEqual($PARAM[index],1)">SetProperty(Bald.Menu,1,home)</onup>
+				<onup condition="Integer.IsEqual($PARAM[index],1)">SetProperty(Bald.MenuPreview,$PARAM[screen],home)</onup>
+				<onup condition="Integer.IsEqual($PARAM[index],1)">SetProperty(Bald.RowStyle,$PARAM[style],home)</onup>
+				<include content="Bald_FollowContainerOnUp"><param name="id">$PARAM[id]</param><param name="window">home</param><param name="condition">Integer.IsEqual($PARAM[index],1)</param></include>
+				<onup condition="Integer.IsEqual($PARAM[index],1)">SetFocus($PARAM[menu])</onup>
+				<onup condition="!Integer.IsEqual($PARAM[index],1)">$PARAM[up]</onup>
+				<ondown>$PARAM[down]</ondown>
+				<!-- Left and Right wrap at the row's ends (a container wraps when none of its onleft/onright holds,
+				     CGUIBaseContainer::OnLeft). A row of one item has nowhere to go: it nudges instead. -->
+				<onleft condition="!Integer.IsGreater(Container($PARAM[id]).NumItems,1)">SetProperty(Bald.NudgeL,$VAR[Bald_NudgeLNext],home)</onleft>
+				<onright condition="!Integer.IsGreater(Container($PARAM[id]).NumItems,1)">SetProperty(Bald.NudgeR,$VAR[Bald_NudgeRNext],home)</onright>
+				<onback>SetProperty(Bald.Menu,1,home)</onback>
+				<onback>SetProperty(Bald.MenuPreview,$PARAM[screen],home)</onback>
+				<onback>SetProperty(Bald.RowStyle,$PARAM[style],home)</onback>
+				<include content="Bald_FollowContainerOnBack"><param name="id">$PARAM[id]</param><param name="window">home</param></include>
+				<onback>SetFocus($PARAM[menu])</onback>
+				<!-- A PVR channel group (a "channel groups" row, widget editor Choose content) opens the guide on that group:
+				     the guide windows take a group path with ActivateWindow and make it the active group
+				     (CGUIWindowPVRGuideBase::OnMessage, SetChannelGroupPath). Everything else opens its information. -->
+				<onclick condition="$EXP[Bald_TVChannelGroupItem]">ActivateWindow(TVGuide,$ESCINFO[ListItem.FolderPath],return)</onclick>
+				<onclick condition="$EXP[Bald_RadioChannelGroupItem]">ActivateWindow(RadioGuide,$ESCINFO[ListItem.FolderPath],return)</onclick>
+				<!-- A favourite (a "favourites://" row) runs itself: with no onclick condition true, Kodi hands the click to the
+				     list provider (CGUIBaseContainer::OnClick), which resolves and executes the favourite
+				     (CDirectoryProvider::OnClick). -->
+				<!-- A weather tile (a weather row, Includes_Bald_Weather.xml) runs its static item's own onclick the same way. -->
+				<!-- Piers: a plain folder (an add-on menu or a TMDb Helper node entry: a folder with no media type) opens as a
+				     list in its own window instead of the information dialog, which has nothing to show for it and whose
+				     Play would try to play the folder. Shows, seasons and sets keep their information. -->
+				<onclick condition="$EXP[Bald_PlainFolderItem] + $EXP[Bald_MusicFolderItem]">ActivateWindow(Music,$ESCINFO[ListItem.FolderPath],return)</onclick>
+				<onclick condition="$EXP[Bald_PlainFolderItem] + !$EXP[Bald_MusicFolderItem]">ActivateWindow(Videos,$ESCINFO[ListItem.FolderPath],return)</onclick>
+				<onclick condition="!$EXP[Bald_TVChannelGroupItem] + !$EXP[Bald_RadioChannelGroupItem] + !$EXP[Bald_FavouriteItem] + !$EXP[Bald_WeatherTileItem] + !$EXP[Bald_PlainFolderItem]">Action(Info)</onclick>
+				<nested />
+			</control>
+		</definition>
+	</include>
+
+	<!-- ============ Menu ============ -->
+	<!-- The focused row item is a PVR channel group (a folder under pvr://channels/). -->
+	<expression name="Bald_TVChannelGroupItem">[ListItem.IsFolder + String.StartsWith(ListItem.FolderPath,pvr://channels/tv/)]</expression>
+	<expression name="Bald_RadioChannelGroupItem">[ListItem.IsFolder + String.StartsWith(ListItem.FolderPath,pvr://channels/radio/)]</expression>
+	<!-- The focused row item is one of Kodi's favourites (a row on favourites://; CFavouritesURL paths). -->
+	<!-- Piers: the focused row item is a folder with no media type (an add-on menu, a TMDb Helper node entry). -->
+	<expression name="Bald_PlainFolderItem">[ListItem.IsFolder + String.IsEmpty(ListItem.DBType) + !ListItem.IsParentFolder + !$EXP[Bald_TVChannelGroupItem] + !$EXP[Bald_RadioChannelGroupItem] + !$EXP[Bald_FavouriteItem] + !$EXP[Bald_WeatherTileItem]]</expression>
+	<expression name="Bald_MusicFolderItem">[String.StartsWith(ListItem.FolderPath,musicdb://) | String.StartsWith(ListItem.FolderPath,plugin://plugin.audio.) | String.StartsWith(ListItem.FolderPath,library://music/)]</expression>
+	<expression name="Bald_FavouriteItem">[String.StartsWith(ListItem.FolderPath,favourites://)]</expression>
+	<!-- One entry of the Home menu (grouplist 9000). Pass what Select does as <onclick> children (nested), or
+	     Bald_HomeMenuScreen for a screen with rows. Up and Down are the grouplist's: CGUIControlGroupList::AddControl
+	     points each entry at its neighbours (replacing any onup/ondown here) and CGUIWindow::OnMove passes over hidden
+	     entries, so disabled screens and empty hub slots drop out; each entry's onfocus sets the preview. Left does
+	     what Select does while left_if holds (nested <onleft> children cover the rest); Right navigates to control
+	     right while right_if holds (a conditional numeric onright, as Estuary's channel manager uses). -->
+	<include name="Bald_HomeMenuButton">
+		<param name="id" />
+		<param name="label" />
+		<param name="preview" />
+		<param name="visible">true</param>
+		<param name="suffix" />
+		<param name="right">noop</param>
+		<param name="right_if">true</param>
+		<param name="left_if">true</param>
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<left>-6</left><width>390</width><height>56</height><visible>$PARAM[visible]</visible>
+				<texturefocus border="12,0,0,0" colordiffuse="bald_accent">bald/menu_dot.png</texturefocus><texturenofocus /><font>Bald_MenuItem</font><align>left</align><aligny>center</aligny><textoffsetx>26</textoffsetx>
+				<textcolor>bald_ink34</textcolor><focusedcolor>bald_ink</focusedcolor><label>$PARAM[label]$PARAM[suffix]</label>
+				<!-- Not reversible: Kodi reverses an interrupted Focus animation from wherever it stopped, which left quickly
+				     passed items at a stray brightness. Resetting it returns every unfocused item to exactly bald_ink34. -->
+				<animation type="Focus" condition="$EXP[Bald_FullMotion]" reversible="false"><effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" /><effect type="slide" start="0,0" end="6,0" time="320" tween="cubic" easing="out" /></animation>
+				<animation type="Focus" condition="$EXP[Bald_ReduceMotion]" reversible="false"><effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" /></animation>
+				<animation type="Unfocus" condition="$EXP[Bald_FullMotion]"><effect type="slide" start="6,0" end="0,0" time="320" tween="cubic" easing="out" /></animation>
+				<!-- Count the first three menu opens for the auto-hiding menu hint; not Home's own move to the menu when
+				     there are no rows (no current row then). -->
+				<onfocus condition="!$EXP[Bald_MenuOpen] + $EXP[Bald_HasRow] + String.IsEqual(Skin.String(Bald.MenuOpens),2)">Skin.SetString(Bald.MenuOpens,3)</onfocus>
+				<onfocus condition="!$EXP[Bald_MenuOpen] + $EXP[Bald_HasRow] + String.IsEqual(Skin.String(Bald.MenuOpens),1)">Skin.SetString(Bald.MenuOpens,2)</onfocus>
+				<onfocus condition="!$EXP[Bald_MenuOpen] + $EXP[Bald_HasRow] + String.IsEmpty(Skin.String(Bald.MenuOpens))">Skin.SetString(Bald.MenuOpens,1)</onfocus>
+				<onfocus>SetProperty(Bald.Menu,1,home)</onfocus>
+				<onfocus>SetProperty(Bald.MenuPreview,$PARAM[preview],home)</onfocus>
+				<!-- The previewed screen's remembered row sets the art frame's shape (empty, a full frame, without rows). -->
+				<onfocus>SetProperty(Bald.RowStyle,$VAR[Bald_PreviewRowStyle],home)</onfocus>
+				<nested />
+				<onleft condition="$PARAM[left_if]">Action(Select)</onleft>
+				<onright condition="$PARAM[right_if]">$PARAM[right]</onright>
+				<!-- With background video, Back from the menu returns to the playing video (fullscreen); otherwise to the row. -->
+				<onback condition="$EXP[Bald_VideoBackdropOn]">Action(FullScreen)</onback>
+				<onback condition="$EXP[Bald_HasRow] + !$EXP[Bald_VideoBackdropOn]">ClearProperty(Bald.Menu,home)</onback><onback condition="$EXP[Bald_HasRow] + !$EXP[Bald_VideoBackdropOn]">SetFocus($INFO[Window(home).Property(Bald.Row)])</onback>
+			</control>
+		</definition>
+	</include>
+	<!-- Returning to Home from a window a menu entry opened (a hub's target, Live TV's guide, Settings): the entry sets
+	     Bald.ReturnMenu to its own id as it leaves, and Home's onload opens the menu on it again, as Search does with
+	     Bald.ReturnSearch. Only while that entry is still shown (a hub turned off meanwhile is skipped), so focus never
+	     goes to a hidden button with the menu open; otherwise Home starts on its row as usual. One line per entry,
+	     because a condition cannot read the id from the property. -->
+	<!-- Home is loading back onto a menu entry (Bald_ReturnToMenu will focus it). Home's onload then keeps the state
+	     it was left in (the menu up, the previewed screen, each screen's remembered row, the frame's row style) rather
+	     than resetting it: Kodi sets each control's initial animation state from the properties as they were when Home
+	     was left, so any reset and restore flips conditions and animates the frame away and back. -->
+	<expression name="Bald_ReturningToMenu">[[String.IsEqual(Window(home).Property(Bald.ReturnMenu),9011) + Control.IsVisible(9011)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9012) + Control.IsVisible(9012)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9013) + Control.IsVisible(9013)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9014) + Control.IsVisible(9014)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9015) + Control.IsVisible(9015)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9016) + Control.IsVisible(9016)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9017) + Control.IsVisible(9017)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9018) + Control.IsVisible(9018)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9004) + Control.IsVisible(9004)] | [String.IsEqual(Window(home).Property(Bald.ReturnMenu),9006) + Control.IsVisible(9006)]]</expression>
+	<!-- Home is loading back from any other window (a library, playback, a reload after a rebuild): it keeps the state
+	     it was left in, as above, and focus returns to where it was: the previewed menu entry with the menu open
+	     (Bald_MenuPreviewEntry), else the current row. Bald.Left is set by Home's onunload
+	     and cleared at the end of its onload, and by the widget editor and Home Screens when they change the rows, so
+	     Home starts fresh after a rebuild. The first load of a Kodi session starts fresh too (window properties start
+	     empty). -->
+	<expression name="Bald_ReturningToRow">[!String.IsEmpty(Window(home).Property(Bald.Left)) + $EXP[Bald_HasRow] + !$EXP[Bald_ReturningToMenu]]</expression>
+	<expression name="Bald_Restoring">[$EXP[Bald_ReturningToMenu] | $EXP[Bald_ReturningToRow]]</expression>
+	<!-- The menu entry of the previewed screen (Bald.MenuPreview). -->
+	<variable name="Bald_MenuPreviewEntry">
+		<value condition="$EXP[Bald_MenuPreview_hub1]">9011</value>
+		<value condition="$EXP[Bald_MenuPreview_hub2]">9012</value>
+		<value condition="$EXP[Bald_MenuPreview_hub3]">9013</value>
+		<value condition="$EXP[Bald_MenuPreview_hub4]">9014</value>
+		<value condition="$EXP[Bald_MenuPreview_hub5]">9015</value>
+		<value condition="$EXP[Bald_MenuPreview_hub6]">9016</value>
+		<value condition="$EXP[Bald_MenuPreview_hub7]">9017</value>
+		<value condition="$EXP[Bald_MenuPreview_hub8]">9018</value>
+		<value condition="$EXP[Bald_MenuPreview_livetv]">9004</value>
+		<value condition="$EXP[Bald_MenuPreview_search]">9005</value>
+		<value condition="$EXP[Bald_MenuPreview_settings]">9006</value>
+		<value condition="$EXP[Bald_MenuPreview_power]">9007</value>
+		<value condition="$EXP[Bald_MenuPreview_home]">9001</value>
+		<value>$VAR[Bald_StartMenuEntry]</value>
+	</variable>
+	<!-- Open the menu on the start screen's entry, previewing that screen (the art frame takes its remembered row's
+	     style), under `condition`: as Home's onload, and as the splash's 9195 onfocus. -->
+	<include name="Bald_OpenStartMenuOnLoad">
+		<param name="condition" />
+		<definition>
+			<onload condition="$PARAM[condition]">SetProperty(Bald.Menu,1,home)</onload>
+			<onload condition="$PARAM[condition]">SetProperty(Bald.MenuPreview,$VAR[Bald_StartScreen],home)</onload>
+			<onload condition="$PARAM[condition]">SetProperty(Bald.RowStyle,$VAR[Bald_PreviewRowStyle],home)</onload>
+			<onload condition="$PARAM[condition]">SetFocus($VAR[Bald_StartMenuEntry])</onload>
+		</definition>
+	</include>
+	<include name="Bald_OpenStartMenuOnFocus">
+		<param name="condition" />
+		<definition>
+			<onfocus condition="$PARAM[condition]">SetProperty(Bald.Menu,1,home)</onfocus>
+			<onfocus condition="$PARAM[condition]">SetProperty(Bald.MenuPreview,$VAR[Bald_StartScreen],home)</onfocus>
+			<onfocus condition="$PARAM[condition]">SetProperty(Bald.RowStyle,$VAR[Bald_PreviewRowStyle],home)</onfocus>
+			<onfocus condition="$PARAM[condition]">SetFocus($VAR[Bald_StartMenuEntry])</onfocus>
+		</definition>
+	</include>
+	<!-- A fresh start opens the menu on the start screen's entry; Appearance > Behavior can start on the rows instead. -->
+	<expression name="Bald_StartOnMenu">[!Skin.HasSetting(Bald.HomeStartsOnRows)]</expression>
+	<!-- A library page's heading (the movie and series views): the hub's name while the library shows the folder that
+	     hub opened (Bald.HubTitle, set by the hub's bridge; Bald.HubPath, taken by MyVideoNav's onload when it opens
+	     from Home), else the section's own name. -->
+	<variable name="Bald_LibraryMoviesHeading">
+		<value condition="$EXP[Bald_InHubFolder]">$INFO[Window(home).Property(Bald.HubTitle)]</value>
+		<value>$LOCALIZE[342]</value>
+	</variable>
+	<variable name="Bald_LibraryShowsHeading">
+		<value condition="$EXP[Bald_InHubFolder]">$INFO[Window(home).Property(Bald.HubTitle)]</value>
+		<value>$LOCALIZE[20343]</value>
+	</variable>
+	<expression name="Bald_InHubFolder">[!String.IsEmpty(Window(home).Property(Bald.HubTitle)) + !String.IsEmpty(Window(home).Property(Bald.HubPath)) + String.IsEqual(Container.FolderPath,Window(home).Property(Bald.HubPath))]</expression>
+	<include name="Bald_ReturnToMenuEntry">
+		<param name="id" />
+		<definition>
+			<onload condition="String.IsEqual(Window(home).Property(Bald.ReturnMenu),$PARAM[id]) + Control.IsVisible($PARAM[id])">SetProperty(Bald.Menu,1,home)</onload>
+			<onload condition="String.IsEqual(Window(home).Property(Bald.ReturnMenu),$PARAM[id]) + Control.IsVisible($PARAM[id])">SetFocus($PARAM[id])</onload>
+		</definition>
+	</include>
+	<include name="Bald_ReturnToMenu">
+		<definition>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9011</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9012</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9013</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9014</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9015</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9016</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9017</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9018</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9004</param></include>
+			<include content="Bald_ReturnToMenuEntry"><param name="id">9006</param></include>
+			<onload>ClearProperty(Bald.ReturnMenu,home)</onload>
+		</definition>
+	</include>
+	<!-- Appearance > Behavior, "Select on a hub opens its library" (9629). Off (unset, the default): Select on a hub or
+	     Live TV enters its rows and Right opens its library (or the guide). On: the two swap for an entry that has both
+	     rows and a target; an entry with only one of them behaves as before. Left always goes where the rows are
+	     reached from when they swap (the rows lie left of the menu), else does what Select does. -->
+	<expression name="Bald_SelectOpens">[Skin.HasSetting(Bald.HubSelectOpens)]</expression>
+	<!-- The swap for each hub slot (Includes cannot name an expression from a parameter inside another expression, so
+	     one per slot) and for Live TV, which always has a target (the guide). -->
+	<expression name="Bald_HubSwap_hub1">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub1] + $EXP[Bald_HasRows_hub1]]</expression>
+	<expression name="Bald_HubSwap_hub2">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub2] + $EXP[Bald_HasRows_hub2]]</expression>
+	<expression name="Bald_HubSwap_hub3">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub3] + $EXP[Bald_HasRows_hub3]]</expression>
+	<expression name="Bald_HubSwap_hub4">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub4] + $EXP[Bald_HasRows_hub4]]</expression>
+	<expression name="Bald_HubSwap_hub5">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub5] + $EXP[Bald_HasRows_hub5]]</expression>
+	<expression name="Bald_HubSwap_hub6">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub6] + $EXP[Bald_HasRows_hub6]]</expression>
+	<expression name="Bald_HubSwap_hub7">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub7] + $EXP[Bald_HasRows_hub7]]</expression>
+	<expression name="Bald_HubSwap_hub8">[$EXP[Bald_SelectOpens] + $EXP[Bald_HubHasOpen_hub8] + $EXP[Bald_HasRows_hub8]]</expression>
+	<expression name="Bald_LiveTVSwap">[$EXP[Bald_SelectOpens] + $EXP[Bald_LiveTVRows]]</expression>
+	<!-- Enter a screen's rows on its remembered row (Bald.Row.<screen>), closing the menu. One include per event, as an
+	     include cannot choose its tag. -->
+	<include name="Bald_HomeMenuEnterOnClick">
+		<param name="screen" />
+		<param name="condition" />
+		<definition>
+			<onclick condition="$PARAM[condition]">SetProperty(Bald.Screen,$PARAM[screen],home)</onclick>
+			<onclick condition="$PARAM[condition]">SetProperty(Bald.Row,$INFO[Window(home).Property(Bald.Row.$PARAM[screen])],home)</onclick>
+			<onclick condition="$PARAM[condition]">SetProperty(Bald.RowStyle,$VAR[Bald_RowStyle_$PARAM[screen]],home)</onclick>
+			<onclick condition="$PARAM[condition]">ClearProperty(Bald.Menu,home)</onclick>
+			<onclick condition="$PARAM[condition]">SetFocus($INFO[Window(home).Property(Bald.Row.$PARAM[screen])])</onclick>
+		</definition>
+	</include>
+	<include name="Bald_HomeMenuEnterOnRight">
+		<param name="screen" />
+		<param name="condition" />
+		<definition>
+			<onright condition="$PARAM[condition]">SetProperty(Bald.Screen,$PARAM[screen],home)</onright>
+			<onright condition="$PARAM[condition]">SetProperty(Bald.Row,$INFO[Window(home).Property(Bald.Row.$PARAM[screen])],home)</onright>
+			<onright condition="$PARAM[condition]">SetProperty(Bald.RowStyle,$VAR[Bald_RowStyle_$PARAM[screen]],home)</onright>
+			<onright condition="$PARAM[condition]">ClearProperty(Bald.Menu,home)</onright>
+			<onright condition="$PARAM[condition]">SetFocus($INFO[Window(home).Property(Bald.Row.$PARAM[screen])])</onright>
+		</definition>
+	</include>
+	<include name="Bald_HomeMenuEnterOnLeft">
+		<param name="screen" />
+		<param name="condition" />
+		<definition>
+			<onleft condition="$PARAM[condition]">SetProperty(Bald.Screen,$PARAM[screen],home)</onleft>
+			<onleft condition="$PARAM[condition]">SetProperty(Bald.Row,$INFO[Window(home).Property(Bald.Row.$PARAM[screen])],home)</onleft>
+			<onleft condition="$PARAM[condition]">SetProperty(Bald.RowStyle,$VAR[Bald_RowStyle_$PARAM[screen]],home)</onleft>
+			<onleft condition="$PARAM[condition]">ClearProperty(Bald.Menu,home)</onleft>
+			<onleft condition="$PARAM[condition]">SetFocus($INFO[Window(home).Property(Bald.Row.$PARAM[screen])])</onleft>
+		</definition>
+	</include>
+	<!-- A screen entry (Home, a hub): the background follows the screen's remembered row while it is previewed;
+	     Select enters the screen on that row, or, while swap holds (Bald_SelectOpens with rows and a target), Right
+	     and Left do. -->
+	<include name="Bald_HomeMenuScreen">
+		<param name="screen" />
+		<param name="swap">false</param>
+		<definition>
+			<include content="Bald_FollowContainer"><param name="id">$INFO[Window(home).Property(Bald.Row.$PARAM[screen])]</param><param name="window">home</param></include>
+			<include content="Bald_HomeMenuEnterOnClick"><param name="screen">$PARAM[screen]</param><param name="condition">$EXP[Bald_HasRows_$PARAM[screen]] + ![$PARAM[swap]]</param></include>
+			<include content="Bald_HomeMenuEnterOnRight"><param name="screen">$PARAM[screen]</param><param name="condition">$PARAM[swap]</param></include>
+			<include content="Bald_HomeMenuEnterOnLeft"><param name="screen">$PARAM[screen]</param><param name="condition">$PARAM[swap]</param></include>
+		</definition>
+	</include>
+	<!-- Hub slot n (1-8) of the main menu: the hub at position n in the Home Screens list (generated names, see
+	     shortcuts/generator/screen.xml). Hidden, and so skipped by the grouplist, when the slot is empty or the hub is
+	     turned off. Select enters its rows and Right opens its target, if it has one, through bridge 902n; Select also
+	     opens the target while the hub has no rows. With Bald_SelectOpens and both rows and a target, Select opens the
+	     target and Right (and Left) enter the rows (Bald_HubSwap_hub<n>). -->
+	<include name="Bald_HomeMenuHub">
+		<param name="n" />
+		<definition>
+			<include content="Bald_HomeMenuButton">
+				<param name="id">901$PARAM[n]</param>
+				<param name="label">$VAR[Bald_HubLabel_hub$PARAM[n]]</param>
+				<param name="suffix">$VAR[Bald_HubSuffix_hub$PARAM[n]]</param>
+				<param name="preview">hub$PARAM[n]</param>
+				<param name="visible">$EXP[Bald_HubShown_hub$PARAM[n]]</param>
+				<param name="right">902$PARAM[n]</param>
+				<param name="right_if">$EXP[Bald_HubHasOpen_hub$PARAM[n]] + !$EXP[Bald_HubSwap_hub$PARAM[n]]</param>
+				<param name="left_if">!$EXP[Bald_HubSwap_hub$PARAM[n]]</param>
+				<include content="Bald_HomeMenuScreen"><param name="screen">hub$PARAM[n]</param><param name="swap">$EXP[Bald_HubSwap_hub$PARAM[n]]</param></include>
+				<onclick condition="$EXP[Bald_HubHasOpen_hub$PARAM[n]] + [!$EXP[Bald_HasRows_hub$PARAM[n]] | $EXP[Bald_SelectOpens]]">SetFocus(902$PARAM[n])</onclick>
+			</include>
+		</definition>
+	</include>
+	<!-- The invisible bridge behind a hub's Right (and Select without rows): focusing it opens the hub's target
+	     (generated Bald_HubOpen_hub<n>: ActivateWindow for a library node, playlist or add-on path, else the builtin). -->
+	<include name="Bald_HubBridge">
+		<param name="n" />
+		<definition>
+			<control type="button" id="902$PARAM[n]">
+				<width>1</width><height>1</height><texturefocus /><texturenofocus />
+				<onfocus>SetProperty(Bald.ReturnMenu,901$PARAM[n],home)</onfocus>
+				<!-- The library heading shows the hub's name for the folder it opens (Bald_LibraryMoviesHeading). -->
+				<onfocus>SetProperty(Bald.HubTitle,$ESCVAR[Bald_HubLabel_hub$PARAM[n]],home)</onfocus>
+				<include content="Bald_HubOpen_hub$PARAM[n]" />
+				<include content="Bald_BridgeReturn"><param name="menu">901$PARAM[n]</param></include>
+			</control>
+		</definition>
+	</include>
+	<!-- A bridge hands focus back to its menu entry: after its target (a window that opened has the focus by then,
+	     so this does nothing there), and on any key. A target that leaves Home active (RunScript, RunPlugin,
+	     RunAddon, PlayMedia, a failed ActivateWindow) would otherwise leave focus on the invisible bridge until the
+	     idle timer. -->
+	<include name="Bald_BridgeReturn">
+		<param name="menu" />
+		<definition>
+			<onfocus>SetFocus($PARAM[menu])</onfocus>
+			<onup>SetFocus($PARAM[menu])</onup>
+			<ondown>SetFocus($PARAM[menu])</ondown>
+			<onleft>SetFocus($PARAM[menu])</onleft>
+			<onright>SetFocus($PARAM[menu])</onright>
+			<onback>SetFocus($PARAM[menu])</onback>
+		</definition>
+	</include>
+	<!-- Live TV's entry, with its own rows (Home Screens, Live TV), like a hub: Select (and Left) enters the rows while
+	     there are rows and a PVR add-on, else opens the guide; Right opens the guide (bridge 9029). With
+	     Bald_SelectOpens and rows (Bald_LiveTVSwap), Select opens the guide and Right and Left enter the rows. -->
+	<!-- Live TV's menu entry when Home Screens placed it after `after` hub slots (Bald.LiveTVAfter, "0" to "7"; unset is
+	     after all eight, Home.xml). Kodi evaluates an include's condition as the skin loads, so the entry keeps its one
+	     id (9004); a move marks the rows changed, and Home's rebuild reloads the skin. -->
+	<include name="Bald_HomeMenuLiveTVAt">
+		<param name="after" />
+		<definition>
+			<include condition="String.IsEqual(Skin.String(Bald.LiveTVAfter),$PARAM[after])">Bald_HomeMenuLiveTV</include>
+		</definition>
+	</include>
+	<include name="Bald_HomeMenuLiveTV">
+		<definition>
+			<include content="Bald_HomeMenuButton">
+				<param name="id">9004</param>
+				<param name="label">$LOCALIZE[31700]</param>
+				<param name="preview">livetv</param>
+				<param name="visible">!Skin.HasSetting(Bald.Screen.HideLiveTV)</param>
+				<!-- The disclosure cue hubs with a target show: Right opens the guide. -->
+				<param name="suffix">  ›</param>
+				<param name="right">9029</param>
+				<param name="right_if">!$EXP[Bald_LiveTVSwap]</param>
+				<param name="left_if">!$EXP[Bald_LiveTVSwap]</param>
+				<include content="Bald_FollowContainer"><param name="id">$INFO[Window(home).Property(Bald.Row.livetv)]</param><param name="window">home</param><param name="condition">$EXP[Bald_LiveTVRows]</param></include>
+				<include content="Bald_HomeMenuEnterOnClick"><param name="screen">livetv</param><param name="condition">$EXP[Bald_LiveTVRows] + !$EXP[Bald_LiveTVSwap]</param></include>
+				<include content="Bald_HomeMenuEnterOnRight"><param name="screen">livetv</param><param name="condition">$EXP[Bald_LiveTVSwap]</param></include>
+				<include content="Bald_HomeMenuEnterOnLeft"><param name="screen">livetv</param><param name="condition">$EXP[Bald_LiveTVSwap]</param></include>
+				<onclick condition="!$EXP[Bald_LiveTVRows] | $EXP[Bald_LiveTVSwap]">SetProperty(Bald.ReturnMenu,9004,home)</onclick>
+				<onclick condition="!$EXP[Bald_LiveTVRows] | $EXP[Bald_LiveTVSwap]">ActivateWindow(TVGuide)</onclick>
+			</include>
+		</definition>
+	</include>
+	<expression name="Bald_LiveTVRows">[System.HasPVRAddon + $EXP[Bald_HasRows_livetv]]</expression>
+</includes>

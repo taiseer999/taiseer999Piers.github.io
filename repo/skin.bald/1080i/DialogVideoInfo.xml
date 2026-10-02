@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald paged info: Overview, Cast & details, More like this. Home still owns the opening frame zoom.
+     Shows, seasons and episodes get the TV Overview (Includes_Bald_InfoTV.xml); include conditions on the item's
+     DBType choose it, and Kodi reloads this window when they change. -->
+<window>
+	<defaultcontrol always="true">5000</defaultcontrol>
+	<onload>SetProperty(Bald.InfoSec,0,home)</onload>
+	<onload>SetProperty(Bald.Identity,$INFO[ListItem.DBType]:$INFO[ListItem.DBID],movieinformation)</onload>
+	<onload>ClearProperty(Bald.MorePath,movieinformation)</onload>
+	<onload>ClearProperty(Bald.MoreFor,movieinformation)</onload>
+	<onload>ClearProperty(Bald.InfoSwitch,home)</onload>
+	<include content="Bald_UnfollowContainerOnLoad"><param name="window">movieinformation</param></include>
+	<include>Bald_InfoTVClear</include>
+	<onload condition="$EXP[Bald_HasTMDbHelper] + !Skin.HasSetting(TMDbHelper.UseLocalWidgetContainer)">Skin.SetBool(TMDbHelper.UseLocalWidgetContainer)</onload>
+	<!-- Bald Helper's bald.info does both recommendations and (TV items) tvinfo; without it, two scripts. -->
+	<onload condition="$EXP[Bald_HelperActions]">NotifyAll(skin.bald,bald.info|$INFO[ListItem.DBType]|$INFO[ListItem.DBID])</onload>
+	<onload condition="!$EXP[Bald_HelperActions]">RunScript(skin.bald,recommendations,$INFO[ListItem.DBType],$INFO[ListItem.DBID])</onload>
+	<include condition="!$EXP[Bald_InfoTVItem]">Bald_InfoMovieOnLoad</include>
+	<include condition="$EXP[Bald_InfoTVItem]">Bald_InfoTVOnLoad</include>
+	<onunload>ClearProperty(Bald.InfoSec,home)</onunload>
+	<onunload>ClearProperty(Bald.Identity,movieinformation)</onunload>
+	<onunload>ClearProperty(Bald.MorePath,movieinformation)</onunload>
+	<onunload>ClearProperty(Bald.MoreFor,movieinformation)</onunload>
+	<include content="Bald_UnfollowContainerOnUnload"><param name="window">movieinformation</param></include>
+	<controls>
+		<!-- Opened away from Home (library, Search, add-ons; Bald_InfoOwnBackdrop): an opaque sharp backdrop of its own,
+		     in and out over Bald_InfoBackdropTime. Leaving, the art dissolves over that while the text leaves in
+		     Bald_InfoOutTime (a 130 fade of the full-screen art read as a snap). -->
+		<control type="group">
+			<visible>$EXP[Bald_InfoOwnBackdrop]</visible>
+			<animation effect="fade" start="0" end="100" time="Bald_InfoBackdropTime" tween="sine" easing="inout">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="Bald_InfoBackdropTime" tween="sine" easing="inout">WindowClose</animation>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_field">bald/white.png</texture></control>
+			<control type="image"><width>1920</width><height>1080</height><aspectratio>scale</aspectratio><texture background="true">$VAR[Bald_ItemFanart]</texture></control>
+		</control>
+		<!-- Native playback contracts, unchanged. -->
+		<control type="button" id="8"><include>HiddenObject</include></control>
+		<control type="button" id="9"><include>HiddenObject</include></control>
+		<control type="button" id="11"><include>HiddenObject</include></control>
+		<!-- What lies over the art: the Overview's scrims, or the Cast and More backdrop. From Home they wait for the frame
+		     zoom and leave with the text; over the dialog's own backdrop they come and go with it (arriving later, the
+		     sharp fanart showed undimmed for a moment and then darkened; leaving sooner, the Cast and More backdrop
+		     uncovered the sharp fanart before it dissolved). -->
+		<control type="group">
+			<animation type="WindowOpen" condition="!$EXP[Bald_InfoOwnBackdrop]"><effect type="fade" start="0" end="100" time="Bald_InfoInTime" delay="Bald_InfoInDelay" tween="sine" easing="inout" /></animation>
+			<animation type="WindowOpen" condition="$EXP[Bald_InfoOwnBackdrop]"><effect type="fade" start="0" end="100" time="Bald_InfoBackdropTime" tween="sine" easing="inout" /></animation>
+			<animation type="WindowClose" condition="!$EXP[Bald_InfoOwnBackdrop]"><effect type="fade" start="100" end="0" time="Bald_InfoOutTime" tween="sine" easing="inout" /></animation>
+			<animation type="WindowClose" condition="$EXP[Bald_InfoOwnBackdrop]"><effect type="fade" start="100" end="0" time="Bald_InfoBackdropTime" tween="sine" easing="inout" /></animation>
+			<!-- Only Overview needs the hero's directional scrims. -->
+			<control type="group">
+				<visible>$EXP[Bald_InfoOnOverview]</visible>
+				<animation effect="fade" start="0" end="100" time="Bald_InfoPageFadeTime" tween="sine" easing="inout">Visible</animation>
+				<animation effect="fade" start="100" end="0" time="Bald_InfoPageFadeTime" tween="sine" easing="inout">Hidden</animation>
+				<include>Bald_InfoScrims</include>
+			</control>
+			<!-- Cast and More like this: the SAME cached blur, field and multiplier used by Home (over background video, the
+			     dimmed video instead, so Home's zoomed fanart never shows through). Bald Helper (or TMDb Helper) follows
+			     the dialog's own item until More like this names its container (Bald_FollowContainer, 5100). -->
+			<control type="group" id="5200">
+				<visible>!$EXP[Bald_InfoOnOverview]</visible>
+				<animation effect="fade" start="0" end="100" time="Bald_InfoPageFadeTime" tween="sine" easing="inout">Visible</animation>
+				<animation effect="fade" start="100" end="0" time="Bald_InfoPageFadeTime" tween="sine" easing="inout">Hidden</animation>
+				<include>Bald_WindowBase</include>
+				<include>Bald_BackdropImage</include>
+			</control>
+		</control>
+		<!-- The pages and hints: in after the frame zoom, out first on closing. -->
+		<control type="group">
+			<animation effect="fade" start="0" end="100" time="Bald_InfoInTime" delay="Bald_InfoInDelay" tween="sine" easing="inout">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="Bald_InfoOutTime" tween="sine" easing="inout">WindowClose</animation>
+			<include condition="!$EXP[Bald_InfoTVItem]">Bald_InfoOverview</include>
+			<include condition="$EXP[Bald_InfoTVItem]">Bald_InfoTVOverview</include>
+			<include>Bald_InfoCastPage</include>
+			<include>Bald_InfoRecommendationsPage</include>
+			<control type="group">
+				<!-- The TV Overview runs to y964, so it has no page trail. -->
+				<control type="label">
+					<left>Bald_SafeLeft</left><top>Bald_HintTop</top><width>1100</width><height>28</height>
+					<font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$VAR[Bald_InfoPageTrail]</label>
+					<visible>!$EXP[Bald_InfoOnMore] + ![$EXP[Bald_InfoIsTV] + $EXP[Bald_InfoOnOverview]]</visible>
+				</control>
+				<control type="label">
+					<left>Bald_RightColumn</left><top>Bald_HintTop</top><width>384</width><height>24</height><align>right</align><aligny>center</aligny>
+					<font>Bald_Hint</font><textcolor>bald_ink60</textcolor>
+					<label>$VAR[Bald_KeyDown]$LOCALIZE[31771]</label><visible>$EXP[Bald_InfoOnOverview] + !$EXP[Bald_InfoIsTV]</visible>
+				</control>
+				<include condition="$EXP[Bald_InfoTVItem]">Bald_InfoTVHints</include>
+				<control type="group">
+					<left>Bald_RightColumn</left><top>Bald_HintTop</top>
+					<visible>$EXP[Bald_InfoOnCast]</visible>
+					<include content="Bald_InfoHintPair"><param name="first">$VAR[Bald_KeyUp]$LOCALIZE[31770]</param><param name="second">$VAR[Bald_KeyDown]$LOCALIZE[31772]</param></include>
+				</control>
+				<!-- Page hints switch immediately; they are not children of the animated page content. -->
+				<control type="group">
+					<left>Bald_RightColumn</left><top>Bald_HintTop</top>
+					<visible>$EXP[Bald_InfoOnMore]</visible>
+					<include content="Bald_InfoHintPair"><param name="first">$VAR[Bald_KeyUp]$LOCALIZE[31771]</param><param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31666]</param></include>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>

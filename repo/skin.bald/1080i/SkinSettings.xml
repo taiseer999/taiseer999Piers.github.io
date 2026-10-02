@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Kodi's "Configure skin..." opens this window. It draws the Bald Settings page itself (Bald_SettingsHome, shared with
+     window 1115) rather than redirecting there, so nothing flashes on the way in. Estuary's skin settings that are still
+     useful live in Bald's own Appearance categories. -->
+<window>
+	<defaultcontrol always="true">9000</defaultcontrol>
+	<backgroundcolor>bald_field</backgroundcolor>
+	<controls>
+		<include>Bald_SettingsHome</include>
+	</controls>
+</window>

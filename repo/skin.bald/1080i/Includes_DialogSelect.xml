@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The layouts DialogSelect.xml picks per select window. Started from Kodi 22 Estuary's Includes_DialogSelect.xml
+     (GPL-2.0-or-later, see LICENSE-Estuary.txt) and restyled in Bald's popup language; the shared pieces are in
+     Includes_Bald_Foundations.xml. Dialog sizes, list geometry, control ids and navigation are Estuary's.
+     Kodi binds (CGUIDialogSelect) 1 heading, 3 simple list, 6 detailed list, 5 and 8 extra buttons, 7 cancel;
+     (CDialogGameSaves) 10820 heading, 3 saves, 10822 caption, 10823 emulator name, 10824 emulator icon,
+     10825 new save, 10826 cancel, 10828 emulator version; (CDialogGameVideoSelect) 10811 thumbs, 10812
+     description. Estuary never shipped 2, 10810 or 10827, which Kodi only writes labels to. -->
+<includes>
+	<include name="DefaultDialogSelectLayout">
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<height>750</height>
+			<width>1220</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1220" />
+				<param name="height" value="750" />
+				<param name="header_label" value="" />
+				<param name="header_id" value="1" />
+			</include>
+			<include content="Bald_SelectDivider">
+				<param name="left" value="920" />
+			</include>
+			<include content="Bald_SelectSimpleList">
+				<param name="width" value="880" />
+				<param name="row_width" value="880" />
+			</include>
+			<control type="list" id="6">
+				<left>20</left>
+				<top>100</top>
+				<width>880</width>
+				<bottom>20</bottom>
+				<onup>6</onup>
+				<ondown>6</ondown>
+				<onleft>9001</onleft>
+				<onright>61</onright>
+				<pagecontrol>61</pagecontrol>
+				<scrolltime tween="cubic" easing="out">200</scrolltime>
+				<itemlayout height="125" width="880">
+					<include content="Bald_SelectDetailedItem" />
+				</itemlayout>
+				<focusedlayout height="125" width="880">
+					<include content="Bald_SelectDetailedItem">
+						<param name="focused" value="true" />
+						<param name="color" value="bald_ink" />
+						<param name="color2" value="bald_ink60" />
+					</include>
+				</focusedlayout>
+			</control>
+			<include content="Bald_SelectScrollbar">
+				<param name="left" value="906" />
+			</include>
+			<include content="Bald_SelectCount">
+				<param name="left" value="925" />
+			</include>
+			<include content="Bald_SelectButtons">
+				<param name="left" value="920" />
+			</include>
+		</control>
+	</include>
+	<include name="VideoDialogSelectVideoLayout">
+	<!--
+	Available ListItem video stream properties:
+	stream.description, stream.codec, stream.language, stream.resolution, stream.bitrate,
+	stream.fps, stream.is3d, stream.stereomode, stream.hdrtype, stream.isdefault, stream.isforced,
+	stream.ishearingimpaired, stream.isvisualimpaired
+	-->
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<height>870</height>
+			<width>1270</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1270" />
+				<param name="height" value="870" />
+				<param name="header_label" value="" />
+				<param name="header_id" value="1" />
+			</include>
+			<include content="Bald_SelectDivider">
+				<param name="left" value="970" />
+			</include>
+			<include content="Bald_SelectSimpleList">
+				<param name="width" value="930" />
+				<param name="row_width" value="880" />
+			</include>
+			<include content="Bald_SelectStreamList">
+				<param name="width" value="930" />
+				<param name="label" value="$MAP[DefaultCodecMap, ListItem.Property(stream.codec)]$MAP[DefaultHdrMap, ListItem.Property(stream.hdrtype), | ]$INFO[ListItem.Property(stream.resolution), | ]$VAR[StreamBitrateVar, | , kbps]$INFO[ListItem.Property(stream.fps), | , fps]$VAR[VideoStreamDialogItemLabelVar, - [LIGHT],[/LIGHT]]" />
+				<param name="label2" value="$INFO[ListItem.Property(stream.description),, ]$INFO[ListItem.Property(stream.language),(,)]" />
+			</include>
+			<include content="Bald_SelectScrollbar">
+				<param name="left" value="956" />
+			</include>
+			<include content="Bald_SelectCount">
+				<param name="left" value="975" />
+			</include>
+			<include content="Bald_SelectButtons">
+				<param name="left" value="970" />
+			</include>
+		</control>
+	</include>
+	<include name="VideoDialogSelectAudioLayout">
+	<!--
+	Available ListItem audio stream properties:
+	stream.description, stream.codec, stream.codecdesc, stream.channels,
+	stream.isdefault, stream.isforced, stream.isoriginal, stream.ishearingimpaired, stream.isvisualimpaired
+	-->
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<height>870</height>
+			<width>1270</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1270" />
+				<param name="height" value="870" />
+				<param name="header_label" value="" />
+				<param name="header_id" value="1" />
+			</include>
+			<include content="Bald_SelectDivider">
+				<param name="left" value="970" />
+			</include>
+			<include content="Bald_SelectSimpleList">
+				<param name="width" value="930" />
+				<param name="row_width" value="880" />
+			</include>
+			<include content="Bald_SelectStreamList">
+				<param name="width" value="930" />
+				<param name="label" value="$INFO[ListItem.Label]$VAR[VideoStreamDialogItemLabelVar, - [LIGHT],[/LIGHT]]" />
+				<param name="label2" value="$MAP[DefaultAltAudioMap, ListItem.Property(stream.codec)]$INFO[ListItem.Property(stream.channels), ]$INFO[ListItem.Property(stream.description), | ]" />
+			</include>
+			<include content="Bald_SelectScrollbar">
+				<param name="left" value="956" />
+			</include>
+			<include content="Bald_SelectCount">
+				<param name="left" value="975" />
+			</include>
+			<include content="Bald_SelectButtons">
+				<param name="left" value="970" />
+			</include>
+		</control>
+	</include>
+	<include name="VideoDialogSelectSubtitleLayout">
+	<!--
+	Available ListItem subtitle stream properties:
+	stream.description, stream.codec, stream.isdefault, stream.isforced, stream.isoriginal,
+	stream.ishearingimpaired, stream.isvisualimpaired, stream.isexternal
+	-->
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<height>870</height>
+			<width>1220</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1220" />
+				<param name="height" value="870" />
+				<param name="header_label" value="" />
+				<param name="header_id" value="1" />
+			</include>
+			<include content="Bald_SelectDivider">
+				<param name="left" value="920" />
+			</include>
+			<include content="Bald_SelectSimpleList">
+				<param name="width" value="880" />
+				<param name="row_width" value="880" />
+			</include>
+			<include content="Bald_SelectStreamList">
+				<param name="width" value="880" />
+				<param name="label" value="$INFO[ListItem.Label]$VAR[VideoStreamDialogItemLabelVar, - [LIGHT],[/LIGHT]]" />
+				<param name="label2" value="$VAR[SubtitleStreamDescriptionVar]" />
+			</include>
+			<include content="Bald_SelectScrollbar">
+				<param name="left" value="906" />
+			</include>
+			<include content="Bald_SelectCount">
+				<param name="left" value="925" />
+			</include>
+			<include content="Bald_SelectButtons">
+				<param name="left" value="920" />
+			</include>
+		</control>
+	</include>
+	<include name="GameDialogSelectSaveLayout">
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<width>1580</width>
+			<height>920</height>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1580" />
+				<param name="height" value="920" />
+				<param name="header_label" value="35260" />
+				<param name="header_id" value="10820" />
+			</include>
+			<include content="Bald_SelectDivider">
+				<param name="left" value="1270" />
+			</include>
+			<control type="group">
+				<description>Content area</description>
+				<top>100</top>
+				<bottom>20</bottom>
+				<left>30</left>
+				<right>30</right>
+				<control type="group">
+					<description>Panel area, including scroll bar</description>
+					<width>1224</width>
+					<height>748</height>
+					<control type="panel" id="3">
+						<onright>9001</onright>
+						<pagecontrol>61</pagecontrol>
+						<scrolltime tween="cubic" easing="out">200</scrolltime>
+						<itemlayout width="408" height="374">
+							<include content="Bald_GameSaveItem" />
+						</itemlayout>
+						<focusedlayout width="408" height="374">
+							<include content="Bald_GameSaveItem">
+								<param name="focused" value="true" />
+								<param name="color" value="bald_ink" />
+								<param name="color2" value="bald_ink60" />
+							</include>
+						</focusedlayout>
+					</control>
+					<control type="scrollbar" id="61">
+						<description>Scroll bar</description>
+						<right>-8</right>
+						<width>4</width>
+						<orientation>vertical</orientation>
+						<texturesliderbackground colordiffuse="bald_ink10">bald/white.png</texturesliderbackground>
+						<texturesliderbar colordiffuse="bald_ink34">bald/white.png</texturesliderbar>
+						<texturesliderbarfocus colordiffuse="bald_ink">bald/white.png</texturesliderbarfocus>
+					</control>
+				</control>
+				<control type="grouplist" id="9001">
+					<description>Buttons on the right</description>
+					<left>1240</left>
+					<top>-20</top>
+					<onleft>3</onleft>
+					<itemgap>dialogbuttons_itemgap</itemgap>
+					<include content="DefaultDialogButton">
+						<param name="id" value="10825" />
+						<param name="label" value="$LOCALIZE[35261]" />
+					</include>
+					<include content="DefaultDialogButton">
+						<param name="id" value="10826" />
+						<param name="label" value="$LOCALIZE[222]" />
+					</include>
+				</control>
+				<control type="group">
+					<description>Saved-with emulator name, version and icon</description>
+					<left>1260</left>
+					<top>420</top>
+					<control type="label" id="10823">
+						<description>Emulator name</description>
+						<top>48</top>
+						<height>30</height>
+						<font>Bald_CaptionMeta</font>
+						<textoffsetx>20</textoffsetx>
+						<textcolor>bald_ink70</textcolor>
+						<align>center</align>
+					</control>
+					<control type="label" id="10828">
+						<description>Emulator version</description>
+						<top>78</top>
+						<height>30</height>
+						<font>Bald_CaptionMeta</font>
+						<textoffsetx>20</textoffsetx>
+						<textcolor>bald_ink45</textcolor>
+						<align>center</align>
+					</control>
+					<control type="image" id="10824">
+						<description>Emulator icon</description>
+						<top>128</top>
+						<height>200</height>
+						<aspectratio>keep</aspectratio>
+					</control>
+				</control>
+				<control type="group">
+					<description>Bottom bar of text area</description>
+					<height>40</height>
+					<bottom>0</bottom>
+					<control type="label" id="10822">
+						<description>Caption area</description>
+						<right>200</right>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink70</textcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+					</control>
+					<control type="label">
+						<description>Item count</description>
+						<right>0</right>
+						<width>200</width>
+						<font>Bald_Hint</font>
+						<align>right</align>
+						<aligny>center</aligny>
+						<textcolor>bald_ink60</textcolor>
+						<label>$VAR[SelectLabel]</label>
+					</control>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="GameDialogSelectFilterLayout">
+		<include content="Bald_GameSheetCloseArea">
+			<param name="height" value="410" />
+		</include>
+		<control type="group">
+			<bottom>0</bottom>
+			<height>410</height>
+			<width>100%</width>
+			<include>Bald_GameSheetSurface</include>
+			<control type="panel" id="10811">
+				<top>30</top>
+				<scrolltime tween="cubic" easing="out">200</scrolltime>
+				<orientation>horizontal</orientation>
+				<itemlayout width="480" height="340">
+					<include content="Bald_GameVideoTile">
+						<control type="gamewindow">
+							<visible>!String.IsEmpty(ListItem.Property(game.videofilter))</visible>
+							<width>444</width>
+							<height>250</height>
+							<videofilter>$INFO[ListItem.Property(game.videofilter)]</videofilter>
+							<stretchmode>$INFO[ListItem.Property(game.stretchmode)]</stretchmode>
+							<rotation>$INFO[ListItem.Property(game.videorotation)]</rotation>
+						</control>
+					</include>
+				</itemlayout>
+				<focusedlayout width="480" height="340">
+					<include content="Bald_GameVideoTile">
+						<param name="focused" value="true" />
+						<param name="color" value="bald_ink" />
+						<control type="gamewindow">
+							<visible>!String.IsEmpty(ListItem.Property(game.videofilter))</visible>
+							<width>444</width>
+							<height>250</height>
+							<videofilter>$INFO[ListItem.Property(game.videofilter)]</videofilter>
+							<stretchmode>$INFO[ListItem.Property(game.stretchmode)]</stretchmode>
+							<rotation>$INFO[ListItem.Property(game.videorotation)]</rotation>
+						</control>
+					</include>
+				</focusedlayout>
+			</control>
+		</control>
+	</include>
+	<include name="GameDialogSelectViewLayout">
+		<include content="Bald_GameSheetCloseArea">
+			<param name="height" value="410" />
+		</include>
+		<control type="group">
+			<bottom>0</bottom>
+			<height>410</height>
+			<width>100%</width>
+			<include>Bald_GameSheetSurface</include>
+			<control type="panel" id="10811">
+				<top>30</top>
+				<scrolltime tween="cubic" easing="out">200</scrolltime>
+				<orientation>horizontal</orientation>
+				<itemlayout width="480" height="340">
+					<include content="Bald_GameVideoTile">
+						<param name="label_height" value="40" />
+						<control type="gamewindow">
+							<width>444</width>
+							<height>250</height>
+							<videofilter>$INFO[ListItem.Property(game.videofilter)]</videofilter>
+							<stretchmode>$INFO[ListItem.Property(game.stretchmode)]</stretchmode>
+							<rotation>$INFO[ListItem.Property(game.videorotation)]</rotation>
+						</control>
+					</include>
+				</itemlayout>
+				<focusedlayout width="480" height="340">
+					<include content="Bald_GameVideoTile">
+						<param name="focused" value="true" />
+						<param name="color" value="bald_ink" />
+						<param name="label_height" value="40" />
+						<control type="gamewindow">
+							<width>444</width>
+							<height>250</height>
+							<videofilter>$INFO[ListItem.Property(game.videofilter)]</videofilter>
+							<stretchmode>$INFO[ListItem.Property(game.stretchmode)]</stretchmode>
+							<rotation>$INFO[ListItem.Property(game.videorotation)]</rotation>
+						</control>
+					</include>
+				</focusedlayout>
+			</control>
+		</control>
+	</include>
+	<include name="GameDialogSelectSaveInGameLayout">
+		<include content="Bald_GameSheetCloseArea">
+			<param name="height" value="540" />
+		</include>
+		<control type="group">
+			<bottom>0</bottom>
+			<height>540</height>
+			<width>100%</width>
+			<include>Bald_GameSheetSurface</include>
+			<control type="panel" id="10811">
+				<top>30</top>
+				<scrolltime tween="cubic" easing="out">200</scrolltime>
+				<orientation>horizontal</orientation>
+				<itemlayout width="480" height="340">
+					<include content="Bald_GameVideoTile">
+						<control type="gamewindow">
+							<width>444</width>
+							<height>250</height>
+							<pixels>$INFO[ListItem.FilenameAndPath]</pixels>
+						</control>
+					</include>
+				</itemlayout>
+				<focusedlayout width="480" height="340">
+					<include content="Bald_GameVideoTile">
+						<param name="focused" value="true" />
+						<param name="color" value="bald_ink" />
+						<control type="gamewindow">
+							<width>444</width>
+							<height>250</height>
+							<pixels>$INFO[ListItem.FilenameAndPath]</pixels>
+						</control>
+					</include>
+				</focusedlayout>
+			</control>
+			<control type="textbox" id="10812">
+				<description>Description Area</description>
+				<top>410</top>
+				<left>100</left>
+				<right>100</right>
+				<height>110</height>
+				<font>Bald_InfoPlot</font>
+				<textcolor>bald_ink70</textcolor>
+				<align>justify</align>
+				<autoscroll time="3000" delay="5000" repeat="5000">true</autoscroll>
+				<label>$INFO[ListItem.Property(savestate.caption)]</label>
+			</control>
+		</control>
+	</include>
+</includes>

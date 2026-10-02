@@ -1,0 +1,469 @@
+# Kodi Media Center language file
+# Addon Name: Bald
+# Addon id: skin.bald
+# Addon Provider: dangerouslaser
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2025-02-04 02:37+0000\n"
+"Last-Translator: Nao3Line Prez <n.yazawa6932@gmail.com>\n"
+"Language-Team: Indonesian <https://kodi.weblate.cloud/projects/kodi-add-ons-skins/skin-estuary/id_id/>\n"
+"Language: id_id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Minimal, artwork-first skin for Kodi 22."
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "Bald is a minimal, artwork-first Kodi 22 skin with fluid motion. Utility windows are based on Kodi's Estuary by phil65 and Team Kodi."
+msgstr ""
+
+msgctxt "#31000"
+msgid "Now playing"
+msgstr "Sedang dimainkan"
+
+msgctxt "#31004"
+msgid "Change mode"
+msgstr "Rubah Modus"
+
+msgctxt "#31005"
+msgid "Watch as 2D"
+msgstr "Tonton sebagai 2D"
+
+msgctxt "#31009"
+msgid "Download icons"
+msgstr "Unduh ikon"
+
+msgctxt "#31019"
+msgid "Forecast"
+msgstr "Ramalan"
+
+msgctxt "#31020"
+msgid "Actions"
+msgstr "Aksi"
+
+msgctxt "#31021"
+msgid "Misc options"
+msgstr "Pilihan Misc"
+
+msgctxt "#31022"
+msgid "Sort by"
+msgstr "Urut berdasarkan"
+
+msgctxt "#31023"
+msgid "Viewtype"
+msgstr "Jenis tampilan"
+
+msgctxt "#31025"
+msgid "No favourites found. You can add items from media and other views by using the context menu."
+msgstr ""
+
+msgctxt "#31026"
+msgid "Timeshift"
+msgstr "Pergeseran waktu"
+
+msgctxt "#31028"
+msgid "Show fanart"
+msgstr "Tampilkan fanart"
+
+msgctxt "#31029"
+msgid "Last logged in"
+msgstr "Login terakhir"
+
+#. Label to show the system memory usage
+msgctxt "#31030"
+msgid "System memory usage"
+msgstr "Penggunaan memori sistem"
+
+msgctxt "#31032"
+msgid "Order"
+msgstr "Urut"
+
+msgctxt "#31033"
+msgid "Your rating"
+msgstr "Penialianmu"
+
+msgctxt "#31036"
+msgid "items"
+msgstr "Item"
+
+msgctxt "#31038"
+msgid "Rewind"
+msgstr "Mundurkan"
+
+msgctxt "#31039"
+msgid "Fast forward"
+msgstr "Mempercepat"
+
+msgctxt "#31042"
+msgid "Playlist options"
+msgstr "Opsi Daftar Main"
+
+msgctxt "#31043"
+msgid "Set the type and add rules to create a smart playlist. These playlists are dynamic and include all media items from your database which apply to your chosen rules."
+msgstr "Tetapkan jenis dan tambahkan aturan untuk membuat daftar putar cerdas. Daftar putar ini dinamis dan mencakup semua item media dari database Anda yang berlaku untuk aturan yang Anda pilih."
+
+msgctxt "#31044"
+msgid "Add group"
+msgstr "Tambah grup"
+
+msgctxt "#31045"
+msgid "Rename group"
+msgstr "Mengubah nama grup"
+
+msgctxt "#31046"
+msgid "Delete group"
+msgstr "Hapus grup"
+
+msgctxt "#31049"
+msgid "Original title"
+msgstr ""
+
+msgctxt "#31050"
+msgid "Original title (Localised title)"
+msgstr ""
+
+msgctxt "#31051"
+msgid "Localised title (Original title)"
+msgstr ""
+
+# empty strings from id 31049 to 31051
+msgctxt "#31052"
+msgid "filtered"
+msgstr "disaring"
+
+msgctxt "#31053"
+msgid "Arial based"
+msgstr "berbasis Arial"
+
+msgctxt "#31056"
+msgid "Go to playlist"
+msgstr "Ke daftar putar"
+
+msgctxt "#31057"
+msgid "Show login screen on startup"
+msgstr "Tampilkan layar masuk saat mulai"
+
+msgctxt "#31058"
+msgid "Automatic Login on startup"
+msgstr "Login Otomatis saat mulai"
+
+# empty string with id 31064
+msgctxt "#31065"
+msgid "Video playlist"
+msgstr "Daftar putar video"
+
+msgctxt "#31066"
+msgid "Music playlist"
+msgstr "Daftar putar lagu"
+
+msgctxt "#31067"
+msgid "Event log"
+msgstr "Log event"
+
+msgctxt "#31068"
+msgid "Choose presets"
+msgstr "Pilih preset"
+
+msgctxt "#31069"
+msgid "Last Updated"
+msgstr "Terakhir diperbarui"
+
+msgctxt "#31072"
+msgid "Power Options"
+msgstr "Pilihan Batere"
+
+msgctxt "#31073"
+msgid "Total length"
+msgstr "Total panjang"
+
+msgctxt "#31074"
+msgid "Total duration"
+msgstr "Total durasi"
+
+msgctxt "#31080"
+msgid "Ends at"
+msgstr "Berakhir di"
+
+#. Label to highlight that live stream is being played
+msgctxt "#31081"
+msgid "Live"
+msgstr ""
+
+msgctxt "#31082"
+msgid "Lyrics add-on"
+msgstr "Pengaya lirik"
+
+msgctxt "#31083"
+msgid "Lyrics add-on settings"
+msgstr "Pengaturan penya lirik"
+
+msgctxt "#31084"
+msgid "Visualisation settings"
+msgstr "Pengaturan visualisasi"
+
+# empty strings from id 31085 to 31088
+msgctxt "#31089"
+msgid "Available groups"
+msgstr "Grup tersedia"
+
+msgctxt "#31096"
+msgid "Local subtitle available"
+msgstr "Takarir lokal tersedia"
+
+msgctxt "#31097"
+msgid "Channel options"
+msgstr "Opsi saluran"
+
+msgctxt "#31098"
+msgid "Select your Kodi user profile[CR]to login and continue"
+msgstr "Pilih profil pengguna Kodi Anda[CR]untuk masuk dan lanjutkan"
+
+#. viewtype name
+msgctxt "#31099"
+msgid "IconWall"
+msgstr "Ikon dinding"
+
+#. viewtype name
+msgctxt "#31100"
+msgid "Shift"
+msgstr "Daftar tetap"
+
+#. viewtype name
+msgctxt "#31101"
+msgid "InfoWall"
+msgstr "Dinding info"
+
+#. viewtype name
+msgctxt "#31102"
+msgid "Wall"
+msgstr "Dinding"
+
+msgctxt "#31103"
+msgid "Enter text here..."
+msgstr "Masukkan teks disini..."
+
+msgctxt "#31106"
+msgid "Teletext"
+msgstr "Teleteks"
+
+#. viewtype name
+msgctxt "#31107"
+msgid "WideList"
+msgstr "Daftar lebar"
+
+#. viewtype name
+msgctxt "#31108"
+msgid "MediaList"
+msgstr ""
+
+# empty strings from id 31108 to 31108
+msgctxt "#31109"
+msgid "Video streams"
+msgstr "Aliran video"
+
+msgctxt "#31112"
+msgid "Audio streams"
+msgstr "Aliran audio"
+
+msgctxt "#31115"
+msgid "Subtitles streams"
+msgstr "Aliran takarir"
+
+msgctxt "#31117"
+msgid "Edit nodes"
+msgstr "Sunting nodes"
+
+msgctxt "#31132"
+msgid "Select Program"
+msgstr "Pilih Program"
+
+msgctxt "#31133"
+msgid "Select Resolution"
+msgstr "Pilih Resolusi"
+
+msgctxt "#31135"
+msgid "Binary"
+msgstr "Biner"
+
+msgctxt "#31136"
+msgid "Click here to see latest changes..."
+msgstr "Klik di sini untuk melihat perubahan terakhir..."
+
+#. Label to show PVR info page
+msgctxt "#31137"
+msgid "PVR"
+msgstr "PVR"
+
+#. Label to show video decoder name
+msgctxt "#31139"
+msgid "Video decoder"
+msgstr "Dekoder video"
+
+#. Label to show the video pixel format
+msgctxt "#31140"
+msgid "Pixel format"
+msgstr "Format piksel"
+
+msgctxt "#31141"
+msgid "Changes for version"
+msgstr "Perubahan untuk versi"
+
+msgctxt "#31142"
+msgid "Play speed"
+msgstr "Kecepatan putar"
+
+msgctxt "#31150"
+msgid "Origin"
+msgstr "Asal"
+
+msgctxt "#31154"
+msgid "Press OK to switch between locations"
+msgstr "Tekan OK untuk beralih antar lokasi"
+
+msgctxt "#31155"
+msgid "No bookmarks created yet."
+msgstr "Belum ada penanda yang dibuat."
+
+msgctxt "#31161"
+msgid "Numeric pad"
+msgstr "Papan nomor"
+
+msgctxt "#31163"
+msgid "Show Fanart background"
+msgstr "Tampilkan latar belakang Fanart"
+
+#. Label of a setting
+msgctxt "#31167"
+msgid "Animate background"
+msgstr "Animasi latar belakang"
+
+# empty strings from id 31177 to 31596
+#. Button to select Player Process Info window
+msgctxt "#31597"
+msgid "Player info"
+msgstr "Info pemutar"
+
+#. Label to show player cache
+msgctxt "#31598"
+msgid "Player cache"
+msgstr "Cache pemutar"
+
+#. Label to show the video codec name
+msgctxt "#31599"
+msgid "Audio decoder"
+msgstr "Dekoder audio"
+
+# empty strings from id 31170 to 31599
+#. Label to show the video codec name
+msgctxt "#31600"
+msgid "Video codec"
+msgstr "Kodek video"
+
+#. Label to show the video resolution
+msgctxt "#31601"
+msgid "Video resolution"
+msgstr "Resolusi video"
+
+#. Label to show the video aspect
+msgctxt "#31602"
+msgid "Video aspect"
+msgstr "Aspek video"
+
+#. Label to show the video bitrate
+msgctxt "#31603"
+msgid "Video bitrate"
+msgstr "Kecepatan bit video"
+
+#. Label to show the audio codec name
+msgctxt "#31604"
+msgid "Audio codec"
+msgstr "Kodek audio"
+
+#. Label to show the number of audio channels
+msgctxt "#31605"
+msgid "Audio channels"
+msgstr "Saluran audio"
+
+#. Label to show the audio bitrate
+msgctxt "#31606"
+msgid "Audio bitrate"
+msgstr "Kecepatan bit audio"
+
+#. Label to show the screen resolution
+msgctxt "#31607"
+msgid "Screen resolution"
+msgstr "Resolusi layar"
+
+#. Label to show the system rendering speed
+msgctxt "#31608"
+msgid "System rendering speed"
+msgstr "Kecepatan rendering sistem"
+
+#. Label to show the system CPU usage
+msgctxt "#31609"
+msgid "System CPU usage"
+msgstr "Penggunaan CPU sistem"
+
+#. Label to show the system info page
+msgctxt "#31611"
+msgid "System"
+msgstr "Sistem"
+
+#. Label to show the subtitle decoder name
+msgctxt "#31613"
+msgid "Subtitle decoder"
+msgstr ""
+
+#. Label to show the subtitle codec name
+msgctxt "#31614"
+msgid "Subtitle codec"
+msgstr ""
+
+#. Label to show the subtitle language
+msgctxt "#31615"
+msgid "Subtitle language"
+msgstr ""
+
+#~ msgctxt "#31025"
+#~ msgid "No favourites found. You can add any item from media views to this list by using the context menu."
+#~ msgstr "Tidak ada favorit yang ditemukan. Anda dapat menambahkan item apa pun dari tampilan media ke daftar ini dengan menggunakan menu konteks."
+
+#~ msgctxt "#31149"
+#~ msgid "Select genre fanart pack"
+#~ msgstr "Pilih paket fanart genre"
+
+#~ msgctxt "#31112"
+#~ msgid "Toggle audio stream"
+#~ msgstr "Alihkan aliran audio"
+
+#~ msgctxt "#31115"
+#~ msgid "Toggle subtitle"
+#~ msgstr "Alihkan takarir"
+
+#~ msgctxt "#31615"
+#~ msgid "Extras"
+#~ msgstr "Ekstra"
+
+#~ msgctxt "#31059"
+#~ msgid "Select + X"
+#~ msgstr "Select + X"
+
+#~ msgctxt "#31060"
+#~ msgid "Select + Start"
+#~ msgstr "Select + Start"
+
+#~ msgctxt "#31137"
+#~ msgid "PVR info"
+#~ msgstr "Info PVR"
+
+#~ msgctxt "#31138"
+#~ msgid "Player process info"
+#~ msgstr "Info proses pemain"

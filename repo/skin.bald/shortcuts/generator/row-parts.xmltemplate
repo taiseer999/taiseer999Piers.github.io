@@ -1,0 +1,20 @@
+<variable name="Bald_RowPrevFrom_{screen}_{row_index}">
+    <value condition="Integer.IsGreater(Container({row_id}).NumItems,0)">{item_label_escaped}</value>
+    <value>$VAR[Bald_RowPrevFrom_{screen}_{item_x}]</value>
+</variable>
+<variable name="Bald_RowNextFrom_{screen}_{row_index}">
+    <value condition="Integer.IsGreater(Container({row_id}).NumItems,0)">{item_label_escaped}</value>
+    <value>$VAR[Bald_RowNextFrom_{screen}_{next_index}]</value>
+</variable>
+<expression name="Bald_RowHasNextFrom_{screen}_{row_index}">[Integer.IsGreater(Container({row_id}).NumItems,0) | $EXP[Bald_RowHasNextFrom_{screen}_{next_index}]]</expression>
+{row_ends}
+<variable name="Bald_RowsNote_{screen}_{row_index}">
+    <value>{item_label_escaped}{note_rest}</value>
+</variable>
+<include name="Bald_RowStart_{row_id}">
+    <definition>
+        <onfocus condition="String.IsEmpty(Window(home).Property(Bald.Start{row_id})) + String.IsEqual(Container({row_id}).CurrentItem,{row_start}) + String.IsEqual(Container({row_id}).Position,{row_slot})">SetProperty(Bald.Start{row_id},1,home)</onfocus>
+        <onfocus condition="String.IsEmpty(Window(home).Property(Bald.Start{row_id})) + String.IsEqual(Container({row_id}).CurrentItem,{row_start}) + String.IsEqual(Container({row_id}).Position,{row_slot})">Control.Move({row_id},-{row_slot})</onfocus>
+        <include content="Bald_RowStartShort_{row_slot}"><param name="id">{row_id}</param></include>
+    </definition>
+</include>

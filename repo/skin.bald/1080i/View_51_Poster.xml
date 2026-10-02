@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Started from Kodi 22's bundled Estuary (skin.estuary, GPL-2.0-or-later; see LICENSE-Estuary.txt).
+     Bald: three large posters and the preview column, the Bald movie library's first layout (SPEC 5.5 geometry,
+     Bald_LibraryPosterItem) for sets, games, video versions and extras and other poster content outside the Bald
+     views. Id, viewtype, visibility, page control 5199, navigation and the hidden 20000 are Estuary's. -->
+<includes>
+	<include name="View_51_Poster">
+		<control type="button" id="20000">
+			<description>Dummy button to get animations right (hide focusedlayout on animations)</description>
+			<include>HiddenObject</include>
+			<onclick>noop</onclick>
+			<visible>Control.IsVisible(51)</visible>
+		</control>
+		<control type="group">
+			<visible>Control.IsVisible(51)</visible>
+			<include>Bald_BrowseViewIn</include>
+			<control type="list" id="51">
+				<include>Bald_BaldViewRedirect</include>
+				<left>Bald_BrowseWallLeft</left>
+				<top>Bald_BrowseWallTop</top>
+				<width>1152</width>
+				<height>648</height>
+				<orientation>horizontal</orientation>
+				<scrolltime tween="cubic" easing="out">440</scrolltime>
+				<preloaditems>3</preloaditems>
+				<pagecontrol>5199</pagecontrol>
+				<onleft>51</onleft>
+				<onright>51</onright>
+				<onup>9000</onup>
+				<ondown>5199</ondown>
+				<visible>Container.Content(movies) | Container.Content(seasons) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(games) | $EXP[videoasset_true]</visible>
+				<viewtype label="20021">icon</viewtype>
+				<include>Bald_BrowseDim</include>
+				<itemlayout width="384" height="648"><include>Bald_LibraryPosterItem</include></itemlayout>
+				<focusedlayout width="384" height="648"><include content="Bald_LibraryPosterItem"><param name="diffuse">bald_ink</param><param name="focused">Control.HasFocus(51)</param></include></focusedlayout>
+			</control>
+			<include>Bald_BrowsePreview</include>
+		</control>
+	</include>
+</includes>

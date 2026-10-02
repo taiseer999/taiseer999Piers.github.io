@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald player process info: one page over the video, in the look of the video OSD's panels (docs/SPEC.md 5.16,
+     "Video OSD"). Columns of label/value pairs, as the details of the information screen, with empty values left out:
+     video, audio, subtitles (while they are on) with the system under them, and PVR on Live TV. Nothing takes focus;
+     Back closes. The OSD row fades while this dialog is up (VideoOSD.xml).
+     Layout pieces: "Player process info" in Includes_Bald_Playback.xml. Codec, channel and language names come from
+     the stream maps in Includes_Bald_Info.xml.
+     Started from Kodi 22 Estuary's DialogPlayerProcessInfo.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt); the
+     values are Estuary's. -->
+<window>
+	<depth>DepthOSD</depth>
+	<include>Bald_OSDAnimPanel</include>
+	<controls>
+		<control type="image">
+			<left>0</left>
+			<top>0</top>
+			<width>1920</width>
+			<height>1080</height>
+			<texture colordiffuse="bald_field60">bald/white.png</texture>
+		</control>
+		<include>Bald_PlaybackScrim</include>
+
+		<!-- Video: the stream, then how the player decodes it. -->
+		<include content="Bald_ProcessColumn">
+			<param name="x">96</param>
+			<include content="Bald_ProcessHeading"><param name="label">$LOCALIZE[291]</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31600]</param><param name="value">$MAP[DefaultCodecMap, VideoPlayer.VideoCodec]</param><param name="visible">!String.IsEmpty(VideoPlayer.VideoCodec)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31601]</param><param name="value">$VAR[Bald_OSDResolution]$MAP[DefaultResolutionMap, VideoPlayer.VideoResolution, · ]</param><param name="visible">!String.IsEmpty(VideoPlayer.VideoResolution)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[20474]</param><param name="value">$VAR[Bald_ProcessHdr]</param><param name="visible">!String.IsEmpty(VideoPlayer.VideoCodec)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31602]</param><param name="value">$INFO[VideoPlayer.VideoAspect,,:1]</param><param name="visible">!String.IsEmpty(VideoPlayer.VideoAspect)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31603]</param><param name="value">$INFO[VideoPlayer.VideoBitrate,, kb/s]</param><param name="visible">!String.IsEmpty(VideoPlayer.VideoBitrate)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31139]</param><param name="value">$INFO[Player.Process(videodecoder)]$VAR[VideoHWDecoder, · ]</param><param name="visible">!String.IsEmpty(Player.Process(videodecoder))</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31140]</param><param name="value">$INFO[Player.Process(pixformat)]</param><param name="visible">!String.IsEmpty(Player.Process(pixformat))</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[16038]</param><param name="value">$INFO[Player.Process(deintmethod)]</param><param name="visible">!String.IsEmpty(Player.Process(deintmethod))</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[38031]</param><param name="value">$INFO[Player.Process(videowidth),,x]$INFO[Player.Process(videoheight)]$INFO[Player.Process(videoscantype)]$INFO[Player.Process(videodar), · , AR]$INFO[Player.Process(videofps), · , fps]</param><param name="visible">!String.IsEmpty(Player.Process(videowidth))</param></include>
+		</include>
+
+		<!-- Audio: the stream, then the decoder and what it outputs. -->
+		<include content="Bald_ProcessColumn">
+			<param name="x">528</param>
+			<include content="Bald_ProcessHeading"><param name="label">$LOCALIZE[292]</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31604]</param><param name="value">$MAP[Bald_AudioCodec, VideoPlayer.AudioCodec]</param><param name="visible">!String.IsEmpty(VideoPlayer.AudioCodec)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31605]</param><param name="value">$MAP[Bald_AudioChannels, VideoPlayer.AudioChannels]</param><param name="visible">!String.IsEmpty(VideoPlayer.AudioChannels)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31606]</param><param name="value">$INFO[VideoPlayer.AudioBitrate,, kb/s]</param><param name="visible">!String.IsEmpty(VideoPlayer.AudioBitrate)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[21447]</param><param name="value">$MAP[Bald_Language, VideoPlayer.AudioLanguage]</param><param name="visible">!String.IsEmpty(VideoPlayer.AudioLanguage)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31599]</param><param name="value">$INFO[Player.Process(audiodecoder)]</param><param name="visible">!String.IsEmpty(Player.Process(audiodecoder))</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31995]</param><param name="value">$INFO[Player.Process(audiochannels)]</param><param name="visible">!String.IsEmpty(Player.Process(audiochannels))</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[460]</param><param name="value">$INFO[Player.Process(audiobitspersample),, bit]$INFO[Player.Process(audiosamplerate), · , Hz]</param><param name="visible">!String.IsEmpty(Player.Process(audiobitspersample))</param></include>
+		</include>
+
+		<!-- Subtitles while they are on, and the system under them. -->
+		<include content="Bald_ProcessColumn">
+			<param name="x">960</param>
+			<include content="Bald_ProcessHeading"><param name="label">$LOCALIZE[287]</param><param name="visible">VideoPlayer.HasSubtitles + VideoPlayer.SubtitlesEnabled</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31614]</param><param name="value">$MAP[DefaultCodecMap, VideoPlayer.SubtitleCodec]</param><param name="visible">VideoPlayer.HasSubtitles + VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitleCodec)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31615]</param><param name="value">$MAP[Bald_Language, VideoPlayer.SubtitlesLanguage]</param><param name="visible">VideoPlayer.HasSubtitles + VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31613]</param><param name="value">$INFO[Player.Process(subtitledecoder)]</param><param name="visible">VideoPlayer.HasSubtitles + VideoPlayer.SubtitlesEnabled + !String.IsEmpty(Player.Process(subtitledecoder))</param></include>
+			<include content="Bald_ProcessHeading"><param name="label">$LOCALIZE[31611]</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31607]</param><param name="value">$INFO[System.ScreenResolution]</param><param name="visible">!String.IsEmpty(System.ScreenResolution)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31608]</param><param name="value">$INFO[System.FPS,, fps]</param><param name="visible">!String.IsEmpty(System.FPS)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31609]</param><param name="value">$INFO[System.CpuUsage]</param><param name="visible">System.SupportsCPUUsage</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31030]</param><param name="value">$INFO[System.Memory(used.percent)]</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31994]</param><param name="value">$INFO[System.CPUTemperature]</param><param name="visible">!String.IsEmpty(System.CPUTemperature)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[31598]</param><param name="value">$INFO[Player.CacheLevel,,%]</param><param name="visible">!String.IsEmpty(Player.CacheLevel)</param></include>
+		</include>
+
+		<!-- PVR on Live TV: service, backend, device and the signal. -->
+		<include content="Bald_ProcessColumn">
+			<param name="x">1392</param>
+			<param name="visible">VideoPlayer.Content(livetv)</param>
+			<include content="Bald_ProcessHeading"><param name="label">$LOCALIZE[31137]</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19099]</param><param name="value">$INFO[PVR.ActStreamServiceName]</param><param name="visible">!String.IsEmpty(PVR.ActStreamServiceName)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19101]</param><param name="value">$INFO[PVR.ActStreamProviderName]</param><param name="visible">!String.IsEmpty(PVR.ActStreamProviderName)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19012]</param><param name="value">$INFO[PVR.ActStreamClient]</param><param name="visible">!String.IsEmpty(PVR.ActStreamClient)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19006]</param><param name="value">$INFO[PVR.ActStreamDevice]</param><param name="visible">!String.IsEmpty(PVR.ActStreamDevice)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19007]</param><param name="value">$INFO[PVR.ActStreamStatus]</param><param name="visible">!String.IsEmpty(PVR.ActStreamStatus)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19015]</param><param name="value">$INFO[PVR.ActStreamEncryptionName]</param><param name="visible">!String.IsEmpty(PVR.ActStreamEncryptionName)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19100]</param><param name="value">$INFO[PVR.ActStreamMux]</param><param name="visible">!String.IsEmpty(PVR.ActStreamMux)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19010]</param><param name="value">$INFO[PVR.ActStreamBer]</param><param name="visible">!String.IsEmpty(PVR.ActStreamBer)</param></include>
+			<include content="Bald_ProcessDetail"><param name="label">$LOCALIZE[19011]</param><param name="value">$INFO[PVR.ActStreamUnc]</param><param name="visible">!String.IsEmpty(PVR.ActStreamUnc)</param></include>
+			<include content="Bald_ProcessLevel"><param name="label">$LOCALIZE[19008]</param><param name="value">PVR.ActStreamSignal</param><param name="info">PVR.ActStreamProgrSignal</param></include>
+			<include content="Bald_ProcessLevel"><param name="label">$LOCALIZE[19009]</param><param name="value">PVR.ActStreamSNR</param><param name="info">PVR.ActStreamProgrSNR</param></include>
+		</include>
+
+		<control type="label">
+			<left>1224</left>
+			<top>Bald_HintTop</top>
+			<width>600</width>
+			<height>24</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<font>Bald_Hint</font>
+			<textcolor>bald_ink60</textcolor>
+			<label>$VAR[Bald_KeyBack]$LOCALIZE[31619]</label>
+		</control>
+	</controls>
+</window>

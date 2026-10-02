@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<!-- First: other files' maps extend these (e.g. Bald_AudioCodec ref="DefaultCodecMap"), and Kodi resolves a
+	     map's ref when it loads, so the referenced map must already exist. -->
+	<include file="Includes_Maps.xml" />
+	<include file="Defaults.xml" />
+	<include file="Includes_Weather.xml" />
+	<include file="Includes_Bald_Constants.xml" />
+	<include file="Includes_Bald_Common.xml" />
+	<include file="Includes_Bald_Search.xml" />
+	<include file="Includes_Bald_Spoilers.xml" />
+	<include file="Includes_Bald_Ratings.xml" />
+	<include file="Includes_Bald_Home.xml" />
+	<include file="Includes_Bald_Weather.xml" />
+	<!-- Home rows and their bindings, built per install by Skin Variables from the widget editor's row lists
+	     (shortcuts/skinvariables-generator.json). Not shipped or tracked; Includes_Bald_HomeDefaults.xml below
+	     stands in until the first build. -->
+	<include file="script-skinvariables-generator-includes.xml" />
+	<include file="Includes_Bald_Configure.xml" />
+	<include file="Includes_Bald_Info.xml" />
+	<include file="Includes_Bald_InfoPages.xml" />
+	<include file="Includes_Bald_InfoTV.xml" />
+	<include file="Includes_Bald_ContextMenu.xml" />
+	<include file="Includes_Bald_Foundations.xml" />
+	<include file="Includes_Bald_Playback.xml" />
+	<include file="Includes_Bald_OSD.xml" />
+	<include file="Includes_Bald_Overlays.xml" />
+	<include file="Includes_Bald_Browse.xml" />
+	<include file="Includes_Bald_Media.xml" />
+	<include file="Includes_Bald_Music.xml" />
+	<include file="Includes_Animations.xml" />
+	<include file="Includes_Games.xml" />
+	<include file="Includes_MediaMenu.xml" />
+	<include file="Includes_Buttons.xml" />
+	<include file="Includes_DialogSelect.xml" />
+	<include file="Includes_MusicInfo.xml" />
+	<include file="Includes_PVR.xml" />
+	<include file="Includes_Bald_PVR.xml" />
+	<include file="Includes_SettingsDialog.xml" />
+	<include file="View_50_List.xml" />
+	<include file="View_510_Bald_Posters.xml" />
+	<include file="View_511_Bald_Wall.xml" />
+	<include file="View_512_Bald_WallPreview.xml" />
+	<include file="Includes_Bald_LibraryList.xml" />
+	<include file="View_513_Bald_CompactList.xml" />
+	<include file="View_514_Bald_ArtworkList.xml" />
+	<include file="View_515_Bald_PosterLow.xml" />
+	<include file="View_520_Bald_TV.xml" />
+	<include file="View_521_Bald_TV_Alternates.xml" />
+	<include file="View_550_Bald_Music.xml" />
+	<include file="View_51_Poster.xml" />
+	<include file="View_52_IconWall.xml" />
+	<include file="View_53_Shift.xml" />
+	<include file="View_54_InfoWall.xml" />
+	<include file="View_55_WideList.xml" />
+	<include file="View_503_NowPlaying.xml" />
+	<include file="View_500_Wall.xml" />
+	<include file="View_501_Banner.xml" />
+	<include file="View_502_FanArt.xml" />
+	<include file="View_504_MediaList.xml" />
+	<include file="Variables.xml" />
+	<include file="Constants.xml" />
+	<!-- Load last. Kodi keeps the first definition of an include, variable or expression name
+	     (CGUIIncludes uses try_emplace), so these shipped defaults only apply where the generated file above
+	     is missing. Rebuild with tools/build_home_defaults.py. -->
+	<include file="Includes_Bald_HomeDefaults.xml" />
+	<expression name="infodialog_active">Window.IsActive(musicinformation) | Window.IsActive(songinformation) | Window.IsActive(movieinformation) | Window.IsActive(addoninformation) | Window.IsActive(pvrguideinfo) | Window.IsActive(pvrrecordinginfo) | Window.IsActive(pictureinfo) | Window.IsVisible(script-embuary-video.xml) | Window.IsVisible(script-embuary-person.xml) | Window.IsVisible(script-embuary-image.xml)</expression>
+	<expression name="sidebar_visible">ControlGroup(9000).HasFocus | Control.HasFocus(6130) | Control.HasFocus(6131)</expression>
+	<expression name="videoasset_true">Container.Content(videoassets) | Container.Content(videoversions) | Container.Content(videoextras)</expression>
+	<include name="CommonScrollbars">
+		<!-- Bald: 4 px tracks outside the content (Bald_BrowseScrollbarStyle). 5198 is the vertical page control of views
+		     52, 55, 500, 501, 504 and 54 (Estuary's 531, renumbered: Bald's seasons view is 531), 5199 the horizontal one of
+		     views 51 and 53 (Estuary's id). Both keep Estuary's routes. -->
+		<param name="bottom_offset">list_bottom_offset</param>
+		<definition>
+			<control type="group">
+				<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+				<animation effect="fade" start="100" end="0" time="200" tween="sine" easing="inout" condition="System.HasActiveModalDialog">Conditional</animation>
+				<animation effect="fade" start="0" end="100" delay="300" time="380" tween="sine" easing="inout">WindowOpen</animation>
+				<control type="scrollbar" id="5198">
+					<left>1860</left>
+					<top>Bald_ContentTop</top>
+					<width>4</width>
+					<height>624</height>
+					<onleft condition="![Window.IsVisible(musicplaylist) | Window.IsVisible(videoplaylist)]">50</onleft>
+					<onleft condition="Window.IsVisible(musicplaylist) | Window.IsVisible(videoplaylist)">55</onleft>
+					<onright condition="![Window.IsVisible(musicplaylist) | Window.IsVisible(videoplaylist)]">50</onright>
+					<onright condition="Window.IsVisible(musicplaylist) | Window.IsVisible(videoplaylist)">55</onright>
+					<include content="Bald_BrowseScrollbarStyle" />
+					<include>Bald_BrowseFade</include>
+					<visible>Control.IsVisible(52) | Control.IsVisible(500) | Control.IsVisible(55) | Control.IsVisible(501) | Control.IsVisible(54)</visible>
+				</control>
+				<control type="scrollbar" id="5199">
+					<left>Bald_SafeLeft</left>
+					<top>890</top>
+					<width>1728</width>
+					<height>4</height>
+					<onup>50</onup>
+					<ondown>50</ondown>
+					<include content="Bald_BrowseScrollbarStyle"><param name="orientation">horizontal</param></include>
+					<include>Bald_BrowseFade</include>
+					<visible>Control.IsVisible(51) | Control.IsVisible(53)</visible>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="HiddenObject">
+		<left>-3000</left>
+		<top>-3000</top>
+		<width>1</width>
+		<height>1</height>
+		<texturefocus />
+		<texturenofocus />
+		<label></label>
+		<font></font>
+	</include>
+	<include name="InfoList">
+		<param name="item_label">$INFO[ListItem.Year,[COLOR bald_ink60],  ·  [/COLOR]]$INFO[ListItem.Label]</param>
+		<param name="path">$VAR[InfoListPathVar]</param>
+		<param name="item_height">36</param>
+		<param name="bottom">100</param>
+		<param name="width">1152</param>
+		<param name="list_id">5000</param>
+		<param name="font">Bald_CaptionMeta</param>
+		<param name="sortby"></param>
+		<param name="sortorder">ascending</param>
+		<param name="visible">true</param>
+		<definition>
+			<control type="panel" id="$PARAM[list_id]">
+				<top>0</top>
+				<width>$PARAM[width]</width>
+				<bottom>$PARAM[bottom]</bottom>
+				<orientation>vertical</orientation>
+				<visible>$PARAM[visible]</visible>
+				<focusedlayout height="$PARAM[item_height]" width="$PARAM[width]">
+					<control type="label">
+						<left>10</left>
+						<height>$PARAM[item_height]</height>
+						<width>$PARAM[width]</width>
+						<aligny>center</aligny>
+						<label>$PARAM[item_label]</label>
+						<textcolor>bald_ink80</textcolor>
+						<font>$PARAM[font]</font>
+					</control>
+				</focusedlayout>
+				<itemlayout height="$PARAM[item_height]" width="$PARAM[width]">
+					<control type="label">
+						<left>10</left>
+						<height>$PARAM[item_height]</height>
+						<width>$PARAM[width]</width>
+						<aligny>center</aligny>
+						<label>$PARAM[item_label]</label>
+						<textcolor>bald_ink80</textcolor>
+						<font>$PARAM[font]</font>
+					</control>
+				</itemlayout>
+				<content sortby="$PARAM[sortby]" sortorder="$PARAM[sortorder]">$PARAM[path]</content>
+			</control>
+		</definition>
+	</include>
+	<include name="DefaultSimpleListLayout">
+		<param name="align">left</param>
+		<param name="height">70</param>
+		<param name="font">Bald_Section</param>
+		<param name="fontcolor">bald_ink70</param>
+		<definition>
+			<itemlayout width="$PARAM[width]" height="$PARAM[height]">
+				<control type="group">
+					<visible>ListItem.Property(PVR.IsRecordingTimer) | ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture colordiffuse="bald_record">icons/pvr/timers/recording.png</texture>
+						<visible>ListItem.Property(PVR.IsRecordingTimer)</visible>
+					</control>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture colordiffuse="bald_ink70">icons/pvr/timers/bell.png</texture>
+						<visible>ListItem.Property(PVR.IsRemindingTimer)</visible>
+					</control>
+					<control type="label">
+						<left>80</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<textcolor>$PARAM[fontcolor]</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</control>
+				<control type="group">
+					<visible>!ListItem.Property(PVR.IsRecordingTimer) + !ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="label">
+						<left>20</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<textcolor>$PARAM[fontcolor]</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</control>
+			</itemlayout>
+			<focusedlayout width="$PARAM[width]" height="$PARAM[height]">
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<right>0</right>
+					<bottom>0</bottom>
+					<texture colordiffuse="bald_ink10">bald/white.png</texture>
+					<animation effect="fade" start="100" end="50" time="0">UnFocus</animation>
+				</control>
+				<control type="group">
+					<visible>ListItem.Property(PVR.IsRecordingTimer) | ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture colordiffuse="bald_record">icons/pvr/timers/recording.png</texture>
+						<visible>ListItem.Property(PVR.IsRecordingTimer)</visible>
+					</control>
+					<control type="image">
+						<left>20</left>
+						<width>40</width>
+						<aspectratio align="left">keep</aspectratio>
+						<aligny>center</aligny>
+						<texture colordiffuse="bald_ink">icons/pvr/timers/bell.png</texture>
+						<visible>ListItem.Property(PVR.IsRemindingTimer)</visible>
+					</control>
+					<control type="label">
+						<left>80</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<textcolor>bald_ink</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<scroll>true</scroll>
+					</control>
+				</control>
+				<control type="group">
+					<visible>!ListItem.Property(PVR.IsRecordingTimer) + !ListItem.Property(PVR.IsRemindingTimer)</visible>
+					<control type="label">
+						<left>20</left>
+						<top>0</top>
+						<right>20</right>
+						<bottom>0</bottom>
+						<align>$PARAM[align]</align>
+						<font>$PARAM[font]</font>
+						<aligny>center</aligny>
+						<textcolor>bald_ink</textcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<scroll>true</scroll>
+					</control>
+				</control>
+			</focusedlayout>
+		</definition>
+	</include>
+	<include name="MediaFlag">
+		<!-- Bald: Estuary's info rows draw the shared outlined chip (Bald_FlagChip). -->
+		<param name="flag_visible">true</param>
+		<definition>
+			<include content="Bald_FlagChip">
+				<param name="label">$PARAM[flag_label]</param>
+				<param name="visible">$PARAM[flag_visible]</param>
+			</include>
+		</definition>
+	</include>
+	<include name="MediaFlags">
+		<param name="visible">true</param>
+		<definition>
+			<control type="grouplist">
+				<visible>Window.IsActive(Home) | Window.IsActive(10025) | Window.IsActive(TVRecordings) | Window.IsActive(RadioRecordings)</visible>
+				<orientation>horizontal</orientation>
+				<right>96</right>
+				<height>40</height>
+				<align>right</align>
+				<itemgap>8</itemgap>
+				<width>1728</width>
+				<usecontrolcoords>true</usecontrolcoords>
+				<control type="image">
+					<top>7</top>
+					<width>114</width>
+					<height>26</height>
+					<fadetime>0</fadetime>
+					<aspectratio align="right" aligny="center">keep</aspectratio>
+					<texture colordiffuse="bald_ink70">$INFO[ListItem.Studio,resource://resource.images.studios.white/,.png]</texture>
+					<visible>System.AddonIsEnabled(resource.images.studios.white) + !String.IsEmpty($PARAM[infolabel_prefix]ListItem.Studio)</visible>
+				</control>
+				<control type="label">
+					<visible>!String.IsEmpty(ListItem.Premiered)</visible>
+					<width>auto</width>
+					<height>40</height>
+					<aligny>center</aligny>
+					<font>Bald_CaptionMeta</font>
+					<textcolor>bald_ink60</textcolor>
+					<label>$INFO[ListItem.Premiered]</label>
+				</control>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.Duration) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$INFO[ListItem.Duration]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="ListItem.IsStereoscopic + !Control.IsVisible(504)" />
+					<param name="flag_label" value="3D" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.VideoCodec) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$VAR[VideoCodecVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.VideoResolution) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$INFO[ListItem.VideoResolution]$VAR[VideoResolutionTypeVar, ]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.HdrType) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$VAR[VideoHDRType1Var]$VAR[VideoHDRType2Var, &#8226; ]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.VideoAspect) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$INFO[ListItem.VideoAspect,,:1]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.AudioCodec) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$VAR[AudioCodecFlagVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.AudioChannels) + !Control.IsVisible(504)" />
+					<param name="flag_label" value="$VAR[AudioPropertyFlagVar]" />
+				</include>
+			</control>
+			<control type="grouplist">
+				<visible>[Player.ShowInfo | Window.IsActive(fullscreeninfo)] + !Player.ChannelPreviewActive + Window.IsActive(fullscreenvideo)</visible>
+				<orientation>horizontal</orientation>
+				<right>96</right>
+				<bottom>0</bottom>
+				<height>60</height>
+				<align>right</align>
+				<itemgap>8</itemgap>
+				<width>1728</width>
+				<usecontrolcoords>true</usecontrolcoords>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="VideoPlayer.IsStereoscopic" />
+					<param name="flag_label" value="3D" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(VideoPlayer.VideoCodec)" />
+					<param name="flag_label" value="$VAR[VideoCodecVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(VideoPlayer.VideoResolution)" />
+					<param name="flag_label" value="$INFO[VideoPlayer.VideoResolution]$VAR[VideoResolutionTypeVar, ]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(VideoPlayer.HdrType)" />
+					<param name="flag_label" value="$VAR[VideoHDRTypeVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(VideoPlayer.VideoAspect)" />
+					<param name="flag_label" value="$INFO[VideoPlayer.VideoAspect,,:1]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(VideoPlayer.AudioCodec)" />
+					<param name="flag_label" value="$VAR[AudioCodecFlagVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(VideoPlayer.AudioChannels)" />
+					<param name="flag_label" value="$VAR[AudioPropertyFlagVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="VideoPlayer.SubtitlesEnabled + [!String.IsEmpty(VideoPlayer.SubtitleCodec) | !String.IsEmpty(VideoPlayer.SubtitlesLanguage)]" />
+					<param name="flag_label" value="$VAR[ActiveVideoPlayerSubtitleLanguage]" />
+				</include>
+			</control>
+			<control type="grouplist">
+				<visible>!String.IsEqual(ListItem.DbType,musicvideo) + [Container.Content(albums) | Window.IsActive(music)]</visible>
+				<orientation>horizontal</orientation>
+				<right>96</right>
+				<bottom>10</bottom>
+				<height>60</height>
+				<align>right</align>
+				<itemgap>8</itemgap>
+				<width>1728</width>
+				<usecontrolcoords>true</usecontrolcoords>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.Duration) + Container.Content(albums) + ![Window.IsVisible(songinformation) | Window.IsVisible(musicinformation)]" />
+					<param name="flag_label" value="$INFO[ListItem.Duration]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.FileExtension)" />
+					<param name="flag_label" value="$INFO[ListItem.FileExtension]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.MusicChannels)" />
+					<param name="flag_label" value="$VAR[AudioChannelsVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.Samplerate)" />
+					<param name="flag_label" value="$INFO[ListItem.Samplerate, ,kHz]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.BitRate)" />
+					<param name="flag_label" value="$INFO[ListItem.BitRate, ,kbps]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.MusicBitsPerSample)" />
+					<param name="flag_label" value="$INFO[ListItem.MusicBitsPerSample, ,bit]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(ListItem.BMP)" />
+					<param name="flag_label" value="$INFO[ListItem.BMP, ,bpm]" />
+				</include>
+			</control>
+			<control type="grouplist">
+				<visible>Player.ShowInfo + !Player.ChannelPreviewActive + Window.IsActive(visualisation)</visible>
+				<orientation>horizontal</orientation>
+				<right>96</right>
+				<bottom>9</bottom>
+				<height>60</height>
+				<align>right</align>
+				<itemgap>8</itemgap>
+				<width>1728</width>
+				<usecontrolcoords>true</usecontrolcoords>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="RDS.HasRDS" />
+					<param name="flag_label" value="RDS" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.Codec)" />
+					<param name="flag_label" value="$VAR[AudioCodecVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.Channels)" />
+					<param name="flag_label" value="$VAR[AudioChannelsVar]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.SampleRate)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.SampleRate, ,kHz]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BitRate)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.BitRate, ,kbps]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BitsPerSample)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.BitsPerSample, ,bit]" />
+				</include>
+				<include content="MediaFlag">
+					<param name="flag_visible" value="!String.IsEmpty(MusicPlayer.BMP)" />
+					<param name="flag_label" value="$INFO[MusicPlayer.BMP, ,bpm]" />
+				</include>
+			</control>
+		</definition>
+	</include>
+	<include name="FileManagerPanel">
+		<!-- Bald: 48 px text rows in the compact-list language: accent dot and full ink on the focused row, 70% ink
+		     otherwise, selected (marked) items in the accent. -->
+		<param name="width"></param>
+		<param name="right"></param>
+		<param name="top">list_top_offset</param>
+		<param name="bottom">list_bottom_offset</param>
+		<definition>
+			<control type="fixedlist" id="$PARAM[list_id]">
+				<left>0</left>
+				<top>$PARAM[top]</top>
+				<bottom>$PARAM[bottom]</bottom>
+				<right>$PARAM[right]</right>
+				<width>$PARAM[width]</width>
+				<focusposition>5</focusposition>
+				<movement>4</movement>
+				<onleft>$PARAM[onleft_id]</onleft>
+				<onright>$PARAM[onright_id]</onright>
+				<onup>$PARAM[list_id]</onup>
+				<ondown>$PARAM[list_id]</ondown>
+				<pagecontrol>$PARAM[scrollbar_id]</pagecontrol>
+				<scrolltime tween="cubic" easing="out">440</scrolltime>
+				<focusedlayout height="48">
+					<include content="Bald_BrowseRowDot"><param name="visible">Control.HasFocus($PARAM[list_id])</param></include>
+					<control type="label">
+						<left>26</left>
+						<right>200</right>
+						<height>48</height>
+						<aligny>center</aligny>
+						<scroll>true</scroll>
+						<font>Bald_Section</font>
+						<textcolor>bald_ink</textcolor>
+						<selectedcolor>bald_accent</selectedcolor>
+						<label>$INFO[ListItem.Label]</label>
+						<animation effect="fade" start="100" end="70" time="0" condition="!Control.HasFocus($PARAM[list_id])">Conditional</animation>
+					</control>
+					<control type="label">
+						<left>0</left>
+						<right>0</right>
+						<height>48</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink60</textcolor>
+						<selectedcolor>bald_accent</selectedcolor>
+						<label>$INFO[ListItem.Label2]</label>
+					</control>
+				</focusedlayout>
+				<itemlayout height="48">
+					<control type="label">
+						<left>26</left>
+						<right>200</right>
+						<height>48</height>
+						<aligny>center</aligny>
+						<font>Bald_Section</font>
+						<textcolor>bald_ink70</textcolor>
+						<selectedcolor>bald_accent</selectedcolor>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+					<control type="label">
+						<left>0</left>
+						<right>0</right>
+						<height>48</height>
+						<align>right</align>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink45</textcolor>
+						<selectedcolor>bald_accent</selectedcolor>
+						<label>$INFO[ListItem.Label2]</label>
+					</control>
+				</itemlayout>
+			</control>
+		</definition>
+	</include>
+	<include name="UpDownArrows">
+		<param name="up_posy">134</param>
+		<param name="down_posy">910</param>
+		<param name="posx">936</param>
+		<param name="visible">true</param>
+		<definition>
+			<control type="button" id="$PARAM[container_id]588">
+				<left>$PARAM[posx]</left>
+				<top>$PARAM[down_posy]</top>
+				<width>48</width>
+				<height>24</height>
+				<texturefocus colordiffuse="button_focus">overlays/arrowdown.png</texturefocus>
+				<texturenofocus colordiffuse="button_focus">overlays/arrowdown.png</texturenofocus>
+				<animation effect="zoom" condition="$EXP[Bald_FullMotion]" start="100,0" end="100,100" center="auto" time="200" delay="10">VisibleChange</animation>
+				<animation effect="zoom" condition="$EXP[Bald_FullMotion]" start="100,0" end="100,100" delay="500" center="auto" time="200">WindowOpen</animation>
+				<animation effect="zoom" condition="$EXP[Bald_FullMotion]" start="100,100" end="100,0" center="auto" time="200">WindowClose</animation>
+				<onclick>SetFocus($PARAM[container_id])</onclick>
+				<onclick>PageDown</onclick>
+				<visible>Container($PARAM[container_id]).HasNext + Control.IsVisible($PARAM[container_id])</visible>
+				<visible>$PARAM[visible]</visible>
+			</control>
+			<control type="button" id="$PARAM[container_id]589">
+				<left>$PARAM[posx]</left>
+				<top>$PARAM[up_posy]</top>
+				<width>48</width>
+				<height>24</height>
+				<texturefocus colordiffuse="button_focus" flipy="true">overlays/arrowdown.png</texturefocus>
+				<texturenofocus colordiffuse="button_focus" flipy="true">overlays/arrowdown.png</texturenofocus>
+				<animation effect="zoom" condition="$EXP[Bald_FullMotion]" start="100,0" end="100,100" center="auto" time="200" delay="10">VisibleChange</animation>
+				<animation effect="zoom" condition="$EXP[Bald_FullMotion]" start="100,0" end="100,100" delay="500" center="auto" time="200">WindowOpen</animation>
+				<animation effect="zoom" condition="$EXP[Bald_FullMotion]" start="100,100" end="100,0" center="auto" time="200">WindowClose</animation>
+				<onclick>SetFocus($PARAM[container_id])</onclick>
+				<onclick>PageUp</onclick>
+				<visible>Container($PARAM[container_id]).HasPrevious + Control.IsVisible($PARAM[container_id])</visible>
+				<visible>$PARAM[visible]</visible>
+			</control>
+		</definition>
+	</include>
+	<include name="DialogBackgroundCommons">
+		<control type="image">
+			<left>-2000</left>
+			<top>-2000</top>
+			<width>6000</width>
+			<height>6000</height>
+			<animation effect="fade" time="300">VisibleChange</animation>
+			<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+			<texture colordiffuse="bald_scrim50">bald/white.png</texture>
+			<visible>$PARAM[darken_bg]</visible>
+		</control>
+		<control type="button">
+			<left>-2000</left>
+			<top>-2000</top>
+			<width>6000</width>
+			<height>6000</height>
+			<texturefocus />
+			<texturenofocus />
+			<onclick>Action(close)</onclick>
+		</control>
+		<control type="group">
+			<width>$PARAM[width]</width>
+			<height>$PARAM[height]</height>
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<bottom>0</bottom>
+				<texture colordiffuse="bald_field">bald/white.png</texture>
+			</control>
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<height>70</height>
+				<texture colordiffuse="bald_ink10">bald/white.png</texture>
+			</control>
+			<control type="label" id="$PARAM[header_id]">
+				<left>40</left>
+				<top>0</top>
+				<right>100</right>
+				<height>70</height>
+				<font>Bald_CaptionTitle</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$PARAM[header_label]</label>
+				<aligny>center</aligny>
+			</control>
+			<control type="button" id="22002">
+				<description>button overlay to avoid closing in dialog area</description>
+				<left>0</left>
+				<top>0</top>
+				<right>0</right>
+				<bottom>0</bottom>
+				<texturefocus />
+				<texturenofocus />
+				<onclick>noop</onclick>
+			</control>
+			<control type="radiobutton">
+				<right>10</right>
+				<top>11</top>
+				<width>48</width>
+				<height>48</height>
+				<radiowidth>48</radiowidth>
+				<radioheight>48</radioheight>
+				<texturefocus />
+				<texturenofocus />
+				<label></label>
+				<textureradioofffocus colordiffuse="bald_ink">dialogs/close.png</textureradioofffocus>
+				<textureradiooffnofocus colordiffuse="bald_ink70">dialogs/close.png</textureradiooffnofocus>
+				<textureradioonfocus colordiffuse="bald_ink">dialogs/close.png</textureradioonfocus>
+				<textureradioonnofocus colordiffuse="bald_ink70">dialogs/close.png</textureradioonnofocus>
+				<onclick>Action(close)</onclick>
+				<visible>!String.IsEmpty(Control.GetLabel($PARAM[header_id]))</visible>
+			</control>
+		</control>
+	</include>
+	<include name="TopBar">
+		<!-- Bald: the library header. The title sits at the safe margin in caption-title type; the sort summary, now
+		     playing and the optional profile and weather items are a quiet right-aligned meta line ending on the x 1824
+		     safe edge (SPEC 5.5). <top> is the header's baseline: 24 keeps Estuary's band for windows whose content
+		     still starts at list_top_offset; the restyled browse windows pass Bald's page title top, 108. -->
+		<param name="sublabel">$INFO[Container.SortMethod]$INFO[Container.SortOrder, · ,]</param>
+		<param name="top">24</param>
+		<definition>
+			<control type="group">
+				<depth>DepthBars</depth>
+				<top>$PARAM[top]</top>
+				<animation effect="fade" start="100" end="0" time="200" tween="sine" easing="inout" condition="$EXP[infodialog_active]">Conditional</animation>
+				<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout" condition="[Window.Previous(fullscreenvideo) | Window.Previous(startup)] + !Window.IsVisible(1109)">WindowOpen</animation>
+				<control type="grouplist">
+					<left>Bald_SafeLeft</left>
+					<width>1100</width>
+					<include content="TopBarLabels">
+						<param name="breadcrumbs_label" value="$PARAM[breadcrumbs_label]" />
+					</include>
+				</control>
+				<control type="button">
+					<left>Bald_SafeLeft</left>
+					<width>400</width>
+					<height>52</height>
+					<label></label>
+					<onclick>Action(Back)</onclick>
+					<visible>!Window.IsActive(home)</visible>
+					<texturefocus />
+					<texturenofocus />
+				</control>
+				<control type="grouplist">
+					<left>724</left>
+					<top>12</top>
+					<width>1100</width>
+					<height>28</height>
+					<align>right</align>
+					<orientation>horizontal</orientation>
+					<itemgap>24</itemgap>
+					<usecontrolcoords>true</usecontrolcoords>
+					<visible>!Window.IsVisible(extendedprogressdialog) + !Window.IsActive(fullscreenvideo)</visible>
+					<animation effect="fade" time="160" tween="sine" easing="inout">VisibleChange</animation>
+					<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout">WindowOpen</animation>
+					<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+					<control type="image">
+						<top>6</top>
+						<width>16</width>
+						<height>16</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="bald_accent">$VAR[NowPlayingIconVar]</texture>
+						<visible>!Control.IsVisible(503) + Player.HasMedia + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
+					</control>
+					<control type="label">
+						<left>-16</left>
+						<width min="1" max="420">auto</width>
+						<height>28</height>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink70</textcolor>
+						<label>$INFO[Player.Title]</label>
+						<visible>!Control.IsVisible(503) + Player.HasMedia + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
+					</control>
+					<control type="label" id="7700">
+						<left>-16</left>
+						<width min="1" max="300">auto</width>
+						<height>28</height>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink45</textcolor>
+						<label>$VAR[NowPlayingSublabelVar]</label>
+						<visible>!Control.IsVisible(503) + Player.HasMedia + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))</visible>
+					</control>
+					<control type="label">
+						<width min="1" max="300">auto</width>
+						<height>28</height>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$INFO[System.ProfileName]</label>
+						<visible>Skin.HasSetting(Bald.HeaderProfile) + Integer.IsGreater(System.ProfileCount,1) + !Player.HasMedia</visible>
+					</control>
+					<control type="label">
+						<width min="1" max="200">auto</width>
+						<height>28</height>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$INFO[Weather.Data(Current.Temperature)]</label>
+						<visible>Skin.HasSetting(Bald.HeaderWeather) + Weather.IsFetched</visible>
+						<visible>!Window.IsActive(weather) + [!Window.IsActive(home) | !String.IsEqual(Container(9000).ListItem.Property(id),weather)]</visible>
+					</control>
+					<control type="label">
+						<width min="1" max="200">auto</width>
+						<height>28</height>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$INFO[System.AlarmPos]</label>
+						<visible>System.HasAlarm(shutdowntimer)</visible>
+					</control>
+					<control type="image">
+						<top>4</top>
+						<width>28</width>
+						<height>20</height>
+						<aspectratio>keep</aspectratio>
+						<texture colordiffuse="bald_ink60">dialogs/volume/mute.png</texture>
+						<visible>Player.Muted</visible>
+					</control>
+					<control type="label" id="18900">
+						<width min="1" max="700">auto</width>
+						<height>28</height>
+						<aligny>center</aligny>
+						<font>Bald_CaptionMeta</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$PARAM[sublabel]</label>
+					</control>
+				</control>
+				<!-- The first letter while a title-sorted list scrolls fast, in the accent at the top centre. -->
+				<control type="label" id="23000">
+					<left>0</left>
+					<width>1920</width>
+					<height>52</height>
+					<align>center</align>
+					<font>Bald_CaptionTitle</font>
+					<textcolor>bald_accent</textcolor>
+					<label>$INFO[ListItem.SortLetter]</label>
+					<visible>!System.HasActiveModalDialog</visible>
+					<visible>Container.Scrolling</visible>
+					<visible>!Container.Content(seasons)</visible>
+					<visible>Container.SortMethod(1) | Container.SortMethod(4) | Container.SortMethod(12) | Container.SortMethod(10) | Container.SortMethod(7) | Container.SortMethod(29) | Container.SortMethod(17)</visible>
+					<animation effect="fade" start="0" end="100" time="180" tween="sine" easing="inout" reversible="true">VisibleChange</animation>
+					<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="TopBarLabels">
+		<description>The header title: the section in full ink, then its folders in 60% ink.</description>
+		<height>52</height>
+		<orientation>horizontal</orientation>
+		<usecontrolcoords>true</usecontrolcoords>
+		<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout">WindowOpen</animation>
+		<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+		<control type="label">
+			<label>$PARAM[breadcrumbs_label]</label>
+			<textcolor>bald_ink</textcolor>
+			<include>BreadcrumbsLabel</include>
+		</control>
+		<control type="label">
+			<label>$INFO[Container.ShowTitle, / ]</label>
+			<include>BreadcrumbsLabel</include>
+			<visible>!String.IsEmpty(Container.ShowTitle) + !String.IsEqual(Container.ShowTitle,Container.FolderName)</visible>
+		</control>
+		<control type="label">
+			<label>$INFO[Container.FolderName, / ]</label>
+			<include>BreadcrumbsLabel</include>
+			<visible>![Container.Content() + Window.IsActive(videos)]</visible>
+			<visible>![Window.IsActive(MyPVRChannels.xml) | Window.IsActive(MyPVRTimers.xml) | Window.IsActive(MyPVRRecordings.xml) | Window.IsActive(MyPVRSearch.xml) | Window.IsActive(MyPVRProviders.xml)]</visible>
+		</control>
+		<control type="label">
+			<label>$VAR[BreadcrumbsVideoAssetTypeVar, / ]</label>
+			<include>BreadcrumbsLabel</include>
+			<visible>$EXP[videoasset_true]</visible>
+		</control>
+		<control type="label">
+			<label>$INFO[Container.PluginCategory, / ]</label>
+			<include>BreadcrumbsLabel</include>
+			<visible>!String.isempty(Container.PluginCategory)</visible>
+		</control>
+		<control type="label">
+			<label>$INFO[Control.GetLabel(10),: ]</label>
+			<include>BreadcrumbsLabel</include>
+			<visible>!String.IsEqual(Control.GetLabel(10),$LOCALIZE[16100]) + Window.IsActive(videos)</visible>
+		</control>
+		<control type="label">
+			<left>10</left>
+			<label>($LOCALIZE[31052])</label>
+			<textcolor>bald_accent</textcolor>
+			<include>BreadcrumbsLabel</include>
+			<visible>Container.Filtered</visible>
+		</control>
+	</include>
+	<include name="BreadcrumbsLabel">
+		<font>Bald_CaptionTitle</font>
+		<textcolor>bald_ink60</textcolor>
+		<height>52</height>
+		<width>auto</width>
+	</include>
+	<include name="ColoredBackgroundImages">
+		<!-- Bald: the opaque field (Estuary's pattern overlay was retired with its background_overlay setting). -->
+		<control type="image">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<texture colordiffuse="bald_field">bald/white.png</texture>
+		</control>
+	</include>
+	<include name="DefaultBackground">
+		<!-- Bald: the field, with the focused item's fanart at the backdrop brightness under a 60% field layer, so art
+		     tints the page without competing with the sharp preview. Playing video (unless Playback › Background video
+		     is off, Bald_VideoBackdropOn) or a visualisation shows through as in Estuary. A window that draws
+		     Bald_VideoBackdrop over this passes video false, so it has one videowindow. -->
+		<param name="video">true</param>
+		<definition>
+			<control type="videowindow">
+				<depth>DepthBackground</depth>
+				<include>FullScreenDimensions</include>
+				<visible>$PARAM[video] + $EXP[Bald_VideoBackdropOn]</visible>
+				<visible>!Slideshow.IsActive</visible>
+			</control>
+			<control type="visualisation">
+				<include>FullScreenDimensions</include>
+				<visible>!Slideshow.IsActive</visible>
+				<visible>Player.HasAudio + String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia)) + Visualisation.Enabled</visible>
+			</control>
+			<control type="group">
+				<include>FullScreenDimensions</include>
+				<control type="group">
+					<animation effect="fade" start="100" end="bg_alpha" time="0" condition="!Control.IsVisible(31111)">Conditional</animation>
+					<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout" condition="Window.Previous(fullscreenvideo) | Window.Previous(FullscreenGame) | Window.Previous(startup)">WindowOpen</animation>
+					<include>ColoredBackgroundImages</include>
+				</control>
+				<control type="group" id="31111">
+					<visible>!Window.IsActive(Home) + [![$EXP[Bald_VideoBackdropOn] | [Player.HasAudio + Visualisation.Enabled + !String.IsEmpty(Visualisation.Name)]] | !String.IsEmpty(Window(Videos).Property(PlayingBackgroundMedia))]</visible>
+					<depth>DepthBackground</depth>
+					<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout">WindowOpen</animation>
+					<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+					<animation effect="fade" time="380" tween="sine" easing="inout">VisibleChange</animation>
+					<control type="image" id="32111">
+						<include>FullScreenDimensions</include>
+						<aspectratio>scale</aspectratio>
+						<fadetime>800</fadetime>
+						<texture background="true" colordiffuse="bald_backdrop">$VAR[MediaFanartVar]</texture>
+						<visible>!Control.IsVisible(502) | $EXP[infodialog_active]</visible>
+					</control>
+					<control type="image">
+						<include>FullScreenDimensions</include>
+						<texture colordiffuse="bald_field60">bald/white.png</texture>
+					</control>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="BottomBar">
+		<!-- Bald: the footer on the y 954 hint line. The item count sits at the safe margin; with <info_visible> the
+		     window has Estuary's options menu, and the right-hand hints say how to open and leave it (SPEC 5.5). -->
+		<param name="info_visible">false</param>
+		<param name="count">$INFO[Container.CurrentItem]$INFO[Container.NumItems, / ,]</param>
+		<definition>
+			<control type="group">
+				<depth>DepthBars</depth>
+				<animation effect="fade" start="100" end="0" time="200" tween="sine" easing="inout" condition="$EXP[infodialog_active]">Conditional</animation>
+				<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout" condition="Window.Next(visualisation) | Window.Next(screencalibration)">WindowClose</animation>
+				<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout" condition="Window.Previous(fullscreenvideo) | Window.Previous(startup) | Window.Previous(visualisation)">WindowOpen</animation>
+				<control type="group">
+					<control type="label">
+						<left>Bald_SafeLeft</left>
+						<top>Bald_HintTop</top>
+						<width>600</width>
+						<height>24</height>
+						<font>Bald_Hint</font>
+						<textcolor>bald_ink60</textcolor>
+						<label>$PARAM[count]</label>
+					</control>
+					<control type="group">
+						<left>800</left>
+						<top>Bald_HintTop</top>
+						<visible>$PARAM[info_visible] + !$EXP[sidebar_visible] + !System.HasActiveModalDialog</visible>
+						<include content="Bald_InfoHintPair">
+							<param name="width">1024</param>
+							<param name="first">$VAR[Bald_KeyLeft]$LOCALIZE[31661]</param>
+							<param name="second">$VAR[Bald_KeyInfo]$LOCALIZE[31664]</param>
+						</include>
+					</control>
+					<control type="group">
+						<left>1404</left>
+						<top>Bald_HintTop</top>
+						<visible>$PARAM[info_visible] + $EXP[sidebar_visible]</visible>
+						<include content="Bald_InfoHintPair">
+							<param name="width">420</param>
+							<param name="first">$VAR[Bald_KeyLeft]$LOCALIZE[31789]</param>
+							<param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31747]</param>
+						</include>
+					</control>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="BottomBarTwoListInfo">
+		<!-- Bald: two item counters on the y 954 hint line, the left list's at the left safe margin and the right
+		     list's flush with the right one (Bald_Hint at 60% ink, "n / total"). The caller passes BottomBar an empty
+		     count so the lines do not overlap. -->
+		<param name="left_container_id" />
+		<param name="right_container_id" />
+		<definition>
+			<control type="group">
+				<depth>DepthBars</depth>
+				<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+				<control type="label">
+					<left>Bald_SafeLeft</left>
+					<top>Bald_HintTop</top>
+					<width>600</width>
+					<height>24</height>
+					<font>Bald_Hint</font>
+					<textcolor>bald_ink60</textcolor>
+					<label>$INFO[Container($PARAM[left_container_id]).CurrentItem]$INFO[Container($PARAM[left_container_id]).NumItems, / ,]</label>
+				</control>
+				<control type="label">
+					<left>1224</left>
+					<top>Bald_HintTop</top>
+					<width>600</width>
+					<height>24</height>
+					<align>right</align>
+					<font>Bald_Hint</font>
+					<textcolor>bald_ink60</textcolor>
+					<label>$INFO[Container($PARAM[right_container_id]).CurrentItem]$INFO[Container($PARAM[right_container_id]).NumItems, / ,]</label>
+				</control>
+			</control>
+		</definition>
+	</include>
+	<include name="FullScreenDimensions">
+		<left>0</left>
+		<top>0</top>
+		<width>100%</width>
+		<height>100%</height>
+	</include>
+	<include name="ContentPanel">
+		<!-- Bald: a flat 60% field surface in place of Estuary's shadowed panel; same geometry params. -->
+		<param name="width">500</param>
+		<param name="left">-40</param>
+		<param name="right"></param>
+		<param name="top">-10%</param>
+		<param name="height">120%</param>
+		<param name="flipx">false</param>
+		<definition>
+			<control type="image">
+				<texture colordiffuse="bald_field60">bald/white.png</texture>
+				<width>$PARAM[width]</width>
+				<left>$PARAM[left]</left>
+				<right>$PARAM[right]</right>
+				<top>$PARAM[top]</top>
+				<height>$PARAM[height]</height>
+			</control>
+		</definition>
+	</include>
+</includes>

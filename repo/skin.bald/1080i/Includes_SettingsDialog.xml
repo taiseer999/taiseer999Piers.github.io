@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The OSD settings drawer (Custom_1101_SettingsDialog.xml), Bald (docs/SPEC.md 5.16, "Other playback windows"). Started
+     from Kodi 22 Estuary's Includes_SettingsDialog.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). The row contents,
+     ids and actions are Estuary's; the rows are the settings scaffold's (Bald_PlaybackSettingRow). Estuary's Home
+     widget toggles (moviewidgets, tvshowwidgets, musicwidgets, musicvideowidgets, tvwidgets, radiowidgets) were
+     removed: nothing opens them since Bald replaced Estuary's Home. -->
+<includes>
+	<include name="SettingsDialogOSDVisible">
+		<visible>!Window.IsActive(DialogSettings.xml) + !Window.IsActive(DialogSlider.xml) + !Window.IsActive(GameVideoFilter) + !Window.IsActive(GameStretchMode) + !Window.IsActive(GameControllers) + !Window.IsActive(GameVideoRotation)</visible>
+	</include>
+	<!-- A right-hand drawer over the dimmed player: the settings scaffold's rows (56 px, 6 px gap) in a 672 px column
+	     ending on the right safe edge, under the heading at y 292 (the library options menu's heading line). -->
+	<include name="SettingsDialogLayout">
+		<control type="group">
+			<include condition="String.IsEqual(window(home).Property(settingsdialog_content),osd) | String.IsEqual(window(home).Property(settingsdialog_content),3d) | String.IsEqual(window(home).Property(settingsdialog_content),games) | String.IsEqual(window(home).Property(settingsdialog_content),videosettings)">SettingsDialogOSDVisible</include>
+			<include>Bald_PlaybackAnimFade</include>
+			<control type="group">
+				<animation type="WindowOpen" reversible="false">
+					<effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" />
+				</animation>
+				<animation type="WindowClose" reversible="false">
+					<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+				</animation>
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>1920</width>
+					<height>1080</height>
+					<texture colordiffuse="bald_field60">bald/white.png</texture>
+				</control>
+				<control type="image">
+					<left>0</left>
+					<top>0</top>
+					<width>1920</width>
+					<height>1080</height>
+					<texture flipx="true" colordiffuse="bald_scrim">bald/scrim_info_h.png</texture>
+				</control>
+			</control>
+			<control type="button">
+				<description>background close area</description>
+				<left>0</left>
+				<top>0</top>
+				<width>1056</width>
+				<height>1080</height>
+				<texturefocus />
+				<texturenofocus />
+				<onclick>Action(close)</onclick>
+			</control>
+			<control type="button" id="22002">
+				<description>drawer area: clicks here do not close it (Estuary's id)</description>
+				<left>1056</left>
+				<top>0</top>
+				<width>864</width>
+				<height>1080</height>
+				<texturefocus />
+				<texturenofocus />
+				<onclick>noop</onclick>
+			</control>
+			<control type="group">
+				<include>Bald_PlaybackAnimDrawer</include>
+				<control type="label" id="1">
+					<left>1178</left>
+					<top>292</top>
+					<width>646</width>
+					<height>30</height>
+					<aligny>center</aligny>
+					<font>Bald_CaptionMeta</font>
+					<textcolor>bald_ink60</textcolor>
+					<label>$INFO[Window(home).Property(settingsdialog_header)]</label>
+				</control>
+				<control type="group" id="11000">
+					<left>1152</left>
+					<top>344</top>
+					<control type="grouplist" id="11100">
+						<width>678</width>
+						<height>552</height>
+						<itemgap>6</itemgap>
+						<onup>11100</onup>
+						<ondown>11100</ondown>
+						<orientation>vertical</orientation>
+						<scrolltime tween="cubic" easing="out">320</scrolltime>
+						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),streamselection)">SettingsDialogStreamSelectionContent</include>
+						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),videosettings)">SettingsDialogVideoSettingsContent</include>
+						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),3d)">SettingsDialog3DContent</include>
+						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),games)">SettingsDialogGameContent</include>
+						<include condition="String.IsEqual(window(home).Property(settingsdialog_content),musicsettings)">SettingsDialogMusicSettingsContent</include>
+					</control>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="SettingsDialogStreamSelectionContent">
+		<control type="button" id="22106">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31115]</label>
+			<label2>$VAR[ActiveVideoPlayerSubtitleLanguage]</label2>
+			<onclick>DialogSelectSubtitle</onclick>
+			<enable>VideoPlayer.HasSubtitles</enable>
+		</control>
+		<control type="button" id="22105">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31112]</label>
+			<label2>$VAR[ActiveVideoPlayerAudioLanguage]$VAR[AudioCodecVar, | ]$VAR[AudioChannelsVar, ]</label2>
+			<onclick>DialogSelectAudio</onclick>
+			<enable>Integer.IsGreater(VideoPlayer.AudioStreamCount,1)</enable>
+		</control>
+		<control type="button" id="22110">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31109]</label>
+			<label2>$VAR[VideoCodecVar]$VAR[VideoHDRTypeVar, | ]$INFO[VideoPlayer.HdrDetail, P]$INFO[VideoPlayer.VideoResolution, | ]$VAR[VideoResolutionTypeVar, ]</label2>
+			<onclick>DialogSelectVideo</onclick>
+			<enable>Integer.IsGreater(VideoPlayer.VideoStreamCount,1)</enable>
+		</control>
+	</include>
+	<include name="SettingsDialogVideoSettingsContent">
+		<control type="button" id="22101">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[13396]</label>
+			<onclick>ActivateWindow(osdaudiosettings)</onclick>
+		</control>
+		<control type="button" id="22102">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[24133]</label>
+			<onclick>ActivateWindow(osdsubtitlesettings)</onclick>
+		</control>
+		<control type="button" id="22103">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[13395]</label>
+			<onclick>ActivateWindow(osdvideosettings)</onclick>
+		</control>
+		<control type="button" id="22104">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[36560]</label>
+			<onclick>ActivateWindow(osdcmssettings)</onclick>
+			<visible>System.HasCMS</visible>
+		</control>
+		<control type="button" id="22107">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31132]</label>
+			<onclick>PlayerProgramSelect</onclick>
+			<visible>Player.HasPrograms</visible>
+		</control>
+		<control type="button" id="22108">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31133]</label>
+			<onclick>PlayerResolutionSelect</onclick>
+			<visible>Player.HasResolutions</visible>
+		</control>
+		<control type="button" id="22109">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31142]</label>
+			<onclick>Dialog.Close(1101)</onclick>
+			<onclick>ActivateWindow(1110)</onclick>
+			<visible>Player.TempoEnabled</visible>
+		</control>
+		<control type="button" id="22110">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31597]</label>
+			<onclick>Dialog.Close(1101)</onclick>
+			<onclick>ActivateWindow(playerprocessinfo)</onclick>
+		</control>
+	</include>
+	<include name="SettingsDialog3DContent">
+		<control type="radiobutton" id="22101">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[24022]</label>
+			<onclick>ToggleStereoMode</onclick>
+			<selected>Integer.IsGreater(System.StereoscopicMode,0)</selected>
+		</control>
+		<control type="button" id="22102">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31004]</label>
+			<label2>$INFO[VideoPlayer.StereoscopicMode]</label2>
+			<onclick>StereoMode</onclick>
+		</control>
+		<control type="radiobutton" id="22103">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31005]</label>
+			<onclick>StereoModeToMono</onclick>
+			<selected>Integer.IsEqual(System.StereoscopicMode,9)</selected>
+		</control>
+	</include>
+	<include name="SettingsDialogGameContent">
+		<control type="button" id="22101">
+			<description>Video filter button</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[35225]</label>
+			<onclick>ActivateWindow(GameVideoFilter)</onclick>
+		</control>
+		<control type="button" id="22102">
+			<description>Stretch mode button</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[35233]</label>
+			<onclick>ActivateWindow(GameStretchMode)</onclick>
+		</control>
+		<control type="button" id="22103">
+			<description>Video rotation button</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[35227]</label>
+			<onclick>ActivateWindow(GameVideoRotation)</onclick>
+		</control>
+		<control type="button" id="22104">
+			<description>Volume button</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[13376]</label>
+			<label2>$FEATURE[select,game.controller.snes] + $FEATURE[rightstick,game.controller.default]</label2>
+			<onclick>ActivateWindow(GameVolume)</onclick>
+		</control>
+		<control type="button" id="22105">
+			<description>Controller settings button</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[35234]</label>
+			<onclick>ActivateWindow(GameControllers)</onclick>
+		</control>
+		<control type="button" id="22106">
+			<description>Controller port configuration</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[35110]</label>
+			<onclick>ActivateWindow(GamePorts)</onclick>
+		</control>
+		<control type="button" id="22107">
+			<description>Advanced settings</description>
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[35226]</label>
+			<onclick>ActivateWindow(GameAdvancedSettings)</onclick>
+		</control>
+	</include>
+	<include name="SettingsDialogMusicSettingsContent">
+		<control type="radiobutton" id="22101">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31163]</label>
+			<onclick>Skin.ToggleSetting(hide_background_fanart)</onclick>
+			<selected>!Skin.HasSetting(hide_background_fanart)</selected>
+		</control>
+		<control type="radiobutton" id="22102">
+			<label>$LOCALIZE[31167]</label>
+			<include>Bald_PlaybackSettingRow</include>
+			<onclick>Skin.ToggleSetting(animate_background_fanart)</onclick>
+			<selected>Skin.HasSetting(animate_background_fanart)</selected>
+		</control>
+		<control type="button" id="22103">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[250]</label>
+			<label2>$INFO[Visualisation.Name]</label2>
+			<onclick>Dialog.Close(all)</onclick>
+			<onclick>SendClick(500)</onclick>
+		</control>
+		<control type="button" id="22104">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31084]</label>
+			<onclick>Addon.Default.OpenSettings(xbmc.player.musicviz)</onclick>
+		</control>
+		<control type="button" id="22105">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31068]</label>
+			<onclick>ActivateWindow(visualisationpresetlist)</onclick>
+			<visible>Visualisation.HasPresets</visible>
+		</control>
+		<control type="button" id="22106">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31082]</label>
+			<label2>$INFO[Skin.String(LyricScript_Path)]</label2>
+			<onclick>Skin.SetAddon(LyricScript_Path,xbmc.python.lyrics)</onclick>
+		</control>
+		<control type="button" id="22107">
+			<include>Bald_PlaybackSettingRow</include>
+			<label>$LOCALIZE[31083]</label>
+			<onclick>Addon.OpenSettings($INFO[Skin.String(LyricScript_Path)])</onclick>
+			<visible>!String.IsEmpty(Skin.String(LyricScript_Path))</visible>
+		</control>
+	</include>
+</includes>

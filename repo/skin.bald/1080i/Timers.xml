@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<timers>
+    <!-- Bald's Search (Custom_1130_BaldSearch.xml): focus waits on 9198 while the results come in, then moves to the
+         category that shows. The conditions are Bald_SearchAny and Bald_SearchShows_* (Includes_Bald_Search.xml)
+         written out: $EXP does not work in a timer in Kodi 22 (docs/NOTES.md). -->
+    <timer>
+        <name>bald_search_focus</name>
+        <start>Window.IsActive(1130) + Control.HasFocus(9198) + [Integer.IsGreater(Container(71).NumItems,0) | Integer.IsGreater(Container(72).NumItems,0) | Integer.IsGreater(Container(73).NumItems,0) | Integer.IsGreater(Container(74).NumItems,0) | Integer.IsGreater(Container(75).NumItems,0) | Integer.IsGreater(Container(76).NumItems,0) | Integer.IsGreater(Container(77).NumItems,0) | Integer.IsGreater(Container(61).NumItems,0) | Integer.IsGreater(Container(62).NumItems,0)]</start>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(71).NumItems,0)]">SetFocus(71)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0)]">SetFocus(72)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(73).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0)]">SetFocus(73)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(74).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(73).NumItems,0)]">SetFocus(74)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(75).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(73).NumItems,0) + !Integer.IsGreater(Container(74).NumItems,0)]">SetFocus(75)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(76).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(73).NumItems,0) + !Integer.IsGreater(Container(74).NumItems,0) + !Integer.IsGreater(Container(75).NumItems,0)]">SetFocus(76)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(77).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(73).NumItems,0) + !Integer.IsGreater(Container(74).NumItems,0) + !Integer.IsGreater(Container(75).NumItems,0) + !Integer.IsGreater(Container(76).NumItems,0)]">SetFocus(77)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(61).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(73).NumItems,0) + !Integer.IsGreater(Container(74).NumItems,0) + !Integer.IsGreater(Container(75).NumItems,0) + !Integer.IsGreater(Container(76).NumItems,0) + !Integer.IsGreater(Container(77).NumItems,0)]">SetFocus(61)</onstart>
+        <onstart condition="[String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)] | [![[String.IsEqual(Window(1130).Property(Bald.SearchCat),movies) + Integer.IsGreater(Container(71).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),tvshows) + Integer.IsGreater(Container(72).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),episodes) + Integer.IsGreater(Container(73).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),musicvideos) + Integer.IsGreater(Container(74).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),artists) + Integer.IsGreater(Container(75).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),albums) + Integer.IsGreater(Container(76).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),songs) + Integer.IsGreater(Container(77).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),channels) + Integer.IsGreater(Container(61).NumItems,0)] | [String.IsEqual(Window(1130).Property(Bald.SearchCat),programmes) + Integer.IsGreater(Container(62).NumItems,0)]] + Integer.IsGreater(Container(62).NumItems,0) + !Integer.IsGreater(Container(71).NumItems,0) + !Integer.IsGreater(Container(72).NumItems,0) + !Integer.IsGreater(Container(73).NumItems,0) + !Integer.IsGreater(Container(74).NumItems,0) + !Integer.IsGreater(Container(75).NumItems,0) + !Integer.IsGreater(Container(76).NumItems,0) + !Integer.IsGreater(Container(77).NumItems,0) + !Integer.IsGreater(Container(61).NumItems,0)]">SetFocus(62)</onstart>
+        <stop>!Control.HasFocus(9198) | !Window.IsActive(1130)</stop>
+    </timer>
+    <!-- Only an initial load handoff: page motion and per-item previews never depend on this slow timer. -->
+    <timer>
+        <name>bald_info_recommendations_ready</name>
+        <start>Window.IsActive(movieinformation) + String.IsEqual(Window(home).Property(Bald.InfoSec),2) + Control.HasFocus(5150) + !String.IsEmpty(Window(movieinformation).Property(Bald.MorePath)) + Integer.IsGreater(Container(5100).NumItems,0)</start>
+        <onstart>SetFocus(5100)</onstart>
+        <stop>!Control.HasFocus(5150) | !Window.IsActive(movieinformation)</stop>
+    </timer>
+    <!-- Video and music OSD auto-close (Includes_Bald_OSD.xml, Bald_OSDAutoCloseArm): the OSD buttons run the alarm
+         bald_osd_close, which only sets Bald.OSD.Close on Home; this closes the companion panels and the OSD. Replaces
+         Estuary's autoclosevideoosd timer and its OSDAutoClose settings (migrated in Startup.xml). -->
+    <timer>
+        <name>bald_osd_close</name>
+        <start>!String.IsEmpty(Window(home).Property(Bald.OSD.Close))</start>
+        <onstart>ClearProperty(Bald.OSD.Close,home)</onstart>
+        <onstart condition="Window.IsVisible(videoosd)">Dialog.Close(1120,true)</onstart>
+        <onstart condition="Window.IsVisible(videoosd)">Dialog.Close(1121,true)</onstart>
+        <onstart condition="Window.IsVisible(videoosd)">Dialog.Close(1122,true)</onstart>
+        <onstart condition="Window.IsVisible(videoosd)">Dialog.Close(1123,true)</onstart>
+        <onstart condition="Window.IsVisible(videoosd)">Dialog.Close(1124,true)</onstart>
+        <onstart condition="Window.IsVisible(videoosd)">Dialog.Close(videoosd)</onstart>
+        <onstart condition="Window.IsVisible(musicosd)">Dialog.Close(musicosd)</onstart>
+        <stop>String.IsEmpty(Window(home).Property(Bald.OSD.Close))</stop>
+    </timer>
+    <!-- Video OSD playlist panel (1125): once its row has loaded, move it to what plays next. Playlist.Position is
+         1-based, so as a 0-based index it names the next item; for a season (sorted by episode, starting at 1) the
+         current episode number does the same. One shot per panel: 1125 clears Bald.OSD.Placed when it opens. -->
+    <timer>
+        <name>bald_osd_playlist_focus</name>
+        <start>Window.IsActive(1125) + !Container(8150).IsUpdating + Integer.IsGreater(Container(8150).NumItems,0) + String.IsEmpty(Window(home).Property(Bald.OSD.Placed))</start>
+        <onstart>SetProperty(Bald.OSD.Placed,1,home)</onstart>
+        <onstart condition="Integer.IsGreater(Playlist.Length(video),1)">SetFocus(8150,$INFO[Playlist.Position(video)],absolute)</onstart>
+        <onstart condition="!Integer.IsGreater(Playlist.Length(video),1) + !String.IsEmpty(VideoPlayer.Episode)">SetFocus(8150,$INFO[VideoPlayer.Episode],absolute)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.OSD.Placed))</stop>
+    </timer>
+    <!-- Home hidden (Home Screens): Home's onload focuses the start row, but a list that has never been shown has no
+         items and cannot take focus yet, so focus can stay on Home's hidden row 1 (the default control). Marker 9193
+         (Bald_HomeRowStranded) shows then; 9195 moves focus to the start row, now loading, or the menu. -->
+    <!-- Bald Home, lost focus: Kodi cannot focus an empty list, so returning to a row with no items (a new install with
+         no library, a screen whose rows are all empty) left nothing focused and every key doing nothing. After a
+         second with nothing focused on Home (a moment between controls never lasts that long; not behind the startup
+         splash or a dialog), open the menu on the current screen's entry. -->
+    <timer>
+        <name>bald_focus_lost</name>
+        <start>Window.IsActive(home) + String.IsEmpty(System.CurrentControlID) + String.IsEmpty(Window(home).Property(Bald.Preload)) + !System.HasActiveModalDialog</start>
+        <stop>!String.IsEmpty(System.CurrentControlID) | Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(bald_focus_lost),1)</stop>
+        <onstop condition="Window.IsActive(home) + String.IsEmpty(System.CurrentControlID) + !System.HasActiveModalDialog">SetProperty(Bald.Menu,1,home)</onstop>
+        <onstop condition="Window.IsActive(home) + String.IsEmpty(System.CurrentControlID) + !System.HasActiveModalDialog">SetFocus($VAR[Bald_ScreenMenuEntry])</onstop>
+    </timer>
+    <timer>
+        <name>bald_home_start</name>
+        <start>Window.IsActive(home) + Control.IsVisible(9193)</start>
+        <onstart>SetFocus(9195)</onstart>
+        <stop>!Control.IsVisible(9193)</stop>
+    </timer>
+    <!-- Bald skin timers run in CApplication::ProcessSlow, every 500 ms: fine for row start and idle, too coarse
+         for anything that must follow item changes. -->
+    <!-- Bald Home. Row start: a fixedlist first selects the item at its focus position (slot 2, or slot 5 on a poster
+         row: item 6 at position 5; a landscape row's cursor never reaches position 5, so the two cannot be confused);
+         once a row's items have loaded, move it back to the first item. A short row (2 to 5 items, at most its slot;
+         Bald_Row, aligny) starts with its last item selected at position NumItems - 1 instead; the third clause
+         catches that (a landscape row of 3 matches both, at position 2). The move is the position, one line per
+         position, so exactly one runs. One shot per window load; Home clears the flags in onload.
+         Timers only for rows that can show before they are focused (the first rows, and each screen's first row in the menu
+         preview) and the next two Home rows; every other row is moved by the row above it or on its own focus (Bald_Row). -->
+    <timer>
+        <name>bald_rowstart_9101</name>
+        <start>Window.IsActive(home) + !Container(9101).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9101)) + [[String.IsEqual(Container(9101).CurrentItem,3) + String.IsEqual(Container(9101).Position,2)] | [String.IsEqual(Container(9101).CurrentItem,6) + String.IsEqual(Container(9101).Position,5)] | [Integer.IsGreater(Container(9101).NumItems,1) + !Integer.IsGreater(Container(9101).NumItems,5) + Integer.IsEqual(Container(9101).CurrentItem,Container(9101).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9101,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9101).Position,1)">Control.Move(9101,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9101).Position,2)">Control.Move(9101,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9101).Position,3)">Control.Move(9101,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9101).Position,4)">Control.Move(9101,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9101).Position,5)">Control.Move(9101,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9101))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9102</name>
+        <start>Window.IsActive(home) + !Container(9102).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9102)) + [[String.IsEqual(Container(9102).CurrentItem,3) + String.IsEqual(Container(9102).Position,2)] | [String.IsEqual(Container(9102).CurrentItem,6) + String.IsEqual(Container(9102).Position,5)] | [Integer.IsGreater(Container(9102).NumItems,1) + !Integer.IsGreater(Container(9102).NumItems,5) + Integer.IsEqual(Container(9102).CurrentItem,Container(9102).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9102,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9102).Position,1)">Control.Move(9102,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9102).Position,2)">Control.Move(9102,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9102).Position,3)">Control.Move(9102,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9102).Position,4)">Control.Move(9102,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9102).Position,5)">Control.Move(9102,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9102))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9103</name>
+        <start>Window.IsActive(home) + !Container(9103).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9103)) + [[String.IsEqual(Container(9103).CurrentItem,3) + String.IsEqual(Container(9103).Position,2)] | [String.IsEqual(Container(9103).CurrentItem,6) + String.IsEqual(Container(9103).Position,5)] | [Integer.IsGreater(Container(9103).NumItems,1) + !Integer.IsGreater(Container(9103).NumItems,5) + Integer.IsEqual(Container(9103).CurrentItem,Container(9103).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9103,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9103).Position,1)">Control.Move(9103,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9103).Position,2)">Control.Move(9103,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9103).Position,3)">Control.Move(9103,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9103).Position,4)">Control.Move(9103,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9103).Position,5)">Control.Move(9103,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9103))</stop>
+    </timer>
+    <!-- Each hub's first row (slots 1-8: 9201 to 9901) and Live TV's (9051) preview in the menu before they are ever
+         focused. Timers.xml cannot be generated, so every slot has one; a slot without rows has no container, and
+         the start condition never holds. -->
+    <timer>
+        <name>bald_rowstart_9201</name>
+        <start>Window.IsActive(home) + !Container(9201).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9201)) + [[String.IsEqual(Container(9201).CurrentItem,3) + String.IsEqual(Container(9201).Position,2)] | [String.IsEqual(Container(9201).CurrentItem,6) + String.IsEqual(Container(9201).Position,5)] | [Integer.IsGreater(Container(9201).NumItems,1) + !Integer.IsGreater(Container(9201).NumItems,5) + Integer.IsEqual(Container(9201).CurrentItem,Container(9201).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9201,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9201).Position,1)">Control.Move(9201,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9201).Position,2)">Control.Move(9201,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9201).Position,3)">Control.Move(9201,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9201).Position,4)">Control.Move(9201,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9201).Position,5)">Control.Move(9201,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9201))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9301</name>
+        <start>Window.IsActive(home) + !Container(9301).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9301)) + [[String.IsEqual(Container(9301).CurrentItem,3) + String.IsEqual(Container(9301).Position,2)] | [String.IsEqual(Container(9301).CurrentItem,6) + String.IsEqual(Container(9301).Position,5)] | [Integer.IsGreater(Container(9301).NumItems,1) + !Integer.IsGreater(Container(9301).NumItems,5) + Integer.IsEqual(Container(9301).CurrentItem,Container(9301).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9301,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9301).Position,1)">Control.Move(9301,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9301).Position,2)">Control.Move(9301,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9301).Position,3)">Control.Move(9301,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9301).Position,4)">Control.Move(9301,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9301).Position,5)">Control.Move(9301,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9301))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9401</name>
+        <start>Window.IsActive(home) + !Container(9401).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9401)) + [[String.IsEqual(Container(9401).CurrentItem,3) + String.IsEqual(Container(9401).Position,2)] | [String.IsEqual(Container(9401).CurrentItem,6) + String.IsEqual(Container(9401).Position,5)] | [Integer.IsGreater(Container(9401).NumItems,1) + !Integer.IsGreater(Container(9401).NumItems,5) + Integer.IsEqual(Container(9401).CurrentItem,Container(9401).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9401,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9401).Position,1)">Control.Move(9401,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9401).Position,2)">Control.Move(9401,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9401).Position,3)">Control.Move(9401,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9401).Position,4)">Control.Move(9401,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9401).Position,5)">Control.Move(9401,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9401))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9501</name>
+        <start>Window.IsActive(home) + !Container(9501).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9501)) + [[String.IsEqual(Container(9501).CurrentItem,3) + String.IsEqual(Container(9501).Position,2)] | [String.IsEqual(Container(9501).CurrentItem,6) + String.IsEqual(Container(9501).Position,5)] | [Integer.IsGreater(Container(9501).NumItems,1) + !Integer.IsGreater(Container(9501).NumItems,5) + Integer.IsEqual(Container(9501).CurrentItem,Container(9501).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9501,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9501).Position,1)">Control.Move(9501,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9501).Position,2)">Control.Move(9501,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9501).Position,3)">Control.Move(9501,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9501).Position,4)">Control.Move(9501,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9501).Position,5)">Control.Move(9501,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9501))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9601</name>
+        <start>Window.IsActive(home) + !Container(9601).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9601)) + [[String.IsEqual(Container(9601).CurrentItem,3) + String.IsEqual(Container(9601).Position,2)] | [String.IsEqual(Container(9601).CurrentItem,6) + String.IsEqual(Container(9601).Position,5)] | [Integer.IsGreater(Container(9601).NumItems,1) + !Integer.IsGreater(Container(9601).NumItems,5) + Integer.IsEqual(Container(9601).CurrentItem,Container(9601).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9601,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9601).Position,1)">Control.Move(9601,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9601).Position,2)">Control.Move(9601,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9601).Position,3)">Control.Move(9601,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9601).Position,4)">Control.Move(9601,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9601).Position,5)">Control.Move(9601,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9601))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9701</name>
+        <start>Window.IsActive(home) + !Container(9701).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9701)) + [[String.IsEqual(Container(9701).CurrentItem,3) + String.IsEqual(Container(9701).Position,2)] | [String.IsEqual(Container(9701).CurrentItem,6) + String.IsEqual(Container(9701).Position,5)] | [Integer.IsGreater(Container(9701).NumItems,1) + !Integer.IsGreater(Container(9701).NumItems,5) + Integer.IsEqual(Container(9701).CurrentItem,Container(9701).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9701,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9701).Position,1)">Control.Move(9701,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9701).Position,2)">Control.Move(9701,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9701).Position,3)">Control.Move(9701,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9701).Position,4)">Control.Move(9701,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9701).Position,5)">Control.Move(9701,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9701))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9801</name>
+        <start>Window.IsActive(home) + !Container(9801).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9801)) + [[String.IsEqual(Container(9801).CurrentItem,3) + String.IsEqual(Container(9801).Position,2)] | [String.IsEqual(Container(9801).CurrentItem,6) + String.IsEqual(Container(9801).Position,5)] | [Integer.IsGreater(Container(9801).NumItems,1) + !Integer.IsGreater(Container(9801).NumItems,5) + Integer.IsEqual(Container(9801).CurrentItem,Container(9801).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9801,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9801).Position,1)">Control.Move(9801,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9801).Position,2)">Control.Move(9801,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9801).Position,3)">Control.Move(9801,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9801).Position,4)">Control.Move(9801,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9801).Position,5)">Control.Move(9801,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9801))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9901</name>
+        <start>Window.IsActive(home) + !Container(9901).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9901)) + [[String.IsEqual(Container(9901).CurrentItem,3) + String.IsEqual(Container(9901).Position,2)] | [String.IsEqual(Container(9901).CurrentItem,6) + String.IsEqual(Container(9901).Position,5)] | [Integer.IsGreater(Container(9901).NumItems,1) + !Integer.IsGreater(Container(9901).NumItems,5) + Integer.IsEqual(Container(9901).CurrentItem,Container(9901).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9901,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9901).Position,1)">Control.Move(9901,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9901).Position,2)">Control.Move(9901,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9901).Position,3)">Control.Move(9901,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9901).Position,4)">Control.Move(9901,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9901).Position,5)">Control.Move(9901,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9901))</stop>
+    </timer>
+    <timer>
+        <name>bald_rowstart_9051</name>
+        <start>Window.IsActive(home) + !Container(9051).IsUpdating + String.IsEmpty(Window(home).Property(Bald.Start9051)) + [[String.IsEqual(Container(9051).CurrentItem,3) + String.IsEqual(Container(9051).Position,2)] | [String.IsEqual(Container(9051).CurrentItem,6) + String.IsEqual(Container(9051).Position,5)] | [Integer.IsGreater(Container(9051).NumItems,1) + !Integer.IsGreater(Container(9051).NumItems,5) + Integer.IsEqual(Container(9051).CurrentItem,Container(9051).NumItems)]]</start>
+        <onstart>SetProperty(Bald.Start9051,1,home)</onstart>
+        <onstart condition="String.IsEqual(Container(9051).Position,1)">Control.Move(9051,-1)</onstart>
+        <onstart condition="String.IsEqual(Container(9051).Position,2)">Control.Move(9051,-2)</onstart>
+        <onstart condition="String.IsEqual(Container(9051).Position,3)">Control.Move(9051,-3)</onstart>
+        <onstart condition="String.IsEqual(Container(9051).Position,4)">Control.Move(9051,-4)</onstart>
+        <onstart condition="String.IsEqual(Container(9051).Position,5)">Control.Move(9051,-5)</onstart>
+        <stop>!String.IsEmpty(Window(home).Property(Bald.Start9051))</stop>
+    </timer>
+    <!-- Bald startup splash (Home.xml, Includes_Bald_Home.xml Bald_Splash): lift it once every row has loaded (the
+         9194 marker shows the Bald_RowsLoaded expression, which a timer condition cannot use) or the 10 s alarm Startup.xml set
+         has run out, and not under a modal dialog (focus would go to the dialog). 9195 moves focus on to Home's usual
+         first control. The rows' start timers above run behind the splash; idle and ambient wait for it. -->
+    <timer>
+        <name>bald_preload</name>
+        <start>Window.IsActive(home) + !String.IsEmpty(Window(home).Property(Bald.Preload)) + !System.HasActiveModalDialog + [Control.IsVisible(9194) | !System.HasAlarm(bald_preload)]</start>
+        <onstart>ClearProperty(Bald.Preload,home)</onstart>
+        <onstart>CancelAlarm(bald_preload,silent)</onstart>
+        <onstart>SetFocus(9195)</onstart>
+        <stop>String.IsEmpty(Window(home).Property(Bald.Preload))</stop>
+    </timer>
+    <!-- Bald Home idle (Bald_IdleReached: a minute by default, Appearance › Behavior › Idle after; never when it is
+         off): close the menu and park focus on the wake button so the first key only wakes. The idle conditions below
+         are Bald_IdleReached and Bald_DriftIdle (Includes_Bald_Common.xml) written out. -->
+    <timer>
+        <name>bald_idle</name>
+        <start reset="true">Window.IsActive(home) + [[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] + !Control.HasFocus(9199) + String.IsEmpty(Window(home).Property(Bald.Preload))</start>
+        <onstart>ClearProperty(Bald.Menu,home)</onstart>
+        <onstart>SetFocus(9199)</onstart>
+        <stop>![[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] | Control.HasFocus(9199)</stop>
+    </timer>
+    <!-- Idle drift (Bald_IdleDrift): runs while Home, or Now Playing without its OSD, has been idle (Bald_DriftIdle: the
+         idle time, or a minute with idle off, so the burn-in guard stays); stops at 12 minutes and, still idle, starts
+         again, so the drift's four 3-minute steps loop. Literal conditions: $EXP in a timer condition did not trigger
+         (docs/NOTES.md). -->
+    <timer>
+        <name>bald_drift</name>
+        <start reset="true">[[[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] | [System.IdleTime(60) + Skin.String(Bald.IdleTime,off)]] + [Window.IsActive(home) | [Window.IsActive(visualisation) + !Window.IsVisible(musicosd)]]</start>
+        <stop>![[[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] | [System.IdleTime(60) + Skin.String(Bald.IdleTime,off)]] | Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(bald_drift),720)</stop>
+    </timer>
+    <!-- Bald Home ambient: while idle, advance the current row every 8 s (Skin setting Bald.AmbientOff turns it off;
+         never with idle off). Not under a dialog, info or the context menu (Bald_DialogOver written out): the row
+         moved under an info page left open, so closing it returned to another item. -->
+    <timer>
+        <name>bald_ambient</name>
+        <start reset="true">Window.IsActive(home) + [[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] + !Skin.HasSetting(Bald.AmbientOff) + String.IsEmpty(Window(home).Property(Bald.Preload)) + !System.HasActiveModalDialog + !Window.IsVisible(movieinformation) + !Window.IsVisible(contextmenu)</start>
+        <stop>Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(bald_ambient),8) | ![[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))]</stop>
+        <onstop condition="[[System.IdleTime(60) + !Skin.String(Bald.IdleTime,2) + !Skin.String(Bald.IdleTime,5) + !Skin.String(Bald.IdleTime,10) + !Skin.String(Bald.IdleTime,off)] | [System.IdleTime(120) + Skin.String(Bald.IdleTime,2)] | [System.IdleTime(300) + Skin.String(Bald.IdleTime,5)] | [System.IdleTime(600) + Skin.String(Bald.IdleTime,10)] | !String.IsEmpty(Window(home).Property(Bald.IdlePreview))] + !String.IsEmpty(Window(home).Property(Bald.Row)) + !System.HasActiveModalDialog + !Window.IsVisible(movieinformation) + !Window.IsVisible(contextmenu)">Control.Move($INFO[Window(home).Property(Bald.Row)],1)</onstop>
+    </timer>
+    <!-- Bald Helper (addons/script.bald.helper): while Appearance, Behavior, "Open TV shows on their info page" is on, its
+         keymap maps Select in the video library (the <videos> section) to Skin.TimerStart(bald_library_select). With a
+         library view container focused on a library TV show, Select opens the show's information (DialogVideoInfo,
+         Bald's series page) instead of its seasons; anything else gets Select as usual. A timer, not a hidden button:
+         SendClick never runs a skin button's onclick, and a focus bridge would replay the focused poster's pop (docs/NOTES.md,
+         "Select on a TV show opens its info page"). Conditions are evaluated when the keymap starts the timer, before
+         the actions run; the view ids are MyVideoNav's <views>. No start condition: only the keymap starts it. -->
+    <timer>
+        <name>bald_library_select</name>
+        <onstart condition="Skin.HasSetting(Bald.ShowsOpenInfo) + Window.IsActive(videos) + [Control.HasFocus(510) | Control.HasFocus(511) | Control.HasFocus(512) | Control.HasFocus(513) | Control.HasFocus(514) | Control.HasFocus(515) | Control.HasFocus(520) | Control.HasFocus(521) | Control.HasFocus(522) | Control.HasFocus(523) | Control.HasFocus(530) | Control.HasFocus(531) | Control.HasFocus(532) | Control.HasFocus(540) | Control.HasFocus(541) | Control.HasFocus(542) | Control.HasFocus(504) | Control.HasFocus(50) | Control.HasFocus(51) | Control.HasFocus(52) | Control.HasFocus(53) | Control.HasFocus(54) | Control.HasFocus(55) | Control.HasFocus(500) | Control.HasFocus(501) | Control.HasFocus(502)] + String.IsEqual(ListItem.DBType,tvshow) + Integer.IsGreater(ListItem.DBID,0) + !ListItem.IsParentFolder">Action(Info)</onstart>
+        <onstart condition="![Skin.HasSetting(Bald.ShowsOpenInfo) + Window.IsActive(videos) + [Control.HasFocus(510) | Control.HasFocus(511) | Control.HasFocus(512) | Control.HasFocus(513) | Control.HasFocus(514) | Control.HasFocus(515) | Control.HasFocus(520) | Control.HasFocus(521) | Control.HasFocus(522) | Control.HasFocus(523) | Control.HasFocus(530) | Control.HasFocus(531) | Control.HasFocus(532) | Control.HasFocus(540) | Control.HasFocus(541) | Control.HasFocus(542) | Control.HasFocus(504) | Control.HasFocus(50) | Control.HasFocus(51) | Control.HasFocus(52) | Control.HasFocus(53) | Control.HasFocus(54) | Control.HasFocus(55) | Control.HasFocus(500) | Control.HasFocus(501) | Control.HasFocus(502)] + String.IsEqual(ListItem.DBType,tvshow) + Integer.IsGreater(ListItem.DBID,0) + !ListItem.IsParentFolder]">Action(Select)</onstart>
+        <stop>true</stop>
+    </timer>
+</timers>

@@ -1,0 +1,60 @@
+<include name="Bald_Generated_{title}Widgets">
+    <definition>
+{rows}
+    </definition>
+</include>
+{row_parts}
+<include name="Bald_RowStartReset_{screen}">
+    <definition>
+{start_reset}
+    </definition>
+</include>
+<include name="Bald_ConfiguredArtLogos_{screen}">
+    <definition>
+{art_logos}
+    </definition>
+</include>
+<include name="Bald_ConfiguredCaptions_{screen}">
+    <definition>
+{captions}
+    </definition>
+</include>
+<expression name="Bald_HasRows_{screen}">[false]{has_rows}</expression>
+<expression name="Bald_RowsLoading_{screen}">[false]{rows_loading}</expression>
+<expression name="Bald_ItemOdd_{screen}">[false]{item_odd}</expression>
+<expression name="Bald_HasLogo_{screen}">[false]{has_logo}</expression>
+<expression name="Bald_PreviewItemOdd_{screen}">[false]{preview_item_odd}</expression>
+<expression name="Bald_PreviewHasLogo_{screen}">[false]{preview_has_logo}</expression>
+<variable name="Bald_RowsNote_{screen}">
+{note_head}
+    <value></value>
+</variable>
+<variable name="Bald_RowStyle_{screen}">
+{row_styles}
+    <value>fanart</value>
+</variable>
+
+<expression name="Bald_PreviewRows_{screen}">[$EXP[Bald_Preview{title}] + {enabled} + $EXP[Bald_HasRows_{screen}]]</expression>
+<expression name="Bald_HubShown_{screen}">[false]{hub_shown}</expression>
+<expression name="Bald_HubHasOpen_{screen}">[false]{hub_has_open}</expression>
+<expression name="Bald_HasArt_{screen}">[!String.IsEmpty(Skin.String(Bald.Art.{screen}))]{hub_has_art}</expression>
+<variable name="Bald_ScreenArt_{screen}">
+    <value condition="!String.IsEmpty(Skin.String(Bald.Art.{screen}))">$INFO[Skin.String(Bald.Art.{screen})]</value>
+    <value>{hub_image}</value>
+</variable>
+<variable name="Bald_HubLabel_{screen}">
+    <value>{hub_label}</value>
+</variable>
+<variable name="Bald_HubSuffix_{screen}">
+    <value condition="$EXP[Bald_HubHasOpen_{screen}]">  ›</value>
+</variable>
+<variable name="Bald_HubNote_{screen}">
+    <value condition="$EXP[Bald_HasRows_{screen}]">$VAR[Bald_RowsNote_{screen}]</value>
+    <value condition="$EXP[Bald_HubHasOpen_{screen}]">$LOCALIZE[31201]</value>
+    <value>$LOCALIZE[31202]</value>
+</variable>
+<include name="Bald_HubOpen_{screen}">
+    <definition>
+{hub_open}
+    </definition>
+</include>

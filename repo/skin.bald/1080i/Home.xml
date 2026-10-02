@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald Home (milestones 2 and 3). Layout from docs/SPEC.md section 5.1, motion from section 4.
+     State and variables are documented in Includes_Bald_Home.xml; timers in Timers.xml. -->
+<window>
+	<defaultcontrol always="true">9101</defaultcontrol>
+	<backgroundcolor>bald_field</backgroundcolor>
+	<!-- Build the Home rows (Skin Variables, shortcuts/skinvariables-generator.json). It hashes these arguments, its
+	     config (with the generator's build version) and the current output, and returns at once when none changed;
+	     after writing it reloads the skin. So it builds on first run, after a skin update that changed the generator,
+	     and after the widget editor or Home Screens closes with a change (Custom_1116 and 1117 stamp Bald.WidgetsStamp).
+	     Not before the hubs migration has run (docs/NOTES.md, Home hubs): until Bald.HubsMigrated is set, Home starts
+	     it instead (unless Startup.xml already has, Bald.HubsMigrating), and the script builds when it has written the
+	     hubs list. Startup does not run on a live skin update or ReloadSkin, so Home must be able to start it too. -->
+	<!-- Startup does not run on a skin switch or ReloadSkin, so Home also turns mouse input off. -->
+	<onload condition="System.GetBool(input.enablemouse)">RunScript(skin.bald,mouse)</onload>
+	<!-- DM Sans became the Default fontset (docs/NOTES.md): an earlier choice saved as "DMSans" still works (Kodi falls
+	     back to Default) but logs a warning each load, so it is moved to Default once; Kodi then reloads the skin. -->
+	<onload condition="String.IsEqual(Skin.Font,DMSans)">RunScript(skin.bald,font,Default)</onload>
+	<!-- Offer Bald's recommended Kodi settings once, after the startup splash (scripts/recommended.py; it says nothing
+	     when they are already in place): here without the splash, else as it lifts (9195). Bald Settings > Appearance >
+	     Behavior offers them again any time. -->
+	<onload condition="!Skin.HasSetting(Bald.RecommendedOffered) + !$EXP[Bald_Preloading]">RunScript(skin.bald,recommended,prompt)</onload>
+	<onload condition="!Skin.HasSetting(Bald.RecommendedOffered) + !$EXP[Bald_Preloading]">Skin.SetBool(Bald.RecommendedOffered)</onload>
+	<onload condition="String.IsEmpty(Skin.String(Bald.HubsMigrated)) + String.IsEmpty(Window(home).Property(Bald.HubsMigrating))">SetProperty(Bald.HubsMigrating,1,home)</onload>
+	<onload condition="String.IsEmpty(Skin.String(Bald.HubsMigrated)) + String.IsEmpty(Window(home).Property(Bald.HubsMigrating))">RunScript(skin.bald,hubs)</onload>
+	<!-- As in Startup.xml: a failed run cannot leave Bald.HubsMigrating set for good. -->
+	<onload condition="String.IsEmpty(Skin.String(Bald.HubsMigrated)) + String.IsEmpty(Window(home).Property(Bald.HubsMigrating))">AlarmClock(bald_hubs_migrating,ClearProperty(Bald.HubsMigrating,home),00:30,silent)</onload>
+	<onload condition="!String.IsEmpty(Skin.String(Bald.HubsMigrated))">RunScript(script.skinvariables,action=buildtemplate,lastbuildtime=$INFO[Skin.String(Bald.WidgetsStamp)])</onload>
+	<!-- Window properties survive ReloadSkin and returning from other windows; start clean on a fresh load, and keep the
+	     state Home was left in when returning to it (Bald_Restoring: to the menu entry it was left from, or to the row).
+	     Kodi focuses row 1 first (defaultcontrol always); the onloads below move focus: back to the row or menu entry
+	     Home was left on, else to the start screen's menu entry (Bald_StartOnMenu) or its first row. -->
+	<!-- Home's own rows, or while Home is hidden (Home Screens) the screen it starts on instead (Bald_StartScreen:
+	     the first shown hub with rows, Live TV's rows, else the menu). With Home shown, Bald_Start* are Home's. -->
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row,$VAR[Bald_StartRow],home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.home,9101,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.livetv,9051,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub1,9201,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub2,9301,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub3,9401,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub4,9501,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub5,9601,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub6,9701,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub7,9801,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Row.hub8,9901,home)</onload>
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.Screen,$VAR[Bald_StartScreen],home)</onload>
+	<!-- The art frame's shape follows the displayed row's style (Bald_PosterRow). -->
+	<onload condition="!$EXP[Bald_Restoring]">SetProperty(Bald.RowStyle,$VAR[Bald_StartRowStyle],home)</onload>
+	<!-- Background: the current row item's blurred fanart, following the current row (Bald_FollowContainer). Bald
+	     Helper makes it (Bald.Blur); without it, TMDb Helper's image service does (TMDbHelper.EnableBlur; no TMDB
+	     lookups). Never both: with Bald Helper, TMDb Helper's blur is switched off. -->
+	<onload condition="$EXP[Bald_HasTMDbHelper] + !$EXP[Bald_HasHelper] + !Skin.HasSetting(TMDbHelper.EnableBlur)">Skin.SetBool(TMDbHelper.EnableBlur)</onload>
+	<onload condition="$EXP[Bald_HasHelper] + Skin.HasSetting(TMDbHelper.EnableBlur)">Skin.Reset(TMDbHelper.EnableBlur)</onload>
+	<onload condition="$EXP[Bald_HasTMDbHelper] + !Skin.HasSetting(TMDbHelper.UseLocalWidgetContainer)">Skin.SetBool(TMDbHelper.UseLocalWidgetContainer)</onload>
+	<!-- Online ratings (Appearance > Ratings): TMDb Helper's ListItem monitor, which publishes the followed item's
+	     ratings, runs only while the skin sets TMDbHelper.Service. On with the setting, off without it
+	     (Includes_Bald_Ratings.xml, Bald_RatingsOnline). -->
+	<onload condition="$EXP[Bald_RatingsOnline] + !Skin.HasSetting(TMDbHelper.Service)">Skin.SetBool(TMDbHelper.Service)</onload>
+	<onload condition="!$EXP[Bald_RatingsOnline] + Skin.HasSetting(TMDbHelper.Service)">Skin.Reset(TMDbHelper.Service)</onload>
+	<onload condition="$EXP[Bald_HasTMDbHelper] + !$EXP[Bald_HasHelper]">SetProperty(TMDbHelper.Blur.SourceImage,Art(fanart)|Art(tvshow.fanart)|Art(thumb),home)</onload>
+	<include content="Bald_FollowContainerOnLoad"><param name="id">$VAR[Bald_StartRow]</param><param name="window">home</param><param name="condition">!$EXP[Bald_Restoring]</param></include>
+	<onload condition="!$EXP[Bald_Restoring]">ClearProperty(Bald.Menu,home)</onload>
+	<!-- No rows to start on (no Home rows: the widget editor keeps one, but a row list can be emptied by hand; or Home
+	     hidden and no shown hub or Live TV with rows): no current row, and focus goes to the menu's first entry, which
+	     opens the menu. Search's return below still takes precedence. -->
+	<onload condition="!$EXP[Bald_StartHasRows]">ClearProperty(Bald.Row,home)</onload>
+	<onload condition="!$EXP[Bald_StartHasRows]">SetFocus($VAR[Bald_StartMenuEntry])</onload>
+	<!-- Home hidden: focus the start row (Kodi has already focused the default control, Home's hidden row 1). If that
+	     row cannot take focus yet, Timers.xml bald_home_start finishes the move (Bald_HomeRowStranded). Behind the
+	     startup splash 9195 does it as the splash lifts. -->
+	<onload condition="!$EXP[Bald_Restoring] + !$EXP[Bald_Preloading] + $EXP[Bald_HomeHidden] + $EXP[Bald_StartHasRows]">SetFocus($INFO[Window(home).Property(Bald.Row)])</onload>
+	<!-- A fresh start: the menu, on the start screen's entry; Back goes to the start row. Behind the startup splash 9195
+	     does it as the splash lifts. The menu is opened here, not by the entry's onfocus: an entry focused while the
+	     menu is still hidden does not run it (as Timers.xml bald_focus_lost and Bald_ReturnToMenuEntry). -->
+	<include content="Bald_OpenStartMenuOnLoad"><param name="condition">!$EXP[Bald_Restoring] + !$EXP[Bald_Preloading] + $EXP[Bald_StartHasRows] + $EXP[Bald_StartOnMenu]</param></include>
+	<!-- Back from another window: where Home was left, the menu entry it was on or the row. -->
+	<onload condition="$EXP[Bald_ReturningToRow] + !$EXP[Bald_Preloading] + $EXP[Bald_MenuOpen]">SetFocus($VAR[Bald_MenuPreviewEntry])</onload>
+	<onload condition="$EXP[Bald_ReturningToRow] + !$EXP[Bald_Preloading] + !$EXP[Bald_MenuOpen]">SetFocus($INFO[Window(home).Property(Bald.Row)])</onload>
+	<onload condition="!String.IsEmpty(Window(home).Property(Bald.ReturnSearch))">SetProperty(Bald.Menu,1,home)</onload>
+	<onload condition="!String.IsEmpty(Window(home).Property(Bald.ReturnSearch))">SetFocus(9005)</onload>
+	<onload>ClearProperty(Bald.ReturnSearch,home)</onload>
+	<include>Bald_ReturnToMenu</include>
+	<onload>ClearProperty(Bald.Left,home)</onload>
+	<!-- Marks the next load as a return (Bald_ReturningToRow). -->
+	<onunload>SetProperty(Bald.Left,1,home)</onunload>
+	<!-- A hub's name is only for the library its bridge opens next (Bald_LibraryMoviesHeading). -->
+	<onload>ClearProperty(Bald.HubTitle,home)</onload>
+	<!-- Startup splash (Bald_Splash). No current row until it lifts, so the first row, its art, clearlogo and caption
+	     come in with their usual motion as it fades; until then keys go to 9198, which ignores them. -->
+	<onload condition="$EXP[Bald_Preloading]">ClearProperty(Bald.Row,home)</onload>
+	<onload condition="$EXP[Bald_Preloading]">SetFocus(9198)</onload>
+	<include>Bald_RowStartReset</include>
+	<onload>ClearProperty(Bald.InfoSwitch,home)</onload>
+	<include>Bald_CurtainHandoff</include>
+	<controls>
+		<!-- Background: neutral field, with the darkened blurred fanart over it (see Bald_BackdropImage); or the playing video,
+		     dimmed (Bald_WindowBase). -->
+		<include>Bald_WindowBase</include>
+		<include>Bald_BackdropImage</include>
+
+		<!-- While idle, everything steps round a 2 px square every 3 minutes (burn-in guard, Bald_IdleDrift). -->
+		<control type="group">
+			<!-- Home is the root: it is always returned to (in from the left) and always left deeper (out to the left). -->
+			<include content="Bald_AnimWindowDepth"><param name="back_in">true</param></include>
+			<include>Bald_IdleDrift</include>
+
+			<!-- Art frame -->
+			<control type="group">
+				<include>Bald_AnimInfoFrame</include>
+				<!-- Idle: grows to the full 1728 x 840 rect (Bald_AnimIdleFrame, Includes_Bald_Home.xml). -->
+				<include>Bald_AnimIdleFrame</include>
+				<!-- Poster rows: up 63 px so the crop stays centred in the 576 px frame; undone while info is open. -->
+				<include>Bald_AnimPosterArt</include>
+				<left>Bald_SafeLeft</left>
+				<top>120</top>
+				<width>1248</width>
+				<height>702</height>
+				<control type="image">
+					<texture colordiffuse="bald_placeholder">bald/white.png</texture>
+					<visible>!$EXP[Bald_VideoPosterFrame]</visible>
+				</control>
+				<!-- Fanart: two parity layers (see Bald_ArtLayer). -->
+				<control type="group">
+					<visible>!$EXP[Bald_VideoPosterFrame]</visible>
+					<include content="Bald_ArtLayer"><param name="visible">$EXP[Bald_EffectiveItemOdd]</param></include>
+					<include content="Bald_ArtLayer"><param name="visible">!$EXP[Bald_EffectiveItemOdd]</param></include>
+				</control>
+				<!-- Weather rows with a folder weather pack, until Bald Helper has picked each tile's picture: the current
+				     conditions' pictures (Bald_WeatherFolderArt). -->
+				<control type="multiimage">
+					<width>1248</width>
+					<height>702</height>
+					<aspectratio>scale</aspectratio>
+					<timeperimage>12000</timeperimage>
+					<fadetime>700</fadetime>
+					<randomize>true</randomize>
+					<imagepath background="true">$INFO[Skin.String(Bald.WeatherFanart.path)]$INFO[Weather.Data(Current.FanartCode)]</imagepath>
+					<visible>$EXP[Bald_WeatherFolderArt] + !$EXP[Bald_VideoPosterFrame]</visible>
+					<animation type="Visible">
+						<effect type="fade" start="0" end="100" time="700" tween="sine" easing="inout" />
+					</animation>
+					<animation type="Hidden">
+						<effect type="fade" start="100" end="0" time="700" tween="sine" easing="inout" />
+					</animation>
+				</control>
+				<!-- Poster rows with background video: the frame's bottom mask cannot be drawn over video, so the art is a
+				     1248 x 576 copy, 63 px down in the nudged group: the same 120-696 frame the mask would leave. -->
+				<control type="group">
+					<visible>$EXP[Bald_VideoPosterFrame]</visible>
+					<top>63</top>
+					<control type="image">
+						<width>1248</width>
+						<height>576</height>
+						<texture colordiffuse="bald_placeholder">bald/white.png</texture>
+					</control>
+					<include content="Bald_ArtLayer"><param name="visible">$EXP[Bald_EffectiveItemOdd]</param><param name="height">576</param><param name="center">624,288</param></include>
+					<include content="Bald_ArtLayer"><param name="visible">!$EXP[Bald_EffectiveItemOdd]</param><param name="height">576</param><param name="center">624,288</param></include>
+					<include content="Bald_DialogArt"><param name="height">576</param></include>
+				</control>
+				<!-- Dialog art. Kodi evaluates <visible> and animation conditions without a window context
+				     (CGUIControl::UpdateVisibility), so with a modal dialog over Home, Container(9101..9103) in them
+				     resolves against the dialog and the parity layers above flip or blank. Textures and variables are
+				     evaluated with the control's window (CGUIImage::UpdateInfo, CSkinVariableString::GetValue), so this
+				     image, whose texture is the live $VAR[Bald_Fanart] and whose visibility needs no container, shows the
+				     right art for as long as a dialog is up, and lingers while the layers settle after it closes (the
+				     576 copy above does the same for a poster row over background video; this one gives way to it at
+				     once, Bald_DialogArt). -->
+				<include content="Bald_DialogArt">
+					<param name="visible">$EXP[Bald_DialogOver] + !$EXP[Bald_VideoPosterFrame]</param>
+					<param name="cut">$EXP[Bald_VideoPosterFrame]</param>
+				</include>
+				<!-- The current info item can change independently of the originating Home tile.
+				     Keep its artwork inside this zoomed frame; fade it back to the tile on final close. -->
+				<control type="group">
+					<visible>$EXP[Bald_InfoOpen] + $EXP[Bald_InfoArtReady]</visible>
+					<animation effect="fade" start="100" end="0" time="130" tween="sine" easing="inout">Hidden</animation>
+					<control type="image">
+						<width>1248</width>
+						<height>702</height>
+						<texture colordiffuse="bald_field">bald/white.png</texture>
+					</control>
+					<control type="image">
+						<width>1248</width>
+						<height>702</height>
+						<aspectratio>scale</aspectratio>
+						<fadetime>700</fadetime>
+						<texture background="true">$INFO[Window(movieinformation).Property(Bald.Fanart)]</texture>
+					</control>
+				</control>
+			</control>
+			<!-- Scrim and clearlogo (not zoomed; inside the frame, so the masks never touch them). -->
+			<control type="group">
+				<include>Bald_AnimInfoFrame</include>
+				<include>Bald_AnimInfoArtOverlay</include>
+				<include>Bald_AnimIdleArtOverlay</include>
+				<!-- Poster rows: up 126 px with the frame's bottom edge. -->
+				<include>Bald_AnimPosterEdge</include>
+				<left>Bald_SafeLeft</left>
+				<top>120</top>
+				<width>1248</width>
+				<height>702</height>
+				<control type="image">
+					<texture>bald/scrim_logo.png</texture>
+					<visible>$EXP[Bald_ShowClearlogo] + $EXP[Bald_EffectiveHasLogo]</visible>
+					<animation type="Visible">
+						<effect type="fade" start="0" end="100" time="500" tween="sine" easing="inout" />
+					</animation>
+					<animation type="Hidden">
+						<effect type="fade" start="100" end="0" time="150" tween="sine" easing="inout" />
+					</animation>
+				</control>
+				<!-- Clearlogo, per row and parity (see Bald_ArtLogo). -->
+				<include>Bald_ConfiguredArtLogos</include>
+				<!-- Dialog logo and scrim (e.g. under the context menu), for the same reason as the dialog art. The logo
+				     texture is the live variable; the scrim cannot test for a logo without a container, so it always shows. -->
+				<control type="group">
+					<visible>$EXP[Bald_DialogOver] + !$EXP[Bald_InfoOpen]</visible>
+					<animation type="Hidden">
+						<effect type="fade" start="100" end="0" time="250" delay="900" tween="sine" easing="inout" />
+					</animation>
+					<control type="image">
+						<texture>bald/scrim_logo.png</texture>
+					</control>
+					<control type="image">
+						<left>52</left>
+						<top>486</top>
+						<width>560</width>
+						<height>170</height>
+						<aspectratio align="left" aligny="bottom">keep</aspectratio>
+						<texture background="true">$VAR[Bald_Logo]</texture>
+						<visible>$EXP[Bald_ShowClearlogo]</visible>
+					</control>
+				</control>
+			</control>
+
+			<!-- Frame masks: Kodi does not clip a zoom-animated texture, so bars cover the up-to-5% settle-zoom
+			     overflow around the art frame (96,120 1248x702, or 1248x576 on a poster row). Each bar is a clipped window
+			     onto the same background (grouplists clip ordinary textures), so the bars are invisible against it. -->
+			<control type="group">
+				<include>Bald_AnimInfoMasks</include>
+				<include>Bald_AnimIdleMasks</include>
+				<include>Bald_HomeFrameMasks</include>
+			</control>
+
+			<!-- Idle: the expanded frame's full-size art, its masks, clearlogo and small clock (Bald_IdleFrame). -->
+			<include>Bald_IdleFrame</include>
+
+			<!-- Clock, date and weather (Appearance › Date & time: format, the date line, the clock on Home at all; Appearance ›
+			     weather in headers). Three steps down in size and ink: clock 132 ink, date 22 ink70, weather 17 ink45
+			     (Bald_HomeClock, Includes_Bald_Home.xml, has the positions and the reasoning). -->
+			<control type="group">
+				<include>Bald_AnimInfoChrome</include>
+				<include>Bald_AnimIdleChrome</include>
+				<visible>$EXP[Bald_ShowHomeClock]</visible>
+				<left>Bald_RightColumn</left>
+				<top>104</top>
+				<width>384</width>
+				<include>Bald_HomeClock</include>
+			</control>
+
+			<!-- Caption: out 180 and slide 40 px right as the menu or context menu opens; back 380 / 480 after 140 as it closes. -->
+			<control type="group">
+				<include>Bald_AnimInfoChrome</include>
+				<include>Bald_AnimIdleChrome</include>
+				<visible>!$EXP[Bald_OverlayOpen]</visible>
+				<animation type="Hidden" condition="$EXP[Bald_FullMotion]">
+					<effect type="fade" start="100" end="0" time="180" tween="sine" easing="inout" />
+					<effect type="slide" start="0,0" end="40,0" time="200" tween="cubic" easing="out" />
+				</animation>
+				<animation type="Hidden" condition="$EXP[Bald_ReduceMotion]">
+					<effect type="fade" start="100" end="0" time="180" tween="sine" easing="inout" />
+				</animation>
+				<animation type="Visible" condition="$EXP[Bald_FullMotion]">
+					<effect type="fade" start="0" end="100" time="380" delay="140" tween="sine" easing="inout" />
+					<effect type="slide" start="40,0" end="0,0" time="480" delay="140" tween="cubic" easing="out" />
+				</animation>
+				<animation type="Visible" condition="$EXP[Bald_ReduceMotion]">
+					<effect type="fade" start="0" end="100" time="380" delay="140" tween="sine" easing="inout" />
+				</animation>
+				<include>Bald_ConfiguredCaptions</include>
+			</control>
+
+			<!-- Menu: in fade 380 and slide 40 px over 480 after 120; out 160. -->
+			<control type="group">
+				<visible>$EXP[Bald_MenuOpen]</visible>
+				<include>Bald_AnimMenuShows</include>
+				<!-- The power menu stands in for the menu in its column while it is open (DialogButtonMenu.xml). -->
+				<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout" condition="Window.IsVisible(shutdownmenu)">Conditional</animation>
+				<include content="Bald_MenuNote"><param name="text">$VAR[Bald_MenuPreviewNote]</param></include>
+			</control>
+			<control type="grouplist" id="9000">
+				<!-- 384 wide: its right edge on the 96 px safe margin (x 1824). -->
+				<left>Bald_RightColumn</left>
+				<top>395</top>
+				<width>384</width>
+				<height>310</height>
+				<orientation>vertical</orientation>
+				<itemgap>6</itemgap>
+				<scrolltime tween="cubic" easing="out">320</scrolltime>
+				<!-- The ends wrap: with no onup/ondown of its own, the grouplist joins the last entry to the first. -->
+				<visible allowhiddenfocus="true">$EXP[Bald_MenuOpen]</visible>
+				<include>Bald_AnimMenuShows</include>
+				<!-- The power menu stands in for the menu in its column while it is open (DialogButtonMenu.xml). -->
+				<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout" condition="Window.IsVisible(shutdownmenu)">Conditional</animation>
+				<!-- Hidden while Home is hidden in Home Screens (never with no hub shown, Bald_HomeHidden). -->
+				<include content="Bald_HomeMenuButton"><param name="id">9001</param><param name="label">$LOCALIZE[10000]</param><param name="preview">home</param><param name="visible">!$EXP[Bald_HomeHidden]</param>
+					<include content="Bald_HomeMenuScreen"><param name="screen">home</param></include>
+				</include>
+				<!-- The user's hubs, in their Home Screens order (Movies and TV shows by default); empty slots are hidden. Live TV
+				     sits after as many hub slots as Home Screens moved it to (Bald.LiveTVAfter; unset, after all of them). -->
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">0</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">1</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">1</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">2</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">2</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">3</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">3</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">4</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">4</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">5</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">5</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">6</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">6</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">7</param></include>
+				<include content="Bald_HomeMenuLiveTVAt"><param name="after">7</param></include>
+				<include content="Bald_HomeMenuHub"><param name="n">8</param></include>
+				<include condition="String.IsEmpty(Skin.String(Bald.LiveTVAfter))">Bald_HomeMenuLiveTV</include>
+				<include content="Bald_HomeMenuButton"><param name="id">9005</param><param name="label">$LOCALIZE[137]</param><param name="preview">search</param>
+					<onclick>SetProperty(Bald.SearchOrigin,home,home)</onclick>
+					<!-- Bald Helper reads the Live TV schedules while the query is typed, for Search's programme matches. -->
+					<onclick condition="$EXP[Bald_SearchCanLive]">RunPlugin(plugin://script.bald.helper/?action=warm_livetv)</onclick>
+					<!-- Bald's Search (window 1130): Bald Helper asks for the query, then opens it. -->
+					<onclick>RunPlugin(plugin://script.bald.helper/?action=search)</onclick>
+				</include>
+				<include content="Bald_HomeMenuButton"><param name="id">9006</param><param name="label">$LOCALIZE[5]</param><param name="preview">settings</param>
+					<onclick>SetProperty(Bald.ReturnMenu,9006,home)</onclick>
+					<onclick>ActivateWindow(settings)</onclick>
+				</include>
+				<!-- Kodi's power menu (DialogButtonMenu.xml): restart, shut down, exit and the rest. A dialog over Home, so
+				     closing it leaves focus here. Customization > Power can take it out of the menu (Bald.Screen.HidePower). -->
+				<include content="Bald_HomeMenuButton"><param name="id">9007</param><param name="label">$LOCALIZE[33060]</param><param name="preview">power</param><param name="visible">!Skin.HasSetting(Bald.Screen.HidePower)</param>
+					<onclick>ActivateWindow(shutdownmenu)</onclick>
+				</include>
+			</control>
+
+			<!-- Home's hints on the y 954 line (Bald_HomeHintLine): the focused row's (Bald_RowHints, with each row) or the
+			     menu's. The screen's name is the breadcrumb on the row label line (Bald_Row). -->
+			<include>Bald_MenuHints</include>
+
+			<!-- Configured rows of Home, Live TV and every hub (Bald_GeneratedRows). -->
+			<include>Bald_GeneratedRows</include>
+
+			<!-- Menu preview for screens without rows yet -->
+			<control type="group">
+				<include>Bald_AnimInfoChrome</include>
+				<visible>$EXP[Bald_PreviewOther]</visible>
+				<include>Bald_AnimRowSwap</include>
+				<control type="label">
+					<left>Bald_SafeLeft</left>
+					<top>856</top>
+					<width>1248</width>
+					<height>26</height>
+					<aligny>center</aligny>
+					<font>Bald_RowLabel</font>
+					<textcolor>bald_ink</textcolor>
+					<label>$VAR[Bald_MenuPreviewLabel]</label>
+				</control>
+				<control type="label">
+					<left>Bald_SafeLeft</left>
+					<top>898</top>
+					<width>1248</width>
+					<height>30</height>
+					<font>Bald_Date</font>
+					<textcolor>bald_ink70</textcolor>
+					<label>$VAR[Bald_MenuPreviewNote]</label>
+				</control>
+			</control>
+		</control>
+
+		<!-- Idle wake: the idle timer parks focus here so the first key press only wakes. -->
+		<control type="button" id="9199">
+			<width>1</width>
+			<height>1</height>
+			<texturefocus />
+			<texturenofocus />
+			<!-- The idle timer closed the menu, so the current row is displayed again. -->
+			<onfocus>SetProperty(Bald.RowStyle,$VAR[Bald_ScreenRowStyle],home)</onfocus>
+			<onup>SetFocus($VAR[Bald_RowFocus])</onup>
+			<ondown>SetFocus($VAR[Bald_RowFocus])</ondown>
+			<onleft>SetFocus($VAR[Bald_RowFocus])</onleft>
+			<onright>SetFocus($VAR[Bald_RowFocus])</onright>
+			<onclick>SetFocus($VAR[Bald_RowFocus])</onclick>
+			<onback>SetFocus($VAR[Bald_RowFocus])</onback>
+			<!-- Info too: without it the key woke Home but left focus here, so every later Info did nothing. -->
+			<oninfo>SetFocus($VAR[Bald_RowFocus])</oninfo>
+		</control>
+		<!-- Startup splash. 9198 holds focus while it shows and swallows keys (Arctic Fuse 3's splash has no skip either);
+		     if it somehow still has focus afterwards, any key goes on to 9195. The bald_preload timer lifts the splash
+		     by focusing 9195, which moves on to Home's usual first focus. 9194 is the timer's "all rows loaded" marker
+		     (Timers.xml cannot use $EXP). -->
+		<control type="group" id="9194">
+			<visible>$EXP[Bald_RowsLoaded]</visible>
+		</control>
+		<control type="button" id="9198">
+			<width>1</width>
+			<height>1</height>
+			<texturefocus />
+			<texturenofocus />
+			<onup condition="!$EXP[Bald_Preloading]">SetFocus(9195)</onup>
+			<ondown condition="!$EXP[Bald_Preloading]">SetFocus(9195)</ondown>
+			<onleft condition="!$EXP[Bald_Preloading]">SetFocus(9195)</onleft>
+			<onright condition="!$EXP[Bald_Preloading]">SetFocus(9195)</onright>
+			<onclick condition="!$EXP[Bald_Preloading]">SetFocus(9195)</onclick>
+			<onback condition="!$EXP[Bald_Preloading]">SetFocus(9195)</onback>
+			<onback>noop</onback>
+		</control>
+		<control type="button" id="9195">
+			<width>1</width>
+			<height>1</height>
+			<texturefocus />
+			<texturenofocus />
+			<onfocus>ClearProperty(Bald.Preload,home)</onfocus>
+			<onfocus>CancelAlarm(bald_preload,silent)</onfocus>
+			<!-- The recommended-settings offer Home's onload skips behind the splash comes as it lifts. -->
+			<onfocus condition="!Skin.HasSetting(Bald.RecommendedOffered)">RunScript(skin.bald,recommended,prompt)</onfocus>
+			<onfocus condition="!Skin.HasSetting(Bald.RecommendedOffered)">Skin.SetBool(Bald.RecommendedOffered)</onfocus>
+			<!-- Home's first focus: row 1 (its onfocus makes it the current row), or the menu with no Home rows; while Home is
+			     hidden, the start screen's first row or the menu (Bald_StartRow, Bald_StartMenuEntry). -->
+			<onfocus condition="!$EXP[Bald_HomeHidden] + $EXP[Bald_HasRows_home]">SetFocus(9101)</onfocus>
+			<onfocus condition="$EXP[Bald_HomeHidden] + $EXP[Bald_StartHasRows]">SetProperty(Bald.Row,$VAR[Bald_StartRow],home)</onfocus>
+			<onfocus condition="$EXP[Bald_HomeHidden] + $EXP[Bald_StartHasRows]">SetProperty(Bald.RowStyle,$VAR[Bald_StartRowStyle],home)</onfocus>
+			<onfocus condition="$EXP[Bald_HomeHidden] + $EXP[Bald_StartHasRows]">SetFocus($INFO[Window(home).Property(Bald.Row)])</onfocus>
+			<onfocus condition="!$EXP[Bald_StartHasRows]">SetFocus($VAR[Bald_StartMenuEntry])</onfocus>
+			<!-- A fresh start opens on the menu (Bald_StartOnMenu): the row above is made current first, so Back from the
+			     menu reaches it. -->
+			<include content="Bald_OpenStartMenuOnFocus"><param name="condition">$EXP[Bald_StartHasRows] + $EXP[Bald_StartOnMenu]</param></include>
+			<!-- Should the row still refuse focus (Home hidden, its list not loaded yet), any key tries again. -->
+			<onup>SetFocus($VAR[Bald_RowFocus])</onup>
+			<ondown>SetFocus($VAR[Bald_RowFocus])</ondown>
+			<onleft>SetFocus($VAR[Bald_RowFocus])</onleft>
+			<onright>SetFocus($VAR[Bald_RowFocus])</onright>
+			<onclick>SetFocus($VAR[Bald_RowFocus])</onclick>
+		</control>
+		<!-- Home hidden: shows while focus is stranded on one of Home's rows (Bald_HomeRowStranded); Timers.xml
+		     bald_home_start reads it (timers cannot use $EXP) and focuses 9195. -->
+		<control type="group" id="9193">
+			<visible>$EXP[Bald_HomeRowStranded]</visible>
+		</control>
+		<!-- Directional navigation accepts a control target more reliably than an ActivateWindow
+		     built-in on Kodi's list edge. These invisible bridges own the secondary routes: each hub's open target
+		     (9021-9028) and Live TV's guide (9029). -->
+		<include content="Bald_HubBridge"><param name="n">1</param></include>
+		<include content="Bald_HubBridge"><param name="n">2</param></include>
+		<include content="Bald_HubBridge"><param name="n">3</param></include>
+		<include content="Bald_HubBridge"><param name="n">4</param></include>
+		<include content="Bald_HubBridge"><param name="n">5</param></include>
+		<include content="Bald_HubBridge"><param name="n">6</param></include>
+		<include content="Bald_HubBridge"><param name="n">7</param></include>
+		<include content="Bald_HubBridge"><param name="n">8</param></include>
+		<control type="button" id="9029">
+			<width>1</width><height>1</height><texturefocus /><texturenofocus />
+			<onfocus>SetProperty(Bald.ReturnMenu,9004,home)</onfocus>
+			<onfocus>ActivateWindow(TVGuide)</onfocus>
+			<include content="Bald_BridgeReturn"><param name="menu">9004</param></include>
+		</control>
+		<!-- Startup splash: the top layer while Bald.Preload is set; fades out 600 as it lifts. -->
+		<include>Bald_Splash</include>
+	</controls>
+</window>

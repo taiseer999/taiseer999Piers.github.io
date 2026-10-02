@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<!-- From Kodi 22 Estuary's Includes_Games.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt), restyled for Bald
+	     (docs/NOTES.md, "Media windows restyle"). The four game dialogs DialogGameControllers.xml draws: controller
+	     setup, ports, players (agents) and the disc manager. Every id is Kodi's (games/controllers/windows/
+	     GUIControllerDefines.h, games/ports/windows/GUIPortDefines.h, games/agents/windows/GUIAgentDefines.h,
+	     games/dialogs/disc/DiscManagerIDs.h). Estuary's commented-out static test content and radio-button example
+	     were left out. Surfaces are the shared Bald popup; rows use the popup list's 10% ink focus row, controller
+	     artwork is tinted with the accent, and Estuary's inner panel frames are gone. -->
+	<include name="GameDialogControllers">
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<width>1820</width>
+			<height>870</height>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1820" />
+				<param name="height" value="870" />
+				<param name="header_label" value="$LOCALIZE[35058]" />
+				<param name="header_id" value="2" />
+			</include>
+			<control type="group">
+				<description>Controller list</description>
+				<top>94</top>
+				<left>40</left>
+				<width>410</width>
+				<height>600</height>
+				<include content="Bald_MediaCaption">
+					<param name="label">$LOCALIZE[35050]</param>
+					<param name="left">0</param>
+					<param name="width">390</param>
+				</include>
+				<control type="grouplist" id="3">
+					<description>Controller profiles grouplist</description>
+					<top>40</top>
+					<width>390</width>
+					<height>560</height>
+					<onleft>9001</onleft>
+					<onright>5</onright>
+					<onup>3</onup>
+					<ondown>3</ondown>
+					<pagecontrol>62</pagecontrol>
+				</control>
+				<control type="scrollbar" id="62">
+					<top>40</top>
+					<left>400</left>
+					<height>560</height>
+					<include>Bald_MediaScrollbarLook</include>
+				</control>
+				<control type="button" id="10">
+					<description>Default controller button</description>
+					<width>390</width>
+					<height>60</height>
+					<include>Bald_GameRowButtonLook</include>
+				</control>
+			</control>
+			<control type="gamecontroller" id="31">
+				<top>130</top>
+				<left>470</left>
+				<width>540</width>
+				<height>540</height>
+			</control>
+			<control type="group">
+				<description>Feature list</description>
+				<top>94</top>
+				<left>1040</left>
+				<width>410</width>
+				<height>600</height>
+				<include content="Bald_MediaCaption">
+					<param name="label">$LOCALIZE[35059]</param>
+					<param name="left">0</param>
+					<param name="width">390</param>
+				</include>
+				<control type="grouplist" id="5">
+					<description>Features grouplist</description>
+					<top>40</top>
+					<width>390</width>
+					<height>560</height>
+					<onleft>3</onleft>
+					<onright>9001</onright>
+					<onup>5</onup>
+					<ondown>5</ondown>
+					<pagecontrol>61</pagecontrol>
+				</control>
+				<control type="scrollbar" id="61">
+					<top>40</top>
+					<left>400</left>
+					<height>560</height>
+					<include>Bald_MediaScrollbarLook</include>
+				</control>
+				<control type="button" id="7">
+					<description>Default feature button</description>
+					<width>390</width>
+					<height>60</height>
+					<include>Bald_GameRowButtonLook</include>
+				</control>
+				<control type="label" id="8">
+					<description>Feature group title</description>
+					<width>390</width>
+					<height>44</height>
+					<textoffsetx>20</textoffsetx>
+					<aligny>center</aligny>
+					<font>Bald_RowLabel</font>
+					<textcolor>bald_ink60</textcolor>
+				</control>
+				<control type="image" id="9">
+					<description>Feature separator image</description>
+					<height>2</height>
+					<texture colordiffuse="bald_ink10">bald/white.png</texture>
+				</control>
+			</control>
+			<control type="grouplist" id="9001">
+				<top>134</top>
+				<right>40</right>
+				<width>310</width>
+				<onleft>5</onleft>
+				<onright>3</onright>
+				<itemgap>dialogbuttons_itemgap</itemgap>
+				<include content="DefaultDialogButton">
+					<param name="width" value="310" />
+					<param name="id" value="18" />
+					<param name="label" value="$LOCALIZE[186]" />
+				</include>
+				<include content="DefaultDialogButton">
+					<param name="width" value="310" />
+					<param name="id" value="19" />
+					<param name="label" value="$LOCALIZE[13007]" />
+				</include>
+				<include content="DefaultDialogButton">
+					<param name="width" value="310" />
+					<param name="id" value="20" />
+					<param name="label" value="$LOCALIZE[21452]" />
+				</include>
+				<include content="DefaultDialogButton">
+					<param name="width" value="310" />
+					<param name="id" value="22" />
+					<param name="label" value="$LOCALIZE[35021]" />
+				</include>
+				<include content="DefaultDialogButton">
+					<param name="width" value="310" />
+					<param name="id" value="17" />
+					<param name="label" value="$LOCALIZE[10043]" />
+				</include>
+				<include content="DefaultDialogButton">
+					<param name="width" value="310" />
+					<param name="id" value="21" />
+					<param name="label" value="$LOCALIZE[35019]" />
+				</include>
+			</control>
+			<control type="textbox" id="32">
+				<description>Controller description</description>
+				<left>40</left>
+				<right>40</right>
+				<bottom>36</bottom>
+				<height>110</height>
+				<font>Bald_CaptionPlot</font>
+				<textcolor>bald_ink60</textcolor>
+			</control>
+		</control>
+	</include>
+	<include name="GameDialogPorts">
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<width>1820</width>
+			<height>830</height>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1820" />
+				<param name="height" value="830" />
+				<param name="header_label" value="" />
+				<param name="header_id" value="2" />
+			</include>
+			<control type="group">
+				<description>Content area</description>
+				<top>100</top>
+				<bottom>30</bottom>
+				<left>40</left>
+				<right>40</right>
+				<control type="list" id="3">
+					<description>Port item list</description>
+					<width>1380</width>
+					<height>700</height>
+					<onright>9001</onright>
+					<onup>3</onup>
+					<ondown>3</ondown>
+					<pagecontrol>62</pagecontrol>
+					<scrolltime tween="cubic" easing="out">200</scrolltime>
+					<orientation>vertical</orientation>
+					<itemlayout width="1380" height="100">
+						<include content="Bald_GamePortRow" />
+					</itemlayout>
+					<focusedlayout width="1380" height="100">
+						<control type="image">
+							<texture colordiffuse="bald_ink10">bald/white.png</texture>
+							<visible>Control.HasFocus(3)</visible>
+						</control>
+						<include content="Bald_GamePortRow">
+							<param name="ink">bald_ink</param>
+						</include>
+					</focusedlayout>
+				</control>
+				<control type="scrollbar" id="62">
+					<left>1392</left>
+					<height>700</height>
+					<include>Bald_MediaScrollbarLook</include>
+				</control>
+				<control type="grouplist" id="9001">
+					<right>0</right>
+					<width>310</width>
+					<onleft>3</onleft>
+					<itemgap>dialogbuttons_itemgap</itemgap>
+					<include content="DefaultDialogButton">
+						<param name="width" value="310" />
+						<param name="id" value="18" />
+						<param name="label" value="$LOCALIZE[186]" />
+					</include>
+					<include content="DefaultDialogButton">
+						<param name="width" value="310" />
+						<param name="id" value="19" />
+						<param name="label" value="$LOCALIZE[13007]" />
+					</include>
+				</control>
+			</control>
+		</control>
+	</include>
+	<include name="GameDialogAgents">
+		<control type="group">
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<width>1820</width>
+			<height>962</height>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1820" />
+				<param name="height" value="962" />
+				<param name="header_label" value="$LOCALIZE[35172]" />
+				<param name="header_id" value="2" />
+			</include>
+			<control type="group">
+				<description>Content area</description>
+				<top>110</top>
+				<bottom>40</bottom>
+				<left>40</left>
+				<right>40</right>
+				<control type="group">
+					<description>Area of the dialog for ports</description>
+					<height>96</height>
+					<control type="button" id="3">
+						<description>Ports button</description>
+						<top>21</top>
+						<width>auto</width>
+						<ondown>7</ondown>
+						<label>$LOCALIZE[35110]</label>
+						<onclick>ActivateWindow(GamePorts)</onclick>
+						<include>Bald_MediaPillLook</include>
+					</control>
+					<control type="gamecontrollerlist" id="4">
+						<description>Active port list. Length should fit 13 listitems (12 controllers and one "controller disconnected" indicator).</description>
+						<right>0</right>
+						<width>1248</width>
+						<orientation>horizontal</orientation>
+						<align>right</align>
+						<enable>false</enable>
+						<itemlayout width="96" height="96">
+							<include content="Bald_GameController">
+								<controlleraddress>$INFO[ListItem.FilenameAndPath]</controlleraddress>
+							</include>
+						</itemlayout>
+						<focusedlayout width="96" height="96">
+							<include content="Bald_GameController">
+								<controlleraddress>$INFO[ListItem.FilenameAndPath]</controlleraddress>
+							</include>
+						</focusedlayout>
+					</control>
+				</control>
+				<control type="list" id="7">
+					<description>Controller list</description>
+					<top>136</top>
+					<height>576</height>
+					<onup>3</onup>
+					<ondown>10</ondown>
+					<pagecontrol>61</pagecontrol>
+					<scrolltime tween="cubic" easing="out">200</scrolltime>
+					<orientation>vertical</orientation>
+					<itemlayout width="1728" height="96">
+						<include>AgentControllerList</include>
+					</itemlayout>
+					<focusedlayout width="1728" height="96">
+						<control type="image">
+							<texture colordiffuse="bald_ink10">bald/white.png</texture>
+							<visible>Control.HasFocus(7)</visible>
+						</control>
+						<include content="AgentControllerList">
+							<param name="ink">bald_ink</param>
+						</include>
+					</focusedlayout>
+				</control>
+				<control type="scrollbar" id="61">
+					<description>Controller list scroll bar</description>
+					<top>136</top>
+					<height>576</height>
+					<right>-12</right>
+					<include>Bald_MediaScrollbarLook</include>
+				</control>
+				<control type="grouplist" id="10">
+					<description>Action buttons</description>
+					<left>0</left>
+					<right>0</right>
+					<bottom>0</bottom>
+					<height>72</height>
+					<onup>7</onup>
+					<orientation>horizontal</orientation>
+					<itemgap>dialogbuttons_itemgap</itemgap>
+					<include content="DefaultDialogButton">
+						<param name="width" value="310" />
+						<param name="id" value="18" />
+						<param name="label" value="$LOCALIZE[186]" />
+					</include>
+				</control>
+			</control>
+		</control>
+	</include>
+	<!-- A player's row in the agents list: the driver's controller name, then the ports its controller uses. -->
+	<include name="AgentControllerList">
+		<param name="ink">bald_ink70</param>
+		<definition>
+			<control type="label">
+				<description>Controller name as reported by the driver</description>
+				<left>20</left>
+				<width>460</width>
+				<height>96</height>
+				<aligny>center</aligny>
+				<font>Bald_Section</font>
+				<textcolor>$PARAM[ink]</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+			<control type="gamecontrollerlist">
+				<description>Controller list which indicates the port a player's controller is connected to. Length should fit 13 listitems (12 controller items and one "input disabled" item).</description>
+				<right>0</right>
+				<width>1248</width>
+				<orientation>horizontal</orientation>
+				<align>right</align>
+				<enable>false</enable>
+				<itemlayout width="96" height="96">
+					<include content="Bald_GameController">
+						<peripherallocation>$INFO[ListItem.FilenameAndPath]</peripherallocation>
+					</include>
+				</itemlayout>
+				<focusedlayout width="96" height="96">
+					<include content="Bald_GameController">
+						<peripherallocation>$INFO[ListItem.FilenameAndPath]</peripherallocation>
+					</include>
+				</focusedlayout>
+			</control>
+		</definition>
+	</include>
+	<include name="GameDialogDiscManager">
+		<control type="group">
+			<animation effect="fade" time="200" tween="sine" easing="inout">VisibleChange</animation>
+			<centertop>50%</centertop>
+			<centerleft>50%</centerleft>
+			<width>1480</width>
+			<height>630</height>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1480" />
+				<param name="height" value="630" />
+				<param name="header_label" value="$LOCALIZE[35272]" />
+			</include>
+			<control type="group">
+				<description>Content area</description>
+				<top>100</top>
+				<bottom>30</bottom>
+				<left>40</left>
+				<right>40</right>
+				<control type="group">
+					<description>Visibility group for main menu</description>
+					<visible>String.IsEqual(Window.Property(GameDiscManager.ShowMenu),true)</visible>
+					<control type="list" id="3">
+						<description>Disc manager menu. The content is a template from which the menu items are generated.</description>
+						<width>1400</width>
+						<height>500</height>
+						<scrolltime tween="cubic" easing="out">200</scrolltime>
+						<orientation>vertical</orientation>
+						<itemlayout width="1400" height="100">
+							<include content="GameDiscManagerMenuItem" />
+						</itemlayout>
+						<focusedlayout width="1400" height="100">
+							<control type="image">
+								<texture colordiffuse="bald_ink10">bald/white.png</texture>
+								<visible>Control.HasFocus(3)</visible>
+							</control>
+							<include content="GameDiscManagerMenuItem">
+								<param name="ink">bald_ink</param>
+							</include>
+						</focusedlayout>
+						<content>
+							<item id="108323">
+								<description>"Selected disc" item. Label2 is the inserted disc's label (or "No disc" if no disc is inserted).</description>
+								<label>$LOCALIZE[35273]</label>
+								<label2>$LOCALIZE[35274]</label2>
+								<icon>DefaultSets.png</icon>
+								<property name="EnableOnEject">true</property>
+							</item>
+							<item id="108324">
+								<description>"Eject"/"Insert" item. Label2 is the tray status (only "Tray open" is shown).</description>
+								<label>$LOCALIZE[35275]</label>
+								<icon>icons/eject_256.png</icon>
+							</item>
+							<item id="108325">
+								<description>"Add" item for adding another disc to the disc playlist</description>
+								<label>$LOCALIZE[15019]</label>
+								<icon>DefaultAddSource.png</icon>
+								<property name="EnableOnEject">true</property>
+							</item>
+							<item id="108326">
+								<description>"Delete" item for deleting a disc from the disc playlist</description>
+								<label>$LOCALIZE[117]</label>
+								<icon>DefaultAddonNone.png</icon>
+								<property name="EnableOnEject">true</property>
+							</item>
+							<item id="108327">
+								<description>"Resume game" item for resuming the game</description>
+								<label>$LOCALIZE[35277]</label>
+								<icon>osd/fullscreen/buttons/play.png</icon>
+							</item>
+						</content>
+					</control>
+				</control>
+				<control type="group">
+					<description>Visibility group for disc list</description>
+					<visible>String.IsEqual(Window.Property(GameDiscManager.ShowDiscList),true)</visible>
+					<control type="list" id="108321">
+						<description>Disc list</description>
+						<width>1400</width>
+						<height>500</height>
+						<onup>108321</onup>
+						<ondown>108321</ondown>
+						<pagecontrol>108322</pagecontrol>
+						<scrolltime tween="cubic" easing="out">200</scrolltime>
+						<orientation>vertical</orientation>
+						<itemlayout width="1400" height="100">
+							<include content="GameDiscManagerDiscItem" />
+						</itemlayout>
+						<focusedlayout width="1400" height="100">
+							<control type="image">
+								<texture colordiffuse="bald_ink10">bald/white.png</texture>
+								<visible>Control.HasFocus(108321)</visible>
+							</control>
+							<include content="GameDiscManagerDiscItem">
+								<param name="ink">bald_ink</param>
+							</include>
+						</focusedlayout>
+					</control>
+					<control type="scrollbar" id="108322">
+						<description>Disc list scroll bar</description>
+						<left>1412</left>
+						<height>500</height>
+						<include>Bald_MediaScrollbarLook</include>
+					</control>
+				</control>
+			</control>
+		</control>
+	</include>
+	<!-- A disc manager menu row. Items marked EnableOnEject dim to 34% while the tray is closed (Estuary's 38%). -->
+	<include name="GameDiscManagerMenuItem">
+		<param name="ink">bald_ink70</param>
+		<definition>
+			<control type="group">
+				<visible>!String.IsEqual(ListItem.Property(EnableOnEject),true) | RetroPlayer.DiscEjected</visible>
+				<include content="Bald_GameDiscRow">
+					<param name="ink">$PARAM[ink]</param>
+				</include>
+			</control>
+			<control type="group">
+				<visible>String.IsEqual(ListItem.Property(EnableOnEject),true) + !RetroPlayer.DiscEjected</visible>
+				<include content="Bald_GameDiscRow">
+					<param name="ink">bald_ink34</param>
+				</include>
+			</control>
+		</definition>
+	</include>
+	<include name="GameDiscManagerDiscItem">
+		<param name="ink">bald_ink70</param>
+		<definition>
+			<control type="label">
+				<left>26</left>
+				<right>26</right>
+				<height>100</height>
+				<aligny>center</aligny>
+				<font>Bald_Section</font>
+				<textcolor>$PARAM[ink]</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</definition>
+	</include>
+</includes>

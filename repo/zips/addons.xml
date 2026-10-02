@@ -756,6 +756,45 @@ v3.5.46
 - Minor cosmetic adjustments and small fixes
 </news>
     </extension>
+</addon><addon id="skin.bald" version="0.10.1+piers.5" name="Bald" provider-name="dangerouslaser">
+	<requires>
+		<import addon="xbmc.gui" version="5.18.0" />
+		<import addon="xbmc.python" version="3.0.1" />
+		<import addon="script.skinvariables" version="2.2.4" />
+		<import addon="script.bald.helper" version="1.5.0" />
+		<import addon="script.globalsearch" version="9.2.1" optional="true" />
+		<import addon="plugin.video.themoviedb.helper" version="6.17.4" optional="true" />
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false">
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="1080i" />
+	</extension>
+	
+	<extension point="xbmc.python.script" library="scripts/info.py" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en_GB">Minimal, artwork-first skin for Kodi 22.</summary>
+		<description lang="en_GB">Bald is a minimal, artwork-first Kodi 22 skin with fluid motion. Utility windows are based on Kodi's Estuary by phil65 and Team Kodi.</description>
+		<license>GPL-2.0-or-later</license>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshot-08.jpg</screenshot>
+			<screenshot>resources/screenshot-09.jpg</screenshot>
+			<screenshot>resources/screenshot-10.jpg</screenshot>
+			<screenshot>resources/screenshot-11.jpg</screenshot>
+			<screenshot>resources/screenshot-12.jpg</screenshot>
+			<screenshot>resources/screenshot-13.jpg</screenshot>
+			<screenshot>resources/screenshot-14.jpg</screenshot>
+			<screenshot>resources/screenshot-15.jpg</screenshot>
+		</assets>
+	</extension>
 </addon><addon id="skin.bingie" version="2.0.2.2.1" name="Bingie" provider-name="matke">
 	<requires>
 		<import version="5.17.0" addon="xbmc.gui" />

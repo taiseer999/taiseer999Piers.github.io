@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald primary Live TV guide. Native Kodi 22 PVR controls and actions are retained. -->
+<window>
+	<include>Bald_CurtainHandoff</include>
+	<!-- The corner's date (scripts/guidedate.py). -->
+	<onload>RunScript(skin.bald,guidedate)</onload>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<backgroundcolor>bald_field</backgroundcolor>
+	<views>50</views>
+	<menucontrol>9000</menucontrol>
+	<controls>
+		<include>Bald_WindowBase</include>
+		<control type="label"><left>Bald_SafeLeft</left><top>82</top><width>900</width><height>52</height><font>Bald_CaptionTitle</font><textcolor>bald_ink</textcolor><label>$LOCALIZE[31700]</label></control>
+		<control type="label"><left>Bald_PreviewLeft</left><top>92</top><width>528</width><height>30</height><align>right</align><font>Bald_CaptionMeta</font><textcolor>bald_ink60</textcolor><label>$VAR[Bald_ClockDateTime]</label></control>
+		<!-- The weather under the date and time, smaller and quieter, as under Home's clock (it no longer fits on one line). -->
+		<control type="label"><left>Bald_PreviewLeft</left><top>124</top><width>528</width><height>24</height><align>right</align><font>Bald_Hint</font><textcolor>bald_ink45</textcolor><label>$VAR[Bald_HeaderWeather]</label></control>
+		<control type="group"><left>Bald_SafeLeft</left><top>154</top><width>1728</width><height>190</height>
+			<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout" condition="String.IsEmpty(Window(home).Property(Bald.Curtain))">WindowOpen</animation>
+			<control type="image"><left>0</left><top>8</top><width>150</width><height>112</height><aspectratio align="center" aligny="center">keep</aspectratio><fadetime>380</fadetime><texture>$INFO[ListItem.ChannelLogo]</texture></control>
+			<control type="label"><left>184</left><top>0</top><width>1544</width><height>48</height><font>Bald_CaptionTitle</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.EpgEventTitle]</label></control>
+			<control type="label"><left>184</left><top>0</top><width>1544</width><height>48</height><font>Bald_CaptionTitle</font><textcolor>bald_ink</textcolor><label>$LOCALIZE[31877]</label><visible>String.IsEmpty(ListItem.EpgEventTitle)</visible></control>
+			<control type="label"><left>184</left><top>52</top><width>1544</width><height>30</height><font>Bald_CaptionMeta</font><textcolor>bald_ink70</textcolor><label>$INFO[ListItem.ChannelNumberLabel]$INFO[ListItem.ChannelName, · ]$INFO[ListItem.StartTime, · ]$INFO[ListItem.EndTime,– ]</label></control>
+			<control type="textbox"><left>184</left><top>94</top><width>1544</width><height>82</height><font>Bald_CaptionPlot</font><textcolor>bald_ink80</textcolor><label>$INFO[ListItem.Plot]</label><include content="Bald_SpoilerPlotShown" /></control>
+			<include content="Bald_SpoilerNote"><param name="left">184</param><param name="top">94</param><param name="width">1544</param><param name="height">34</param><param name="visible">!String.IsEmpty(ListItem.EpgEventTitle)</param></include>
+			<control type="label"><left>184</left><top>94</top><width>1544</width><height>34</height><font>Bald_CaptionPlot</font><textcolor>bald_ink60</textcolor><label>$LOCALIZE[31878]</label><visible>String.IsEmpty(ListItem.EpgEventTitle)</visible></control>
+		</control>
+		<!-- Kodi owns control 11 and binds the available channel groups to it. Keep that native
+		     contract active off-screen; the visible group controls live in Bald_PVRGuideTools. -->
+		<control type="fixedlist" id="11"><left>2000</left><top>0</top><width>1</width><height>1</height><orientation>horizontal</orientation><onleft>50</onleft><onright>50</onright><onup>50</onup><ondown>50</ondown>
+			<itemlayout width="1" height="1" />
+			<focusedlayout width="1" height="1" />
+		</control>
+		<control type="group" id="63"><include content="Bald_EpgGrid"><param name="control_id" value="50" /></include></control>
+		<include>Bald_PVRChannelNumberInput</include>
+		<include>Bald_PVRGuideTools</include>
+		<control type="label" id="29"><font></font><include>HiddenObject</include></control>
+		<control type="label" id="30"><font></font><include>HiddenObject</include></control>
+		<control type="label"><left>Bald_SafeLeft</left><top>Bald_HintTop</top><width>800</width><height>24</height><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$INFO[Control.GetLabel(30)]</label></control>
+		<control type="group"><left>1024</left><top>Bald_HintTop</top><include content="Bald_InfoHintPair"><param name="width">800</param><param name="first">$VAR[Bald_KeyBack]$LOCALIZE[31879]</param><param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31791]</param></include></control>
+	</controls>
+</window>

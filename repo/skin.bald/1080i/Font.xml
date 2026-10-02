@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fonts>
+	<!-- Piers: Arabic typefaces. The three fontset ids stay as upstream Bald has them (Default, InstrumentSans,
+	     Arial) so Appearance > Typography, scripts/info.py and Bald Helper keep working; only the files change:
+	     Default = Inter Mohand, InstrumentSans = Inter iPhone, Arial = Inter Tonos. Each has Regular and Bold only, so
+	     Regular/Medium map to Regular and SemiBold/Bold to Bold. Linespacing values are rescaled by each face's
+	     Kodi cell height (max(head.yMax, ascender) - min(head.yMin, descender)) so multi-line text keeps upstream's pixel line height. -->
+	<!-- DM Sans, the default typeface: its id is "Default", lookandfeel.font's default value in Kodi, so a fresh install
+	     and a skin switch land here (an earlier "DMSans" choice, no longer an id, falls back here too); the label comes
+	     from idloc. It is the Instrument Sans set with each weight swapped for the same DM Sans weight (static opsz 14
+	     cuts). Names and sizes stay identical to InstrumentSans. DM Sans' natural line is taller (1.302 em against
+	     1.22), so every font drawn on several lines (textboxes, wrapped labels) has its own linespacing here that
+	     brings Kodi's pixel line height back to Instrument Sans' within 0.5 px (tests/test_fonts.py). -->
+	<fontset id="Default" idloc="31941">
+		<!-- Estuary names kept for the copied utility windows; font13 also stays because Kodi falls back to it for any
+		     font name a window asks for that the skin lacks. font23_narrow and font32 use Kodi's bundled arial.ttf in
+		     every fontset: they only draw text from outside the skin (a game add-on's emulator name and version in
+		     DialogAddonSettings, the screen calibration readout), which arial.ttf's wide glyph coverage suits. -->
+		<font>
+			<name>font12</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>25</size>
+			<linespacing>0.895</linespacing>
+		</font>
+		<font>
+			<name>font13</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>30</size>
+			<linespacing>0.904</linespacing>
+		</font>
+		<font>
+			<name>font23_narrow</name>
+			<filename>special://xbmc/media/Fonts/arial.ttf</filename>
+			<size>21</size>
+		</font>
+		<font>
+			<name>font27</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>27</size>
+			<linespacing>0.899</linespacing>
+		</font>
+		<font>
+			<name>font32</name>
+			<filename>special://xbmc/media/Fonts/arial.ttf</filename>
+			<size>32</size>
+		</font>
+		<font>
+			<name>font37</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>37</size>
+			<linespacing>0.894</linespacing>
+		</font>
+		<!-- Title Fonts -->
+		<font>
+			<name>font25_title</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>25</size>
+		</font>
+		<font>
+			<name>font40_title</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>40</size>
+		</font>
+		<!-- Bald type scale (docs/SPEC.md section 3) -->
+		<!-- Clock (spec 300; lightest static face is 400) -->
+		<font>
+			<name>Bald_Clock</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>132</size>
+		</font>
+		<!-- Date -->
+		<font>
+			<name>Bald_Date</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>22</size>
+		</font>
+		<!-- Caption title, line height 44 (prototype 1.1) -->
+		<font>
+			<name>Bald_CaptionTitle</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>40</size>
+			<linespacing>0.826</linespacing>
+		</font>
+		<!-- Caption meta -->
+		<font>
+			<name>Bald_CaptionMeta</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>20</size>
+			<linespacing>0.880</linespacing>
+		</font>
+		<!-- Accent line -->
+		<font>
+			<name>Bald_Accent</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>18</size>
+		</font>
+		<!-- Caption plot, line height 30 (natural line is ~24 px) -->
+		<font>
+			<name>Bald_CaptionPlot</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>20</size>
+			<linespacing>1.100</linespacing>
+		</font>
+		<!-- Media flag -->
+		<font>
+			<name>Bald_Flag</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>14</size>
+		</font>
+		<!-- Menu item -->
+		<font>
+			<name>Bald_MenuItem</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>36</size>
+		</font>
+		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 46 -->
+		<font>
+			<name>Bald_SettingsCategory</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>34</size>
+		</font>
+		<!-- Menu note, line height 28 -->
+		<font>
+			<name>Bald_MenuNote</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>19</size>
+			<linespacing>1.079</linespacing>
+		</font>
+		<!-- Section line, action button, section heading -->
+		<font>
+			<name>Bald_Section</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>22</size>
+			<linespacing>0.887</linespacing>
+		</font>
+		<!-- Keyboard keys: the fontset's own Arabic-capable face (upstream used Noto Sans, which has no Arabic). -->
+		<font>
+			<name>Bald_KeyboardKey</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>45</size>
+		</font>
+		<!-- Section hint, row count -->
+		<font>
+			<name>Bald_Hint</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>17</size>
+		</font>
+		<!-- Row label -->
+		<font>
+			<name>Bald_RowLabel</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Info title fallback -->
+		<font>
+			<name>Bald_InfoTitle</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>76</size>
+		</font>
+		<!-- Info meta -->
+		<font>
+			<name>Bald_InfoMeta</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>24</size>
+		</font>
+		<!-- Info tagline -->
+		<font>
+			<name>Bald_InfoTagline</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>30</size>
+		</font>
+		<!-- Info plot, line height 34 (natural line is ~26.4 px) -->
+		<font>
+			<name>Bald_InfoPlot</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>22</size>
+			<linespacing>1.145</linespacing>
+		</font>
+		<!-- Info genres -->
+		<font>
+			<name>Bald_InfoGenre</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Info media flag -->
+		<font>
+			<name>Bald_FlagL</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>16</size>
+		</font>
+		<!-- Cast name -->
+		<font>
+			<name>Bald_CastName</name>
+			<filename>Mohand-Bold.ttf</filename>
+			<size>18</size>
+			<linespacing>0.912</linespacing>
+		</font>
+		<!-- Cast role -->
+		<font>
+			<name>Bald_CastRole</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>16</size>
+			<linespacing>0.907</linespacing>
+		</font>
+		<!-- Details label -->
+		<font>
+			<name>Bald_DetailLabel</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>17</size>
+		</font>
+		<!-- Details value -->
+		<font>
+			<name>Bald_DetailValue</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>21</size>
+			<linespacing>0.918</linespacing>
+		</font>
+		<!-- Info progress -->
+		<font>
+			<name>Bald_Progress</name>
+			<filename>Mohand-Regular.ttf</filename>
+			<size>18</size>
+		</font>
+	</fontset>
+	<!-- Instrument Sans (Appearance > Typography). The reference set: DM Sans (Default) and Onest (Arial) differ from
+	     it only in files and linespacing (tests/test_fonts.py). -->
+	<fontset id="InstrumentSans" idloc="31940">
+		<!-- Normal Fonts -->
+		<font>
+			<name>font12</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>25</size>
+		</font>
+		<font>
+			<name>font13</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>30</size>
+		</font>
+		<font>
+			<name>font23_narrow</name>
+			<filename>special://xbmc/media/Fonts/arial.ttf</filename>
+			<size>21</size>
+		</font>
+		<font>
+			<name>font27</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>27</size>
+		</font>
+		<font>
+			<name>font32</name>
+			<filename>special://xbmc/media/Fonts/arial.ttf</filename>
+			<size>32</size>
+		</font>
+		<font>
+			<name>font37</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>37</size>
+		</font>
+		<!-- Title Fonts -->
+		<font>
+			<name>font25_title</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>25</size>
+		</font>
+		<font>
+			<name>font40_title</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>40</size>
+		</font>
+		<!-- Bald type scale (docs/SPEC.md section 3) -->
+		<!-- Clock (spec 300; lightest static face is 400) -->
+		<font>
+			<name>Bald_Clock</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>132</size>
+		</font>
+		<!-- Date -->
+		<font>
+			<name>Bald_Date</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>22</size>
+		</font>
+		<!-- Caption title, line height 44 (prototype 1.1) -->
+		<font>
+			<name>Bald_CaptionTitle</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>40</size>
+			<linespacing>0.874</linespacing>
+		</font>
+		<!-- Caption meta -->
+		<font>
+			<name>Bald_CaptionMeta</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Accent line -->
+		<font>
+			<name>Bald_Accent</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>18</size>
+		</font>
+		<!-- Caption plot, line height 30 (natural line is ~24 px) -->
+		<font>
+			<name>Bald_CaptionPlot</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>20</size>
+			<linespacing>1.155</linespacing>
+		</font>
+		<!-- Media flag -->
+		<font>
+			<name>Bald_Flag</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>14</size>
+		</font>
+		<!-- Menu item -->
+		<font>
+			<name>Bald_MenuItem</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>36</size>
+		</font>
+		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 46 -->
+		<font>
+			<name>Bald_SettingsCategory</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>34</size>
+		</font>
+		<!-- Menu note, line height 28 -->
+		<font>
+			<name>Bald_MenuNote</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>19</size>
+			<linespacing>1.153</linespacing>
+		</font>
+		<!-- Section line, action button, section heading -->
+		<font>
+			<name>Bald_Section</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>22</size>
+		</font>
+		<!-- Keyboard keys: the fontset's own Arabic-capable face (upstream used Noto Sans, which has no Arabic). -->
+		<font>
+			<name>Bald_KeyboardKey</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>45</size>
+		</font>
+		<!-- Section hint, row count -->
+		<font>
+			<name>Bald_Hint</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>17</size>
+		</font>
+		<!-- Row label -->
+		<font>
+			<name>Bald_RowLabel</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Info title fallback -->
+		<font>
+			<name>Bald_InfoTitle</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>76</size>
+		</font>
+		<!-- Info meta -->
+		<font>
+			<name>Bald_InfoMeta</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>24</size>
+		</font>
+		<!-- Info tagline -->
+		<font>
+			<name>Bald_InfoTagline</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>30</size>
+		</font>
+		<!-- Info plot, line height 34 (natural line is ~26.4 px) -->
+		<font>
+			<name>Bald_InfoPlot</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>22</size>
+			<linespacing>1.192</linespacing>
+		</font>
+		<!-- Info genres -->
+		<font>
+			<name>Bald_InfoGenre</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Info media flag -->
+		<font>
+			<name>Bald_FlagL</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>16</size>
+		</font>
+		<!-- Cast name -->
+		<font>
+			<name>Bald_CastName</name>
+			<filename>iPhone-Bold.ttf</filename>
+			<size>18</size>
+		</font>
+		<!-- Cast role -->
+		<font>
+			<name>Bald_CastRole</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>16</size>
+		</font>
+		<!-- Details label -->
+		<font>
+			<name>Bald_DetailLabel</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>17</size>
+		</font>
+		<!-- Details value -->
+		<font>
+			<name>Bald_DetailValue</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>21</size>
+		</font>
+		<!-- Info progress -->
+		<font>
+			<name>Bald_Progress</name>
+			<filename>iPhone-Regular.ttf</filename>
+			<size>18</size>
+		</font>
+	</fontset>
+	<!-- Onest (Appearance > Typography), the typeface with Cyrillic (no Greek): DM Sans and Instrument Sans have
+	     neither, and Kodi draws a missing glyph as a box rather than falling back to another file. Its id is "Arial",
+	     the id of the arial.ttf fontset Estuary and earlier Bald versions offered for non-Latin text, so anyone who had
+	     picked Arial for Cyrillic lands on Onest without choosing again; the label comes from idloc. The DM Sans set
+	     with each weight swapped for the same Onest weight (static instances of the variable font). Onest's natural
+	     line is 1.275 em, so the fonts drawn on several lines have their own linespacing that brings Kodi's pixel line
+	     height back to Instrument Sans' within 0.5 px (tests/test_fonts.py). -->
+	<fontset id="Arial" idloc="31415">
+		<font>
+			<name>font12</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>25</size>
+			<linespacing>0.923</linespacing>
+		</font>
+		<font>
+			<name>font13</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>30</size>
+			<linespacing>0.928</linespacing>
+		</font>
+		<font>
+			<name>font23_narrow</name>
+			<filename>special://xbmc/media/Fonts/arial.ttf</filename>
+			<size>21</size>
+		</font>
+		<font>
+			<name>font27</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>27</size>
+			<linespacing>0.925</linespacing>
+		</font>
+		<font>
+			<name>font32</name>
+			<filename>special://xbmc/media/Fonts/arial.ttf</filename>
+			<size>32</size>
+		</font>
+		<font>
+			<name>font37</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>37</size>
+			<linespacing>0.912</linespacing>
+		</font>
+		<!-- Title Fonts -->
+		<font>
+			<name>font25_title</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>25</size>
+		</font>
+		<font>
+			<name>font40_title</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>40</size>
+		</font>
+		<!-- Bald type scale (docs/SPEC.md section 3) -->
+		<!-- Clock (spec 300; lightest static face is 400) -->
+		<font>
+			<name>Bald_Clock</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>132</size>
+		</font>
+		<!-- Date -->
+		<font>
+			<name>Bald_Date</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>22</size>
+		</font>
+		<!-- Caption title, line height 44 (prototype 1.1) -->
+		<font>
+			<name>Bald_CaptionTitle</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>40</size>
+			<linespacing>0.847</linespacing>
+		</font>
+		<!-- Caption meta -->
+		<font>
+			<name>Bald_CaptionMeta</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>20</size>
+			<linespacing>0.879</linespacing>
+		</font>
+		<!-- Accent line -->
+		<font>
+			<name>Bald_Accent</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>18</size>
+		</font>
+		<!-- Caption plot, line height 30 (natural line is ~24 px) -->
+		<font>
+			<name>Bald_CaptionPlot</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>20</size>
+			<linespacing>1.099</linespacing>
+		</font>
+		<!-- Media flag -->
+		<font>
+			<name>Bald_Flag</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>14</size>
+		</font>
+		<!-- Menu item -->
+		<font>
+			<name>Bald_MenuItem</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>36</size>
+		</font>
+		<!-- Settings sidebar categories (Bald_SettingsCategoryButton): smaller than the menu, Arabic reads large at 46 -->
+		<font>
+			<name>Bald_SettingsCategory</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>34</size>
+		</font>
+		<!-- Menu note, line height 28 -->
+		<font>
+			<name>Bald_MenuNote</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>19</size>
+			<linespacing>1.125</linespacing>
+		</font>
+		<!-- Section line, action button, section heading -->
+		<font>
+			<name>Bald_Section</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>22</size>
+			<linespacing>0.924</linespacing>
+		</font>
+		<!-- Keyboard keys: the fontset's own Arabic-capable face (upstream used Noto Sans, which has no Arabic). -->
+		<font>
+			<name>Bald_KeyboardKey</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>45</size>
+		</font>
+		<!-- Section hint, row count -->
+		<font>
+			<name>Bald_Hint</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>17</size>
+		</font>
+		<!-- Row label -->
+		<font>
+			<name>Bald_RowLabel</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Info title fallback -->
+		<font>
+			<name>Bald_InfoTitle</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>76</size>
+		</font>
+		<!-- Info meta -->
+		<font>
+			<name>Bald_InfoMeta</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>24</size>
+		</font>
+		<!-- Info tagline -->
+		<font>
+			<name>Bald_InfoTagline</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>30</size>
+		</font>
+		<!-- Info plot, line height 34 (natural line is ~26.4 px) -->
+		<font>
+			<name>Bald_InfoPlot</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>22</size>
+			<linespacing>1.185</linespacing>
+		</font>
+		<!-- Info genres -->
+		<font>
+			<name>Bald_InfoGenre</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>20</size>
+		</font>
+		<!-- Info media flag -->
+		<font>
+			<name>Bald_FlagL</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>16</size>
+		</font>
+		<!-- Cast name -->
+		<font>
+			<name>Bald_CastName</name>
+			<filename>Tonos-Bold.ttf</filename>
+			<size>18</size>
+			<linespacing>0.917</linespacing>
+		</font>
+		<!-- Cast role -->
+		<font>
+			<name>Bald_CastRole</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>16</size>
+		</font>
+		<!-- Details label -->
+		<font>
+			<name>Bald_DetailLabel</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>17</size>
+		</font>
+		<!-- Details value -->
+		<font>
+			<name>Bald_DetailValue</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>21</size>
+			<linespacing>0.919</linespacing>
+		</font>
+		<!-- Info progress -->
+		<font>
+			<name>Bald_Progress</name>
+			<filename>Tonos-Regular.ttf</filename>
+			<size>18</size>
+		</font>
+	</fontset>
+</fonts>

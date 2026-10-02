@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald mini guide for one channel (pvrchannelguide), usually over live video: the Guide tab of the in-player Live TV
+     panel. Started from Kodi 22 Estuary's
+     DialogPVRChannelGuide.xml (Team Kodi, GPL-2.0-or-later). Kodi binds list 11 (CGUIDialogPVRItemsViewBase), fills
+     it with the channel's programmes, selects the one on now and opens information on Select; scrollbar 60 is the
+     list's page control. -->
+<window>
+	<!-- The video OSD's auto-close waits while this panel is browsed (Includes_Bald_OSD.xml). -->
+	<include content="Bald_OSDSuspendAutoClose"><param name="name">guide</param></include>
+	<defaultcontrol always="true">11</defaultcontrol>
+	<depth>DepthOSD</depth>
+	<include>Bald_PVRAnimOverlay</include>
+	<controls>
+		<control type="group">
+			<include>Bald_PVRInfoDim</include>
+			<!-- The Live TV panel's Guide tab (Includes_Bald_PVR.xml, "In-player Live TV panel"). -->
+			<include>Bald_PVRPanelBase</include>
+			<include content="Bald_PVRTabs">
+				<param name="guide">true</param>
+				<param name="section">$INFO[Container(11).ListItem.ChannelName]$INFO[Container(11).ListItem.StartDate, · ]</param>
+			</include>
+			<!-- Header label as Estuary numbers it; Kodi does not write to it. -->
+			<control type="label" id="2"><font></font><include>HiddenObject</include></control>
+			<control type="fixedlist" id="11">
+				<left>Bald_SafeLeft</left><top>Bald_ContentTop</top><width>780</width><height>672</height>
+				<onleft>11</onleft><onup>11</onup>
+				<!-- Over Live TV in full screen (the Guide key, or the OSD's guide): Right, or Down past the last programme,
+				     swaps in the Channels tab (the guide closes first, so the two never stack). Elsewhere (the music OSD's
+				     radio guide, a channel's context menu) they wrap. -->
+				<onright condition="!$EXP[Bald_PVRGuideToChannels]">11</onright>
+				<onright condition="$EXP[Bald_PVRGuideToChannels]">Dialog.Close(pvrchannelguide,true)</onright>
+				<onright condition="$EXP[Bald_PVRGuideToChannels]">ActivateWindow(pvrosdchannels)</onright>
+				<ondown condition="!$EXP[Bald_PVRGuideToChannels]">11</ondown>
+				<ondown condition="$EXP[Bald_PVRGuideToChannels]">Dialog.Close(pvrchannelguide,true)</ondown>
+				<ondown condition="$EXP[Bald_PVRGuideToChannels]">ActivateWindow(pvrosdchannels)</ondown>
+				<movement>4</movement><focusposition>4</focusposition>
+				<pagecontrol>60</pagecontrol><scrolltime tween="cubic" easing="out">440</scrolltime>
+				<itemlayout width="780" height="64"><include>Bald_PVREpgRow</include></itemlayout>
+				<focusedlayout width="780" height="64"><include content="Bald_PVREpgRow"><param name="focused">true</param><param name="c1">bald_ink</param><param name="c2">bald_ink70</param></include></focusedlayout>
+			</control>
+			<include content="Bald_PVRScrollbar"><param name="id">60</param><param name="list_id">11</param><param name="left">892</param></include>
+			<include content="Bald_PVRDetailPane"><param name="item">Container(11).ListItem.</param></include>
+			<include content="Bald_PVRHints">
+				<param name="first">$VAR[Bald_KeySelect]$LOCALIZE[31664]</param>
+				<param name="second">$VAR[Bald_PVRGuideHint]</param>
+			</include>
+		</control>
+	</controls>
+</window>

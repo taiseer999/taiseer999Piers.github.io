@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Started from Kodi 22's bundled Estuary (skin.estuary, GPL-2.0-or-later; see LICENSE-Estuary.txt).
+     Bald: add-on information in the info dialog's language. The add-on's fanart under Bald's info scrims, its icon and
+     name at the safe margin, screenshots as a rail of 16:9 tiles, the description as a focusable block (Select opens
+     the changelog), details in the right column and Kodi's actions as pills. Kodi binds 6 (install / uninstall),
+     7 (enable / disable), 8 (update), 9 (settings), 10 (dependencies), 12 (open / use), 13 (auto-update),
+     14 (versions) and the screenshot list 50; Kodi sets the labels of 6, 7, 12 and 13 and shows 8 or 14. -->
+<window>
+	<defaultcontrol always="true">9000</defaultcontrol>
+	<onload condition="!ListItem.Property(addon.isinstalled) + Window.IsActive(addonbrowser)">SetFocus(6)</onload>
+	<onload>SetProperty(infobackground,$ESCINFO[ListItem.Art(fanart)],home)</onload>
+	<onunload>ClearProperty(infobackground,home)</onunload>
+	<controls>
+		<control type="group">
+			<animation type="WindowOpen"><effect type="fade" start="0" end="100" time="380" tween="sine" easing="inout" /></animation>
+			<animation type="WindowClose"><effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" /></animation>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_field">bald/white.png</texture></control>
+			<control type="image">
+				<width>1920</width><height>1080</height><aspectratio>scale</aspectratio><fadetime>700</fadetime>
+				<texture background="true" colordiffuse="bald_backdrop">$INFO[ListItem.Art(fanart)]</texture>
+			</control>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_scrim">bald/scrim_info_h.png</texture></control>
+			<control type="image"><width>1920</width><height>1080</height><texture colordiffuse="bald_scrim">bald/scrim_info_b.png</texture></control>
+		</control>
+		<control type="group">
+			<include>Bald_AddonInfoIn</include>
+			<!-- Header: icon, name, version and author, and the repository's lifecycle warning. -->
+			<control type="image"><left>Bald_SafeLeft</left><top>120</top><width>168</width><height>168</height><texture colordiffuse="bald_placeholder">bald/white.png</texture></control>
+			<control type="image">
+				<left>Bald_SafeLeft</left><top>120</top><width>168</width><height>168</height><aspectratio>keep</aspectratio><fadetime>300</fadetime>
+				<texture fallback="DefaultAddon.png" background="true">$INFO[ListItem.Art(thumb)]</texture>
+			</control>
+			<control type="label">
+				<left>296</left><top>120</top><width>1528</width><height>90</height>
+				<font>Bald_InfoTitle</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.AddonName]</label>
+			</control>
+			<control type="label">
+				<left>296</left><top>214</top><width>1528</width><height>32</height>
+				<font>Bald_InfoMeta</font><textcolor>bald_ink70</textcolor>
+				<label>$INFO[ListItem.AddonVersion]$INFO[ListItem.AddonCreator, · ,]</label>
+			</control>
+			<control type="label">
+				<left>296</left><top>256</top><width>1528</width><height>28</height>
+				<font>Bald_InfoGenre</font><textcolor>bald_accent</textcolor>
+				<label>$VAR[Bald_BrowseAddonWarningTitle]$INFO[ListItem.AddonLifecycleDesc, · ,]</label>
+				<visible>$EXP[Bald_BrowseAddonWarning]</visible>
+			</control>
+			<!-- Screenshots: three 16:9 tiles per page. -->
+			<control type="panel" id="50">
+				<left>Bald_BrowseWallLeft</left>
+				<top>320</top>
+				<width>1152</width>
+				<height>230</height>
+				<ondown>5000</ondown>
+				<onup>9000</onup>
+				<onleft>50</onleft>
+				<onright>50</onright>
+				<orientation>horizontal</orientation>
+				<scrolltime tween="cubic" easing="out">440</scrolltime>
+				<itemlayout width="384" height="230">
+					<include content="Bald_BrowseTile">
+						<param name="art">$INFO[ListItem.Icon]</param>
+						<param name="width">360</param><param name="height">203</param><param name="ring_width">366</param><param name="ring_height">209</param><param name="center">192,113</param>
+					</include>
+				</itemlayout>
+				<focusedlayout width="384" height="230">
+					<include content="Bald_BrowseTile">
+						<param name="art">$INFO[ListItem.Icon]</param>
+						<param name="width">360</param><param name="height">203</param><param name="ring_width">366</param><param name="ring_height">209</param><param name="center">192,113</param>
+						<param name="diffuse">bald_ink</param><param name="focused">Control.HasFocus(50)</param>
+					</include>
+				</focusedlayout>
+			</control>
+			<!-- Description: Select opens the changelog in the text viewer when the add-on has news. -->
+			<control type="button" id="5000">
+				<left>84</left>
+				<top>572</top>
+				<width>1164</width>
+				<height>276</height>
+				<label></label>
+				<texturenofocus />
+				<texturefocus border="8" colordiffuse="bald_ink45">bald/focus_ring.png</texturefocus>
+				<onup>50</onup>
+				<ondown>9000</ondown>
+				<onclick>SetProperty(TextViewer_Header,$LOCALIZE[31141] $INFO[ListItem.AddonVersion],home)</onclick>
+				<onclick>SetProperty(TextViewer_Text,$ESCINFO[ListItem.AddonNews],home)</onclick>
+				<onclick>ActivateWindow(1102)</onclick>
+				<enable>!String.IsEmpty(ListItem.AddonNews)</enable>
+			</control>
+			<control type="label">
+				<left>Bald_SafeLeft</left><top>584</top><width>1140</width><height>40</height>
+				<font>Bald_InfoTagline</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.AddonSummary]</label>
+			</control>
+			<control type="textbox">
+				<left>Bald_SafeLeft</left><top>632</top><width>1140</width><height>170</height>
+				<font>Bald_InfoPlot</font><textcolor>bald_ink80</textcolor>
+				<label>$INFO[ListItem.AddonDescription]</label>
+				<autoscroll delay="5000" repeat="7500" time="5000">true</autoscroll>
+			</control>
+			<control type="label">
+				<left>Bald_SafeLeft</left><top>812</top><width>1140</width><height>24</height>
+				<font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$VAR[AddonNewsVar]</label>
+				<visible>!String.IsEmpty(ListItem.AddonNews)</visible>
+			</control>
+			<!-- Details column. -->
+			<control type="list">
+				<left>Bald_PreviewLeft</left>
+				<top>320</top>
+				<width>528</width>
+				<height>520</height>
+				<orientation>vertical</orientation>
+				<pagecontrol />
+				<itemlayout height="72" width="528">
+					<include content="Bald_AddonInfoDetail" />
+				</itemlayout>
+				<focusedlayout height="72" width="528">
+					<include content="Bald_AddonInfoDetail" />
+				</focusedlayout>
+				<content>
+					<item>
+						<label>$LOCALIZE[21866]</label>
+						<label2>$INFO[ListItem.AddonType]</label2>
+						<visible>!String.IsEmpty(ListItem.AddonType)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[31150]</label>
+						<label2>$INFO[ListItem.AddonOrigin]</label2>
+						<icon>$VAR[AddonsOriginVar]</icon>
+						<visible>!String.IsEmpty(ListItem.AddonOrigin)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[22031]</label>
+						<label2>$INFO[ListItem.AddonSize]</label2>
+						<visible>!String.IsEmpty(ListItem.AddonSize)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[467]</label>
+						<label2>$LOCALIZE[31135]</label2>
+						<visible>ListItem.Property(Addon.IsBinary)</visible>
+					</item>
+					<item>
+						<label>$LOCALIZE[126]</label>
+						<label2>$INFO[ListItem.Property(Addon.Status)]$INFO[ListItem.Property(Addon.ValidUpdateVersion), · $LOCALIZE[19114] ,]</label2>
+						<visible>!String.IsEmpty(ListItem.Property(Addon.Status))</visible>
+					</item>
+				</content>
+			</control>
+			<!-- Actions: Kodi's buttons as pills, in Estuary's order. -->
+			<control type="grouplist" id="9000">
+				<left>Bald_SafeLeft</left>
+				<top>870</top>
+				<width>1728</width>
+				<height>60</height>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>5000</onup>
+				<ondown>9000</ondown>
+				<itemgap>12</itemgap>
+				<orientation>horizontal</orientation>
+				<usecontrolcoords>true</usecontrolcoords>
+				<include content="Bald_BrowseAction"><param name="id">12</param><param name="label">$LOCALIZE[518]</param></include>
+				<include content="Bald_BrowseAction"><param name="id">9</param><param name="label">$LOCALIZE[24020]</param></include>
+				<include content="Bald_BrowseAction"><param name="id">13</param><param name="type">radiobutton</param><param name="width">260</param><param name="visible">Control.IsEnabled(13)</param></include>
+				<include content="Bald_BrowseAction"><param name="id">10</param><param name="label">$LOCALIZE[39024]</param></include>
+				<include content="Bald_BrowseAction"><param name="id">7</param><param name="type">radiobutton</param></include>
+				<include content="Bald_BrowseAction"><param name="id">8</param><param name="label">$LOCALIZE[24138]</param></include>
+				<include content="Bald_BrowseAction"><param name="id">14</param><param name="label">$LOCALIZE[24069]</param></include>
+				<include content="Bald_BrowseAction"><param name="id">6</param><param name="type">radiobutton</param></include>
+			</control>
+			<control type="label">
+				<left>Bald_SafeLeft</left><top>Bald_HintTop</top><width>1728</width><height>24</height>
+				<font>Bald_Hint</font><textcolor>bald_ink45</textcolor><label>$INFO[ListItem.AddonDisclaimer]</label>
+				<scroll>true</scroll>
+			</control>
+		</control>
+	</controls>
+</window>

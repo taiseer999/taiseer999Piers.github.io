@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Control defaults for every control that does not set its own values. Started from Kodi 22 Estuary's Defaults.xml
+     (GPL-2.0-or-later, see LICENSE-Estuary.txt) and restyled with Bald fonts and colour tokens, so a control left
+     unstyled reads as Bald (docs/SPEC.md, "Shared foundations"). Bald-native windows set their own look; before
+     changing a default here, check what relies on it with tests/test_foundations.py.
+
+     Kodi uses a control's textcolor when it has no focusedcolor (CGUILabel::GetColor), and labels in a list's
+     focused layout take their focusedcolor. So no label default sets focusedcolor, and the button default does not
+     either: many buttons bring their own focus texture and rely on focused text staying their textcolor. The
+     button focus is therefore a quiet pill (ink28 fill) that ink text reads on, not the ink-filled action pill,
+     which needs field-coloured text and stays with DefaultDialogButton. Setting rows (radio, spinner, slider, edit)
+     use the PVR guide tool row's 10% ink surface with ink60 text that turns full ink on focus. -->
+<includes>
+	<default type="image">
+		<texture></texture>
+		<aspectratio>stretch</aspectratio>
+	</default>
+	<default type="multiimage">
+		<aspectratio align="center">scale</aspectratio>
+		<fadetime>800</fadetime>
+		<timeperimage>7000</timeperimage>
+		<randomize>true</randomize>
+	</default>
+	<default type="label">
+		<label></label>
+		<align>left</align>
+		<font>Bald_InfoPlot</font>
+		<textcolor>bald_ink</textcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<selectedcolor>bald_accent</selectedcolor>
+		<scroll>false</scroll>
+		<scrollspeed>40</scrollspeed>
+	</default>
+	<default type="fadelabel">
+		<align>left</align>
+		<font>Bald_InfoPlot</font>
+		<textcolor>bald_ink</textcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+	</default>
+	<default type="button">
+		<texturefocus border="27" colordiffuse="bald_ink28">bald/pill.png</texturefocus>
+		<texturenofocus border="27" colordiffuse="bald_ink45">bald/pill_outline.png</texturenofocus>
+		<font>Bald_Section</font>
+		<textcolor>bald_ink</textcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<textoffsetx>27</textoffsetx>
+		<aligny>center</aligny>
+		<pulseonselect>no</pulseonselect>
+	</default>
+	<default type="togglebutton">
+		<texturefocus border="27" colordiffuse="bald_ink28">bald/pill.png</texturefocus>
+		<texturenofocus border="27" colordiffuse="bald_ink45">bald/pill_outline.png</texturenofocus>
+		<alttexturefocus border="27" colordiffuse="bald_ink28">bald/pill.png</alttexturefocus>
+		<alttexturenofocus border="27" colordiffuse="bald_ink45">bald/pill_outline.png</alttexturenofocus>
+		<textcolor>bald_ink</textcolor>
+		<font>Bald_Section</font>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<pulseonselect>no</pulseonselect>
+	</default>
+	<default type="textbox">
+		<align>left</align>
+		<textcolor>bald_ink70</textcolor>
+		<font>Bald_InfoPlot</font>
+	</default>
+	<default type="progress">
+		<texturebg border="2" colordiffuse="bald_ink10">bald/bar.png</texturebg>
+		<midtexture border="2" colordiffuse="bald_ink">bald/bar.png</midtexture>
+		<lefttexture></lefttexture>
+		<righttexture></righttexture>
+		<overlaytexture></overlaytexture>
+	</default>
+	<default type="spincontrol">
+		<textureup colordiffuse="bald_ink28">bald/chevron.png</textureup>
+		<texturedown flipx="true" colordiffuse="bald_ink28">bald/chevron.png</texturedown>
+		<textureupfocus colordiffuse="bald_ink">bald/chevron.png</textureupfocus>
+		<texturedownfocus flipx="true" colordiffuse="bald_ink">bald/chevron.png</texturedownfocus>
+		<textureupdisabled colordiffuse="bald_ink10">bald/chevron.png</textureupdisabled>
+		<texturedowndisabled flipx="true" colordiffuse="bald_ink10">bald/chevron.png</texturedowndisabled>
+		<align>right</align>
+		<width>32</width>
+		<height>32</height>
+		<font>Bald_Section</font>
+		<reverse>yes</reverse>
+		<textcolor>bald_ink60</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<subtype>text</subtype>
+		<textoffsetx>-5</textoffsetx>
+		<textoffsety>0</textoffsety>
+		<pulseonselect>no</pulseonselect>
+	</default>
+	<default type="spincontrolex">
+		<spinwidth>16</spinwidth>
+		<spinheight>16</spinheight>
+		<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+		<texturenofocus />
+		<textureup colordiffuse="bald_ink28">bald/chevron.png</textureup>
+		<texturedown flipx="true" colordiffuse="bald_ink28">bald/chevron.png</texturedown>
+		<textureupfocus colordiffuse="bald_ink">bald/chevron.png</textureupfocus>
+		<texturedownfocus flipx="true" colordiffuse="bald_ink">bald/chevron.png</texturedownfocus>
+		<textureupdisabled colordiffuse="bald_ink10">bald/chevron.png</textureupdisabled>
+		<texturedowndisabled flipx="true" colordiffuse="bald_ink10">bald/chevron.png</texturedowndisabled>
+		<font>Bald_Section</font>
+		<textcolor>bald_ink60</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<textoffsetx>20</textoffsetx>
+		<aligny>center</aligny>
+		<!-- Estuary's direction; SettingsCategory's spinner (9) relies on it. -->
+		<reverse>yes</reverse>
+		<pulseonselect>no</pulseonselect>
+	</default>
+	<default type="radiobutton">
+		<radiowidth>12</radiowidth>
+		<radioheight>12</radioheight>
+		<textureradioonfocus colordiffuse="bald_accent">bald/dot.png</textureradioonfocus>
+		<textureradioonnofocus colordiffuse="bald_accent">bald/dot.png</textureradioonnofocus>
+		<textureradioofffocus colordiffuse="bald_ink34">bald/dot.png</textureradioofffocus>
+		<textureradiooffnofocus colordiffuse="bald_ink28">bald/dot.png</textureradiooffnofocus>
+		<textureradioondisabled colordiffuse="bald_ink28">bald/dot.png</textureradioondisabled>
+		<textureradiooffdisabled colordiffuse="bald_ink10">bald/dot.png</textureradiooffdisabled>
+		<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+		<texturenofocus />
+		<font>Bald_Section</font>
+		<textcolor>bald_ink60</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<textoffsetx>20</textoffsetx>
+		<align>left</align>
+		<aligny>center</aligny>
+		<pulseonselect>no</pulseonselect>
+	</default>
+	<default type="colorbutton">
+		<colorwidth>20</colorwidth>
+		<colorheight>20</colorheight>
+		<texturecolormask>bald/dot.png</texturecolormask>
+		<texturecolordisabledmask colordiffuse="bald_ink28">bald/dot.png</texturecolordisabledmask>
+		<font>Bald_Section</font>
+		<textcolor>bald_ink60</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<textoffsetx>20</textoffsetx>
+		<align>left</align>
+		<aligny>center</aligny>
+		<pulseonselect>no</pulseonselect>
+	</default>
+	<default type="scrollbar">
+		<texturesliderbackground colordiffuse="bald_ink10">bald/white.png</texturesliderbackground>
+		<texturesliderbar colordiffuse="bald_ink34">bald/white.png</texturesliderbar>
+		<texturesliderbarfocus colordiffuse="bald_ink">bald/white.png</texturesliderbarfocus>
+		<textureslidernib></textureslidernib>
+		<textureslidernibfocus></textureslidernibfocus>
+		<showonepage>false</showonepage>
+		<orientation>vertical</orientation>
+	</default>
+	<default type="grouplist">
+		<itemgap>0</itemgap>
+		<align>left</align>
+	</default>
+	<!-- Sliders: the settings slider's 16 px track texture with its 4 px bar, and a 16 px nib (Kodi scales the nib
+	     by the control height over the track texture's height). -->
+	<default type="slider">
+		<texturesliderbar border="8,0,8,0" colordiffuse="bald_ink28">bald/slider_bar.png</texturesliderbar>
+		<texturesliderbardisabled border="8,0,8,0" colordiffuse="bald_ink10">bald/slider_bar.png</texturesliderbardisabled>
+		<textureslidernib colordiffuse="bald_ink60">bald/slider_nib.png</textureslidernib>
+		<textureslidernibfocus colordiffuse="bald_accent">bald/slider_nib.png</textureslidernibfocus>
+		<textureslidernibdisabled colordiffuse="bald_ink28">bald/slider_nib.png</textureslidernibdisabled>
+		<orientation>horizontal</orientation>
+	</default>
+	<default type="sliderex">
+		<textoffsetx>20</textoffsetx>
+		<aligny>center</aligny>
+		<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+		<texturenofocus />
+		<sliderwidth>240</sliderwidth>
+		<sliderheight>16</sliderheight>
+		<texturesliderbar border="8,0,8,0" colordiffuse="bald_ink28">bald/slider_bar.png</texturesliderbar>
+		<texturesliderbardisabled border="8,0,8,0" colordiffuse="bald_ink10">bald/slider_bar.png</texturesliderbardisabled>
+		<textureslidernib colordiffuse="bald_ink60">bald/slider_nib.png</textureslidernib>
+		<textureslidernibfocus colordiffuse="bald_accent">bald/slider_nib.png</textureslidernibfocus>
+		<textureslidernibdisabled colordiffuse="bald_ink28">bald/slider_nib.png</textureslidernibdisabled>
+		<font>Bald_Section</font>
+		<textcolor>bald_ink60</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+	</default>
+	<default type="mover">
+		<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+		<texturenofocus />
+	</default>
+	<default type="resize">
+		<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+		<texturenofocus />
+	</default>
+	<default type="edit">
+		<texturefocus border="8" colordiffuse="bald_ink10">bald/white.png</texturefocus>
+		<texturenofocus />
+		<font>Bald_Section</font>
+		<textcolor>bald_ink60</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<disabledcolor>bald_ink28</disabledcolor>
+		<invalidcolor>bald_accent</invalidcolor>
+		<textoffsetx>20</textoffsetx>
+		<aligny>center</aligny>
+		<pulseonselect>no</pulseonselect>
+	</default>
+</includes>

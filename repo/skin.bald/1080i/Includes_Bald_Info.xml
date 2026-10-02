@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald movie info dialog: variables, animations and repeated controls (docs/SPEC.md 5.2). -->
+<includes>
+	<expression name="Bald_InfoOwnBackdrop">[!Window.IsVisible(home)]</expression>
+	<!-- The page in view (Bald.InfoSec on Home, set by each page's focusable controls): 0 Overview, 1 Cast & details,
+	     2 More like this. Unset counts as Overview: the dialog's onload sets 0 only after Kodi has drawn its first
+	     frames, and until then the Cast and More backdrop faded in over the fanart and straight out again. -->
+	<expression name="Bald_InfoOnOverview">[String.IsEmpty(Window(home).Property(Bald.InfoSec)) | String.IsEqual(Window(home).Property(Bald.InfoSec),0)]</expression>
+	<expression name="Bald_InfoOnCast">[String.IsEqual(Window(home).Property(Bald.InfoSec),1)]</expression>
+	<expression name="Bald_InfoOnMore">[String.IsEqual(Window(home).Property(Bald.InfoSec),2)]</expression>
+	<expression name="Bald_InfoHasCast">[Integer.IsGreater(Container(50).NumItems,0)]</expression>
+	<!-- scripts/info.py found a recommendations path; the list may still be loading. -->
+	<expression name="Bald_InfoHasMorePath">[!String.IsEmpty(Window(movieinformation).Property(Bald.MorePath))]</expression>
+	<expression name="Bald_HasRecommendations">[$EXP[Bald_InfoHasMorePath] + Integer.IsGreater(Container(5100).NumItems,0)]</expression>
+	<!-- A hidden still (Includes_Bald_Spoilers.xml) skips the episode's own poster, which Jellyfin sets to the still. -->
+	<variable name="Bald_InfoPoster">
+		<value condition="!String.IsEmpty(ListItem.Art(poster)) + !$EXP[Bald_SpoilerThumb]">$INFO[ListItem.Art(poster)]</value>
+		<value condition="!String.IsEmpty(ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(tvshow.poster)]</value>
+		<value condition="$EXP[Bald_SpoilerThumb]" />
+		<value>$INFO[ListItem.Art(thumb)]</value>
+	</variable>
+	<!-- Bald_ItemFanart for the highlighted recommendation. -->
+	<variable name="Bald_ItemFanart5100">
+		<value condition="!String.IsEmpty(Container(5100).ListItem.Art(fanart))">$INFO[Container(5100).ListItem.Art(fanart)]</value>
+		<value condition="!String.IsEmpty(Container(5100).ListItem.Art(tvshow.fanart))">$INFO[Container(5100).ListItem.Art(tvshow.fanart)]</value>
+		<value condition="$EXP[Bald_SpoilerThumb5100]">$VAR[Bald_SpoilerArt5100]</value>
+		<value>$INFO[Container(5100).ListItem.Art(thumb)]</value>
+	</variable>
+	<variable name="Bald_MoreStatus">
+		<value condition="$EXP[Bald_InfoHasMorePath] + Container(5100).IsUpdating">$LOCALIZE[31777]</value>
+		<value>$LOCALIZE[31778]</value>
+	</variable>
+	<variable name="Bald_InfoPageTrail">
+		<value condition="$EXP[Bald_InfoOnOverview]">[COLOR bald_ink]$LOCALIZE[31770][/COLOR]     ·     $LOCALIZE[31771]     ·     $LOCALIZE[31772]</value>
+		<value>[COLOR bald_ink60]$LOCALIZE[31770][/COLOR]     ·     [COLOR bald_ink]$LOCALIZE[31771][/COLOR]     ·     $LOCALIZE[31772]</value>
+	</variable>
+	<!-- ============ Variables (ListItem.* is the dialog's item) ============ -->
+	<variable name="Bald_InfoTitle">
+		<value>$INFO[ListItem.Title]</value>
+	</variable>
+	<variable name="Bald_InfoMeta">
+		<value condition="$EXP[Bald_InfoTVIsEpisode]">$INFO[ListItem.TVShowTitle] · S$INFO[ListItem.Season] E$INFO[ListItem.Episode]$INFO[ListItem.Duration(mins), · , $LOCALIZE[31710]]</value>
+		<value condition="$EXP[Bald_InfoTVIsShow]">$VAR[Bald_InfoSeasons]</value>
+		<value condition="Integer.IsGreaterOrEqual(ListItem.Duration(mins),60)">$INFO[ListItem.Year,,$COMMA ]$INFO[ListItem.Duration(h),,h ]$INFO[ListItem.Duration(mm),,m]</value>
+		<value>$INFO[ListItem.Year]$INFO[ListItem.Duration(mins),$COMMA , $LOCALIZE[31710]]</value>
+	</variable>
+	<!-- A show's year and season count, shared by Cast & details and the TV Overview (which adds the rating). -->
+	<variable name="Bald_InfoSeasons">
+		<value condition="String.IsEqual(ListItem.Property(TotalSeasons),1)">$INFO[ListItem.Year,,$COMMA ]$LOCALIZE[31711]</value>
+		<value>$INFO[ListItem.Year]$INFO[ListItem.Property(TotalSeasons),$COMMA , $LOCALIZE[31712]]</value>
+	</variable>
+	<variable name="Bald_InfoResolution">
+		<value condition="String.IsEqual(ListItem.VideoResolution,4K)">4K</value>
+		<value>$INFO[ListItem.VideoResolution,,p]</value>
+	</variable>
+	<variable name="Bald_InfoVideo">
+		<!-- Kodi leaves the HDR type empty for SDR; with stream details present (a codec), that is SDR. -->
+		<value condition="String.IsEmpty(ListItem.HdrType) + !String.IsEmpty(ListItem.VideoCodec)">$VAR[Bald_InfoResolution]$MAP[DefaultCodecMap, ListItem.VideoCodec, · ] · SDR</value>
+		<value>$VAR[Bald_InfoResolution]$MAP[DefaultCodecMap, ListItem.VideoCodec, · ]$MAP[DefaultHdrMap, ListItem.HdrType, · ]</value>
+	</variable>
+	<variable name="Bald_InfoAudio">
+		<value>$MAP[Bald_AudioCodec, ListItem.AudioCodec]$VAR[Bald_InfoChannels]$MAP[Bald_Language, ListItem.AudioLanguage, · ]</value>
+	</variable>
+	<variable name="Bald_InfoChannels">
+		<value condition="Integer.IsGreater(ListItem.AudioChannels,10)">$INFO[ListItem.AudioChannels, · , $LOCALIZE[31714]]</value>
+		<value>$MAP[Bald_AudioChannels, ListItem.AudioChannels, · ]</value>
+	</variable>
+	<variable name="Bald_InfoSubtitle">
+		<value>$MAP[Bald_Language, ListItem.SubtitleLanguage]</value>
+	</variable>
+	<!-- Stream names for the details (after script.tinyppi's tables): Kodi's codec ids as their product names, the
+	     Atmos and DTS:X variants spelled out; Estuary's DefaultCodecMap for the rest. $MAP returns an id it has no
+	     entry for unchanged. -->
+	<map name="Bald_AudioCodec" ref="DefaultCodecMap">
+		<entry key="truehd">Dolby TrueHD</entry>
+		<entry key="truehd_atmos">Dolby TrueHD Atmos</entry>
+		<entry key="eac3">Dolby Digital Plus</entry>
+		<entry key="eac3_ddp_atmos">Dolby Digital Plus Atmos</entry>
+		<entry key="dtshd_ma_x">DTS:X</entry>
+		<entry key="dtshd_ma_x_imax">DTS:X IMAX</entry>
+		<entry key="dts_es">DTS-ES</entry>
+		<entry key="dts_96_24">DTS 96/24</entry>
+		<entry key="dts_express">DTS Express</entry>
+		<entry key="dtshd">DTS-HD</entry>
+		<entry key="pcm_bluray">LPCM</entry>
+		<!-- Estuary's spellings, tidied -->
+		<entry key="he_aac_v2">HE-AAC v2</entry>
+		<entry key="aifc">AIFF-C</entry>
+		<entry key="ape">Monkey's Audio</entry>
+		<entry key="cdda">CD Audio</entry>
+		<entry key="ogg">Ogg Vorbis</entry>
+		<entry key="opus">Opus</entry>
+		<entry key="wavpack">WavPack</entry>
+		<entry key="wmapro">WMA Pro</entry>
+		<!-- Dolby and object audio -->
+		<entry key="ac4">Dolby AC-4</entry>
+		<entry key="dolby_e">Dolby E</entry>
+		<entry key="mlp">MLP</entry>
+		<entry key="mpegh_3d_audio">MPEG-H 3D Audio</entry>
+		<!-- PCM and lossless -->
+		<entry key="pcm_dvd">LPCM</entry>
+		<entry key="pcm_s16be">PCM</entry>
+		<entry key="pcm_s24be">PCM</entry>
+		<entry key="pcm_s32le">PCM</entry>
+		<entry key="pcm_s32be">PCM</entry>
+		<entry key="pcm_f32le">PCM</entry>
+		<entry key="pcm_f64le">PCM</entry>
+		<entry key="pcm_u8">PCM</entry>
+		<entry key="pcm_alaw">A-law</entry>
+		<entry key="pcm_mulaw">μ-law</entry>
+		<entry key="dsd_lsbf">DSD</entry>
+		<entry key="dsd_msbf">DSD</entry>
+		<entry key="dsd_lsbf_planar">DSD</entry>
+		<entry key="dsd_msbf_planar">DSD</entry>
+		<entry key="mp4als">MPEG-4 ALS</entry>
+		<entry key="tak">TAK</entry>
+		<entry key="tta">TTA</entry>
+		<entry key="wmalossless">WMA Lossless</entry>
+		<!-- Other -->
+		<entry key="adpcm_ms">ADPCM</entry>
+		<entry key="adpcm_ima_wav">ADPCM</entry>
+		<entry key="amr_nb">AMR-NB</entry>
+		<entry key="amr_wb">AMR-WB</entry>
+		<entry key="atrac3">ATRAC3</entry>
+		<entry key="atrac3p">ATRAC3plus</entry>
+		<entry key="cook">RealAudio</entry>
+		<entry key="speex">Speex</entry>
+		<entry key="wmav1">WMA</entry>
+		<entry key="wmavoice">WMA Voice</entry>
+	</map>
+	<!-- Channel count to speaker layout; above 10 the count is shown with "channels" (Bald_InfoChannels). -->
+	<map name="Bald_AudioChannels">
+		<entry key="1">1.0</entry>
+		<entry key="2">2.0</entry>
+		<entry key="3">2.1</entry>
+		<entry key="4">4.0</entry>
+		<entry key="5">5.0</entry>
+		<entry key="6">5.1</entry>
+		<entry key="7">6.1</entry>
+		<entry key="8">7.1</entry>
+		<entry key="9">8.1</entry>
+		<entry key="10">9.1</entry>
+	</map>
+	<!-- ISO 639-2 codes (both the B and T forms where they differ) to each language's own name, the same in every
+	     interface language. -->
+	<map name="Bald_Language">
+		<entry key="ger">Deutsch</entry>
+		<entry key="deu">Deutsch</entry>
+		<entry key="eng">English</entry>
+		<entry key="fre">Français</entry>
+		<entry key="fra">Français</entry>
+		<entry key="spa">Español</entry>
+		<entry key="ita">Italiano</entry>
+		<entry key="por">Português</entry>
+		<entry key="dut">Nederlands</entry>
+		<entry key="nld">Nederlands</entry>
+		<entry key="dan">Dansk</entry>
+		<entry key="swe">Svenska</entry>
+		<entry key="nor">Norsk</entry>
+		<entry key="nob">Norsk</entry>
+		<entry key="nno">Norsk</entry>
+		<entry key="fin">Suomi</entry>
+		<entry key="ice">Íslenska</entry>
+		<entry key="isl">Íslenska</entry>
+		<entry key="pol">Polski</entry>
+		<entry key="cze">Čeština</entry>
+		<entry key="ces">Čeština</entry>
+		<entry key="slo">Slovenčina</entry>
+		<entry key="slk">Slovenčina</entry>
+		<entry key="slv">Slovenščina</entry>
+		<entry key="hun">Magyar</entry>
+		<entry key="rum">Română</entry>
+		<entry key="ron">Română</entry>
+		<entry key="bul">Български</entry>
+		<entry key="hrv">Hrvatski</entry>
+		<entry key="srp">Српски</entry>
+		<entry key="bos">Bosanski</entry>
+		<entry key="mac">Македонски</entry>
+		<entry key="mkd">Македонски</entry>
+		<entry key="alb">Shqip</entry>
+		<entry key="sqi">Shqip</entry>
+		<entry key="gre">Ελληνικά</entry>
+		<entry key="ell">Ελληνικά</entry>
+		<entry key="tur">Türkçe</entry>
+		<entry key="rus">Русский</entry>
+		<entry key="ukr">Українська</entry>
+		<entry key="bel">Беларуская</entry>
+		<entry key="est">Eesti</entry>
+		<entry key="lav">Latviešu</entry>
+		<entry key="lit">Lietuvių</entry>
+		<entry key="cat">Català</entry>
+		<entry key="baq">Euskara</entry>
+		<entry key="eus">Euskara</entry>
+		<entry key="glg">Galego</entry>
+		<entry key="wel">Cymraeg</entry>
+		<entry key="cym">Cymraeg</entry>
+		<entry key="gle">Gaeilge</entry>
+		<entry key="lat">Latina</entry>
+		<entry key="heb">עברית</entry>
+		<entry key="ara">العربية</entry>
+		<entry key="per">فارسی</entry>
+		<entry key="fas">فارسی</entry>
+		<entry key="hin">हिन्दी</entry>
+		<entry key="tam">தமிழ்</entry>
+		<entry key="tel">తెలుగు</entry>
+		<entry key="ben">বাংলা</entry>
+		<entry key="urd">اردو</entry>
+		<entry key="tha">ไทย</entry>
+		<entry key="vie">Tiếng Việt</entry>
+		<entry key="ind">Bahasa Indonesia</entry>
+		<entry key="may">Bahasa Melayu</entry>
+		<entry key="msa">Bahasa Melayu</entry>
+		<entry key="fil">Filipino</entry>
+		<entry key="tgl">Filipino</entry>
+		<entry key="chi">中文</entry>
+		<entry key="zho">中文</entry>
+		<entry key="jpn">日本語</entry>
+		<entry key="kor">한국어</entry>
+		<entry key="geo">ქართული</entry>
+		<entry key="kat">ქართული</entry>
+		<entry key="arm">Հայերեն</entry>
+		<entry key="hye">Հայերեն</entry>
+		<entry key="aze">Azərbaycan</entry>
+		<entry key="kaz">Қазақ</entry>
+		<entry key="mon">Монгол</entry>
+		<entry key="afr">Afrikaans</entry>
+		<entry key="swa">Kiswahili</entry>
+	</map>
+
+	<!-- ============ Animations ============ -->
+	<!-- The dialog's timings (DialogVideoInfo.xml; Home's frame zoom is Bald_InfoZoom* and Bald_InfoReturn*,
+	     Includes_Bald_Home.xml). From Home: the art layers (scrims, Cast and More backdrop) and the pages fade in over
+	     InTime after InDelay, once the zoom is under way, and leave over OutTime before the frame returns. Opened away
+	     from Home, the dialog's own backdrop and the art layers come and go together over BackdropTime (the pages keep
+	     InTime / OutTime). Changing page, the scrims and the backdrop crossfade over PageFadeTime. -->
+	<constant name="Bald_InfoInDelay">260</constant>
+	<constant name="Bald_InfoInTime">360</constant>
+	<constant name="Bald_InfoOutTime">130</constant>
+	<constant name="Bald_InfoBackdropTime">380</constant>
+	<constant name="Bald_InfoPageFadeTime">460</constant>
+	<!-- Info content in: fade 400 and rise 18 px over 560, base delay 380 plus the stagger (0, 60, 100, 140, 180, 220,
+	     270, 310 in the prototype). -->
+	<include name="Bald_AnimInfoIn">
+		<param name="delay" />
+		<definition>
+			<animation type="WindowOpen" condition="$EXP[Bald_FullMotion]">
+				<effect type="fade" start="0" end="100" time="400" delay="$PARAM[delay]" tween="sine" easing="inout" />
+				<effect type="slide" start="0,18" end="0,0" time="560" delay="$PARAM[delay]" tween="cubic" easing="out" />
+			</animation>
+			<animation type="WindowOpen" condition="$EXP[Bald_ReduceMotion]">
+				<effect type="fade" start="0" end="100" time="400" delay="$PARAM[delay]" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<!-- Each fixed page owns one visibility transition; no compounded/reversing scroll offsets. -->
+	<include name="Bald_InfoPage">
+		<param name="page" />
+		<definition>
+			<visible allowhiddenfocus="true">String.IsEqual(Window(home).Property(Bald.InfoSec),$PARAM[page])</visible>
+			<animation type="Visible" condition="$EXP[Bald_FullMotion]" reversible="false">
+				<effect type="fade" start="0" end="100" time="360" tween="sine" easing="inout" />
+				<effect type="slide" start="0,18" end="0,0" time="560" tween="cubic" easing="out" />
+			</animation>
+			<animation type="Visible" condition="$EXP[Bald_ReduceMotion]" reversible="false">
+				<effect type="fade" start="0" end="100" time="360" tween="sine" easing="inout" />
+			</animation>
+			<animation type="Hidden" reversible="false">
+				<effect type="fade" start="100" end="0" time="130" tween="sine" easing="inout" />
+			</animation>
+		</definition>
+	</include>
+	<!-- Movie Overview opens on Resume or Play (the grouplist remembers its last child, so focus it explicitly). -->
+	<include name="Bald_InfoMovieOnLoad">
+		<onload condition="ListItem.IsResumable">SetFocus(5001)</onload>
+		<onload condition="!ListItem.IsResumable">SetFocus(5003)</onload>
+	</include>
+	<!-- Down to Cast & details: focus cast, or Details (5050) if cast is empty. Also the TV episode row's Down. -->
+	<include name="Bald_InfoActionToCast">
+		<ondown>SetProperty(Bald.InfoSec,1,home)</ondown>
+		<include content="Bald_UnfollowContainerOnDown"><param name="window">movieinformation</param></include>
+		<ondown condition="$EXP[Bald_InfoHasCast]">SetFocus(50)</ondown>
+		<ondown condition="!$EXP[Bald_InfoHasCast]">SetFocus(5050)</ondown>
+	</include>
+	<!-- Up to Overview restores the actions; TV returns to the lowest filled row (episodes, then seasons).
+	     Movies have no 5301/5302, so those conditions are false there. -->
+	<include name="Bald_InfoToOverview">
+		<include content="Bald_UnfollowContainerOnUp"><param name="window">movieinformation</param></include>
+		<onup>SetProperty(Bald.InfoSec,0,home)</onup>
+		<onup condition="$EXP[Bald_InfoTVHasEpisodes]">SetFocus(5302)</onup>
+		<onup condition="!$EXP[Bald_InfoTVHasEpisodes] + $EXP[Bald_InfoTVHasSeasons]">SetFocus(5301)</onup>
+		<onup condition="!$EXP[Bald_InfoTVHasEpisodes] + !$EXP[Bald_InfoTVHasSeasons]">SetFocus(5000)</onup>
+	</include>
+	<include name="Bald_InfoToMore">
+		<ondown>SetProperty(Bald.InfoSec,2,home)</ondown>
+		<include content="Bald_FollowContainerOnDown"><param name="id">5100</param><param name="window">movieinformation</param></include>
+		<ondown condition="$EXP[Bald_HasRecommendations]">SetFocus(5100)</ondown>
+		<ondown condition="!$EXP[Bald_HasRecommendations]">SetFocus(5150)</ondown>
+	</include>
+	<include name="Bald_InfoBackToCast">
+		<include content="Bald_UnfollowContainerOnUp"><param name="window">movieinformation</param></include>
+		<onup>SetProperty(Bald.InfoSec,1,home)</onup>
+		<onup condition="$EXP[Bald_InfoHasCast]">SetFocus(50)</onup>
+		<onup condition="!$EXP[Bald_InfoHasCast]">SetFocus(5050)</onup>
+	</include>
+
+	<!-- ============ Controls ============ -->
+	<!-- A centred dot in a 32 px separator between the hints (the key glyphs start each hint, so it needs the room). -->
+	<include name="Bald_InfoHintPair">
+		<param name="first" /><param name="second" />
+		<param name="width">384</param><param name="third" /><param name="third_visible">false</param>
+		<definition>
+			<control type="grouplist">
+				<width>$PARAM[width]</width><height>24</height><orientation>horizontal</orientation><align>right</align><itemgap>0</itemgap>
+				<control type="label"><width>auto</width><height>24</height><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$PARAM[first]</label></control>
+				<control type="label"><width>32</width><height>24</height><align>center</align><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>·</label></control>
+				<control type="label"><width>auto</width><height>24</height><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$PARAM[second]</label></control>
+				<control type="label"><width>32</width><height>24</height><align>center</align><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>·</label><visible>$PARAM[third_visible]</visible></control>
+				<control type="label"><width>auto</width><height>24</height><aligny>center</aligny><font>Bald_Hint</font><textcolor>bald_ink60</textcolor><label>$PARAM[third]</label><visible>$PARAM[third_visible]</visible></control>
+			</control>
+		</definition>
+	</include>
+	<!-- Action pill: 54 px tall, 28 px side padding. Focused: filled ink, label in field, pop to 1.04 (260). -->
+	<include name="Bald_InfoAction">
+		<param name="id" />
+		<param name="label" />
+		<param name="onclick" />
+		<!-- Optional: a Bald Helper request sent in place of onclick while helper_if holds. -->
+		<param name="helper">noop</param>
+		<param name="helper_if">false</param>
+		<param name="visible">true</param>
+		<!-- Include holding the Down route: Cast & details for movies, the season tabs for TV. -->
+		<param name="down">Bald_InfoActionToCast</param>
+		<definition>
+			<control type="button" id="$PARAM[id]">
+				<width>auto</width>
+				<height>54</height>
+				<label>$PARAM[label]</label>
+				<font>Bald_Section</font>
+				<textoffsetx>28</textoffsetx>
+				<aligny>center</aligny>
+				<textcolor>bald_ink</textcolor>
+				<focusedcolor>bald_field</focusedcolor>
+				<texturenofocus border="27" colordiffuse="bald_ink45">bald/pill_outline.png</texturenofocus>
+				<texturefocus border="27" colordiffuse="bald_ink">bald/pill.png</texturefocus>
+				<onclick condition="![$PARAM[helper_if]]">$PARAM[onclick]</onclick>
+				<onclick condition="$PARAM[helper_if]">$PARAM[helper]</onclick>
+				<!-- Navigation belongs to the focused button, not its grouplist. -->
+				<include>$PARAM[down]</include>
+				<onup>noop</onup>
+				<onfocus>SetProperty(Bald.InfoSec,0,home)</onfocus>
+				<include content="Bald_UnfollowContainerOnFocus"><param name="window">movieinformation</param></include>
+				<visible>$PARAM[visible]</visible>
+				<animation type="Focus" condition="$EXP[Bald_FullMotion]">
+					<effect type="zoom" start="100" end="104" center="auto" time="260" tween="back" easing="out" />
+				</animation>
+				<animation type="Unfocus" condition="$EXP[Bald_FullMotion]">
+					<effect type="zoom" start="104" end="100" center="auto" time="220" tween="cubic" easing="out" />
+				</animation>
+			</control>
+		</definition>
+	</include>
+	<!-- Cast member: 240 px slot: 112 px circle, two-line name and role. Focused: 3 px ink ring, pop to 1.06. -->
+	<include name="Bald_CastItem">
+		<param name="focused">false</param>
+		<definition>
+			<control type="group">
+				<animation type="Focus" condition="$EXP[Bald_FullMotion]">
+					<effect type="zoom" start="100" end="106" center="120,68" time="280" tween="back" easing="out" />
+				</animation>
+				<control type="image">
+					<left>64</left>
+					<top>12</top>
+					<width>112</width>
+					<height>112</height>
+					<texture colordiffuse="bald_ink10">bald/circle_112.png</texture>
+				</control>
+				<control type="image">
+					<left>64</left>
+					<top>12</top>
+					<width>112</width>
+					<height>112</height>
+					<aspectratio scalediffuse="false">scale</aspectratio>
+					<texture diffuse="bald/circle_112.png" background="true">$INFO[ListItem.Art(thumb)]</texture>
+				</control>
+				<control type="image">
+					<left>61</left>
+					<top>9</top>
+					<width>118</width>
+					<height>118</height>
+					<texture colordiffuse="bald_ink">bald/ring_118.png</texture>
+					<visible>$PARAM[focused]</visible>
+				</control>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>138</top>
+				<width>220</width>
+				<height>44</height>
+				<wrapmultiline>true</wrapmultiline><aligny>top</aligny>
+				<align>center</align>
+				<font>Bald_CastName</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+			<control type="label">
+				<left>10</left>
+				<top>188</top>
+				<width>220</width>
+				<height>44</height>
+				<wrapmultiline>true</wrapmultiline><aligny>top</aligny>
+				<align>center</align>
+				<font>Bald_CastRole</font>
+				<textcolor>bald_ink60</textcolor>
+				<label>$INFO[ListItem.Label2]</label>
+			</control>
+		</definition>
+	</include>
+	<!-- Detail cell: 380 px wide; label 17 px at 58%, value 21 px medium on at most two lines, or Kodi's "Not available" in the
+	     same style while the value is empty (<id> names the value label so the fallback can read it; ids in 1080i/IDs). -->
+	<include name="Bald_Detail">
+		<param name="id" />
+		<param name="x" />
+		<param name="y" />
+		<param name="vy" />
+		<param name="label" />
+		<param name="value" />
+		<definition>
+			<control type="label">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[y]</top>
+				<width>380</width>
+				<height>22</height>
+				<font>Bald_DetailLabel</font>
+				<textcolor>bald_ink60</textcolor>
+				<label>$PARAM[label]</label>
+			</control>
+			<!-- The value, for the fallback below to read (Control.GetLabel); drawn clear: a label does not stop at its
+			     height, so a long value (seven writers) ran into the row below. -->
+			<control type="label" id="$PARAM[id]">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[vy]</top>
+				<width>380</width>
+				<height>56</height>
+				<wrapmultiline>true</wrapmultiline><aligny>top</aligny>
+				<font>Bald_DetailValue</font>
+				<textcolor>00FFFFFF</textcolor>
+				<label>$PARAM[value]</label>
+			</control>
+			<!-- What shows: a text box keeps to the lines that fit its height, two. -->
+			<control type="textbox">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[vy]</top>
+				<width>380</width>
+				<height>56</height>
+				<font>Bald_DetailValue</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$PARAM[value]</label>
+			</control>
+			<control type="label">
+				<left>$PARAM[x]</left>
+				<top>$PARAM[vy]</top>
+				<width>380</width>
+				<height>56</height>
+				<aligny>top</aligny>
+				<font>Bald_DetailValue</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$LOCALIZE[10005]</label>
+				<visible>String.IsEmpty(Control.GetLabel($PARAM[id]))</visible>
+			</control>
+		</definition>
+	</include>
+</includes>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<!-- The context menu's look (DialogContextMenu.xml), shared with the add-on menus drawn in it (Jellyfin's context
+	     menu and resume prompt): the dark scrim, the column's motion (in: fade 380 and slide 40 px over 480 after 120;
+	     out: fade 160, slide 180) and the 56 px item (unfocused 34%; focused full ink, 6 px right, the accent dot). -->
+	<include name="Bald_MenuScrim">
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<texture colordiffuse="bald_field85">bald/white.png</texture>
+			<animation effect="fade" start="0" end="100" time="300" tween="sine" easing="inout">WindowOpen</animation>
+			<animation effect="fade" start="100" end="0" time="160" tween="sine" easing="inout">WindowClose</animation>
+		</control>
+	</include>
+	<include name="Bald_MenuMotion">
+		<animation type="WindowOpen" condition="$EXP[Bald_FullMotion]">
+			<effect type="fade" start="0" end="100" time="380" delay="120" tween="sine" easing="inout" />
+			<effect type="slide" start="40,0" end="0,0" time="480" delay="120" tween="cubic" easing="out" />
+		</animation>
+		<animation type="WindowOpen" condition="$EXP[Bald_ReduceMotion]">
+			<effect type="fade" start="0" end="100" time="380" delay="120" tween="sine" easing="inout" />
+		</animation>
+		<animation type="WindowClose" condition="$EXP[Bald_FullMotion]">
+			<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+			<effect type="slide" start="0,0" end="40,0" time="180" tween="cubic" easing="out" />
+		</animation>
+		<animation type="WindowClose" condition="$EXP[Bald_ReduceMotion]">
+			<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+		</animation>
+	</include>
+	<!-- A menu button's look, inside a 446 x 56 button at x 4 of a column at 1430 (the dot lands at 1440 after the
+	     focus slide, text at 1460 unfocused and 1466 focused, as in the Home menu). -->
+	<include name="Bald_MenuButtonLook">
+		<font>Bald_MenuItem</font>
+		<textoffsetx>26</textoffsetx>
+		<aligny>center</aligny>
+		<textcolor>bald_ink34</textcolor>
+		<focusedcolor>bald_ink</focusedcolor>
+		<texturefocus colordiffuse="bald_accent">bald/menu_dot.png</texturefocus>
+		<texturenofocus />
+		<animation type="Focus" condition="$EXP[Bald_FullMotion]" reversible="false">
+			<effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" />
+			<effect type="slide" start="0,0" end="6,0" time="320" tween="cubic" easing="out" />
+		</animation>
+		<animation type="Focus" condition="$EXP[Bald_ReduceMotion]" reversible="false">
+			<effect type="fade" start="34" end="100" time="240" tween="sine" easing="inout" />
+		</animation>
+		<animation type="Unfocus" condition="$EXP[Bald_FullMotion]">
+			<effect type="slide" start="6,0" end="0,0" time="320" tween="cubic" easing="out" />
+		</animation>
+	</include>
+
+	<!-- Native context buttons expose labels, not action IDs or descriptions. Match localized labels, never
+	     dynamic button positions. Unknown/add-on actions retain an honest generic hint. Notes are skin strings
+	     (31900-31930); the labels used to select them follow Kodi's/add-ons' current language. -->
+	<!-- The same items in a list (a dialog whose entries are list items, not Kodi's copies of a button): placed at x
+	     1434 with width 446, each item 62 px (56 and the 6 px gap). A list draws its items in fixed layouts, so the
+	     focused item's slide is a place, not a motion. -->
+	<include name="Bald_MenuListLayouts">
+		<itemlayout width="446" height="62">
+			<control type="label">
+				<left>26</left>
+				<width>420</width>
+				<height>56</height>
+				<font>Bald_MenuItem</font>
+				<aligny>center</aligny>
+				<textcolor>bald_ink34</textcolor>
+				<label>$INFO[ListItem.Label]</label>
+			</control>
+		</itemlayout>
+		<focusedlayout width="446" height="62">
+			<control type="group">
+				<left>6</left>
+				<control type="image">
+					<width>440</width>
+					<height>56</height>
+					<texture border="12,0,0,0" colordiffuse="bald_accent">bald/menu_dot.png</texture>
+				</control>
+				<control type="label">
+					<left>26</left>
+					<width>414</width>
+					<height>56</height>
+					<font>Bald_MenuItem</font>
+					<aligny>center</aligny>
+					<textcolor>bald_ink</textcolor>
+					<scroll>true</scroll>
+					<label>$INFO[ListItem.Label]</label>
+				</control>
+			</control>
+		</focusedlayout>
+	</include>
+
+	<variable name="Bald_ContextNote">
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[208])">$LOCALIZE[31900]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[12021])">$LOCALIZE[31901]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13362])">$LOCALIZE[31902]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13412])">$LOCALIZE[31903]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13434])">$LOCALIZE[31904]</value>
+		<value condition="String.StartsWith(System.CurrentControl,$LOCALIZE[12023]) | String.IsEqual(System.CurrentControl,$LOCALIZE[13404])">$LOCALIZE[31905]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[10008])">$LOCALIZE[31906]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13347])">$LOCALIZE[31907]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[15213])">$LOCALIZE[31908]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[14116]) | String.IsEqual(System.CurrentControl,$LOCALIZE[13346]) | String.IsEqual(System.CurrentControl,$LOCALIZE[20351]) | String.IsEqual(System.CurrentControl,$LOCALIZE[20352])">$LOCALIZE[31909]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[16103])">$LOCALIZE[31910]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[16104])">$LOCALIZE[31911]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[14076])">$LOCALIZE[31912]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[14077])">$LOCALIZE[31913]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[16106])">$LOCALIZE[31914]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13511])">$LOCALIZE[31915]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[16105])">$LOCALIZE[31916]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[16107])">$LOCALIZE[31917]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[20384])">$LOCALIZE[31918]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[20465])">$LOCALIZE[31919]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[40001])">$LOCALIZE[31920]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[646])">$LOCALIZE[31921]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[184])">$LOCALIZE[31922]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13349])">$LOCALIZE[31923]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[13352])">$LOCALIZE[31924]</value>
+		<value condition="String.IsEqual(System.CurrentControl,$LOCALIZE[37015])">$LOCALIZE[31925]</value>
+		<value condition="System.HasAddon(plugin.video.jellyfin) + String.IsEqual(System.CurrentControl,Window(contextmenu).Property(Bald.JellyfinOptions))">$LOCALIZE[31926]</value>
+		<value condition="System.HasAddon(plugin.video.jellyfin) + String.IsEqual(System.CurrentControl,Window(contextmenu).Property(Bald.JellyfinTranscode))">$LOCALIZE[31927]</value>
+		<value condition="!String.IsEmpty(System.CurrentControl)">$LOCALIZE[31928] “$INFO[System.CurrentControl]” $LOCALIZE[31929]</value>
+		<value>$LOCALIZE[31930]</value>
+	</variable>
+</includes>

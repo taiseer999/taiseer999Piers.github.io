@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bald play speed control (docs/SPEC.md 5.16, "Other playback windows"): an opaque field panel at the top centre with
+     the name and speed and a pair of chevrons, dim until focused. Started from Kodi 22 Estuary's
+     Custom_1110_TempoControl.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). Buttons 11 (slower) and 12 (faster)
+     keep Estuary's actions and navigation. -->
+<window id="1110" type="dialog">
+	<!-- Parks the video OSD's auto-close while this dialog is open over it (Includes_Bald_OSD.xml). -->
+	<include content="Bald_OSDSuspendAutoClose"><param name="name">1110</param></include>
+	<defaultcontrol>11</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<depth>DepthOSD+</depth>
+	<controls>
+		<control type="group">
+			<top>96</top>
+			<centerleft>50%</centerleft>
+			<width>840</width>
+			<include content="Bald_PlaybackPanel">
+				<param name="height">96</param>
+			</include>
+			<control type="label">
+				<description>Dialog header</description>
+				<left>40</left>
+				<top>0</top>
+				<width>400</width>
+				<height>96</height>
+				<aligny>center</aligny>
+				<font>Bald_Section</font>
+				<textcolor>bald_ink60</textcolor>
+				<label>$LOCALIZE[31142]</label>
+			</control>
+			<control type="label">
+				<left>400</left>
+				<top>0</top>
+				<width>256</width>
+				<height>96</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>Bald_InfoMeta</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$INFO[Player.PlaySpeed]</label>
+			</control>
+			<control type="button" id="11">
+				<left>688</left>
+				<top>24</top>
+				<width>48</width>
+				<height>48</height>
+				<label />
+				<font>Bald_Hint</font>
+				<onleft>12</onleft>
+				<onright>12</onright>
+				<texturefocus flipx="true" colordiffuse="bald_ink">bald/chevron.png</texturefocus>
+				<texturenofocus flipx="true" colordiffuse="bald_ink45">bald/chevron.png</texturenofocus>
+				<onclick>PlayerControl(TempoDown)</onclick>
+			</control>
+			<control type="button" id="12">
+				<left>752</left>
+				<top>24</top>
+				<width>48</width>
+				<height>48</height>
+				<label />
+				<font>Bald_Hint</font>
+				<onleft>11</onleft>
+				<onright>11</onright>
+				<texturefocus colordiffuse="bald_ink">bald/chevron.png</texturefocus>
+				<texturenofocus colordiffuse="bald_ink45">bald/chevron.png</texturenofocus>
+				<onclick>PlayerControl(TempoUp)</onclick>
+			</control>
+		</control>
+	</controls>
+</window>

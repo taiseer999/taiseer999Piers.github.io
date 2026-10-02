@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald player controls popup (docs/SPEC.md 5.16, "Other playback windows"), shown outside full screen: the Bald popup
+     surface with the now-playing art, title and meta, the seek track and the OSD's icon buttons. Started from Kodi 22
+     Estuary's PlayerControls.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). CGUIDialogPlayerControls binds no
+     control ids; the buttons keep Estuary's ids and actions (201 row, 600-607, 704 repeat, 23 progress and
+     87 seek button). -->
+<window>
+	<defaultcontrol always="true">201</defaultcontrol>
+	<visible>Player.HasMedia + Window.IsActive(PlayerControls) + !Window.IsActive(FullscreenVideo) + !Window.IsActive(FullscreenGame) + !Window.IsActive(Visualisation)</visible>
+	<include>Animation_DialogPopupOpenClose</include>
+	<controls>
+		<control type="group">
+			<top>335</top>
+			<centerleft>50%</centerleft>
+			<width>1115</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1115" />
+				<param name="height" value="410" />
+				<param name="header_label" value="$LOCALIZE[16003]" />
+				<param name="header_id" value="" />
+			</include>
+			<!-- Art, right: poster or icon, 250 px, no frame. -->
+			<control type="image">
+				<left>825</left>
+				<top>100</top>
+				<width>250</width>
+				<height>250</height>
+				<fadetime>400</fadetime>
+				<aspectratio align="right" aligny="top">keep</aspectratio>
+				<texture background="true">$VAR[NowPlayingPosterVar]</texture>
+			</control>
+			<!-- Title, artist and meta. -->
+			<control type="label">
+				<left>40</left>
+				<top>96</top>
+				<width>760</width>
+				<height>48</height>
+				<aligny>center</aligny>
+				<font>Bald_CaptionTitle</font>
+				<textcolor>bald_ink</textcolor>
+				<scroll>true</scroll>
+				<label>$VAR[Bald_PlaybackMiniTitle]</label>
+			</control>
+			<control type="label">
+				<left>40</left>
+				<top>150</top>
+				<width>760</width>
+				<height>28</height>
+				<aligny>center</aligny>
+				<font>Bald_InfoMeta</font>
+				<textcolor>bald_ink80</textcolor>
+				<scroll>true</scroll>
+				<label>$VAR[Bald_PlaybackMiniArtist]</label>
+			</control>
+			<control type="label">
+				<left>40</left>
+				<top>184</top>
+				<width>760</width>
+				<height>28</height>
+				<aligny>center</aligny>
+				<font>Bald_CaptionMeta</font>
+				<textcolor>bald_ink60</textcolor>
+				<scroll>true</scroll>
+				<label>$VAR[Bald_PlaybackMiniMeta]</label>
+			</control>
+			<!-- Time and track. -->
+			<control type="label">
+				<left>40</left>
+				<top>226</top>
+				<width>760</width>
+				<height>28</height>
+				<align>right</align>
+				<aligny>center</aligny>
+				<font>Bald_CaptionMeta</font>
+				<textcolor>bald_ink</textcolor>
+				<label>$INFO[Player.Time]$INFO[Player.Duration, / ]</label>
+			</control>
+			<control type="group">
+				<left>40</left>
+				<top>264</top>
+				<include content="Bald_PlaybackFocusTrack">
+					<param name="width">760</param>
+					<param name="onunfocus_id">201</param>
+				</include>
+			</control>
+			<control type="grouplist" id="201">
+				<left>36</left>
+				<width>780</width>
+				<include content="Bald_PlaybackButtonRow">
+					<param name="top">300</param>
+				</include>
+				<onup>87</onup>
+				<control type="radiobutton" id="600">
+					<include content="Bald_PlaybackButton"><param name="icon">osd/fullscreen/buttons/previous.png</param></include>
+					<onclick>PlayerControl(Previous)</onclick>
+					<visible>!VideoPlayer.Content(livetv)</visible>
+				</control>
+				<control type="radiobutton" id="602">
+					<include content="Bald_PlaybackToggle">
+						<param name="icon">osd/fullscreen/buttons/pause.png</param>
+						<param name="on">osd/fullscreen/buttons/play.png</param>
+					</include>
+					<selected>Player.Paused</selected>
+					<onclick>PlayerControl(Play)</onclick>
+					<visible>Player.PauseEnabled</visible>
+				</control>
+				<control type="radiobutton" id="603">
+					<include content="Bald_PlaybackButton"><param name="icon">osd/fullscreen/buttons/stop.png</param></include>
+					<onclick>PlayerControl(Stop)</onclick>
+				</control>
+				<control type="radiobutton" id="605">
+					<include content="Bald_PlaybackButton"><param name="icon">osd/fullscreen/buttons/next.png</param></include>
+					<onclick>PlayerControl(Next)</onclick>
+					<visible>!VideoPlayer.Content(livetv) + [Integer.IsGreater(Playlist.Length(video),1) | Integer.IsGreater(Playlist.Length(music),1)]</visible>
+				</control>
+				<!-- A direct child of the row that hides itself: a control hidden only through a parent group can still
+				     take focus (CGUIControl::CanFocus ignores parents), which stranded the remote on Live TV. -->
+				<control type="radiobutton" id="704">
+					<!-- Radio textures are static in Kodi: off shows repeat-off, on shows repeat-all, and repeat one adds a "1" badge. -->
+					<include content="Bald_PlaybackToggle"><param name="icon">osd/fullscreen/buttons/repeat-off.png</param><param name="on">osd/fullscreen/buttons/repeat-all.png</param><param name="badge">$VAR[Bald_PlaybackRepeatBadge]</param></include>
+					<selected>Playlist.IsRepeat | Playlist.IsRepeatOne</selected>
+					<onleft>605</onleft>
+					<onright>607</onright>
+					<onclick>PlayerControl(Repeat)</onclick>
+					<visible>Player.HasAudio + !MusicPlayer.Content(LiveTV)</visible>
+				</control>
+				<control type="radiobutton" id="607">
+					<include content="Bald_PlaybackToggle">
+						<param name="icon">osd/fullscreen/buttons/random-off.png</param>
+						<param name="on">osd/fullscreen/buttons/random-on.png</param>
+					</include>
+					<selected>Playlist.IsRandom</selected>
+					<visible>Player.HasAudio + !MusicPlayer.Content(LiveTV)</visible>
+					<onclick>PlayerControl(Random)</onclick>
+				</control>
+			</control>
+			<!-- The focused button's name under the row. -->
+			<control type="group">
+				<left>40</left>
+				<top>384</top>
+				<width>760</width>
+				<include>Bald_PlaybackHelpLine</include>
+			</control>
+		</control>
+	</controls>
+</window>

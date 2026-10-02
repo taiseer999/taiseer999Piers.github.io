@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bald video OSD (docs/SPEC.md 5.16, "Video OSD"): one row of round icon buttons under the seek layer's lifted bar,
+     transport on the left and tools on the right, and an invisible seek slider over the bar (Up from the buttons).
+     Focusing a tool opens its companion panel above the row (1120-1123), focusing forward the next item card (1124);
+     Down opens the first panel of the down chain. The row fades while a chain panel is up. The bar, times and clock
+     are the seek layer's (DialogSeekBar.xml), which shows with the OSD. Everything is in Includes_Bald_OSD.xml.
+     Started from Kodi 22 Estuary's VideoOSD.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt). CGUIDialogVideoOSD binds
+     no control ids; the buttons keep Estuary's ids where the function is the same (602 play, 600 back, 607 forward,
+     603 stop, 804 disc menu, 70043 information, 70045 teletext, 70047 3D) and 87 is the seek slider. -->
+<window>
+	<defaultcontrol always="true">602</defaultcontrol>
+	<onload condition="!Player.PauseEnabled">SetFocus(600)</onload>
+	<!-- A fresh key for the stream lists (1121, 1122), so each OSD opening reads the streams again. -->
+	<onload>SetProperty(UID,$INFO[System.Time(hh:mm:ss)],1121)</onload>
+	<onload>SetProperty(UID,$INFO[System.Time(hh:mm:ss)],1122)</onload>
+	<onunload>CancelAlarm(bald_osd_close,true)</onunload>
+	<onunload>Dialog.Close(1120,true)</onunload>
+	<onunload>Dialog.Close(1121,true)</onunload>
+	<onunload>Dialog.Close(1122,true)</onunload>
+	<onunload>Dialog.Close(1123,true)</onunload>
+	<onunload>Dialog.Close(1124,true)</onunload>
+	<depth>DepthOSD</depth>
+	<zorder>1</zorder>
+	<include>Bald_PlaybackAnimWindow</include>
+	<controls>
+		<!-- Hidden by a fade rather than <visible>: a group's visibility does not stop its buttons taking focus. The
+		     row fades under DialogSlider, process info and the chain panels, which hold the focus meanwhile. -->
+		<control type="group">
+			<animation type="Conditional" condition="Window.IsVisible(sliderdialog) | Window.IsVisible(playerprocessinfo) | $EXP[Bald_OSDPanelUp] | $EXP[Bald_OSDPVRPanelUp]">
+				<effect type="fade" start="100" end="0" time="160" tween="sine" easing="inout" />
+			</animation>
+			<include>Bald_OSDRow</include>
+			<include>Bald_OSDSeekSliders</include>
+			<include content="Bald_OSDHints"><param name="hidden">Window.IsVisible(1120) | Window.IsVisible(1121) | Window.IsVisible(1122) | Window.IsVisible(1123) | Window.IsVisible(1124)</param></include>
+		</control>
+	</controls>
+</window>

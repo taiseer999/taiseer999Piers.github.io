@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Started from Kodi 22's bundled Estuary (skin.estuary, GPL-2.0-or-later; see LICENSE-Estuary.txt).
+     Bald: the music playlist as the compact list, with now playing in the preview column (RightListPanel). Id 503,
+     its viewtype and page control 503600 are Estuary's. -->
+<includes>
+	<include name="View_503_NowPlaying">
+		<control type="group">
+			<visible>Control.IsVisible(503)</visible>
+			<include>Bald_BrowseViewIn</include>
+			<include content="ListContainer">
+				<param name="list_id" value="503" />
+				<param name="viewtype_label" value="$LOCALIZE[31000]" />
+			</include>
+			<control type="scrollbar" id="503600">
+				<left>1252</left>
+				<top>Bald_ContentTop</top>
+				<width>4</width>
+				<height>624</height>
+				<onleft>503</onleft>
+				<onright>503</onright>
+				<include content="Bald_BrowseScrollbarStyle" />
+			</control>
+			<include>RightListPanel</include>
+		</control>
+	</include>
+</includes>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- From Kodi 22 Estuary's LoginScreen.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt), restyled for Bald
+     (docs/NOTES.md, "Media windows restyle"). Kodi binds 52 (profile list), and fills 2 (heading) and 3 (selected
+     profile counter), which Estuary left out. 20 opens the power menu. -->
+<window>
+	<defaultcontrol always="true">52</defaultcontrol>
+	<include>Bald_MediaOpenClose</include>
+	<controls>
+		<include content="Bald_MediaBackdrop">
+			<param name="scrims">false</param>
+		</include>
+		<include content="Bald_MediaPageTitle">
+			<param name="id">2</param>
+			<param name="label">$LOCALIZE[20115]</param>
+		</include>
+		<control type="label">
+			<left>Bald_RightColumn</left>
+			<top>Bald_PageTitleTop</top>
+			<width>384</width>
+			<height>52</height>
+			<align>right</align>
+			<aligny>center</aligny>
+			<font>Bald_InfoMeta</font>
+			<textcolor>bald_ink70</textcolor>
+			<label>$VAR[Bald_ClockTime]</label>
+		</control>
+		<control type="label">
+			<left>Bald_SafeLeft</left>
+			<top>172</top>
+			<width>1000</width>
+			<height>68</height>
+			<wrapmultiline>true</wrapmultiline>
+			<aligny>top</aligny>
+			<font>Bald_InfoPlot</font>
+			<textcolor>bald_ink70</textcolor>
+			<label>$LOCALIZE[31098]</label>
+		</control>
+		<!-- Profiles: 200 px avatars on a centred fixed list; the focused one rings in ink and pops. -->
+		<control type="fixedlist" id="52">
+			<left>0</left>
+			<right>0</right>
+			<top>330</top>
+			<height>400</height>
+			<onleft>52</onleft>
+			<onright>52</onright>
+			<onup>20</onup>
+			<ondown>20</ondown>
+			<focusposition>2</focusposition>
+			<orientation>horizontal</orientation>
+			<scrolltime tween="cubic" easing="out">440</scrolltime>
+			<itemlayout width="384" height="400">
+				<include content="Bald_ProfileItem" />
+			</itemlayout>
+			<focusedlayout width="384" height="400">
+				<include content="Bald_ProfileItem">
+					<param name="focused">Control.HasFocus(52)</param>
+				</include>
+			</focusedlayout>
+		</control>
+		<control type="label">
+			<left>0</left>
+			<right>0</right>
+			<top>744</top>
+			<height>30</height>
+			<align>center</align>
+			<aligny>center</aligny>
+			<font>Bald_CaptionMeta</font>
+			<textcolor>bald_ink60</textcolor>
+			<label>$INFO[Container(52).ListItem.Label2]</label>
+		</control>
+		<control type="button" id="20">
+			<centerleft>50%</centerleft>
+			<top>832</top>
+			<width>320</width>
+			<label>$LOCALIZE[31072]</label>
+			<align>center</align>
+			<textoffsetx>0</textoffsetx>
+			<onclick>ActivateWindow(ShutdownMenu)</onclick>
+			<onleft>52</onleft>
+			<onright>52</onright>
+			<onup>52</onup>
+			<ondown>52</ondown>
+			<include>Bald_MediaPillLook</include>
+		</control>
+		<include content="Bald_MediaFooter">
+			<param name="id">3</param>
+			<param name="width">800</param>
+		</include>
+		<control type="group">
+			<left>Bald_RightColumn</left>
+			<top>Bald_HintTop</top>
+			<include content="Bald_InfoHintPair">
+				<param name="first">$VAR[Bald_KeySelect]$LOCALIZE[31980]</param>
+				<param name="second">$VAR[Bald_KeyDown]$LOCALIZE[31981]</param>
+			</include>
+		</control>
+	</controls>
+</window>

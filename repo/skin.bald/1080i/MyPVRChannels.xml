@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bald Live TV Channels (TVChannels, RadioChannels). Started from Kodi 22 Estuary's MyPVRChannels.xml
+     (Team Kodi, GPL-2.0-or-later); Kodi's ids are kept: view 50, show hidden 6, filter 31, channel groups 28,
+     sort 3 and 4, header labels 29 and 30, menucontrol 9000. -->
+<window>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<backgroundcolor>bald_field</backgroundcolor>
+	<views>50</views>
+	<menucontrol>9000</menucontrol>
+	<include>Bald_PVRAnimWindow</include>
+	<controls>
+		<include>Bald_PVRBackground</include>
+		<control type="group">
+			<include>Bald_PVRInfoDim</include>
+			<include content="Bald_PVRWindowChrome">
+				<param name="title">$LOCALIZE[19019]</param>
+				<param name="section">$VAR[Bald_PVRArea]$INFO[Control.GetLabel(29), · ]$INFO[Control.GetLabel(30), · ]</param>
+				<param name="next">true</param>
+				<param name="hint">$VAR[Bald_KeySelect]$LOCALIZE[31662]</param>
+			</include>
+			<include content="Bald_PVRList">
+				<itemlayout width="1140" height="84" infoupdate="5000"><include content="Bald_PVRChannelRow"><param name="list_id">50</param></include></itemlayout>
+				<focusedlayout width="1140" height="84" infoupdate="5000"><include content="Bald_PVRChannelRow"><param name="list_id">50</param><param name="focused">true</param><param name="c1">bald_ink</param><param name="c2">bald_ink70</param></include></focusedlayout>
+			</include>
+			<include content="Bald_PVROptions">
+				<include content="Bald_PVROption"><param name="id">9010</param><param name="label">$LOCALIZE[19141]</param><param name="label2">$INFO[Control.GetLabel(29)]</param><param name="onclick">SendClick(28)</param></include>
+				<include content="Bald_PVROptionToggle"><param name="id">6</param><param name="label">$LOCALIZE[19051]</param></include>
+				<control type="radiobutton" id="31">
+					<include content="Bald_ConfigureButton"><param name="width">420</param></include>
+					<label>$LOCALIZE[587]</label>
+					<selected>Container.Filtered</selected>
+					<onclick>right</onclick>
+				</control>
+				<include>Bald_PVRSortOptions</include>
+				<include>Bald_PVRAreaOptions</include>
+			</include>
+			<include>Bald_PVRChannelNumberInput</include>
+		</control>
+		<include>Bald_PVRNativeLabels</include>
+	</controls>
+</window>

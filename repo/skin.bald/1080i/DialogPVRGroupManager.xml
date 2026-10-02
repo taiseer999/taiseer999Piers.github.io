@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Channel group manager (pvrgroupmanager). Started from Kodi 22 Estuary's DialogPVRGroupManager.xml (Team Kodi,
+     GPL-2.0-or-later); the shared popup surface was already Bald's, and the inner layout now is too. Kodi binds
+     heading 1, ungrouped channels 11, group members 12, groups 13, labels 20-22, hide 25, new 26, rename 27,
+     delete 28, OK 29, TV/radio 34 and regenerate thumbnail 35 (CGUIDialogPVRGroupManager). Navigation, through
+     scrollbars 71-73, is Estuary's. -->
+<window>
+	<defaultcontrol always="true">29</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<controls>
+		<control type="group">
+			<centertop>50%</centertop>
+			<height>995</height>
+			<centerleft>50%</centerleft>
+			<width>1820</width>
+			<include content="DialogBackgroundCommons">
+				<param name="width" value="1820" />
+				<param name="height" value="995" />
+				<param name="header_label" value="$VAR[PVRGroupMgrHeader]$INFO[Container(13).ListItem.Label, · ,]" />
+				<param name="header_id" value="1" />
+			</include>
+			<!-- Groups -->
+			<control type="group">
+				<left>30</left>
+				<top>90</top>
+				<control type="label">
+					<left>20</left><width>380</width><height>44</height><aligny>center</aligny>
+					<font>Bald_Section</font><textcolor>bald_ink60</textcolor>
+					<label>$LOCALIZE[31089]$INFO[Container(13).NumItems, · ]</label>
+				</control>
+				<control type="list" id="13">
+					<left>0</left><top>60</top><width>400</width><height>840</height>
+					<onup>13</onup><ondown>13</ondown><onleft>9000</onleft><onright>73</onright>
+					<pagecontrol>73</pagecontrol><scrolltime tween="cubic" easing="out">200</scrolltime>
+					<itemlayout width="400" height="70">
+						<include content="Bald_PVRManagerItem"><param name="text_width">300</param><param name="icon_left">332</param><param name="line2">$INFO[ListItem.PVRGroupOrigin]</param></include>
+					</itemlayout>
+					<focusedlayout width="400" height="70">
+						<include content="Bald_PVRManagerFocus"><param name="list_id">13</param></include>
+						<include content="Bald_PVRManagerItem"><param name="text_width">300</param><param name="icon_left">332</param><param name="c1">bald_ink</param><param name="line2">$INFO[ListItem.PVRGroupOrigin]$INFO[ListItem.Property(ClientName), · ,]</param></include>
+					</focusedlayout>
+				</control>
+				<include content="Bald_PVRManagerScrollbar"><param name="id">73</param><param name="left">408</param><param name="top">60</param><param name="height">840</param><param name="onleft">13</param><param name="onright">11</param></include>
+			</control>
+			<control type="group">
+				<description>Channels list</description>
+				<left>460</left>
+				<top>90</top>
+				<include content="Bald_PVRManagerChannels">
+					<param name="header_id">21</param>
+					<param name="list_id">11</param>
+					<param name="scrollbar_id">71</param>
+					<param name="onright">12</param>
+					<param name="onleft">73</param>
+				</include>
+			</control>
+			<control type="group">
+				<description>Grouped Channels list</description>
+				<left>960</left>
+				<top>90</top>
+				<include content="Bald_PVRManagerChannels">
+					<param name="header_id">22</param>
+					<param name="list_id">12</param>
+					<param name="scrollbar_id">72</param>
+					<param name="onright">9000</param>
+					<param name="onleft">71</param>
+				</include>
+			</control>
+			<control type="grouplist" id="9000">
+				<left>1460</left>
+				<top>96</top>
+				<width>340</width>
+				<height>620</height>
+				<itemgap>8</itemgap>
+				<orientation>vertical</orientation>
+				<onleft>12</onleft>
+				<onright>13</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<include content="DefaultDialogButton">
+					<param name="width" value="340" />
+					<param name="id" value="29" />
+					<param name="label" value="$LOCALIZE[186]" />
+				</include>
+				<control type="button" id="26">
+					<description>Add Group</description>
+					<include content="Bald_PVRManagerRow"><param name="width">340</param></include>
+					<label>$LOCALIZE[31044]</label>
+				</control>
+				<control type="button" id="27">
+					<description>Rename Group</description>
+					<include content="Bald_PVRManagerRow"><param name="width">340</param></include>
+					<label>$LOCALIZE[31045]</label>
+				</control>
+				<control type="radiobutton" id="25">
+					<description>Hide Group</description>
+					<include content="Bald_PVRManagerRow"><param name="width">340</param></include>
+					<label>$LOCALIZE[19289]</label>
+				</control>
+				<control type="button" id="28">
+					<description>Delete Group</description>
+					<include content="Bald_PVRManagerRow"><param name="width">340</param></include>
+					<label>$LOCALIZE[31046]</label>
+				</control>
+				<control type="button" id="35">
+					<description>Regenerate Group Thumbnail</description>
+					<include content="Bald_PVRManagerRow"><param name="width">340</param></include>
+					<label>$LOCALIZE[13315]</label>
+				</control>
+				<control type="togglebutton" id="34">
+					<description>TV/Radio toggle</description>
+					<include content="Bald_PVRManagerRow"><param name="width">340</param></include>
+					<label>$LOCALIZE[19174]</label>
+					<altlabel>$LOCALIZE[19173]</altlabel>
+					<usealttexture>!String.IsEmpty(Window.Property(IsRadio))</usealttexture>
+				</control>
+			</control>
+			<!-- The focused group's thumbnail. -->
+			<control type="image">
+				<left>1460</left>
+				<bottom>50</bottom>
+				<width>340</width>
+				<height>192</height>
+				<aspectratio>keep</aspectratio>
+				<texture background="true">$INFO[Container(13).ListItem.Icon]</texture>
+			</control>
+		</control>
+		<control type="label" id="20">
+			<description>Fake Label used to pass on name label</description>
+			<font>Bald_Hint</font>
+			<textcolor>bald_ink60</textcolor>
+			<visible>false</visible>
+		</control>
+	</controls>
+</window>

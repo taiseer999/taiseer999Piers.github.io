@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<!-- The weather page. Started from Kodi 22 Estuary's MyWeather.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt); the
+	     layout is Bald's (Includes_Weather.xml, docs/NOTES.md "Weather page"). CGUIWindowWeather's ids (2, 3, 11,
+	     223-228, 31-35) were never in Estuary: the page reads Weather.* infolabels and switches location with
+	     Weather.LocationNext. 9100 holds the focus for the views' trail (Now, Daily, Hourly, Maps), 20 the current conditions (Select: next
+	     location), 15100 / 15200 the daily and hourly forecasts, 2000 the maps (70010-70050 their focus buttons), 9170
+	     the hidden list the backdrop follows on Now, and 10000 (Menu) opens the weather settings. -->
+	<defaultcontrol always="true">9100</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<menucontrol>10000</menucontrol>
+	<!-- The backdrop follows the current conditions' tile until a forecast row takes focus (Bald_FollowContainer). -->
+	<onload>SetProperty(Bald.FocusContainer,9170,weather)</onload>
+	<onunload>ClearProperty(Bald.FocusContainer,weather)</onunload>
+	<controls>
+		<control type="button" id="10000">
+			<include>HiddenObject</include>
+			<onfocus>ActivateWindow(servicesettings,weather)</onfocus>
+			<onclick>noop</onclick>
+		</control>
+		<control type="videowindow">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<visible>Player.HasVideo</visible>
+		</control>
+		<control type="visualisation">
+			<include>FullScreenDimensions</include>
+			<visible>Player.HasAudio</visible>
+		</control>
+		<control type="image">
+			<width>1920</width>
+			<height>1080</height>
+			<texture colordiffuse="bald_field">bald/white.png</texture>
+			<animation effect="fade" start="100" end="bg_alpha" time="0" condition="Player.HasMedia">Conditional</animation>
+			<animation effect="fade" start="0" end="100" time="380" tween="sine" easing="inout" condition="Window.Previous(fullscreenvideo) | Window.Previous(FullscreenGame) | Window.Previous(startup)">WindowOpen</animation>
+		</control>
+		<include>Bald_WeatherBackdrop</include>
+		<!-- The current conditions as one static item, for the backdrop to follow: its thumb is the weather background
+		     pack's picture (Bald Helper). Kodi only fills a visible list, so it is 1 x 1 and draws nothing. -->
+		<control type="list" id="9170">
+			<width>1</width>
+			<height>1</height>
+			<itemlayout width="1" height="1" />
+			<focusedlayout width="1" height="1" />
+			<content><include>Bald_WeatherNowItem</include></content>
+		</control>
+		<control type="group">
+			<include>Bald_MediaOpenClose</include>
+			<!-- Header: the page title, and where the weather is for at the right. -->
+			<include content="Bald_MediaPageTitle">
+				<param name="label">$LOCALIZE[8]</param>
+				<param name="width">1100</param>
+			</include>
+			<control type="label">
+				<left>Bald_PreviewLeft</left>
+				<top>120</top>
+				<width>528</width>
+				<height>28</height>
+				<align>right</align>
+				<font>Bald_CaptionMeta</font>
+				<textcolor>bald_ink60</textcolor>
+				<label>$INFO[Weather.Data(Current.Location)]</label>
+			</control>
+			<include>Bald_WeatherTabs</include>
+			<include>Bald_WeatherNowView</include>
+			<include content="Bald_WeatherForecastView">
+				<param name="id">15100</param>
+				<param name="view">daily</param>
+				<param name="content">Bald_WeatherPageDaily</param>
+			</include>
+			<include content="Bald_WeatherForecastView">
+				<param name="id">15200</param>
+				<param name="view">hourly</param>
+				<param name="content">Bald_WeatherPageHourly</param>
+			</include>
+			<include>Bald_WeatherMapsView</include>
+		</control>
+		<!-- Footer: the views' trail at the left (Bald_WeatherTabs), the hints at the right (the trail's, else a view's). -->
+		<control type="group">
+			<left>1224</left>
+			<top>Bald_HintTop</top>
+			<visible>Control.HasFocus(9100)</visible>
+			<include content="Bald_InfoHintPair">
+				<param name="width">600</param>
+				<param name="first">$VAR[Bald_KeyLeft]$LOCALIZE[31701]$VAR[Bald_KeyRight]</param>
+				<param name="second">$VAR[Bald_KeyMenu]$LOCALIZE[31984]</param>
+			</include>
+		</control>
+		<!-- On the current conditions with several locations, Select moves to the next one. -->
+		<control type="group">
+			<left>1224</left>
+			<top>Bald_HintTop</top>
+			<visible>Control.HasFocus(20) + $EXP[Bald_WeatherLocations]</visible>
+			<include content="Bald_InfoHintPair">
+				<param name="width">600</param>
+				<param name="first">$VAR[Bald_KeyUp]$LOCALIZE[31701]</param>
+				<param name="second">$VAR[Bald_KeySelect]$LOCALIZE[31792]</param>
+				<param name="third">$VAR[Bald_KeyMenu]$LOCALIZE[31984]</param>
+				<param name="third_visible">true</param>
+			</include>
+		</control>
+		<control type="group">
+			<left>1224</left>
+			<top>Bald_HintTop</top>
+			<visible>!Control.HasFocus(9100) + ![Control.HasFocus(20) + $EXP[Bald_WeatherLocations]]</visible>
+			<include content="Bald_InfoHintPair">
+				<param name="width">600</param>
+				<param name="first">$VAR[Bald_KeyUp]$LOCALIZE[31701]</param>
+				<param name="second">$VAR[Bald_KeyMenu]$LOCALIZE[31984]</param>
+			</include>
+		</control>
+		<!-- Updating: the page dims under the field and an accent dot breathes at the centre. -->
+		<control type="group">
+			<visible>Weather.IsUpdating</visible>
+			<animation effect="fade" time="380" tween="sine" easing="inout">VisibleChange</animation>
+			<control type="image">
+				<width>1920</width>
+				<height>1080</height>
+				<texture colordiffuse="bald_field60">bald/white.png</texture>
+			</control>
+			<control type="image">
+				<depth>DepthMax</depth>
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>24</width>
+				<height>24</height>
+				<texture colordiffuse="bald_accent">bald/dot.png</texture>
+				<animation effect="fade" start="100" end="28" time="700" tween="sine" easing="inout" pulse="true" condition="true">Conditional</animation>
+			</control>
+		</control>
+	</controls>
+</window>

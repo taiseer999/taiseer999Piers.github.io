@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kodi's text viewer (changelogs, log and file views), drawn with Bald's popup surface. Started from Kodi 22 Estuary's
+     DialogTextViewer.xml (GPL-2.0-or-later, see LICENSE-Estuary.txt).
+     Kodi (CGUIDialogTextViewer) binds label 1 (heading) and textbox 5 (text; its monofont when Kodi asks for a fixed
+     font). 1000 (remote focus: Select closes, Up/Down page) and 3000 (5's page control) are the skin's own.
+     Layout and arrows: Bald_TextViewerPanel in Includes_Bald_Overlays.xml, shared with window 1102. -->
+<window>
+	<defaultcontrol always="true">1000</defaultcontrol>
+	<include>Animation_DialogPopupOpenClose</include>
+	<controls>
+		<include content="Bald_TextViewerPanel">
+			<param name="header_label" value="$LOCALIZE[13406]" />
+			<param name="textbox_id" value="5" />
+			<param name="text" value="" />
+		</include>
+	</controls>
+</window>
