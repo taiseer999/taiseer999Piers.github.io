@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "kill": [],
+  "toggles": [],
+  "patches": [],
+  "_example_entry_not_applied": {
+    "id": "example-seren-timeout",
+    "addon_id": "plugin.video.seren",
+    "rel_path": "resources/lib/modules/example.py",
+    "old": "TIMEOUT = 30",
+    "new": "TIMEOUT = 10",
+    "description": "Seren: example only",
+    "toggle": "seren_example",
+    "min_version": "3.4.0",
+    "max_version": "3.4.99",
+    "target_sha256": [
+      "<sha256 of the unpatched file>"
+    ],
+    "not_found_ok": true
+  }
+}

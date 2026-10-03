@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "presets": [
+    {
+      "id": "full",
+      "name": [
+        "Full",
+        "كامل"
+      ],
+      "desc": [
+        "Every video add-on in the portal - the complete Piers experience.",
+        "كل إضافات الفيديو - تجربة بيرز الكاملة."
+      ],
+      "addons": [
+        "*"
+      ]
+    },
+    {
+      "id": "lite",
+      "name": [
+        "Lite",
+        "خفيف"
+      ],
+      "desc": [
+        "Fen Light+, YouTube and Last Played only - fastest boot, least to maintain.",
+        "فن لايت+ ويوتيوب وآخر ما شوهد فقط - أسرع إقلاع وأقل صيانة."
+      ],
+      "addons": [
+        "plugin.video.fenlight",
+        "plugin.video.youtube",
+        "plugin.video.last_played"
+      ]
+    },
+    {
+      "id": "plex",
+      "name": [
+        "Plex / Emby",
+        "بلكس / إمبي"
+      ],
+      "desc": [
+        "For your own media server: DPlex and Dex Hub plus Last Played.",
+        "لسيرفر الوسائط الخاص بك: DPlex و Dex Hub مع آخر ما شوهد."
+      ],
+      "addons": [
+        "plugin.video.dplex",
+        "plugin.video.dexhub",
+        "plugin.video.last_played"
+      ]
+    },
+    {
+      "id": "custom",
+      "name": [
+        "Custom",
+        "مخصص"
+      ],
+      "desc": [
+        "Nothing pre-selected - pick each add-on yourself.",
+        "بدون تحديد مسبق - اختر كل إضافة بنفسك."
+      ],
+      "addons": []
+    }
+  ]
+}

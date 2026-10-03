@@ -1,0 +1,48 @@
+name: Validate repo
+
+on:
+  push:
+    branches: [master, main]
+    paths: ['repo/zips/**', 'skins.json', 'abukarim/**', 'profiles/**', 'tools/repo_validate.py']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # On a push to the default branch: bring skins.json up to the versions in
+      # addons.xml, (re)write sha256/size/profile_sha256, regenerate the md5,
+      # and commit that back. Pull requests are only checked.
+      - name: Auto-fix catalogs
+        if: github.event_name != 'pull_request'
+        run: python3 tools/repo_validate.py --fix --repo-name "${{ github.event.repository.name }}" || true
+
+      - name: Commit fixes
+        if: github.event_name != 'pull_request'
+        run: |
+          if ! git diff --quiet; then
+            git config user.name  "piers-ci"
+            git config user.email "piers-ci@users.noreply.github.com"
+            git add -A skins.json repo/zips/addons.xml.md5
+            git commit -m "ci: refresh skins.json versions / sha256 [skip ci]"
+            git push
+          fi
+
+      - name: Validate
+        run: python3 tools/repo_validate.py --repo-name "${{ github.event.repository.name }}"

@@ -1,0 +1,69 @@
+[
+  {
+    "name": "[B][COLOR gold]Arctic Fuse 3[/COLOR][/B]",
+    "description": "CoreELEC22 Optimized",
+    "screenshot": "https://iili.io/C9FQszG.png",
+    "id": "skin.arctic.fuse.3",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/skin.arctic.fuse.3/skin.arctic.fuse.3-5.10.24.zip",
+    "sha256": "b4036e3505047b822f99ecc774d73233962d063a26c26295c2e264b740b36b4b",
+    "size": 84146673,
+    "companions": [
+      "plugin.video.themoviedb.helper"
+    ],
+    "profile": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/profiles/skin.arctic.fuse.3-profile.zip",
+    "profile_sha256": "69f824910b96691ec4c2d9bcc3fbd99356d43f3aac5a024f50a2e5ea829c800a"
+  },
+  {
+    "name": "[B]skin.estuary.vs10[/B]",
+    "description": "CoreELEC22 Optimized",
+    "screenshot": "https://iili.io/CThIaiF.png",
+    "id": "skin.estuary.vs10",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/skin.estuary.vs10/skin.estuary.vs10-4.1.0.zip",
+    "sha256": "df9651ef7fb98b09da2eec9078438178bc16b366928c6b54b1ba60c61c4b2a81",
+    "size": 5321709
+  },
+  {
+    "name": "[B][COLOR gold]NETFLIX[/COLOR][/B]",
+    "description": "CoreELEC22 Optimized",
+    "screenshot": "https://iili.io/CuDJ6YB.png",
+    "id": "skin.bingie",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/skin.bingie/skin.bingie-2.0.2.2.1.zip",
+    "sha256": "99292849f6f05feb9f4ff6f796f38f0b50c17f05979041a17b2d751a68b4daa2",
+    "size": 37017175,
+    "profile": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/profiles/skin.bingie-profile.zip",
+    "profile_sha256": "a1da8923902f944df24391062fcd1922efbc0ff6a5729eb9a9ef54be65be95b8"
+  },
+  {
+    "name": "[B][COLOR gold]FENtastic Plus[/COLOR][/B]",
+    "description": "KODI",
+    "screenshot": "https://iili.io/CRp8frF.png",
+    "id": "skin.fentastic",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/skin.fentastic/skin.fentastic-100.0.30i.zip",
+    "sha256": "878cf877e5cf03cb8a32beba92d2ae6a1b99fb64e2851763c02e24b32df6a218",
+    "size": 24267388,
+    "profile": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/profiles/skin.fentastic-profile.zip",
+    "profile_sha256": "e5944410d2e9ceedd13a36e2bee48044beddeee298bff106ace7f2c27ee6ff03"
+  },
+  {
+    "name": "[B][COLOR gold]Arctic: Zephyr - Rounded[/COLOR][/B]",
+    "description": "KODI",
+    "screenshot": "https://iili.io/C11bGtt.png",
+    "id": "skin.arctic.zephyr.rounded",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/skin.arctic.zephyr.rounded/skin.arctic.zephyr.rounded-3.5.68.zip",
+    "sha256": "0794760d545db256bdb793848bdca7e1020e0d271a88ae2451fc94fad0c41c0e",
+    "size": 93518806,
+    "profile": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/profiles/skin.arctic.zephyr.rounded-profile.zip",
+    "profile_sha256": "799e9121d5c35e41acc6d18d2f99ea32d90e5bca2e5130a36cecace856e3718f"
+  },
+  {
+    "name": "[B][COLOR gold]nimbus[/COLOR][/B]",
+    "description": "KODI",
+    "screenshot": "https://iili.io/CwJ77LP.png",
+    "id": "skin.nimbus",
+    "zip": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/repo/zips/skin.nimbus/skin.nimbus-1.0.zip",
+    "sha256": "f9d7d02e0ceed438f6ab5ca4d143823b8b99522f1e872d507fc0bd1c4f43541b",
+    "size": 7835042,
+    "profile": "https://raw.githubusercontent.com/taiseer999/taiseer999Piers.github.io/master/profiles/skin.nimbus-profile.zip",
+    "profile_sha256": "41d33c09a5d3730220fdebf78945d4740c1d90b0ae3ea47a0ce4041d3dac61d9"
+  }
+]

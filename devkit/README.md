@@ -1,4 +1,4 @@
-# Piers devkit (ABUKARIM TOOLS 3.2.0)
+# Piers devkit (ABUKARIM TOOLS 3.2)
 
 ## Folder layout
 
@@ -13,7 +13,7 @@ repo-files/            copy these as-is to the root of taiseer999Piers.github.io
   skins.json           now includes sha256/size/companions/profile
   tools/repo_validate.py
   .github/workflows/validate.yml
-plugin.program.abukarimtools-3.2.0.zip
+plugin.program.abukarimtools-3.2.0.0.zip
 ```
 
 ## 1) Building the build (on your Mac)

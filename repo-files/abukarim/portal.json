@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "addons": [
+    {
+      "id": "plugin.video.dexhub",
+      "name": "Dex Hub",
+      "repo": "repository.dexworld",
+      "icon": "https://dexworld.cc/kodi/plugin.video.dexhub/resources/media/icon.png"
+    },
+    {
+      "id": "plugin.video.dplex",
+      "name": "DPlex",
+      "repo": "repository.dexworld",
+      "icon": "https://dexworld.cc/kodi/plugin.video.dplex/resources/media/icon.png"
+    },
+    {
+      "id": "plugin.video.fenlight",
+      "name": "Fen Light+",
+      "repo": "repository.taiseer",
+      "icon": "https://raw.githubusercontent.com/taiseer999/taiseer999.github.io/main/repo/zips/plugin.video.fenlight/resources/media/fenlight_plus_icon.png"
+    },
+    {
+      "id": "plugin.video.last_played",
+      "name": "Last Played",
+      "repo": "repository.taiseer",
+      "icon": "https://raw.githubusercontent.com/taiseer999/taiseer999.github.io/main/repo/zips/plugin.video.last_played/icon.png"
+    },
+    {
+      "id": "plugin.video.pov",
+      "name": "POV",
+      "repo": "repository.kodifitzwell",
+      "icon": ""
+    },
+    {
+      "id": "plugin.video.redlight",
+      "name": "Red Light",
+      "repo": "repository.redwizard",
+      "icon": "https://repo.redwizard.xyz/redwizardrepo/main/plugin.video.redlight/resources/media/addon_icons/icon.png"
+    },
+    {
+      "id": "plugin.video.seren",
+      "name": "Seren",
+      "repo": "repository.taiseer",
+      "icon": "https://raw.githubusercontent.com/taiseer999/taiseer999.github.io/main/repo/zips/plugin.video.seren/resources/images/ico-seren-3.png"
+    },
+    {
+      "id": "plugin.video.umbrella",
+      "name": "Umbrella",
+      "repo": "repository.umbrella",
+      "icon": "https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/nexus/zips/plugin.video.umbrella/icon.png"
+    },
+    {
+      "id": "plugin.video.youtube",
+      "name": "YouTube",
+      "repo": "repository.redwizard",
+      "icon": "https://repo.redwizard.xyz/redwizardrepo/main/plugin.video.youtube/resources/media/icon.png"
+    }
+  ],
+  "repo_names": {
+    "repository.dexworld": "DexWorld",
+    "repository.taiseer": "ABUKARIM",
+    "repository.kodifitzwell": "kodifitzwell",
+    "repository.redwizard": "The Red Repo",
+    "repository.umbrella": "Umbrella"
+  },
+  "repo_zips": {}
+}
