@@ -398,19 +398,7 @@
             <selected>!Skin.HasSetting(sysstats.icons.mono)</selected>
             <enable>Skin.HasSetting(Furniture.Network_RAM)</enable>
         </include>
-        <include content="Settings_Button" description="CoreELEC Logo">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">011</param>
-            <param name="dialog">false</param>
-            <param name="control">radiobutton</param>
-            <label>$LOCALIZE[31609]</label>
-            <onclick>Skin.ToggleSetting(Header.DisableLogo)</onclick>
-            <selected>!Skin.HasSetting(Header.DisableLogo)</selected>
-        </include>
-       
-
+        
         <include content="Settings_Label" description="Context">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -527,18 +515,6 @@
             <label>$LOCALIZE[31324] > $LOCALIZE[31457]</label>
             <label2>$VAR[Label_Settings_NavigationOnScroll]</label2>
             <onclick>Skin.ToggleSetting(Navigation.DisableAlphabetJump)</onclick>
-        </include>
-
-        <include content="Settings_Button" description="OnCategories">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">031</param>
-            <param name="control">button</param>
-            <param name="slevel">2</param>
-            <label>$LOCALIZE[31324] > $LOCALIZE[31150]</label>
-            <label2>$VAR[Label_Settings_NavigationOnCategories]</label2>
-            <onclick>Skin.ToggleSetting(Navigation.DisableCategoriesSelectDialog)</onclick>
         </include>
 
         <include content="Settings_Label" description="Labels">
@@ -795,18 +771,7 @@
             <onclick>Skin.ToggleSetting(InfoTags.EnableHDR)</onclick>
             <selected>Skin.HasSetting(InfoTags.EnableHDR)</selected>
         </include>
-        <include content="Settings_Button" description="Hub clearlogo on right">
-            <param name="dialog">false</param>
-            <param name="window">skinsettings</param>
-            <param name="baseid">$PARAM[baseid]</param>
-            <param name="id">013</param>
-            <param name="dialog">false</param>
-            <param name="control">radiobutton</param>
-            <label>$LOCALIZE[31626]</label>
-            <onclick>Skin.ToggleSetting(ClearLogo.HubRight)</onclick>
-            <selected>Skin.HasSetting(ClearLogo.HubRight)</selected>
-        </include>
-
+        
     </include>
 
    <!-- Other -->
