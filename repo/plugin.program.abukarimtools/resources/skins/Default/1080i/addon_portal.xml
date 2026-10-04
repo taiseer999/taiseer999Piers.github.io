@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ABUKARIM TOOLS – Add-on Portal (multi-select video add-on installer).
+     Left: portal art + title + counter + buttons. Right: checklist.
+     Palette follows the portal icon: neon blue FF1E8FFF -> orange FFFF7A1A. -->
+<window>
+    <defaultcontrol always="true">100</defaultcontrol>
+    <controls>
+
+        <!-- backdrop -->
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="F2030509">white.png</texture>
+        </control>
+        <!-- faint oversized art bleeding in from the left -->
+        <control type="image">
+            <left>-260</left><top>-40</top><width>1160</width><height>1160</height>
+            <texture colordiffuse="26FFFFFF">$INFO[Window.Property(portal_icon)]</texture>
+            <aspectratio>keep</aspectratio>
+        </control>
+
+        <!-- ── left panel ─────────────────────────────────────────────── -->
+        <control type="image">
+            <left>60</left><top>60</top><width>600</width><height>960</height>
+            <texture colordiffuse="E60A0F1A">white.png</texture>
+        </control>
+        <control type="image">
+            <left>60</left><top>60</top><width>300</width><height>5</height>
+            <texture colordiffuse="FF1E8FFF">white.png</texture>
+        </control>
+        <control type="image">
+            <left>360</left><top>60</top><width>300</width><height>5</height>
+            <texture colordiffuse="FFFF7A1A">white.png</texture>
+        </control>
+
+        <control type="image">
+            <left>140</left><top>100</top><width>440</width><height>440</height>
+            <texture>$INFO[Window.Property(portal_icon)]</texture>
+            <aspectratio>keep</aspectratio>
+        </control>
+
+        <control type="label" id="9001">
+            <left>60</left><top>560</top><width>600</width><height>80</height>
+            <font>AbkTitle</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFFFFFFF</textcolor>
+            <shadowcolor>FF1E8FFF</shadowcolor>
+            <label></label>
+        </control>
+        <control type="label" id="9002">
+            <left>90</left><top>645</top><width>540</width><height>80</height>
+            <font>AbkHint</font>
+            <align>center</align>
+            <wrapmultiline>true</wrapmultiline>
+            <textcolor>FFAFC3E6</textcolor>
+            <label></label>
+        </control>
+        <control type="label" id="9003">
+            <left>60</left><top>735</top><width>600</width><height>50</height>
+            <font>AbkRowBold</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFFF7A1A</textcolor>
+            <label></label>
+        </control>
+
+        <control type="button" id="201">
+            <left>110</left><top>810</top><width>500</width><height>84</height>
+            <font>AbkRowBold</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFFFFFFF</textcolor>
+            <focusedcolor>FFFFFFFF</focusedcolor>
+            <texturenofocus colordiffuse="FF14325E">white.png</texturenofocus>
+            <texturefocus colordiffuse="FFFF7A1A">white.png</texturefocus>
+            <onup>202</onup><ondown>202</ondown>
+            <onleft>100</onleft><onright>100</onright>
+            <label></label>
+        </control>
+        <control type="button" id="202">
+            <left>110</left><top>910</top><width>500</width><height>70</height>
+            <font>AbkRow</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFAFC3E6</textcolor>
+            <focusedcolor>FFFFFFFF</focusedcolor>
+            <texturenofocus colordiffuse="FF101826">white.png</texturenofocus>
+            <texturefocus colordiffuse="FF1E8FFF">white.png</texturefocus>
+            <onup>201</onup><ondown>201</ondown>
+            <onleft>100</onleft><onright>100</onright>
+            <label></label>
+        </control>
+
+        <!-- ── right: checklist ───────────────────────────────────────── -->
+        <control type="list" id="100">
+            <left>700</left><top>60</top><width>1160</width><height>960</height>
+            <onleft>201</onleft><onright>201</onright>
+            <onup>100</onup><ondown>100</ondown>
+            <pagecontrol>-</pagecontrol>
+            <scrolltime>200</scrolltime>
+
+            <itemlayout width="1160" height="106">
+                <control type="image">
+                    <left>0</left><top>4</top><width>1160</width><height>98</height>
+                    <texture colordiffuse="CC0C1322">white.png</texture>
+                </control>
+                <!-- checkbox -->
+                <control type="image">
+                    <left>26</left><top>31</top><width>44</width><height>44</height>
+                    <texture colordiffuse="FF3A4A66">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>30</left><top>35</top><width>36</width><height>36</height>
+                    <texture colordiffuse="FF070B14">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>35</left><top>40</top><width>26</width><height>26</height>
+                    <texture colordiffuse="FFFF7A1A">white.png</texture>
+                    <visible>String.IsEqual(ListItem.Property(checked),true)</visible>
+                </control>
+                <control type="image">
+                    <left>94</left><top>15</top><width>76</width><height>76</height>
+                    <texture>$INFO[ListItem.Art(icon)]</texture>
+                    <aspectratio>keep</aspectratio>
+                </control>
+                <control type="label">
+                    <left>196</left><top>10</top><width>700</width><height>50</height>
+                    <font>AbkRowBold</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <label>$INFO[ListItem.Label]</label>
+                </control>
+                <control type="label">
+                    <left>196</left><top>58</top><width>700</width><height>36</height>
+                    <font>AbkHint</font>
+                    <textcolor>FF7F93B8</textcolor>
+                    <label>$INFO[ListItem.Property(repo)]</label>
+                </control>
+                <control type="label">
+                    <left>860</left><top>30</top><width>270</width><height>46</height>
+                    <font>AbkHint</font>
+                    <align>right</align><aligny>center</aligny>
+                    <textcolor>FF33D17A</textcolor>
+                    <label>$INFO[ListItem.Property(status)]</label>
+                </control>
+            </itemlayout>
+
+            <focusedlayout width="1160" height="106">
+                <control type="image">
+                    <left>0</left><top>4</top><width>1160</width><height>98</height>
+                    <texture colordiffuse="FF14325E">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>0</left><top>4</top><width>7</width><height>98</height>
+                    <texture colordiffuse="FFFF7A1A">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>26</left><top>31</top><width>44</width><height>44</height>
+                    <texture colordiffuse="FFFFFFFF">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>30</left><top>35</top><width>36</width><height>36</height>
+                    <texture colordiffuse="FF070B14">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>35</left><top>40</top><width>26</width><height>26</height>
+                    <texture colordiffuse="FFFF7A1A">white.png</texture>
+                    <visible>String.IsEqual(ListItem.Property(checked),true)</visible>
+                </control>
+                <control type="image">
+                    <left>94</left><top>15</top><width>76</width><height>76</height>
+                    <texture>$INFO[ListItem.Art(icon)]</texture>
+                    <aspectratio>keep</aspectratio>
+                </control>
+                <control type="label">
+                    <left>196</left><top>10</top><width>700</width><height>50</height>
+                    <font>AbkRowBold</font>
+                    <textcolor>FFFFFFFF</textcolor>
+                    <label>$INFO[ListItem.Label]</label>
+                </control>
+                <control type="label">
+                    <left>196</left><top>58</top><width>700</width><height>36</height>
+                    <font>AbkHint</font>
+                    <textcolor>FFAFC3E6</textcolor>
+                    <label>$INFO[ListItem.Property(repo)]</label>
+                </control>
+                <control type="label">
+                    <left>860</left><top>30</top><width>270</width><height>46</height>
+                    <font>AbkHint</font>
+                    <align>right</align><aligny>center</aligny>
+                    <textcolor>FF5BF09A</textcolor>
+                    <label>$INFO[ListItem.Property(status)]</label>
+                </control>
+            </focusedlayout>
+        </control>
+
+    </controls>
+</window>

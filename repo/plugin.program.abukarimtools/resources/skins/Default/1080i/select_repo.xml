@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ABUKARIM TOOLS – Skin Selection: repository picker (v3.1.0.18 redesign).
+     Same visual language as the Add-on Portal: dark glass, neon blue→orange.
+     Python contract (unchanged): list 100, title 9001, hint 9002,
+     Window.Property(background), ListItem.Property(repo_bg). -->
+<window type="dialog" id="13001">
+    <defaultcontrol always="true">100</defaultcontrol>
+    <zorder>1</zorder>
+    <controls>
+
+        <!-- backdrop: repo photo follows focus, under a heavy dark glass -->
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture>$INFO[Window.Property(background)]</texture>
+            <aspectratio>scale</aspectratio>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture>$INFO[Container(100).ListItem.Property(repo_bg)]</texture>
+            <aspectratio>scale</aspectratio>
+            <fadetime>300</fadetime>
+        </control>
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="E6030509">white.png</texture>
+        </control>
+
+        <!-- header -->
+        <control type="label" id="9001">
+            <left>0</left><top>90</top><width>1920</width><height>90</height>
+            <font>AbkTitle</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFFFFFFF</textcolor>
+            <shadowcolor>FF1E8FFF</shadowcolor>
+            <label></label>
+        </control>
+        <control type="image">
+            <left>810</left><top>190</top><width>150</width><height>4</height>
+            <texture colordiffuse="FF1E8FFF">white.png</texture>
+        </control>
+        <control type="image">
+            <left>960</left><top>190</top><width>150</width><height>4</height>
+            <texture colordiffuse="FFFF7A1A">white.png</texture>
+        </control>
+
+        <!-- three repository cards -->
+        <control type="list" id="100">
+            <left>210</left><top>250</top><width>1500</width><height>660</height>
+            <orientation>horizontal</orientation>
+            <onup>100</onup><ondown>100</ondown>
+            <pagecontrol>-</pagecontrol>
+            <scrolltime>200</scrolltime>
+
+            <itemlayout width="500" height="660">
+                <control type="image">
+                    <left>20</left><top>20</top><width>460</width><height>620</height>
+                    <texture colordiffuse="D90C1322">white.png</texture>
+                </control>
+                <control type="image">
+                    <left>60</left><top>60</top><width>380</width><height>380</height>
+                    <texture colordiffuse="A6FFFFFF">$INFO[ListItem.Art(icon)]</texture>
+                    <aspectratio>keep</aspectratio>
+                </control>
+                <control type="label">
+                    <left>40</left><top>470</top><width>420</width><height>120</height>
+                    <font>AbkRow</font>
+                    <align>center</align><aligny>center</aligny>
+                    <wrapmultiline>true</wrapmultiline>
+                    <textcolor>FF7F93B8</textcolor>
+                    <label>$INFO[ListItem.Label]</label>
+                </control>
+            </itemlayout>
+
+            <focusedlayout width="500" height="660">
+                <control type="group">
+                    <animation effect="zoom" start="96" end="100" center="250,330" time="180" tween="cubic" easing="out">Focus</animation>
+                    <!-- neon rim: blue top half, orange bottom half -->
+                    <control type="image">
+                        <left>12</left><top>12</top><width>476</width><height>318</height>
+                        <texture colordiffuse="FF1E8FFF">white.png</texture>
+                    </control>
+                    <control type="image">
+                        <left>12</left><top>330</top><width>476</width><height>318</height>
+                        <texture colordiffuse="FFFF7A1A">white.png</texture>
+                    </control>
+                    <control type="image">
+                        <left>17</left><top>17</top><width>466</width><height>626</height>
+                        <texture colordiffuse="FF0A0F1A">white.png</texture>
+                    </control>
+                    <control type="image">
+                        <left>17</left><top>17</top><width>466</width><height>626</height>
+                        <texture colordiffuse="1A1E8FFF">white.png</texture>
+                    </control>
+                    <control type="image">
+                        <left>50</left><top>50</top><width>400</width><height>400</height>
+                        <texture>$INFO[ListItem.Art(icon)]</texture>
+                        <aspectratio>keep</aspectratio>
+                    </control>
+                    <control type="label">
+                        <left>40</left><top>470</top><width>420</width><height>120</height>
+                        <font>AbkRowBold</font>
+                        <align>center</align><aligny>center</aligny>
+                        <wrapmultiline>true</wrapmultiline>
+                        <textcolor>FFFFFFFF</textcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="image">
+                        <left>190</left><top>604</top><width>120</width><height>6</height>
+                        <texture colordiffuse="FFFF7A1A">white.png</texture>
+                    </control>
+                </control>
+            </focusedlayout>
+        </control>
+
+        <!-- footer hint -->
+        <control type="label" id="9002">
+            <left>0</left><top>960</top><width>1920</width><height>40</height>
+            <font>AbkHint</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFAFC3E6</textcolor>
+            <label></label>
+        </control>
+
+    </controls>
+</window>

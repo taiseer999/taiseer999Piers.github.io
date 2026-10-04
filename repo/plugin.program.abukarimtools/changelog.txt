@@ -1,0 +1,199 @@
+v3.2.17
+- Auto-patch watchdog no longer waits for repository relinking: with an empty
+  repo cache the relink retries for up to 3 minutes and held the watchdog back
+  (log 2026-10-04: service up 12:15:38, watchdog only 12:18:45). Relinking now
+  runs in the background.
+
+v3.2.16
+- Every restart now goes through ABUKARIM Wizard > Maintenance > Force Close
+  (plugin mode 18). The clean Quit / RestartApp hung on Kodi 22 ("Stopping the
+  application..." forever, log 2026-10-04 12:14). Used by the update prompt,
+  Origin Fix, Device Tuning, tab toggle and the add-on DB rebuild (desktop).
+  If the wizard is missing or does not act within 5 s, Kodi is exited directly
+  (same thing the wizard does). CoreELEC brings Kodi back by itself.
+- Update prompt now appears right when ABUKARIM TOOLS is updated while Kodi is
+  running (checks addon.xml every 20 s, waits until nothing plays and no
+  dialog is open), not only on the next boot.
+- The service frees its heartbeat when it stops and a new copy waits 15 s for
+  the old one, so an updated service is no longer turned away as a duplicate.
+
+v3.2.15
+- FIX: auto-patching stopped because the service never got going at boot.
+  The service, the watchdog and i18n all called xbmcaddon.Addon() at import;
+  with the damaged Addons33.db ("Can't update database Addons33 from version
+  0") that call can block at boot, so the service hung before its first log
+  line. Import-time paths/version now come from special:// paths
+  (resources/lib/paths.py); Addon() is only created on first real use.
+- First line of service.py logs "[AbukarimTools Service] process started"
+  before anything else - shows whether Kodi launched it at all.
+- Guardian: if the service it kicked still has no heartbeat after 45 s, the
+  guardian runs the auto-patch watchdog + window rescue itself.
+
+v3.2.14
+- FIX: since 2026-10-04 Kodi 22 never started the ABUKARIM TOOLS service at
+  boot (no "[AbukarimTools Service] started" line in any log; DexHub and Last
+  Played were skipped too - that is also why Last Played recorded nothing).
+  Without the service there was no watchdog and no window rescue, so the AF3
+  update froze again. New guardian.py: AF3 Home runs it once per session
+  (always-on Home.xml onload patch); it waits 25 s and starts every watched
+  service whose heartbeat is missing (ABUKARIM TOOLS, Last Played (ABUKARIM)),
+  and logs when one of them is disabled.
+- Window rescue now starts first thing in the service, before the boot chores.
+
+v3.2.13
+- FIX: black screen / "frozen" Kodi every time the ACTIVE skin updates
+  (AF3 5.10.25 -> 5.10.26, log 2026-10-04 07:15). Kodi unloads the skin
+  before extracting the update, then ReloadSkin restores "the window that was
+  open" - which by then is none, so the new skin loads with no window at all
+  and TMDbHelper floods the log with "Window id does not exist". A small
+  service thread now spots an invalid current window lasting 4 s and opens
+  Home (15 s cooldown, idle for the first 20 s of boot).
+
+v3.2.12
+- Last Played fix now covers EVERY video add-on, not just TMDbHelper flows.
+  While you browse, the service remembers the last 8 playable add-on items
+  you focused (also over AF3's windowed trailers). When a stream starts, the
+  one that matches it (TMDb/IMDb id first, then exact title / show+SxE) is
+  saved as the replay link, and the list shows that add-on as the source -
+  Seren, Umbrella, POV, Fen Light, anything. "Sources as folder" entries can
+  no longer win over the real title. Fallbacks unchanged: TMDbHelper link
+  from ids, then the raw stream. Toggle renamed "Record Streams (all video
+  add-ons)".
+
+v3.2.11
+- NEW Toggles > "Last Played: Record Streams (TMDbHelper/Fen Light)" (on by
+  default). Last Played 6.4.0 never recorded TMDbHelper -> Fen Light playback:
+  the dummy.mp4 splash fired its stop with empty data, the real stream was read
+  before its info settled and anything not typed movie/episode was dropped.
+  The service is replaced: capture on onAVStarted, dummy + AF3 trailers
+  ignored, internet items classified from their TMDb/IMDb ids, entry saved at
+  start (survives a crash/power-off) and stored as a TMDbHelper play link so it
+  replays after the debrid link expires. Restarted automatically after patching.
+- NEW Toggles > "a4kSubtitles: Hide Account/API-Key Nags" (on by default).
+  OpenSubtitles / SubDL / SubSource without accounts no longer pop
+  "requires authentication / API Key" (and "IMDB ID is not provided") on every
+  search - they go to the log. a4k's debug chatter (player_props dumps,
+  "no subtitles found for ...") is written only when Kodi debug logging is on.
+
+v3.2.10
+- NEW Toggles > "AF3: Waves While Loading" (own icon). Arctic Fuse 3's
+  Background_BusyLoader plays resource.images.arctic.waves full-screen while
+  Kodi's busy dialog is up - most visibly right after a movie's player is
+  picked. The toggle flips the AF3 skin bool abk.nobusywaves; an always-on
+  AF3 patch (Includes_Background.xml) makes the loader obey it. Takes effect
+  on the next busy dialog - no restart; the list shows On/Off.
+
+v3.2.9
+- Backup/Restore (menu and first-run restore step): the "Include my
+  customisations?" checklist is gone. skinshortcuts + skinvariables (your
+  menus and widgets) are always included in a backup and always restored
+  when the backup contains them; the skin's templates are rebuilt afterwards.
+
+v3.2.8
+- FIX (log 2026-10-03 20:47): Kodi 21+ ignores the <cache> block of
+  advancedsettings.xml - the box ran with "Buffer Mode 0, 256 MB, adaptive"
+  although the file asked for 200 MB / 20x. Device Tuning now writes
+  filecache.memorysize / filecache.readfactor through JSON-RPC, snapped to the
+  options this Kodi offers; never shrinks a larger cache on big boxes.
+- FIX: the tuning dialog showed "System.CpuInfo" as the device name on
+  macOS - now the CPU model / platform name.
+- FIX (video 2026-10-03 20:46): Restore Skin Profile only listed automatic
+  backups, so a profile just exported "did not exist". It now lists exports
+  and backups and can browse for any profile zip (Desktop, USB, SMB); the
+  skin is read from profile.json inside the zip.
+- make_build.py warns that advancedsettings <cache> is ignored.
+
+v3.2.7
+- NEW remote patch flag "once": the entry is applied a single time per box
+  (recorded by its "id" in patches_once.json) and skipped afterwards, so a
+  whole-file replacement (inject_file + replace) no longer reverts later user
+  or menu-reconcile edits on every sweep. Publish a newer file under a new id.
+- repo_validate.py: "once" needs an "id"; warns on replace without "once".
+
+v3.2.6
+- NEW remote "json_edit" patches: edit JSON files by matching items on their
+  fields (guid / label / "~substring") instead of text, so formatting
+  differences between boxes don't matter. Ops: match+set/unset, remove,
+  append/insert (idempotent via "unless"), move before. Works on add-on files
+  and, with "base": "addon_data", on userdata (e.g. script.skinvariables
+  nodes). A changed node of the active skin triggers a template rebuild.
+- Patching > Update Online Fixes & Catalogs now applies the downloaded
+  patches immediately and shows the result.
+- repo_validate.py checks json_edit entries.
+
+v3.2.5
+- Dedicated icons (512x512, same neon style) for the 3.2 entries: Finish Build
+  Install, Optimize for This Device, Remote Access, Share Log (QR), Update
+  Online Fixes & Catalogs, Repair Menus & Widgets, Export Skin Profile (also
+  the Skin Profiles category). Restore Skin Profile Backup keeps backup.png.
+
+v3.2.4
+- FIX (video 2026-10-03 09:49, AF3 power tray: empty slot, Force Close red in
+  the editor): menu_reconcile asked System.HasAddon() whether
+  plugin.program.ABUKARIMwizard is installed. Kodi lowercases condition
+  strings, so a mixed-case id never matches (same root cause as
+  wizard_runner 3.1.3) and the item was hidden. Mixed-case ids are now checked
+  through JSON-RPC Addons.GetAddonDetails (installed + enabled); items hidden
+  by mistake come back on the next boot or with Repair Menus & Widgets.
+- Skin conditions are never generated for mixed-case ids (they could only
+  ever evaluate false); bootstrap uses the same presence check.
+
+v3.2.3
+- FIX (log 2026-10-03 09:40, AF3 power tray "Skin Variables error", 0 items,
+  could not edit): menu_reconcile tagged the items it hid with
+  "abk_hidden": [ids] - a LIST. skinvariables passes every item field to
+  ListItem.setProperties(), which only takes strings, so any node holding a
+  hidden item raised TypeError and the whole menu failed. The tag is now a
+  comma-separated string; list tags written by 3.2.0-3.2.2 are converted on the
+  next boot (or Maintenance > Repair Menus & Widgets) and the skin's
+  templates are rebuilt.
+
+v3.2.2
+- FIX (screenshot 2026-10-03 09:32): Remote Access showed "http://Busy:8080"
+  - Network.IPAddress read from Python returned Kodi's "Busy" placeholder.
+  The LAN address now comes from the OS (UDP socket, nothing is sent), with
+  the info label as a retried fallback; never shows a non-IP value.
+
+v3.2.1
+- FIX (log 2026-10-03 09:07): the Remote Access / Share Log QR screen drew its
+  text but not its images (xbmcgui.WindowDialog + ControlImage on Kodi 22), so
+  the previous dialog's last frame showed through behind it. Rebuilt as a
+  WindowXMLDialog (skins/Default/1080i/abk_qr.xml) in the portal's style,
+  backdrop from white.png, QR kept in addon_data/.../qr/. Waits for other
+  dialogs to close and reopens if Kodi swallows it.
+- FIX (same log): right after the Add-on Portal's installs, the preset list
+  returned -1 after ~1 s and the patch checklist returned None after ~50 ms
+  with no input, so setup skipped the preset and the patch step. New
+  dialog_guard: a cancel faster than 1 s is treated as swallowed - wait for
+  the screen to settle and reopen (max 3).
+- FIX: OriginFix "corrected" add-ons whose origin is Kodi's ORIGIN_SYSTEM
+  (b6a50484-...) every 15 s; Kodi puts it straight back. They are skipped now.
+
+v3.2.0
+- NEW Remote config: patches.json / portal.json / presets.json / config.json
+  are read from taiseer999Piers.github.io/abukarim/ (refreshed at boot, max
+  every 6 h, cache-only everywhere else). Patches can now be added or killed
+  without a tools release; remote entries support min_version/max_version and
+  target_sha256 so they never touch an upstream file they were not written for.
+- NEW skins.json fields (all optional, old catalogs keep working):
+  sha256 (download verified), companions (replaces the hardcoded map),
+  min_kodi / max_kodi / platforms (incompatible skins are hidden),
+  profile + profile_sha256 (Piers settings/menus/widgets per skin, applied
+  before the skin is activated, previous files backed up).
+- NEW Skin Profiles menu: export the current skin's profile as a portable zip
+  (dev paths rewritten to special://home) + restore a profile backup.
+- NEW Menu reconcile: menu items / widgets that point at an add-on that is not
+  installed are hidden (skinvariables: disabled flag, skinshortcuts v3:
+  System.HasAddon visible) and come back automatically once it is installed.
+  Runs at boot and after the Add-on Portal; also in Maintenance.
+- NEW First run: setup preset (Full / Lite / Plex-Emby / Custom) pre-ticks the
+  Add-on Portal; device tuning sizes the video cache from RAM; every box gets
+  its own web server password (shown once with a QR for Kore/Yatse); thin-build
+  bootstrap installs add-ons listed in bootstrap.json from their repos.
+- Tools menu entries for these are actions (not folders), per the 3.1.19 rule.
+- segno (QR) vendored in resources/lib/vendor (OpenWizard copy was removed).
+- NEW Share Log (QR): uploads kodi.log / kodi.old.log to paste.kodi.tv with
+  keys, tokens, passwords, e-mails, debrid links and public IPs scrubbed.
+- NEW Setup > Optimize for This Device, Remote Access, Finish Build Install;
+  Patches > Update Online Fixes & Catalogs; Maintenance > Repair Menus.
+

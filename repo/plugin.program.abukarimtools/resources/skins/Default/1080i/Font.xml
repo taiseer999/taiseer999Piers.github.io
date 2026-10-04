@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fonts>
+    <fontset id="Default" unicodefont="false">
+        <font>
+            <name>AbkTitle</name>
+            <filename>NotoSans-Bold.ttf</filename>
+            <size>64</size>
+        </font>
+        <font>
+            <name>AbkItem</name>
+            <filename>NotoSans-Regular.ttf</filename>
+            <size>46</size>
+        </font>
+        <font>
+            <name>AbkHint</name>
+            <filename>NotoSans-Regular.ttf</filename>
+            <size>26</size>
+        </font>
+        <font>
+            <name>AbkRow</name>
+            <filename>NotoSans-Regular.ttf</filename>
+            <size>38</size>
+        </font>
+        <font>
+            <name>AbkRowBold</name>
+            <filename>NotoSans-Bold.ttf</filename>
+            <size>38</size>
+        </font>
+        <font>
+            <name>AbkCard</name>
+            <filename>NotoSans-Regular.ttf</filename>
+            <size>32</size>
+        </font>
+        <font>
+            <name>AbkCardBold</name>
+            <filename>NotoSans-Bold.ttf</filename>
+            <size>32</size>
+        </font>
+    </fontset>
+</fonts>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ABUKARIM TOOLS - "scan this" dialog (3.2.0): QR code + text block.
+     Same visual language as the Add-on Portal. Python contract:
+     Window.Property(title), Window.Property(qr), Window.Property(text),
+     Window.Property(hint). Any key closes it (onAction in qr_view.py). -->
+<window type="dialog">
+    <defaultcontrol always="true">9100</defaultcontrol>
+    <zorder>2</zorder>
+    <controls>
+        <!-- full-screen dark glass so nothing underneath shows through -->
+        <control type="image">
+            <left>0</left><top>0</top><width>1920</width><height>1080</height>
+            <texture colordiffuse="F2030509">white.png</texture>
+        </control>
+
+        <control type="label">
+            <left>0</left><top>90</top><width>1920</width><height>90</height>
+            <font>AbkTitle</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FFFFFFFF</textcolor>
+            <shadowcolor>FF1E8FFF</shadowcolor>
+            <label>$INFO[Window.Property(title)]</label>
+        </control>
+        <control type="image">
+            <left>810</left><top>190</top><width>150</width><height>4</height>
+            <texture colordiffuse="FF1E8FFF">white.png</texture>
+        </control>
+        <control type="image">
+            <left>960</left><top>190</top><width>150</width><height>4</height>
+            <texture colordiffuse="FFFF7A1A">white.png</texture>
+        </control>
+
+        <!-- QR on a white card (quiet zone is part of the PNG) -->
+        <control type="image">
+            <left>180</left><top>270</top><width>600</width><height>600</height>
+            <texture colordiffuse="FFFFFFFF">white.png</texture>
+        </control>
+        <control type="image">
+            <left>200</left><top>290</top><width>560</width><height>560</height>
+            <texture>$INFO[Window.Property(qr)]</texture>
+            <aspectratio>keep</aspectratio>
+        </control>
+
+        <!-- text panel -->
+        <control type="image">
+            <left>840</left><top>270</top><width>900</width><height>600</height>
+            <texture colordiffuse="D90C1322">white.png</texture>
+        </control>
+        <control type="textbox">
+            <left>890</left><top>310</top><width>800</width><height>520</height>
+            <font>AbkRow</font>
+            <textcolor>FFE6E6E6</textcolor>
+            <label>$INFO[Window.Property(text)]</label>
+        </control>
+
+        <control type="label">
+            <left>0</left><top>930</top><width>1920</width><height>60</height>
+            <font>AbkHint</font>
+            <align>center</align><aligny>center</aligny>
+            <textcolor>FF9AA4B2</textcolor>
+            <label>$INFO[Window.Property(hint)]</label>
+        </control>
+
+        <!-- invisible focus target so key presses reach onAction -->
+        <control type="button" id="9100">
+            <left>-10</left><top>-10</top><width>1</width><height>1</height>
+            <texturefocus />
+            <texturenofocus />
+            <label></label>
+        </control>
+    </controls>
+</window>
