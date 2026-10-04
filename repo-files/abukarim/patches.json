@@ -2,20 +2,34 @@
   "schema": 1,
   "kill": [],
   "toggles": [],
-  "patches": [],
-  "_example_entry_not_applied": {
-    "id": "example-seren-timeout",
-    "addon_id": "plugin.video.seren",
-    "rel_path": "resources/lib/modules/example.py",
-    "old": "TIMEOUT = 30",
-    "new": "TIMEOUT = 10",
-    "description": "Seren: example only",
-    "toggle": "seren_example",
-    "min_version": "3.4.0",
-    "max_version": "3.4.99",
-    "target_sha256": [
-      "<sha256 of the unpatched file>"
-    ],
-    "not_found_ok": true
-  }
+  "patches": [
+    {
+      "id": "af3-homewidgets-icons-2026-10",
+      "addon_id": "script.skinvariables",
+      "base": "addon_data",
+      "rel_path": "nodes/skin.arctic.fuse.3/skinvariables-shortcut-homewidgets.json",
+      "description": "AF3 home widgets: portable TMDbHelper icons",
+      "not_found_ok": true,
+      "json_edit": [
+        {
+          "match": {
+            "guid": "guid-fa755c53",
+            "icon": "~%2fUsers%2f"
+          },
+          "set": {
+            "icon": "special://home/addons/plugin.video.themoviedb.helper/resources/icons/themoviedb/default.png"
+          }
+        },
+        {
+          "match": {
+            "guid": "guid-ee901122",
+            "icon": "~%2fUsers%2f"
+          },
+          "set": {
+            "icon": "special://home/addons/plugin.video.themoviedb.helper/resources/icons/themoviedb/default.png"
+          }
+        }
+      ]
+    }
+  ]
 }
