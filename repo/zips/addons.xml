@@ -26,37 +26,6 @@
     <platform>all</platform>
   </extension>
 
-</addon><addon id="plugin.video.redlight" name="[COLOR red]Red Light[/COLOR]" version="3.0" provider-name="[COLOR red]The Red Wizard[/COLOR]">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-        <import addon="script.module.pil" version="1.1.7" />
-        <import addon="script.module.requests" version="2.19.1" />
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="resources/lib/redlight.py">
-        <provides>video</provides>
-    </extension>
-    
-    <extension point="xbmc.python.module" library="resources/lib/" />
-    <extension point="xbmc.addon.metadata">
-        <reuselanguageinvoker>true</reuselanguageinvoker>
-        <summary lang="en">[COLOR red]The Red Light[/COLOR]</summary>
-        <description lang="en">* AllDebrid, Offcloud, Premiumize, Real Debrid and TorBox
-* AIOStreams
-* EasyNews, NZB Indexers and Local Folders
-* MDBList, PunchPlay, Simkl, TMDb Lists, Trakt and WeTrakr</description>
-        <disclaimer lang="en">The author of this add-on does not host any content and has no affiliation with the content providers</disclaimer>
-        <language>en</language>
-        <platform>all</platform>
-        <license>GPL-3.0</license>
-        <forum>https://t.me/+X-lt1ZDii3I3YjA0</forum>
-        <website>https://redwizard.xyz/</website> 
-        <source>https://github.com/The-Red-Wizard/TheRedWizard</source>
-        <news>Check the Changelog in Tools &gt; Changelog &amp; Log Utils</news>
-        <assets>
-            <icon>resources/media/addon_icons/icon.png</icon>
-            <fanart>resources/media/fanart.jpg</fanart>
-        </assets>
-    </extension>
 </addon><addon id="plugin.video.themoviedb.helper" version="6.17.4" name="TMDb Helper" provider-name="jurialmunkey">
 <requires>
   <import addon="xbmc.python" version="3.0.1" />
@@ -102,23 +71,6 @@
     <screenshot>resources/screenshot-02.jpg</screenshot>
   </assets>
 </extension>
-</addon><addon id="plugin.video.tidb" name="TheIntroDB Kodi Addon" version="1.8.0" provider-name="TheIntroDB">
-    <requires>
-        <import addon="xbmc.python" version="3.0.1" />
-    </requires>
-    <extension point="xbmc.service" library="service.py" start="startup" />
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Skip intro, recap, credits, and preview segments in movies and TV shows using TheIntroDB</summary>
-        <summary lang="zh_CN">基于 TheIntroDB 数据库，自动跳过电影和电视剧的片头、前情回顾、片尾和预告片段</summary>
-        <description lang="en_GB">Looks up segment timings from TheIntroDB while you watch. Uses TMDB ids when present; otherwise IMDb ids (tt…) with season/episode.</description>
-        <description lang="zh_CN">观看时自动从 TheIntroDB 数据库查询片段时间信息。优先使用 TMDB ID 进行匹配；无 TMDB ID 时则使用 IMDb ID（tt 开头）配合季/集号查询。</description>
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <assets>
-            <icon>resources/icon.png</icon>
-        </assets>
-        <news lang="en_GB">v1.8.0 - make skip button persist until segment ends, add configurable timeout setting.</news>
-    </extension>
 </addon><addon id="repository.bald" version="1.0.3" name="Bald Add-on Repository" provider-name="dangerouslaser">
   <extension point="xbmc.addon.repository" name="Bald Add-on Repository">
     <dir>
