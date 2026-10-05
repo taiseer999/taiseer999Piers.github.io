@@ -1129,6 +1129,16 @@ msgctxt "#31246"
 msgid "Autoscroll textboxes"
 msgstr "تمرير تلقائي لمربّعات النص"
 
+#: /1080i/Includes_Settings.xml
+msgctxt "#31247"
+msgid "Networks"
+msgstr "الشبكات"
+
+#: /1080i/Includes_Settings.xml
+msgctxt "#31248"
+msgid "Certifications"
+msgstr "الشهادات"
+
 msgctxt "#31249"
 msgid "Waiting for PVR"
 msgstr "بانتظار PVR"
@@ -1137,6 +1147,11 @@ msgstr "بانتظار PVR"
 msgctxt "#31250"
 msgid "Highlight"
 msgstr "إبراز"
+
+#: /1080i/Settings.xml
+msgctxt "#31251"
+msgid "Statistics"
+msgstr "الإحصائيات"
 
 msgctxt "#31252"
 msgid "Catch-up"
