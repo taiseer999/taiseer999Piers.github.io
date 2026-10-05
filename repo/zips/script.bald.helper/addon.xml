@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="script.bald.helper" name="Bald Helper" version="1.5.0" provider-name="dangerouslaser">
+	<requires>
+		<import addon="xbmc.python" version="3.0.1"/>
+		<!-- Pillow, for the blurred backgrounds: the version Kodi 22 bundles (Kodi.app's addons/script.module.pil). -->
+		<import addon="script.module.pil" version="5.1.0"/>
+	</requires>
+	<extension point="xbmc.service" library="service.py"/>
+	<!-- plugin://script.bald.helper/: the OSD cast panel's list and the settings actions. No <provides>, so it is
+	     not listed among the video add-ons; Kodi finds a plugin by id and type (PluginDirectory.cpp). -->
+	<extension point="xbmc.python.pluginsource" library="plugin.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Blurred backgrounds, online ratings, spoiler-free stills, keymaps and faster info pages for the Bald skin.</summary>
+		<description lang="en_GB">The companion service for the Bald skin. It makes Bald's blurred backgrounds, fetches online ratings from MDbList (add your free API key in the settings), frosts the stills of unwatched episodes when spoiler protection is on, and runs Bald's info page and library actions quickly. It does nothing under other skins.</description>
+		<platform>all</platform>
+		<license>GPL-2.0-or-later</license>
+		<source>https://github.com/dangerouslaser/skin.bald</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+	</extension>
+</addon>

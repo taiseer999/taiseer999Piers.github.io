@@ -2,11 +2,12 @@
 <!-- Bald movie library: cinematic fanart with a low horizontal poster row. -->
 <includes>
 	<include name="Bald_PosterLowTile">
-		<param name="diffuse">bald_poster_dim</param><param name="focused">false</param>
+		<param name="diffuse">bald_poster_dim</param><param name="focused">false</param><param name="marks">Bald_LibraryPosterMarks</param>
 		<definition>
 			<include content="Bald_LibraryPosterItem">
 				<param name="width">140</param><param name="height">210</param><param name="ring_width">144</param><param name="ring_height">216</param><param name="center">78,117</param><param name="show_label">false</param>
-				<param name="diffuse">$PARAM[diffuse]</param><param name="focused">$PARAM[focused]</param>
+				<param name="diffuse">$PARAM[diffuse]</param><param name="focused">$PARAM[focused]</param><param name="marks">$PARAM[marks]</param>
+				<param name="check_x">120</param>
 			</include>
 		</definition>
 	</include>

@@ -381,8 +381,8 @@ def disable_mouse(xbmc):
     rpc(xbmc, "Settings.SetSettingValue", {"setting": "input.enablemouse", "value": False})
 
 
-# Font.xml fontset ids Bald Settings > Appearance offers, in file order: Mohand (Default, lookandfeel.font's
-# default), iPhone (id InstrumentSans), Tonos (id Arial); see Font.xml.
+# Font.xml fontset ids Bald Settings > Appearance offers, in file order: DM Sans (Default, lookandfeel.font's
+# default), Instrument Sans, Onest (id Arial, see Font.xml).
 FONTSETS = ("Default", "InstrumentSans", "Arial")
 # The skin's own copy of the choice; Bald Helper (resources/lib/lookandfeel.py) re-applies it when the setting was
 # lost.

@@ -253,6 +253,25 @@
 			<screenshot>resources/images/06.jpg</screenshot>
 		</assets>
 	</extension>
+</addon><addon id="script.bald.helper" name="Bald Helper" version="1.5.0" provider-name="dangerouslaser">
+	<requires>
+		<import addon="xbmc.python" version="3.0.1" />
+		
+		<import addon="script.module.pil" version="5.1.0" />
+	</requires>
+	<extension point="xbmc.service" library="service.py" />
+	
+	<extension point="xbmc.python.pluginsource" library="plugin.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Blurred backgrounds, online ratings, spoiler-free stills, keymaps and faster info pages for the Bald skin.</summary>
+		<description lang="en_GB">The companion service for the Bald skin. It makes Bald's blurred backgrounds, fetches online ratings from MDbList (add your free API key in the settings), frosts the stills of unwatched episodes when spoiler protection is on, and runs Bald's info page and library actions quickly. It does nothing under other skins.</description>
+		<platform>all</platform>
+		<license>GPL-2.0-or-later</license>
+		<source>https://github.com/dangerouslaser/skin.bald</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+	</extension>
 </addon><addon id="script.fentastic.helper" name="FENtastic Plus Helper" version="100.6.25f" provider-name="Tikipeter, Ivar Brandt, Zaxxon709">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
@@ -782,11 +801,11 @@ v3.5.46
 - Minor cosmetic adjustments and small fixes
 </news>
     </extension>
-</addon><addon id="skin.bald" version="0.11.0" name="Bald" provider-name="dangerouslaser">
+</addon><addon id="skin.bald" version="0.12.0" name="Bald" provider-name="dangerouslaser">
 	<requires>
 		<import addon="xbmc.gui" version="5.18.0" />
 		<import addon="xbmc.python" version="3.0.1" />
-		<import addon="script.skinvariables" version="2.2.4" />
+		<import addon="script.skinvariables" version="2.2.8" />
 		<import addon="script.bald.helper" version="1.5.0" />
 		<import addon="script.globalsearch" version="9.2.1" optional="true" />
 		<import addon="plugin.video.themoviedb.helper" version="6.17.4" optional="true" />

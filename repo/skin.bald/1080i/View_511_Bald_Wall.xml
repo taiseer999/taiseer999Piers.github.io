@@ -5,6 +5,7 @@
 		<definition>
 			<include content="Bald_LibraryPosterItem">
 				<param name="width">192</param><param name="height">288</param><param name="ring_width">198</param><param name="ring_height">294</param><param name="center">108,156</param><param name="show_label">false</param><param name="diffuse">$PARAM[diffuse]</param><param name="focused">$PARAM[focused]</param>
+				<param name="check_x">172</param>
 			</include>
 		</definition>
 	</include>

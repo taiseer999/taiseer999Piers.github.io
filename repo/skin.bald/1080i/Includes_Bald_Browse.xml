@@ -340,10 +340,17 @@
 			<control type="grouplist">
 				<left>Bald_BrowseCaptionLeft</left><top>548</top><width>568</width><height>88</height>
 				<orientation>vertical</orientation><align>right</align><usecontrolcoords>true</usecontrolcoords>
+				<!-- The clearlogo in place of the title (Appearance > Artwork, Bald_LogoTitleBrowse), else the title. -->
+				<control type="image">
+					<left>20</left><width>528</width><height>88</height>
+					<aspectratio align="left" aligny="bottom">keep</aspectratio><texture background="true">$VAR[Bald_ItemLogo]</texture>
+					<visible>Integer.Is$PARAM[p](Container.CurrentItem) + $EXP[Bald_LogoTitleBrowse] + $EXP[Bald_ItemHasLogo]</visible>
+					<include content="Bald_AnimCaptionIn"><param name="c">browse</param><param name="ignore_home_row">true</param><param name="delay">180</param></include>
+				</control>
 				<control type="textbox">
 					<left>20</left><width>528</width><height max="88">auto</height>
 					<font>Bald_CaptionTitle</font><textcolor>bald_ink</textcolor><label>$INFO[ListItem.Label]</label>
-					<visible>Integer.Is$PARAM[p](Container.CurrentItem)</visible>
+					<visible>Integer.Is$PARAM[p](Container.CurrentItem) + ![$EXP[Bald_LogoTitleBrowse] + $EXP[Bald_ItemHasLogo]]</visible>
 					<include content="Bald_AnimCaptionIn"><param name="c">browse</param><param name="ignore_home_row">true</param><param name="delay">180</param></include>
 				</control>
 			</control>
@@ -377,9 +384,9 @@
 					<include content="Bald_AnimCaptionIn"><param name="c">browse</param><param name="ignore_home_row">true</param><param name="delay">300</param></include>
 				</control>
 				<control type="textbox">
-					<left>20</left><top>18</top><width>528</width><height>150</height>
+					<left>20</left><top>18</top><width>528</width><height>151</height>
 					<font>Bald_CaptionPlot</font><textcolor>bald_ink80</textcolor><label>$VAR[Bald_BrowsePlot]</label>
-					<autoscroll delay="10000" time="3000" repeat="10000">Skin.HasSetting(Bald.ScrollPlots) + !System.HasActiveModalDialog</autoscroll>
+					<include content="Bald_PlotAutoScroll" />
 					<visible>Integer.Is$PARAM[p](Container.CurrentItem) + ![ListItem.IsCollection + String.IsEmpty(ListItem.Plot)]</visible>
 					<include content="Bald_AnimCaptionIn"><param name="c">browse</param><param name="ignore_home_row">true</param><param name="delay">350</param></include>
 				</control>
