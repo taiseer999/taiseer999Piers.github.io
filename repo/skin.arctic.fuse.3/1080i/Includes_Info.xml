@@ -579,7 +579,7 @@
                 <control type="label">
                     <wrapmultiline>true</wrapmultiline>
                     <label>$INFO[$PARAM[container]$PARAM[listitem].TVShowTitle]</label>
-                    <font>font_title_midi</font>
+                    <font>font_title_info</font>
                     <aligny>center</aligny>
                     <align>$PARAM[align]</align>
                     <visible>![!String.IsEmpty($PARAM[croplogo]) + $EXP[Exp_TMDbHelper_IsCrop]]</visible>
@@ -591,7 +591,7 @@
                 <control type="label">
                     <wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
                     <label>$INFO[$PARAM[container]$PARAM[listitem].Artist]</label>
-                    <font>font_title_midi</font>
+                    <font>font_title_info</font>
                     <aligny>center</aligny>
                     <align>$PARAM[align]</align>
                     <visible>![!String.IsEmpty($PARAM[croplogo]) + $EXP[Exp_TMDbHelper_IsCrop]]</visible>
@@ -604,7 +604,7 @@
                 <control type="label">
                     <wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
                     <label>$INFO[$PARAM[container]$PARAM[listitem].Title]</label>
-                    <font>font_title_midi</font>
+                    <font>font_title_info</font>
                     <aligny>center</aligny>
                     <align>$PARAM[align]</align>
                     <visible>![!String.IsEmpty($PARAM[croplogo]) + $EXP[Exp_TMDbHelper_IsCrop]]</visible>
@@ -618,7 +618,7 @@
                 <control type="label">
                     <wrapmultiline>$PARAM[wrapmultiline]</wrapmultiline>
                     <label>$INFO[$PARAM[container]$PARAM[listitem].Label]</label>
-                    <font>font_title_midi</font>
+                    <font>font_title_info</font>
                     <aligny>center</aligny>
                     <align>$PARAM[align]</align>
                     <visible>![!String.IsEmpty($PARAM[croplogo]) + $EXP[Exp_TMDbHelper_IsCrop]]</visible>
