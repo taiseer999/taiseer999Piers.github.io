@@ -432,48 +432,84 @@ msgstr ""
 
 #: /1080i/Custom_1117_BaldHomeScreens.xml
 #: /1080i/Custom_1131_BaldPowerMenu.xml
-msgctxt "#31170"
+msgctxt "#31211"
 msgid "Power menu"
 msgstr ""
 
 
 #. Power menu editor: an entry's switch
 #: /1080i/Custom_1131_BaldPowerMenu.xml
-msgctxt "#31172"
+msgctxt "#31213"
 msgid "Show in the power menu"
 msgstr ""
 
 #. Power menu editor: a command of the user's own, as typed (a Kodi built-in)
 #: /1080i/Custom_1131_BaldPowerMenu.xml
-msgctxt "#31173"
+msgctxt "#31214"
 msgid "Command"
 msgstr ""
 
 #: /1080i/Custom_1131_BaldPowerMenu.xml
-msgctxt "#31174"
+msgctxt "#31215"
 msgid "Add a command"
 msgstr ""
 
 #: /1080i/Custom_1131_BaldPowerMenu.xml
-msgctxt "#31175"
+msgctxt "#31216"
 msgid "Restore the default menu"
 msgstr ""
 
 #. Power menu editor, the note under one of Kodi's own entries
 #: /1080i/Includes_Bald_Configure.xml
-msgctxt "#31176"
+msgctxt "#31217"
 msgid "One of Kodi's own. It shows only on devices that can do it."
 msgstr ""
 
 #. Power menu editor, the note under a command of the user's own
 #: /1080i/Includes_Bald_Configure.xml
-msgctxt "#31177"
+msgctxt "#31218"
 msgid "Your own command: any Kodi built-in, such as RunScript(...) or ActivateWindow(...)."
+msgstr ""
+
+#. Appearance > Artwork: the clearlogo in place of the title (the title shows without one)
+#: /1080i/Custom_1118_BaldAppearance.xml
+msgctxt "#31219"
+msgid "Clearlogo as the title in library previews"
+msgstr ""
+
+#. Appearance > Artwork: the clearlogo in place of the title (the title shows without one)
+#: /1080i/Custom_1118_BaldAppearance.xml
+msgctxt "#31220"
+msgid "Clearlogo as the title in Cast & details"
+msgstr ""
+
+#. Appearance > Artwork: the clearlogo in place of the title (the title shows without one)
+#: /1080i/Custom_1118_BaldAppearance.xml
+msgctxt "#31221"
+msgid "Clearlogo as the title on the series page"
+msgstr ""
+
+#. Appearance > Artwork: the clearlogo in place of the title (the title shows without one)
+#: /1080i/Custom_1118_BaldAppearance.xml
+msgctxt "#31222"
+msgid "Clearlogo as the title in the player"
+msgstr ""
+
+#. Customization, the Search entry's note
+#: /1080i/Custom_1117_BaldHomeScreens.xml
+msgctxt "#31223"
+msgid "Search's entry in the main menu. Choose whether it shows and the picture it shows while it is selected."
+msgstr ""
+
+#. Customization, the Settings entry's note
+#: /1080i/Custom_1117_BaldHomeScreens.xml
+msgctxt "#31224"
+msgid "Settings' entry in the main menu. Hidden, it moves into the power menu; Settings and Power cannot both be hidden."
 msgstr ""
 
 #. Customization, the Power entry's note
 #: /1080i/Custom_1117_BaldHomeScreens.xml
-msgctxt "#31171"
+msgctxt "#31212"
 msgid "The power menu's entry in the main menu. Choose whether it shows, its picture, and what its menu offers."
 msgstr ""
 
@@ -587,12 +623,6 @@ msgstr ""
 #. Home Screens: the Background image row's value once a picture is chosen
 msgctxt "#31786"
 msgid "Chosen"
-msgstr ""
-
-#. Home Screens: note for Search, Settings and Power, whose only option is their background image
-#: /1080i/Custom_1117_BaldHomeScreens.xml
-msgctxt "#31760"
-msgid "A fixed entry of the main menu. Choose the picture it shows while it is selected."
 msgstr ""
 
 #: /1080i/Custom_1118_BaldAppearance.xml
@@ -875,13 +905,13 @@ msgid "On focus"
 msgstr ""
 
 #: /1080i/Custom_1118_BaldAppearance.xml
-#. Appearance > Information: the watched check on episode cards and Home tiles, and the Watched note in lists
+#. Appearance > Information: the watched check on episode cards, Home tiles and library posters, and the Watched note in lists
 msgctxt "#31339"
 msgid "Watched marks"
 msgstr ""
 
 #: /1080i/Custom_1118_BaldAppearance.xml
-#. Appearance > Information: the progress bar on episode cards and Home tiles, and the Resume note in lists
+#. Appearance > Information: the progress bar on episode cards, the in-progress clock on Home tiles and library posters, the progress line under Home tiles, and the Resume note in lists
 msgctxt "#31340"
 msgid "Progress marks"
 msgstr ""
@@ -995,7 +1025,7 @@ msgstr ""
 #: /1080i/Includes_Bald_Configure.xml
 #. Font set name (the typeface with Cyrillic): Kodi's Interface > Skin > Fonts list and Bald Settings > Appearance > Typography
 msgctxt "#31415"
-msgid "Tonos"
+msgid "Onest"
 msgstr ""
 
 #: /1080i/Custom_1119_BaldPlayback.xml
@@ -2564,13 +2594,13 @@ msgstr ""
 #: /1080i/Includes_Bald_Configure.xml
 #. Font set names: Kodi's Interface > Skin > Fonts list and Bald Settings > Appearance > Typography
 msgctxt "#31940"
-msgid "iPhone"
+msgid "Instrument Sans"
 msgstr ""
 
 #: /1080i/Font.xml
 #: /1080i/Includes_Bald_Configure.xml
 msgctxt "#31941"
-msgid "Mohand"
+msgid "DM Sans"
 msgstr ""
 
 #: /1080i/Custom_1118_BaldAppearance.xml

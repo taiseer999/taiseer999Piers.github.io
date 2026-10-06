@@ -425,7 +425,16 @@ class PlayerMonitor(Player, CommonMonitorFunctions):
 
     def get_playingitem(self):
         # Check that video other than dummy splash video is playing
-        if self.getPlayingFile() and self.getPlayingFile().endswith('dummy.mp4'):
+        # -- TMDbHelper dead-player guard (by ABUKARIM TOOLS) --
+        try:
+            if not self.isPlaying():
+                self.reset_properties()
+                return
+            _abk_playing_file = self.getPlayingFile()
+        except RuntimeError:
+            self.reset_properties()
+            return
+        if _abk_playing_file and _abk_playing_file.endswith('dummy.mp4'):
             self.reset_properties()
             return
 

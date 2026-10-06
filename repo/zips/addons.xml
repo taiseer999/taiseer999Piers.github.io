@@ -26,7 +26,7 @@
     <platform>all</platform>
   </extension>
 
-</addon><addon id="plugin.video.themoviedb.helper" version="6.17.4" name="TMDb Helper" provider-name="jurialmunkey">
+</addon><addon id="plugin.video.themoviedb.helper" version="6.17.5" name="TMDb Helper" provider-name="jurialmunkey">
 <requires>
   <import addon="xbmc.python" version="3.0.1" />
   <import addon="script.module.requests" version="2.9.1" />
@@ -801,7 +801,7 @@ v3.5.46
 - Minor cosmetic adjustments and small fixes
 </news>
     </extension>
-</addon><addon id="skin.bald" version="0.12.0" name="Bald" provider-name="dangerouslaser">
+</addon><addon id="skin.bald" version="0.12.1" name="Bald" provider-name="dangerouslaser">
 	<requires>
 		<import addon="xbmc.gui" version="5.18.0" />
 		<import addon="xbmc.python" version="3.0.1" />
