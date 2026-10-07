@@ -169,21 +169,7 @@ def _preflight(home, player, toggle_log: str) -> bool:
     Returns True when a view may open; otherwise notifies (or toggles the
     open view closed) and returns False.
     """
-    if not _ALLOW_NON_COREELEC:
-        if not _is_coreelec():
-            _notify_error(32215)
-            return False
-
-        build_version = xbmc.getInfoLabel("System.BuildVersion")
-        try:
-            major_version = int(build_version.split(".")[0])
-        except (ValueError, IndexError):
-            _notify_error(32216)
-            return False
-
-        if major_version < 22:
-            _notify_error(32215)
-            return False
+    # Platform gate removed: runs on any system.
 
     skin_path = xbmcvfs.translatePath("special://skin/")
     if os.path.exists(os.path.join(skin_path, "720p")):
