@@ -53,7 +53,7 @@ _releasing = threading.Event()
 _opening = threading.Lock()
 
 # Set True to allow launching on non-CoreELEC platforms (for testing).
-_ALLOW_NON_COREELEC = False
+_ALLOW_NON_COREELEC = True
 
 # Arrow-key nudge: pixels per press.  Only when enabled (see _nudge_enabled)
 # and never saved; the next launch starts from the configured offsets.
