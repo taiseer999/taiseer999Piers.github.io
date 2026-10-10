@@ -1766,7 +1766,7 @@
                     <!-- Genre -->
                     <include content="Object_InfoCircle_Detail">
                         <param name="id">21</param>
-                        <param name="icon">special://skin/extras/icons/genre.png</param>
+                        <param name="icon">special://skin/extras/icons/genre1.png</param>
                         <param name="role">$LOCALIZE[515]</param>
                         <param name="name">$VAR[Label_Genre]</param>
                         <visible>!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Genre)) | !String.IsEmpty(ListItem.Genre)</visible>
@@ -1909,7 +1909,7 @@
                     <width>$PARAM[left_group_width]</width>
                     <height>320</height>
                     <include content="Object_InfoCircle">
-                        <param name="icon">special://skin/extras/icons/genre.png</param>
+                        <param name="icon">special://skin/extras/icons/genre1.png</param>
                         <param name="role">$LOCALIZE[515]</param>
                         <param name="name">$INFO[ListItem.Genre]</param>
                         <visible>!String.IsEmpty(ListItem.Genre)</visible>
