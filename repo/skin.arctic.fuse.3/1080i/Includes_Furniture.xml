@@ -263,13 +263,30 @@
                 <orientation>horizontal</orientation>
                 <align>center</align>
                 <itemgap>$PARAM[itemgap]</itemgap>
+                <!-- ABUKARIM: 4K/8K mapped to lowercase files (case-sensitive FS) -->
                 <control type="image">
                     <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoresolution],flags/colorful/resolution/,.png]</texture>
                     <aspectratio>keep</aspectratio>
                     <height>110</height>
                     <width>110</width>
                     <centertop>50%</centertop>
-                    <visible>!String.IsEmpty($PARAM[infolabel_videoresolution])</visible>
+                    <visible>!String.IsEmpty($PARAM[infolabel_videoresolution]) + !String.IsEqual($PARAM[infolabel_videoresolution],4K) + !String.IsEqual($PARAM[infolabel_videoresolution],8K)</visible>
+                </control>
+                <control type="image">
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/colorful/resolution/4k.png</texture>
+                    <aspectratio>keep</aspectratio>
+                    <height>110</height>
+                    <width>110</width>
+                    <centertop>50%</centertop>
+                    <visible>String.IsEqual($PARAM[infolabel_videoresolution],4K)</visible>
+                </control>
+                <control type="image">
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/colorful/resolution/8k.png</texture>
+                    <aspectratio>keep</aspectratio>
+                    <height>110</height>
+                    <width>110</width>
+                    <centertop>50%</centertop>
+                    <visible>String.IsEqual($PARAM[infolabel_videoresolution],8K)</visible>
                 </control>
                 <control type="image">
                     <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoaspect],flags/colorful/aspectratio/,.png]</texture>
