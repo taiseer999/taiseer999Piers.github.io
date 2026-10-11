@@ -332,7 +332,7 @@
             <param name="dialog">false</param>
             <param name="control">radiobutton</param>
             <param name="enabled">Skin.HasSetting(Footer.EnableCodecs)</param>
-            <label>$LOCALIZE[31627]</label>
+            <label>$LOCALIZE[31995]</label>
             <onclick>Skin.ToggleSetting(Furniture.DisableCodecLogos)</onclick>
             <selected>!Skin.HasSetting(Furniture.DisableCodecLogos)</selected>
         </include>

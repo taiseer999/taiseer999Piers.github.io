@@ -2515,13 +2515,44 @@ msgctxt "#31625"
 msgid "High"
 msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+#: /shortcuts/skinviewtypes.json
 msgctxt "#31626"
-msgid "Hub clearlogo on right (watermark)"
+msgid "Combined Wall"
 msgstr ""
 
-#: /1080i/Includes_SkinSettings.xml
+#: /1080i/Includes_Views_Combined_Wall.xml
 msgctxt "#31627"
+msgid "Combined Wall Square"
+msgstr ""
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31628"
+msgid "Combined Wall Landscape"
+msgstr ""
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31629"
+msgid "Combined Wall Poster"
+msgstr ""
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31630"
+msgid "Combined Wall Circle"
+msgstr ""
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31631"
+msgid "Combined Wall Board"
+msgstr ""
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31632"
+msgid "Combined Wall Flyer"
+msgstr ""
+
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31995"
 msgid "Codec logos"
 msgstr ""
 

@@ -17,6 +17,12 @@
         <value condition="Control.IsVisible(527)">$INFO[Container(537).NumItems,, $LOCALIZE[31022]]</value>
         <value condition="Control.IsVisible(528)">$INFO[Container(538).NumItems,, $LOCALIZE[31022]]</value>
         <value condition="Control.IsVisible(529)">$INFO[Container(539).NumItems,, $LOCALIZE[31022]]</value>
+        <value condition="Control.IsVisible(550)">$INFO[Container(560).NumItems,, $LOCALIZE[31022]]</value>
+        <value condition="Control.IsVisible(551)">$INFO[Container(561).NumItems,, $LOCALIZE[31022]]</value>
+        <value condition="Control.IsVisible(552)">$INFO[Container(562).NumItems,, $LOCALIZE[31022]]</value>
+        <value condition="Control.IsVisible(553)">$INFO[Container(563).NumItems,, $LOCALIZE[31022]]</value>
+        <value condition="Control.IsVisible(554)">$INFO[Container(564).NumItems,, $LOCALIZE[31022]]</value>
+        <value condition="Control.IsVisible(556)">$INFO[Container(566).NumItems,, $LOCALIZE[31022]]</value>
         <value>$INFO[Container.NumItems,, $LOCALIZE[31022]]</value>
     </variable>
 

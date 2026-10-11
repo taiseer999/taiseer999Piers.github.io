@@ -2511,13 +2511,44 @@ msgctxt "#31625"
 msgid "High"
 msgstr "مرتفع"
 
-#: /1080i/Includes_SkinSettings.xml
+#: /shortcuts/skinviewtypes.json
 msgctxt "#31626"
-msgid "Hub clearlogo on right (watermark)"
-msgstr "شعار المجموعة على اليمين (علامة مائية)"
+msgid "Combined Wall"
+msgstr "جدار مدمج"
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31627"
+msgid "Combined Wall Square"
+msgstr "جدار مدمج - مربع"
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31628"
+msgid "Combined Wall Landscape"
+msgstr "جدار مدمج - أفقي"
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31629"
+msgid "Combined Wall Poster"
+msgstr "جدار مدمج - ملصق"
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31630"
+msgid "Combined Wall Circle"
+msgstr "جدار مدمج - دائري"
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31631"
+msgid "Combined Wall Board"
+msgstr "جدار مدمج - لوحة"
+
+#: /1080i/Includes_Views_Combined_Wall.xml
+msgctxt "#31632"
+msgid "Combined Wall Flyer"
+msgstr "جدار مدمج - نشرة"
+
 
 #: /1080i/Includes_SkinSettings.xml
-msgctxt "#31627"
+msgctxt "#31995"
 msgid "Codec logos"
 msgstr "شعارات الترميز"
 
