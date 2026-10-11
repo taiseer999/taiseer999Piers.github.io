@@ -93,6 +93,11 @@
         <value>$LOCALIZE[31458]</value>
     </variable>
 
+    <variable name="Label_Setting_TitleStyle">
+        <value condition="!Skin.HasSetting(Info.EnableTextClearlogos)">$LOCALIZE[31438]</value>
+        <value>$LOCALIZE[31634]</value>
+    </variable>
+
     <variable name="Label_Setting_Search_Mode">
         <value condition="String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Combined)">$LOCALIZE[31083] $LOCALIZE[31103]</value>
         <value condition="String.IsEqual(Skin.String(HomeSwitcher.Search.Mode),Wall)">$LOCALIZE[31008] $LOCALIZE[31103]</value>

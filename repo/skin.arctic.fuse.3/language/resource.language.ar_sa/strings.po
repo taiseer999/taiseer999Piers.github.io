@@ -2546,6 +2546,15 @@ msgctxt "#31632"
 msgid "Combined Wall Flyer"
 msgstr "جدار مدمج - نشرة"
 
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31633"
+msgid "Title style"
+msgstr "نمط العنوان"
+
+#: /1080i/Includes_Labels.xml
+msgctxt "#31634"
+msgid "Stylised"
+msgstr "مُصمم"
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31995"
