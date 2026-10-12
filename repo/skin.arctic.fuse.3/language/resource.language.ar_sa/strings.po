@@ -1216,6 +1216,16 @@ msgctxt "#31266"
 msgid "Monthly"
 msgstr "شهري"
 
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31267"
+msgid "Title fallback"
+msgstr "العودة إلى العنوان"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31268"
+msgid "Background fallback"
+msgstr "العودة إلى للخلفية"
+
 msgctxt "#31270"
 msgid "Single image"
 msgstr "صورة واحدة"
@@ -2437,7 +2447,7 @@ msgctxt "#31609"
 msgid "Show CoreELEC logo above date"
 msgstr "اظهار شعار CoreELEC "
 
-msgctxt "#31610"
+msgctxt "#31997"
 msgid "Colored system stats icons (RAM / CPU / connection)"
 msgstr "أيقونات ملونة (ذاكرة الوصول العشوائي / وحدة المعالجة المركزية / الاتصال)"
 
@@ -2557,7 +2567,7 @@ msgid "Stylised"
 msgstr "مُصمم"
 
 #: /1080i/Includes_SkinSettings.xml
-msgctxt "#31995"
+msgctxt "#31998"
 msgid "Codec logos"
 msgstr "شعارات الترميز"
 
@@ -2571,3 +2581,63 @@ msgstr "ايقونات فيديو OSD"
 msgctxt "#31980"
 msgid "Left"
 msgstr "يسار"
+
+msgctxt "#31153"
+msgid "Results for"
+msgstr "نتائج البحث عن"
+
+msgctxt "#31156"
+msgid "Row Flyer"
+msgstr "صف منشور"
+
+msgctxt "#31157"
+msgid "Wall Flyer"
+msgstr "جدار منشور"
+
+msgctxt "#31175"
+msgid "Player"
+msgstr "المشغّل"
+
+msgctxt "#31176"
+msgid "Create a new save"
+msgstr "إنشاء حفظ جديد"
+
+msgctxt "#31178"
+msgid "Cheats available"
+msgstr "الغش متاح"
+
+msgctxt "#31180"
+msgid "Garbage"
+msgstr "رديء جدًا"
+
+msgctxt "#31182"
+msgid "Bad"
+msgstr "سيئ"
+
+msgctxt "#31190"
+msgid "Average"
+msgstr "متوسط"
+
+msgctxt "#31191"
+msgid "Good"
+msgstr "جيد"
+
+msgctxt "#31192"
+msgid "Great"
+msgstr "رائع"
+
+msgctxt "#31193"
+msgid "Amazing"
+msgstr "مذهل"
+
+msgctxt "#31219"
+msgid "Recently Watched"
+msgstr "شوهد مؤخرًا"
+
+msgctxt "#31610"
+msgid "Seasonal Themes"
+msgstr "السمات الموسمية"
+
+msgctxt "#31611"
+msgid "Christmas Theme"
+msgstr "سمة عيد الميلاد"

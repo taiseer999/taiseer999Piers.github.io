@@ -88,19 +88,18 @@
         <value condition="Window.ISVisible(ingamesaves)">$LOCALIZE[31091]</value>
     </variable>
 
-    <variable name="Label_Setting_TitleBackgroundStyle">
-        <value condition="!Skin.HasSetting(Info.EnableStylisedTitlesBackgrounds)">$LOCALIZE[31438]</value>
+    <variable name="Label_Setting_BackgroundStyle">
+        <value condition="!Skin.HasSetting(Info.EnableStylisedBackgrounds)">$LOCALIZE[31438]</value>
+        <value>$LOCALIZE[31634]</value>
+    </variable>
+    <variable name="Label_Setting_TitleStyle">
+        <value condition="!Skin.HasSetting(Info.EnableStylisedTitles)">$LOCALIZE[31438]</value>
         <value>$LOCALIZE[31634]</value>
     </variable>
 
     <variable name="Label_Setting_Ratings">
         <value condition="Skin.HasSetting(Ratings.EnableColor)">$LOCALIZE[737]</value>
         <value>$LOCALIZE[31458]</value>
-    </variable>
-
-    <variable name="Label_Setting_TitleStyle">
-        <value condition="!Skin.HasSetting(Info.EnableTextClearlogos)">$LOCALIZE[31438]</value>
-        <value>$LOCALIZE[31634]</value>
     </variable>
 
     <variable name="Label_Setting_Search_Mode">
