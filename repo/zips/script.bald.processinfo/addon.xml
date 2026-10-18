@@ -9,7 +9,7 @@
         <provides>executable</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
-        <platform>linux</platform>
+        <platform>all</platform>
         <license>AGPL-3.0-or-later</license>
         <source>https://github.com/dangerouslaser/script.bald.processinfo</source>
         <summary lang="en">Shows what the player is doing: video, audio, HDR and Dolby Vision output</summary>
