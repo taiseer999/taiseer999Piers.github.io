@@ -1,0 +1,845 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (c) 2026 U3knOwn
+
+"use strict";
+
+/* ===========================================================================
+   The live panels, for whichever page asks for them.
+
+   What is playing -- with its poster and its format badges -- the four figures
+   worth a glance, the luminance chart, what the whole title has done so far,
+   and the transport row (built by js/live-remote.js).  The dashboard hands
+   them out to its tabs: the now-playing card stays on the live tab, the
+   luminance chart goes to the metadata tab and the events to the history tab
+   (see js/dashboard.js).
+
+   Loaded after core.js, readings.js, live-chapters.js and live-remote.js.
+
+   A page opts in by putting <div id="live"></div> where the panels belong;
+   the markup and the drawing are here, the styling is in live-panels.css.  It
+   then hands the snapshot on through BaldPI.panels.update() and the localized
+   strings through .strings().
+=========================================================================== */
+
+(function () {
+
+  const host = document.getElementById("live");
+  if (!host) return;
+  /* What the folds are remembered by.  The chart keeps the key it had when
+     it was a card of the metadata window, so a device that had it open still
+     has it open on the metadata tab. */
+  const pageState = "dashboard";
+
+  /* How much of the past the live buffer holds, in seconds.  It is what the
+     one-minute range draws; the longer ones come from the add-on, which has
+     been sampling since the film started. */
+  const HISTORY_SECONDS = 60;
+
+  /* How often a longer range is fetched again while it is on screen. */
+  const HISTORY_REFRESH = 5000;
+
+  host.innerHTML =
+    '<section class="card hero" id="nowCard">' +
+      '<div class="art hidden" id="artBox"><img id="poster" alt=""></div>' +
+      '<div class="now">' +
+        '<div class="badges" id="badges"></div>' +
+        '<h1 id="title">—</h1>' +
+        '<p class="meta" id="meta"></p>' +
+        '<p class="file mono hidden" id="file"></p>' +
+        /* What the picture is and what the sound is, a row each -- the same
+           badges the mobile app draws under its title. */
+        '<div class="formats" id="formats">' +
+          '<div class="format-row" id="pictureBadges"></div>' +
+          '<div class="format-row" id="soundBadges"></div>' +
+        '</div>' +
+      '</div>' +
+      /* The bar and the buttons take a row of their own under both, so
+         they have the whole card to lay out in however narrow the poster
+         leaves the column beside it. */
+      '<div class="foot">' +
+        '<div class="progress">' +
+          /* Which chapter the position is in, over the bar it is marked on
+             (see js/live-chapters.js). */
+          '<div class="chapter-now hidden" id="chapterNow"></div>' +
+          '<div class="trackwrap">' +
+            '<div class="track" id="track" role="slider" tabindex="0" ' +
+              'aria-valuemin="0" aria-valuemax="100"><i id="bar"></i>' +
+              '<span class="chapter-dots hidden" id="chapterDots" aria-hidden="true"></span>' +
+            '</div>' +
+            /* Only what the label over the bar already says for the
+               chapter playing, so it is kept from a screen reader. */
+            '<span class="chapter-tip hidden" id="chapterTip" aria-hidden="true"></span>' +
+          '</div>' +
+          /* Three readings under the bar, not two: how far the title has
+             got, when it will be over by the clock on the wall, and how long
+             it runs for.  The middle one is centred on the bar rather than on
+             the gap between the other two, so it stays put as the figures
+             either side of it change width. */
+          '<div class="times mono">' +
+            '<span id="tElapsed">--:--</span>' +
+            '<span class="finish hidden" id="tFinish">' +
+              '<span id="tFinishLabel"></span>' +
+              '<span class="mono" id="tFinishTime"></span>' +
+            '</span>' +
+            '<span id="tTotal">--:--</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="control-drawer" id="controlDrawer">' +
+          '<div class="control-body">' +
+            '<div class="transport hidden" id="transport"></div>' +
+            '<div class="tracks hidden" id="tracks"></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</section>' +
+    '<details class="card hidden" id="tiles">' +
+      '<summary class="panel-toggle"><span id="tilesTitle"></span></summary>' +
+      '<div class="tilegrid">' +
+        '<div class="tile"><span class="k" id="kPlayerCache"></span>' +
+          '<span class="vwrap"><span class="v mono" id="vPlayerCache">N/A</span><span class="u"></span></span></div>' +
+        '<div class="tile"><span class="k" id="kFps"></span>' +
+          '<span class="vwrap"><span class="v mono" id="vFps">N/A</span><span class="u"></span>' +
+            '<span class="trend" id="tFps" aria-hidden="true"></span></span></div>' +
+        '<div class="tile"><span class="k" id="kSwitches"></span>' +
+          '<span class="vwrap"><span class="v mono" id="vSwitches">0</span><span class="u"></span></span></div>' +
+        '<div class="tile"><span class="k" id="kWarnings"></span>' +
+          '<span class="vwrap"><span class="v mono" id="vWarnings">0</span><span class="u"></span></span></div>' +
+      '</div>' +
+    '</details>' +
+    '<details class="card hidden" id="chartCard">' +
+      '<summary class="panel-toggle"><span id="chartTitle"></span></summary>' +
+      '<div class="chart-options">' +
+        '<div class="ranges" id="ranges"></div>' +
+      '</div>' +
+      '<div class="chartwrap">' +
+        '<canvas id="chart" class="chart" role="img"></canvas>' +
+        '<div class="legend">' +
+          '<span><i class="swatch band"></i><span id="legendPeak">Max</span></span>' +
+          '<span><i class="swatch avg"></i><span id="legendAvg">Ø</span></span>' +
+          '<span id="chartScale"></span>' +
+        '</div>' +
+      '</div>' +
+    '</details>' +
+    '<details class="card hidden" id="eventsCard">' +
+      '<summary class="panel-toggle"><span id="eventsTitle"></span></summary>' +
+      '<div class="eventswrap" id="eventsWrap">' +
+        '<div class="events" id="events"></div>' +
+      '</div>' +
+    '</details>';
+
+  const $ = (id) => document.getElementById(id);
+
+  /* Made before the remote, which asks it whether a tap was on a dot.  The
+     switch is the settings tab's, where the page has one. */
+  const chapters = BaldPIChapters.create({
+    track: $("track"), dots: $("chapterDots"), now: $("chapterNow"),
+    tip: $("chapterTip"), toggle: $("chapterMarks")
+  });
+  const remote = BaldPIRemote.create({
+    nowCard: $("nowCard"), drawer: $("controlDrawer"), transport: $("transport"),
+    tracks: $("tracks"), track: $("track"), bar: $("bar"), elapsed: $("tElapsed"),
+    chapters
+  }, pageState);
+  const uiIcon = BaldPIRemote.icon;
+
+  const el = {
+    nowCard: $("nowCard"), badges: $("badges"), title: $("title"),
+    meta: $("meta"), file: $("file"),
+    pictureBadges: $("pictureBadges"), soundBadges: $("soundBadges"),
+    artBox: $("artBox"), poster: $("poster"),
+    track: $("track"), bar: $("bar"), tElapsed: $("tElapsed"),
+    tFinish: $("tFinish"), tFinishLabel: $("tFinishLabel"),
+    tFinishTime: $("tFinishTime"), tTotal: $("tTotal"),
+    tiles: $("tiles"), vSwitches: $("vSwitches"), vWarnings: $("vWarnings"),
+    vPlayerCache: $("vPlayerCache"), vFps: $("vFps"), tFps: $("tFps"),
+    chartCard: $("chartCard"), chart: $("chart"), ranges: $("ranges"),
+    eventsCard: $("eventsCard"), events: $("events"),
+    eventsWrap: $("eventsWrap")
+  };
+
+  let live = [];        /* {t, max, avg} for the last HISTORY_SECONDS       */
+  let past = null;      /* the add-on's own history, when a range needs it  */
+  let pastAt = 0;       /* when that arrived, to age it as time goes on     */
+  let pastSeq = -1;     /* the event count it was fetched at                */
+  let fetching = false;
+  let lastTry = 0;      /* when one was last attempted, failures included   */
+  let range = HISTORY_SECONDS;
+  let posterTag = "";
+  let finishLabel = "";  /* "Ends at", once Kodi's table has been asked      */
+  let lastFinish = "";   /* the clock that label belongs in front of         */
+  let idleFetched = false;  /* the ended title's events, asked for once      */
+  let idleReset = false;    /* the panels have been put away once already    */
+
+  BaldPI.bindDisclosure(el.tiles, pageState + ".metrics", false);
+  /* The chart and the events arrive open: each is what a tab of its own is
+     for now (the metadata tab and the history tab), and a tab that opens on a
+     folded heading is a tab that has to be pressed twice. */
+  BaldPI.bindDisclosure(el.chartCard, "metadata.l1", true);
+  BaldPI.bindDisclosure(el.eventsCard, pageState + ".events", true);
+
+  /* --- what is playing -------------------------------------------------- */
+
+  function renderNow(snapshot) {
+    el.title.textContent = snapshot.title || "—";
+
+    const media = snapshot.media || {};
+    const parts = [];
+    if (media.show) {
+      parts.push(media.season && media.episode
+        ? media.show + " · " + media.season + "×" +
+          String(media.episode).padStart(2, "0")
+        : media.show);
+    }
+    if (media.year) parts.push(media.year);
+    if (media.genre) parts.push(media.genre);
+    el.meta.textContent = parts.join("  ·  ");
+
+    if (snapshot.filename) {
+      el.file.textContent = snapshot.filename;
+      el.file.classList.remove("hidden");
+    } else {
+      el.file.classList.add("hidden");
+    }
+
+    renderArt(snapshot.art || {});
+    renderBadges(snapshot);
+    renderFormats(snapshot);
+
+    const progress = (snapshot.metrics || {}).progress;
+    const percent = (progress === null || progress === undefined) ? 0 : progress;
+    chapters.render(snapshot, percent);
+    /* A bar held by a pointer is the pointer's until it lets go (see dragTo
+       in js/live-remote.js): the reading five times a second would drag the
+       fill back out from under it. */
+    if (remote.held() === null) {
+      el.bar.style.width = percent + "%";
+      el.track.setAttribute("aria-valuenow", Math.round(percent));
+      el.tElapsed.textContent = snapshot.time || "--:--";
+    }
+    el.tTotal.textContent = snapshot.duration || "--:--";
+    renderFinish(snapshot.finish || "");
+  }
+
+  /* When the title will be over, by the clock rather than by the length: the
+     figure that answers "can I still watch this before bed" without anyone
+     having to do the sum.
+
+     The box works it out and writes it in its own regional format (see
+     _EXTRA_INFOLABELS in web/snapshot.py), so it is printed exactly as it
+     arrived.  A live stream has no end and neither has a title Kodi does not
+     yet know the length of; the reading is empty for both, and the middle of
+     the row then simply stays empty rather than showing a clock that would be
+     wrong. */
+  function renderFinish(finish) {
+    lastFinish = finish;
+    /* The words and the figure are kept apart so only the figure is set in
+       the monospaced face the row is otherwise written in: tabular digits are
+       what keeps a clock from shuffling as it counts, and a label set in them
+       reads as part of the reading rather than as the name for it. */
+    el.tFinishLabel.textContent = finish && finishLabel ? finishLabel + " " : "";
+    el.tFinishTime.textContent = finish;
+    el.tFinish.classList.toggle("hidden", !finish);
+  }
+
+  /* The poster is fetched once per film: the add-on sends a tag that changes
+     only when the picture does, and it hangs on the address, so the browser
+     asks again exactly then.
+
+     It is handed to the tint as well as to the page.  On the adaptive theme
+     that is what the now-playing card is painted with; every other theme
+     ignores it, so the call is made whichever one is in force -- the theme can
+     change long after the film did (see js/cover-tint.js). */
+  function renderArt(art) {
+    const tag = art.poster || "";
+    if (tag === posterTag) return;
+    posterTag = tag;
+    if (!tag) {
+      el.artBox.classList.add("hidden");
+      el.poster.removeAttribute("src");
+      tint("");
+      return;
+    }
+    const url = "/api/art?kind=poster&v=" + tag;
+    el.poster.src = url;
+    el.artBox.classList.remove("hidden");
+    tint(url);
+  }
+
+  function tint(url) {
+    if (window.BaldPICover) BaldPICover.show(el.nowCard, url, el.poster);
+  }
+
+  /* A film with no poster is not an error; the frame just goes away, and the
+     card goes back to the plain panel colour with it. */
+  el.poster.addEventListener("error", () => {
+    el.artBox.classList.add("hidden");
+    tint("");
+  });
+
+  /* The row across the top of the card says only whether playback is held:
+     what the source is and what it is converted to are format badges now,
+     under the title with the rest of them (see renderFormats). */
+  function renderBadges(snapshot) {
+    const paused = Boolean(snapshot.paused);
+    if (el.badges.dataset.paused === String(paused)) return;
+    el.badges.dataset.paused = String(paused);
+    el.badges.innerHTML = "";
+    if (!paused) return;
+    const node = document.createElement("span");
+    node.className = "badge alt";
+    node.appendChild(uiIcon("pause"));
+    el.badges.appendChild(node);
+  }
+
+  /* What the badges and the events say is worked out in js/readings.js. */
+  const { pictureBadges, soundBadges, historySwitches, eventLabel, isTransition,
+          eventText, eventTrend } = BaldPIReadings;
+
+  /* Rebuilt only when they say something else: they hold still for a whole
+     film, and tearing a row down five times a second to put the same words
+     back costs a phone real work. */
+  function fillRow(node, badges) {
+    const signature = badges.join("|");
+    if (node.dataset.signature === signature) return;
+    node.dataset.signature = signature;
+    node.innerHTML = "";
+    for (const text of badges) {
+      const badge = document.createElement("span");
+      badge.className = "format";
+      badge.textContent = text;
+      node.appendChild(badge);
+    }
+  }
+
+  function renderFormats(snapshot) {
+    fillRow(el.pictureBadges, pictureBadges(snapshot));
+    fillRow(el.soundBadges, soundBadges(snapshot));
+  }
+
+  /* --- the four figures ------------------------------------------------- */
+
+  /* Up and down, for the tile below and for the event list further down: both
+     say which way a figure moved and both say it with the same two shapes. */
+  const TREND_ARROW = { "1": "▲", "-1": "▼" };
+
+  /* The frame rate the tile is showing, so the next pass can tell which way it
+     moved.  Forgotten while nothing is playing (see update): the first reading
+     of the next title is not a change from the last reading of the one before
+     it. */
+  let fpsShown = null;
+
+  function setFpsTrend(trend) {
+    el.tFps.textContent = trend ? TREND_ARROW[String(trend)] : "";
+    el.tFps.className = "trend" + (trend > 0 ? " up" : trend < 0 ? " down" : "");
+  }
+
+  function renderTiles(metrics, session) {
+    el.tiles.classList.remove("hidden");
+    const totals = session || {};
+    const fetchedTotal = past && past.seq === totals.seq
+      ? historySwitches(past) : null;
+    el.vSwitches.textContent = String(fetchedTotal === null
+      ? (totals.switches || 0) : fetchedTotal);
+    el.vWarnings.textContent = String(totals.warnings || 0);
+    const cacheKnown = metrics.cache !== null && metrics.cache !== undefined;
+    el.vPlayerCache.textContent = cacheKnown
+      ? String(Math.round(metrics.cache)) : BaldPI.T.na;
+    /* "N/A %" would read as a percentage of nothing: the unit goes with the
+       figure. */
+    el.vPlayerCache.nextElementSibling.textContent = cacheKnown ? "%" : "";
+    /* Show the frames that actually made it out, not only the source rate.
+       Kodi already publishes that as fps_out (input FPS minus the current
+       per-second drop).  The subtraction is kept as a fallback for snapshots
+       produced by an older backend during an add-on update. */
+    const fps = metrics.fps_out !== null && metrics.fps_out !== undefined
+      ? Number(metrics.fps_out)
+      : (metrics.fps_in !== null && metrics.fps_in !== undefined
+          ? Math.max(0, Number(metrics.fps_in) - Number(metrics.fps_drop || 0))
+          : null);
+    const known = fps !== null && Number.isFinite(fps);
+    el.vFps.textContent = known
+      ? fps.toFixed(3).replace(/0+$/, "").replace(/[.]$/, "") : BaldPI.T.na;
+    /* The arrow stays as it was until the rate moves again, so a glance at the
+       tile says which way the last change went rather than only what the rate
+       is now.  A reading that has gone away takes it with it: there is no
+       direction to show beside a dash. */
+    if (!known) {
+      fpsShown = null;
+      setFpsTrend(0);
+    } else {
+      if (fpsShown !== null && fps !== fpsShown) {
+        setFpsTrend(fps > fpsShown ? 1 : -1);
+      }
+      fpsShown = fps;
+    }
+  }
+
+  /* Whether anything is under the last row on screen.  The list is the only
+     panel here that scrolls, and on a phone the scrollbar is drawn only while
+     a finger is moving -- so the page says so itself, with a shade over the
+     bottom of the list for exactly as long as there is more of it. */
+  function markMore() {
+    const list = el.events;
+    const more = list.scrollHeight - list.scrollTop - list.clientHeight > 2;
+    el.eventsWrap.classList.toggle("more", more);
+  }
+
+  el.events.addEventListener("scroll", markMore, { passive: true });
+  window.addEventListener("resize", markMore);
+  el.eventsCard.addEventListener("toggle", markMore);
+
+  function renderEvents(events) {
+    if (!events || !events.length) {
+      el.events.className = "events empty";
+      el.events.textContent = BaldPI.T.events_empty;
+      markMore();
+      return;
+    }
+    el.events.className = "events";
+    el.events.innerHTML = "";
+    /* Newest first: what just happened is what a glance is looking for. */
+    for (const entry of events.slice().reverse()) {
+      const shift = isTransition(entry);
+      const row = document.createElement("div");
+      /* The kind on the row itself, which is what colours the dot in front of
+         it (see .event::before in live-panels.css).  A display mode change is
+         its own kind and says so: it used to be written out as "drops", from
+         a time when the class named nothing and no rule read it. */
+      /* All transitions share one DOM/style contract.  The event kind still
+         drives its label and text, but no longer creates visually different
+         VS10/audio/subtitle variants.  Non-transition warnings keep their
+         kind class for the warning/recovery colours below. */
+      row.className = "event" + (shift ? " shift" : " " + entry.kind);
+      row.dataset.kind = entry.kind;
+      row.setAttribute("role", "listitem");
+      const when = document.createElement("span");
+      when.className = "at mono";
+      when.textContent = entry.pos || "";
+      const what = document.createElement("span");
+      what.className = "what";
+      what.textContent = eventLabel(entry.kind);
+      const detail = document.createElement("span");
+      detail.className = "detail mono";
+      detail.textContent = eventText(entry);
+      /* Right of the value, inside it rather than in a column of its own, so
+         the arrow stays with the figure it is about however the row is laid
+         out.  Hidden from a reader that is being read to: it says the same
+         thing the row above it already says, and "black up-pointing triangle"
+         is not what that reader came for. */
+      const trend = eventTrend(entry);
+      if (trend) {
+        const arrow = document.createElement("span");
+        arrow.className = "trend " + (trend > 0 ? "up" : "down");
+        arrow.textContent = TREND_ARROW[String(trend)];
+        arrow.setAttribute("aria-hidden", "true");
+        detail.append(arrow);
+      }
+      row.append(when, what, detail);
+      el.events.append(row);
+    }
+    el.events.setAttribute("role", "list");
+    markMore();
+  }
+
+  /* --- the charts ------------------------------------------------------- */
+
+  /* Luminance spans four decades, from a black frame to a specular highlight,
+     so the y axis is logarithmic: a linear one would flatten everything below
+     a hundred nits into the baseline. */
+  const MIN_NITS = 0.01;
+  const MAX_NITS = 10000;
+  const logScale = (value) => {
+    const clamped = Math.min(MAX_NITS, Math.max(MIN_NITS, value));
+    return (Math.log10(clamped) - Math.log10(MIN_NITS)) /
+           (Math.log10(MAX_NITS) - Math.log10(MIN_NITS));
+  };
+
+  /* Every chart on the page reads the same range buttons.  There is one
+     chart, the luminance one on the metadata tab. */
+  const rangeBars = [];
+
+  function buildRanges(container) {
+    if (container.dataset.built) return;
+    container.dataset.built = "1";
+    rangeBars.push(container);
+    const spans = [[60, "range_1m"], [600, "range_10m"], [0, "range_all"]];
+    for (const [seconds, key] of spans) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "range";
+      button.dataset.range = String(seconds);
+      button.dataset.key = key;
+      button.textContent = BaldPI.T[key] || key;
+      button.addEventListener("click", () => {
+        range = seconds;
+        markRange();
+        if (seconds !== HISTORY_SECONDS) fetchHistory(true);
+        drawCharts();
+      });
+      container.append(button);
+    }
+    markRange();
+  }
+
+  function markRange() {
+    for (const bar of rangeBars) {
+      for (const button of bar.children) {
+        button.classList.toggle("on", Number(button.dataset.range) === range);
+      }
+    }
+  }
+
+  /* The add-on has been sampling since the film started, so a page that opens
+     halfway through asks for what it missed instead of drawing from the moment
+     it arrived.  Fetched on connect, again whenever the event count moves, and
+     on a slow tick while a long range is on screen. */
+  function fetchHistory(force) {
+    const now = Date.now();
+    if (fetching) return;
+    /* Never faster than once a second, however urgent the reason: a fetch
+       that keeps failing leaves the event count unmatched, and every snapshot
+       after it would otherwise be a fresh reason to try again. */
+    if (now - lastTry < 1000) return;
+    if (!force && now - pastAt < HISTORY_REFRESH) return;
+    lastTry = now;
+    fetching = true;
+    BaldPI.getJSON("/api/history").then((data) => {
+      past = data;
+      pastAt = Date.now();
+      pastSeq = data.seq;
+      renderEvents(data.events);
+      el.vSwitches.textContent = String(historySwitches(data) || 0);
+      el.eventsCard.classList.remove("hidden");
+      drawCharts();
+    }).catch(() => { /* the stream's own retry reports an outage */ })
+      .finally(() => { fetching = false; });
+  }
+
+  /* Both luminance sources reduced to the same shape: how long ago, and what
+     was read.  A sample without the required L1 value is left out rather than
+     drawn as zero, which keeps non-Dolby-Vision titles out of this chart. */
+  function series(required) {
+    const now = Date.now() / 1000;
+    const known = (value) => value !== null && value !== undefined;
+    if (range === HISTORY_SECONDS) {
+      const points = [];
+      for (const point of live) {
+        if (!known(point[required])) continue;
+        points.push({
+          age: now - point.t, max: point.max, avg: point.avg
+        });
+      }
+      return points;
+    }
+    if (!past || !past.t || !past.t.length) return [];
+    /* The add-on counts from the start of the film and the page from the
+       moment the answer arrived; the drift is what puts the two on one axis. */
+    const drift = now - pastAt / 1000;
+    const points = [];
+    for (let index = 0; index < past.t.length; index++) {
+      const column = past[required];
+      if (!column || !known(column[index])) continue;
+      points.push({
+        age: (past.now - past.t[index]) + drift,
+        max: past.max[index],
+        avg: known(past.avg[index]) ? past.avg[index] : past.max[index]
+      });
+    }
+    return points;
+  }
+
+  /* --- what each page charts -------------------------------------------- */
+
+  /* One live L1 sample per metadata snapshot. */
+  function recordSample(metrics) {
+    const l1 = metrics.l1 || {};
+    live.push({
+      t: Date.now() / 1000,
+      max: (l1.max === null || l1.max === undefined) ? null : l1.max,
+      avg: (l1.avg === null || l1.avg === undefined) ? l1.max : l1.avg
+    });
+    const now = Date.now() / 1000;
+    while (live.length && now - live[0].t > HISTORY_SECONDS) live.shift();
+  }
+
+  function renderCharts(metrics) {
+    recordSample(metrics);
+
+    /* The luminance chart needs an RPU to read. */
+    const l1 = metrics.l1 || {};
+    const has = l1.max !== null && l1.max !== undefined;
+    if (!has) {
+      el.chartCard.classList.add("hidden");
+      return;
+    }
+    el.chartCard.classList.remove("hidden");
+    buildRanges(el.ranges);
+
+    if (range !== HISTORY_SECONDS) fetchHistory(false);
+    drawCharts();
+  }
+
+  /* --- drawing ----------------------------------------------------------- */
+
+  /* The canvas sized to its box and the theme's palette read off it.  Read off
+     the canvas rather than off <html>: custom properties inherit, so this is
+     the theme's palette on every theme -- and the film's own accent on the
+     adaptive one, where the card the chart sits in has taken the poster's
+     colour (see css/theme.css). */
+  function prepare(canvas) {
+    const ratio = window.devicePixelRatio || 1;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    if (!width || !height) return null;
+    if (canvas.width !== Math.round(width * ratio) ||
+        canvas.height !== Math.round(height * ratio)) {
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+    }
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+
+    const style = getComputedStyle(canvas);
+    const colour = (name, fallback) =>
+      style.getPropertyValue(name).trim() || fallback;
+    return {
+      ctx, width, height,
+      accent:  colour("--accent", "#4fc3f7"),
+      accent2: colour("--accent-2", "#82b1ff"),
+      line:    colour("--line", "#242c36"),
+      dim:     colour("--dim", "#5d6875")
+    };
+  }
+
+  /* How far back the drawing goes: whichever range is on, and for the whole
+     title as far back as the samples themselves. */
+  function windowFor(points) {
+    return range || Math.max(HISTORY_SECONDS, points[0].age);
+  }
+
+  function trace(ctx, points, x, y, key, colour, thickness, dash) {
+    ctx.setLineDash(dash || []);
+    ctx.beginPath();
+    points.forEach((point, index) => {
+      const px = x(point.age), py = y(point[key]);
+      index === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    });
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = thickness;
+    ctx.lineJoin = "round";
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  /* An area under a trace, fading out towards the floor. */
+  function area(ctx, points, x, y, key, colour, floor, alpha) {
+    ctx.beginPath();
+    ctx.moveTo(x(points[0].age), floor);
+    for (const point of points) ctx.lineTo(x(point.age), y(point[key]));
+    ctx.lineTo(x(points[points.length - 1].age), floor);
+    ctx.closePath();
+    const fill = ctx.createLinearGradient(0, y(Infinity), 0, floor);
+    fill.addColorStop(0, colour);
+    fill.addColorStop(1, "transparent");
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = fill;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  /* A chart on a tab that is not in front has no size, and prepare() leaves
+     it alone; the tab draws it again when it comes forward (see draw). */
+  function drawCharts() {
+    drawLuminance();
+  }
+
+  function drawLuminance() {
+    const set = prepare(el.chart);
+    if (!set) return;
+    const { ctx, width, height } = set;
+
+    const padLeft = 34, padRight = 6, padTop = 8, padBottom = 6;
+    const plotW = width - padLeft - padRight;
+    const plotH = height - padTop - padBottom;
+    const y = (nits) => padTop + plotH * (1 - logScale(nits));
+
+    /* Gridlines, one per decade. */
+    ctx.strokeStyle = set.line;
+    ctx.fillStyle = set.dim;
+    ctx.lineWidth = 1;
+    ctx.font = "10px ui-monospace, monospace";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (const tick of [0.1, 1, 10, 100, 1000, 10000]) {
+      const ty = Math.round(y(tick)) + 0.5;
+      ctx.beginPath();
+      ctx.moveTo(padLeft, ty);
+      ctx.lineTo(width - padRight, ty);
+      ctx.stroke();
+      ctx.fillText(tick >= 1000 ? (tick / 1000) + "k" : String(tick), padLeft - 6, ty);
+    }
+
+    const points = series("max");
+    if (points.length < 2) return;
+    const span = windowFor(points);
+    const x = (age) => padLeft + plotW * (1 - Math.min(1, age / span));
+
+    /* Peak, as an area down to the floor.  The min of an L1 block sits near
+       zero on almost every frame, so a min-max band would be full height and
+       say nothing; the peak against the average is where the grade shows. */
+    area(ctx, points, x, y, "max", set.accent, padTop + plotH, 0.28);
+    /* The peak is the solid line the fill belongs to; the average is dashed, so
+       the two never read as one band even where they run close together. */
+    trace(ctx, points, x, y, "max", set.accent, 1.7);
+    trace(ctx, points, x, y, "avg", set.accent2, 1.5, [4, 3]);
+  }
+
+  /* The charts' colours come from the card they are drawn in, which the
+     adaptive theme repaints from the poster.  A canvas cannot notice that on
+     its own, so js/cover-tint.js says when it has happened. */
+  document.addEventListener("baldpi-tint", () => drawCharts());
+
+  let resizeTimer = 0;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      drawCharts();
+      chapters.relayout();
+    }, 120);
+  });
+
+  /* --- what a page calls ------------------------------------------------ */
+
+  function strings(T) {
+    finishLabel = T.ends_at || "";
+    /* The bar may already be drawn by the time the words for it arrive; the
+       reading is there either way, and this puts the label in front of it. */
+    renderFinish(lastFinish);
+    $("tilesTitle").textContent = T.metrics;
+    $("kSwitches").textContent = T.switches;
+    $("kWarnings").textContent = T.warnings;
+    $("kPlayerCache").textContent = T.player_cache;
+    $("kFps").textContent = T.fps;
+    $("chartTitle").textContent = T.chart;
+    /* The two traces name themselves in the reader's language.  They were the
+       last words on either page still written in English -- everything else
+       comes out of Kodi's own table -- and the strings for them were already
+       in it, waiting for the legend to ask.  The scale beside them stays as
+       it is: a unit and the shape of an axis are not translated. */
+    $("legendPeak").textContent = T.peak;
+    $("legendAvg").textContent = T.average;
+    $("chartScale").textContent = "nits · log";
+    $("eventsTitle").textContent = T.events;
+    for (const bar of rangeBars) {
+      for (const button of bar.children) {
+        button.textContent = T[button.dataset.key] || button.dataset.key;
+      }
+    }
+    /* History can beat /api/hello on a fresh page.  Redraw it once localized
+       strings arrive so fallbacks used for that first frame do not remain. */
+    if (past && past.events) renderEvents(past.events);
+    /* And so can the first snapshot, which is what builds the transport row
+       and the track pickers.  The buttons are renamed in place; the pickers
+       carry their strings inside options and are simply marked stale, so the
+       next snapshot builds them again (see renderTracks in
+       js/live-remote.js). */
+    remote.strings(T);
+    chapters.strings();
+  }
+
+  /* Everything the panels show comes out of one snapshot, and a snapshot that
+     says nothing is playing takes them off the page rather than leaving the
+     last frame of a film that has ended standing there. */
+  function update(snapshot) {
+    if (!snapshot || !snapshot.playing) {
+      /* Put away once, when the title ends -- not five times a second for as
+         long as the box sits there.  Every one of these writes marks the
+         document for another style pass, and what is under them on the idle
+         page is a wall of several hundred posters. */
+      if (!idleReset) {
+        idleReset = true;
+        const cards = [el.nowCard, el.tiles, el.chartCard];
+        for (const node of cards) node.classList.add("hidden");
+        live = [];
+        posterTag = "";
+        renderFinish("");
+        fpsShown = null;
+        setFpsTrend(0);
+        remote.reset();
+        chapters.reset();
+      }
+      /* The title that has just ended keeps its samples and its events for a
+         while (see SessionLog.end in web/session.py).  While it does, the
+         list stays where it was rather than emptying the moment the credits
+         stop -- which is the minute the figures are worth most. */
+      const last = snapshot && snapshot.last;
+      if (!last || !last.events) {
+        el.eventsCard.classList.add("hidden");
+        past = null;
+        pastSeq = -1;
+        idleFetched = false;
+        return;
+      }
+      if (!idleFetched) {
+        idleFetched = true;
+        fetchHistory(true);
+      }
+      return;
+    }
+    idleFetched = false;
+    idleReset = false;
+    el.nowCard.classList.remove("hidden");
+    renderNow(snapshot);
+    remote.render(snapshot);
+    renderTiles(snapshot.metrics || {}, snapshot.session);
+    renderCharts(snapshot.metrics || {});
+
+    /* The event list travels apart from the snapshot -- it would otherwise be
+       sent five times a second to say nothing.  The count in the summary is
+       what says there is something new to fetch. */
+    const session = snapshot.session || {};
+    if (session.seq !== undefined && session.seq !== pastSeq) fetchHistory(true);
+  }
+
+  /* The event list as something other than a page can print: the report on
+     the dashboard writes the same entries into plain text (see buildReport in
+     js/dashboard.js), and the history they come from is fetched here. */
+  function events() {
+    return ((past && past.events) || []).map((entry) => {
+      const trend = eventTrend(entry);
+      return {
+        pos:   entry.pos || "",
+        label: eventLabel(entry.kind),
+        /* The printed report carries the arrow too: a line reading "FPS  60"
+           is missing the half of the event that says it used to be 24. */
+        text:  eventText(entry) + (trend ? " " + TREND_ARROW[String(trend)] : "")
+      };
+    });
+  }
+
+  /* The highest L1 peak in the samples the page holds, or null where the
+     source carried no luminance to sample. */
+  function peak() {
+    const column = (past && past.max) || [];
+    let highest = null;
+    for (const value of column) {
+      if (value === null || value === undefined) continue;
+      if (highest === null || value > highest) highest = value;
+    }
+    return highest;
+  }
+
+  /* Everything here that is measured rather than styled, measured again: a
+     tab that has just come forward was laid out at no size at all while it
+     was away, so its chart was never drawn and its event list never knew
+     whether there was more of it (see the tabs in js/dashboard.js). */
+  function draw() {
+    drawCharts();
+    markMore();
+    chapters.relayout();
+  }
+
+  window.BaldPI.panels = { strings, update, events, peak, draw };
+
+})();
