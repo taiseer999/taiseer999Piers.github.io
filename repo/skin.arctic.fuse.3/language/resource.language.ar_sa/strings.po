@@ -2566,6 +2566,21 @@ msgctxt "#31634"
 msgid "Stylised"
 msgstr "مُصمم"
 
+#: /1080i/Includes_Views_List.xml
+msgctxt "#31635"
+msgid "List Poster"
+msgstr "ملصق قائمة"
+
+#: /1080i/Includes_Views_List.xml
+msgctxt "#31636"
+msgid "List Square"
+msgstr "قائمة المربع"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31637"
+msgid "Trailer provider"
+msgstr "مزود الفيديو الدعائي "
+
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31998"
 msgid "Codec logos"

@@ -503,6 +503,26 @@
             <selected>Skin.HasSetting(Background.ExtraFanart)</selected>
             <visible>$EXP[Exp_TMDbHelper_IsBlur]</visible>
         </include>
+        
+        <!-- Trailers -->
+        <include content="Settings_Label" description="Trailers">
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">044</param>
+            <label>$LOCALIZE[31482]</label>
+        </include>
+        <include content="Settings_Button" description="Trailer provider">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">043</param>
+            <label>$LOCALIZE[31637]</label>
+            <label2>$VAR[Label_Setting_TrailerProvider]</label2>
+            <onclick>Skin.ToggleSetting(Trailer.UseIMDb)</onclick>
+            <onclick condition="!System.HasAddon(plugin.video.imdb.trailers)">InstallAddon(plugin.video.imdb.trailers)</onclick>
+            <onclick condition="!System.AddonIsEnabled(plugin.video.imdb.trailers) + System.HasAddon(plugin.video.imdb.trailers)">EnableAddon(plugin.video.imdb.trailers)</onclick>
+        </include>
+
         <include content="Settings_Label" description="Navigation">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>

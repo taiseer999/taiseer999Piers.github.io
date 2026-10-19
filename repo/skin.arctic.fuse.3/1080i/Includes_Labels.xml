@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
+     
+     <variable name="Label_Setting_TrailerProvider">
+        <value condition="Skin.HasSetting(Trailer.UseIMDb)">IMDb Trailers</value>
+        <value>$LOCALIZE[571]</value>
+    </variable>
 
     <variable name="Label_Setting_LiveTV_Style">
         <value condition="Skin.HasSetting(Hub.1107.SquareChannels)">$LOCALIZE[31320]</value>
