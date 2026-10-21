@@ -7,7 +7,11 @@
         <param name="sourceimage">Art(fanart)|Property(fanart)|Icon</param>
     </include>
     <controls>
-        <include>Background</include>
+        <!-- <include>Background</include> -->
+        <include content="Background_StartUp_Layered">
+            <param name="overlays">false</param>
+        </include>
+
         <control type="group">
             <include>Animation_View_WindowChange</include>
             <control type="list" id="8000">
@@ -22,14 +26,17 @@
             </control>
 
             <control type="group">
-                <include>Dimension_Info</include>
+                <left>80</left>
+                <right>80</right>
+                <top>240</top>
+                <bottom>160</bottom>
                 <control type="group">
                     <top>0</top>
                     <right>-40</right>
                     <control type="group">
                         <left>0%</left>
-                        <height>760</height>
-                        <centertop>50%</centertop>
+                        <!-- <height>760</height>
+                        <centertop>50%</centertop> -->
                         <width>20%</width>
                         <control type="group">
                             <right>40</right>
@@ -41,8 +48,8 @@
                     </control>
                     <control type="group">
                         <left>20%</left>
-                        <height>760</height>
-                        <centertop>50%</centertop>
+                        <!-- <height>760</height>
+                        <centertop>50%</centertop> -->
                         <width>20%</width>
                         <control type="group">
                             <right>40</right>
@@ -54,8 +61,8 @@
                     </control>
                     <control type="group">
                         <left>40%</left>
-                        <height>760</height>
-                        <centertop>50%</centertop>
+                        <!-- <height>760</height>
+                        <centertop>50%</centertop> -->
                         <width>20%</width>
                         <control type="group">
                             <right>40</right>
@@ -67,8 +74,8 @@
                     </control>
                     <control type="group">
                         <left>60%</left>
-                        <height>760</height>
-                        <centertop>50%</centertop>
+                        <!-- <height>760</height>
+                        <centertop>50%</centertop> -->
                         <width>20%</width>
                         <control type="group">
                             <right>40</right>
@@ -80,8 +87,8 @@
                     </control>
                     <control type="group">
                         <left>80%</left>
-                        <height>760</height>
-                        <centertop>50%</centertop>
+                        <!-- <height>760</height>
+                        <centertop>50%</centertop> -->
                         <width>20%</width>
                         <control type="group">
                             <right>40</right>
@@ -98,16 +105,32 @@
 
         </control>
 
-        <control type="group">
+        <include>Background_StartUp_Overlays</include>
+
+        <!-- <control type="group">
             <include>Dimension_Bottombar</include>
             <include content="View_Furniture_Footer_ViewLine">
                 <param name="label">$INFO[Weather.Location]$INFO[Window(weather).Property(WeatherProvider), | ,]</param>
                 <param name="align">left</param>
             </include>
+        </control> -->
+
+
+        <include>Furniture_Header</include>
+        <control type="label">
+            <label>$INFO[Weather.Location]$INFO[Window(weather).Property(WeatherProvider), | ,]</label>
+            <align>right</align>
+            <aligny>center</aligny>
+            <textcolor>main_fg_70</textcolor>
+            <font>font_main</font>
+            <height>80</height>
+            <right>80</right>
+            <width>1000</width>
+            <top>100</top>
         </control>
 
+
         <include>Furniture_Footer_Right</include>
-        <include>Furniture_Header</include>
 
         <include content="Furniture_Busy">
             <param name="hasspinner">true</param>
