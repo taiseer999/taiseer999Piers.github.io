@@ -3,10 +3,9 @@
 
     <include name="Hub_Onload_Window">
         <param name="defaultname">$LOCALIZE[636]</param>
-        <param name="spotlight">true</param>
         <definition>
-            <onload condition="String.IsEmpty(Window($PARAM[window]).Property(TMDbHelper.WidgetContainer)) + $PARAM[spotlight] + !String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))">SetProperty(TMDbHelper.WidgetContainer,301,$PARAM[window])</onload>
-            <onload condition="String.IsEmpty(Window($PARAM[window]).Property(TMDbHelper.WidgetContainer)) + [!$PARAM[spotlight] | String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))]">SetProperty(TMDbHelper.WidgetContainer,501,$PARAM[window])</onload>
+            <onload condition="String.IsEmpty(Window($PARAM[window]).Property(TMDbHelper.WidgetContainer)) + !String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))">SetProperty(TMDbHelper.WidgetContainer,301,$PARAM[window])</onload>
+            <onload condition="String.IsEmpty(Window($PARAM[window]).Property(TMDbHelper.WidgetContainer)) + String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Spotlight.Target))">SetProperty(TMDbHelper.WidgetContainer,501,$PARAM[window])</onload>
             <onload condition="String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Name))">Skin.SetString(HomeSwitcher.$PARAM[window].Name,$PARAM[defaultname])</onload>
         </definition>
     </include>
@@ -22,43 +21,21 @@
             </include>
             <include content="Hub_Onload_Window">
                 <param name="window">1101</param>
-                <param name="spotlight">$EXP[Exp_Hub_1101_Custom]</param>
             </include>
             <include content="Hub_Onload_Window">
                 <param name="window">1102</param>
-                <param name="spotlight">$EXP[Exp_Hub_1102_Custom]</param>
             </include>
             <include content="Hub_Onload_Window">
                 <param name="window">1103</param>
-                <param name="spotlight">$EXP[Exp_Hub_1103_Custom]</param>
             </include>
             <include content="Hub_Onload_Window">
                 <param name="window">1104</param>
-                <param name="spotlight">$EXP[Exp_Hub_1104_Custom]</param>
             </include>
 
             <onload condition="String.IsEmpty(Window(1105).Property(TMDbHelper.WidgetContainer))">SetProperty(TMDbHelper.WidgetContainer,501,1105)</onload>
-            <include content="Hub_Onload_Window">
-                <param name="window">1106</param>
-                <param name="spotlight">$EXP[Exp_Hub_1106_Custom]</param>
-                <param name="defaultname">$LOCALIZE[31605]</param>
-            </include>
-            <include content="Hub_Onload_Window">
-                <param name="window">1107</param>
-                <param name="spotlight">$EXP[Exp_Hub_1107_Custom]</param>
-                <param name="defaultname">$LOCALIZE[31085] / PVR</param>
-            </include>
-            <include content="Hub_Onload_Window">
-                <param name="window">1108</param>
-                <param name="spotlight">$EXP[Exp_Hub_1108_Custom]</param>
-                <param name="defaultname">$LOCALIZE[24001]</param>
-            </include>
-            <include content="Hub_Onload_Window">
-                <param name="window">1109</param>
-                <param name="spotlight">$EXP[Exp_Hub_1109_Custom]</param>
-                <param name="defaultname">$LOCALIZE[31639]</param>
-            </include>
-            <onload condition="String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window_id].UpNextMode))">Skin.SetString(HomeSwitcher.$PARAM[window_id].UpNextMode,library_nextaired)</onload>
+            <onload condition="String.IsEmpty(Window(1106).Property(TMDbHelper.WidgetContainer))">SetProperty(TMDbHelper.WidgetContainer,501,1106)</onload>
+            <onload condition="String.IsEmpty(Window(1107).Property(TMDbHelper.WidgetContainer))">SetProperty(TMDbHelper.WidgetContainer,501,1107)</onload>
+            <onload condition="String.IsEmpty(Window(1108).Property(TMDbHelper.WidgetContainer))">SetProperty(TMDbHelper.WidgetContainer,501,1108)</onload>
 
             <menucontrol>300</menucontrol>
 
@@ -253,9 +230,7 @@
                     <left>40</left>
                     <include>Hub_Grouplist_OnLeftRight</include>
                     <content>
-                        <include content="$PARAM[include_content]">
-                            <param name="window">$PARAM[window]</param>
-                        </include>
+                        <include>$PARAM[include_content]</include>
                     </content>
                 </include>
             </control>
@@ -310,6 +285,10 @@
                     <param name="visible_plot">true</param>
                     <param name="visible_meta">true</param>
                     <param name="include_title">false</param>
+                    <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (hub) -->
+                    <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (hub) -->
+                    <param name="plottop">54</param>
+                    <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (hub) -->
                     <param name="container">Container($PARAM[id]).</param>
                 </include>
             </control>
@@ -368,6 +347,10 @@
             <include>Info_Panel_Dimensions</include>
             <include content="Info_Panel">
                 <param name="container">Container(301).</param>
+                <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (spotlight) -->
+                <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (spotlight) -->
+                <param name="plottop">54</param>
+                <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (spotlight) -->
                 <param name="visible_line">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_plot">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_meta">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
@@ -735,6 +718,24 @@
         <animation effect="slide" end="0" start="0,240" time="400" tween="quadratic" reversible="false" condition="![!ControlGroup(310).HasFocus() + !String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) + Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301)]">Conditional</animation>
     </include>
 
+    <!-- ABUKARIM: top bar (date/time/stats) in side menu mode -->
+    <include name="Hub_Vert_Header">
+        <control type="group">
+            <visible>!$EXP[Exp_InfoDialogs]</visible>
+            <visible>!String.IsEmpty(Window(Home).Property(HomeSwitcher.IsVisible)) | Integer.IsEqual(Window.Property(TMDbHelper.WidgetContainer),301)</visible>
+            <include>Home_Animation</include>
+            <!-- date raised so it clears the clearlogo -->
+            <include content="Furniture_Header">
+                <param name="label">$VAR[Home_Header_Label]</param>
+                <param name="include_right">false</param>
+                <param name="top">0</param>
+            </include>
+            <include content="Furniture_Header">
+                <param name="include_left">false</param>
+            </include>
+        </control>
+    </include>
+
     <include name="Hub_Window_Background">
         <include>Hub_Window_Refocus_Buttons</include>
         <include>Background</include>
@@ -763,7 +764,6 @@
             </include>
 
             <control type="group">
-                <visible>!Window.IsVisible(pvrchannelguide)</visible>
                 <include>Animation_Group_Bumper</include>
 
                 <control type="group">
@@ -821,6 +821,7 @@
                     <visible>!$EXP[Exp_InfoDialogs]</visible>
                     <include>Furniture_Footer_Right</include>
                 </control>
+                <include condition="Skin.HasSetting(HomeSwitcher.Vertical) + !Skin.HasSetting(HomeSwitcher.DisableHeader)">Hub_Vert_Header</include>
             </control>
 
         </definition>
@@ -830,18 +831,21 @@
 
     <include name="Hub_Prefab_Window">
         <param name="overlay">true</param>
-        <param name="standard_only">false</param>
         <definition>
             <include>Hub_Window_Background</include>
 
             <include content="Home_Control" condition="!String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Toggle))">
                 <param name="window">$PARAM[window]</param>
-                <param name="overlay">[String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) + !$PARAM[standard_only]]</param>
+                <param name="overlay">[String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)]</param>
+
+                <onclick condition="Window.IsVisible(1106) + Skin.String(HomeSwitcher.1106.UpNextMode,library_nextaired)">Skin.SetString(HomeSwitcher.1106.UpNextMode,trakt_calendar)</onclick>
+                <onclick condition="Window.IsVisible(1106) + Skin.String(HomeSwitcher.1106.UpNextMode,trakt_calendar)">Skin.SetString(HomeSwitcher.1106.UpNextMode,library_nextaired)</onclick>
+                <onclick condition="Window.IsVisible(1106)">SetProperty(ReloadWidgets,1)</onclick>
+                <onclick condition="Window.IsVisible(1106)">AlarmClock(resetproperty,ClearProperty(ReloadWidgets),00:00,silent)</onclick>
 
             </include>
 
             <control type="group">
-                <visible>!Window.IsVisible(pvrchannelguide)</visible>
                 <include>Animation_Group_Bumper</include>
 
                 <control type="group">
@@ -852,28 +856,20 @@
                         <include>Animation_View_WindowChange</include>
                         <!-- Widgets Groups -->
                         <control type="group" id="500">
-                            <include content="Hub_Combined_Widgets_Grouplist" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) + !$PARAM[standard_only]">
-                                <include content="$PARAM[widgets_wall]" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) + !$PARAM[standard_only]">
-                                    <param name="window">$PARAM[window]</param>
-                                </include>
+                            <include content="Hub_Combined_Widgets_Grouplist" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">
+                                <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">$PARAM[widgets_wall]</include>
                             </include>
-                            <include content="$PARAM[widgets_combined]" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) + !$PARAM[standard_only]">
-                                <param name="window">$PARAM[window]</param>
-                            </include>
-                            <include content="$PARAM[widgets_standard]" condition="[String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard) | $PARAM[standard_only]]">
-                                <param name="window">$PARAM[window]</param>
-                            </include>
+                            <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined)">$PARAM[widgets_combined]</include>
+                            <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">$PARAM[widgets_standard]</include>
                         </control>
 
                         <!-- Switching Groups -->
                         <control type="group" id="600">
-                            <include content="Hub_Widget_Switcher" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) + !$PARAM[standard_only]">
+                            <include content="Hub_Widget_Switcher" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">
                                 <param name="include_content">$PARAM[switcher_content]</param>
-                                <param name="window">$PARAM[window]</param>
                             </include>
-                            <include content="Hub_Widget_Switcher" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) + !$PARAM[standard_only]">
+                            <include content="Hub_Widget_Switcher" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined)">
                                 <param name="include_content">$PARAM[switcher_content]</param>
-                                <param name="window">$PARAM[window]</param>
                                 <param name="top">520</param>
                                 <param name="wall">false</param>
                             </include>
@@ -881,12 +877,8 @@
                     </control>
 
                     <!-- Info Panels -->
-                    <include content="$PARAM[info_wall]" condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall) + !$PARAM[standard_only]">
-                        <param name="window">$PARAM[window]</param>
-                    </include>
-                    <include content="$PARAM[info_combined]" condition="[String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard) | $PARAM[standard_only]]">
-                        <param name="window">$PARAM[window]</param>
-                    </include>
+                    <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Wall)">$PARAM[info_wall]</include>
+                    <include condition="String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Combined) | String.IsEqual(Skin.String(HomeSwitcher.$PARAM[window].Mode),Standard)">$PARAM[info_combined]</include>
                     <include content="Hub_VertMenu" condition="Skin.HasSetting(HomeSwitcher.Vertical)">
                         <param name="window">$PARAM[window]</param>
                     </include>
@@ -898,6 +890,7 @@
                     <visible>!$EXP[Exp_InfoDialogs]</visible>
                     <include>Furniture_Footer_Right</include>
                 </control>
+                <include condition="Skin.HasSetting(HomeSwitcher.Vertical) + !Skin.HasSetting(HomeSwitcher.DisableHeader)">Hub_Vert_Header</include>
             </control>
 
         </definition>
@@ -1057,7 +1050,7 @@
         </include>
     </include>
 
-    <include name="Hub_Widget_Splash">
+     <include name="Hub_Widget_Splash">
         <param name="condition">false</param>
         <param name="label">$LOCALIZE[31427] [LOWERCASE]$LOCALIZE[31103][/LOWERCASE]</param>
         <param name="busyspinner">true</param>
@@ -1084,84 +1077,6 @@
                 </include>
             </control>
 
-        </definition>
-    </include>
-
-    <include name="Hub_Configurable_Window">
-        <definition>
-            <include content="Hub_Window" condition="$EXP[Exp_Hub_$PARAM[window]_Custom]">
-                <param name="window">$PARAM[window]</param>
-            </include>
-            <include content="Hub_NextAired_Window" condition="$EXP[Exp_Hub_$PARAM[window]_NextAired]">
-                <param name="window">$PARAM[window]</param>
-            </include>
-            <include content="Hub_LiveTV_Window" condition="$EXP[Exp_Hub_$PARAM[window]_LiveTV]">
-                <param name="window">$PARAM[window]</param>
-            </include>
-            <include content="Hub_Addons_Window" condition="$EXP[Exp_Hub_$PARAM[window]_Addons]">
-                <param name="window">$PARAM[window]</param>
-            </include>
-        </definition>
-    </include>
-
-    <include name="Hub_NextAired_Window">
-        <definition>
-            <include content="Hub_Prefab_Window">
-                <param name="window">$PARAM[window]</param>
-                <param name="standard_only">true</param>
-                <param name="widgets_wall">Object_Null</param>
-                <param name="widgets_combined">Object_Null</param>
-                <param name="widgets_standard">NextAired_Content</param>
-                <param name="info_combined">NextAired_Info</param>
-                <param name="info_wall">Object_Null</param>
-                <param name="switcher_content">Object_Null</param>
-            </include>
-        </definition>
-    </include>
-
-    <include name="Hub_LiveTV_Window">
-        <definition>
-            <include content="Object_Hidden_List">
-                <param name="id">509</param>
-                <content>pvr://channels/tv/</content>
-            </include>
-            <include content="Hub_Prefab_Window">
-                <param name="window">$PARAM[window]</param>
-                <param name="widgets_wall">LiveTV_Wall_Widgets</param>
-                <param name="widgets_combined">LiveTV_Combined_Widgets</param>
-                <param name="widgets_standard">LiveTV_Content</param>
-                <param name="info_combined">NextAired_Info</param>
-                <param name="info_wall">NextAired_Wall_Info</param>
-                <param name="switcher_content">LiveTV_Switcher_Items</param>
-            </include>
-        </definition>
-    </include>
-
-    <include name="Hub_Addons_Window">
-        <definition>
-            <include content="Hub_Prefab_Window">
-                <param name="window">$PARAM[window]</param>
-                <param name="widgets_wall">Addons_Wall_Widgets</param>
-                <param name="widgets_combined">Addons_Combined_Widgets</param>
-                <param name="widgets_standard">Addons_Content</param>
-                <param name="info_combined">NextAired_Info</param>
-                <param name="info_wall">NextAired_Wall_Info</param>
-                <param name="switcher_content">Addons_Switcher_Items</param>
-            </include>
-        </definition>
-    </include>
-
-    <include name="Hub_ClickActions">
-        <param name="condition">true</param>
-        <definition>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_Custom] + !String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Shortcut.Target))">ActivateWindow($INFO[Skin.String(HomeSwitcher.$PARAM[window].Shortcut.Target)],$INFO[Skin.String(HomeSwitcher.$PARAM[window].Shortcut.Path)],return)</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_Custom] + String.IsEmpty(Skin.String(HomeSwitcher.$PARAM[window].Shortcut.Target))">$INFO[Skin.String(HomeSwitcher.$PARAM[window].Shortcut.Path)]</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_LiveTV]">ActivateWindow(tvchannels)</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_Addons]">ActivateWindow(addonbrowser)</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_NextAired] + Skin.String(HomeSwitcher.$PARAM[window].UpNextMode,library_nextaired)">Skin.SetString(HomeSwitcher.$PARAM[window].UpNextMode,trakt_calendar)</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_NextAired] + Skin.String(HomeSwitcher.$PARAM[window].UpNextMode,trakt_calendar)">Skin.SetString(HomeSwitcher.$PARAM[window].UpNextMode,library_nextaired)</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_NextAired]">SetProperty(ReloadWidgets,1)</onclick>
-            <onclick condition="$PARAM[condition] + $EXP[Exp_Hub_$PARAM[window]_NextAired]">AlarmClock(resetproperty,ClearProperty(ReloadWidgets),00:00,silent)</onclick>
         </definition>
     </include>
 

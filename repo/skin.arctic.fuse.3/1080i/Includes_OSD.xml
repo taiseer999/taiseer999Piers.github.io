@@ -279,7 +279,7 @@
                         <width>80</width>
                         <bordersize>18</bordersize>
                         <aspectratio align="right">keep</aspectratio>
-                        <texture>$INFO[ListItem.Property(language),flags/color/language/,.png]</texture>
+                        <texture fallback="flags/color/language/unk.png">$INFO[ListItem.Property(language),flags/color/language/,.png]</texture>
                     </control>
                 </control>
             </control>
@@ -336,7 +336,6 @@
 
     <include name="OSD_Part_Background_Blur">
         <include content="Part_Background_Blur">
-            
             <param name="transparency">true</param>
         </include>
     </include>
@@ -355,7 +354,6 @@
     </include>
 
     <include name="OSD_Stream_Selector_BackgroundResizer">
-        
         <definition>
             <control type="group">
                 <include>OSD_Part_Background_Blur</include>
@@ -382,7 +380,7 @@
                 <visible>Integer.IsEqual(Container($PARAM[id]).NumItems,4)</visible>
             </control>
             <control type="group">
-                 <include>OSD_Part_Background_Blur</include>
+                <include>OSD_Part_Background_Blur</include>
                 <include>OSD_Stream_Selector_Divider</include>
                 <height>440</height>
                 <visible>Integer.IsEqual(Container($PARAM[id]).NumItems,3)</visible>
@@ -394,7 +392,7 @@
                 <visible>Integer.IsEqual(Container($PARAM[id]).NumItems,2)</visible>
             </control>
             <control type="group">
-               <include>OSD_Part_Background_Blur</include>
+                <include>OSD_Part_Background_Blur</include>
                 <include>OSD_Stream_Selector_Divider</include>
                 <height>280</height>
                 <visible>Integer.IsLess(Container($PARAM[id]).NumItems,2)</visible>
@@ -428,7 +426,6 @@
                     <animation effect="slide" start="0" end="0,480" condition="Integer.IsLess(Container($PARAM[id]).NumItems,2)">Conditional</animation>
                     <include content="OSD_Stream_Selector_BackgroundResizer">
                         <param name="id">$PARAM[id]</param>
-                        
                     </include>
                     <include content="Object_MenuHeader">
                         <param name="label">$PARAM[header]</param>
