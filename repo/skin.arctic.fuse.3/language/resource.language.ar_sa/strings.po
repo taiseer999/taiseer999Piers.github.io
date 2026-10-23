@@ -2651,3 +2651,7 @@ msgstr "السمات الموسمية"
 msgctxt "#31611"
 msgid "Christmas Theme"
 msgstr "سمة عيد الميلاد"
+
+msgctxt "#31999"
+msgid "Media flags style"
+msgstr "نمط شارات الوسائط"

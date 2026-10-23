@@ -2663,3 +2663,7 @@ msgstr ""
 msgctxt "#31980"
 msgid "Left"
 msgstr ""
+
+msgctxt "#31999"
+msgid "Media flags style"
+msgstr ""

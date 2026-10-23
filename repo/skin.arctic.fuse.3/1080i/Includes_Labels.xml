@@ -98,6 +98,11 @@
         <value>$LOCALIZE[31634]</value>
     </variable>
 
+    <variable name="Label_Setting_MediaFlags">
+        <value condition="Skin.HasSetting(Flags.EnableMonochrome)">$LOCALIZE[31458]</value>
+        <value>$LOCALIZE[737]</value>
+    </variable>
+
     <variable name="Label_Setting_Ratings">
         <value condition="Skin.HasSetting(Ratings.EnableColor)">$LOCALIZE[737]</value>
         <value>$LOCALIZE[31458]</value>

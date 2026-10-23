@@ -2,19 +2,19 @@
 <includes>
 
 	<variable name="Image_VideoPlayer_HDRType_Strip">
-		<value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision) | String.Contains(Player.Filenameandpath,.dv.) | String.Contains(Player.Filenameandpath,dolby.vision) | String.Contains(Player.Filenameandpath,dovi)">flags/colorful/other/dolbyvision.png</value>
-		<value condition="String.Contains(Player.Filenameandpath,hdr10plus) | String.Contains(Player.Filenameandpath,.hdrplus.) | String.Contains(Player.Filenameandpath,.12bit.)">flags/colorful/other/hdr10plus.png</value>
-		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10) | String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">flags/colorful/other/hdr10.png</value>
-		<value condition="String.IsEqual(VideoPlayer.HdrType,hlg) | String.Contains(Player.Process(amlogic.eoft_gamut),HLG)">flags/colorful/other/hlg.png</value>
-		<value condition="!String.IsEmpty(VideoPlayer.HdrType) | String.Contains(Player.Filenameandpath,hdr)">flags/colorful/other/hdr.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.Contains(Player.Process(amlogic.vs10.mode),Dolby Vision) | String.Contains(Player.Filenameandpath,.dv.) | String.Contains(Player.Filenameandpath,dolby.vision) | String.Contains(Player.Filenameandpath,dovi)">flags/$VAR[Flags_Badge_Directory]/other/dolbyvision.png</value>
+		<value condition="String.Contains(Player.Filenameandpath,hdr10plus) | String.Contains(Player.Filenameandpath,.hdrplus.) | String.Contains(Player.Filenameandpath,.12bit.)">flags/$VAR[Flags_Badge_Directory]/other/hdr10plus.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hdr10) | String.Contains(Player.Process(amlogic.vs10.mode),HDR10)">flags/$VAR[Flags_Badge_Directory]/other/hdr10.png</value>
+		<value condition="String.IsEqual(VideoPlayer.HdrType,hlg) | String.Contains(Player.Process(amlogic.eoft_gamut),HLG)">flags/$VAR[Flags_Badge_Directory]/other/hlg.png</value>
+		<value condition="!String.IsEmpty(VideoPlayer.HdrType) | String.Contains(Player.Filenameandpath,hdr)">flags/$VAR[Flags_Badge_Directory]/other/hdr.png</value>
 	</variable>
 
 	<!-- ABUKARIM: Kodi reports 4K/8K in uppercase but the files are 4k.png/8k.png;
 	     CoreELEC's filesystem is case-sensitive so the badge came up blank. -->
 	<variable name="Image_VideoPlayer_ResolutionFlag">
-		<value condition="String.IsEqual(VideoPlayer.VideoResolution,4K)">flags/colorful/resolution/4k.png</value>
-		<value condition="String.IsEqual(VideoPlayer.VideoResolution,8K)">flags/colorful/resolution/8k.png</value>
-		<value>$INFO[VideoPlayer.VideoResolution,flags/colorful/resolution/,.png]</value>
+		<value condition="String.IsEqual(VideoPlayer.VideoResolution,4K)">flags/$VAR[Flags_Badge_Directory]/resolution/4k.png</value>
+		<value condition="String.IsEqual(VideoPlayer.VideoResolution,8K)">flags/$VAR[Flags_Badge_Directory]/resolution/8k.png</value>
+		<value>flags/$VAR[Flags_Badge_Directory]/resolution/$INFO[VideoPlayer.VideoResolution].png</value>
 	</variable>
 
 	<include name="ExtraOSD">
@@ -112,7 +112,7 @@
                         <control type="image" id="78883">
                             <fadetime>100</fadetime>
                             <aspectratio>keep</aspectratio>
-                            <texture colordiffuse="panel_fg_100">flags/colorful/source/$INFO[VideoPlayer.VideoCodec].png</texture>
+                            <texture colordiffuse="panel_fg_100">flags/$VAR[Flags_Badge_Directory]/source/$INFO[VideoPlayer.VideoCodec].png</texture>
                         </control>
                     </control>
                 </control>
@@ -130,7 +130,7 @@
                         <control type="image" id="788814">
                             <fadetime>100</fadetime>
                             <aspectratio>keep</aspectratio>
-                            <texture colordiffuse="panel_fg_100">flags/colorful/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
+                            <texture colordiffuse="panel_fg_100">flags/$VAR[Flags_Badge_Directory]/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
                         </control>
                     </control>
                 </control>
@@ -148,7 +148,7 @@
                         <control type="image">
                             <fadetime>100</fadetime>
                             <aspectratio>keep</aspectratio>
-                            <texture colordiffuse="panel_fg_100">flags/colorful/other/fps.png</texture>
+                            <texture colordiffuse="panel_fg_100">flags/$VAR[Flags_Badge_Directory]/other/fps.png</texture>
                         </control>
                         <control type="label">
                             <top>25</top>
@@ -211,7 +211,7 @@
                         <control type="image" id="audioflag">
                             <fadetime>100</fadetime>
                             <aspectratio>keep</aspectratio>
-                            <texture colordiffuse="panel_fg_100">flags/colorful/other/soun.png</texture>
+                            <texture colordiffuse="panel_fg_100">flags/$VAR[Flags_Badge_Directory]/other/soun.png</texture>
                         </control>
                         <control type="image">
                             <centertop>50%</centertop>
@@ -219,7 +219,7 @@
                             <width>33</width>
                             <height>24</height>
                             <aspectratio>keep</aspectratio>
-                            <texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.AudioLanguage,flags/colorful/other/language/,.png]</texture>
+                            <texture fallback="flags/colorful/other/language/fallback.png">flags/$VAR[Flags_Badge_Directory]/other/language/$INFO[VideoPlayer.AudioLanguage].png</texture>
                         </control>
                     </control>
                 </control>
@@ -238,13 +238,13 @@
                             <visible>VideoPlayer.SubtitlesEnabled</visible>
                             <fadetime>100</fadetime>
                             <aspectratio>keep</aspectratio>
-                            <texture colordiffuse="panel_fg_100">flags/colorful/other/subt.png</texture>
+                            <texture colordiffuse="panel_fg_100">flags/$VAR[Flags_Badge_Directory]/other/subt.png</texture>
                         </control>
                         <control type="image" id="subtitleflag">
                             <visible>!VideoPlayer.SubtitlesEnabled</visible>
                             <fadetime>100</fadetime>
                             <aspectratio>keep</aspectratio>
-                            <texture colordiffuse="panel_fg_100">flags/colorful/other/subtd.png</texture>
+                            <texture colordiffuse="panel_fg_100">flags/$VAR[Flags_Badge_Directory]/other/subtd.png</texture>
                         </control>
                         <control type="image">
                             <centertop>50%</centertop>
@@ -252,7 +252,7 @@
                             <width>33</width>
                             <height>24</height>
                             <aspectratio>keep</aspectratio>
-                            <texture fallback="flags/colorful/other/language/fallback.png">$INFO[VideoPlayer.SubtitlesLanguage,flags/colorful/other/language/,.png]</texture>
+                            <texture fallback="flags/colorful/other/language/fallback.png">flags/$VAR[Flags_Badge_Directory]/other/language/$INFO[VideoPlayer.SubtitlesLanguage].png</texture>
                         </control>
                     </control>
                 </control>

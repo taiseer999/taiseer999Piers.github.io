@@ -265,7 +265,7 @@
                 <itemgap>$PARAM[itemgap]</itemgap>
                 <!-- ABUKARIM: 4K/8K mapped to lowercase files (case-sensitive FS) -->
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoresolution],flags/colorful/resolution/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/resolution/$INFO[$PARAM[infolabel_videoresolution]].png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>110</height>
                     <width>110</width>
@@ -273,7 +273,7 @@
                     <visible>!String.IsEmpty($PARAM[infolabel_videoresolution]) + !String.IsEqual($PARAM[infolabel_videoresolution],4K) + !String.IsEqual($PARAM[infolabel_videoresolution],8K)</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/colorful/resolution/4k.png</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/resolution/4k.png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>110</height>
                     <width>110</width>
@@ -281,7 +281,7 @@
                     <visible>String.IsEqual($PARAM[infolabel_videoresolution],4K)</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/colorful/resolution/8k.png</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/resolution/8k.png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>110</height>
                     <width>110</width>
@@ -289,7 +289,7 @@
                     <visible>String.IsEqual($PARAM[infolabel_videoresolution],8K)</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videoaspect],flags/colorful/aspectratio/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/aspectratio/$INFO[$PARAM[infolabel_videoaspect]].png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>80</height>
                     <width>80</width>
@@ -297,7 +297,7 @@
                     <visible>!String.IsEmpty($PARAM[infolabel_videoaspect])</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_videocodec],flags/colorful/source/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/source/$INFO[$PARAM[infolabel_videocodec]].png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>48</height>
                     <width>71</width>
@@ -305,7 +305,7 @@
                     <visible>!String.IsEmpty($PARAM[infolabel_videocodec])</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiocodec],flags/colorful/audio/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/audio/$INFO[$PARAM[infolabel_audiocodec]].png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>48</height>
                     <width>71</width>
@@ -322,7 +322,7 @@
                     <visible>!String.IsEmpty(Control.GetLabel(77881))</visible>
                 </control>
                 <control type="image">
-                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">$INFO[$PARAM[infolabel_audiochannels],flags/colorful/channels/,.png]</texture>
+                    <texture background="true" colordiffuse="$PARAM[colordiffuse]">flags/$VAR[Flags_Badge_Directory]/channels/$INFO[$PARAM[infolabel_audiochannels]].png</texture>
                     <aspectratio>keep</aspectratio>
                     <height>43</height>
                     <width>65</width>

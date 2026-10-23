@@ -216,6 +216,16 @@
             <label2>$VAR[Label_Setting_Ratings]</label2>
             <onclick>Skin.ToggleSetting(Ratings.EnableColor)</onclick>
         </include>
+        <include content="Settings_Button" description="Media flags style">
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">012</param>
+            <param name="control">button</param>
+            <label>$LOCALIZE[31999]</label>
+            <label2>$VAR[Label_Setting_MediaFlags]</label2>
+            <onclick>Skin.ToggleSetting(Flags.EnableMonochrome)</onclick>
+        </include>
     </include>
 
     <!-- Viewtypes -->

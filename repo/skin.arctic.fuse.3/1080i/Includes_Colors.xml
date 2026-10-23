@@ -14,6 +14,12 @@
         <value>dialog_fg_06</value>
     </variable>
 
+    <!-- Piers: OSD/furniture media-flag badges (flags/colorful) — monochrome copy in flags/colorful_mono -->
+    <variable name="Flags_Badge_Directory">
+        <value condition="Skin.HasSetting(Flags.EnableMonochrome)">colorful_mono</value>
+        <value>colorful</value>
+    </variable>
+
     <variable name="Color_Directory">
         <value condition="Skin.HasSetting(Ratings.EnableColor)">color</value>
         <value>monochrome</value>
