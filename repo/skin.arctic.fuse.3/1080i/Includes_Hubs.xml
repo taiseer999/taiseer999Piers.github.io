@@ -10,8 +10,20 @@
         </definition>
     </include>
 
+    <!-- Custom-window properties reset on skin reload; Home properties survive it. -->
+    <expression name="Exp_Hub_SplashPending">String.IsEmpty(Window(1198).Property(WidgetsInitialized))</expression>
+    <include name="Hub_Splash_Onload">
+        <onload condition="$EXP[Exp_Hub_SplashPending]">ClearProperty(HasPreloadedHubs,Home)</onload>
+        <onload condition="$EXP[Exp_Hub_SplashPending] + !Skin.HasSetting(Startup.DisableWaitForLoad)">SetProperty(InitStatus,$LOCALIZE[31133],1198)</onload>
+        <onload condition="$EXP[Exp_Hub_SplashPending] + !Skin.HasSetting(Startup.DisableWaitForLoad)">SetProperty(SplashIsVisible,True,1198)</onload>
+        <onload condition="$EXP[Exp_Hub_SplashPending] + !Skin.HasSetting(Startup.DisableWaitForLoad) + !System.HasAlarm(SplashTimeOut)">AlarmClock(SplashTimeOut,noop,00:59,silent)</onload>
+        <onload condition="Window.IsActive(Home) | $EXP[Exp_Hub_SplashPending]">RunScript(script.skinvariables,run_executebuiltin=special://skin/shortcuts/skinvariables-splash.json,use_rules=True)</onload>
+        <onload>SetProperty(WidgetsInitialized,True,1198)</onload>
+    </include>
+
     <include name="Hub_Onload">
         <definition>
+            <include>Hub_Splash_Onload</include>
 
             <include>Action_Blur_Onload</include>
 
