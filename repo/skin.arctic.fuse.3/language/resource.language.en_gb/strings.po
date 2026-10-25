@@ -2667,3 +2667,18 @@ msgstr ""
 msgctxt "#31999"
 msgid "Media flags style"
 msgstr ""
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31638"
+msgid "Hub type"
+msgstr ""
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31639"
+msgid "Custom"
+msgstr ""
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31640"
+msgid "Calendar source"
+msgstr ""

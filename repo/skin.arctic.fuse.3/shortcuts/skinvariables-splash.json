@@ -74,7 +74,7 @@
                 ],
                 [
                     {
-                        "rules": ["!String.IsEmpty(Skin.String(HomeSwitcher.1107.Toggle)) + System.HasPVRAddon + PVR.HasTVChannels"],
+                        "rules": ["!String.IsEmpty(Skin.String(HomeSwitcher.1107.Toggle))"],
                         "value": ["ActivateWindow(1107)", "sleep=0.3"]
 
                     }
@@ -83,6 +83,13 @@
                     {
                         "rules": ["!String.IsEmpty(Skin.String(HomeSwitcher.1108.Toggle))"],
                         "value": ["ActivateWindow(1108)", "sleep=0.3"]
+
+                    }
+                ],
+                [
+                    {
+                        "rules": ["!String.IsEmpty(Skin.String(HomeSwitcher.1109.Toggle))"],
+                        "value": ["ActivateWindow(1109)", "sleep=0.3"]
 
                     }
                 ],

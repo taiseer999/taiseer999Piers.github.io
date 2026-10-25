@@ -2576,6 +2576,21 @@ msgctxt "#31637"
 msgid "Trailer provider"
 msgstr "مزود الفيديو الدعائي "
 
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31638"
+msgid "Hub type"
+msgstr "نوع المركز"
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31639"
+msgid "Custom"
+msgstr "مخصّص"
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31640"
+msgid "Calendar source"
+msgstr "مصدر التقويم"
+
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31998"
 msgid "Codec logos"
