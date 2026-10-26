@@ -961,4 +961,11 @@
         <value condition="Skin.HasSetting(sysstats.icons.mono)">special://skin/extras/icons/networkinfono1.png</value>
         <value>special://skin/extras/icons/disconnected.png</value>
     </variable>
+
+    <variable name="Image_GameManuals_Finder_State">
+        <value condition="String.IsEqual(Window.Property(state),noproviders)">special://skin/extras/icons/puzzle-piece.png</value>
+        <value condition="String.IsEqual(Window.Property(state),failed)">special://skin/extras/icons/triangle-exclamation.png</value>
+        <value>special://skin/extras/icons/magnifying-glass.png</value>
+    </variable>
+
 </includes>
