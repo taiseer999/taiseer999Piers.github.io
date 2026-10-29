@@ -2291,6 +2291,7 @@
                     </include>
                     <include content="Object_Control" condition="$PARAM[selected]">
                         <param name="control">image</param>
+                        <visible>!$EXP[Exp_Focus_IconTileOnWhite]</visible>
                         <include content="Texture_Box_Highlight_V">
                             <param name="variant">-backing</param>
                         </include>
@@ -2476,6 +2477,7 @@
                     </include>
                     <include content="Object_Control" condition="$PARAM[selected]">
                         <param name="control">image</param>
+                        <visible>!$EXP[Exp_Focus_IconTileOnWhite]</visible>
                         <include content="Texture_Box_Highlight_V">
                             <param name="variant">-backing</param>
                         </include>
@@ -2691,6 +2693,7 @@
 
                 <include content="Object_Control" condition="$PARAM[selected]">
                     <param name="control">image</param>
+                    <visible>!$EXP[Exp_Focus_IconTileOnWhite]</visible>
                     <include content="Texture_Box_Highlight_V">
                         <param name="variant">-backing</param>
                     </include>
@@ -2777,6 +2780,7 @@
 
                 <include content="Object_Control" condition="$PARAM[selected]">
                     <param name="control">image</param>
+                    <visible>!$EXP[Exp_Focus_IconTileOnWhite]</visible>
                     <include content="Texture_Box_Highlight_V">
                         <param name="variant">-backing</param>
                     </include>
