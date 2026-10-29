@@ -86,6 +86,8 @@
     <expression name="Exp_ColourHighlight_IsAqua">[String.IsEqual(Skin.String(focuscolor.name),ff00b8d4) + Skin.HasSetting(RevertSelectedText)]</expression>
     <expression name="Exp_ColourHighlight_IsTropical">[String.IsEqual(Skin.String(focuscolor.name),fff4511e) + Skin.HasSetting(RevertSelectedText)]</expression>
 
+    <!-- ABUKARIM: focused icon-only folder item (plugin menu PNG) while selected text is dark (white highlight) -->
+    <expression name="Exp_SelectedIcon_NeedsDarkDiffuse">[!Skin.HasSetting(RevertSelectedText) + ListItem.IsFolder + String.IsEmpty(ListItem.DBType) + String.EndsWith(ListItem.Icon,.png)]</expression>
     <expression name="Exp_ColourHighlight_IsWhite">[String.IsEmpty(Skin.String(focuscolor.name)) + !Skin.HasSetting(RevertSelectedText)]</expression>
     <expression name="Exp_ColourHighlight_IsMiami">[String.IsEqual(Skin.String(focuscolor.name),ffe91e63) + Skin.HasSetting(RevertSelectedText)]</expression>
 
