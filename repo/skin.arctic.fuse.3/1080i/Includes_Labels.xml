@@ -119,6 +119,53 @@
         <value>$LOCALIZE[602] $LOCALIZE[31103]</value>
     </variable>
 
+    <variable name="Label_Setting_Home_Mode">
+        <value condition="String.IsEqual(Skin.String(HomeSwitcher.Home.Mode),Combined)">$LOCALIZE[31083]</value>
+        <value condition="String.IsEqual(Skin.String(HomeSwitcher.Home.Mode),Wall)">$LOCALIZE[31008]</value>
+        <value>$LOCALIZE[602]</value>
+    </variable>
+
+    <variable name="Label_SetupWizard_Title">
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,2)">$LOCALIZE[31758]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,3)">$LOCALIZE[31103]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,4)">$LOCALIZE[31767]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,5)">$LOCALIZE[31769]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,6)">$LOCALIZE[31803]</value>
+        <value>$LOCALIZE[31754]</value>
+    </variable>
+
+    <variable name="Label_SetupWizard_Subline">
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,2)">$LOCALIZE[31781]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,3)">$LOCALIZE[31782]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,4)">$LOCALIZE[31783]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,5)">$LOCALIZE[31784]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,6)">$LOCALIZE[31785]</value>
+        <value>$LOCALIZE[31780]</value>
+    </variable>
+
+    <variable name="Label_SetupWizard_Help">
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,2)">$LOCALIZE[31759]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,3)">$LOCALIZE[31760]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,4)">$LOCALIZE[31768]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,5)">$LOCALIZE[31770]</value>
+        <value condition="Integer.IsEqual(Container(3).CurrentItem,6)">$LOCALIZE[31772]</value>
+        <value>$LOCALIZE[31755]</value>
+    </variable>
+
+    <variable name="Label_SetupWizard_WidgetGroup">
+        <value condition="Skin.String(SetupWizard.WidgetGroup,library)">$LOCALIZE[31761]</value>
+        <value condition="Skin.String(SetupWizard.WidgetGroup,discover)">$LOCALIZE[31762]</value>
+        <value condition="Skin.String(SetupWizard.WidgetGroup,tmdbhelper)">$LOCALIZE[31800]</value>
+        <value condition="Skin.String(SetupWizard.WidgetGroup,minimal)">$LOCALIZE[31763]</value>
+        <value>$LOCALIZE[636]</value>
+    </variable>
+
+    <variable name="Label_SetupWizard_MenuStyle">
+        <value condition="Skin.HasSetting(HomeSwitcher.Vertical)">$LOCALIZE[31788]</value>
+        <value condition="Skin.HasSetting(HomeSwitcher.EnableIcons)">$LOCALIZE[31787]</value>
+        <value>$LOCALIZE[31786]</value>
+    </variable>
+
     <variable name="Label_Setting_Hub_Mode">
         <value condition="String.IsEqual(Container(30000).ListItem.Property(Mode),Combined)">$LOCALIZE[31083] $LOCALIZE[31103]</value>
         <value condition="String.IsEqual(Container(30000).ListItem.Property(Mode),Wall)">$LOCALIZE[31008] $LOCALIZE[31103]</value>

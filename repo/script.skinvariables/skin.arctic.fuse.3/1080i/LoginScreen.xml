@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window type="window">
+    <defaultcontrol always="true">52</defaultcontrol>
+    <onunload>SetProperty(System.ProfileNumber,$INFO[Container(52).CurrentItem],Home)</onunload>
+    <controls>
+
+        <control type="group">
+            <include>Background_StartUp</include>
+            <include>Object_StartUp_Logo</include>
+
+            <include>Object_StartUp_Selector</include>
+
+
+        </control>
+    </controls>
+</window>

@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+    <include name="Texture_FlixArt_Foreground_Sized">
+        <param name="size">1280x720</param>
+        <param name="variant">flixart</param>
+        <definition>
+            <texture background="true" diffuse="special://skin/extras/diffuse/flixart/$PARAM[size]/$PARAM[variant].png">$VAR[Image_Foreground]</texture>
+        </definition>
+    </include>
+
+    <include name="Texture_FlixArt_Foreground">
+        <param name="variant">flixart</param>
+        <definition>
+            <include content="Texture_FlixArt_Foreground_Sized" condition="Skin.String(Skin.FlixArt.Size,Large)">
+                <param name="size">1440x810</param>
+                <param name="variant">$PARAM[variant]</param>
+            </include>
+            <include content="Texture_FlixArt_Foreground_Sized" condition="Skin.String(Skin.FlixArt.Size,ExtraLarge)">
+                <param name="size">1600x900</param>
+                <param name="variant">$PARAM[variant]</param>
+            </include>
+            <include content="Texture_FlixArt_Foreground_Sized" condition="!Skin.String(Skin.FlixArt.Size,Large) + !Skin.String(Skin.FlixArt.Size,ExtraLarge)">
+                <param name="variant">$PARAM[variant]</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_Shadow_20">
+        <param name="colordiffuse">shadow_hard</param>
+        <definition>
+            <include content="Dimension_Padding"><param name="pad">-20</param></include>
+            <bordersize>20</bordersize>
+            <bordertexture border="40" colordiffuse="$PARAM[colordiffuse]">shadows/shadow-20.png</bordertexture>
+        </definition>
+    </include>
+
+    <include name="Texture_Shadow_40">
+        <param name="colordiffuse">shadow_hard</param>
+        <definition>
+            <include content="Dimension_Padding"><param name="pad">-40</param></include>
+            <bordersize>40</bordersize>
+            <bordertexture border="60" colordiffuse="$PARAM[colordiffuse]">shadows/shadow-40.png</bordertexture>
+        </definition>
+    </include>
+
+    <include name="Texture_Shadow_80">
+        <param name="colordiffuse">shadow_hard</param>
+        <definition>
+            <include content="Dimension_Padding"><param name="pad">-80</param></include>
+            <bordersize>80</bordersize>
+            <bordertexture border="100" colordiffuse="$PARAM[colordiffuse]">shadows/shadow-80.png</bordertexture>
+        </definition>
+    </include>
+
+    <include name="Texture_Shadow_Provider">
+        <include content="Dimension_Padding"><param name="pad">-40</param></include>
+        <bordersize>40</bordersize>
+        <bordertexture colordiffuse="shadow_soft">shadows/circle_provider.png</bordertexture>
+    </include>
+
+    <!-- Focus textures are resolved on window load; changing FocusStyle reloads the skin. -->
+    <include name="Texture_FocusStyle">
+        <param name="include">Object_Texture</param>
+        <param name="directory">common</param>
+        <param name="texture">menu</param>
+        <param name="variant" />
+        <param name="border">40</param>
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <param name="flipx">false</param>
+        <param name="diffuse"></param>
+        <definition>
+            <include content="$PARAM[include]" condition="!$EXP[Exp_FocusStyle_Outlined]">
+                <param name="texture">$PARAM[directory]/$PARAM[texture].png</param>
+                <param name="border">$PARAM[border]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="flipx">$PARAM[flipx]</param>
+                <param name="flipy">false</param>
+                <param name="diffuse">$PARAM[diffuse]</param>
+                <param name="background">false</param>
+            </include>
+            <include content="$PARAM[include]" condition="$EXP[Exp_FocusStyle_Outlined]">
+                <param name="texture">$PARAM[directory]/$PARAM[texture]$PARAM[variant]-focus-outlined.png</param>
+                <param name="border">$PARAM[border]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="flipx">$PARAM[flipx]</param>
+                <param name="flipy">false</param>
+                <param name="diffuse">$PARAM[diffuse]</param>
+                <param name="background">false</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_Highlight">
+        <include content="Texture_FocusStyle">
+            <param name="texture">main</param>
+            <param name="border">0</param>
+            <param name="diffuse">$PARAM[diffuse]</param>
+        </include>
+    </include>
+    <include name="Texture_Highlight_Focus">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">main</param>
+            <param name="border">0</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_AltTextureFocus</param>
+            <param name="texture">main</param>
+            <param name="border">0</param>
+        </include>
+    </include>
+    <include name="Texture_Highlight_Button_FakeFocus_V">
+        <include>Texture_Highlight_Button_FakeFocus_H</include>
+    </include>
+    <include name="Texture_Highlight_Button_FakeFocus_H">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureNoFocus</param>
+        </include>
+    </include>
+    <include name="Texture_Highlight_ToggleButton_FakeFocus_H">
+        <param name="diffuse_nofocus" />
+        <definition>
+            <texturenofocus />
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_TextureFocus</param>
+            </include>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_AltTextureFocus</param>
+            </include>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_AltTextureNoFocus</param>
+                <param name="diffuse">$PARAM[diffuse_nofocus]</param>
+            </include>
+        </definition>
+    </include>
+    <include name="Texture_Highlight_ToggleButton_FakeFocus_V">
+        <include>Texture_Highlight_ToggleButton_FakeFocus_H</include>
+    </include>
+    <include name="Texture_Highlight_ToggleButton_Settings">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="colordiffuse">$VAR[ColorSettingsToggleButtonHighlight]</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_AltTextureFocus</param>
+            <param name="colordiffuse">$VAR[ColorSettingsToggleButtonHighlight]</param>
+        </include>
+    </include>
+    <include name="Texture_Highlight_Underline_H">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">underline</param>
+            <param name="border">10</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_AltTextureFocus</param>
+            <param name="texture">underline</param>
+            <param name="border">10</param>
+        </include>
+        <alttexturenofocus border="10" colordiffuse="main_back">common/underline.png</alttexturenofocus>
+        <texturenofocus />
+    </include>
+    <include name="Texture_Highlight_Underline_FakeFocus_H">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">underline</param>
+            <param name="border">10</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_AltTextureFocus</param>
+            <param name="texture">underline</param>
+            <param name="border">10</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureNoFocus</param>
+            <param name="texture">underline</param>
+            <param name="border">10</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_AltTextureNoFocus</param>
+            <param name="texture">underline</param>
+            <param name="border">10</param>
+        </include>
+    </include>
+
+
+    <include name="Texture_Progress_Circle">
+        <param name="progress">Player.Progress</param>
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <param name="flipx">false</param>
+        <param name="flipy">false</param>
+        <definition>
+            <include content="Object_Texture" condition="!$EXP[Exp_FocusStyle_Outlined]">
+                <param name="texture">$INFO[$PARAM[progress],progress/circle/p,.png]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="flipx">$PARAM[flipx]</param>
+                <param name="flipy">$PARAM[flipy]</param>
+                <param name="border">0</param>
+                <param name="background">false</param>
+                <param name="diffuse" />
+            </include>
+            <include content="Object_Texture" condition="$EXP[Exp_FocusStyle_Outlined]">
+                <param name="texture">$INFO[$PARAM[progress],progress/circle-outlined/p,.png]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="flipx">$PARAM[flipx]</param>
+                <param name="flipy">$PARAM[flipy]</param>
+                <param name="border">0</param>
+                <param name="background">false</param>
+                <param name="diffuse" />
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_Progress_Mid">
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_TextureProgressMid</param>
+                <param name="directory">progress</param>
+                <param name="texture">progress-nib</param>
+                <param name="border">12,0,12,0</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_Progress_Segmented">
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_TextureProgressLeft</param>
+                <param name="directory">progress</param>
+                <param name="texture">progress-left</param>
+                <param name="border">6</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_TextureProgressMid</param>
+                <param name="directory">progress</param>
+                <param name="texture">progress-end</param>
+                <param name="border">6</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_TextureProgressRight</param>
+                <param name="directory">progress</param>
+                <param name="texture">progress-right</param>
+                <param name="border">6</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_Slider_NibFocus">
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="include">Object_TextureSliderNibFocus</param>
+                <param name="directory">slider</param>
+                <param name="texture">slider_nib</param>
+                <param name="border">6</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_Highlight_Scrollbar_H">
+        <include content="Texture_FocusStyle">
+            <param name="texture">scrollh</param>
+            <param name="border">4</param>
+        </include>
+    </include>
+    <include name="Texture_Highlight_Scrollbar_V">
+        <include>Texture_Highlight_Scrollbar_H</include>
+    </include>
+    <include name="Texture_Scrollbar_H">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureSliderBarFocus</param>
+            <param name="texture">scrollh</param>
+            <param name="border">4</param>
+        </include>
+    </include>
+    <include name="Texture_Scrollbar_SliderBar_H">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureSliderBar</param>
+            <param name="texture">scrollh</param>
+            <param name="border">4</param>
+        </include>
+    </include>
+    <include name="Texture_Scrollbar_V">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureSliderBarFocus</param>
+            <param name="texture">scrollv</param>
+            <param name="border">4</param>
+        </include>
+    </include>
+    <include name="Texture_Scrollbar_SliderBar_V">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureSliderBar</param>
+            <param name="texture">scrollv</param>
+            <param name="border">4</param>
+        </include>
+    </include>
+    <include name="Texture_MainMenu_Highlight_ToggleButton_FakeFocus">
+        <include>Texture_Highlight_ToggleButton_FakeFocus_H</include>
+    </include>
+    <include name="Texture_MainMenu_Highlight_V">
+        <include>Texture_Menu_Highlight_V</include>
+    </include>
+    <include name="Texture_MainMenu_Highlight_H">
+        <include>Texture_Menu_Highlight_H</include>
+    </include>
+    <include name="Texture_Box_Highlight_H">
+        <param name="variant" />
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="texture">box</param>
+                <param name="variant">$PARAM[variant]</param>
+                <param name="border">20</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+        </definition>
+    </include>
+    <include name="Texture_Box_Highlight_V">
+        <param name="variant" />
+        <definition>
+            <include content="Texture_Box_Highlight_H">
+                <param name="variant">$PARAM[variant]</param>
+            </include>
+        </definition>
+    </include>
+    <include name="Texture_Box_Highlight_Focus_H">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">box</param>
+            <param name="border">20</param>
+        </include>
+    </include>
+    <include name="Texture_Menu_Highlight_H">
+        <param name="border">40</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="border">$PARAM[border]</param>
+            </include>
+        </definition>
+    </include>
+    <include name="Texture_Menu_Highlight_V">
+        <param name="border">40</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="border">$PARAM[border]</param>
+            </include>
+        </definition>
+    </include>
+    <include name="Texture_Circle_Highlight_H">
+        <include content="Texture_FocusStyle">
+            <param name="texture">circle</param>
+            <param name="border">0</param>
+        </include>
+    </include>
+    <include name="Texture_Circle_Highlight_V">
+        <include>Texture_Circle_Highlight_H</include>
+    </include>
+    <include name="Texture_Circle_Highlight_Focus_V">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">circle</param>
+            <param name="border">0</param>
+        </include>
+    </include>
+    <include name="Texture_Circle_Highlight_NoFocus_V">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureNoFocus</param>
+            <param name="texture">circle</param>
+            <param name="border">0</param>
+        </include>
+    </include>
+    <include name="Texture_CircleButtonDialog_Highlight_V">
+        <include content="Texture_FocusStyle">
+            <param name="texture">circlebutton</param>
+            <param name="border">0</param>
+        </include>
+    </include>
+    <include name="Texture_CircleButtonDialog_Highlight_Focus_V">
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">circlebutton</param>
+            <param name="border">80</param>
+        </include>
+    </include>
+    <include name="Texture_Indicator_Highlight">
+        <param name="variant" />
+        <param name="colordiffuse">$VAR[ColorHighlight]</param>
+        <definition>
+            <include content="Texture_FocusStyle">
+                <param name="directory">indicator</param>
+                <param name="texture">circle-fo</param>
+                <param name="variant">$PARAM[variant]</param>
+                <param name="border">0</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Texture_SelectBox_Thin">
+        <include content="Texture_FocusStyle">
+            <param name="texture">selectbox_thin</param>
+            <param name="border">20</param>
+        </include>
+    </include>
+    <include name="Texture_KeyboardButton">
+        <include>Texture_Circle_Highlight_Focus_V</include>
+    </include>
+    <include name="Texture_Button_X">
+        <include content="Texture_FocusStyle">
+            <param name="texture">menu_x</param>
+            <param name="border">40,0,0,0</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">menu_x</param>
+            <param name="border">40,0,0,0</param>
+        </include>
+    </include>
+    <include name="Texture_Button_Y">
+        <include content="Texture_FocusStyle">
+            <param name="texture">white</param>
+            <param name="border">0</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">white</param>
+            <param name="border">0</param>
+        </include>
+    </include>
+    <include name="Texture_Button_Z">
+        <include content="Texture_FocusStyle">
+            <param name="texture">menu_x</param>
+            <param name="border">0,0,40,0</param>
+            <param name="flipx">true</param>
+        </include>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+            <param name="texture">menu_x</param>
+            <param name="border">0,0,40,0</param>
+            <param name="flipx">true</param>
+        </include>
+    </include>
+    <include name="Texture_Button">
+        <texturenofocus colordiffuse="dialog_fg_06" border="40">common/menu.png</texturenofocus>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_TextureFocus</param>
+        </include>
+    </include>
+    <include name="Texture_ToggleButton">
+        <alttexturenofocus colordiffuse="main_bg_12" border="40">common/menu.png</alttexturenofocus>
+        <include content="Texture_FocusStyle">
+            <param name="include">Object_AltTextureFocus</param>
+        </include>
+    </include>
+
+    <include name="Defs_BusySpinner_Image">
+        <param name="spinspinner">true</param>
+        <definition>
+            <description>Busy animation</description>
+            <include content="Texture_FocusStyle">
+                <param name="directory">dialog</param>
+                <param name="texture">loading-spinner</param>
+                <param name="border">0</param>
+            </include>
+            <aspectratio>keep</aspectratio>
+            <animation effect="rotate" condition="$PARAM[spinspinner]" start="0" end="360" loop="true" time="1000" center="auto">Conditional</animation>
+        </definition>
+    </include>
+
+</includes>

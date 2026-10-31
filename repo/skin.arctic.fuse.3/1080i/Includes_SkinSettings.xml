@@ -35,6 +35,16 @@
             <selected>!Skin.HasSetting(HomeSwitcher.DisableFirstWidgetFocus)</selected>
         </include>
 
+        <include content="Settings_Button" description="Setup Wizard">
+            <param name="help">$LOCALIZE[31753]</param>
+            <param name="dialog">false</param>
+            <param name="window">skinsettings</param>
+            <param name="baseid">$PARAM[baseid]</param>
+            <param name="id">006</param>
+            <label>$LOCALIZE[31752]</label>
+            <include>Action_SetupWizard_Open</include>
+        </include>
+
         <include content="Settings_Label" description="Menu">
             <param name="window">skinsettings</param>
             <param name="baseid">$PARAM[baseid]</param>
@@ -76,13 +86,8 @@
             <param name="control">button</param>
             <label>$LOCALIZE[31208]</label>
             <label2>$VAR[Label_SkinSettings_Header]</label2>
-
-            <onclick condition="Skin.HasSetting(HomeSwitcher.DisableHeader)">Skin.Reset(HomeSwitcher.DisableDate)</onclick>
-            <onclick condition="Skin.HasSetting(HomeSwitcher.DisableHeader)">Skin.Reset(HomeSwitcher.DisableHeader)</onclick>
-
-            <onclick condition="!Skin.HasSetting(HomeSwitcher.DisableDate)">Skin.SetBool(HomeSwitcher.DisableDate)</onclick>
-
-            <onclick condition="!Skin.HasSetting(HomeSwitcher.DisableHeader) + Skin.HasSetting(HomeSwitcher.DisableDate)">Skin.SetBool(HomeSwitcher.DisableHeader)</onclick>
+            <visible>!Skin.HasSetting(HomeSwitcher.Vertical)</visible>
+            <include>Action_Setting_Header_Onclick</include>
         </include>
         <include content="Settings_Label" description="Layout">
             <param name="window">skinsettings</param>
@@ -178,9 +183,11 @@
             <param name="id">005</param>
             <label> - $LOCALIZE[31204]</label>
             <label2>$VAR[Label_Setting_ColourDialog]</label2>
-            <onclick>SetProperty(CustomDialogSettingsTitle,[CAPITALIZE]$LOCALIZE[31486][/CAPITALIZE],Home)</onclick>
-            <onclick>SetProperty(CustomDialogSettingsItems,DialogCustom_Settings_Items_BackgroundDialogImage,Home)</onclick>
-            <onclick>ActivateWindow(1118)</onclick>
+            <include content="Action_DialogCustom_Settings_Open">
+                <param name="title">$LOCALIZE[31486]</param>
+                <param name="items">DialogCustom_Tiles_BackgroundDialogImage</param>
+                <param name="window">1131</param>
+            </include>
         </include>
         <include content="Settings_Button" description="Customise Startup">
             <param name="help">$LOCALIZE[31665]</param>

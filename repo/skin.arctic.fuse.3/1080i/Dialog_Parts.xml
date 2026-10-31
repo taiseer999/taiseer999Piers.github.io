@@ -6,6 +6,12 @@
         </control>
     </include>
 
+    <include name="Part_Box_Highlight">
+        <control type="image">
+            <include>Texture_Box_Highlight_H</include>
+        </control>
+    </include>
+
     <include name="Part_List_Checkmark">
         <param name="colordiffuse_off">dialog_fg_30</param>
         <param name="colordiffuse_on">dialog_fg_70</param>
@@ -28,6 +34,24 @@
                 <visible>$PARAM[selected]</visible>
             </control>
         </definition>
+    </include>
+
+    <!-- Check badge for a static item whose label matches its "current" property -->
+    <include name="Part_List_Current_Check">
+        <control type="group">
+            <right>10</right>
+            <top>10</top>
+            <width>40</width>
+            <height>40</height>
+            <visible>String.IsEqual(ListItem.Label,ListItem.Property(current))</visible>
+            <control type="image">
+                <texture colordiffuse="$VAR[ColorHighlight]">common/circle.png</texture>
+            </control>
+            <control type="image">
+                <bordersize>9</bordersize>
+                <texture colordiffuse="$VAR[ColorSelected]">indicator/checkmark.png</texture>
+            </control>
+        </control>
     </include>
 
     <include name="Part_List_Icon_Padding">

@@ -3247,3 +3247,268 @@ msgstr ""
 msgctxt "#31751"
 msgid "Customise the buttons in the tray of the options menu."
 msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31752"
+msgid "Setup wizard"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31753"
+msgid "Run the setup wizard to choose the home layout, widgets, colours and backgrounds."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31754"
+msgid "Welcome to Arctic Fuse 3"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31755"
+msgid "Choose a recommended setup to get started straight away, or use the steps on the left to set things up yourself. You can change any of these later in Skin settings."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31756"
+msgid "Use recommended defaults (library)"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31757"
+msgid "Skip setup"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31758"
+msgid "Home layout"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31759"
+msgid "Choose how the main menu is arranged and what is shown at the top of Home."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31760"
+msgid "Replace the Home widgets with a ready-made set. Kodi asks before your current widgets are overwritten. Customise them later in Skin settings."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31761"
+msgid "My library"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31762"
+msgid "Discover"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31763"
+msgid "Minimal"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31764"
+msgid "In progress, new and recent items from your library"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31765"
+msgid "Your library plus trending items from TMDb"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31766"
+msgid "Continue watching only"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31767"
+msgid "Colours"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31768"
+msgid "A colour scheme sets the highlight colour, window background and dialog background together. Adjust each one afterwards if you like."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31769"
+msgid "Backgrounds"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31770"
+msgid "Choose the window and dialog backgrounds and how artwork backgrounds are blurred."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31771"
+msgid "Finish"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31772"
+msgid "Select a choice to go back to that step. Select Finish on the left to save, rebuild the widgets and reload the skin."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31773"
+msgid "Hide parent folder items"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31774"
+msgid "Next"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31775"
+msgid "Back"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31776"
+msgid "Exit setup"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31777"
+msgid "Step"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31779"
+msgid "Welcome"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31780"
+msgid "Choose how to get started"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31781"
+msgid "How the main menu is arranged"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31782"
+msgid "A starting set of widgets for Home"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31783"
+msgid "Colour scheme and highlight colour"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31784"
+msgid "Window and dialog backgrounds"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31785"
+msgid "Review your choices"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31786"
+msgid "Top menu"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31787"
+msgid "Top menu with icons"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31788"
+msgid "Side menu"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31789"
+msgid "Text menu across the top"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31790"
+msgid "Icon buttons across the top"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31791"
+msgid "Vertical menu on the left"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31792"
+msgid "Highlight colour"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31793"
+msgid "Window background"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31794"
+msgid "Menu style"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31796"
+msgid "Use recommended defaults (TMDb Helper)"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31797"
+msgid "Default settings with In progress, new and recent widgets from your library"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31798"
+msgid "Default settings with trending, popular and new widgets from TMDb"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31799"
+msgid "Keep the current settings. Run this wizard again from Skin settings."
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31800"
+msgid "TMDb Helper"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31801"
+msgid "Trending, popular and new from TMDb"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31803"
+msgid "Review"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31802"
+msgid "Widget group"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31804"
+msgid "A row for each widget"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31805"
+msgid "One row with a selector to switch widgets"
+msgstr ""
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31806"
+msgid "A grid of items with a selector to switch widgets"
+msgstr ""
