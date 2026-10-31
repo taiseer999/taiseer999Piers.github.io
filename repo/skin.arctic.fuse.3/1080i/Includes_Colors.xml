@@ -10,10 +10,6 @@
         <colordiffuse>$VAR[ColorSelected]</colordiffuse>
     </include>
 
-    <variable name="Color_DialogBorder">
-        <value>dialog_fg_06</value>
-    </variable>
-
     <!-- Piers: OSD/furniture media-flag badges (flags/colorful) — monochrome copy in flags/colorful_mono -->
     <variable name="Flags_Badge_Directory">
         <value condition="Skin.HasSetting(Flags.EnableMonochrome)">colorful_mono</value>
