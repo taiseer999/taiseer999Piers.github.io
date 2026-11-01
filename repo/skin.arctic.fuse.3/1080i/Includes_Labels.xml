@@ -44,7 +44,13 @@
         <value condition="Control.IsVisible(529)">$LOCALIZE[31135]$INFO[Container(539).CurrentPage, , $LOCALIZE[20163] ]$INFO[Container(539).NumPages]</value>
         <value>$LOCALIZE[31135]$INFO[Container.CurrentPage, , $LOCALIZE[20163] ]$INFO[Container.NumPages]</value>
     </variable>
-    
+
+    <variable name="Label_WatchedOn_Sub">
+        <value condition="String.IsEqual(ListItem.DBType,episode)">$INFO[ListItem.TVShowTitle]$INFO[ListItem.Year, (,)]</value>
+        <value condition="String.IsEqual(ListItem.DBType,movie)">$INFO[ListItem.Director]$INFO[ListItem.Year, (,)]</value>
+        <value>$INFO[ListItem.Label2]</value>
+    </variable>
+
     <variable name="Label_GameSave_Top">
         <value condition="!String.IsEmpty(ListItem.Label2) | String.IsEqual(ListItem.Label,$LOCALIZE[15314])">$INFO[ListItem.Label]</value>
         <value>$INFO[ListItem.FileName]</value>
@@ -178,13 +184,6 @@
         <value>$LOCALIZE[552]</value>
     </variable>
 
-    <variable name="Label_SkinSettings_Level">
-        <value condition="Integer.IsEqual(Skin.String(Skin.SettingsLevel),3)">$LOCALIZE[10039]</value>
-        <value condition="Integer.IsEqual(Skin.String(Skin.SettingsLevel),2)">$LOCALIZE[10038]</value>
-        <value condition="Integer.IsEqual(Skin.String(Skin.SettingsLevel),1)">$LOCALIZE[10037]</value>
-        <value>$LOCALIZE[10036]</value>
-    </variable>
-
     <variable name="Label_UpdateLibrary">
         <value condition="library.isscanningmusic | library.isscanningvideo">$LOCALIZE[31485]</value>
         <value>$LOCALIZE[24138]</value>
@@ -273,15 +272,15 @@
         <value condition="Window.IsVisible(AddonBrowser.xml)">$INFO[Container.FolderName]</value>
         <value condition="Window.IsVisible(Custom_1115_Window_Shortcuts.xml)">$INFO[Container(30000).ListItem.Label]</value>
         <value condition="Window.IsVisible(SettingsSystemInfo.xml)">$INFO[Control.GetLabel(40)]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),0)">$LOCALIZE[31444]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),0)">$LOCALIZE[31807]</value>
         <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),1)">$LOCALIZE[480]</value>
         <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),2)">$LOCALIZE[14206]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),3)">$LOCALIZE[33029]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),4)">$LOCALIZE[31158]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),5)">$LOCALIZE[31186]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),6)">$LOCALIZE[29921]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),7)">$LOCALIZE[39024]</value>
-        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),8)">$VAR[Label_SkinSettings_Level]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),3)">$LOCALIZE[31808]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),4)">$LOCALIZE[31103]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),5)">$LOCALIZE[33029]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),6)">$LOCALIZE[14086]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),7)">$LOCALIZE[31809]</value>
+        <value condition="Window.IsVisible(SkinSettings.xml) + String.IsEqual(Window(Home).Property(Settings.Skin.Category),8)">$LOCALIZE[31810]</value>
         <value condition="Window.IsVisible(SettingsCategory.xml) + ControlGroup(3).HasFocus(-200) + !String.IsEmpty(Window.Property(Settings.Category.-200))">$INFO[Window.Property(Settings.Category.-200)]</value>
         <value condition="Window.IsVisible(SettingsCategory.xml) + ControlGroup(3).HasFocus(-199) + !String.IsEmpty(Window.Property(Settings.Category.-199))">$INFO[Window.Property(Settings.Category.-199)]</value>
         <value condition="Window.IsVisible(SettingsCategory.xml) + ControlGroup(3).HasFocus(-198) + !String.IsEmpty(Window.Property(Settings.Category.-198))">$INFO[Window.Property(Settings.Category.-198)]</value>
@@ -307,19 +306,13 @@
         <value condition="String.IsEqual(Window(Home).Property(Settings.Skin.Category),5)">$LOCALIZE[31649]</value>
         <value condition="String.IsEqual(Window(Home).Property(Settings.Skin.Category),6)">$LOCALIZE[31650]</value>
         <value condition="String.IsEqual(Window(Home).Property(Settings.Skin.Category),7)">$LOCALIZE[31651]</value>
-        <value condition="String.IsEqual(Window(Home).Property(Settings.Skin.Category),8)">$LOCALIZE[31652]</value>
+        <value condition="String.IsEqual(Window(Home).Property(Settings.Skin.Category),8)">$LOCALIZE[31822]</value>
     </variable>
 
     <variable name="Label_Shortcuts_CategoryDescription">
         <value condition="String.IsEqual(Container(30000).ListItem.Property(editmenu),menu=search)">$LOCALIZE[31719]</value>
         <value condition="String.IsEqual(Container(30000).ListItem.Property(editmenu),menu=power)">$LOCALIZE[31721]</value>
         <value>$LOCALIZE[31720]</value>
-    </variable>
-
-    <variable name="Value_SkinSettings_NextLevel">
-        <value condition="Integer.IsEqual(Skin.String(Skin.SettingsLevel),1)">2</value>
-        <value condition="Integer.IsEqual(Skin.String(Skin.SettingsLevel),2)">3</value>
-        <value>1</value>
     </variable>
 
     <variable name="Label_Settings_InfoText">

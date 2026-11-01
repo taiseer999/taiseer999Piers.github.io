@@ -257,6 +257,23 @@
         </definition>
     </include>
 
+    <include name="List_Layout_Dialog_WatchedOn">
+        <param name="selected">false</param>
+        <param name="detailed">false</param>
+        <definition>
+            <include content="List_Layout_Dialog_DetailedCheckmark">
+                <param name="detailed">$PARAM[detailed]</param>
+                <param name="selected">$PARAM[selected]</param>
+                <param name="misc">$PARAM[misc]</param>
+                <param name="item_h">$PARAM[item_h]</param>
+                <param name="icon">$INFO[ListItem.Icon]</param>
+                <param name="label">$INFO[ListItem.Label]</param>
+                <param name="label2">$VAR[Label_WatchedOn_Sub]</param>
+                <param name="label2_visible">true</param>
+            </include>
+        </definition>
+    </include>
+
     <include name="List_Layout_Dialog_GameDiscs">
         <param name="selected">false</param>
         <param name="detailed">false</param>
@@ -446,6 +463,14 @@
         </definition>
     </include>
 
+    <variable name="GameAchievement_Attempting_Label">
+        <value condition="!String.IsEmpty(ListItem.Property(achievement.attempting))">$LOCALIZE[35718]</value>
+    </variable>
+
+    <variable name="GameAchievement_Missable_Label">
+        <value condition="!String.IsEmpty(ListItem.Property(achievement.missable))">$LOCALIZE[35710]</value>
+    </variable>
+
     <include name="List_Layout_GameAchievements">
         <param name="selected">false</param>
         <param name="detailed">false</param>
@@ -512,7 +537,7 @@
                         <param name="item_h">$PARAM[item_h]</param>
                         <param name="selected">$PARAM[selected]</param>
                         <param name="label">$INFO[ListItem.Label]$INFO[ListItem.Property(achievement.measuredprogress), (,)]</param>
-                        <param name="label4">$INFO[ListItem.Property(achievement.unlockeddate),, - ]$INFO[ListItem.Property(achievement.raritycategory)]</param>
+                        <param name="label4">$VAR[GameAchievement_Attempting_Label,, - ]$INFO[ListItem.Property(achievement.unlockeddate),, - ]$INFO[ListItem.Property(achievement.raritycategory)]$VAR[GameAchievement_Missable_Label, - ,]</param>
                         <param name="label3">$INFO[ListItem.Property(achievement.points)]</param>
                     </include>
                 </control>

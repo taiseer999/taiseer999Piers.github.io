@@ -1,6 +1,0 @@
-<item>
-    <label>{item_label} $INFO[System.ProfileName]</label>
-    <onclick>Dialog.Close(all,true)</onclick>
-    <onclick>{item_path}</onclick>
-    <visible>[System.HasLoginScreen | Integer.IsGreater(System.ProfileCount,1)] + System.Loggedon</visible>
-</item>

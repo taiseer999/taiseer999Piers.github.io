@@ -33,11 +33,6 @@
                         <control type="group">
                             <bottom>80</bottom>
                             <include>DialogSetupWizard_Steps</include>
-                            <include content="Part_Scrollbar_Max">
-                                <param name="id">61</param>
-                                <param name="inset">false</param>
-                                <onleft>SetFocus(50$INFO[Container(3).CurrentItem])</onleft>
-                            </include>
                         </control>
                         <include content="Part_InfoText">
                             <param name="label">$VAR[Label_SetupWizard_Help]</param>
@@ -83,8 +78,7 @@
                 <onup>noop</onup>
                 <ondown>noop</ondown>
                 <onleft>3</onleft>
-                <onright>61</onright>
-                <pagecontrol>61</pagecontrol>
+                <onright>noop</onright>
                 <include>Size_Grouplist_Pad</include>
                 <include>$PARAM[items]</include>
             </control>
@@ -248,6 +242,8 @@
     <include name="DialogSetupWizard_Cards">
         <param name="control">list</param>
         <param name="orientation">horizontal</param>
+        <param name="offset_x">20</param>
+        <param name="offset_y">20</param>
         <definition>
             <include content="List_Core">
                 <param name="id">$PARAM[id]</param>
@@ -258,11 +254,12 @@
                 <param name="itemlayout_w">$PARAM[item_w]</param>
                 <param name="itemlayout_h">$PARAM[item_h]</param>
                 <param name="itemlayout_include">$PARAM[layout]</param>
-                <param name="offset_x">20</param>
-                <param name="offset_y">20</param>
+                <param name="offset_x">$PARAM[offset_x]</param>
+                <param name="offset_y">$PARAM[offset_y]</param>
                 <height>$PARAM[height]</height>
                 <onleft>3</onleft>
                 <include>$PARAM[content]</include>
+                <nested />
             </include>
         </definition>
     </include>
@@ -339,97 +336,90 @@
         </definition>
     </include>
 
-    <!-- Menu style wireframes -->
+    <!-- Menu style wireframes: the menu, an info box and a row of four landscape widgets, on an even grid -->
     <include name="DialogSetupWizard_Thumb_Menu">
         <control type="group">
-            <visible>!String.IsEqual(ListItem.Property(value),side)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">23.1%</param><param name="width">89.7%</param><param name="height">43.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">72.3%</param><param name="width">19.8%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">28.4%</param><param name="top">72.3%</param><param name="width">19.8%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">51.7%</param><param name="top">72.3%</param><param name="width">19.8%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">75%</param><param name="top">72.3%</param><param name="width">19.8%</param><param name="height">20%</param></include>
-        </control>
-        <control type="group">
             <visible>String.IsEqual(ListItem.Property(value),top)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">7.7%</param><param name="width">15.5%</param><param name="height">7.7%</param><param name="colour">dialog_fg_50</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">24.1%</param><param name="top">7.7%</param><param name="width">12.9%</param><param name="height">7.7%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">40.5%</param><param name="top">7.7%</param><param name="width">12.9%</param><param name="height">7.7%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">56.9%</param><param name="top">7.7%</param><param name="width">12.9%</param><param name="height">7.7%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">0%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_50</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">0%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">0%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">16%</param><param name="width">100%</param><param name="height">48%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
         </control>
         <control type="group">
             <visible>String.IsEqual(ListItem.Property(value),icons)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">6.2%</param><param name="width">6%</param><param name="height">10.8%</param><param name="colour">dialog_fg_50</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">13.8%</param><param name="top">6.2%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">22.4%</param><param name="top">6.2%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">31%</param><param name="top">6.2%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">39.7%</param><param name="top">6.2%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">0%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_50</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">6%</param><param name="top">0%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">12%</param><param name="top">0%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">18%</param><param name="top">0%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">24%</param><param name="top">0%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">16%</param><param name="width">100%</param><param name="height">48%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
         </control>
         <control type="group">
             <visible>String.IsEqual(ListItem.Property(value),side)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">13.8%</param><param name="width">6%</param><param name="height">10.8%</param><param name="colour">dialog_fg_50</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">29.2%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">44.6%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">60%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">75.4%</param><param name="width">6%</param><param name="height">10.8%</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">15.5%</param><param name="top">9.2%</param><param name="width">79.3%</param><param name="height">56.9%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">15.5%</param><param name="top">72.3%</param><param name="width">24.1%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">43.1%</param><param name="top">72.3%</param><param name="width">24.1%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">70.7%</param><param name="top">72.3%</param><param name="width">24.1%</param><param name="height">20%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">13.96%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_50</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">29.98%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">46%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">62.02%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">78.04%</param><param name="width">4%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param><param name="texture">common/circle.png</param><param name="aspectratio">keep</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">8%</param><param name="top">0%</param><param name="width">92%</param><param name="height">64%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">8%</param><param name="top">72%</param><param name="width">20%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">32%</param><param name="top">72%</param><param name="width">20%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">56%</param><param name="top">72%</param><param name="width">20%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">80%</param><param name="top">72%</param><param name="width">20%</param><param name="height">28%</param></include>
         </control>
     </include>
 
 
-    <!-- Widget layout wireframes, drawn on a 232 x 130 grid -->
+    <!-- Widget layout wireframes: info box, selector and rows of four landscape widgets, on an even grid -->
     <include name="DialogSetupWizard_Thumb_Widgets">
         <control type="group">
             <visible>String.IsEqual(ListItem.Property(value),Standard)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">7.7%</param><param name="width">89.7%</param><param name="height">35.4%</param><param name="colour">dialog_fg_30</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">47.7%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">23.7%</param><param name="top">47.7%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">42.2%</param><param name="top">47.7%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">60.8%</param><param name="top">47.7%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">79.3%</param><param name="top">47.7%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">72.3%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">23.7%</param><param name="top">72.3%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">42.2%</param><param name="top">72.3%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">60.8%</param><param name="top">72.3%</param><param name="width">15.5%</param><param name="height">20%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">79.3%</param><param name="top">72.3%</param><param name="width">15.5%</param><param name="height">20%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">0%</param><param name="width">100%</param><param name="height">28%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">36%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">36%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">36%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">36%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
         </control>
         <control type="group">
             <visible>String.IsEqual(ListItem.Property(value),Combined)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">7.7%</param><param name="width">89.7%</param><param name="height">43.1%</param><param name="colour">dialog_fg_30</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">56.9%</param><param name="width">12.9%</param><param name="height">6.2%</param><param name="colour">dialog_fg_50</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">20.7%</param><param name="top">56.9%</param><param name="width">12.9%</param><param name="height">6.2%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">36.2%</param><param name="top">56.9%</param><param name="width">12.9%</param><param name="height">6.2%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">69.2%</param><param name="width">15.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">23.7%</param><param name="top">69.2%</param><param name="width">15.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">42.2%</param><param name="top">69.2%</param><param name="width">15.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">60.8%</param><param name="top">69.2%</param><param name="width">15.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">79.3%</param><param name="top">69.2%</param><param name="width">15.5%</param><param name="height">23.1%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">0%</param><param name="width">100%</param><param name="height">48%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">56%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_50</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">56%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">56%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">72%</param><param name="width">22%</param><param name="height">28%</param></include>
         </control>
         <control type="group">
             <visible>String.IsEqual(ListItem.Property(value),Wall)</visible>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">7.7%</param><param name="width">12.9%</param><param name="height">6.2%</param><param name="colour">dialog_fg_50</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">20.7%</param><param name="top">7.7%</param><param name="width">12.9%</param><param name="height">6.2%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">36.2%</param><param name="top">7.7%</param><param name="width">12.9%</param><param name="height">6.2%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">18.5%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">20.3%</param><param name="top">18.5%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">35.3%</param><param name="top">18.5%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">50.4%</param><param name="top">18.5%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">65.5%</param><param name="top">18.5%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">80.6%</param><param name="top">18.5%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">46.2%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">20.3%</param><param name="top">46.2%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">35.3%</param><param name="top">46.2%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">50.4%</param><param name="top">46.2%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">65.5%</param><param name="top">46.2%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">80.6%</param><param name="top">46.2%</param><param name="width">12.5%</param><param name="height">23.1%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">5.2%</param><param name="top">73.8%</param><param name="width">12.5%</param><param name="height">18.5%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">20.3%</param><param name="top">73.8%</param><param name="width">12.5%</param><param name="height">18.5%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">35.3%</param><param name="top">73.8%</param><param name="width">12.5%</param><param name="height">18.5%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">50.4%</param><param name="top">73.8%</param><param name="width">12.5%</param><param name="height">18.5%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">65.5%</param><param name="top">73.8%</param><param name="width">12.5%</param><param name="height">18.5%</param></include>
-            <include content="DialogSetupWizard_Block"><param name="left">80.6%</param><param name="top">73.8%</param><param name="width">12.5%</param><param name="height">18.5%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">0%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_50</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">0%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">0%</param><param name="width">22%</param><param name="height">8%</param><param name="colour">dialog_fg_30</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">16%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">16%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">16%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">16%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">46.67%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">46.67%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">46.67%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">46.67%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">0%</param><param name="top">77.33%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">26%</param><param name="top">77.33%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">52%</param><param name="top">77.33%</param><param name="width">22%</param><param name="height">22.67%</param></include>
+            <include content="DialogSetupWizard_Block"><param name="left">78%</param><param name="top">77.33%</param><param name="width">22%</param><param name="height">22.67%</param></include>
         </control>
     </include>
 
@@ -468,7 +458,7 @@
             <include content="List_Layout_Dialog_Tile">
                 <param name="selected">$PARAM[selected]</param>
                 <param name="include_overlay">DialogSetupWizard_Thumb_Colour</param>
-                <param name="diffuse">diffuse/landscape_w307_h135.png</param>
+                <param name="diffuse">diffuse/landscape_w307_h210.png</param>
             </include>
         </definition>
     </include>
@@ -478,7 +468,7 @@
         <definition>
             <include content="List_Layout_Dialog_Tile">
                 <param name="selected">$PARAM[selected]</param>
-                <param name="diffuse">diffuse/landscape_w225_h110.png</param>
+                <param name="diffuse">diffuse/landscape_w225_h130.png</param>
             </include>
         </definition>
     </include>
@@ -488,8 +478,6 @@
         <param name="selected">false</param>
         <definition>
             <control type="group">
-                <right>20</right>
-                <bottom>20</bottom>
                 <control type="image">
                     <visible>$PARAM[selected]</visible>
                     <include content="Object_Texture">
@@ -498,32 +486,32 @@
                     </include>
                 </control>
                 <control type="image">
-                    <include content="Dimension_Padding"><param name="pad">10%</param></include>
+                    <bordersize>7</bordersize>
                     <texture colordiffuse="dialog_bg_100">common/circle.png</texture>
                 </control>
                 <control type="image">
-                    <include content="Dimension_Padding"><param name="pad">14%</param></include>
+                    <bordersize>10</bordersize>
                     <texture colordiffuse="$INFO[ListItem.Property(colour)]">common/circle.png</texture>
                     <visible>!String.IsEmpty(ListItem.Property(colour))</visible>
                 </control>
                 <control type="image">
-                    <include content="Dimension_Padding"><param name="pad">14%</param></include>
+                    <bordersize>10</bordersize>
                     <texture colordiffuse="dialog_fg_12">common/circle.png</texture>
                     <visible>String.IsEmpty(ListItem.Property(colour))</visible>
                 </control>
                 <control type="image">
-                    <include content="Dimension_Padding"><param name="pad">31%</param></include>
+                    <bordersize>12</bordersize>
                     <texture colordiffuse="dialog_fg_70">special://skin/extras/icons/palette.png</texture>
                     <visible>String.IsEmpty(ListItem.Property(colour)) + !String.IsEqual(ListItem.Label,ListItem.Property(current))</visible>
                 </control>
                 <control type="group">
                     <visible>String.IsEqual(ListItem.Label,ListItem.Property(current))</visible>
                     <control type="image">
-                        <include content="Dimension_Padding"><param name="pad">29%</param></include>
+                        <bordersize>20</bordersize>
                         <texture colordiffuse="dialog_bg_70">common/circle.png</texture>
                     </control>
                     <control type="image">
-                        <include content="Dimension_Padding"><param name="pad">37%</param></include>
+                        <bordersize>30</bordersize>
                         <texture colordiffuse="dialog_fg_100">indicator/checkmark.png</texture>
                     </control>
                 </control>
@@ -536,9 +524,9 @@
 
         <include content="List_Dialog">
             <param name="id">57</param>
-            <param name="item_height">128</param>
+            <param name="item_height">140</param>
             <param name="itemlayout_include">List_Layout_Dialog_DetailedCheckmark</param>
-            <height>384</height>
+            <height>560</height>
             <onleft>3</onleft>
             <include>DialogSetupWizard_Content_Welcome</include>
         </include>
@@ -552,6 +540,14 @@
                 <param name="icon">film</param>
                 <param name="preset">library</param>
                 <param name="preset_label">$LOCALIZE[31761]</param>
+            </include>
+            <include content="DialogSetupWizard_Recommended">
+                <param name="label">$LOCALIZE[31825]</param>
+                <param name="label2">$LOCALIZE[31826]</param>
+                <param name="icon">fire</param>
+                <param name="preset">discover</param>
+                <param name="preset_label">$LOCALIZE[31762]</param>
+                <param name="visible">System.AddonIsEnabled(plugin.video.themoviedb.helper)</param>
             </include>
             <include content="DialogSetupWizard_Recommended">
                 <param name="label">$LOCALIZE[31796]</param>
@@ -593,8 +589,8 @@
         <include content="DialogSetupWizard_Cards">
             <param name="id">51</param>
             <param name="item_w">327</param>
-            <param name="item_h">260</param>
-            <param name="height">280</param>
+            <param name="item_h">300</param>
+            <param name="height">320</param>
             <param name="layout">DialogSetupWizard_Layout_Menu</param>
             <param name="content">DialogSetupWizard_Content_Menu</param>
         </include>
@@ -661,8 +657,8 @@
         <include content="DialogSetupWizard_Cards">
             <param name="id">52</param>
             <param name="item_w">327</param>
-            <param name="item_h">260</param>
-            <param name="height">280</param>
+            <param name="item_h">300</param>
+            <param name="height">320</param>
             <param name="layout">DialogSetupWizard_Layout_Widgets</param>
             <param name="content">DialogSetupWizard_Content_WidgetModes</param>
         </include>
@@ -767,25 +763,55 @@
             <param name="control">panel</param>
             <param name="orientation">vertical</param>
             <param name="item_w">327</param>
-            <param name="item_h">155</param>
-            <param name="height">330</param>
+            <param name="item_h">230</param>
+            <param name="height">480</param>
             <param name="layout">DialogSetupWizard_Layout_Colour</param>
             <param name="content">DialogSetupWizard_Content_Colours</param>
         </include>
-        <include content="Settings_Label">
-            <param name="dialog">true</param>
-            <param name="id">5411</param>
-            <label>$LOCALIZE[31792]</label>
-        </include>
-        <include content="DialogSetupWizard_Cards">
-            <param name="id">54</param>
-            <param name="item_w">100</param>
-            <param name="item_h">100</param>
-            <param name="height">120</param>
-            <param name="layout">DialogSetupWizard_Layout_Swatch</param>
-            <param name="content">DialogSetupWizard_Content_Highlights</param>
-        </include>
+
+        <control type="group" id="5414">
+            <height>80</height>
+            <include content="DialogSetupWizard_Cards">
+                <param name="id">54</param>
+                <param name="item_w">80</param>
+                <param name="item_h">80</param>
+                <param name="height">80</param>
+                <param name="offset_x">30</param>
+                <param name="offset_y">0</param>
+                <param name="layout">DialogSetupWizard_Layout_Swatch</param>
+                <param name="content">DialogSetupWizard_Content_Highlights</param>
+                <onright>5412</onright>
+                <onup>53</onup>
+            </include>
+            <control type="group">
+                <left>680</left>
+                <right>20</right>
+                <control type="image">
+                    <visible>!Control.HasFocus(5412)</visible>
+                    <texture border="40" colordiffuse="dialog_fg_12">common/menu$VAR[DialogSetupWizard_Outline_Button_Texture].png</texture>
+                </control>
+                <control type="image">
+                    <visible>Control.HasFocus(5412)</visible>
+                    <texture border="40" colordiffuse="$VAR[ColorHighlight]">common/menu$VAR[DialogSetupWizard_Outline_Button_Texture].png</texture>
+                </control>
+                <include content="Settings_Button">
+                    <param name="dialog">true</param>
+                    <param name="id">5412</param>
+                    <label>$VAR[Label_Setting_FocusStyle]</label>
+                    <onclick>Skin.ToggleSetting(OutlinedFocusedStyle)</onclick>
+                    <onleft>54</onleft>
+                    <onup>53</onup>
+                    <align>center</align>
+                    <texturenofocus />
+                    <texturefocus />
+                </include>
+            </control>
+        </control>
     </include>
+
+    <variable name="DialogSetupWizard_Outline_Button_Texture">
+        <value condition="Skin.HasSetting(OutlinedFocusedStyle)">-outlined</value>
+    </variable>
 
     <include name="DialogSetupWizard_Colour_Preset">
         <definition>
@@ -895,8 +921,8 @@
             <param name="control">panel</param>
             <param name="orientation">vertical</param>
             <param name="item_w">245</param>
-            <param name="item_h">130</param>
-            <param name="height">280</param>
+            <param name="item_h">150</param>
+            <param name="height">320</param>
             <param name="layout">DialogSetupWizard_Layout_Background</param>
             <param name="content">DialogSetupWizard_Content_Backgrounds</param>
         </include>
@@ -996,9 +1022,9 @@
     <include name="DialogSetupWizard_Items_Finish">
         <include content="List_Dialog">
             <param name="id">58</param>
-            <param name="item_height">130</param>
+            <param name="item_height">140</param>
             <param name="itemlayout_include">List_Layout_Dialog_DetailedCheckmark</param>
-            <height>700</height>
+            <height>560</height>
             <onleft>3</onleft>
             <include>DialogSetupWizard_Content_Review</include>
         </include>
@@ -1020,7 +1046,7 @@
             </include>
             <include content="DialogSetupWizard_Review_Item">
                 <param name="label">$LOCALIZE[31767]</param>
-                <param name="label2">$VAR[Label_Setting_ColourPreset] • $VAR[Label_Setting_ColourScheme]</param>
+                <param name="label2">$VAR[Label_Setting_ColourPreset] • $VAR[Label_Setting_ColourScheme] • $VAR[Label_Setting_FocusStyle]</param>
                 <param name="icon">palette</param>
                 <param name="index">3</param>
             </include>

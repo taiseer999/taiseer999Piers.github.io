@@ -1,6 +1,0 @@
-<item>
-    <label>{item_label}</label>
-    <onclick>Dialog.Close(shutdownmenu)</onclick>
-    <onclick>{item_path}</onclick>
-    <visible>{visible}</visible>
-</item>
