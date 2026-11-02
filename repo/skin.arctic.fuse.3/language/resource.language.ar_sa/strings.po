@@ -3034,10 +3034,6 @@ msgctxt "#31728"
 msgid "Select the type of hub: custom, next aired, Live TV, or add-ons."
 msgstr "اختر نوع المحور: مخصص أو الحلقات القادمة أو التلفاز المباشر أو الإضافات."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31729"
-msgid "Configure the label, icon and path of the menu shortcut for this hub."
-msgstr "اضبط تسمية اختصار القائمة لهذا المحور وأيقونته ومساره."
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31730"
@@ -3543,3 +3539,63 @@ msgstr "خط زمني"
 msgctxt "#31832"
 msgid "Gatefold"
 msgstr "غلاف قابل للطي"
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31833"
+msgid "Show or hide this item in the hubs menu."
+msgstr "إظهار هذا العنصر في قائمة المحاور أو إخفاؤه."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31834"
+msgid "Choose the shortcut opened by this item."
+msgstr "اختر الاختصار الذي يفتحه هذا العنصر."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31835"
+msgid "Enter the path or action opened by this item directly."
+msgstr "أدخل المسار أو الإجراء الذي يفتحه هذا العنصر مباشرة."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31836"
+msgid "Set the label shown for this item."
+msgstr "اضبط التسمية المعروضة لهذا العنصر."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31837"
+msgid "Choose the icon shown for this item."
+msgstr "اختر الأيقونة المعروضة لهذا العنصر."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31839"
+msgid "Each widget gets its own row below the info panel."
+msgstr "يحصل كل ودجت على صفّ خاص به أسفل لوحة المعلومات."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31840"
+msgid "Widgets share one row below the info panel. Switch between them with the tabs above it."
+msgstr "تتشارك الودجات صفًّا واحدًا أسفل لوحة المعلومات، ويُنتقل بينها بالتبويبات فوقه."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31841"
+msgid "One widget fills the screen as a grid. Good for large libraries."
+msgstr "يملأ ودجت واحد الشاشة على هيئة شبكة، وهو مناسب للمكتبات الكبيرة."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31842"
+msgid "The options dialog shows these tiles above its menu. The layout sets how many there are."
+msgstr "تعرض نافذة الخيارات هذه المربعات فوق قائمتها، ويحدد التخطيط عددها."
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31843"
+msgid "Left"
+msgstr "اليسار"
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31844"
+msgid "Right"
+msgstr "اليمين"
+
+#: /1080i/Dialog_DialogShortcuts.xml
+msgctxt "#31845"
+msgid "Combined"
+msgstr "مدمج"

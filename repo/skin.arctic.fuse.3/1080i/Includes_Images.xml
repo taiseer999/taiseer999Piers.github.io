@@ -1,51 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-    <!-- ABUKARIM: Lucent icons (AB Tools "AF3: Lucent Look"; AF3 icon when off) -->
-    <variable name="ABK_LucentIcon_subcycler">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/subcycler.png</value>
-        <value>special://skin/extras/icons/subcycler.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_dexsync">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/dexsync.png</value>
-        <value>special://skin/extras/icons/dexsync.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_substyle">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/substyle.png</value>
-        <value>special://skin/extras/icons/substyle.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_ppi">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/ppi.png</value>
-        <value>special://skin/extras/icons/ppi.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_list">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/list.png</value>
-        <value>special://skin/extras/icons/list.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_record">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/record.png</value>
-        <value>special://skin/extras/icons/record-vinyl.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_stop">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/stop.png</value>
-        <value>special://skin/extras/icons/stop.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_info">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/info.png</value>
-        <value>special://skin/extras/icons/info2.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_audio">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/audio.png</value>
-        <value>special://skin/extras/icons/volume.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_subtitles">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/subtitles.png</value>
-        <value>special://skin/extras/icons/quote.png</value>
-    </variable>
-    <variable name="ABK_LucentIcon_video">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/video.png</value>
-        <value>special://skin/extras/icons/video.png</value>
-    </variable>
-
 
     <variable name="Image_FlixArt_MaskPath">
         <value condition="Skin.String(Skin.FlixArt.Size,Large)">special://skin/extras/diffuse/flixart/1440x810/</value>
@@ -134,7 +88,6 @@
     </variable>
 
     <variable name="Image_OSD_SkipPrev">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/prev.png</value>  <!-- ABUKARIM: Lucent icon -->
         <value condition="!String.IsEmpty(Player.Chapter) + !String.IsEqual(Player.Chapter,00) + !String.IsEmpty(Player.ChapterCount) + !String.IsEqual(Player.ChapterCount,00) + !String.IsEqual(Player.Chapter,01)">special://skin/extras/icons/backward-fast.png</value>
         <value condition="Integer.IsGreater(VideoPlayer.PlaylistPosition,1) + Integer.IsGreater(VideoPlayer.PlaylistLength,1)">special://skin/extras/icons/backward-step.png</value>
         <value condition="Integer.IsLess(Player.Time(mins),10)">special://skin/extras/icons/backward-step.png</value>
@@ -142,7 +95,6 @@
     </variable>
 
     <variable name="Image_OSD_SkipNext">
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/next.png</value>  <!-- ABUKARIM: Lucent icon -->
         <value condition="!String.IsEmpty(Player.Chapter) + !String.IsEqual(Player.Chapter,00) + !String.IsEmpty(Player.ChapterCount) + !String.IsEqual(Player.ChapterCount,00) + !String.IsEqual(Player.Chapter,Player.ChapterCount)">special://skin/extras/icons/forward-fast.png</value>
         <value condition="Integer.IsLess(VideoPlayer.PlaylistPosition,VideoPlayer.PlaylistLength)">special://skin/extras/icons/forward-step.png</value>
         <value condition="Integer.IsLess(Player.TimeRemaining(mins),10)">special://skin/extras/icons/forward-step.png</value>
@@ -585,18 +537,12 @@
     </variable>
 
     <variable name="Image_OSD_PausePlay">
-        <value condition="Skin.HasSetting(abk.lucent) + Player.Playing">abk_lucent/icons/pause.png</value>  <!-- ABUKARIM: Lucent icon -->
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/play.png</value>  <!-- ABUKARIM: Lucent icon -->
         <value condition="Player.Playing">special://skin/extras/icons/pause.png</value>
         <value>special://skin/extras/icons/play2.png</value>
     </variable>
 
     <variable name="Image_OSD_PlayPause">
         <value condition="[Window.IsActive(musicosd) | Window.IsActive(videoosd)] + !$EXP[Exp_OSD_HideControls]">$VAR[Image_OSD_PausePlay]</value>
-        <value condition="Skin.HasSetting(abk.lucent) + Player.Paused">abk_lucent/icons/pause.png</value>  <!-- ABUKARIM: Lucent icon -->
-        <value condition="Skin.HasSetting(abk.lucent) + Player.Forwarding">abk_lucent/icons/forward.png</value>  <!-- ABUKARIM: Lucent icon -->
-        <value condition="Skin.HasSetting(abk.lucent) + Player.Rewinding">abk_lucent/icons/rewind.png</value>  <!-- ABUKARIM: Lucent icon -->
-        <value condition="Skin.HasSetting(abk.lucent)">abk_lucent/icons/play.png</value>  <!-- ABUKARIM: Lucent icon -->
         <value condition="Player.Paused">special://skin/extras/icons/pause.png</value>
         <value condition="Player.Forwarding">special://skin/extras/icons/forward.png</value>
         <value condition="Player.Rewinding">special://skin/extras/icons/backward.png</value>

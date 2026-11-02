@@ -18,7 +18,6 @@
                 <include content="View_Line" condition="$PARAM[labelvisible] + ![$PARAM[usewidgetlabel]]">
                     <param name="label">$PARAM[label]</param>
                     <param name="label_fallback">31282</param>
-                    <param name="textcolor">$VAR[ColorHighlight]</param>  <!-- ABUKARIM: widget title highlight (label) -->
                     <param name="top">20</param>
                     <param name="left">0</param>
                     <param name="visible">!Integer.IsEqual(Container($PARAM[id]).NumItems,0) | Container($PARAM[id]).IsUpdating | $PARAM[busy_visible]</param>
@@ -28,7 +27,6 @@
                 <include content="View_Line" condition="$PARAM[labelvisible] + [$PARAM[usewidgetlabel]]">
                     <param name="label">$INFO[Container($PARAM[id]).ListItem.Property(widget)]</param>
                     <param name="label_fallback">$PARAM[label]</param>
-                    <param name="textcolor">$VAR[ColorHighlight]</param>  <!-- ABUKARIM: widget title highlight (widget) -->
                     <param name="top">20</param>
                     <param name="left">0</param>
                     <param name="visible">!Integer.IsEqual(Container($PARAM[id]).NumItems,0) | Container($PARAM[id]).IsUpdating | $PARAM[busy_visible]</param>
@@ -853,6 +851,31 @@
                 </animation>
                 <include>Widget_Busy_BlankItems__$PARAM[include]</include>
             </control>
+        </control>
+    </include>
+
+    <!-- Placeholder rows aligned to a vertical wall panel at top 290 with offset_y 40 and 350 high rows -->
+    <include name="Widget_Busy_Wall">
+        <control type="group">
+            <nested />
+            <include content="Widget_Busy">
+                <param name="visible">$PARAM[visible]</param>
+                <param name="include">$PARAM[include]</param>
+                <top>250</top>
+                <left>view_pad</left>
+            </include>
+            <include content="Widget_Busy">
+                <param name="visible">$PARAM[visible]</param>
+                <param name="include">$PARAM[include]</param>
+                <top>600</top>
+                <left>view_pad</left>
+            </include>
+            <include content="Widget_Busy">
+                <param name="visible">$PARAM[visible]</param>
+                <param name="include">$PARAM[include]</param>
+                <top>950</top>
+                <left>view_pad</left>
+            </include>
         </control>
     </include>
 

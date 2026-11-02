@@ -191,9 +191,12 @@
     <include name="Action_BuildShortcuts_OnLoad">
         <onload>runscript(script.skinvariables,"run_executebuiltin=special://skin/shortcuts/skinvariables-build-templates.json",use_rules)</onload>
     </include>
+    <!-- Rebuild the shortcut templates when leaving the window, only if a menu was saved while it was open -->
     <include name="Action_BuildShortcuts_OnUnLoad">
         <onload>CancelAlarm(rebuild_shortcuts,true)</onload>
-        <onunload>AlarmClock(rebuild_shortcuts,runscript(script.skinvariables,"run_executebuiltin=special://skin/shortcuts/skinvariables-build-templates.json",use_rules),00:01,silent)</onunload>
+        <onload>SetProperty(Shortcuts.WindowReloadOnOpen,$INFO[Window(Home).Property(SkinVariables.ShortcutsNode.Reload)],Home)</onload>
+        <onunload condition="$EXP[Exp_Shortcuts_WindowEditedSinceOpen]">Skin.SetString(Shortcuts.RebuildDateTime,$INFO[System.Date(yyyy-mm-dd)]_$INFO[System.Time(hh:mm:ss)])</onunload>
+        <onunload condition="$EXP[Exp_Shortcuts_WindowEditedSinceOpen]">AlarmClock(rebuild_shortcuts,runscript(script.skinvariables,"run_executebuiltin=special://skin/shortcuts/skinvariables-build-templates.json",use_rules),00:01,silent)</onunload>
     </include>
 
     <include name="Action_Setting_Header_Onclick">
@@ -438,29 +441,6 @@
         <value condition="String.IsEqual(Window(Home).Property(ColorPicker_Type),season_finale)">Skin.SetString(season_finale_color.name,$VAR[Color_PC_to_Hex])</value>
         <value condition="String.IsEqual(Window(Home).Property(ColorPicker_Type),mid_season_finale)">Skin.SetString(mid_season_finale_color.name,$VAR[Color_PC_to_Hex])</value>
     </variable>
-
-    <!-- ABUKARIM: trailer source (AF3 50.11 dropped this include) -->
-    <variable name="ABK_Trailer_Link">
-        <value condition="!String.IsEmpty(ListItem.Trailer)">$INFO[ListItem.Trailer]</value>
-        <value condition="!String.IsEmpty(Container.ListItem.Trailer)">$INFO[Container.ListItem.Trailer]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Trailer))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Trailer)]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_trailer))">$INFO[Window(Home).Property(TMDbHelper.ListItem.base_trailer)]</value>
-        <value>abk://lookup</value>
-    </variable>
-    <variable name="ABK_Trailer_Title">
-        <value condition="!String.IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
-        <value condition="!String.IsEmpty(ListItem.Title)">$INFO[ListItem.Title]</value>
-        <value condition="!String.IsEmpty(Container.ListItem.TVShowTitle)">$INFO[Container.ListItem.TVShowTitle]</value>
-        <value condition="!String.IsEmpty(Container.ListItem.Title)">$INFO[Container.ListItem.Title]</value>
-        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.TVShowTitle))">$INFO[Window(Home).Property(TMDbHelper.ListItem.TVShowTitle)]</value>
-        <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Title)]</value>
-    </variable>
-    <include name="Action_SelectTrailerSource_OnClick">
-        <onclick>SetProperty(PlayTrailerItems,$VAR[Path_VideoInfo_Trailers],Home)</onclick>
-        <onclick>SetProperty(PlayTrailerTitle,$ESCVAR[ABK_Trailer_Title],Home)</onclick>
-        <onclick>SetProperty(PlayTrailer,$ESCVAR[ABK_Trailer_Link],Home)</onclick>
-        <onclick>ActivateWindow(1123)</onclick>
-    </include>
 
     <include name="Action_PlayTrailer_OnClick">
         <param name="enabled">true</param>

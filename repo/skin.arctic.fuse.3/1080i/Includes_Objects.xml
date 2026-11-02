@@ -748,7 +748,6 @@
     </include>
 
     <include name="Object_StartUp_Logo">
-        <!-- ABK Kodi 22 logo -->
         <control type="grouplist">
             <height>128</height>
             <centertop>350</centertop>
@@ -759,12 +758,12 @@
                 <height>96</height>
                 <centerleft>50%</centerleft>
                 <aspectratio>keep</aspectratio>
-                <texture>special://skin/extras/icons/kodi.png</texture>
+                <texture>special://skin/extras/icons/CE.png</texture>
             </control>
             <control type="label">
                 <height>30</height>
                 <textcolor>main_fg_100</textcolor>
-                <label>KODI</label>
+                <label>CoreELEC "NO"</label>
                 <font>font_logo_large</font>
                 <align>center</align>
             </control>

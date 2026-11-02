@@ -1,16 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <fonts>
     <fontset id="Default" unicode="false">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include>Font_Default</include>
         <font>
             <name>font23_narrow</name>
@@ -30,16 +20,6 @@
     </fontset>
     
     <fontset id="الجزيرة" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include content="Font_Default">
             <param name="font_black">Jazeerah bold.ttf</param>
             <param name="font_bold">Jazeerah bold.ttf</param>
@@ -75,16 +55,6 @@
         </font>
     </fontset>
     <fontset id="منادي" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include content="Font_Default">
             <param name="font_black">monadi BOLD.ttf</param>
         <param name="font_bold">monadi BOLD.ttf</param>
@@ -121,16 +91,6 @@
         </font>
     </fontset>
     <fontset id="APPLE" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include content="Font_Default">
             <param name="font_black">iphone.ttf</param>
             <param name="font_bold">iphone.ttf</param>
@@ -166,16 +126,6 @@
         </font>
     </fontset>
     <fontset id="امازون" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
          <include content="Font_Default">
             <param name="font_black">AmazonEmberV2-Bold.ttf</param>
             <param name="font_bold">AmazonEmberV2-Bold.ttf</param>
@@ -213,16 +163,6 @@
     </fontset>
     
     <fontset id="حسن" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include content="Font_Default">
             <param name="font_black">Hacen-Promoter -Bold.ttf</param>
             <param name="font_bold">Hacen-Promoter -Bold.ttf</param>
@@ -258,16 +198,6 @@
         </font>
     </fontset>
     <fontset id="تونس" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include content="Font_Default">
             <param name="font_black">tonos bold.ttf</param>
             <param name="font_bold">tonos bold.ttf</param>
@@ -303,16 +233,6 @@
         </font>
     </fontset>
     <fontset id="RobotoNotoCondensed" unicode="true">
-        <font>
-            <name>abk_ppi_ar21</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>21</size>
-        </font>
-        <font>
-            <name>abk_ppi_ar32</name>
-            <filename>special://home/addons/plugin.program.abukarimtools/resources/fonts/Noto-Regular.ttf</filename>
-            <size>32</size>
-        </font>
         <include content="Font_Default">
             <param name="font_black">RobotoNotoCondensed-Bold.ttf</param>
             <param name="font_bold">RobotoNotoCondensed-Regular.ttf</param>

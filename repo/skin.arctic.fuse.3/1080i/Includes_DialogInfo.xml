@@ -1657,7 +1657,6 @@
                     <top>-2</top>
                     <left>20</left>
                     <height>57</height>
-                    <include condition="Skin.HasSetting(abk.lucent)">ABK_Lucent_PillGap</include>  <!-- ABUKARIM: Lucent pill gap 90001 -->
                     <itemgap>40</itemgap>
                     <ondown>90001</ondown>
                     <onleft>SetProperty(DialogInfo.ArtworkReverse,true)</onleft>
@@ -1917,7 +1916,6 @@
                     <top>-2</top>
                     <left>20</left>
                     <height>57</height>
-                    <include condition="Skin.HasSetting(abk.lucent)">ABK_Lucent_PillGap</include>  <!-- ABUKARIM: Lucent pill gap 5000 -->
                     <itemgap>40</itemgap>
                     <ondown>5000</ondown>
                     <onup condition="$EXP[Exp_TMDbHelper_IsData]">ActivateWindow(1113)</onup>

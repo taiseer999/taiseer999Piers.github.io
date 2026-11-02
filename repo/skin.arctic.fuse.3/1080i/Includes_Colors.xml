@@ -43,7 +43,6 @@
 
     <!-- Highlight Color -->
     <variable name="ColorHighlight">
-        <value condition="Skin.HasSetting(abk.lucent) + !Skin.HasSetting(abk.lucent.ownfocus)">ffffffff</value>  <!-- ABUKARIM: Lucent focus -->
         <value condition="!String.IsEmpty(Skin.String(focuscolor.name))">$INFO[Skin.String(focuscolor.name)]</value>
         <value>ffffffff</value>
     </variable>
@@ -97,18 +96,15 @@
 
     <!-- Selected Color -->
     <variable name="ColorSelected_30">
-        <value condition="Skin.HasSetting(abk.lucent) + !Skin.HasSetting(abk.lucent.ownfocus)">4d0b1119</value>  <!-- ABUKARIM: Lucent focus -->
         <value condition="!Skin.HasSetting(RevertSelectedText)">4d272727</value>
         <value>4dffffff</value>
     </variable>
 
     <variable name="ColorSelected">
-        <value condition="Skin.HasSetting(abk.lucent) + !Skin.HasSetting(abk.lucent.ownfocus)">ff0b1119</value>  <!-- ABUKARIM: Lucent focus -->
         <value condition="!Skin.HasSetting(RevertSelectedText)">ff272727</value>
         <value>ffffffff</value>
     </variable>
     <variable name="ColorSelectedInverted">
-        <value condition="Skin.HasSetting(abk.lucent) + !Skin.HasSetting(abk.lucent.ownfocus)">ffffffff</value>  <!-- ABUKARIM: Lucent focus -->
         <value condition="!Skin.HasSetting(RevertSelectedText)">ffffffff</value>
         <value>ff272727</value>
     </variable>

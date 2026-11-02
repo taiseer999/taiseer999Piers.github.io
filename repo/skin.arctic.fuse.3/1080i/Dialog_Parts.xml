@@ -677,7 +677,7 @@
 
     <include name="Part_Background_Glass">
         <control type="image">
-            <visible>!Skin.String(Background.DialogImage,Onyx) + !Skin.HasSetting(abk.lucent)</visible>
+            <visible>!Skin.String(Background.DialogImage,Onyx)</visible>
             <texture colordiffuse="dialog_fg_06" border="20">common/dialog.png</texture>
         </control>
     </include>
@@ -691,7 +691,6 @@
                     <param name="pad">40</param>
                 </include>
                 <control type="group">
-                    <visible>!Skin.HasSetting(abk.lucent)</visible>  <!-- ABUKARIM: Lucent glass dialogs -->
                     <include content="Part_Background_Blur" condition="$EXP[Exp_DialogTheme_IsAdaptive]">
                         <param name="shadow">$PARAM[shadow]</param>
                         <param name="transparency">$PARAM[transparency]</param>
@@ -700,25 +699,6 @@
                         <param name="shadow">$PARAM[shadow]</param>
                         <param name="transparency">$PARAM[transparency]</param>
                     </include>
-                </control>
-                <control type="group">
-                    <visible>Skin.HasSetting(abk.lucent)</visible>
-                    <control type="image">
-                        <left>-40</left>
-                        <top>-40</top>
-                        <right>-40</right>
-                        <bottom>-40</bottom>
-                        <texture border="88">abk_lucent/panel_shadow.png</texture>
-                        <colordiffuse>shadow_hard</colordiffuse>
-                    </control>
-                    <control type="image">
-                        <texture border="48">abk_lucent/panel.png</texture>
-                        <colordiffuse>dialog_overlay</colordiffuse>
-                    </control>
-                    <control type="image">
-                        <texture border="48">abk_lucent/panel_edge.png</texture>
-                        <colordiffuse>overlay_hard</colordiffuse>
-                    </control>
                 </control>
                 <include condition="$PARAM[include_glass]">Part_Background_Glass</include>
             </control>
