@@ -439,6 +439,29 @@
         <value condition="String.IsEqual(Window(Home).Property(ColorPicker_Type),mid_season_finale)">Skin.SetString(mid_season_finale_color.name,$VAR[Color_PC_to_Hex])</value>
     </variable>
 
+    <!-- ABUKARIM: trailer source (AF3 50.11 dropped this include) -->
+    <variable name="ABK_Trailer_Link">
+        <value condition="!String.IsEmpty(ListItem.Trailer)">$INFO[ListItem.Trailer]</value>
+        <value condition="!String.IsEmpty(Container.ListItem.Trailer)">$INFO[Container.ListItem.Trailer]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.Trailer))">$INFO[Window(Home).Property(TMDbHelper.ListItem.Trailer)]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.base_trailer))">$INFO[Window(Home).Property(TMDbHelper.ListItem.base_trailer)]</value>
+        <value>abk://lookup</value>
+    </variable>
+    <variable name="ABK_Trailer_Title">
+        <value condition="!String.IsEmpty(ListItem.TVShowTitle)">$INFO[ListItem.TVShowTitle]</value>
+        <value condition="!String.IsEmpty(ListItem.Title)">$INFO[ListItem.Title]</value>
+        <value condition="!String.IsEmpty(Container.ListItem.TVShowTitle)">$INFO[Container.ListItem.TVShowTitle]</value>
+        <value condition="!String.IsEmpty(Container.ListItem.Title)">$INFO[Container.ListItem.Title]</value>
+        <value condition="!String.IsEmpty(Window(Home).Property(TMDbHelper.ListItem.TVShowTitle))">$INFO[Window(Home).Property(TMDbHelper.ListItem.TVShowTitle)]</value>
+        <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Title)]</value>
+    </variable>
+    <include name="Action_SelectTrailerSource_OnClick">
+        <onclick>SetProperty(PlayTrailerItems,$VAR[Path_VideoInfo_Trailers],Home)</onclick>
+        <onclick>SetProperty(PlayTrailerTitle,$ESCVAR[ABK_Trailer_Title],Home)</onclick>
+        <onclick>SetProperty(PlayTrailer,$ESCVAR[ABK_Trailer_Link],Home)</onclick>
+        <onclick>ActivateWindow(1123)</onclick>
+    </include>
+
     <include name="Action_PlayTrailer_OnClick">
         <param name="enabled">true</param>
         <definition>
@@ -506,7 +529,7 @@
 
     <variable name="Action_Shortcut_SetWidgetStyle">
         <value condition="String.IsEmpty(Container(22001).ListItem.Property(url))" />
-        <value>RunPlugin($INFO[Container(22001).ListItem.Property(url)]&amp;func=do_edit&amp;&amp;widget_style&amp;&amp;$LOCALIZE[20021]=Poster&amp;$LOCALIZE[31045]=Landscape&amp;$LOCALIZE[31320]=Square&amp;$LOCALIZE[31424]=Board&amp;$LOCALIZE[31161]=Flyer&amp;$LOCALIZE[31431]=Circle&amp;$LOCALIZE[31423]=Card&amp;$LOCALIZE[31172]=Placard&amp;$LOCALIZE[31827]=Ranked&amp;$LOCALIZE[31828]=Stack&amp;$LOCALIZE[31829]=Disc&amp;&amp;$LOCALIZE[736]&amp;&amp;True)</value>
+        <value>RunPlugin($INFO[Container(22001).ListItem.Property(url)]&amp;func=do_edit&amp;&amp;widget_style&amp;&amp;$LOCALIZE[20021]=Poster&amp;$LOCALIZE[31045]=Landscape&amp;$LOCALIZE[31320]=Square&amp;$LOCALIZE[31424]=Board&amp;$LOCALIZE[31161]=Flyer&amp;$LOCALIZE[31431]=Circle&amp;$LOCALIZE[31423]=Card&amp;$LOCALIZE[31172]=Placard&amp;$LOCALIZE[31827]=Ranked&amp;$LOCALIZE[31828]=Stack&amp;$LOCALIZE[31829]=Disc&amp;$LOCALIZE[31830]=Shelf&amp;$LOCALIZE[31831]=Timeline&amp;$LOCALIZE[31832]=Gatefold&amp;&amp;$LOCALIZE[736]&amp;&amp;True)</value>
     </variable>
 
    <variable name="Value_Shortcut_CombinedWidget_Toggle">

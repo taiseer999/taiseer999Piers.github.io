@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    ABUKARIM TOOLS - Installation Wizard progress pill (4.7.4).
+    Kodi opens this dialog by itself while Window(Home).Property(abk.setup.banner)
+    is set (a <visible> dialog), so it stays on top of Home, the hubs and every
+    other window, and comes back by itself after a skin reload - the moments
+    when the setup backdrop has to step aside. No focusable control: it never
+    takes a key press. Properties (set by setup_flow.banner):
+        abk.setup.title   first line   (Setup in progress / Step 6 of 14)
+        abk.setup.text    second line  (current step - do not unplug)
+        abk.setup.pct     0..100       (bar, 20 segments of 5 %)
+-->
+<window type="dialog" id="1789">
+    <visible>!String.IsEmpty(Window(Home).Property(abk.setup.banner))</visible>
+    <zorder>2</zorder>
+    <animation effect="fade" start="0" end="100" time="250">WindowOpen</animation>
+    <animation effect="fade" start="100" end="0" time="250">WindowClose</animation>
+    <controls>
+        <control type="group">
+            <left>440</left>
+            <top>22</top>
+            <width>1040</width>
+            <height>104</height>
+            <!-- shadow + glass pill -->
+            <control type="image">
+                <left>-14</left>
+                <top>-10</top>
+                <right>-14</right>
+                <bottom>-18</bottom>
+                <texture border="32" colordiffuse="66000000">abk_setup/panel.png</texture>
+            </control>
+            <control type="image">
+                <texture border="32" colordiffuse="EE12161D">abk_setup/panel.png</texture>
+            </control>
+            <!-- spinner -->
+            <control type="image">
+                <left>28</left>
+                <top>28</top>
+                <width>48</width>
+                <height>48</height>
+                <texture colordiffuse="FF33A3FF">abk_setup/ring.png</texture>
+                <animation effect="rotate" end="-360" center="auto" time="1100" loop="true" reversible="false" condition="true">Conditional</animation>
+            </control>
+            <!-- text -->
+            <control type="label">
+                <left>100</left>
+                <top>12</top>
+                <width>800</width>
+                <height>38</height>
+                <font>font_main_bold</font>
+                <textcolor>FFFFFFFF</textcolor>
+                <aligny>center</aligny>
+                <label>$INFO[Window(Home).Property(abk.setup.title)]</label>
+            </control>
+            <control type="label">
+                <left>100</left>
+                <top>48</top>
+                <width>800</width>
+                <height>32</height>
+                <font>font_main_bold</font>
+                <textcolor>B3FFFFFF</textcolor>
+                <aligny>center</aligny>
+                <scroll>true</scroll>
+                <label>$INFO[Window(Home).Property(abk.setup.text)]</label>
+            </control>
+            <control type="label">
+                <left>900</left>
+                <top>12</top>
+                <width>112</width>
+                <height>38</height>
+                <font>font_main_bold</font>
+                <textcolor>FF33A3FF</textcolor>
+                <align>right</align>
+                <aligny>center</aligny>
+                <label>$INFO[Window(Home).Property(abk.setup.pct),,%]</label>
+            </control>
+            <!-- bar: 20 segments, 5 % each (dim track + lit part) -->
+            <control type="image">
+                <left>100</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>100</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),5)</visible>
+            </control>
+            <control type="image">
+                <left>146</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>146</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),10)</visible>
+            </control>
+            <control type="image">
+                <left>191</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>191</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),15)</visible>
+            </control>
+            <control type="image">
+                <left>237</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>237</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),20)</visible>
+            </control>
+            <control type="image">
+                <left>282</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>282</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),25)</visible>
+            </control>
+            <control type="image">
+                <left>328</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>328</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),30)</visible>
+            </control>
+            <control type="image">
+                <left>374</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>374</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),35)</visible>
+            </control>
+            <control type="image">
+                <left>419</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>419</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),40)</visible>
+            </control>
+            <control type="image">
+                <left>465</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>465</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),45)</visible>
+            </control>
+            <control type="image">
+                <left>510</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>510</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),50)</visible>
+            </control>
+            <control type="image">
+                <left>556</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>556</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),55)</visible>
+            </control>
+            <control type="image">
+                <left>602</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>602</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),60)</visible>
+            </control>
+            <control type="image">
+                <left>647</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>647</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),65)</visible>
+            </control>
+            <control type="image">
+                <left>693</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>693</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),70)</visible>
+            </control>
+            <control type="image">
+                <left>738</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>738</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),75)</visible>
+            </control>
+            <control type="image">
+                <left>784</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>784</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),80)</visible>
+            </control>
+            <control type="image">
+                <left>830</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>830</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),85)</visible>
+            </control>
+            <control type="image">
+                <left>875</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>875</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),90)</visible>
+            </control>
+            <control type="image">
+                <left>921</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>921</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),95)</visible>
+            </control>
+            <control type="image">
+                <left>966</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="2EFFFFFF">abk_setup/seg.png</texture>
+            </control>
+            <control type="image">
+                <left>966</left><top>86</top><width>42</width><height>6</height>
+                <texture border="3" colordiffuse="FF33A3FF">abk_setup/seg.png</texture>
+                <visible>Integer.IsGreaterOrEqual(Window(Home).Property(abk.setup.pct),100)</visible>
+            </control>
+        </control>
+    </controls>
+</window>

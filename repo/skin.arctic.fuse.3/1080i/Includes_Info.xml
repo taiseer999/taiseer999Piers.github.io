@@ -218,6 +218,7 @@
         <param name="override_movie">false</param>
         <param name="override_tvshow">false</param>
         <param name="ratings_visible">true</param>
+        <param name="plotright">false</param>  <!-- ABUKARIM: plot right order -->
         <definition>
 
             <control type="group">
@@ -258,6 +259,7 @@
                 <left>40</left>
                 <include>Info_Line_Height_U3k</include>
                 <visible>$PARAM[visible]</visible>
+                <animation effect="slide" end="0,-52" time="0" condition="$PARAM[plotright]">Conditional</animation>  <!-- ABUKARIM: plot on the right - ratings up -->
 
                 <control type="grouplist">
                     <include>Info_Meta_Grouplist_Definition</include>
@@ -614,6 +616,7 @@
         <param name="visible">true</param>
         <param name="listitem">ListItem</param>
         <param name="override">false</param>
+        <param name="plotright">false</param>  <!-- ABUKARIM: plot right order -->
         <definition>
             <control type="group">
                 <visible>$PARAM[visible] + !Skin.HasSetting(InfoBar.TwoRow)</visible>
@@ -743,15 +746,21 @@
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration]</param>
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,album) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,song)]</param>
                     </include>
+                    <!-- ABUKARIM: whole hours -->
+                    <include content="Info_Line_Label">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074]]</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
+                    </include>
                     <include content="Info_Line_Label">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074] ]$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
-                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
                     </include>
                     <include content="Info_Line_Label">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
-                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
                     </include>
 
                 </control>
@@ -763,6 +772,7 @@
                 <param name="listitem">$PARAM[listitem]</param>
                 <param name="override">$PARAM[override]</param>
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="plotright">$PARAM[plotright]</param>  <!-- ABUKARIM: plot right order -->
             </include>
         </definition>
     </include>
@@ -840,9 +850,10 @@
 
     <include name="Info_Line_StarRating">
         <param name="visible">true</param>
+        <param name="divider">true</param>  <!-- ABUKARIM: no leading dot when the stars open a row -->
         <definition>
             <include content="Info_Line_Divider">
-                <param name="visible">$PARAM[visible] + !Skin.HasSetting(Info.EnablePillboxStyle)</param>
+                <param name="visible">$PARAM[visible] + $PARAM[divider] + !Skin.HasSetting(Info.EnablePillboxStyle)</param>
             </include>
             <include content="Info_StarRating" condition="!Skin.HasSetting(Info.EnablePillboxStyle)">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
@@ -1417,6 +1428,7 @@
         <param name="visible_plot">true</param>
         <param name="visible_meta">true</param>
         <param name="listitem">ListItem</param>
+        <param name="plotright_genre">false</param>  <!-- ABUKARIM: genre line (plot on the right) -->
         <definition>
 
             <control type="grouplist">
@@ -1429,6 +1441,11 @@
 
                 <control type="group" description="Avoid grouplist chop with spacer">
                     <height>20</height>
+                </control>
+                <!-- ABUKARIM: plot on the right - the info column moves down to sit above the row title -->
+                <control type="group">
+                    <visible>$PARAM[plotright_genre]</visible>
+                    <height>49</height>
                 </control>
 
                 <!-- Logo -->
@@ -1446,12 +1463,28 @@
                     <height>info_title_h</height>
                 </include>
 
+                <!-- ABUKARIM: genre under the title (plot on the right) -->
+                <control type="group">
+                    <visible>$PARAM[plotright_genre] + !String.IsEmpty($PARAM[container]$PARAM[listitem].Genre)</visible>
+                    <height>39</height>
+                    <control type="label">
+                        <left>40</left>
+                        <top>6</top>
+                        <height>40</height>
+                        <width>$PARAM[plotwidth]</width>
+                        <font>font_main_bold</font>
+                        <textcolor>$PARAM[colordiffuse]_90</textcolor>
+                        <label>$INFO[$PARAM[container]$PARAM[listitem].Genre]</label>
+                    </control>
+                </control>
+
                 <!-- Info -->
                 <include content="Info_Line" condition="$PARAM[include_details]">
                     <param name="colordiffuse">$PARAM[colordiffuse]</param>
                     <param name="container">$PARAM[container]</param>
                     <param name="listitem">$PARAM[listitem]</param>
                     <param name="visible">$PARAM[visible_line]</param>
+                    <param name="plotright">$PARAM[plotright_genre]</param>  <!-- ABUKARIM: plot right order -->
                 </include>
 
                 <!-- Plot -->
@@ -1474,6 +1507,7 @@
                     <param name="listitem">$PARAM[listitem]</param>
                     <param name="container">$PARAM[container]</param>
                     <param name="visible">$PARAM[visible_meta]</param>
+                    <param name="plotright">$PARAM[plotright_genre]</param>  <!-- ABUKARIM: plot right order -->
                 </include>
 
             </control>

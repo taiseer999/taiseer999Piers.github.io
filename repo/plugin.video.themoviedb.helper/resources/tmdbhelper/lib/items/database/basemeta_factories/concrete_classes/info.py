@@ -56,14 +56,16 @@ class Network(Studio):
 
 
 class Certification(ItemDetailsList):
+    # -- USA certification fallback (by ABUKARIM TOOLS) --
     table = 'certification'
     keys = tuple(CERTIFICATION_COLUMNS.keys())
-    conditions = 'parent_id=? AND iso_country=? AND name IS NOT NULL AND name != "" ORDER BY IFNULL(release_date, "9999-99-99") ASC LIMIT 1'  # WHERE conditions
+    conditions = 'parent_id=? AND iso_country IN (?, "US") AND name IS NOT NULL AND name != "" ORDER BY iso_country=? DESC, IFNULL(release_date, "9999-99-99") ASC LIMIT 1'  # WHERE conditions
     conflict_constraint = 'iso_country, iso_language, release_date, release_type, parent_id'
 
     @property
     def values(self):  # WHERE conditions values for ?
-        return (self.parent_id, self.common_apis.tmdb_api.iso_country)
+        iso_country = self.common_apis.tmdb_api.iso_country
+        return (self.parent_id, iso_country, iso_country)
 
 
 class Video(ItemDetailsList):

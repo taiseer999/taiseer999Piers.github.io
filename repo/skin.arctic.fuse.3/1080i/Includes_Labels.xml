@@ -1365,6 +1365,9 @@
         <value condition="String.IsEqual(ListItem.Property(widget_style),Ranked)">$LOCALIZE[31827]</value>
         <value condition="String.IsEqual(ListItem.Property(widget_style),Stack)">$LOCALIZE[31828]</value>
         <value condition="String.IsEqual(ListItem.Property(widget_style),Disc)">$LOCALIZE[31829]</value>
+        <value condition="String.IsEqual(ListItem.Property(widget_style),Shelf)">$LOCALIZE[31830]</value>
+        <value condition="String.IsEqual(ListItem.Property(widget_style),Timeline)">$LOCALIZE[31831]</value>
+        <value condition="String.IsEqual(ListItem.Property(widget_style),Gatefold)">$LOCALIZE[31832]</value>
         <value>$LOCALIZE[571]</value>
     </variable>
 
@@ -1380,6 +1383,9 @@
         <value condition="String.IsEqual(Container(22001).ListItem.Property(widget_style),Ranked)">$LOCALIZE[31827]</value>
         <value condition="String.IsEqual(Container(22001).ListItem.Property(widget_style),Stack)">$LOCALIZE[31828]</value>
         <value condition="String.IsEqual(Container(22001).ListItem.Property(widget_style),Disc)">$LOCALIZE[31829]</value>
+        <value condition="String.IsEqual(Container(22001).ListItem.Property(widget_style),Shelf)">$LOCALIZE[31830]</value>
+        <value condition="String.IsEqual(Container(22001).ListItem.Property(widget_style),Timeline)">$LOCALIZE[31831]</value>
+        <value condition="String.IsEqual(Container(22001).ListItem.Property(widget_style),Gatefold)">$LOCALIZE[31832]</value>
         <value>$LOCALIZE[571]</value>
     </variable>
 

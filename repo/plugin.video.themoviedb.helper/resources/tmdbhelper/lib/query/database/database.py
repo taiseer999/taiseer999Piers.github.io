@@ -46,6 +46,35 @@ class FindQueriesDatabase(
 ):
     cache_filename = 'ItemQueries.db'
 
+    # -- TMDbHelper genre list language refresh (by ABUKARIM TOOLS) --
+    # The global genre list is cached without a language. When the language
+    # changes (or no stamp yet) drop it so it is refetched in the current one.
+    def create_database(self):
+        connection = super().create_database()
+        try:
+            self._abk_genre_list_language_refresh()
+        except Exception as error:
+            self.kodi_log(f'CACHE: ABK genre list language refresh failed: {error}', 1)
+        return connection
+
+    def _abk_genre_list_language_refresh(self):
+        import sqlite3
+        from tmdbhelper.lib.addon.plugin import get_language
+        language = get_language() or 'en-US'
+        con = sqlite3.connect(self._db_file, timeout=self._db_timeout)
+        try:
+            with con:
+                con.execute('CREATE TABLE IF NOT EXISTS abk_meta(key TEXT PRIMARY KEY, value TEXT)')
+                row = con.execute("SELECT value FROM abk_meta WHERE key='genre_list_language'").fetchone()
+                if row and row[0] == language:
+                    return
+                cleared = con.execute('DELETE FROM genres').rowcount
+                con.execute("DELETE FROM expiry WHERE id='genres'")
+                con.execute("INSERT OR REPLACE INTO abk_meta(key, value) VALUES ('genre_list_language', ?)", (language, ))
+        finally:
+            con.close()
+        self.kodi_log(f'CACHE: ABK genre list language refresh -> {language} ({cleared} genres cleared)', 1)
+
     expiry_columns = {
         'id': {
             'data': 'TEXT PRIMARY KEY',

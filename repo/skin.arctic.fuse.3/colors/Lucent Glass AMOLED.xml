@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lucent Glass AMOLED - AF3 colour theme by ABUKARIM TOOLS (tools/gen_af3_lucent.py).
+     Palette after the Lucent skin by djdirty60. -->
+<colors>
+    <!-- Main -->
+    <color name="main_fg_100">ffeeeeee</color>
+    <color name="main_fg_90">e7eeeeee</color>
+    <color name="main_fg_70">b3eeeeee</color>
+    <color name="main_fg_50">80eeeeee</color>
+    <color name="main_fg_30">4deeeeee</color>
+    <color name="main_fg_12">1feeeeee</color>
+    <color name="main_fg_06">0feeeeee</color>
+    <color name="main_bg_100">ff000000</color>
+    <color name="main_bg_90">e7000000</color>
+    <color name="main_bg_70">b3000000</color>
+    <color name="main_bg_50">80000000</color>
+    <color name="main_bg_30">4d000000</color>
+    <color name="main_bg_12">1f000000</color>
+    <color name="main_soft">4d2a2a2a</color>
+    <color name="main_hard">b32a2a2a</color>
+    <color name="main_back">ff2a2a2a</color>
+    <color name="main_logo">ffbdbdbd</color>
+
+    <!-- Dialogs (glass) -->
+    <color name="dialog_nib">ff222222</color>
+    <color name="dialog_overlay">e0101010</color>
+    <color name="dialog_fg_100">ffeeeeee</color>
+    <color name="dialog_fg_90">e7eeeeee</color>
+    <color name="dialog_fg_70">b3eeeeee</color>
+    <color name="dialog_fg_50">80eeeeee</color>
+    <color name="dialog_fg_30">4deeeeee</color>
+    <color name="dialog_fg_12">1feeeeee</color>
+    <color name="dialog_fg_06">0feeeeee</color>
+    <color name="dialog_bg_100">ff101010</color>
+    <color name="dialog_bg_90">e7101010</color>
+    <color name="dialog_bg_70">b3101010</color>
+    <color name="dialog_bg_50">80101010</color>
+    <color name="dialog_bg_30">4d101010</color>
+    <color name="dialog_bg_12">1f101010</color>
+    <!-- Panels -->
+    <color name="panel_bg_100">ff000000</color>
+    <color name="panel_bg_90">e7000000</color>
+    <color name="panel_bg_70">b3000000</color>
+    <color name="panel_bg_50">80000000</color>
+    <color name="panel_bg_30">4d000000</color>
+    <color name="panel_bg_12">1f000000</color>
+    <color name="panel_fg_100">ffeeeeee</color>
+    <color name="panel_fg_90">e7eeeeee</color>
+    <color name="panel_fg_70">b3eeeeee</color>
+    <color name="panel_fg_50">80eeeeee</color>
+    <color name="panel_fg_30">4deeeeee</color>
+    <color name="panel_fg_12">1feeeeee</color>
+
+    <!-- Overlay / glass -->
+    <color name="overlay_soft">14ffffff</color>
+    <color name="overlay_hard">2effffff</color>
+
+    <!-- Shadow -->
+    <color name="shadow_soft">1a000000</color>
+    <color name="shadow_hard">99000000</color>
+    <color name="shadow_full">c0000000</color>
+    <color name="shadow_back">cc000000</color>
+
+    <!-- Misc -->
+    <color name="yellow_star">d7f2b84b</color>
+    <color name="rating_9">ff32a0ee</color>
+    <color name="rating_8">ff4cc38a</color>
+    <color name="rating_7">ffa4c05b</color>
+    <color name="rating_6">ffb8b252</color>
+    <color name="rating_5">ffc39c4d</color>
+    <color name="rating_4">ffce8748</color>
+    <color name="rating_3">ffe5534b</color>
+</colors>

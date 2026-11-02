@@ -1,4 +1,4 @@
-from xbmcgui import Dialog, DialogProgress
+from xbmcgui import Dialog, DialogProgress, DLG_YESNO_YES_BTN
 from jurialmunkey.parser import boolean
 from jurialmunkey.window import get_property
 from jurialmunkey.ftools import cached_property
@@ -74,6 +74,10 @@ class TraktAuthenticator:
         return self.get_key(self.code, 'device_code')
 
     @cached_property
+    def verification_url(self):
+        return self.get_key(self.code, 'verification_url')
+
+    @cached_property
     def expires_in(self):
         return self.get_key(self.code, 'expires_in') or 0
 
@@ -87,7 +91,7 @@ class TraktAuthenticator:
 
     @cached_property
     def auth_dialog_text(self):
-        return f'{get_localized(32096)}\n{get_localized(32095)}: [B]{self.user_code}[/B]'
+        return f'{get_localized(32096).format(self.verification_url)}\n{get_localized(32095)}: [B]{self.user_code}[/B]'
 
     @cached_property
     def auth_dialog(self):
@@ -132,36 +136,67 @@ class TraktAuthenticator:
     def on_success(self):
         """Triggered when device authentication has been completed"""
         kodi_log(u'Trakt authenticated successfully!', 1)
-        from tmdbhelper.lib.files.futils import json_dumps as data_dumps
-        self.trakt_api.user_token.value = data_dumps(self.authorization)
+        self.trakt_stored_access_token.stored_authorization = self.authorization
+        self.trakt_stored_access_token.update_stored_authorization()
+        self.trakt_stored_access_token.update_traktisauth_property()
+        from tmdbhelper.lib.script.sync.provider_setup import SyncProviderOnboarding
+        SyncProviderOnboarding('script.module.tmdbhelper.sync.trakt').configure()
 
     def poller(self):
 
-        while True:
+        # -- TMDbHelper Trakt QR Auth patch (by ABUKARIM TOOLS) --
+        import xbmcaddon as _xbmcaddon
+        from tmdbhelper.lib.api.trakt.qr_utils import make_qr, remove_qr, get_qr_dialog
 
-            if self.xbmc_monitor.abortRequested():
-                self.state = 'aborted'
-                break
+        qr_url  = 'https://trakt.tv/activate/' + str(self.user_code)
+        qr_path = make_qr(qr_url)
+        addon_path = _xbmcaddon.Addon('plugin.video.themoviedb.helper').getAddonInfo('path')
 
-            if self.auth_dialog.iscanceled():
-                self.state = 'aborted'
-                break
+        qr_dialog = get_qr_dialog(addon_path)
+        qr_dialog.show()
+        qr_dialog.setProperty('user_code',      str(self.user_code))
+        qr_dialog.setProperty('qr_image',       qr_path)
+        qr_dialog.setProperty('progress_width', '530')
+        qr_dialog.setProperty('expires_label',  'Expires in %ss' % int(self.expires_in))
 
-            self.auth_dialog_update()
+        try:
+            while True:
 
-            if self.expires_in <= self.progress:
-                self.state = 'expired'
-                break
+                if self.xbmc_monitor.abortRequested():
+                    self.state = 'aborted'
+                    break
 
-            self.authorization = self.trakt_api.get_authorisation_token(self.device_code)
+                if getattr(qr_dialog, 'is_canceled', False):
+                    self.state = 'aborted'
+                    break
 
-            if self.authorization:
-                self.state = 'success'
-                break
+                self.progress += self.interval
+                _remaining = max(int(self.expires_in) - self.progress, 0)
+                _width = int(float(_remaining * 530) / self.expires_in) if self.expires_in else 0
+                qr_dialog.setProperty('progress_width', str(_width))
+                qr_dialog.setProperty('expires_label',  'Expires in %ss' % _remaining)
 
-            self.xbmc_monitor.waitForAbort(self.interval)
+                if self.expires_in <= self.progress:
+                    self.state = 'expired'
+                    break
 
-        self.auth_dialog_close()
+                self.authorization = self.trakt_api.get_authorisation_token(self.device_code)
+
+                if self.authorization:
+                    self.state = 'success'
+                    break
+
+                self.xbmc_monitor.waitForAbort(self.interval)
+        finally:
+            try:
+                qr_dialog.close()
+            except Exception:
+                pass
+            del qr_dialog
+            remove_qr(qr_path)
+
+        self.auth_dialog_route()
+        # -- end TMDbHelper Trakt QR Auth patch --
 
     mutex_lockname = 'TraktAskingForLogin'
 
@@ -176,7 +211,8 @@ class TraktAuthenticator:
             self.dialog_noapikey_text,
             nolabel=get_localized(222),
             yeslabel=get_localized(186),
-            customlabel=get_localized(13170)
+            customlabel=get_localized(13170),
+            defaultbutton=DLG_YESNO_YES_BTN
         )
         routes = {
             1: self.login,  # Yes (OK)
@@ -196,4 +232,7 @@ class TraktAuthenticator:
     def logout(self, confirmation=True):
         if confirmation and not Dialog().yesno(get_localized(32212), get_localized(32213)):
             return
-        return TraktStoredAccessToken(self.trakt_api).logout()
+        TraktStoredAccessToken(self.trakt_api).logout()
+        from tmdbhelper.lib.sync.providers.selection import SyncProviderSetting
+        SyncProviderSetting.clear_provider('trakt')
+        return True

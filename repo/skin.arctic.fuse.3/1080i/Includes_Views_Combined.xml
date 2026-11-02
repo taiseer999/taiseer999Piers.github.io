@@ -6,6 +6,10 @@
             <param name="container">Container(53$PARAM[id]).</param>
             <param name="visible">Integer.IsEqual(Window.Property(TMDBHelper.WidgetContainer),53$PARAM[id])</param>
             <param name="include_details">$PARAM[include_details]</param>
+            <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (combined) -->
+            <param name="plotfont">font_mini_plot</param>
+            <param name="plottop">54</param>
+            <param name="plotboxh">80</param>
         </include>
     </include>
 

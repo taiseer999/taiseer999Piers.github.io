@@ -62,7 +62,7 @@
                             <param name="itemgap">osd_itemgap</param>
                         </include>
                         <include content="OSD_Button_Icon_Overlay" condition="VideoPlayer.Content(livetv)">
-                            <param name="icon">special://skin/extras/icons/list.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_list]</param>
                             <param name="id">6002</param>
                             <param name="groupid">6102</param>
                             <param name="itemgap">osd_itemgap</param>
@@ -84,7 +84,7 @@
                             <param name="itemgap">osd_itemgap</param>
                         </include>
                         <include content="OSD_Button_Icon_Overlay" condition="VideoPlayer.Content(livetv)">
-                            <param name="icon">special://skin/extras/icons/record-vinyl.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_record]</param>
                             <param name="id">6003</param>
                             <param name="groupid">6103</param>
                             <param name="itemgap">osd_itemgap</param>
@@ -99,7 +99,7 @@
                             <onup>8200</onup>
                         </control>
                         <include content="OSD_Button_Icon_Overlay">
-                            <param name="icon">special://skin/extras/icons/stop.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_stop]</param>
                             <param name="id">6004</param>
                             <param name="groupid">6104</param>
                             <param name="itemgap">osd_itemgap</param>
@@ -127,7 +127,7 @@
                             <onclick>$VAR[Action_OSD_WikiInfo]</onclick>
                         </control>
                         <include content="OSD_Button_Icon_Overlay">
-                            <param name="icon">special://skin/extras/icons/info2.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_info]</param>
                             <param name="id">6005</param>
                             <param name="groupid">6105</param>
                             <param name="itemgap">osd_itemgap</param>
@@ -143,7 +143,7 @@
                             <onclick>ActivateWindow(osdaudiosettings)</onclick>
                         </control>
                         <include content="OSD_Button_Icon_Overlay">
-                            <param name="icon">special://skin/extras/icons/volume.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_audio]</param>
                             <param name="id">6006</param>
                             <param name="groupid">6106</param>
                             <param name="itemgap">osd_itemgap</param>
@@ -157,15 +157,63 @@
                             <onup>ActivateWindow(1147)</onup>
                             <onfocus>ActivateWindow(1147)</onfocus>
                             <onclick>CancelAlarm(osd_timeout,true)</onclick>
-                            <onclick>ActivateWindow(osdsubtitlesettings)</onclick>
+                            <onclick condition="Skin.HasSetting(abk.lucent)">RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_list)</onclick>  <!-- ABUKARIM: Lucent subtitle list -->
+                            <onclick condition="!Skin.HasSetting(abk.lucent)">ActivateWindow(osdsubtitlesettings)</onclick>
                         </control>
                         <include content="OSD_Button_Icon_Overlay">
-                            <param name="icon">special://skin/extras/icons/quote.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_subtitles]</param>
                             <param name="id">6007</param>
                             <param name="groupid">6107</param>
                             <param name="itemgap">osd_itemgap</param>
                             <param name="iconoffset_condition">[VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)]</param>
                         </include>
+
+
+                        <!-- ABUKARIM: AF3 subtitle buttons -->
+                        <!-- DexSubtitles AutoSync: sync the playing subtitle (autosync.py) -->
+                        <control type="button" id="6010">
+                            <include>Defs_OSD_Button</include>
+                            <visible>System.AddonIsEnabled(service.subtitles.dexworld)</visible>
+                            <onclick>CancelAlarm(osd_timeout,true)</onclick>
+                            <onclick>RunScript(special://home/addons/service.subtitles.dexworld/abk_osd_sync.py)</onclick>
+                        </control>
+                        <include content="OSD_Button_Icon_Overlay" condition="System.AddonIsEnabled(service.subtitles.dexworld)">
+                            <param name="icon">$VAR[ABK_LucentIcon_dexsync]</param>
+                            <param name="id">6010</param>
+                            <param name="groupid">6110</param>
+                            <param name="itemgap">osd_itemgap</param>
+                        </include>
+
+
+                        <!-- Subtitle Cycler: next subtitle from every subtitle add-on -->
+                        <control type="button" id="6011">
+                            <include>Defs_OSD_Button</include>
+                            <onclick>CancelAlarm(osd_timeout,true)</onclick>
+                            <onclick condition="System.AddonIsEnabled(script.subtitle.cycler)">RunScript(script.subtitle.cycler)</onclick>
+                            <onclick condition="!System.AddonIsEnabled(script.subtitle.cycler)">RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_cycler)</onclick>
+                        </control>
+                        <include content="OSD_Button_Icon_Overlay">
+                            <param name="icon">$VAR[ABK_LucentIcon_subcycler]</param>
+                            <param name="id">6011</param>
+                            <param name="groupid">6111</param>
+                            <param name="itemgap">osd_itemgap</param>
+                        </include>
+                        <!-- /ABUKARIM: AF3 subtitle buttons -->
+
+
+                        <!-- ABUKARIM: AF3 subtitle look button -->
+                        <control type="button" id="6012">
+                            <include>Defs_OSD_Button</include>
+                            <onclick>CancelAlarm(osd_timeout,true)</onclick>
+                            <onclick>RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_style)</onclick>
+                        </control>
+                        <include content="OSD_Button_Icon_Overlay">
+                            <param name="icon">$VAR[ABK_LucentIcon_substyle]</param>
+                            <param name="id">6012</param>
+                            <param name="groupid">6112</param>
+                            <param name="itemgap">osd_itemgap</param>
+                        </include>
+                        <!-- /ABUKARIM: AF3 subtitle look button -->
 
 
                         <control type="button" id="6008">
@@ -176,7 +224,7 @@
                             <onfocus>ActivateWindow(1148)</onfocus>
                         </control>
                         <include content="OSD_Button_Icon_Overlay">
-                            <param name="icon">special://skin/extras/icons/video.png</param>
+                            <param name="icon">$VAR[ABK_LucentIcon_video]</param>
                             <param name="id">6008</param>
                             <param name="groupid">6108</param>
                             <param name="itemgap">osd_itemgap</param>

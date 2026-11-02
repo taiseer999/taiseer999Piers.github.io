@@ -353,6 +353,7 @@
         <definition>
             <height>80</height>
             <width>80</width>
+            <include condition="Skin.HasSetting(abk.lucent)">ABK_Lucent_OSD_Button_Textures</include>  <!-- ABUKARIM: Lucent OSD buttons -->
             <include>Texture_Circle_Highlight_Focus_V</include>
             <texturenofocus colordiffuse="$PARAM[back_colordiffuse]">common/circle.png</texturenofocus>
             <include condition="$PARAM[autoclose]">Action_OSD_Button</include>

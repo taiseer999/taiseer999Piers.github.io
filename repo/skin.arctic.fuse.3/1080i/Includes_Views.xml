@@ -217,6 +217,10 @@
                 <param name="visible_line">$EXP[View_Row_Info_Details_Expression]</param>
                 <param name="visible_plot">$EXP[View_Row_Info_Details_Expression]</param>
                 <param name="visible_meta">$EXP[View_Row_Info_Details_Expression]</param>
+                <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (views) -->
+                <param name="plotfont">font_mini_plot</param>
+                <param name="plottop">54</param>
+                <param name="plotboxh">80</param>
             </include>
             <include>View_Combined_Info_Panel</include>
             <include>View_Combined_Wall_Info_Panel</include>

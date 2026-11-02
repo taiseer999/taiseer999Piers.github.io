@@ -32,7 +32,7 @@
 			<onclick>RunScript(script.tinyppi,dialog)</onclick>
 		</control>
 		<include content="OSD_Button_Icon_Overlay">
-			<param name="icon">special://skin/extras/icons/ppi.png</param>
+			<param name="icon">$VAR[ABK_LucentIcon_ppi]</param>
 			<param name="id">6009</param>
 			<param name="groupid">6109</param>
 			<param name="itemgap">osd_itemgap</param>
@@ -179,6 +179,7 @@
         <param name="left">40</param>
         <param name="listitem">ListItem</param>
         <param name="override">false</param>
+        <param name="plotright">false</param>  <!-- ABUKARIM: plot right order -->
         <definition>
             <control type="group">
                 <visible>$PARAM[visible] + Skin.HasSetting(InfoBar.TwoRow)</visible>
@@ -194,6 +195,7 @@
                     <itemgap>10</itemgap>
                     <left>-20</left>
                     <centertop>35</centertop>
+                    <animation effect="slide" end="0,96" time="0" condition="$PARAM[plotright]">Conditional</animation>  <!-- ABUKARIM: plot on the right - badges last -->
                     <control type="group" description="Avoid grouplist chop with spacer">
                         <left>-10</left>
                         <width>20</width>
@@ -230,6 +232,7 @@
                     <itemgap>10</itemgap>
                     <left>-20</left>
 					<centertop>75</centertop>
+					<animation effect="slide" end="0,-40" time="0" condition="$PARAM[plotright]">Conditional</animation>  <!-- ABUKARIM: plot on the right - date line first -->
                     <control type="group" description="Avoid grouplist chop with spacer">
                         <left>-10</left>
                         <width>20</width>
@@ -239,11 +242,13 @@
                     <include content="Info_Line_StarRating" condition="!Skin.HasSetting(InfoTags.DisableStarRating)">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="rating">$PARAM[container]$PARAM[listitem].Rating</param>
+                        <param name="divider">false</param>  <!-- ABUKARIM: stars open the row -->
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) + String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating)</param>
                     </include>
                     <include content="Info_Line_StarRating" condition="!Skin.HasSetting(InfoTags.DisableStarRating)">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="rating">$PARAM[container]$PARAM[listitem].UserRating</param>
+                        <param name="divider">false</param>  <!-- ABUKARIM: stars open the row -->
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating)</param>
                     </include>
 
@@ -306,15 +311,21 @@
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration]</param>
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,album) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,song)]</param>
                     </include>
+                    <!-- ABUKARIM: whole hours -->
+                    <include content="Info_Line_Label">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074]]</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | $PARAM[override]]</param>
+                    </include>
                     <include content="Info_Line_Label">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074] ]$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
-                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | $PARAM[override]]</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | $PARAM[override]]</param>
                     </include>
                     <include content="Info_Line_Label">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
-                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | $PARAM[override]]</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | $PARAM[override]]</param>
                     </include>
 
                 </control>

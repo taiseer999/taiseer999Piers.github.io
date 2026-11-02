@@ -3528,3 +3528,18 @@ msgstr "مكدَّس"
 msgctxt "#31829"
 msgid "Disc"
 msgstr "قرص"
+
+#: /1080i/Includes_Labels.xml
+msgctxt "#31830"
+msgid "Shelf"
+msgstr "رفّ"
+
+#: /1080i/Includes_Labels.xml
+msgctxt "#31831"
+msgid "Timeline"
+msgstr "خط زمني"
+
+#: /1080i/Includes_Labels.xml
+msgctxt "#31832"
+msgid "Gatefold"
+msgstr "غلاف قابل للطي"

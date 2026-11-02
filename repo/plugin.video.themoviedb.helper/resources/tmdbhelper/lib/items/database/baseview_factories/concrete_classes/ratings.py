@@ -2,7 +2,7 @@ from jurialmunkey.ftools import cached_property
 from tmdbhelper.lib.items.database.baseview_factories.concrete_classes.baseclass import BaseList
 from tmdbhelper.lib.query.database.database import FindQueriesDatabase
 from tmdbhelper.lib.addon.thread import ParallelThread
-from tmdbhelper.lib.api.trakt.ratings import map_trakt_ratings
+from tmdbhelper.lib.sync.providers.ratings_settings import RatingsProviderSettings
 from jurialmunkey.parser import try_int
 
 
@@ -12,10 +12,7 @@ class RatingsDict(BaseList):
     cached_data_conditions = 'id=? AND expiry>=?'
 
     rating_attribs = (
-        'omdb_ratings',
-        'mdblist_ratings',
-        'trakt_ratings',
-        'tmdb_ratings',
+        'provider_ratings',
         'imdb_top250',
     )
 
@@ -69,52 +66,47 @@ class RatingsDict(BaseList):
         return FindQueriesDatabase().get_imdb_top250_list_cached(self.tmdb_type)
 
     @cached_property
-    def mdblist_ratings(self):
-        if not self.common_apis.mdblist_api:
+    def ratings_suppliers(self):
+        return self.get_ratings_suppliers()
+
+    def get_ratings_suppliers(self):
+        providers = RatingsProviderSettings().get_enabled_providers(self.mediatype)
+        return tuple(
+            provider.ratings_classes[self.mediatype](
+                provider=provider, tmdb_type=self.tmdb_type, tmdb_id=self.tmdb_id,
+                imdb_id=self.imdb_id, season=self.season, episode=self.episode)
+            for provider in providers)
+
+    @cached_property
+    def provider_ratings(self):
+        return self.get_provider_ratings()
+
+    @staticmethod
+    def get_supplier_ratings(supplier):
+        return supplier.ratings
+
+    def get_provider_ratings(self):
+        if not self.ratings_suppliers:
             return {}
-        return self.common_apis.mdblist_api.get_ratings(self.trakt_type, self.tmdb_id) or {}
+        with ParallelThread(self.ratings_suppliers, self.get_supplier_ratings) as pt:
+            items = pt.queue
+        return {
+            key: value for data in reversed(items) for key, value in data.items()
+            if value not in (None, '')
+        }
 
     @cached_property
     def imdb_top250(self):
+        rank = self.get_imdb_top250_rank()
+        return {'top250': rank} if rank else {}
+
+    def get_imdb_top250_rank(self):
+        if not self.imdb_top250_list:  # No provider supplies a Top 250 list
+            return
         try:
-            return {'top250': self.imdb_top250_list.index(try_int(self.tmdb_id)) + 1}  # Must be an int to match
-        except (KeyError, TypeError, IndexError, ValueError):
-            return {}
-
-    @cached_property
-    def omdb_ratings(self):
-        if not self.common_apis.omdb_api or not self.imdb_id:
-            return {}
-        try:
-            return self.common_apis.omdb_api.get_ratings_awards(imdb_id=self.imdb_id) or {}
-        except (KeyError, TypeError, IndexError, ValueError):
-            return {}
-
-    @cached_property
-    def trakt_ratings_uri(self):
-        return f'{self.trakt_type}s/{self.imdb_id}/ratings'
-
-    @cached_property
-    def trakt_ratings(self):
-        if not self.common_apis.trakt_api or not self.common_apis.trakt_api.authenticator.is_authorized or not self.imdb_id:
-            return {}
-        data = self.common_apis.trakt_api.get_response_json(self.trakt_ratings_uri, extended='all')
-        if not data:
-            return {}
-        return map_trakt_ratings(data)
-
-    @cached_property
-    def tmdb_ratings(self):
-        data = self.common_apis.tmdb_api.get_response_json(self.tmdb_type, self.tmdb_id)
-        if not data:
-            return {}
-        try:
-            return {
-                'tmdb_rating': int(data['vote_average'] * 10),
-                'tmdb_votes': data['vote_count']
-            }
-        except (KeyError, TypeError, IndexError, ValueError):
-            return {}
+            return self.imdb_top250_list.index(try_int(self.tmdb_id)) + 1  # Must be an int to match
+        except ValueError:
+            return
 
     @cached_property
     def online_data_mapped(self):
@@ -128,7 +120,7 @@ class RatingsDict(BaseList):
             return data or {}
 
         # precache some property values before threading
-        for attr in ('mediatype', 'trakt_type', 'imdb_id'):
+        for attr in ('mediatype', 'trakt_type', 'imdb_id', 'ratings_suppliers'):
             getattr(self, attr)
 
         with ParallelThread(self.rating_attribs, get_data_attr) as pt:
@@ -161,7 +153,7 @@ class RatingsDict(BaseList):
 
             v = data[0][k]
 
-            if not v:
+            if v in (None, ''):
                 continue
 
             mapped_data[k] = v
@@ -206,8 +198,7 @@ class RatingsDict(BaseList):
 
 class RatingsSeasonsDict(RatingsDict):
     rating_attribs = (
-        'mdblist_ratings',
-        'trakt_ratings',
+        'provider_ratings',
     )
 
     def get_mediatype(self):
@@ -227,16 +218,6 @@ class RatingsSeasonsDict(RatingsDict):
     def item_id(self):
         return self.get_season_id(self.tmdb_type, self.tmdb_id, self.season)
 
-    @cached_property
-    def trakt_ratings_uri(self):
-        return f'{self.trakt_type}s/{self.imdb_id}/seasons/{self.season}/ratings'
-
-    @cached_property
-    def mdblist_ratings(self):
-        if not self.common_apis.mdblist_api:
-            return {}
-        return self.common_apis.mdblist_api.get_season_ratings(self.trakt_type, self.tmdb_id, self.season) or {}
-
 
 class RatingsEpisodesDict(RatingsSeasonsDict):
     def get_mediatype(self):
@@ -250,13 +231,3 @@ class RatingsEpisodesDict(RatingsSeasonsDict):
     @property
     def item_id(self):
         return self.get_episode_id(self.tmdb_type, self.tmdb_id, self.season, self.episode)
-
-    @cached_property
-    def trakt_ratings_uri(self):
-        return f'{self.trakt_type}s/{self.imdb_id}/seasons/{self.season}/episodes/{self.episode}/ratings'
-
-    @cached_property
-    def mdblist_ratings(self):
-        if not self.common_apis.mdblist_api:
-            return {}
-        return self.common_apis.mdblist_api.get_episode_ratings(self.trakt_type, self.tmdb_id, self.season, self.episode) or {}

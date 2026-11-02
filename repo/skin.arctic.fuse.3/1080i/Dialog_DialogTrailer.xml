@@ -104,7 +104,7 @@
             <label>$LOCALIZE[31483]</label>
             <param name="icon">special://skin/extras/icons/repeat2.png</param>
             <visible>!String.IsEmpty(Window(Home).Property(PlayTrailer))</visible>
-            <onclick>PlayMedia($ESCINFO[Window(Home).Property(PlayTrailer)],False,1)</onclick>
+            <onclick>RunScript(special://home/addons/plugin.program.abukarimtools/trailer_play.py)</onclick><!-- ABUKARIM: trailer button -->
         </include>
         <include content="Button_Dialog">
             <param name="id">9005</param>

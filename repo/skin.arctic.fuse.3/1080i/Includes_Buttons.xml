@@ -219,6 +219,7 @@
         <definition>
             <control type="$PARAM[control]" id="$PARAM[id]">
                 <nested />
+                <include condition="Skin.HasSetting(abk.lucent)">ABK_Lucent_PillButton</include>  <!-- ABUKARIM: Lucent pill buttons -->
                 <width>auto</width>
                 <aligny>top</aligny>
                 <textoffsetx>0</textoffsetx>

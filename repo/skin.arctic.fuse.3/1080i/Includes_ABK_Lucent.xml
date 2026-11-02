@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AB Tools "AF3: Lucent Look" - player (4.6.9) and info page (4.6.10).
+     Installed into skin.arctic.fuse.3/1080i/ and registered in Includes.xml by
+     the AB Tools patcher. Every use is gated on Skin.HasSetting(abk.lucent):
+     the toggle sets that bool and changes the skin colours, which reloads the
+     skin, so include conditions are re-read on every switch.
+     Kodi takes the FIRST texture / textcolor / font tag of a control, so the
+     includes below are placed before AF3's own tags and win only when on.
+     Design after the Lucent skin by djdirty60 (github.com/djdirty60/Lucent). -->
+<includes>
+
+    <!-- OSD buttons: glass circle, solid white when focused -->
+    <include name="ABK_Lucent_OSD_Button_Textures">
+        <texturefocus colordiffuse="FFFFFFFF">common/circle.png</texturefocus>
+        <texturenofocus colordiffuse="26FFFFFF">common/circle.png</texturenofocus>
+    </include>
+
+    <!-- OSD button icon on the white focus circle: dark, like Lucent
+         (placed before AF3's own texture tag of the focused icon) -->
+    <include name="ABK_Lucent_IconFocus">
+        <definition>
+            <texture colordiffuse="FF0B1119" flipx="$PARAM[flipx]">$PARAM[icon]</texture>
+        </definition>
+    </include>
+
+    <!-- Time bold white, duration dimmed -->
+    <include name="ABK_Lucent_TimeLabel">
+        <textcolor>panel_fg_100</textcolor>
+        <font>font_main_bold</font>
+    </include>
+    <include name="ABK_Lucent_DurationLabel">
+        <textcolor>panel_fg_70</textcolor>
+    </include>
+
+    <!-- Thin glass progress bar: track, cache, progress (6 px pills) -->
+    <include name="ABK_Lucent_Progress">
+        <control type="group">
+            <height>6</height>
+            <centertop>50%</centertop>
+            <control type="image">
+                <texture border="3" colordiffuse="26FFFFFF">abk_lucent/pill6.png</texture>
+            </control>
+            <control type="progress">
+                <width>100%</width>
+                <height>6</height>
+                <info>Player.ProgressCache</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lucent/pill6.png</texturebg>
+                <lefttexture />
+                <midtexture border="3" colordiffuse="40FFFFFF">abk_lucent/pill6.png</midtexture>
+                <righttexture />
+                <overlaytexture />
+                <visible>[Player.Playing | Player.Paused | Player.Caching] + !Player.Seeking + Player.HasMedia + !Pvr.IsPlayingTv</visible>
+            </control>
+            <control type="progress">
+                <width>100%</width>
+                <height>6</height>
+                <info>Player.Progress</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lucent/pill6.png</texturebg>
+                <lefttexture />
+                <midtexture border="3" colordiffuse="panel_fg_100">abk_lucent/pill6.png</midtexture>
+                <righttexture />
+                <overlaytexture />
+                <visible>Player.HasMedia + !Pvr.IsPlayingTv</visible>
+            </control>
+            <control type="progress">
+                <width>100%</width>
+                <height>6</height>
+                <info>PVR.EpgEventProgress</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lucent/pill6.png</texturebg>
+                <lefttexture />
+                <midtexture border="3" colordiffuse="panel_fg_100">abk_lucent/pill6.png</midtexture>
+                <righttexture />
+                <overlaytexture />
+                <visible>Pvr.IsPlayingTv</visible>
+            </control>
+        </control>
+    </include>
+
+    <!-- Info page / plot dialog action buttons (Button_Underline_Switcher):
+         Lucent pills - glass when idle, solid white with dark text when
+         focused, a brighter glass pill for the active tab (alt texture). -->
+    <include name="ABK_Lucent_PillButton">
+        <height>56</height>
+        <aligny>center</aligny>
+        <textoffsetx>30</textoffsetx>
+        <textcolor>dialog_fg_70</textcolor>
+        <focusedcolor>FF0B1119</focusedcolor>
+        <texturefocus border="28" colordiffuse="FFFFFFFF">abk_lucent/pill60.png</texturefocus>
+        <texturenofocus border="28" colordiffuse="1AFFFFFF">abk_lucent/pill60.png</texturenofocus>
+        <alttexturefocus border="28" colordiffuse="FFFFFFFF">abk_lucent/pill60.png</alttexturefocus>
+        <alttexturenofocus border="28" colordiffuse="3DFFFFFF">abk_lucent/pill60.png</alttexturenofocus>
+    </include>
+    <!-- pills sit closer than AF3's underlined labels -->
+    <include name="ABK_Lucent_PillGap">
+        <itemgap>14</itemgap>
+    </include>
+
+</includes>

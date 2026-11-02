@@ -44,15 +44,57 @@ from tmdbhelper.lib.items.database.tabledef import (
 class ItemDetailsDatabase(Database):
     cache_filename = 'ItemDetails.db'
 
+    # -- TMDbHelper genre language refresh v2 (by ABUKARIM TOOLS) --
+    # Genre rows carry no language and are never overwritten, so after a
+    # language change they stay in the old language. Clear them once and
+    # expire their items so they are refetched in the current language.
+    def create_database(self):
+        connection = super().create_database()
+        try:
+            self._abk_genre_language_refresh()
+        except Exception as error:
+            self.kodi_log(f'CACHE: ABK genre language refresh failed: {error}', 1)
+        return connection
+
+    def _abk_genre_language_refresh(self):
+        import sqlite3
+        from tmdbhelper.lib.addon.plugin import get_language
+        language = get_language() or 'en-US'
+        con = sqlite3.connect(self._db_file, timeout=self._db_timeout)
+        try:
+            with con:
+                con.execute('CREATE TABLE IF NOT EXISTS abk_meta(key TEXT PRIMARY KEY, value TEXT)')
+                row = con.execute("SELECT value FROM abk_meta WHERE key='genre_language_v2'").fetchone()
+                if row and row[0] == language:
+                    return
+                con.execute('UPDATE baseitem SET expiry=0 WHERE id IN (SELECT parent_id FROM genre)')
+                cleared = con.execute('DELETE FROM genre').rowcount
+                con.execute("INSERT OR REPLACE INTO abk_meta(key, value) VALUES ('genre_language_v2', ?)", (language, ))
+        finally:
+            con.close()
+        self.kodi_log(f'CACHE: ABK genre language refresh -> {language} ({cleared} genre rows cleared)', 1)
+
     def __init__(self):
         super().__init__(filename=self.cache_filename)
 
     def create_database_execute(self, connection):
         with connection:
-            return super().create_database_execute(connection)
+            version = connection.execute('PRAGMA user_version').fetchone()[0]
+            result = super().create_database_execute(connection)
+            if version and version < 51:
+                self.migrate_next_episode_activities(connection)
+            return result
+
+    @staticmethod
+    def migrate_next_episode_activities(connection):
+        # Run after table creation: upgrades through version 50 rebuild lactivities.
+        connection.execute(
+            'DELETE FROM lactivities WHERE id IN (?, ?, ?)',
+            ('show.trakt.nextup', 'show.trakt.all_next_episodes', 'show.mdblist.all_next_episodes'),
+        ).close()
 
     # DB version must be max of table_version
-    database_version = 48
+    database_version = 51
 
     database_changes = {
         21: (),
@@ -73,14 +115,28 @@ class ItemDetailsDatabase(Database):
         36: (),
         37: (),
         38: (),
-        39: (
-            'DROP TABLE IF EXISTS baseitem',
+        39: (),
+        40: (),
+        41: (),
+        42: (),
+        43: (),
+        44: (),
+        45: (),
+        46: (),
+        47: (),
+        48: (),
+        49: (),
+        50: (
+            # Rebuild cached details with episode counts and independent user artwork.
+            'DROP TABLE IF EXISTS episode_group_season_episodes',
+            'DROP TABLE IF EXISTS episode_group_seasons',
+            'DROP TABLE IF EXISTS episode_groups',
+            'DROP TABLE IF EXISTS episode',
+            'DROP TABLE IF EXISTS season',
+            'DROP TABLE IF EXISTS tvshow',
             'DROP TABLE IF EXISTS belongs',
             'DROP TABLE IF EXISTS collection',
             'DROP TABLE IF EXISTS movie',
-            'DROP TABLE IF EXISTS tvshow',
-            'DROP TABLE IF EXISTS season',
-            'DROP TABLE IF EXISTS episode',
             'DROP TABLE IF EXISTS ratings',
             'DROP TABLE IF EXISTS person',
             'DROP TABLE IF EXISTS genre',
@@ -101,41 +157,15 @@ class ItemDetailsDatabase(Database):
             'DROP TABLE IF EXISTS custom',
             'DROP TABLE IF EXISTS art',
             'DROP TABLE IF EXISTS fanart_tv',
+            'DROP TABLE IF EXISTS default_art',
             'DROP TABLE IF EXISTS user_art',
             'DROP TABLE IF EXISTS unique_id',
             'DROP TABLE IF EXISTS translation',
-        ),
-        40: (
-            'DROP TABLE IF EXISTS ratings',
-        ),
-        41: (),
-        42: (
-            'ALTER TABLE castmember ADD guest INTEGER',
-            'CREATE INDEX IF NOT EXISTS castmember_guest_x ON castmember(guest)',
-        ),
-        43: (
             'DROP TABLE IF EXISTS simplecache',
             'DROP TABLE IF EXISTS lactivities',
+            'DROP TABLE IF EXISTS baseitem',
         ),
-        44: (
-            'ALTER TABLE ratings ADD myanimelist_rating INTEGER',
-        ),
-        45: (
-            'ALTER TABLE ratings ADD metacriticuser_rating INTEGER',
-            'ALTER TABLE ratings ADD metacritic_image TEXT',
-            'ALTER TABLE ratings ADD rottentomatoes_usermeter_image TEXT',
-            'ALTER TABLE ratings ADD rogerebert_rating INTEGER',
-            'ALTER TABLE ratings ADD rogerebert_image TEXT',
-        ),
-        46: (),
-        47: (),
-        48: (
-            # Rebuild the group caches with baseitem foreign keys and refresh their show data.
-            'DROP TABLE IF EXISTS episode_group_season_episodes',
-            'DROP TABLE IF EXISTS episode_group_seasons',
-            'DROP TABLE IF EXISTS episode_groups',
-            'UPDATE baseitem SET expiry=0 WHERE mediatype="tvshow"',
-        ),
+        51: (),  # Activity migration runs after tables have been created.
     }
 
     baseitem_columns = BASEITEM_COLUMNS
