@@ -3565,25 +3565,9 @@ msgctxt "#31837"
 msgid "Choose the icon shown for this item."
 msgstr "اختر الأيقونة المعروضة لهذا العنصر."
 
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31839"
-msgid "Each widget gets its own row below the info panel."
-msgstr "يحصل كل ودجت على صفّ خاص به أسفل لوحة المعلومات."
 
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31840"
-msgid "Widgets share one row below the info panel. Switch between them with the tabs above it."
-msgstr "تتشارك الودجات صفًّا واحدًا أسفل لوحة المعلومات، ويُنتقل بينها بالتبويبات فوقه."
 
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31841"
-msgid "One widget fills the screen as a grid. Good for large libraries."
-msgstr "يملأ ودجت واحد الشاشة على هيئة شبكة، وهو مناسب للمكتبات الكبيرة."
 
-#: /1080i/Dialog_DialogShortcuts.xml
-msgctxt "#31842"
-msgid "The options dialog shows these tiles above its menu. The layout sets how many there are."
-msgstr "تعرض نافذة الخيارات هذه المربعات فوق قائمتها، ويحدد التخطيط عددها."
 
 #: /1080i/Dialog_DialogShortcuts.xml
 msgctxt "#31843"
@@ -3599,3 +3583,8 @@ msgstr "اليمين"
 msgctxt "#31845"
 msgid "Combined"
 msgstr "مدمج"
+
+#: /1080i/Custom_1133_Dialog_AddHub.xml
+msgctxt "#31846"
+msgid "Add hub"
+msgstr "إضافة محور"
