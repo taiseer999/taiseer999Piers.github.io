@@ -259,10 +259,11 @@
                 <left>40</left>
                 <include>Info_Line_Height_U3k</include>
                 <visible>$PARAM[visible]</visible>
-                <!-- ABUKARIM: slide (not a spacer) so the grouplist height budget is untouched and the row is never culled -->
-                <animation effect="slide" start="0,$PARAM[meta_offset]" end="0,$PARAM[meta_offset]" time="0" condition="true">Conditional</animation>
 
                 <control type="grouplist">
+                    <!-- ABUKARIM: offset the row inside its fixed-height group (top+height override the definition's bottom),
+                         so the parent vertical grouplist budget is untouched and the row is never culled -->
+                    <top>$PARAM[meta_offset]</top>
                     <include>Info_Meta_Grouplist_Definition</include>
 
                     <!-- Ratings -->
