@@ -218,6 +218,7 @@
         <param name="override_movie">false</param>
         <param name="override_tvshow">false</param>
         <param name="ratings_visible">true</param>
+        <param name="meta_offset">0</param>  <!-- ABUKARIM: render-only downward shift of the ratings line -->
         <definition>
 
             <control type="group">
@@ -258,6 +259,8 @@
                 <left>40</left>
                 <include>Info_Line_Height_U3k</include>
                 <visible>$PARAM[visible]</visible>
+                <!-- ABUKARIM: slide (not a spacer) so the grouplist height budget is untouched and the row is never culled -->
+                <animation effect="slide" start="0,$PARAM[meta_offset]" end="0,$PARAM[meta_offset]" time="0" condition="true">Conditional</animation>
 
                 <control type="grouplist">
                     <include>Info_Meta_Grouplist_Definition</include>
@@ -1417,6 +1420,7 @@
         <param name="plotfont">font_main_plot</param>  <!-- ABUKARIM: plot font (Info_Panel) -->
         <param name="plottop">40</param>
         <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap default (Info_Panel) -->
+        <param name="meta_offset">0</param>  <!-- ABUKARIM: ratings line offset (Info_Panel) -->
         <param name="visible">true</param>
         <param name="visible_line">true</param>
         <param name="visible_plot">true</param>
@@ -1479,6 +1483,7 @@
                     <param name="listitem">$PARAM[listitem]</param>
                     <param name="container">$PARAM[container]</param>
                     <param name="visible">$PARAM[visible_meta]</param>
+                    <param name="meta_offset">$PARAM[meta_offset]</param>
                 </include>
 
             </control>

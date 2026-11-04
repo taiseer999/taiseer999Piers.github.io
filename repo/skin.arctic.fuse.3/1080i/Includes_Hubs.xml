@@ -301,6 +301,7 @@
                     <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (hub) -->
                     <param name="plottop">54</param>
                     <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (hub) -->
+                    <param name="meta_offset">20</param>  <!-- ABUKARIM: ratings line lowered (hub) -->
                     <param name="container">Container($PARAM[id]).</param>
                 </include>
             </control>

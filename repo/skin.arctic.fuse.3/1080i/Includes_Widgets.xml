@@ -6,6 +6,7 @@
         <param name="labelvisible">true</param>
         <param name="labeltop">widget_label_t</param>
         <param name="labelheight">widget_label_h</param>
+        <param name="labeltexttop">20</param>  <!-- ABUKARIM: widget title offset inside label group -->
         <definition>
             <control type="group" id="$PARAM[groupid]">
                 <nested />
@@ -18,7 +19,7 @@
                 <include content="View_Line" condition="$PARAM[labelvisible] + ![$PARAM[usewidgetlabel]]">
                     <param name="label">$PARAM[label]</param>
                     <param name="label_fallback">31282</param>
-                    <param name="top">20</param>
+                    <param name="top">$PARAM[labeltexttop]</param>
                     <param name="left">0</param>
                     <param name="visible">!Integer.IsEqual(Container($PARAM[id]).NumItems,0) | Container($PARAM[id]).IsUpdating | $PARAM[busy_visible]</param>
                     <param name="use_spinner">true</param>
@@ -27,7 +28,7 @@
                 <include content="View_Line" condition="$PARAM[labelvisible] + [$PARAM[usewidgetlabel]]">
                     <param name="label">$INFO[Container($PARAM[id]).ListItem.Property(widget)]</param>
                     <param name="label_fallback">$PARAM[label]</param>
-                    <param name="top">20</param>
+                    <param name="top">$PARAM[labeltexttop]</param>
                     <param name="left">0</param>
                     <param name="visible">!Integer.IsEqual(Container($PARAM[id]).NumItems,0) | Container($PARAM[id]).IsUpdating | $PARAM[busy_visible]</param>
                     <param name="use_spinner">true</param>
@@ -53,6 +54,7 @@
         <param name="categorytarget" />
         <param name="labeltop">widget_label_t</param>
         <param name="labelheight">widget_label_h</param>
+        <param name="labeltexttop">20</param>  <!-- ABUKARIM: widget title offset -->
         <param name="widgettop">widget_items_t</param>
         <param name="widgetheight">widget_items_h</param>
         <param name="categoryonback">5000</param>
@@ -70,13 +72,14 @@
                 <param name="labelvisible">false</param>
                 <param name="labeltop">$PARAM[labeltop]</param>
                 <param name="labelheight">$PARAM[labelheight]</param>
+                <param name="labeltexttop">$PARAM[labeltexttop]</param>
                 <param name="include">$PARAM[include]</param>
                 <nested />
 
                 <include content="View_Line">
                     <param name="label">$PARAM[label]</param>
                     <param name="label_fallback">31282</param>
-                    <param name="top">20</param>
+                    <param name="top">$PARAM[labeltexttop]</param>
                     <param name="left">0</param>
                     <param name="visible">Integer.IsEqual(Container($PARAM[categoryid]).NumItems,0) + [Container($PARAM[categoryid]).IsUpdating | Container($PARAM[id]).IsUpdating]</param>
                     <param name="use_spinner">true</param>
@@ -84,7 +87,7 @@
                 </include>
 
                 <control type="group">
-                    <top>20</top>
+                    <top>$PARAM[labeltexttop]</top>
                     <height>40</height>
                     <visible>Integer.IsGreater(Container($PARAM[categoryid]).NumItems,0)</visible>
                     <include>View_Line_Divider</include>
@@ -198,6 +201,7 @@
         <param name="widget_hideartwork">false</param>
         <param name="widget_showoverlay">false</param>
         <param name="labelinclude">Widget_Label</param>
+        <param name="labeltexttop">20</param>  <!-- ABUKARIM -->
         <param name="categoryid">0</param>
         <definition>
             <include content="$PARAM[labelinclude]">
@@ -210,6 +214,7 @@
                 <param name="labelvisible">$PARAM[labelvisible]</param>
                 <param name="labeltop">$PARAM[labeltop]</param>
                 <param name="labelheight">$PARAM[labelheight]</param>
+                <param name="labeltexttop">$PARAM[labeltexttop]</param>
                 <param name="widgettop">$PARAM[widgettop]</param>
                 <param name="widgetheight">$PARAM[widgetheight]</param>
                 <param name="include">$PARAM[include]</param>
@@ -887,6 +892,7 @@
         <param name="categorynavigationinclude">Widget_Categories_Navigation</param>
         <param name="labeltop">widget_label_t</param>
         <param name="labelheight">widget_label_h</param>
+        <param name="labeltexttop">20</param>  <!-- ABUKARIM -->
         <param name="widgettop">widget_items_t</param>
         <param name="widgetheight">widget_items_h</param>
         <definition>
@@ -917,6 +923,7 @@
                 <param name="busy_visible">$PARAM[busy_visible]</param>
                 <param name="labeltop">$PARAM[labeltop]</param>
                 <param name="labelheight">$PARAM[labelheight]</param>
+                <param name="labeltexttop">$PARAM[labeltexttop]</param>
                 <param name="widgettop">$PARAM[widgettop]</param>
                 <param name="widgetheight">$PARAM[widgetheight]</param>
                 <param name="conditional_fade">$PARAM[conditional_fade]</param>
@@ -960,6 +967,7 @@
 
                 <param name="widgettop">widget_items_t$PARAM[widgetconstants_affix]</param>
                 <param name="labelheight">widget_label_h$PARAM[widgetconstants_affix]</param>
+                <param name="labeltexttop">widget_label_text_t$PARAM[widgetconstants_affix]</param>  <!-- ABUKARIM: hub widget title lowered -->
 
                 <include content="Action_Widget_OnBack">
                     <param name="id">$PARAM[id]</param>
