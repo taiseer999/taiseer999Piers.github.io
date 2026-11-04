@@ -217,8 +217,8 @@
         <param name="service">ListItem</param>
         <param name="override_movie">false</param>
         <param name="override_tvshow">false</param>
+        <param name="meta_offset">0</param>  <!-- ABUKARIM: ratings line offset (Info_Meta) -->
         <param name="ratings_visible">true</param>
-        <param name="meta_offset">0</param>  <!-- ABUKARIM: render-only downward shift of the ratings line -->
         <definition>
 
             <control type="group">
@@ -1483,8 +1483,8 @@
                     <param name="colordiffuse">$PARAM[colordiffuse]</param>
                     <param name="listitem">$PARAM[listitem]</param>
                     <param name="container">$PARAM[container]</param>
-                    <param name="visible">$PARAM[visible_meta]</param>
                     <param name="meta_offset">$PARAM[meta_offset]</param>
+                    <param name="visible">$PARAM[visible_meta]</param>
                 </include>
 
             </control>
