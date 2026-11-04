@@ -2588,10 +2588,6 @@ msgctxt "#31999"
 msgid "Media flags style"
 msgstr "نمط شارات الوسائط"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31641"
-msgid "Focus"
-msgstr "التحديد"
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31642"
@@ -2699,40 +2695,20 @@ msgctxt "#31661"
 msgid "Select a preset colour scheme for highlights, backgrounds and dialogs."
 msgstr "اختر نظام ألوان جاهزًا للإبراز والخلفيات والنوافذ الحوارية."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31662"
-msgid "Choose the colours used for focus highlights and selected text."
-msgstr "اختر الألوان المستخدمة لإبراز التحديد والنص المحدد."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31663"
-msgid "Choose the colour and image used for the window background."
-msgstr "اختر اللون والصورة المستخدمين لخلفية النوافذ."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31664"
-msgid "Choose the colour and image used for the dialog background."
-msgstr "اختر اللون والصورة المستخدمين لخلفية النوافذ الحوارية."
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31665"
 msgid "Choose the image shown on the splash screen while the skin starts."
 msgstr "اختر الصورة المعروضة على شاشة البدء أثناء تشغيل الواجهة."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31666"
-msgid "Configure the blurred artwork shown in the background of windows."
-msgstr "اضبط الصور المموَّهة المعروضة في خلفية النوافذ."
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31667"
 msgid "Select the background shown for genres, studios and people that have no artwork of their own."
 msgstr "اختر الخلفية المعروضة للتصنيفات والاستوديوهات والأشخاص الذين ليست لهم صور خاصة."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31668"
-msgid "Select whether focused items are highlighted with a solid fill or an outline. The skin reloads to apply the change."
-msgstr "اختر ما إذا كان العنصر المحدد يُبرَز بتعبئة مُصمَتة أو بإطار. يُعاد تحميل الواجهة لتطبيق التغيير."
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31669"
@@ -3435,10 +3411,6 @@ msgctxt "#31811"
 msgid "Style"
 msgstr "النمط"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31812"
-msgid "Blur"
-msgstr "التمويه"
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31813"
@@ -3495,10 +3467,6 @@ msgctxt "#31823"
 msgid "Install the add-on, enable it, or open its settings."
 msgstr "ثبّت الإضافة، أو فعّلها، أو افتح إعداداتها."
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31824"
-msgid "Preset"
-msgstr "إعداد جاهز"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31825"
@@ -3588,3 +3556,8 @@ msgstr "مدمج"
 msgctxt "#31846"
 msgid "Add hub"
 msgstr "إضافة محور"
+
+#: /1080i/Includes_SkinSettings.xml
+msgctxt "#31847"
+msgid "Window and dialog"
+msgstr "النافذة والنوافذ الحوارية"
