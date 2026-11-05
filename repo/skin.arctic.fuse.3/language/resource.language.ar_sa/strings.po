@@ -3183,18 +3183,18 @@ msgstr "مُبسَّط"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31764"
-msgid "In progress, new and recent items from your library"
-msgstr "العناصر قيد المشاهدة والجديدة والمضافة حديثًا من مكتبتك"
+msgid "Movies, TV and music hubs with in progress, new and recent items from your library"
+msgstr "محاور الأفلام والمسلسلات والموسيقى مع العناصر قيد المشاهدة والجديدة والمضافة حديثًا من مكتبتك"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31765"
-msgid "Your library plus trending items from TMDb"
-msgstr "مكتبتك إضافةً إلى العناصر الرائجة من TMDb"
+msgid "Library hubs plus trending items and next aired from TMDb"
+msgstr "محاور المكتبة إضافةً إلى العناصر الرائجة والحلقات القادمة من TMDb"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31766"
-msgid "Continue watching only"
-msgstr "متابعة المشاهدة فقط"
+msgid "Continue watching on home with only the add-ons hub"
+msgstr "متابعة المشاهدة في الشاشة الرئيسية مع محور الإضافات فقط"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31767"
@@ -3338,13 +3338,13 @@ msgstr "استخدام الإعدادات الافتراضية الموصى به
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31797"
-msgid "Default settings with In progress, new and recent widgets from your library"
-msgstr "الإعدادات الافتراضية مع ودجات العناصر قيد المشاهدة والجديدة والمضافة حديثًا من مكتبتك"
+msgid "Default settings with movies, TV and music hubs and widgets from your library"
+msgstr "الإعدادات الافتراضية مع محاور وودجات الأفلام والمسلسلات والموسيقى من مكتبتك"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31798"
-msgid "Default settings with trending, popular and new widgets from TMDb"
-msgstr "الإعدادات الافتراضية مع ودجات العناصر الرائجة والشائعة والجديدة من TMDb"
+msgid "Default settings with movies, TV and next aired hubs and widgets from TMDb"
+msgstr "الإعدادات الافتراضية مع محاور وودجات الأفلام والمسلسلات والحلقات القادمة من TMDb"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31799"
@@ -3358,8 +3358,8 @@ msgstr "TMDb Helper"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31801"
-msgid "Trending, popular and new from TMDb"
-msgstr "الرائج والشائع والجديد من TMDb"
+msgid "Movies, TV and next aired hubs with trending, popular and new items from TMDb"
+msgstr "محاور الأفلام والمسلسلات والحلقات القادمة مع العناصر الرائجة والشائعة والجديدة من TMDb"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31803"
@@ -3368,8 +3368,8 @@ msgstr "المراجعة"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31802"
-msgid "Widget group"
-msgstr "مجموعة الودجات"
+msgid "Home screen preset"
+msgstr "إعداد الشاشة الرئيسية الجاهز"
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31804"
@@ -3475,8 +3475,8 @@ msgstr "استخدام الإعدادات الافتراضية الموصى به
 
 #: /1080i/Dialog_DialogSetupWizard.xml
 msgctxt "#31826"
-msgid "Default settings with widgets from your library plus trending items from TMDb"
-msgstr "الإعدادات الافتراضية مع ودجات من مكتبتك إضافةً إلى العناصر الرائجة من TMDb"
+msgid "Default settings with library hubs and widgets plus trending items from TMDb"
+msgstr "الإعدادات الافتراضية مع محاور المكتبة وودجاتها إضافةً إلى العناصر الرائجة من TMDb"
 
 #: /1080i/Includes_Labels.xml
 msgctxt "#31827"
