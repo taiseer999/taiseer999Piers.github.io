@@ -118,7 +118,12 @@ def set_shortcut(set_shortcut, use_rawpath=False):
         xbmc.executebuiltin(f'Skin.SetString({k},{v})')
 
 
-def copy_menufolder(copy_menufolder, skin):
+def copy_menufolder(copy_menufolder, skin, force=False):
+    """
+    Copy every menu file in a folder over the skin's menu files
+    force = skip the overwrite confirmation, e.g. when the skin has already asked the user
+    """
+    from jurialmunkey.parser import boolean
     from resources.lib.shortcuts.futils import read_meta_from_file, get_files_in_folder
 
     files = get_files_in_folder(copy_menufolder, r'.*\.json')
@@ -126,15 +131,16 @@ def copy_menufolder(copy_menufolder, skin):
         xbmcgui.Dialog().ok(get_localized(32076), f'copy_menufolder={copy_menufolder}\nskin={skin}')
         return
 
-    msg = get_localized(32072).format(
-        filename=get_localized(32073).format(skin=skin),
-        content=get_localized(32074).format(folder=copy_menufolder))
-    msg = f'{msg}\n{get_localized(32043)}'
+    if not boolean(force):
+        msg = get_localized(32072).format(
+            filename=get_localized(32073).format(skin=skin),
+            content=get_localized(32074).format(folder=copy_menufolder))
+        msg = f'{msg}\n{get_localized(32043)}'
 
-    x = xbmcgui.Dialog().yesno(get_localized(32075), msg)
+        x = xbmcgui.Dialog().yesno(get_localized(32075), msg)
 
-    if not x or x == -1:
-        return
+        if not x or x == -1:
+            return
 
     from resources.lib.shortcuts.node import assign_guid
     from resources.lib.shortcuts.futils import write_meta_to_file
@@ -166,3 +172,41 @@ def copy_menufile(copy_menufile, filename, skin):
         return
     from resources.lib.shortcuts.node import assign_guid
     write_meta_to_file(assign_guid(meta), folder=skin, filename=filename, fileprop=f'{skin}-{filename}', reload=True)
+
+
+def write_menu(write_menu, skin, template, force=False, **kwargs):
+    """
+    Write a menu file built from a skin template, e.g. to migrate skin settings into a menu
+    write_menu = name of the menu to write e.g. hubs writes skinvariables-shortcut-hubs.json
+    skin = folder of the skin menus e.g. skin.arctic.fuse.3
+    template = json file with rule operations (infolabels, values etc.) and the "menu" items to write
+        -- strings in the menu items are formatted with the values from the rule operations
+    force = overwrite an existing menu file (by default only writes when the menu file does not exist)
+    Additional kwargs are passed to the rule operations as parameters
+    """
+    import xbmcvfs
+    from json import loads
+    from jurialmunkey.parser import boolean
+    from jurialmunkey.futils import load_filecontent
+    from resources.lib.operations import RuleOperations
+    from resources.lib.shortcuts.futils import ADDON_DATA, FILE_PREFIX, validify_filename, write_meta_to_file
+    from resources.lib.shortcuts.node import assign_guid
+
+    filename = validify_filename(f'{FILE_PREFIX}{write_menu}.json')
+    if not boolean(force) and xbmcvfs.exists(f'{ADDON_DATA}{skin}/{filename}'):
+        return
+
+    meta = loads(str(load_filecontent(template)))
+    params = RuleOperations(meta, **kwargs).params
+
+    def _format(obj):
+        if isinstance(obj, str):
+            return obj.format_map(params)
+        if isinstance(obj, list):
+            return [_format(i) for i in obj]
+        if isinstance(obj, dict):
+            return {k: _format(v) for k, v in obj.items()}
+        return obj
+
+    menu = _format(meta.get('menu') or [])
+    write_meta_to_file(assign_guid(menu), folder=skin, filename=filename, fileprop=f'{skin}-{filename}', reload=True)
