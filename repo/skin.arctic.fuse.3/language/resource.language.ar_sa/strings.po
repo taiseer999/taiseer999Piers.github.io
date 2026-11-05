@@ -3561,3 +3561,8 @@ msgstr "إضافة محور"
 msgctxt "#31847"
 msgid "Window and dialog"
 msgstr "النافذة والنوافذ الحوارية"
+
+#: /1080i/Dialog_DialogSetupWizard.xml
+msgctxt "#31848"
+msgid "This replaces your home screen hubs, menus, widgets and spotlights with this preset. Any changes you have made to them will be lost. Continue?"
+msgstr "سيستبدل هذا الإعداد الجاهز المحاور والقوائم والودجات والعروض المميزة في شاشتك الرئيسية، وستفقد أي تغييرات أجريتها عليها. هل تريد المتابعة؟"
