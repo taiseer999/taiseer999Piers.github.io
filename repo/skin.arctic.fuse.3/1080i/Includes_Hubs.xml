@@ -302,7 +302,7 @@
                     <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (hub) -->
                     <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (hub) -->
                     <param name="plottop">54</param>
-                    <param name="plotboxh">105</param>  <!-- ABUKARIM: plot box = 3 lines (hub), uses the 40 freed above the ratings line -->
+                    <param name="plotboxh">118</param>  <!-- ABUKARIM: plot box = 4 lines (hub), uses the 40 freed above the ratings line -->
                     <param name="meta_offset">60</param>  <!-- ABUKARIM: 20 lowered + 40 to cancel the block raise -->
                     <param name="container">Container($PARAM[id]).</param>
                 </include>
@@ -366,7 +366,7 @@
                 <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (spotlight) -->
                 <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (spotlight) -->
                 <param name="plottop">54</param>
-                <param name="plotboxh">105</param>  <!-- ABUKARIM: plot box = 3 lines (spotlight), uses the 60 freed above the ratings line -->
+                <param name="plotboxh">118</param>  <!-- ABUKARIM: plot box = 4 lines (spotlight), uses the 60 freed above the ratings line -->
                 <param name="meta_offset">60</param>  <!-- ABUKARIM: ratings line stays put while the block above is raised 60 -->
                 <param name="visible_line">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_plot">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
@@ -398,7 +398,7 @@
         <param name="label">$VAR[Label_FullscreenWidget_PlayButton]</param>
         <param name="image">$VAR[Image_FullscreenWidget_PlayButton]</param>
         <param name="bordersize">20</param>
-        <param name="size">120</param>
+        <param name="size">115</param>
         <param name="left">0</param>
         <param name="width">auto</param>
         <definition>
@@ -410,7 +410,7 @@
                 <control type="group">
                     <visible>!Control.HasFocus($PARAM[id])</visible>
                     <control type="image">
-                        <texture colordiffuse="main_fg_100">diffuse/circle/circle_120.png</texture>
+                        <texture colordiffuse="main_fg_100">diffuse/circle/circle_115.png</texture>
                     </control>
                     <control type="image">
                         <bordersize>$PARAM[bordersize]</bordersize>
@@ -422,7 +422,7 @@
                     <control type="image">
                         <include content="Texture_FocusStyle">
                             <param name="directory">diffuse/circle</param>
-                            <param name="texture">circle_120</param>
+                            <param name="texture">circle_115</param>
                             <param name="border">0</param>
                         </include>
                     </control>
