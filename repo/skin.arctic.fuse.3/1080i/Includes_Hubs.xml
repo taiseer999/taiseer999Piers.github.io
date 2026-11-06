@@ -276,7 +276,7 @@
                 <include>Home_Slide_Animation</include>
                 <include>Info_Panel_Dimensions</include>
                 <control type="group">
-                    <top>200</top>
+                    <top>160</top>  <!-- ABUKARIM: logo raised 40 with the info block (stock 200) -->
                     <include content="Info_Panel">
                         <param name="visible">[!$EXP[Exp_InfoDialogs] + Integer.IsEqual(Window.Property(TMDBHelper.WidgetContainer),$PARAM[id])]</param>
                         <param name="visible_line">false</param>
@@ -289,6 +289,8 @@
             </control>
             <control type="group">
                 <visible>!$EXP[Exp_Hubs_SlideInfo]</visible>
+                <top>40</top>  <!-- ABUKARIM: info block raised 40 (stock view_pad 80); meta_offset +40 keeps the ratings line in place -->
+                <height>520</height>  <!-- ABUKARIM: before Info_Panel_Dimensions (420) so it wins: grouplist clip room for the offset ratings line -->
                 <include>Info_Panel_Dimensions</include>
                 <include>Home_Info_Animation</include>
                 <include content="Info_Panel">
@@ -300,8 +302,8 @@
                     <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (hub) -->
                     <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (hub) -->
                     <param name="plottop">54</param>
-                    <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (hub) -->
-                    <param name="meta_offset">20</param>  <!-- ABUKARIM: ratings line lowered (hub) -->
+                    <param name="plotboxh">105</param>  <!-- ABUKARIM: plot box = 3 lines (hub), uses the 40 freed above the ratings line -->
+                    <param name="meta_offset">60</param>  <!-- ABUKARIM: 20 lowered + 40 to cancel the block raise -->
                     <param name="container">Container($PARAM[id]).</param>
                 </include>
             </control>
@@ -352,7 +354,8 @@
 
     <include name="Hub_Spotlight_Info">
         <control type="group">
-            <top>280</top>
+            <top>220</top>  <!-- ABUKARIM: block raised 60 (stock 280); meta_offset 60 keeps the ratings line in place -->
+            <height>540</height>  <!-- ABUKARIM: before Info_Panel_Dimensions (420) so it wins: the panel grouplist clips at its own height, room for the offset ratings line -->
             <visible>!$EXP[Exp_InfoDialogs]</visible>
             <visible>$EXP[Hub_Spotlight_Visible_Expression]</visible>
             <animation effect="slide" end="0" start="0,-200" time="400" tween="cubic" easing="out" reversible="false" condition="!Control.HasFocus(300)">Visible</animation>
@@ -363,7 +366,8 @@
                 <param name="use_textbox">true</param>  <!-- ABUKARIM: vertical plot (spotlight) -->
                 <param name="plotfont">font_mini_plot</param>  <!-- ABUKARIM: plot font (spotlight) -->
                 <param name="plottop">54</param>
-                <param name="plotboxh">80</param>  <!-- ABUKARIM: plot gap (spotlight) -->
+                <param name="plotboxh">105</param>  <!-- ABUKARIM: plot box = 3 lines (spotlight), uses the 60 freed above the ratings line -->
+                <param name="meta_offset">60</param>  <!-- ABUKARIM: ratings line stays put while the block above is raised 60 -->
                 <param name="visible_line">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_plot">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
                 <param name="visible_meta">String.IsEmpty(Window(Home).Property(Background.ShowOverlay))</param>
