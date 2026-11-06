@@ -2,11 +2,25 @@
 <includes>
 
     <include name="View_Combined_Info">
-        <include content="Info_Panel" condition="$EXP[Exp_View_52$PARAM[id]_Include]">
-            <param name="container">Container(53$PARAM[id]).</param>
-            <param name="visible">Integer.IsEqual(Window.Property(TMDBHelper.WidgetContainer),53$PARAM[id])</param>
-            <param name="include_details">$PARAM[include_details]</param>
-        </include>
+        <param name="include_details">true</param>
+        <param name="raise_top">-40</param>  <!-- ABUKARIM: hub layout (combined) - block raised 40 -->
+        <param name="raise_h">520</param>  <!-- ABUKARIM: panel room for the offset ratings line -->
+        <definition>
+            <control type="group">
+                <top>$PARAM[raise_top]</top>
+                <height>$PARAM[raise_h]</height>
+                <include content="Info_Panel" condition="$EXP[Exp_View_52$PARAM[id]_Include]">
+                    <param name="use_textbox">true</param>  <!-- ABUKARIM: hub layout (combined) -->
+                    <param name="plotfont">font_mini_plot</param>
+                    <param name="plottop">54</param>
+                    <param name="plotboxh">118</param>
+                    <param name="meta_offset">60</param>  <!-- ABUKARIM: 20 lowered + 40 to cancel the block raise -->
+                    <param name="container">Container(53$PARAM[id]).</param>
+                    <param name="visible">Integer.IsEqual(Window.Property(TMDBHelper.WidgetContainer),53$PARAM[id])</param>
+                    <param name="include_details">$PARAM[include_details]</param>
+                </include>
+            </control>
+        </definition>
     </include>
 
     <variable name="View_Combined_SortBy">
@@ -131,10 +145,14 @@
         <include content="View_Combined_Info">
             <param name="id">7</param>
             <param name="include_details">false</param>
+            <param name="raise_top">0</param>
+            <param name="raise_h">420</param>
         </include>
         <include content="View_Combined_Info">
             <param name="id">8</param>
             <param name="include_details">false</param>
+            <param name="raise_top">0</param>
+            <param name="raise_h">420</param>
         </include>
     </include>
 
@@ -620,7 +638,7 @@
 
     <include name="View_Combined_Row_Horz_Selector">
         <control type="group">
-            <top>520</top>
+            <top>550</top>  <!-- ABUKARIM: row title lowered 30 (stock 520), as on the hubs -->
             <height>40</height>
             <control type="group">
                 <left>view_pad</left>

@@ -180,6 +180,7 @@
                 <include content="View_Line">
                     <param name="use_spinner">true</param>
                     <param name="run_spinner">[Container.IsUpdating]</param>
+                    <param name="top">550</param>  <!-- ABUKARIM: row title lowered 30 (stock 520), as on the hubs -->
                 </include>
             </control>
             <control type="group">
@@ -212,12 +213,23 @@
         <control type="group">
             <visible>!Integer.IsEqual(Container.NumItems,0)</visible>
             <include>Info_Panel_Dimensions</include>
-            <include content="Info_Panel">
-                <param name="visible">String.IsEmpty(Window.Property(TMDBHelper.WidgetContainer))</param>
-                <param name="visible_line">$EXP[View_Row_Info_Details_Expression]</param>
-                <param name="visible_plot">$EXP[View_Row_Info_Details_Expression]</param>
-                <param name="visible_meta">$EXP[View_Row_Info_Details_Expression]</param>
-            </include>
+            <!-- ABUKARIM: hub layout copied to the library views - info block raised 40, panel
+                 taller so the offset ratings line isn't clipped, plot box 3 lines -->
+            <control type="group">
+                <top>-40</top>
+                <height>520</height>
+                <include content="Info_Panel">
+                    <param name="use_textbox">true</param>  <!-- ABUKARIM: hub layout (views) -->
+                    <param name="plotfont">font_mini_plot</param>
+                    <param name="plottop">54</param>
+                    <param name="plotboxh">118</param>
+                    <param name="meta_offset">60</param>  <!-- ABUKARIM: 20 lowered + 40 to cancel the block raise -->
+                    <param name="visible">String.IsEmpty(Window.Property(TMDBHelper.WidgetContainer))</param>
+                    <param name="visible_line">$EXP[View_Row_Info_Details_Expression]</param>
+                    <param name="visible_plot">$EXP[View_Row_Info_Details_Expression]</param>
+                    <param name="visible_meta">$EXP[View_Row_Info_Details_Expression]</param>
+                </include>
+            </control>
             <include>View_Combined_Info_Panel</include>
             <include>View_Combined_Wall_Info_Panel</include>
         </control>
