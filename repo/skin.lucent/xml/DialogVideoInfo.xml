@@ -1,0 +1,1800 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <defaultcontrol always="true">9000</defaultcontrol>
+    <include>Anim_Window</include>
+    <onload>ClearProperty(nuvio.info.coll.count,home)</onload>
+    <onload>ClearProperty(nuvio.info.studio.1,home)</onload>
+    <onload>ClearProperty(nuvio.info.watched,home)</onload>
+    <onload>ClearProperty(nuvio.info.tab,home)</onload>
+    <onload>ClearProperty(nuvio.info.vid.count,home)</onload>
+    <onload>ClearProperty(nuvio.info.cast.count,home)</onload>
+    <onload>ClearProperty(nuvio.info.prov.count,home)</onload>
+    <onload>SetProperty(lucent.page.dbid,$INFO[ListItem.DBID],home)</onload>
+    <onload>SetProperty(lucent.page.dbtype,$INFO[ListItem.DBType],home)</onload>
+    <onload>RunScript(special://skin/scripts/info.py,load)</onload>
+    <onload>RunScript(special://skin/scripts/agenda.py,state)</onload>
+    <controls>
+        <include content="Backdrop">
+            <param name="fanart">$VAR[ItemFanart]</param>
+        </include>
+        <!-- darker backdrop once you scroll down -->
+        <control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>1920</width>
+            <height>1080</height>
+            <texture>white.png</texture>
+            <colordiffuse>bg_70</colordiffuse>
+            <visible>!ControlGroup(9000).HasFocus</visible>
+            <animation effect="fade" start="0" end="100" time="300">Visible</animation>
+            <animation effect="fade" start="100" end="0" time="300">Hidden</animation>
+        </control>
+
+        <control type="grouplist" id="9100">
+            <left>0</left>
+            <top>0</top>
+            <width>1920</width>
+            <height>1080</height>
+            <orientation>vertical</orientation>
+            <itemgap>0</itemgap>
+            <scrolltime tween="cubic" easing="out">380</scrolltime>
+
+            <!-- ================= Header ================= -->
+            <control type="group">
+                <width>1920</width>
+                <height>1010</height>
+                <include>Anim_SlideLeft</include>
+                <control type="image">
+                    <left>96</left>
+                    <top>110</top>
+                    <width>640</width>
+                    <height>230</height>
+                    <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                    <texture background="true">$VAR[ItemLogo]</texture>
+                </control>
+                <control type="textbox">
+                    <left>96</left>
+                    <top>110</top>
+                    <width>1300</width>
+                    <height>230</height>
+                    <font>font60</font>
+                    <aligny>bottom</aligny>
+                    <label>$VAR[ItemTitle]</label>
+                    <visible>String.IsEmpty(ListItem.Art(clearlogo)) + String.IsEmpty(ListItem.Art(tvshow.clearlogo))</visible>
+                </control>
+
+                <!-- Buttons -->
+                <control type="grouplist" id="9000">
+                    <left>96</left>
+                    <top>372</top>
+                    <width>1728</width>
+                    <height>72</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>16</itemgap>
+                    <ondown condition="$EXP[NuvioTab1]">6001</ondown>
+                    <ondown condition="$EXP[NuvioTab2]">6002</ondown>
+                    <ondown condition="$EXP[NuvioTab3]">6003</ondown>
+                    <ondown>5200</ondown>
+                    <control type="button" id="8">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>▶  $LOCALIZE[208]</label>
+                        <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                    </control>
+                    <control type="button" id="9">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>$LOCALIZE[31018]</label>
+                        <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <visible>ListItem.IsResumable + !String.IsEmpty(ListItem.DBID)</visible>
+                    </control>
+                    <control type="button" id="21">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>+  $LOCALIZE[31114]</label>
+                        <onclick>RunScript(special://skin/scripts/info.py,lists)</onclick>
+                        <visible>[[[!String.IsEmpty(ListItem.Property(trakt_id)) | !String.IsEmpty(ListItem.UniqueID(tmdb)) | !String.IsEmpty(ListItem.UniqueID(imdb))] + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow)]] | [[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.Property(trakt_show_id))]] + System.HasAddon(plugin.video.seren)</visible>
+                    </control>
+                    <control type="button" id="22">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>$VAR[NuvioInfoWatched]</label>
+                        <onclick>RunScript(special://skin/scripts/info.py,watched)</onclick>
+                        <visible>[!String.IsEmpty(ListItem.Property(trakt_id)) | !String.IsEmpty(ListItem.UniqueID(tmdb)) | !String.IsEmpty(ListItem.UniqueID(imdb))] + System.HasAddon(plugin.video.seren)</visible>
+                    </control>
+                    <control type="button" id="23">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>$VAR[NuvioAgendaBell]</label>
+                        <onclick>RunScript(special://skin/scripts/agenda.py,follow)</onclick>
+                        <visible>[String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)] + [[!String.IsEmpty(ListItem.Property(trakt_id)) | !String.IsEmpty(ListItem.UniqueID(tmdb)) | !String.IsEmpty(ListItem.UniqueID(imdb))] | !String.IsEmpty(ListItem.Property(trakt_show_id))]</visible>
+                    </control>
+                    <control type="button" id="14">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>$LOCALIZE[40000]</label>
+                        <visible>ListItem.HasVideoVersions</visible>
+                    </control>
+                    <!-- Options: edit title / sort title, choose art, remove from library (Kodi's Manage menu) -->
+                    <control type="button" id="24">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>$LOCALIZE[31619]</label>
+                        <onclick>RunScript(special://skin/scripts/options.py)</onclick>
+                        <visible>!Skin.HasSetting(lucent.kids) + !String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,set)]</visible>
+                    </control>
+                    <control type="button" id="6">
+                        <width>auto</width>
+                        <height>72</height>
+                        <label>$LOCALIZE[184]</label>
+                        <visible>!String.IsEmpty(ListItem.DBID)</visible>
+                    </control>
+                </control>
+
+                <!-- Director -->
+                <control type="label">
+                    <left>96</left>
+                    <top>476</top>
+                    <width>1600</width>
+                    <height>44</height>
+                    <font>font_label_bold</font>
+                    <textcolor>text</textcolor>
+                    <label>$INFO[ListItem.Director,$LOCALIZE[31078] ,]</label>
+                    <visible>!String.IsEmpty(ListItem.Director)</visible>
+                </control>
+
+                <!-- Ratings + season/episode -->
+                <control type="grouplist">
+                    <visible>!Skin.HasSetting(nuvio.info.hideratings) | !String.IsEmpty(ListItem.Season)</visible>
+                    <left>96</left>
+                    <top>532</top>
+                    <width>1600</width>
+                    <height>44</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>12</itemgap>
+                    <include content="InfoPill">
+                        <param name="label">$VAR[ItemSE]</param>
+                        <param name="bg">glass_strong</param>
+                        <param name="color">text</param>
+                        <param name="visible">!String.IsEmpty(ListItem.Season) + [String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)]</param>
+                    </include>
+                    <include content="InfoPill">
+                        <param name="label">IMDb  $VAR[LucentImdbRating]$VAR[LucentImdbVotes]</param>
+                        <param name="bg">glass</param>
+                        <param name="color">text2</param>
+                        <param name="visible">[!String.IsEmpty(ListItem.Rating(imdb)) | !String.IsEmpty(Window(home).Property(lucent.omdb.imdb))] + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.imdb) + !!String.IsEmpty(Window(home).Property(nuvio.logo.imdb))</param>
+                    </include>
+                    <control type="group">
+                        <width>170</width>
+                        <height>44</height>
+                        <visible>[!String.IsEmpty(ListItem.Rating(imdb)) | !String.IsEmpty(Window(home).Property(lucent.omdb.imdb))] + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.imdb) + !String.IsEmpty(Window(home).Property(nuvio.logo.imdb))</visible>
+                        <control type="image">
+                            <left>0</left>
+                            <top>4</top>
+                            <width>84</width>
+                            <height>36</height>
+                            <aspectratio align="left">keep</aspectratio>
+                            <texture>$INFO[Window(home).Property(nuvio.logo.imdb)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>94</left>
+                            <top>0</top>
+                            <width>76</width>
+                            <height>44</height>
+                            <font>font_small_bold</font>
+                            <textcolor>text</textcolor>
+                            <label>$VAR[LucentImdbRating]</label>
+                        </control>
+                    </control>
+                    <include content="InfoPill">
+                        <param name="label">TMDB  $INFO[ListItem.Rating(tmdb)]</param>
+                        <param name="bg">glass</param>
+                        <param name="color">text2</param>
+                        <param name="visible">!String.IsEmpty(ListItem.Rating(tmdb)) + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.tmdb) + !!String.IsEmpty(Window(home).Property(nuvio.logo.tmdb))</param>
+                    </include>
+                    <control type="group">
+                        <width>170</width>
+                        <height>44</height>
+                        <visible>!String.IsEmpty(ListItem.Rating(tmdb)) + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.tmdb) + !String.IsEmpty(Window(home).Property(nuvio.logo.tmdb))</visible>
+                        <control type="image">
+                            <left>0</left>
+                            <top>4</top>
+                            <width>84</width>
+                            <height>36</height>
+                            <aspectratio align="left">keep</aspectratio>
+                            <texture>$INFO[Window(home).Property(nuvio.logo.tmdb)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>94</left>
+                            <top>0</top>
+                            <width>76</width>
+                            <height>44</height>
+                            <font>font_small_bold</font>
+                            <textcolor>text</textcolor>
+                            <label>$INFO[ListItem.Rating(tmdb)]</label>
+                        </control>
+                    </control>
+                    <include content="InfoPill">
+                        <param name="label">Trakt  $INFO[ListItem.Rating(trakt)]</param>
+                        <param name="bg">glass</param>
+                        <param name="color">text2</param>
+                        <param name="visible">!String.IsEmpty(ListItem.Rating(trakt)) + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.trakt) + !!String.IsEmpty(Window(home).Property(nuvio.logo.trakt))</param>
+                    </include>
+                    <control type="group">
+                        <width>170</width>
+                        <height>44</height>
+                        <visible>!String.IsEmpty(ListItem.Rating(trakt)) + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.trakt) + !String.IsEmpty(Window(home).Property(nuvio.logo.trakt))</visible>
+                        <control type="image">
+                            <left>0</left>
+                            <top>4</top>
+                            <width>84</width>
+                            <height>36</height>
+                            <aspectratio align="left">keep</aspectratio>
+                            <texture>$INFO[Window(home).Property(nuvio.logo.trakt)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>94</left>
+                            <top>0</top>
+                            <width>76</width>
+                            <height>44</height>
+                            <font>font_small_bold</font>
+                            <textcolor>text</textcolor>
+                            <label>$INFO[ListItem.Rating(trakt)]</label>
+                        </control>
+                    </control>
+                    <control type="group">
+                        <width>316</width>
+                        <height>44</height>
+                        <visible>!String.IsEmpty(Window(home).Property(lucent.omdb.rt)) + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.rt)</visible>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>316</width>
+                            <height>44</height>
+                            <texture border="22" colordiffuse="glass">pill44.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>20</left>
+                            <top>15</top>
+                            <width>14</width>
+                            <height>14</height>
+                            <texture>mask_circle.png</texture>
+                            <colordiffuse>$INFO[Window(home).Property(lucent.omdb.rtc)]</colordiffuse>
+                        </control>
+                        <control type="label">
+                            <left>44</left>
+                            <top>0</top>
+                            <width>260</width>
+                            <height>44</height>
+                            <font>font_small_bold</font>
+                            <textcolor>text2</textcolor>
+                            <label>Rotten Tomatoes  $INFO[Window(home).Property(lucent.omdb.rt)]</label>
+                        </control>
+                    </control>
+                    <control type="group">
+                        <width>214</width>
+                        <height>44</height>
+                        <visible>!String.IsEmpty(Window(home).Property(lucent.omdb.mc)) + !Skin.HasSetting(nuvio.info.hideratings) + !Skin.HasSetting(lucent.rate.hide.mc)</visible>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>214</width>
+                            <height>44</height>
+                            <texture border="22" colordiffuse="glass">pill44.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>20</left>
+                            <top>15</top>
+                            <width>14</width>
+                            <height>14</height>
+                            <texture>mask_circle.png</texture>
+                            <colordiffuse>$INFO[Window(home).Property(lucent.omdb.mcc)]</colordiffuse>
+                        </control>
+                        <control type="label">
+                            <left>44</left>
+                            <top>0</top>
+                            <width>158</width>
+                            <height>44</height>
+                            <font>font_small_bold</font>
+                            <textcolor>text2</textcolor>
+                            <label>Metacritic  $INFO[Window(home).Property(lucent.omdb.mc)]</label>
+                        </control>
+                    </control>
+                    <include content="InfoPill">
+                        <param name="label">★  $INFO[ListItem.Rating]</param>
+                        <param name="bg">glass</param>
+                        <param name="color">text2</param>
+                        <param name="visible">!Skin.HasSetting(nuvio.info.hideratings) + String.IsEmpty(ListItem.Rating(imdb)) + String.IsEmpty(Window(home).Property(lucent.omdb.imdb)) + String.IsEmpty(ListItem.Rating(tmdb)) + String.IsEmpty(ListItem.Rating(trakt)) + !String.IsEmpty(ListItem.Rating)</param>
+                    </include>
+                </control>
+
+                <!-- Episode title -->
+                <control type="label">
+                    <left>96</left>
+                    <top>596</top>
+                    <width>1600</width>
+                    <height>48</height>
+                    <font>font32</font>
+                    <textcolor>text</textcolor>
+                    <label>$INFO[ListItem.Title]</label>
+                    <visible>String.IsEqual(ListItem.DBType,episode)</visible>
+                </control>
+
+                <!-- Plot -->
+                <control type="textbox">
+                    <left>96</left>
+                    <top>600</top>
+                    <width>1150</width>
+                    <height>250</height>
+                    <font>font_plot</font>
+                    <textcolor>text</textcolor>
+                    <label>$INFO[ListItem.Plot]</label>
+                    <include>TextAutoScroll</include>
+                    <animation effect="slide" start="0,0" end="0,56" time="0" condition="String.IsEqual(ListItem.DBType,episode)">Conditional</animation>
+                </control>
+
+                <!-- Where to watch (TMDB / JustWatch), right of the details -->
+                <control type="group">
+                    <visible>Integer.IsGreater(Window(home).Property(nuvio.info.prov.count),0)</visible>
+                    <animation effect="fade" start="0" end="100" time="300">Visible</animation>
+                    <control type="label">
+                        <left>1200</left>
+                        <top>860</top>
+                        <width>624</width>
+                        <height>40</height>
+                        <font>font_tiny</font>
+                        <textcolor>text4</textcolor>
+                        <align>right</align>
+                        <label>$LOCALIZE[31531]   ·   $INFO[Window(home).Property(nuvio.info.prov.names)]</label>
+                    </control>
+                    <control type="grouplist">
+                        <left>1200</left>
+                        <top>906</top>
+                        <width>624</width>
+                        <height>56</height>
+                        <orientation>horizontal</orientation>
+                        <align>right</align>
+                        <itemgap>12</itemgap>
+                    <control type="image">
+                        <width>56</width>
+                        <height>56</height>
+                        <texture diffuse="mask_square.png" background="true">$INFO[Window(home).Property(nuvio.info.prov.1.logo)]</texture>
+                        <visible>!String.IsEmpty(Window(home).Property(nuvio.info.prov.1.logo))</visible>
+                    </control>
+                    <control type="image">
+                        <width>56</width>
+                        <height>56</height>
+                        <texture diffuse="mask_square.png" background="true">$INFO[Window(home).Property(nuvio.info.prov.2.logo)]</texture>
+                        <visible>!String.IsEmpty(Window(home).Property(nuvio.info.prov.2.logo))</visible>
+                    </control>
+                    <control type="image">
+                        <width>56</width>
+                        <height>56</height>
+                        <texture diffuse="mask_square.png" background="true">$INFO[Window(home).Property(nuvio.info.prov.3.logo)]</texture>
+                        <visible>!String.IsEmpty(Window(home).Property(nuvio.info.prov.3.logo))</visible>
+                    </control>
+                    <control type="image">
+                        <width>56</width>
+                        <height>56</height>
+                        <texture diffuse="mask_square.png" background="true">$INFO[Window(home).Property(nuvio.info.prov.4.logo)]</texture>
+                        <visible>!String.IsEmpty(Window(home).Property(nuvio.info.prov.4.logo))</visible>
+                    </control>
+                    <control type="image">
+                        <width>56</width>
+                        <height>56</height>
+                        <texture diffuse="mask_square.png" background="true">$INFO[Window(home).Property(nuvio.info.prov.5.logo)]</texture>
+                        <visible>!String.IsEmpty(Window(home).Property(nuvio.info.prov.5.logo))</visible>
+                    </control>
+                    <control type="image">
+                        <width>56</width>
+                        <height>56</height>
+                        <texture diffuse="mask_square.png" background="true">$INFO[Window(home).Property(nuvio.info.prov.6.logo)]</texture>
+                        <visible>!String.IsEmpty(Window(home).Property(nuvio.info.prov.6.logo))</visible>
+                    </control>
+                    </control>
+                    <control type="label">
+                        <left>1200</left>
+                        <top>966</top>
+                        <width>624</width>
+                        <height>30</height>
+                        <font>font_tiny</font>
+                        <textcolor>text5</textcolor>
+                        <align>right</align>
+                        <label>$LOCALIZE[31532]</label>
+                    </control>
+                </control>
+
+                <!-- Genres • date -->
+                <control type="grouplist">
+                    <left>96</left>
+                    <top>872</top>
+                    <width>1080</width>
+                    <height>44</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>14</itemgap>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text2</textcolor>
+                        <label>$INFO[ListItem.Genre]</label>
+                        <visible>!String.IsEmpty(ListItem.Genre)</visible>
+                    </control>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text4</textcolor>
+                        <label>•</label>
+                        <visible>!String.IsEmpty(ListItem.Genre) + !String.IsEmpty(ListItem.Premiered)</visible>
+                    </control>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text2</textcolor>
+                        <label>$INFO[ListItem.Premiered]</label>
+                        <visible>!String.IsEmpty(ListItem.Premiered)</visible>
+                    </control>
+                </control>
+
+                <!-- MPAA • duration • country • quality -->
+                <control type="grouplist">
+                    <left>96</left>
+                    <top>932</top>
+                    <width>1080</width>
+                    <height>44</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>14</itemgap>
+                    <include content="InfoPill">
+                        <param name="label">$INFO[ListItem.MPAA]</param>
+                        <param name="bg">glass_strong</param>
+                        <param name="color">text</param>
+                        <param name="visible">!String.IsEmpty(ListItem.MPAA)</param>
+                    </include>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text2</textcolor>
+                        <label>$VAR[ItemDuration]</label>
+                        <visible>Integer.IsGreater(ListItem.Duration(mins),0)</visible>
+                    </control>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text4</textcolor>
+                        <label>•</label>
+                        <visible>Integer.IsGreater(ListItem.Duration(mins),0) + !String.IsEmpty(ListItem.Country)</visible>
+                    </control>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text2</textcolor>
+                        <label>$INFO[ListItem.Country]</label>
+                        <visible>!String.IsEmpty(ListItem.Country)</visible>
+                    </control>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text4</textcolor>
+                        <label>•</label>
+                        <visible>!String.IsEmpty(ListItem.Status)</visible>
+                    </control>
+                    <control type="label">
+                        <width>auto</width>
+                        <height>44</height>
+                        <font>font_label</font>
+                        <textcolor>text2</textcolor>
+                        <label>$INFO[ListItem.Status]</label>
+                        <visible>!String.IsEmpty(ListItem.Status)</visible>
+                    </control>
+                    <include content="InfoPill">
+                        <param name="label">$INFO[ListItem.VideoResolution]$INFO[ListItem.VideoCodec,  ·  ,]</param>
+                        <param name="bg">glass</param>
+                        <param name="color">text2</param>
+                        <param name="visible">!String.IsEmpty(ListItem.VideoResolution)</param>
+                    </include>
+                </control>
+            </control>
+
+            <!-- ================= Tabs: cast | similar titles | trailers ================= -->
+            <control type="group">
+                <width>1920</width>
+                <height>430</height>
+                <visible>[Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0) | Integer.IsGreater(Container(50).NumItems,0)] | $EXP[NuvioHasRelated] | Integer.IsGreater(Window(home).Property(nuvio.info.vid.count),0) + System.HasAddon(plugin.video.youtube)</visible>
+                <control type="grouplist" id="6000">
+                    <left>84</left>
+                    <top>0</top>
+                    <width>1700</width>
+                    <height>60</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>6</itemgap>
+                    <control type="button" id="6001">
+                        <width>auto</width>
+                        <height>60</height>
+                        <font>font_mainmenu_small</font>
+                        <textoffsetx>14</textoffsetx>
+                        <textcolor>text3</textcolor>
+                        <focusedcolor>on_focus</focusedcolor>
+                        <texturefocus border="30" colordiffuse="focus">pill60.png</texturefocus>
+                        <texturenofocus/>
+                        <label>$VAR[NuvioTabLabel1]</label>
+                        <onfocus>SetProperty(nuvio.info.tab,1,home)</onfocus>
+                        <onup>9000</onup>
+                        <ondown condition="Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0)">5050</ondown><ondown>50</ondown>
+                        <visible>[Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0) | Integer.IsGreater(Container(50).NumItems,0)]</visible>
+                    </control>
+                    <control type="label" id="6012">
+                        <width>auto</width>
+                        <height>60</height>
+                        <font>font_mainmenu_small</font>
+                        <textcolor>text5</textcolor>
+                        <label>|</label>
+                        <visible>$EXP[NuvioHasRelated] + [Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0) | Integer.IsGreater(Container(50).NumItems,0)]</visible>
+                    </control>
+                    <control type="button" id="6002">
+                        <width>auto</width>
+                        <height>60</height>
+                        <font>font_mainmenu_small</font>
+                        <textoffsetx>14</textoffsetx>
+                        <textcolor>text3</textcolor>
+                        <focusedcolor>on_focus</focusedcolor>
+                        <texturefocus border="30" colordiffuse="focus">pill60.png</texturefocus>
+                        <texturenofocus/>
+                        <label>$VAR[NuvioTabLabel2]</label>
+                        <onfocus>SetProperty(nuvio.info.tab,2,home)</onfocus>
+                        <onup>9000</onup>
+                        <ondown>5100</ondown>
+                        <visible>$EXP[NuvioHasRelated]</visible>
+                    </control>
+                    <control type="label" id="6013">
+                        <width>auto</width>
+                        <height>60</height>
+                        <font>font_mainmenu_small</font>
+                        <textcolor>text5</textcolor>
+                        <label>|</label>
+                        <visible>Integer.IsGreater(Window(home).Property(nuvio.info.vid.count),0) + System.HasAddon(plugin.video.youtube) + [[Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0) | Integer.IsGreater(Container(50).NumItems,0)] | $EXP[NuvioHasRelated]]</visible>
+                    </control>
+                    <control type="button" id="6003">
+                        <width>auto</width>
+                        <height>60</height>
+                        <font>font_mainmenu_small</font>
+                        <textoffsetx>14</textoffsetx>
+                        <textcolor>text3</textcolor>
+                        <focusedcolor>on_focus</focusedcolor>
+                        <texturefocus border="30" colordiffuse="focus">pill60.png</texturefocus>
+                        <texturenofocus/>
+                        <label>$VAR[NuvioTabLabel3]</label>
+                        <onfocus>SetProperty(nuvio.info.tab,3,home)</onfocus>
+                        <onup>9000</onup>
+                        <ondown>5150</ondown>
+                        <visible>Integer.IsGreater(Window(home).Property(nuvio.info.vid.count),0) + System.HasAddon(plugin.video.youtube)</visible>
+                    </control>
+                </control>
+                <control type="group">
+                    <top>6</top>
+                <control type="fixedlist" id="50">
+                    <left>72</left>
+                    <top>64</top>
+                    <width>1848</width>
+                    <height>270</height>
+                    <orientation>horizontal</orientation>
+                    <focusposition>0</focusposition>
+                    <visible>!Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0)</visible>
+                    <onup>6001</onup>
+                    <ondown>5200</ondown>
+                    <animation effect="fade" start="100" end="0" time="0" condition="!$EXP[NuvioTab1]">Conditional</animation>
+                    <itemlayout width="236" height="270">
+                        <control type="image">
+                            <left>24</left>
+                            <top>14</top>
+                            <width>180</width>
+                            <height>180</height>
+                            <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
+                            <texture diffuse="mask_circle.png" fallback="DefaultActor.png">$INFO[ListItem.Art(thumb)]</texture>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>204</top>
+                            <width>200</width>
+                            <height>32</height>
+                            <font>font12_bold</font>
+                            <align>center</align>
+                            <textcolor>text2</textcolor>
+                            <selectedcolor>text2</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>236</top>
+                            <width>200</width>
+                            <height>28</height>
+                            <font>font10</font>
+                            <align>center</align>
+                            <textcolor>text4</textcolor>
+                            <selectedcolor>text4</selectedcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="236" height="270">
+                        <control type="group">
+                            <left>24</left>
+                            <top>14</top>
+                            <animation effect="zoom" start="100" end="106" center="auto" time="200" tween="cubic" easing="out">Focus</animation>
+                            <control type="image">
+                                <left>-6</left>
+                                <top>-6</top>
+                                <width>192</width>
+                                <height>192</height>
+                                <texture>mask_circle.png</texture>
+                                <colordiffuse>text</colordiffuse>
+                                <visible>Control.HasFocus(50)</visible>
+                            </control>
+                            <control type="image">
+                                <left>0</left>
+                                <top>0</top>
+                                <width>180</width>
+                                <height>180</height>
+                                <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
+                                <texture diffuse="mask_circle.png" fallback="DefaultActor.png">$INFO[ListItem.Art(thumb)]</texture>
+                            </control>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>204</top>
+                            <width>200</width>
+                            <height>32</height>
+                            <font>font12_bold</font>
+                            <align>center</align>
+                            <textcolor>text</textcolor>
+                            <selectedcolor>text</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>236</top>
+                            <width>200</width>
+                            <height>28</height>
+                            <font>font10</font>
+                            <align>center</align>
+                            <textcolor>text3</textcolor>
+                            <selectedcolor>text3</selectedcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                        </control>
+                    </focusedlayout>
+                </control>
+                <control type="fixedlist" id="5050">
+                    <left>72</left>
+                    <top>64</top>
+                    <width>1848</width>
+                    <height>270</height>
+                    <orientation>horizontal</orientation>
+                    <focusposition>0</focusposition>
+                    <onup>6001</onup>
+                    <ondown>5200</ondown>
+                    <animation effect="fade" start="100" end="0" time="0" condition="!$EXP[NuvioTab1]">Conditional</animation>
+                    <itemlayout width="236" height="270">
+                        <control type="image">
+                            <left>24</left>
+                            <top>14</top>
+                            <width>180</width>
+                            <height>180</height>
+                            <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
+                            <texture diffuse="mask_circle.png" fallback="DefaultActor.png" background="true">$INFO[ListItem.Icon]</texture>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>204</top>
+                            <width>200</width>
+                            <height>32</height>
+                            <font>font12_bold</font>
+                            <align>center</align>
+                            <textcolor>text2</textcolor>
+                            <selectedcolor>text2</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>236</top>
+                            <width>200</width>
+                            <height>28</height>
+                            <font>font10</font>
+                            <align>center</align>
+                            <textcolor>text4</textcolor>
+                            <selectedcolor>text4</selectedcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="236" height="270">
+                        <control type="group">
+                            <left>24</left>
+                            <top>14</top>
+                            <animation effect="zoom" start="100" end="106" center="auto" time="200" tween="cubic" easing="out">Focus</animation>
+                            <control type="image">
+                                <left>-6</left>
+                                <top>-6</top>
+                                <width>192</width>
+                                <height>192</height>
+                                <texture>mask_circle.png</texture>
+                                <colordiffuse>text</colordiffuse>
+                                <visible>Control.HasFocus(5050)</visible>
+                            </control>
+                            <control type="image">
+                                <left>0</left>
+                                <top>0</top>
+                                <width>180</width>
+                                <height>180</height>
+                                <aspectratio scalediffuse="false" aligny="top">scale</aspectratio>
+                                <texture diffuse="mask_circle.png" fallback="DefaultActor.png" background="true">$INFO[ListItem.Icon]</texture>
+                            </control>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>204</top>
+                            <width>200</width>
+                            <height>32</height>
+                            <font>font12_bold</font>
+                            <align>center</align>
+                            <textcolor>text</textcolor>
+                            <selectedcolor>text</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                        </control>
+                        <control type="label">
+                            <left>14</left>
+                            <top>236</top>
+                            <width>200</width>
+                            <height>28</height>
+                            <font>font10</font>
+                            <align>center</align>
+                            <textcolor>text3</textcolor>
+                            <selectedcolor>text3</selectedcolor>
+                            <label>$INFO[ListItem.Label2]</label>
+                        </control>
+                    </focusedlayout>
+                    <visible>Integer.IsGreater(Window(home).Property(nuvio.info.cast.count),0)</visible>
+                    <content>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.1.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.1.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.1.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.1.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.1.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.2.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.2.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.2.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.2.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.2.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.3.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.3.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.3.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.3.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.3.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.4.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.4.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.4.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.4.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.4.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.5.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.5.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.5.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.5.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.5.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.6.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.6.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.6.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.6.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.6.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.7.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.7.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.7.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.7.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.7.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.8.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.8.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.8.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.8.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.8.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.9.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.9.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.9.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.9.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.9.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.10.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.10.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.10.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.10.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.10.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.11.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.11.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.11.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.11.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.11.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.12.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.12.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.12.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.12.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.12.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.13.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.13.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.13.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.13.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.13.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.14.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.14.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.14.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.14.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.14.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.15.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.15.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.15.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.15.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.15.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.16.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.16.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.16.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.16.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.16.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.17.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.17.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.17.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.17.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.17.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.18.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.18.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.18.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.18.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.18.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.19.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.19.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.19.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.19.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.19.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.20.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.20.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.20.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.20.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.20.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.21.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.21.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.21.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.21.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.21.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.22.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.22.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.22.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.22.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.22.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.23.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.23.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.23.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.23.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.23.name))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.cast.24.name)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.cast.24.role)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.cast.24.thumb)]</icon>
+                            <onclick>RunScript(special://skin/scripts/info.py,person,$INFO[Window(home).Property(nuvio.info.cast.24.id)])</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.cast.24.name))</visible>
+                        </item>
+                    </content>
+                </control>
+                </control>
+                <control type="group">
+                    <top>6</top>
+                    <animation effect="fade" start="100" end="0" time="0" condition="!$EXP[NuvioTab2]">Conditional</animation>
+                    <control type="group">
+                        <left>1640</left>
+                        <top>18</top>
+                        <visible>Container(5100).IsUpdating + $EXP[NuvioTab2]</visible>
+                        <include content="Spinner"><param name="size">32</param></include>
+                    </control>
+                <control type="fixedlist" id="5100">
+                    <left>56</left>
+                    <top>64</top>
+                    <width>1864</width>
+                    <height>335</height>
+                    <orientation>horizontal</orientation>
+                    <focusposition>0</focusposition>
+                    <preloaditems>2</preloaditems>
+                    <scrolltime tween="cubic" easing="out">260</scrolltime>
+                    <onup>6002</onup>
+                    <ondown>5200</ondown>
+                    <!-- a similar title opens its own page (it used to start playing at once): openpage.py opens the list and presses Info -->
+                    <onclick>SetProperty(nuvio.open.pos,$INFO[Container(5100).CurrentItem],home)</onclick>
+                    <onclick>SetProperty(nuvio.open.tmdb,$INFO[Container(5100).ListItem.UniqueID(tmdb)],home)</onclick>
+                    <onclick condition="String.IsEqual(Container(5100).ListItem.DBType,tvshow)">SetProperty(nuvio.open.type,tv,home)</onclick>
+                    <onclick condition="!String.IsEqual(Container(5100).ListItem.DBType,tvshow)">SetProperty(nuvio.open.type,movie,home)</onclick>
+                    <onclick>SetProperty(nuvio.open.trakt,$INFO[Container(5100).ListItem.Property(trakt_id)],home)</onclick>
+                    <onclick>RunScript(special://skin/scripts/info.py,open,related)</onclick>
+                    <itemlayout width="428" height="335">
+                    <control type="group">
+                        <left>40</left>
+                        <top>16</top>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture diffuse="mask_landscape.png">default_landscape.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <aspectratio scalediffuse="false">scale</aspectratio>
+                            <texture diffuse="mask_landscape.png" background="true">$VAR[ItemLandscape]</texture>
+                        </control>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>255</top>
+                        <width>392</width>
+                        <height>36</height>
+                        <font>font12</font>
+                        <textcolor>text2</textcolor>
+                        <selectedcolor>text2</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>289</top>
+                        <width>392</width>
+                        <height>30</height>
+                        <font>font10</font>
+                        <textcolor>text4</textcolor>
+                        <selectedcolor>text4</selectedcolor>
+                        <label>$INFO[ListItem.Year]</label>
+                    </control>
+                    </itemlayout>
+                    <focusedlayout width="428" height="335">
+                    <control type="group">
+                        <left>40</left>
+                        <top>16</top>
+                        <animation effect="zoom" start="100" end="105" center="auto" time="200" tween="cubic" easing="out">Focus</animation>
+                        <animation effect="zoom" start="105" end="100" center="auto" time="160" tween="cubic" easing="out">UnFocus</animation>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture diffuse="mask_landscape.png">default_landscape.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <aspectratio scalediffuse="false">scale</aspectratio>
+                            <texture diffuse="mask_landscape.png" background="true">$VAR[ItemLandscape]</texture>
+                        </control>
+                        <control type="image">
+                            <left>-24</left>
+                            <top>-24</top>
+                            <width>448</width>
+                            <height>273</height>
+                            <texture border="38">rr14_glow.png</texture>
+                            <colordiffuse>$VAR[NuvioGlowColour]</colordiffuse>
+                            <visible>Control.HasFocus(5100) + !String.IsEqual(Skin.String(nuvio.glow),off)</visible>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture border="14">rr14_edge.png</texture>
+                            <colordiffuse>text</colordiffuse>
+                            <visible>Control.HasFocus(5100)</visible>
+                        </control>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>255</top>
+                        <width>392</width>
+                        <height>36</height>
+                        <font>font12_bold</font>
+                        <textcolor>text</textcolor>
+                        <selectedcolor>text</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>289</top>
+                        <width>392</width>
+                        <height>30</height>
+                        <font>font10</font>
+                        <textcolor>text4</textcolor>
+                        <selectedcolor>text4</selectedcolor>
+                        <label>$INFO[ListItem.Year]</label>
+                    </control>
+                    </focusedlayout>
+                    <content target="videos" limit="20" browse="never">$VAR[NuvioInfoRelated]</content>
+                </control>
+                </control>
+                <control type="group">
+                    <top>6</top>
+                    <animation effect="fade" start="100" end="0" time="0" condition="!$EXP[NuvioTab3]">Conditional</animation>
+                <control type="fixedlist" id="5150">
+                    <left>56</left>
+                    <top>64</top>
+                    <width>1864</width>
+                    <height>335</height>
+                    <orientation>horizontal</orientation>
+                    <focusposition>0</focusposition>
+                    <preloaditems>2</preloaditems>
+                    <scrolltime tween="cubic" easing="out">260</scrolltime>
+                    <onup>6003</onup>
+                    <ondown>5200</ondown>
+                    <itemlayout width="428" height="335">
+                    <control type="group">
+                        <left>40</left>
+                        <top>16</top>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture diffuse="mask_landscape.png">default_landscape.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <aspectratio scalediffuse="false">scale</aspectratio>
+                            <texture diffuse="mask_landscape.png" background="true">$INFO[ListItem.Icon]</texture>
+                        </control>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>255</top>
+                        <width>392</width>
+                        <height>36</height>
+                        <font>font12</font>
+                        <textcolor>text2</textcolor>
+                        <selectedcolor>text2</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>289</top>
+                        <width>392</width>
+                        <height>30</height>
+                        <font>font10</font>
+                        <textcolor>text4</textcolor>
+                        <selectedcolor>text4</selectedcolor>
+                        <label>$INFO[ListItem.Label2]</label>
+                    </control>
+                    </itemlayout>
+                    <focusedlayout width="428" height="335">
+                    <control type="group">
+                        <left>40</left>
+                        <top>16</top>
+                        <animation effect="zoom" start="100" end="105" center="auto" time="200" tween="cubic" easing="out">Focus</animation>
+                        <animation effect="zoom" start="105" end="100" center="auto" time="160" tween="cubic" easing="out">UnFocus</animation>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture diffuse="mask_landscape.png">default_landscape.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <aspectratio scalediffuse="false">scale</aspectratio>
+                            <texture diffuse="mask_landscape.png" background="true">$INFO[ListItem.Icon]</texture>
+                        </control>
+                        <control type="image">
+                            <left>-24</left>
+                            <top>-24</top>
+                            <width>448</width>
+                            <height>273</height>
+                            <texture border="38">rr14_glow.png</texture>
+                            <colordiffuse>$VAR[NuvioGlowColour]</colordiffuse>
+                            <visible>Control.HasFocus(5150) + !String.IsEqual(Skin.String(nuvio.glow),off)</visible>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture border="14">rr14_edge.png</texture>
+                            <colordiffuse>text</colordiffuse>
+                            <visible>Control.HasFocus(5150)</visible>
+                        </control>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>255</top>
+                        <width>392</width>
+                        <height>36</height>
+                        <font>font12_bold</font>
+                        <textcolor>text</textcolor>
+                        <selectedcolor>text</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>289</top>
+                        <width>392</width>
+                        <height>30</height>
+                        <font>font10</font>
+                        <textcolor>text4</textcolor>
+                        <selectedcolor>text4</selectedcolor>
+                        <label>$INFO[ListItem.Label2]</label>
+                    </control>
+                    </focusedlayout>
+                    <content>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.1.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.1.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.1.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.1.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.1.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.2.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.2.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.2.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.2.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.2.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.3.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.3.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.3.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.3.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.3.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.4.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.4.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.4.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.4.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.4.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.5.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.5.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.5.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.5.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.5.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.6.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.6.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.6.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.6.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.6.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.7.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.7.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.7.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.7.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.7.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.8.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.8.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.8.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.8.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.8.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.9.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.9.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.9.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.9.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.9.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.10.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.10.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.10.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.10.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.10.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.11.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.11.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.11.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.11.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.11.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.vid.12.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.vid.12.sub)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.vid.12.thumb)]</icon>
+                            <onclick>PlayMedia($INFO[Window(home).Property(nuvio.info.vid.12.path)])</onclick>
+                            <onclick>SetProperty(nuvio.open.leave,1,home)</onclick>
+                        <onclick>RunScript(special://skin/scripts/trailerback.py)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.vid.12.title))</visible>
+                        </item>
+                    </content>
+                </control>
+                </control>
+            </control>
+
+            <!-- ================= Collection (TMDB) ================= -->
+            <control type="group">
+                <width>1920</width>
+                <height>420</height>
+                <visible>Integer.IsGreater(Window(home).Property(nuvio.info.coll.count),1)</visible>
+                <control type="label">
+                    <left>96</left>
+                    <top>10</top>
+                    <width>1600</width>
+                    <height>48</height>
+                    <font>font_mainmenu_small</font>
+                    <textcolor>text</textcolor>
+                    <label>$INFO[Window(home).Property(nuvio.info.coll.name)]</label>
+                </control>
+                <control type="fixedlist" id="5200">
+                    <left>56</left>
+                    <top>64</top>
+                    <width>1864</width>
+                    <height>335</height>
+                    <orientation>horizontal</orientation>
+                    <focusposition>0</focusposition>
+                    <preloaditems>2</preloaditems>
+                    <scrolltime tween="cubic" easing="out">260</scrolltime>
+                    <onup condition="$EXP[NuvioTab1] + {TMDB_CAST}">5050</onup>
+                    <onup condition="$EXP[NuvioTab1]">50</onup>
+                    <onup condition="$EXP[NuvioTab2]">5100</onup>
+                    <onup condition="$EXP[NuvioTab3]">5150</onup>
+                    <onup>9000</onup>
+                    <ondown>5300</ondown>
+                    <itemlayout width="428" height="335">
+                    <control type="group">
+                        <left>40</left>
+                        <top>16</top>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture diffuse="mask_landscape.png">default_landscape.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <aspectratio scalediffuse="false">scale</aspectratio>
+                            <texture diffuse="mask_landscape.png" background="true">$INFO[ListItem.Icon]</texture>
+                        </control>
+                        <control type="image">
+                            <left>344</left>
+                            <top>14</top>
+                            <width>40</width>
+                            <height>40</height>
+                            <texture>buttons/check_fo.png</texture>
+                            <visible>!String.IsEmpty(ListItem.Property(current))</visible>
+                        </control>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>255</top>
+                        <width>392</width>
+                        <height>36</height>
+                        <font>font12</font>
+                        <textcolor>text2</textcolor>
+                        <selectedcolor>text2</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>289</top>
+                        <width>392</width>
+                        <height>30</height>
+                        <font>font10</font>
+                        <textcolor>text4</textcolor>
+                        <selectedcolor>text4</selectedcolor>
+                        <label>$INFO[ListItem.Label2]</label>
+                    </control>
+                    </itemlayout>
+                    <focusedlayout width="428" height="335">
+                    <control type="group">
+                        <left>40</left>
+                        <top>16</top>
+                        <animation effect="zoom" start="100" end="105" center="auto" time="200" tween="cubic" easing="out">Focus</animation>
+                        <animation effect="zoom" start="105" end="100" center="auto" time="160" tween="cubic" easing="out">UnFocus</animation>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture diffuse="mask_landscape.png">default_landscape.png</texture>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <aspectratio scalediffuse="false">scale</aspectratio>
+                            <texture diffuse="mask_landscape.png" background="true">$INFO[ListItem.Icon]</texture>
+                        </control>
+                        <control type="image">
+                            <left>344</left>
+                            <top>14</top>
+                            <width>40</width>
+                            <height>40</height>
+                            <texture>buttons/check_fo.png</texture>
+                            <visible>!String.IsEmpty(ListItem.Property(current))</visible>
+                        </control>
+                        <control type="image">
+                            <left>-24</left>
+                            <top>-24</top>
+                            <width>448</width>
+                            <height>273</height>
+                            <texture border="38">rr14_glow.png</texture>
+                            <colordiffuse>$VAR[NuvioGlowColour]</colordiffuse>
+                            <visible>Control.HasFocus(5200) + !String.IsEqual(Skin.String(nuvio.glow),off)</visible>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>400</width>
+                            <height>225</height>
+                            <texture border="14">rr14_edge.png</texture>
+                            <colordiffuse>text</colordiffuse>
+                            <visible>Control.HasFocus(5200)</visible>
+                        </control>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>255</top>
+                        <width>392</width>
+                        <height>36</height>
+                        <font>font12_bold</font>
+                        <textcolor>text</textcolor>
+                        <selectedcolor>text</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                    <control type="label">
+                        <left>44</left>
+                        <top>289</top>
+                        <width>392</width>
+                        <height>30</height>
+                        <font>font10</font>
+                        <textcolor>text4</textcolor>
+                        <selectedcolor>text4</selectedcolor>
+                        <label>$INFO[ListItem.Label2]</label>
+                    </control>
+                    </focusedlayout>
+                    <content>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.1.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.1.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.1.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.1.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.1.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.1.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.1.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.1.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.2.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.2.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.2.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.2.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.2.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.2.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.2.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.2.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.3.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.3.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.3.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.3.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.3.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.3.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.3.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.3.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.4.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.4.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.4.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.4.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.4.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.4.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.4.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.4.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.5.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.5.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.5.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.5.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.5.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.5.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.5.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.5.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.6.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.6.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.6.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.6.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.6.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.6.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.6.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.6.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.7.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.7.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.7.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.7.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.7.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.7.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.7.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.7.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.8.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.8.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.8.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.8.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.8.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.8.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.8.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.8.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.9.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.9.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.9.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.9.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.9.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.9.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.9.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.9.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.10.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.10.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.10.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.10.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.10.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.10.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.10.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.10.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.11.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.11.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.11.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.11.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.11.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.11.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.11.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.11.title))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.coll.12.title)]</label>
+                            <label2>$INFO[Window(home).Property(nuvio.info.coll.12.year)]</label2>
+                            <icon>$INFO[Window(home).Property(nuvio.info.coll.12.art)]</icon>
+                            <property name="current">$INFO[Window(home).Property(nuvio.info.coll.12.current)]</property>
+                            <onclick>SetProperty(nuvio.open.path,"$INFO[Window(home).Property(nuvio.info.coll.12.path)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.year,"$INFO[Window(home).Property(nuvio.info.coll.12.year)]",home)</onclick>
+                            <onclick>SetProperty(nuvio.open.tmdb,$INFO[Window(home).Property(nuvio.info.coll.12.id)],home)</onclick>
+                            <onclick>SetProperty(nuvio.open.type,movie,home)</onclick>
+                            <onclick>ClearProperty(nuvio.open.trakt,home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,open,path)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.coll.12.title))</visible>
+                        </item>
+                    </content>
+                </control>
+            </control>
+
+            <!-- ================= Production ================= -->
+            <control type="group">
+                <width>1920</width>
+                <height>260</height>
+                <visible>!String.IsEmpty(Window(home).Property(nuvio.info.studio.1))</visible>
+                <control type="label">
+                    <left>96</left>
+                    <top>10</top>
+                    <width>1600</width>
+                    <height>48</height>
+                    <font>font_mainmenu_small</font>
+                    <textcolor>text</textcolor>
+                    <label>$LOCALIZE[31113]</label>
+                </control>
+                <control type="list" id="5300">
+                    <left>96</left>
+                    <top>70</top>
+                    <width>1700</width>
+                    <height>170</height>
+                    <orientation>horizontal</orientation>
+                    <onup>5200</onup>
+                    <itemlayout width="324" height="170">
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>300</width>
+                            <height>120</height>
+                            <texture border="20" colordiffuse="glass_strong">rr20.png</texture>
+                            <visible>true</visible>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>300</width>
+                            <height>120</height>
+                            <texture border="20" colordiffuse="glass_strong">rr20.png</texture>
+                            <visible>!false</visible>
+                        </control>
+                        <control type="image">
+                            <left>8</left>
+                            <top>8</top>
+                            <width>284</width>
+                            <height>104</height>
+                            <texture border="16" colordiffuse="FFF2F2F2">rr20.png</texture>
+                            <visible>!String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="image">
+                            <left>28</left>
+                            <top>18</top>
+                            <width>244</width>
+                            <height>84</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Thumb]</texture>
+                            <visible>!String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="image">
+                            <left>30</left>
+                            <top>20</top>
+                            <width>240</width>
+                            <height>80</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture colordiffuse="text">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</texture>
+                            <visible>System.HasAddon(resource.images.studios.white) + String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="label">
+                            <left>20</left>
+                            <top>0</top>
+                            <width>260</width>
+                            <height>120</height>
+                            <align>center</align>
+                            <aligny>center</aligny>
+                            <font>font_label_bold</font>
+                            <textcolor>text</textcolor>
+                            <selectedcolor>text</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <visible>!System.HasAddon(resource.images.studios.white) + String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="label">
+                            <left>0</left>
+                            <top>130</top>
+                            <width>300</width>
+                            <height>34</height>
+                            <align>center</align>
+                            <font>font10</font>
+                            <textcolor>text3</textcolor>
+                            <selectedcolor>text3</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <visible>System.HasAddon(resource.images.studios.white)</visible>
+                        </control>
+                    </itemlayout>
+                    <focusedlayout width="324" height="170">
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>300</width>
+                            <height>120</height>
+                            <texture border="20" colordiffuse="focus">rr20.png</texture>
+                            <visible>Control.HasFocus(5300)</visible>
+                        </control>
+                        <control type="image">
+                            <left>0</left>
+                            <top>0</top>
+                            <width>300</width>
+                            <height>120</height>
+                            <texture border="20" colordiffuse="glass_strong">rr20.png</texture>
+                            <visible>!Control.HasFocus(5300)</visible>
+                        </control>
+                        <control type="image">
+                            <left>8</left>
+                            <top>8</top>
+                            <width>284</width>
+                            <height>104</height>
+                            <texture border="16" colordiffuse="FFF2F2F2">rr20.png</texture>
+                            <visible>!String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="image">
+                            <left>28</left>
+                            <top>18</top>
+                            <width>244</width>
+                            <height>84</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture background="true">$INFO[ListItem.Thumb]</texture>
+                            <visible>!String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="image">
+                            <left>30</left>
+                            <top>20</top>
+                            <width>240</width>
+                            <height>80</height>
+                            <aspectratio>keep</aspectratio>
+                            <texture colordiffuse="on_focus">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</texture>
+                            <visible>System.HasAddon(resource.images.studios.white) + String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="label">
+                            <left>20</left>
+                            <top>0</top>
+                            <width>260</width>
+                            <height>120</height>
+                            <align>center</align>
+                            <aligny>center</aligny>
+                            <font>font_label_bold</font>
+                            <textcolor>on_focus</textcolor>
+                            <selectedcolor>on_focus</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <visible>!System.HasAddon(resource.images.studios.white) + String.IsEmpty(ListItem.Thumb)</visible>
+                        </control>
+                        <control type="label">
+                            <left>0</left>
+                            <top>130</top>
+                            <width>300</width>
+                            <height>34</height>
+                            <align>center</align>
+                            <font>font10</font>
+                            <textcolor>text</textcolor>
+                            <selectedcolor>text</selectedcolor>
+                            <label>$INFO[ListItem.Label]</label>
+                            <visible>System.HasAddon(resource.images.studios.white)</visible>
+                        </control>
+                    </focusedlayout>
+                    <content>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.studio.1)]</label>
+                            <icon>resource://resource.images.studios.white/$INFO[Window(home).Property(nuvio.info.studio.1)].png</icon>
+                            <thumb>$INFO[Window(home).Property(nuvio.info.studio.1.logo)]</thumb>
+                            <onclick>SetProperty(nuvio.open.studio,"$INFO[Window(home).Property(nuvio.info.studio.1)]",home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,studio)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.studio.1))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.studio.2)]</label>
+                            <icon>resource://resource.images.studios.white/$INFO[Window(home).Property(nuvio.info.studio.2)].png</icon>
+                            <thumb>$INFO[Window(home).Property(nuvio.info.studio.2.logo)]</thumb>
+                            <onclick>SetProperty(nuvio.open.studio,"$INFO[Window(home).Property(nuvio.info.studio.2)]",home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,studio)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.studio.2))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.studio.3)]</label>
+                            <icon>resource://resource.images.studios.white/$INFO[Window(home).Property(nuvio.info.studio.3)].png</icon>
+                            <thumb>$INFO[Window(home).Property(nuvio.info.studio.3.logo)]</thumb>
+                            <onclick>SetProperty(nuvio.open.studio,"$INFO[Window(home).Property(nuvio.info.studio.3)]",home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,studio)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.studio.3))</visible>
+                        </item>
+                        <item>
+                            <label>$INFO[Window(home).Property(nuvio.info.studio.4)]</label>
+                            <icon>resource://resource.images.studios.white/$INFO[Window(home).Property(nuvio.info.studio.4)].png</icon>
+                            <thumb>$INFO[Window(home).Property(nuvio.info.studio.4.logo)]</thumb>
+                            <onclick>SetProperty(nuvio.open.studio,"$INFO[Window(home).Property(nuvio.info.studio.4)]",home)</onclick>
+                            <onclick>RunScript(special://skin/scripts/info.py,studio)</onclick>
+                            <visible>!String.IsEmpty(Window(home).Property(nuvio.info.studio.4))</visible>
+                        </item>
+                    </content>
+                </control>
+            </control>
+        </control>
+
+        <include>Clock</include>
+    </controls>
+</window>

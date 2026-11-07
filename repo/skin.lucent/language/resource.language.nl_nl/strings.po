@@ -1,0 +1,2514 @@
+# Kodi Media Center language file
+# Addon Name: Lucent
+# Addon id: skin.lucent
+msgid ""
+msgstr ""
+"Project-Id-Version: skin.lucent\n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#31000"
+msgid "Default"
+msgstr "Standaard"
+
+msgctxt "#31002"
+msgid "Search"
+msgstr "Zoeken"
+
+msgctxt "#31006"
+msgid "Add-ons"
+msgstr "Add-ons"
+
+msgctxt "#31009"
+msgid "Power"
+msgstr "Afsluiten"
+
+msgctxt "#31018"
+msgid "Resume"
+msgstr "Hervatten"
+
+msgctxt "#31020"
+msgid "Episodes"
+msgstr "Afleveringen"
+
+msgctxt "#31022"
+msgid "View"
+msgstr "Weergave"
+
+msgctxt "#31023"
+msgid "Sort"
+msgstr "Sorteren"
+
+msgctxt "#31024"
+msgid "Ascending"
+msgstr "Oplopend"
+
+msgctxt "#31025"
+msgid "Descending"
+msgstr "Aflopend"
+
+msgctxt "#31031"
+msgid "List"
+msgstr "Lijst"
+
+msgctxt "#31032"
+msgid "Posters"
+msgstr "Posters"
+
+msgctxt "#31033"
+msgid "Poster wall"
+msgstr "Postermuur"
+
+msgctxt "#31034"
+msgid "Landscape"
+msgstr "Liggend"
+
+msgctxt "#31036"
+msgid "items"
+msgstr "items"
+
+msgctxt "#31038"
+msgid "Done"
+msgstr "Klaar"
+
+msgctxt "#31041"
+msgid "Space"
+msgstr "Spatie"
+
+msgctxt "#31042"
+msgid "Symbols"
+msgstr "Symbolen"
+
+msgctxt "#31043"
+msgid "Shift"
+msgstr "Shift"
+
+msgctxt "#31044"
+msgid "Caps"
+msgstr "Hoofdletters"
+
+msgctxt "#31047"
+msgid "Ends at"
+msgstr "Eindigt om"
+
+msgctxt "#31048"
+msgid "Subtitles"
+msgstr "Ondertitels"
+
+msgctxt "#31049"
+msgid "Audio"
+msgstr "Audio"
+
+msgctxt "#31050"
+msgid "Video settings"
+msgstr "Beeldinstellingen"
+
+msgctxt "#31052"
+msgid "Bookmarks"
+msgstr "Bladwijzers"
+
+msgctxt "#31053"
+msgid "Stop"
+msgstr "Stoppen"
+
+msgctxt "#31054"
+msgid "Next"
+msgstr "Volgende"
+
+msgctxt "#31055"
+msgid "Previous"
+msgstr "Vorige"
+
+msgctxt "#31056"
+msgid "Information"
+msgstr "Informatie"
+
+msgctxt "#31060"
+msgid "Show clock"
+msgstr "Klok tonen"
+
+msgctxt "#31061"
+msgid "Season"
+msgstr "Seizoen"
+
+msgctxt "#31063"
+msgid "Rating"
+msgstr "Beoordeling"
+
+msgctxt "#31064"
+msgid "File manager"
+msgstr "Bestandsbeheer"
+
+msgctxt "#31065"
+msgid "System info"
+msgstr "Systeeminfo"
+
+msgctxt "#31066"
+msgid "Profiles"
+msgstr "Profielen"
+
+msgctxt "#31067"
+msgid "Skin settings"
+msgstr "Skin-instellingen"
+
+msgctxt "#31068"
+msgid "Player"
+msgstr "Speler"
+
+msgctxt "#31069"
+msgid "Media"
+msgstr "Media"
+
+msgctxt "#31070"
+msgid "Interface"
+msgstr "Interface"
+
+msgctxt "#31071"
+msgid "System"
+msgstr "Systeem"
+
+msgctxt "#31072"
+msgid "Services"
+msgstr "Diensten"
+
+msgctxt "#31076"
+msgid "Pause"
+msgstr "Pauzeren"
+
+msgctxt "#31077"
+msgid "Buffering"
+msgstr "Bufferen"
+
+msgctxt "#31078"
+msgid "Directed by"
+msgstr "Regie:"
+
+msgctxt "#31088"
+msgid "Nothing here yet"
+msgstr "Hier staat nog niets"
+
+msgctxt "#31089"
+msgid "Install Seren and connect Trakt to fill your home screen, or add movies and series to your Kodi library."
+msgstr "Installeer Seren en koppel Trakt om je startscherm te vullen, of voeg films en series toe aan je Kodi-bibliotheek."
+
+msgctxt "#31094"
+msgid "This folder is empty"
+msgstr "Deze map is leeg"
+
+msgctxt "#31095"
+msgid "Manual search"
+msgstr "Handmatig zoeken"
+
+msgctxt "#31096"
+msgid "Muted"
+msgstr "Gedempt"
+
+msgctxt "#31097"
+msgid "Back 10 seconds"
+msgstr "10 seconden terug"
+
+msgctxt "#31098"
+msgid "Forward 30 seconds"
+msgstr "30 seconden vooruit"
+
+msgctxt "#31099"
+msgid "Dependencies"
+msgstr "Afhankelijkheden"
+
+msgctxt "#31100"
+msgid "Thumbnails"
+msgstr "Miniaturen"
+
+msgctxt "#31101"
+msgid "Paths"
+msgstr "Paden"
+
+msgctxt "#31102"
+msgid "Name"
+msgstr "Naam"
+
+msgctxt "#31103"
+msgid "Who is watching?"
+msgstr "Wie kijkt er?"
+
+msgctxt "#31104"
+msgid "This tab has no widgets yet. Add them in Settings → Skin settings → Customise menu and widgets."
+msgstr "Deze tab heeft nog geen widgets. Voeg ze toe via Instellingen → Skin-instellingen → Menu en widgets aanpassen."
+
+msgctxt "#31105"
+msgid "Customise menu and widgets"
+msgstr "Menu en widgets aanpassen"
+
+msgctxt "#31106"
+msgid "Restore the default menu"
+msgstr "Standaardmenu herstellen"
+
+msgctxt "#31107"
+msgid "Screen"
+msgstr "Beeld"
+
+msgctxt "#31111"
+msgid "Cast and crew"
+msgstr "Maker en cast"
+
+msgctxt "#31112"
+msgid "Similar titles"
+msgstr "Vergelijkbare titels"
+
+msgctxt "#31113"
+msgid "Production"
+msgstr "Productie"
+
+msgctxt "#31114"
+msgid "Library and lists"
+msgstr "Bibliotheek en lijsten"
+
+msgctxt "#31115"
+msgid "Mark as watched"
+msgstr "Markeren als bekeken"
+
+msgctxt "#31116"
+msgid "Watched"
+msgstr "Bekeken"
+
+msgctxt "#31119"
+msgid "Trailers"
+msgstr "Trailers"
+
+msgctxt "#31120"
+msgid "Filmography"
+msgstr "Filmografie"
+
+msgctxt "#31130"
+msgid "Appearance"
+msgstr "Weergave"
+
+msgctxt "#31131"
+msgid "Layout"
+msgstr "Indeling"
+
+msgctxt "#31132"
+msgid "Menu and widgets"
+msgstr "Menu en widgets"
+
+msgctxt "#31133"
+msgid "Playback"
+msgstr "Afspelen"
+
+msgctxt "#31134"
+msgid "Integrations"
+msgstr "Integraties"
+
+msgctxt "#31135"
+msgid "Tracking"
+msgstr "Volgen"
+
+msgctxt "#31136"
+msgid "Profiles"
+msgstr "Profielen"
+
+msgctxt "#31137"
+msgid "Advanced"
+msgstr "Geavanceerd"
+
+msgctxt "#31138"
+msgid "About"
+msgstr "Over"
+
+msgctxt "#31140"
+msgid "Theme"
+msgstr "Thema"
+
+msgctxt "#31141"
+msgid "Colour theme"
+msgstr "Kleurthema"
+
+msgctxt "#31143"
+msgid "Interface scale"
+msgstr "Schaal van de interface"
+
+msgctxt "#31144"
+msgid "Font and language"
+msgstr "Lettertype en taal"
+
+msgctxt "#31145"
+msgid "Screensaver"
+msgstr "Screensaver"
+
+msgctxt "#31146"
+msgid "Dim when idle"
+msgstr "Dimmen bij inactiviteit"
+
+msgctxt "#31147"
+msgid "Idle timeout"
+msgstr "Wachttijd"
+
+msgctxt "#31148"
+msgid "Dim strength"
+msgstr "Dimsterkte"
+
+msgctxt "#31149"
+msgid "Home"
+msgstr "Startscherm"
+
+msgctxt "#31150"
+msgid "Show poster labels"
+msgstr "Posterlabels tonen"
+
+msgctxt "#31151"
+msgid "Landscape posters"
+msgstr "Liggende posters"
+
+msgctxt "#31152"
+msgid "Watched titles"
+msgstr "Bekeken titels"
+
+msgctxt "#31153"
+msgid "Hide side icons"
+msgstr "Zijpictogrammen verbergen"
+
+msgctxt "#31154"
+msgid "Show full release date"
+msgstr "Volledige releasedatum tonen"
+
+msgctxt "#31155"
+msgid "Fullscreen hero backdrop"
+msgstr "Hero-achtergrond op volledig scherm"
+
+msgctxt "#31156"
+msgid "Cards"
+msgstr "Kaarten"
+
+msgctxt "#31157"
+msgid "Edge glow"
+msgstr "Randgloed"
+
+msgctxt "#31158"
+msgid "Details page"
+msgstr "Detailpagina"
+
+msgctxt "#31159"
+msgid "Show ratings"
+msgstr "Beoordelingen tonen"
+
+msgctxt "#31161"
+msgid "Show trailer button"
+msgstr "Trailerknop tonen"
+
+msgctxt "#31162"
+msgid "Menu, rows and services"
+msgstr "Menu, rijen en diensten"
+
+msgctxt "#31164"
+msgid "Kodi player settings"
+msgstr "Kodi-spelerinstellingen"
+
+msgctxt "#31165"
+msgid "Seren playback settings"
+msgstr "Seren-afspeelinstellingen"
+
+msgctxt "#31166"
+msgid "Subtitles and audio language"
+msgstr "Ondertitels en audiotaal"
+
+msgctxt "#31167"
+msgid "Add-ons"
+msgstr "Add-ons"
+
+msgctxt "#31169"
+msgid "Trakt watch history, watchlist and lists are handled by Seren. Log in to Trakt in the Seren settings."
+msgstr "Trakt-kijkgeschiedenis, kijklijst en lijsten lopen via Seren. Log in bij Trakt in de Seren-instellingen."
+
+msgctxt "#31170"
+msgid "System information"
+msgstr "Systeeminformatie"
+
+msgctxt "#31171"
+msgid "Event log"
+msgstr "Gebeurtenissenlogboek"
+
+msgctxt "#31172"
+msgid "Reload skin"
+msgstr "Skin opnieuw laden"
+
+msgctxt "#31173"
+msgid "Restore all skin settings"
+msgstr "Alle skin-instellingen herstellen"
+
+msgctxt "#31174"
+msgid "Lucent - a cinematic glass skin for Kodi, made with Claude. Updates arrive automatically through the Lucent Repository."
+msgstr "Lucent - een cinematische glas-skin voor Kodi, gemaakt met Claude. Updates komen automatisch binnen via de Lucent Repository."
+
+msgctxt "#31177"
+msgid "View options"
+msgstr "Weergaveopties"
+
+msgctxt "#31178"
+msgid "Other options"
+msgstr "Overige opties"
+
+msgctxt "#31179"
+msgid "Order"
+msgstr "Volgorde"
+
+msgctxt "#31180"
+msgid "Filter"
+msgstr "Filter"
+
+msgctxt "#31181"
+msgid "Skin settings"
+msgstr "Skin-instellingen"
+
+msgctxt "#31182"
+msgid "Pause screen"
+msgstr "Pauzescherm"
+
+msgctxt "#31183"
+msgid "Show info after"
+msgstr "Info tonen na"
+
+msgctxt "#31185"
+msgid "Your own picture and sound logos"
+msgstr "Eigen logo's voor beeld en geluid"
+
+msgctxt "#31186"
+msgid "YOU'RE WATCHING"
+msgstr "JE KIJKT NAAR"
+
+msgctxt "#31187"
+msgid "Statistics"
+msgstr "Statistieken"
+
+msgctxt "#31190"
+msgid "SOURCE"
+msgstr "BRON"
+
+msgctxt "#31191"
+msgid "VIDEO"
+msgstr "VIDEO"
+
+msgctxt "#31192"
+msgid "AUDIO"
+msgstr "AUDIO"
+
+msgctxt "#31193"
+msgid "NETWORK"
+msgstr "NETWERK"
+
+msgctxt "#31194"
+msgid "SYSTEM"
+msgstr "SYSTEEM"
+
+msgctxt "#31195"
+msgid "File"
+msgstr "Bestand"
+
+msgctxt "#31196"
+msgid "Location"
+msgstr "Locatie"
+
+msgctxt "#31197"
+msgid "Type"
+msgstr "Type"
+
+msgctxt "#31198"
+msgid "Bitrate"
+msgstr "Bitrate"
+
+msgctxt "#31199"
+msgid "Video"
+msgstr "Video"
+
+msgctxt "#31200"
+msgid "HDR"
+msgstr "HDR"
+
+msgctxt "#31201"
+msgid "Format"
+msgstr "Formaat"
+
+msgctxt "#31202"
+msgid "Decoder"
+msgstr "Decoder"
+
+msgctxt "#31203"
+msgid "Deinterlace"
+msgstr "Deïnterlacen"
+
+msgctxt "#31204"
+msgid "Display"
+msgstr "Scherm"
+
+msgctxt "#31205"
+msgid "Queue"
+msgstr "Wachtrij"
+
+msgctxt "#31206"
+msgid "Audio"
+msgstr "Audio"
+
+msgctxt "#31207"
+msgid "Language"
+msgstr "Taal"
+
+msgctxt "#31208"
+msgid "Buffer"
+msgstr "Buffer"
+
+msgctxt "#31210"
+msgid "CPU"
+msgstr "CPU"
+
+msgctxt "#31211"
+msgid "Temperature"
+msgstr "Temperatuur"
+
+msgctxt "#31212"
+msgid "CPU clock"
+msgstr "CPU-klok"
+
+msgctxt "#31213"
+msgid "Memory"
+msgstr "Geheugen"
+
+msgctxt "#31215"
+msgid "Stream"
+msgstr "Stream"
+
+msgctxt "#31216"
+msgid "Local file"
+msgstr "Lokaal bestand"
+
+msgctxt "#31217"
+msgid "hardware"
+msgstr "hardware"
+
+msgctxt "#31218"
+msgid "software"
+msgstr "software"
+
+msgctxt "#31219"
+msgid "Poster focus"
+msgstr "Posterfocus"
+
+msgctxt "#31220"
+msgid "Trailer on focus"
+msgstr "Trailer bij focus"
+
+msgctxt "#31221"
+msgid "Start trailer after"
+msgstr "Trailer starten na"
+
+msgctxt "#31222"
+msgid "Trailers play through the YouTube add-on (installed with the skin)."
+msgstr "Trailers spelen af via de YouTube-add-on (wordt met de skin meegeïnstalleerd)."
+
+msgctxt "#31223"
+msgid "YouTube add-on settings"
+msgstr "Instellingen van de YouTube-add-on"
+
+msgctxt "#31224"
+msgid "Calendar"
+msgstr "Kalender"
+
+msgctxt "#31225"
+msgid "Pop-up when a new episode is out"
+msgstr "Pop-up bij nieuwe aflevering"
+
+msgctxt "#31226"
+msgid "Open the calendar"
+msgstr "Kalender openen"
+
+msgctxt "#31227"
+msgid "Calendar notification"
+msgstr "Kalender-melding"
+
+msgctxt "#31228"
+msgid "Notification on"
+msgstr "Melding aan"
+
+msgctxt "#31229"
+msgid "The calendar shows the series and films of your Trakt collection (Seren library). Switch the bell on for a title (here or on its info page) to get a pop-up for a new episode or a digital release."
+msgstr "De kalender toont de series en films uit je Trakt-collectie (Seren-bibliotheek). Zet de bel aan bij een titel (hier of op de infopagina) voor een pop-up bij een nieuwe aflevering of digitale release."
+
+msgctxt "#31230"
+msgid "Typing on a keyboard:  Enter = done   ·   Esc = cancel   ·   Backspace = delete"
+msgstr "Met een toetsenbord:  Enter = klaar   ·   Esc = annuleren   ·   Backspace = wissen"
+
+msgctxt "#31232"
+msgid "Pop-up when a new version is available"
+msgstr "Pop-up bij een nieuwe versie"
+
+msgctxt "#31234"
+msgid "Subtitles"
+msgstr "Ondertitels"
+
+msgctxt "#31235"
+msgid "Lucent Subtitles searches OpenSubtitles, SubDL and Podnapisi at the same time; the Subtitles button in the player menu opens the list. Fill in your free accounts below."
+msgstr "Lucent Ondertitels zoekt tegelijk op OpenSubtitles, SubDL en Podnapisi; de knop Ondertitels in het spelermenu opent de lijst. Vul hieronder je gratis accounts in."
+
+msgctxt "#31236"
+msgid "Lucent Subtitles: accounts and keys"
+msgstr "Lucent Ondertitels: accounts en sleutels"
+
+msgctxt "#31237"
+msgid "Use as default"
+msgstr "Als standaard gebruiken"
+
+msgctxt "#31239"
+msgid "Show login screen on startup"
+msgstr "Inlogscherm tonen bij het opstarten"
+
+msgctxt "#31240"
+msgid "Log in automatically on startup"
+msgstr "Automatisch inloggen bij het opstarten"
+
+msgctxt "#31242"
+msgid "TV guide"
+msgstr "TV-gids"
+
+msgctxt "#31243"
+msgid "Channel down"
+msgstr "Kanaal omlaag"
+
+msgctxt "#31244"
+msgid "Channel up"
+msgstr "Kanaal omhoog"
+
+msgctxt "#31245"
+msgid "Record"
+msgstr "Opnemen"
+
+msgctxt "#31246"
+msgid "UP NEXT"
+msgstr "DAARNA"
+
+msgctxt "#31247"
+msgid "left"
+msgstr "over"
+
+msgctxt "#31248"
+msgid "RECENT"
+msgstr "RECENT"
+
+msgctxt "#31249"
+msgid "LIVE"
+msgstr "LIVE"
+
+msgctxt "#31250"
+msgid "Test: live TV instead of a trailer (temporary)"
+msgstr "Test: live-tv in plaats van trailer (tijdelijk)"
+
+msgctxt "#31254"
+msgid "Films and series from this studio"
+msgstr "Films en series van deze studio"
+
+msgctxt "#31260"
+msgid "Playback of video, music, discs and pictures, audio and subtitle language"
+msgstr "Afspelen van video, muziek, discs en foto's, taal van audio en ondertitels"
+
+msgctxt "#31261"
+msgid "Video playback, refresh rate, zoom and stretch"
+msgstr "Video afspelen, beeldfrequentie aanpassen, zoomen en uitrekken"
+
+msgctxt "#31262"
+msgid "Font, size, colour and position of subtitles"
+msgstr "Lettertype, grootte, kleur en plaats van ondertitels"
+
+msgctxt "#31263"
+msgid "Preferred audio and subtitle language"
+msgstr "Voorkeurstaal voor audio en ondertitels"
+
+msgctxt "#31264"
+msgid "Crossfade, visualisation and replay gain"
+msgstr "Overvloeien, visualisatie en volume-egalisatie"
+
+msgctxt "#31265"
+msgid "DVD and Blu-ray playback"
+msgstr "Afspelen van dvd en Blu-ray"
+
+msgctxt "#31266"
+msgid "Slideshow and picture display"
+msgstr "Diavoorstelling en foto's tonen"
+
+msgctxt "#31267"
+msgid "Library, file lists and how your media is shown"
+msgstr "Bibliotheek, bestandslijsten en hoe je media getoond wordt"
+
+msgctxt "#31268"
+msgid "Update the library, show watched and extra art"
+msgstr "Bibliotheek bijwerken, bekeken tonen en extra plaatjes"
+
+msgctxt "#31269"
+msgid "Video library: titles, flags, actors and trailers"
+msgstr "Videobibliotheek: titels, vlaggen, acteurs en trailers"
+
+msgctxt "#31270"
+msgid "Music library and tags"
+msgstr "Muziekbibliotheek en tags"
+
+msgctxt "#31271"
+msgid "Picture thumbnails and EXIF"
+msgstr "Miniaturen van foto's en EXIF"
+
+msgctxt "#31272"
+msgid "File lists: hide extensions, sort, delete and rename"
+msgstr "Bestandslijsten: extensies verbergen, sorteren, verwijderen en hernoemen"
+
+msgctxt "#31273"
+msgid "Live TV"
+msgstr "Live tv"
+
+msgctxt "#31274"
+msgid "Your IPTV channels, guide, recordings and parental control"
+msgstr "Je IPTV-zenders, de gids, opnames en kinderslot"
+
+msgctxt "#31275"
+msgid "Channel manager, groups and channel numbers"
+msgstr "Zenderbeheer, groepen en zendernummers"
+
+msgctxt "#31276"
+msgid "Guide: days to show, update interval"
+msgstr "Gids: aantal dagen, hoe vaak bijwerken"
+
+msgctxt "#31277"
+msgid "Playback: switch channels, start at the last channel"
+msgstr "Afspelen: zenders wisselen, starten op de laatste zender"
+
+msgctxt "#31278"
+msgid "Recordings: margins and file names"
+msgstr "Opnames: marges en bestandsnamen"
+
+msgctxt "#31279"
+msgid "Lock channels with a PIN code"
+msgstr "Zenders vergrendelen met een pincode"
+
+msgctxt "#31280"
+msgid "The PVR add-ons (IPTV Simple Client)"
+msgstr "De PVR-add-ons (IPTV Simple Client)"
+
+msgctxt "#31281"
+msgid "Skin, language, region, screensaver and start-up"
+msgstr "Skin, taal, regio, screensaver en opstarten"
+
+msgctxt "#31282"
+msgid "Choose the skin, zoom, sounds and RSS"
+msgstr "Skin kiezen, zoom, geluiden en RSS"
+
+msgctxt "#31283"
+msgid "Language, keyboard, time, date and units"
+msgstr "Taal, toetsenbord, tijd, datum en eenheden"
+
+msgctxt "#31284"
+msgid "Screensaver and when it starts"
+msgstr "Screensaver en wanneer die start"
+
+msgctxt "#31285"
+msgid "Start-up window and what Kodi shows first"
+msgstr "Startvenster en wat Kodi als eerste laat zien"
+
+msgctxt "#31286"
+msgid "Master lock with a code"
+msgstr "Hoofdvergrendeling met een code"
+
+msgctxt "#31287"
+msgid "Display, audio, input, internet and power"
+msgstr "Beeld, geluid, bediening, internet en energie"
+
+msgctxt "#31288"
+msgid "Resolution, refresh rate and calibration"
+msgstr "Resolutie, beeldfrequentie en kalibratie"
+
+msgctxt "#31289"
+msgid "Audio output, passthrough and channels"
+msgstr "Geluidsuitvoer, passthrough en kanalen"
+
+msgctxt "#31290"
+msgid "Remote, keyboard, mouse and peripherals"
+msgstr "Afstandsbediening, toetsenbord, muis en apparaten"
+
+msgctxt "#31291"
+msgid "Proxy and internet speed"
+msgstr "Proxy en internetsnelheid"
+
+msgctxt "#31292"
+msgid "Shut down when idle, wake-on-LAN"
+msgstr "Uitschakelen bij niets doen, wake-on-LAN"
+
+msgctxt "#31293"
+msgid "Unknown sources, updates and dependencies"
+msgstr "Onbekende bronnen, updates en afhankelijkheden"
+
+msgctxt "#31294"
+msgid "Debug logging for problems"
+msgstr "Debuglogboek bij problemen"
+
+msgctxt "#31295"
+msgid "Remote control, sharing and streaming between devices"
+msgstr "Bediening op afstand, delen en streamen tussen apparaten"
+
+msgctxt "#31296"
+msgid "Device name and zeroconf"
+msgstr "Apparaatnaam en zeroconf"
+
+msgctxt "#31297"
+msgid "Control from a phone app or web browser"
+msgstr "Bediening via een telefoon-app of webbrowser"
+
+msgctxt "#31298"
+msgid "Share your library with other devices"
+msgstr "Je bibliotheek delen met andere apparaten"
+
+msgctxt "#31299"
+msgid "Receive video and music from Apple devices"
+msgstr "Video en muziek ontvangen van Apple-apparaten"
+
+msgctxt "#31300"
+msgid "Windows network shares"
+msgstr "Windows-netwerkmappen"
+
+msgctxt "#31301"
+msgid "Install, update and manage add-ons"
+msgstr "Add-ons installeren, bijwerken en beheren"
+
+msgctxt "#31302"
+msgid "All add-ons you have installed"
+msgstr "Alle add-ons die je hebt geïnstalleerd"
+
+msgctxt "#31303"
+msgid "Browse the repositories you added"
+msgstr "Bladeren in de repositories die je hebt toegevoegd"
+
+msgctxt "#31304"
+msgid "Install an add-on or repository from a zip"
+msgstr "Een add-on of repository installeren uit een zip"
+
+msgctxt "#31305"
+msgid "Add-ons with a newer version"
+msgstr "Add-ons met een nieuwere versie"
+
+msgctxt "#31306"
+msgid "Search add-ons"
+msgstr "Add-ons zoeken"
+
+msgctxt "#31307"
+msgid "Find an add-on by name"
+msgstr "Een add-on zoeken op naam"
+
+msgctxt "#31308"
+msgid "Add-on settings"
+msgstr "Add-on-instellingen"
+
+msgctxt "#31309"
+msgid "Unknown sources, automatic updates"
+msgstr "Onbekende bronnen, automatisch bijwerken"
+
+msgctxt "#31310"
+msgid "Files and profiles"
+msgstr "Bestanden en profielen"
+
+msgctxt "#31311"
+msgid "Your files, sources, profiles, kids mode and backup"
+msgstr "Je bestanden, bronnen, profielen, kinderstand en back-up"
+
+msgctxt "#31312"
+msgid "Copy, move and delete files"
+msgstr "Bestanden kopiëren, verplaatsen en verwijderen"
+
+msgctxt "#31313"
+msgid "Profiles for every person in the house"
+msgstr "Profielen voor iedereen in huis"
+
+msgctxt "#31314"
+msgid "Hardware, storage, network, event log, self-test and safe log"
+msgstr "Hardware, opslag, netwerk, logboek, zelftest en veilig logboek"
+
+msgctxt "#31315"
+msgid "Kodi version, CPU, memory, storage and network"
+msgstr "Kodi-versie, processor, geheugen, opslag en netwerk"
+
+msgctxt "#31316"
+msgid "What Kodi did recently, with errors"
+msgstr "Wat Kodi de laatste tijd deed, met fouten"
+
+msgctxt "#31317"
+msgid "Look, home screen, menu, widgets and setup assistant of Lucent"
+msgstr "Uiterlijk, startscherm, menu, widgets en setup-assistent van Lucent"
+
+msgctxt "#31318"
+msgid "Theme, layout, info page, integrations and more"
+msgstr "Thema, indeling, infopagina, integraties en meer"
+
+msgctxt "#31319"
+msgid "Tabs of the side menu and the rows on Home"
+msgstr "Tabs van het zijmenu en de rijen op het startscherm"
+
+msgctxt "#31320"
+msgid "Calibrate the picture"
+msgstr "Beeld kalibreren"
+
+msgctxt "#31321"
+msgid "Fix black edges or a picture that falls off the screen"
+msgstr "Zwarte randen of beeld dat buiten de tv valt oplossen"
+
+msgctxt "#31322"
+msgid "Accounts, scraping, playback and the look of Seren"
+msgstr "Accounts, scrapen, afspelen en het uiterlijk van Seren"
+
+msgctxt "#31323"
+msgid "All Seren settings"
+msgstr "Alle Seren-instellingen"
+
+msgctxt "#31324"
+msgid "Open the settings of Seren"
+msgstr "De instellingen van Seren openen"
+
+msgctxt "#31325"
+msgid "Accounts"
+msgstr "Accounts"
+
+msgctxt "#31326"
+msgid "Trakt, Real-Debrid, Premiumize and AllDebrid"
+msgstr "Trakt, Real-Debrid, Premiumize en AllDebrid"
+
+msgctxt "#31327"
+msgid "Playback"
+msgstr "Afspelen"
+
+msgctxt "#31328"
+msgid "Source select, autoplay, Up Next and the playback watchdog"
+msgstr "Bronkeuze, automatisch afspelen, volgende aflevering en de afspeel-bewaker"
+
+msgctxt "#31400"
+msgid "Closed"
+msgstr "Gesloten"
+
+msgctxt "#31401"
+msgid "Open"
+msgstr "Open"
+
+msgctxt "#31402"
+msgid "Colour theme, scale, clock and screensaver"
+msgstr "Kleurthema, schaal, klok en screensaver"
+
+msgctxt "#31403"
+msgid "Home screen, cards and the info page"
+msgstr "Startscherm, kaarten en de infopagina"
+
+msgctxt "#31404"
+msgid "Tabs, rows, streaming services and the power menu"
+msgstr "Tabs, rijen, streamingdiensten en het afsluitmenu"
+
+msgctxt "#31405"
+msgid "Player, subtitles and the pause screen"
+msgstr "Speler, ondertitels en het pauzescherm"
+
+msgctxt "#31406"
+msgid "Seren, TMDB and subtitles"
+msgstr "Seren, TMDB en ondertitels"
+
+msgctxt "#31407"
+msgid "Trakt and the calendar"
+msgstr "Trakt en de kalender"
+
+msgctxt "#31408"
+msgid "Profiles for everyone in the house"
+msgstr "Profielen voor iedereen in huis"
+
+msgctxt "#31409"
+msgid "Picture calibration, system info and resetting"
+msgstr "Beeld kalibreren, systeeminfo en herstellen"
+
+msgctxt "#31411"
+msgid "Seren settings"
+msgstr "Seren-instellingen"
+
+msgctxt "#31412"
+msgid "Accent colour of the focus, buttons and glow"
+msgstr "Accentkleur van de focus, knoppen en gloed"
+
+msgctxt "#31413"
+msgid "AMOLED mode"
+msgstr "AMOLED-modus"
+
+msgctxt "#31414"
+msgid "Pure black surfaces, saves power on OLED screens"
+msgstr "Puur zwarte vlakken, zuiniger op OLED-schermen"
+
+msgctxt "#31415"
+msgid "Make everything a bit larger or smaller"
+msgstr "Alles iets groter of kleiner maken"
+
+msgctxt "#31416"
+msgid "Language, region and keyboard of Kodi"
+msgstr "Taal, regio en toetsenbord van Kodi"
+
+msgctxt "#31417"
+msgid "Clock at the top right of every screen"
+msgstr "Klok rechtsboven in elk scherm"
+
+msgctxt "#31418"
+msgid "Darken the screen when you do nothing for a while"
+msgstr "Het scherm donkerder maken als je even niets doet"
+
+msgctxt "#31419"
+msgid "How long before the screen dims"
+msgstr "Hoe lang voordat het scherm dimt"
+
+msgctxt "#31420"
+msgid "How dark the screen gets"
+msgstr "Hoe donker het scherm wordt"
+
+msgctxt "#31421"
+msgid "Tabs of the side menu and the rows on Home"
+msgstr "Tabs van het zijmenu en de rijen op het startscherm"
+
+msgctxt "#31422"
+msgid "Title under every poster"
+msgstr "Titel onder elke poster"
+
+msgctxt "#31423"
+msgid "Wide cards instead of posters on Home"
+msgstr "Brede kaarten in plaats van posters op het startscherm"
+
+msgctxt "#31424"
+msgid "Show, dim or hide titles you have seen"
+msgstr "Titels die je hebt gezien tonen, dimmen of verbergen"
+
+msgctxt "#31425"
+msgid "No icons next to the closed side menu"
+msgstr "Geen pictogrammen naast het gesloten zijmenu"
+
+msgctxt "#31426"
+msgid "Day and month as well as the year"
+msgstr "Dag en maand naast het jaar"
+
+msgctxt "#31427"
+msgid "Enlarge the hero background so it fills the screen"
+msgstr "De hero-achtergrond vergroten zodat die het scherm vult"
+
+msgctxt "#31428"
+msgid "Play a trailer when a poster keeps the focus"
+msgstr "Een trailer spelen als een poster even focus houdt"
+
+msgctxt "#31429"
+msgid "How long to wait before the trailer starts"
+msgstr "Hoe lang wachten voordat de trailer start"
+
+msgctxt "#31430"
+msgid "Quality and login of the YouTube add-on"
+msgstr "Kwaliteit en login van de YouTube-add-on"
+
+msgctxt "#31431"
+msgid "Temporary test switch"
+msgstr "Tijdelijke testschakelaar"
+
+msgctxt "#31432"
+msgid "Glow around the card that has the focus"
+msgstr "Gloed rond de kaart met focus"
+
+msgctxt "#31433"
+msgid "IMDb, TMDB and Trakt scores on the info page"
+msgstr "Scores van IMDb, TMDB en Trakt op de infopagina"
+
+msgctxt "#31434"
+msgid "Rating logos"
+msgstr "Beoordelingslogo's"
+
+msgctxt "#31435"
+msgid "Your own logo images instead of the names"
+msgstr "Eigen logo-afbeeldingen in plaats van de namen"
+
+msgctxt "#31436"
+msgid "OK on a film opens its page"
+msgstr "OK op een film opent de pagina"
+
+msgctxt "#31437"
+msgid "Off: the stream starts at once"
+msgstr "Uit: de stream begint meteen"
+
+msgctxt "#31438"
+msgid "OK on an episode opens its page"
+msgstr "OK op een aflevering opent de pagina"
+
+msgctxt "#31439"
+msgid "Off: the stream starts at once"
+msgstr "Uit: de stream begint meteen"
+
+msgctxt "#31440"
+msgid "Trailer button on the info page"
+msgstr "Trailerknop op de infopagina"
+
+msgctxt "#31441"
+msgid "Install studio logos"
+msgstr "Studiologo's installeren"
+
+msgctxt "#31442"
+msgid "Logo pack for the studios on the info page"
+msgstr "Logopakket voor de studio's op de infopagina"
+
+msgctxt "#31443"
+msgid "Tabs of the side menu and the rows on Home"
+msgstr "Tabs van het zijmenu en de rijen op het startscherm"
+
+msgctxt "#31444"
+msgid "Put the tabs and rows back the way they were"
+msgstr "Tabs en rijen terugzetten zoals ze waren"
+
+msgctxt "#31445"
+msgid "Trakt, accounts and sources"
+msgstr "Trakt, accounts en bronnen"
+
+msgctxt "#31446"
+msgid "Video, sound and refresh rate of Kodi's player"
+msgstr "Video, geluid en beeldfrequentie van de Kodi-speler"
+
+msgctxt "#31447"
+msgid "Source select, autoplay, Up Next and the playback watchdog"
+msgstr "Bronkeuze, automatisch afspelen, volgende aflevering en de afspeel-bewaker"
+
+msgctxt "#31448"
+msgid "Preferred language for audio and subtitles"
+msgstr "Voorkeurstaal voor audio en ondertitels"
+
+msgctxt "#31449"
+msgid "When the info appears after you pause"
+msgstr "Wanneer de info verschijnt nadat je pauzeert"
+
+msgctxt "#31450"
+msgid "Picture and sound info"
+msgstr "Beeld- en geluidsinfo"
+
+msgctxt "#31451"
+msgid "Resolution, HDR and audio badges on the pause screen"
+msgstr "Resolutie, HDR en audiobadges op het pauzescherm"
+
+msgctxt "#31452"
+msgid "Use your own badge images"
+msgstr "Je eigen badge-afbeeldingen gebruiken"
+
+msgctxt "#31453"
+msgid "Trakt, accounts and sources"
+msgstr "Trakt, accounts en bronnen"
+
+msgctxt "#31454"
+msgid "Install and manage add-ons"
+msgstr "Add-ons installeren en beheren"
+
+msgctxt "#31455"
+msgid "Services"
+msgstr "Diensten"
+
+msgctxt "#31456"
+msgid "Remote control and sharing"
+msgstr "Bediening op afstand en delen"
+
+msgctxt "#31457"
+msgid "TMDB API key"
+msgstr "TMDB API-sleutel"
+
+msgctxt "#31458"
+msgid "For cast, collections, studios and the pages opened from them"
+msgstr "Voor acteurs, collecties, studio's en de pagina's die je daarvandaan opent"
+
+msgctxt "#31459"
+msgid "Accounts and keys (OpenSubtitles, SubDL), sources"
+msgstr "Accounts en sleutels (OpenSubtitles, SubDL), bronnen"
+
+msgctxt "#31460"
+msgid "Lucent Subtitles for all films and series"
+msgstr "Lucent Ondertitels voor alle films en series"
+
+msgctxt "#31461"
+msgid "Search automatically"
+msgstr "Automatisch zoeken"
+
+msgctxt "#31462"
+msgid "When a video starts without subtitles in your language: off, show the list, or choose one by itself in the background"
+msgstr "Als een video start zonder ondertitels in jouw taal: uit, de lijst laten zien, of zelf eentje kiezen op de achtergrond"
+
+msgctxt "#31465"
+msgid "Log in to Trakt in Seren"
+msgstr "Inloggen bij Trakt in Seren"
+
+msgctxt "#31466"
+msgid "Notification when a followed series has a new episode"
+msgstr "Melding als een gevolgde serie een nieuwe aflevering heeft"
+
+msgctxt "#31467"
+msgid "Week, list and month view"
+msgstr "Week-, lijst- en maandoverzicht"
+
+msgctxt "#31468"
+msgid "Photo, own colour theme and Who is watching? at start (switch on Login screen)"
+msgstr "Foto, eigen kleurthema en 'Wie kijkt er?' bij het opstarten (zet Inlogscherm aan)"
+
+msgctxt "#31469"
+msgid "Calibrate the picture"
+msgstr "Beeld kalibreren"
+
+msgctxt "#31470"
+msgid "Fix black edges or a picture that is too large"
+msgstr "Zwarte randen of te groot beeld oplossen"
+
+msgctxt "#31471"
+msgid "Display settings"
+msgstr "Beeldscherminstellingen"
+
+msgctxt "#31472"
+msgid "Resolution and refresh rate"
+msgstr "Resolutie en beeldfrequentie"
+
+msgctxt "#31473"
+msgid "Version, processor, memory and storage"
+msgstr "Versie, processor, geheugen en opslag"
+
+msgctxt "#31474"
+msgid "What Kodi did recently"
+msgstr "Wat Kodi de laatste tijd deed"
+
+msgctxt "#31475"
+msgid "Reload Lucent without restarting Kodi"
+msgstr "Lucent herladen zonder Kodi te herstarten"
+
+msgctxt "#31476"
+msgid "All Lucent settings back to their defaults"
+msgstr "Alle Lucent-instellingen terug naar standaard"
+
+msgctxt "#31477"
+msgid "Skin debug"
+msgstr "Skin-debug"
+
+msgctxt "#31478"
+msgid "Shows the names of windows and controls"
+msgstr "Toont de namen van vensters en onderdelen"
+
+msgctxt "#31480"
+msgid "Rows, posters and what you see on Home"
+msgstr "Rijen, posters en wat je op het startscherm ziet"
+
+msgctxt "#31481"
+msgid "Trailer on a poster that has the focus"
+msgstr "Trailer op een poster met focus"
+
+msgctxt "#31482"
+msgid "Look of the cards"
+msgstr "Uiterlijk van de kaarten"
+
+msgctxt "#31483"
+msgid "Ratings, buttons and what OK does"
+msgstr "Beoordelingen, knoppen en wat OK doet"
+
+msgctxt "#31484"
+msgid "Seren, add-ons, services and TMDB"
+msgstr "Seren, add-ons, diensten en TMDB"
+
+msgctxt "#31485"
+msgid "Search subtitles from the player"
+msgstr "Ondertitels zoeken vanuit de speler"
+
+msgctxt "#31500"
+msgid "Version"
+msgstr "Versie"
+
+msgctxt "#31501"
+msgid "Made by Wilfried with Claude  ·  design inspired by Nuvio Arc"
+msgstr "Gemaakt door Wilfried met Claude  ·  ontwerp geïnspireerd door Nuvio Arc"
+
+msgctxt "#31502"
+msgid "for Kodi"
+msgstr "voor Kodi"
+
+msgctxt "#31510"
+msgid "Licences and credits"
+msgstr "Licenties en naamsvermelding"
+
+msgctxt "#31512"
+msgid "DATA AND SERVICES"
+msgstr "GEGEVENS EN DIENSTEN"
+
+msgctxt "#31513"
+msgid "Cast, collections, studios and the pages opened from them use the TMDB API, but Lucent is not endorsed or certified by TMDB."
+msgstr "Acteurs, collecties, studio's en de pagina's die je daarvandaan opent gebruiken de TMDB-API, maar Lucent wordt niet goedgekeurd of gecertificeerd door TMDB."
+
+msgctxt "#31514"
+msgid "Watch history, watchlist, lists and the calendar, through your Trakt login in Seren. Lucent is not affiliated with Trakt."
+msgstr "Kijkgeschiedenis, kijklijst, lijsten en de kalender, via je Trakt-login in Seren. Lucent is niet verbonden aan Trakt."
+
+msgctxt "#31515"
+msgid "Air times in the calendar, from the free TVmaze API (CC BY-SA)."
+msgstr "Uitzendtijden in de kalender, uit de gratis TVmaze-API (CC BY-SA)."
+
+msgctxt "#31516"
+msgid "Games, scores, tables and Formula 1 data on the Sport tab. Lucent is not affiliated with ESPN."
+msgstr "Wedstrijden, uitslagen, standen en Formule 1-gegevens op de Sport-tab. Lucent is niet verbonden aan ESPN."
+
+msgctxt "#31517"
+msgid "ADD-ONS, FONT AND DESIGN"
+msgstr "ADD-ONS, LETTERTYPE EN ONTWERP"
+
+msgctxt "#31518"
+msgid "Home rows, sources and playing go through the Seren add-on by Nixgates. Lucent is not affiliated with Seren."
+msgstr "De rijen op het startscherm, bronnen en afspelen lopen via de Seren-add-on van Nixgates. Lucent is niet verbonden aan Seren."
+
+msgctxt "#31519"
+msgid "Trailers play through the YouTube add-on for Kodi."
+msgstr "Trailers spelen af via de YouTube-add-on voor Kodi."
+
+msgctxt "#31520"
+msgid "Subtitles (via Lucent Subtitles)."
+msgstr "Ondertitels (via Lucent Ondertitels)."
+
+msgctxt "#31521"
+msgid "Studio logos"
+msgstr "Studiologo's"
+
+msgctxt "#31522"
+msgid "White and coloured studio logo packs from the official Kodi repository."
+msgstr "Witte en gekleurde studiologo-pakketten uit de officiële Kodi-repository."
+
+msgctxt "#31523"
+msgid "Font by Rasmus Andersson, SIL Open Font License 1.1."
+msgstr "Lettertype van Rasmus Andersson, SIL Open Font License 1.1."
+
+msgctxt "#31524"
+msgid "The design is inspired by Nuvio Arc, a fork of Nuvio TV by ysosrs123. Lucent is not affiliated with it."
+msgstr "Het ontwerp is geïnspireerd door Nuvio Arc, een fork van Nuvio TV door ysosrs123. Lucent is daar niet aan verbonden."
+
+msgctxt "#31525"
+msgid "Lucent is a skin for Kodi. Kodi is a trademark of the XBMC Foundation."
+msgstr "Lucent is een skin voor Kodi. Kodi is een handelsmerk van de XBMC Foundation."
+
+msgctxt "#31329"
+msgid "Version, news, updates, licences and credits"
+msgstr "Versie, nieuws, updates, licenties en naamsvermelding"
+
+msgctxt "#31330"
+msgid "About Lucent"
+msgstr "Over Lucent"
+
+msgctxt "#31331"
+msgid "Logo, version, update options and licences"
+msgstr "Logo, versie, update-opties en licenties"
+
+msgctxt "#31332"
+msgid "Check for updates now"
+msgstr "Nu op updates controleren"
+
+msgctxt "#31333"
+msgid "Look for a new version of Lucent"
+msgstr "Zoeken naar een nieuwe versie van Lucent"
+
+msgctxt "#31334"
+msgid "Automatic updates by Kodi"
+msgstr "Automatisch bijwerken door Kodi"
+
+msgctxt "#31335"
+msgid "Kodi installs new versions from the Lucent Repository"
+msgstr "Kodi installeert nieuwe versies uit de Lucent Repository"
+
+msgctxt "#31336"
+msgid "What's new"
+msgstr "Wat is er nieuw"
+
+msgctxt "#31337"
+msgid "The changes of every version"
+msgstr "De wijzigingen van elke versie"
+
+msgctxt "#31530"
+msgid "What's new"
+msgstr "Wat is er nieuw"
+
+msgctxt "#31531"
+msgid "Watch on"
+msgstr "Te zien op"
+
+msgctxt "#31532"
+msgid "Streaming data: JustWatch via TMDB"
+msgstr "Streaminggegevens: JustWatch via TMDB"
+
+msgctxt "#31533"
+msgid "Colour from the poster"
+msgstr "Kleur van de poster"
+
+msgctxt "#31534"
+msgid "The background glows in the colour of the poster you are on"
+msgstr "De achtergrond gloeit mee in de kleur van de poster waar je op staat"
+
+msgctxt "#31535"
+msgid "Sport today"
+msgstr "Sport vandaag"
+
+msgctxt "#31537"
+msgid "OK: watch on"
+msgstr "OK: kijken op"
+
+msgctxt "#31538"
+msgid "No channel found yet – OK opens Sport"
+msgstr "Nog geen zender gevonden – OK opent Sport"
+
+msgctxt "#31539"
+msgid "Sport on the home screen"
+msgstr "Sport op het startscherm"
+
+msgctxt "#31540"
+msgid "A card with today's game of a team you follow, OK to watch"
+msgstr "Een kaart met de wedstrijd van vandaag van een team dat je volgt, OK om te kijken"
+
+msgctxt "#31541"
+msgid "watched"
+msgstr "gekeken"
+
+msgctxt "#31542"
+msgid "done at"
+msgstr "klaar om"
+
+msgctxt "#31543"
+msgid "Intro at start"
+msgstr "Intro bij het opstarten"
+
+msgctxt "#31544"
+msgid "The Lucent moon rises when Kodi starts (about 3 seconds)"
+msgstr "De Lucent-maan komt op als Kodi start (ongeveer 3 seconden)"
+
+msgctxt "#31545"
+msgid "Tonight for you"
+msgstr "Vanavond voor jou"
+
+msgctxt "#31546"
+msgid "A row on Home with titles like what you watched last, fitting the time of day"
+msgstr "Een rij op het startscherm met titels zoals wat je laatst keek, passend bij het moment van de dag"
+
+msgctxt "#31547"
+msgid "Films on my watchlist"
+msgstr "Films op mijn kijklijst"
+
+msgctxt "#31548"
+msgid "Pop-up when a film from your Trakt collection or watchlist comes out digitally, with where to watch it"
+msgstr "Pop-up als een film uit je Trakt-collectie of kijklijst digitaal uitkomt, met waar hij te zien is"
+
+msgctxt "#31549"
+msgid "Seasons"
+msgstr "Seizoensthema's"
+
+msgctxt "#31550"
+msgid "Halloween, Sinterklaas, Christmas with snow, New Year and King's Day on Home"
+msgstr "Halloween, Sinterklaas, Kerst met sneeuw, Oud en nieuw en Koningsdag op het startscherm"
+
+msgctxt "#31551"
+msgid "Light mode (2 GB boxes)"
+msgstr "Lichte modus (kastjes met 2 GB)"
+
+msgctxt "#31552"
+msgid "At most 6 rows per tab, small Seren artwork, no snow and no poster colour. The skin reloads once"
+msgstr "Hoogstens 6 rijen per tab, kleine afbeeldingen van Seren, geen sneeuw en geen posterkleur. De skin laadt één keer opnieuw"
+
+msgctxt "#31553"
+msgid "Keep the rows (faster)"
+msgstr "Rijen bewaren (sneller)"
+
+msgctxt "#31554"
+msgid "Home shows the last rows at once and refreshes them in the background"
+msgstr "Home toont meteen de laatste rijen en ververst ze op de achtergrond"
+
+msgctxt "#31555"
+msgid "Load rows as you go"
+msgstr "Rijen laden als je ernaartoe gaat"
+
+msgctxt "#31556"
+msgid "Only the top three rows load at start, the rest when you scroll down"
+msgstr "Alleen de bovenste drie rijen laden bij het starten, de rest als je naar beneden gaat"
+
+msgctxt "#31557"
+msgid "ENDED"
+msgstr "AFGELOPEN"
+
+msgctxt "#31558"
+msgid "CONTINUING"
+msgstr "LOOPT NOG"
+
+msgctxt "#31559"
+msgid "CANCELLED"
+msgstr "GESTOPT"
+
+msgctxt "#31560"
+msgid "COMING"
+msgstr "BINNENKORT"
+
+msgctxt "#31561"
+msgid "RELEASED"
+msgstr "UIT"
+
+msgctxt "#31562"
+msgid "seasons"
+msgstr "seizoenen"
+
+msgctxt "#31563"
+msgid "episodes"
+msgstr "afleveringen"
+
+msgctxt "#31564"
+msgid "watched"
+msgstr "gezien"
+
+msgctxt "#31565"
+msgid "Continue"
+msgstr "Verder kijken"
+
+msgctxt "#31566"
+msgid "More info"
+msgstr "Meer info"
+
+msgctxt "#31567"
+msgid "Seasons as tabs"
+msgstr "Seizoenen als tabs"
+
+msgctxt "#31568"
+msgid "Left / right: episode   ·   Up: choose a season   ·   OK: play via Seren"
+msgstr "Links / rechts: aflevering   ·   Omhoog: seizoen kiezen   ·   OK: afspelen via Seren"
+
+msgctxt "#31569"
+msgid "Series: seasons as tabs"
+msgstr "Series: seizoenen als tabs"
+
+msgctxt "#31570"
+msgid "Opening a series shows the seasons as tabs above the episodes"
+msgstr "Een serie openen toont de seizoenen als tabs boven de afleveringen"
+
+msgctxt "#31571"
+msgid "Showcase"
+msgstr "Uitgelicht"
+
+msgctxt "#31572"
+msgid "new"
+msgstr "nieuw"
+
+msgctxt "#31573"
+msgid "Lucent Library"
+msgstr "Lucent Bibliotheek"
+
+msgctxt "#31574"
+msgid "Your Trakt collection as a Kodi library: status and updates"
+msgstr "Je Trakt-collectie als Kodi-bibliotheek: stand en bijwerken"
+
+msgctxt "#31575"
+msgid "Update now"
+msgstr "Nu bijwerken"
+
+msgctxt "#31576"
+msgid "Update automatically"
+msgstr "Automatisch bijwerken"
+
+msgctxt "#31577"
+msgid "Only at start"
+msgstr "Alleen bij het starten"
+
+msgctxt "#31578"
+msgid "hours"
+msgstr "uur"
+
+msgctxt "#31579"
+msgid "Watched marks to Trakt"
+msgstr "Gezien-vinkjes naar Trakt"
+
+msgctxt "#31580"
+msgid "A watched mark you set by hand in Kodi goes to Trakt too"
+msgstr "Een vinkje dat je zelf in Kodi zet, gaat ook naar Trakt"
+
+msgctxt "#31581"
+msgid "Surprise me"
+msgstr "Verras me"
+
+msgctxt "#31582"
+msgid "Pick something from your library you have not seen yet"
+msgstr "Kies iets uit je bibliotheek dat je nog niet zag"
+
+msgctxt "#31583"
+msgid "films"
+msgstr "films"
+
+msgctxt "#31584"
+msgid "series"
+msgstr "series"
+
+msgctxt "#31585"
+msgid "last update"
+msgstr "laatst bijgewerkt"
+
+msgctxt "#31586"
+msgid "Also at start of Kodi; more often keeps new episodes up to date"
+msgstr "Ook bij het starten van Kodi; vaker houdt nieuwe afleveringen bij"
+
+msgctxt "#31587"
+msgid "Every"
+msgstr "Om de"
+
+msgctxt "#31588"
+msgid "Quick filters"
+msgstr "Snel filteren"
+
+msgctxt "#31589"
+msgid "Not watched"
+msgstr "Niet gezien"
+
+msgctxt "#31590"
+msgid "Genre"
+msgstr "Genre"
+
+msgctxt "#31591"
+msgid "Year"
+msgstr "Jaar"
+
+msgctxt "#31592"
+msgid "Shorter than 2 hours"
+msgstr "Korter dan 2 uur"
+
+msgctxt "#31593"
+msgid "Newly added"
+msgstr "Nieuw toegevoegd"
+
+msgctxt "#31594"
+msgid "of"
+msgstr "van"
+
+msgctxt "#31595"
+msgid "Watch the next one"
+msgstr "Kijk de volgende"
+
+msgctxt "#31596"
+msgid "Collection"
+msgstr "Collectie"
+
+msgctxt "#31597"
+msgid "Subtitles"
+msgstr "Ondertitels"
+
+msgctxt "#31599"
+msgid "Lucent subtitle list"
+msgstr "Lucent-ondertitellijst"
+
+msgctxt "#31600"
+msgid "All subtitle add-ons at once, your language first; opens by itself 5 seconds after a film starts (without pausing)"
+msgstr "Alle ondertitel-add-ons tegelijk, jouw taal eerst; gaat 5 seconden na de start vanzelf open (zonder te pauzeren)"
+
+msgctxt "#31601"
+msgid "AI translation"
+msgstr "AI-vertaling"
+
+msgctxt "#31602"
+msgid "No subtitle in your language? Gemini, OpenRouter or Claude translates one (your own key)"
+msgstr "Geen ondertitel in jouw taal? Gemini, OpenRouter of Claude vertaalt er een (met je eigen sleutel)"
+
+msgctxt "#31603"
+msgid "Set"
+msgstr "Ingesteld"
+
+msgctxt "#31604"
+msgid "Not set"
+msgstr "Niet ingesteld"
+
+msgctxt "#31605"
+msgid "Close"
+msgstr "Sluiten"
+
+msgctxt "#31606"
+msgid "Turn off subtitles"
+msgstr "Ondertitels uit"
+
+msgctxt "#31607"
+msgid "Search yourself"
+msgstr "Zelf zoeken"
+
+msgctxt "#31608"
+msgid "Important: first load your whole collection in Seren (Movies > My movies (collection) and TV shows > My shows (collection)) until everything is in. Lucent Library only takes over what Seren already knows; titles Seren has not loaded yet are added later."
+msgstr "Belangrijk: laad eerst je hele collectie in Seren (Films > Mijn films (collectie) en Series > Mijn series (collectie)) tot alles binnen is. Lucent Bibliotheek neemt alleen over wat Seren al kent; titels die Seren nog niet geladen heeft, komen er pas later bij."
+
+msgctxt "#31609"
+msgid "Sync"
+msgstr "Gelijkzetten"
+
+msgctxt "#31610"
+msgid "Sync subtitles automatically"
+msgstr "Ondertitels automatisch gelijkzetten"
+
+msgctxt "#31611"
+msgid "A subtitle that is not marked in sync is lined up with one that is"
+msgstr "Een ondertitel die niet gelijkloopt, wordt gelijkgezet met een die dat wel doet"
+
+msgctxt "#31612"
+msgid "Available groups"
+msgstr "Beschikbare groepen"
+
+msgctxt "#31613"
+msgid "Add group"
+msgstr "Groep toevoegen"
+
+msgctxt "#31614"
+msgid "Rename group"
+msgstr "Groep hernoemen"
+
+msgctxt "#31615"
+msgid "Delete group"
+msgstr "Groep verwijderen"
+
+msgctxt "#31616"
+msgid "Channel options"
+msgstr "Zenderopties"
+
+msgctxt "#31617"
+msgid "Other options"
+msgstr "Overige opties"
+
+msgctxt "#31619"
+msgid "Options"
+msgstr "Opties"
+
+msgctxt "#31620"
+msgid "Hide all groups"
+msgstr "Alle groepen verbergen"
+
+msgctxt "#31621"
+msgid "Show all groups"
+msgstr "Alle groepen tonen"
+
+msgctxt "#31622"
+msgid "Setup assistant"
+msgstr "Setup-assistent"
+
+msgctxt "#31623"
+msgid "The most important settings and logins, step by step"
+msgstr "De belangrijkste instellingen en inlogs, stap voor stap"
+
+msgctxt "#31624"
+msgid "▲  Press Up to read on"
+msgstr "▲  Druk omhoog om verder te lezen"
+
+msgctxt "#31625"
+msgid "Backup and restore"
+msgstr "Back-up en herstel"
+
+msgctxt "#31626"
+msgid "Save all your settings and logins in one file, and put them back"
+msgstr "Al je instellingen en inlogs in één bestand bewaren, en terugzetten"
+
+msgctxt "#31627"
+msgid "Sleep timer"
+msgstr "Slaaptimer"
+
+msgctxt "#31628"
+msgid "Kids mode"
+msgstr "Kinderstand"
+
+msgctxt "#31629"
+msgid "Only the menu items you choose, settings behind a PIN"
+msgstr "Alleen de menu-onderdelen die jij kiest, instellingen achter een pincode"
+
+msgctxt "#31630"
+msgid "Kids mode off"
+msgstr "Kinderstand uit"
+
+msgctxt "#31631"
+msgid "Search subtitles"
+msgstr "Ondertitels zoeken"
+
+msgctxt "#31632"
+msgid "Xtream login (IPTV)"
+msgstr "Xtream-inlog (IPTV)"
+
+msgctxt "#31633"
+msgid "Fill in your provider's server address, user name and password; Lucent sets up IPTV Simple"
+msgstr "Serveradres, gebruikersnaam en wachtwoord van je aanbieder invullen; Lucent stelt IPTV Simple in"
+
+msgctxt "#31634"
+msgid "Self-test"
+msgstr "Zelftest"
+
+msgctxt "#31635"
+msgid "Checks Seren, IPTV, subtitles and the channel list and tells you what is missing"
+msgstr "Controleert Seren, IPTV, ondertitels en de zenderlijst en zegt wat er mist"
+
+msgctxt "#31636"
+msgid "Safe log"
+msgstr "Veilig logboek"
+
+msgctxt "#31637"
+msgid "Copies Kodi's log with all logins blanked out, to share"
+msgstr "Kopieert het Kodi-logboek met alle logins weggehaald, om te delen"
+
+msgctxt "#31638"
+msgid "Goal notifications: on"
+msgstr "Doelpuntmeldingen: aan"
+
+msgctxt "#31639"
+msgid "Goal notifications: off"
+msgstr "Doelpuntmeldingen: uit"
+
+msgctxt "#31640"
+msgid "A pop-up when a team you follow scores (select to switch on / off)"
+msgstr "Een melding als een club die je volgt scoort (kies om aan/uit te zetten)"
+
+msgctxt "#31641"
+msgid "Add / remove channel in favourites"
+msgstr "Zender aan favorieten toevoegen of weghalen"
+
+msgctxt "#31642"
+msgid "Hide channels"
+msgstr "Zenders verbergen"
+
+msgctxt "#31643"
+msgid "Leave out groups and channels you never watch (shorter list, faster guide)"
+msgstr "Groepen en zenders weglaten die je nooit kijkt (kortere lijst, snellere gids)"
+
+msgctxt "#31644"
+msgid "Licences and credits"
+msgstr "Licenties en naamsvermelding"
+
+msgctxt "#31645"
+msgid "Libraries, fonts and artwork that Lucent uses"
+msgstr "Bibliotheken, lettertypen en beeldmateriaal die Lucent gebruikt"
+
+msgctxt "#31646"
+msgid "Update pop-up: on"
+msgstr "Update-melding: aan"
+
+msgctxt "#31647"
+msgid "Update pop-up: off"
+msgstr "Update-melding: uit"
+
+msgctxt "#31648"
+msgid "Light mode: on"
+msgstr "Lichte stand: aan"
+
+msgctxt "#31649"
+msgid "Light mode: off"
+msgstr "Lichte stand: uit"
+
+msgctxt "#31650"
+msgid "On: Home builds only 6 rows and uses small pictures (for boxes with 2 GB). Off: up to 10 rows"
+msgstr "Aan: Home bouwt maar 6 rijen en gebruikt kleine plaatjes (voor apparaten met 2 GB). Uit: tot 10 rijen"
+
+msgctxt "#31651"
+msgid "CoreELEC settings"
+msgstr "CoreELEC-instellingen"
+
+msgctxt "#31652"
+msgid "LibreELEC settings"
+msgstr "LibreELEC-instellingen"
+
+msgctxt "#31653"
+msgid "Network, Bluetooth, updates and system of this box"
+msgstr "Netwerk, Bluetooth, updates en systeem van dit apparaat"
+
+msgctxt "#31654"
+msgid "Power menu"
+msgstr "Afsluitmenu"
+
+msgctxt "#31655"
+msgid "Hide Kodi's own buttons, or add your own (Settings, an add-on, Reload skin…)"
+msgstr "Knoppen van Kodi verbergen of eigen knoppen toevoegen (Instellingen, een add-on, Skin herladen…)"
+
+msgctxt "#31656"
+msgid "Streaming services"
+msgstr "Streamingdiensten"
+
+msgctxt "#31657"
+msgid "Which services the 'Streaming services' row shows, their order and their pictures"
+msgstr "Welke diensten de rij 'Streamingdiensten' toont, de volgorde en de afbeeldingen"
+
+msgctxt "#31658"
+msgid "Hide films and series until you can watch them"
+msgstr "Films en series verbergen tot je ze kunt kijken"
+
+msgctxt "#31659"
+msgid "Films stay out of the Home rows until their digital release, series until their first episode has aired"
+msgstr "Films blijven uit de rijen op Home tot de digitale release, series tot de eerste aflevering is uitgezonden"
+
+msgctxt "#31660"
+msgid "Big posters on Home"
+msgstr "Grote posters op het startscherm"
+
+msgctxt "#31661"
+msgid "On: posters 15% bigger, without names. Off: the old, smaller posters, with the next row peeking in"
+msgstr "Aan: posters 15% groter, zonder namen. Uit: de oude, kleinere posters, waarbij de volgende rij net zichtbaar is"
+
+msgctxt "#31662"
+msgid "Off"
+msgstr "Uit"
+
+msgctxt "#31663"
+msgid "Show the list"
+msgstr "Lijst laten zien"
+
+msgctxt "#31664"
+msgid "In the background"
+msgstr "Op de achtergrond"
+
+msgctxt "#31665"
+msgid "In the background + AI"
+msgstr "Op de achtergrond + AI"
+
+
+msgctxt "#31666"
+msgid "Time & look"
+msgstr "Tijd & opmaak"
+
+msgctxt "#31667"
+msgid "Spoken language"
+msgstr "Gesproken taal"
+
+
+msgctxt "#31668"
+msgid "First and second choice for the sound of a film or episode"
+msgstr "Eerste en tweede keuze voor het geluid van een film of aflevering"
+
+msgctxt "#31669"
+msgid "Maintenance"
+msgstr "Onderhoud"
+
+msgctxt "#31670"
+msgid "Free up space: old pictures, add-on zip files and temporary files; also once a month by itself"
+msgstr "Ruimte vrijmaken: oude afbeeldingen, zip-bestanden van add-ons en tijdelijke bestanden; ook elke maand vanzelf"
+
+
+msgctxt "#31671"
+msgid "Skip"
+msgstr "Overslaan"
+
+
+msgctxt "#31672"
+msgid "OK to skip  ·  Back to keep watching"
+msgstr "OK om over te slaan  ·  Terug om verder te kijken"
+
+msgctxt "#31673"
+msgid "Photos of stadiums and race circuits."
+msgstr "Foto's van stadions en circuits."
+
+msgctxt "#31674"
+msgid "TV channel logos by tv-logo (CC BY-SA / BY-NC-SA). The logos belong to their owners."
+msgstr "Logo's van tv-zenders door tv-logo (CC BY-SA / BY-NC-SA). De logo's zijn van hun eigenaars."
+
+msgctxt "#31675"
+msgid "Coming up"
+msgstr "Binnenkort"
+
+msgctxt "#31676"
+msgid "Nothing coming up. Follow a series or film with the bell on its info page."
+msgstr "Er komt niets aan. Volg een serie of film met de bel op de infopagina."
+
+msgctxt "#31677"
+msgid "Today"
+msgstr "Vandaag"
+
+msgctxt "#31678"
+msgid "No games today. Choose clubs or competitions under Follow in Sport."
+msgstr "Vandaag geen wedstrijden. Kies clubs of competities bij Volgen in Sport."
+
+msgctxt "#31679"
+msgid "Next"
+msgstr "Hierna"
+
+msgctxt "#31680"
+msgid "No TV channels yet. Set up live TV in the setup assistant."
+msgstr "Nog geen tv-zenders. Stel live tv in via de setup-assistent."
+
+msgctxt "#31681"
+msgid "Look, rows, kids mode"
+msgstr "Uiterlijk, rijen, kindermodus"
+
+msgctxt "#31682"
+msgid "Menu and widgets"
+msgstr "Menu en widgets"
+
+msgctxt "#31683"
+msgid "Tabs and rows"
+msgstr "Tabs en rijen aanpassen"
+
+msgctxt "#31684"
+msgid "Player"
+msgstr "Speler"
+
+msgctxt "#31685"
+msgid "Buffer, picture and sound"
+msgstr "Buffer, beeld en geluid"
+
+msgctxt "#31686"
+msgid "Subtitles"
+msgstr "Ondertitels"
+
+msgctxt "#31687"
+msgid "Lucent Subtitles, languages"
+msgstr "Lucent Ondertitels, taal"
+
+msgctxt "#31688"
+msgid "Live TV"
+msgstr "Live tv"
+
+msgctxt "#31689"
+msgid "IPTV Simple, channels, guide"
+msgstr "IPTV Simple, zenders, gids"
+
+msgctxt "#31690"
+msgid "System"
+msgstr "Systeem"
+
+msgctxt "#31691"
+msgid "Display, network, storage"
+msgstr "Weergave, internet, opslag"
+
+msgctxt "#31692"
+msgid "Kodi has been running for"
+msgstr "Kodi draait al"
+
+msgctxt "#31693"
+msgid "Power off"
+msgstr "Afsluiten"
+
+msgctxt "#31694"
+msgid "Restart"
+msgstr "Herstarten"
+
+msgctxt "#31695"
+msgid "Sleep"
+msgstr "Slaapstand"
+
+msgctxt "#31696"
+msgid "Sleep timer"
+msgstr "Slaaptimer"
+
+msgctxt "#31697"
+msgid "Other profile"
+msgstr "Ander profiel"
+
+msgctxt "#31698"
+msgid "Video add-ons"
+msgstr "Video-add-ons"
+
+msgctxt "#31699"
+msgid "Program add-ons"
+msgstr "Programma's"
+
+msgctxt "#31700"
+msgid "Skin settings"
+msgstr "Skin-instellingen"
+
+msgctxt "#31701"
+msgid "Video add-on"
+msgstr "Video-add-on"
+
+msgctxt "#31702"
+msgid "version"
+msgstr "versie"
+
+msgctxt "#31703"
+msgid "Watch now"
+msgstr "Kijk nu"
+
+msgctxt "#31704"
+msgid "Remind me"
+msgstr "Herinner me"
+
+msgctxt "#31705"
+msgid "Full guide"
+msgstr "Hele gids"
+
+msgctxt "#31706"
+msgid "Audio"
+msgstr "Audio"
+
+msgctxt "#31707"
+msgid "More"
+msgstr "Meer"
+
+msgctxt "#31708"
+msgid "No guide for this channel"
+msgstr "Geen gids voor deze zender"
+
+msgctxt "#31709"
+msgid "Statistics"
+msgstr "Statistieken"
+
+msgctxt "#31710"
+msgid "Timeline"
+msgstr "Tijdlijn"
+
+msgctxt "#31711"
+msgid "Table"
+msgstr "Stand"
+
+msgctxt "#31712"
+msgid "Also live"
+msgstr "Ook live"
+
+msgctxt "#31713"
+msgid "Guide"
+msgstr "Gids"
+
+msgctxt "#31714"
+msgid "Subtitles / audio"
+msgstr "Ondertitels / audio"
+
+msgctxt "#31715"
+msgid "Box score"
+msgstr "Boxscore"
+
+msgctxt "#31716"
+msgid "Standings"
+msgstr "Stand"
+
+msgctxt "#31717"
+msgid "Positions"
+msgstr "Posities"
+
+msgctxt "#31718"
+msgid "Championship"
+msgstr "Kampioenschap"
+
+msgctxt "#31719"
+msgid "Next on"
+msgstr "Hierna op"
+
+msgctxt "#31720"
+msgid "ALSO LIVE  ·  OK SWITCHES"
+msgstr "OOK LIVE  ·  OK SCHAKELT OVER"
+
+msgctxt "#31721"
+msgid "GOALS"
+msgstr "DOELPUNTEN"
+
+msgctxt "#31722"
+msgid "No other live games on your channels right now."
+msgstr "Nu geen andere live wedstrijden op je zenders."
+
+msgctxt "#31723"
+msgid "TOP PLAYERS"
+msgstr "TOPSPELERS"
+
+msgctxt "#31724"
+msgid "Statistics come in during the game."
+msgstr "Statistieken komen binnen tijdens de wedstrijd."
+
+msgctxt "#31725"
+msgid "LIVE POSITIONS"
+msgstr "LIVE POSITIES"
+
+msgctxt "#31726"
+msgid "Player info"
+msgstr "Speler-info"
+
+msgctxt "#31727"
+msgid "Picture"
+msgstr "Beeld"
+
+msgctxt "#31728"
+msgid "Sound"
+msgstr "Geluid"
+
+msgctxt "#31729"
+msgid "Subtitles"
+msgstr "Ondertitels"
+
+msgctxt "#31730"
+msgid "Container"
+msgstr "Container"
+
+msgctxt "#31731"
+msgid "Resolution"
+msgstr "Resolutie"
+
+msgctxt "#31732"
+msgid "Track"
+msgstr "Spoor"
+
+msgctxt "#31733"
+msgid "Quality"
+msgstr "Kwaliteit"
+
+msgctxt "#31734"
+msgid "Temperature CPU"
+msgstr "Temperatuur CPU"
+
+msgctxt "#31735"
+msgid "Temperature GPU"
+msgstr "Temperatuur GPU"
+
+msgctxt "#31736"
+msgid "Render"
+msgstr "Render"
+
+msgctxt "#31737"
+msgid "Video queue"
+msgstr "Videowachtrij"
+
+msgctxt "#31738"
+msgid "Overview"
+msgstr "Overzicht"
+
+msgctxt "#31739"
+msgid "switch"
+msgstr "wisselen"
+
+msgctxt "#31740"
+msgid "Resolution"
+msgstr "Resolutie"
+
+msgctxt "#31741"
+msgid "Aspect ratio"
+msgstr "Beeldverhouding"
+
+msgctxt "#31742"
+msgid "Frame rate"
+msgstr "Beeldsnelheid"
+
+msgctxt "#31743"
+msgid "Scan"
+msgstr "Scan"
+
+msgctxt "#31744"
+msgid "Brightness · HDR"
+msgstr "Helderheid · HDR"
+
+msgctxt "#31745"
+msgid "Colour"
+msgstr "Kleur"
+
+msgctxt "#31746"
+msgid "From file to screen"
+msgstr "Van bestand naar scherm"
+
+msgctxt "#31747"
+msgid "Picture bitrate"
+msgstr "Beeld-bitrate"
+
+msgctxt "#31748"
+msgid "From file to your speakers"
+msgstr "Van bestand naar je luidsprekers"
+
+msgctxt "#31749"
+msgid "What you hear"
+msgstr "Wat je hoort"
+
+msgctxt "#31750"
+msgid "Output"
+msgstr "Uitvoer"
+
+msgctxt "#31751"
+msgid "Device"
+msgstr "Apparaat"
+
+msgctxt "#31752"
+msgid "Configuration"
+msgstr "Configuratie"
+
+msgctxt "#31753"
+msgid "Volume"
+msgstr "Volume"
+
+msgctxt "#31754"
+msgid "Audio queue"
+msgstr "Audiowachtrij"
+
+msgctxt "#31755"
+msgid "sofa"
+msgstr "bank"
+
+msgctxt "#31756"
+msgid "HEIGHT"
+msgstr "HOOGTE"
+
+msgctxt "#31757"
+msgid "Playing"
+msgstr "Speelt"
+
+msgctxt "#31758"
+msgid "Check for updates"
+msgstr "Op updates zoeken"
+
+msgctxt "#31759"
+msgid "Look for a new Lucent now"
+msgstr "Nu kijken of er een nieuwe Lucent is"
+
+msgctxt "#31760"
+msgid "Use my lists as library"
+msgstr "Mijn lijsten als bibliotheek"
+
+msgctxt "#31761"
+msgid "Off – only the Trakt collection"
+msgstr "Uit – alleen de Trakt-collectie"
+
+msgctxt "#31762"
+msgid "SOLIS · SOLAR PANELS"
+msgstr "SOLIS · ZONNEPANELEN"
+
+msgctxt "#31763"
+msgid "Solis now"
+msgstr "Solis nu"
+
+msgctxt "#31764"
+msgid "Watching"
+msgstr "Kijken"
+
+msgctxt "#31765"
+msgid "Seren and library"
+msgstr "Seren en bibliotheek"
+
+msgctxt "#31766"
+msgid "Help and info"
+msgstr "Hulp en info"
+
+msgctxt "#31767"
+msgid "Look, menu, streaming services, kids mode and the setup assistant"
+msgstr "Uiterlijk, menu, streamingdiensten, kinderstand en de setup-assistent"
+
+msgctxt "#31768"
+msgid "Playback, subtitles, language and skipping intros"
+msgstr "Afspelen, ondertitels, taal en intro's overslaan"
+
+msgctxt "#31769"
+msgid "Seren, your accounts and Lucent Library"
+msgstr "Seren, je accounts en Lucent Bibliotheek"
+
+msgctxt "#31770"
+msgid "Screen, sound, remote, network, language and screensaver"
+msgstr "Beeld, geluid, afstandsbediening, netwerk, taal en screensaver"
+
+msgctxt "#31771"
+msgid "What's new, updates, self-test and system information"
+msgstr "Wat is er nieuw, updates, zelftest en systeeminformatie"
+
+msgctxt "#31772"
+msgid "Lucent Subtitles"
+msgstr "Lucent Ondertitels"
+
+msgctxt "#31773"
+msgid "Accounts, keys and how subtitles are found"
+msgstr "Accounts, sleutels en hoe ondertitels gezocht worden"
+
+msgctxt "#31774"
+msgid "Automatic subtitle search"
+msgstr "Automatisch ondertitels zoeken"
+
+msgctxt "#31775"
+msgid "Off, show the list, or quietly in the background"
+msgstr "Uit, de lijst laten zien of stil op de achtergrond"
+
+msgctxt "#31777"
+msgid "Which sound a film starts with (first and second choice)"
+msgstr "Met welk geluid een film start (eerste en tweede keuze)"
+
+msgctxt "#31778"
+msgid "Skip intro"
+msgstr "Intro overslaan"
+
+msgctxt "#31779"
+msgid "TheIntroDB: skip the intro, recap and preview of episodes"
+msgstr "TheIntroDB: intro, terugblik en preview van afleveringen overslaan"
+
+msgctxt "#31780"
+msgid "Update Lucent Library"
+msgstr "Lucent Bibliotheek bijwerken"
+
+msgctxt "#31781"
+msgid "Put your collection and lists into Kodi's library now"
+msgstr "Je collectie en lijsten nu in de Kodi-bibliotheek zetten"
+
+msgctxt "#31782"
+msgid "Your own Trakt lists next to the collection, without its limit"
+msgstr "Je eigen Trakt-lijsten naast de collectie, zonder de limiet"
+
+msgctxt "#31783"
+msgid "Clean channel logos"
+msgstr "Nette zenderlogo's"
+
+msgctxt "#31784"
+msgid "Logos from tv-logos in the guide, the TV tab and the player (on or off)"
+msgstr "Logo's van tv-logos in de gids, het tv-tabblad en de speler (aan of uit)"
+
+msgctxt "#31785"
+msgid "Favourite channel group"
+msgstr "Favoriete zendergroep"
+
+msgctxt "#31786"
+msgid "Opens first in the guide and shows on the TV tab"
+msgstr "Opent als eerste in de gids en staat op het tv-tabblad"
+
+msgctxt "#31787"
+msgid "More Kodi settings"
+msgstr "Meer Kodi-instellingen"
+
+msgctxt "#31788"
+msgid "Music, discs, pictures, services and games"
+msgstr "Muziek, schijven, foto's, diensten en games"
+
+msgctxt "#31789"
+msgid "Sound to your amplifier"
+msgstr "Geluid naar je versterker"
+
+msgctxt "#31790"
+msgid "Set the volume there"
+msgstr "Het volume regel je daar"
+
+msgctxt "#31791"
+msgid "YouTube trailer fix"
+msgstr "YouTube-trailerfix"
+
+msgctxt "#31792"
+msgid "Keeps trailers from stopping after about a minute (bug in YouTube 7.4)"
+msgstr "Laat trailers na ongeveer een minuut niet meer stoppen (fout in YouTube 7.4)"
+
+msgctxt "#31793"
+msgid "Name and count above lists"
+msgstr "Naam en aantal boven lijsten"
+
+msgctxt "#31794"
+msgid "Shown (e.g. 'Red Light · 1647 items · Date') - choose to hide"
+msgstr "Getoond (bijv. 'Red Light · 1647 items · Datum') - kies om te verbergen"
+
+msgctxt "#31795"
+msgid "Hidden - choose to show again"
+msgstr "Verborgen - kies om weer te tonen"
+
+msgctxt "#31796"
+msgid "Scores (OMDb)"
+msgstr "Scores (OMDb)"
+
+msgctxt "#31797"
+msgid "IMDb, Rotten Tomatoes and Metacritic with your own free key"
+msgstr "IMDb, Rotten Tomatoes en Metacritic met je eigen gratis sleutel"
+
+msgctxt "#31798"
+msgid "Covers"
+msgstr "Hoezen"
+
+msgctxt "#31799"
+msgid "Subtitles always on"
+msgstr "Ondertitels altijd aan"
+
+msgctxt "#31800"
+msgid "Off - choose to switch on: every new video starts with a subtitle"
+msgstr "Uit - kies om aan te zetten: elke nieuwe video start met een ondertitel"
+
+msgctxt "#31801"
+msgid "On - every new video starts with a subtitle, also in your own language"
+msgstr "Aan - elke nieuwe video start met een ondertitel, ook in je eigen taal"
+
+msgctxt "#31802"
+msgid "Skip intro by"
+msgstr "Intro overslaan door"
+
+msgctxt "#31803"
+msgid "Seren and TheIntroDB both have a Skip intro button: choose which one you keep"
+msgstr "Seren en TheIntroDB hebben allebei een knop Intro overslaan: kies welke je houdt"
+
+msgctxt "#31804"
+msgid "Readable text on light pictures"
+msgstr "Leesbare tekst op lichte plaatjes"
+
+msgctxt "#31805"
+msgid "On - a dark edge around the texts and a darker fade behind them"
+msgstr "Aan - een donkere rand om de teksten en een donkerdere overloop erachter"
+
+msgctxt "#31806"
+msgid "Off - white text straight on the picture"
+msgstr "Uit - witte tekst direct op het plaatje"

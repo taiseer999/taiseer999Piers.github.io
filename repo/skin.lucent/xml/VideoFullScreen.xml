@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <onunload>Skin.Reset(nuvio.osdstats)</onunload>
+    <controls>
+        <!-- Buffering -->
+        <control type="group">
+            <visible>Player.Caching</visible>
+            <animation effect="fade" start="0" end="100" time="200" delay="300">Visible</animation>
+            <control type="group">
+                <left>888</left>
+                <top>468</top>
+                <control type="image">
+                    <left>-28</left>
+                    <top>-28</top>
+                    <width>200</width>
+                    <height>200</height>
+                    <texture>mask_circle.png</texture>
+                    <colordiffuse>bg_70</colordiffuse>
+                </control>
+                <control type="group">
+                    <left>40</left>
+                    <top>40</top>
+                    <include content="Spinner"><param name="size">64</param></include>
+                </control>
+            </control>
+            <control type="label">
+                <left>0</left>
+                <top>660</top>
+                <width>1920</width>
+                <height>40</height>
+                <align>center</align>
+                <font>font12_bold</font>
+                <label>$LOCALIZE[31077]$INFO[Player.CacheLevel,  ,%]</label>
+            </control>
+        </control>
+        <control type="group"><!-- statistics: drawn once, by the top-most player screen -->
+            <visible>!Window.IsVisible(videoosd) + !Window.IsVisible(fullscreeninfo) + !Window.IsVisible(seekbar)</visible>
+            <include>NuvioStatsPanel</include>
+        </control>
+        <!-- Codec info labels (filled by Kodi) -->
+        <control type="group">
+            <left>96</left>
+            <top>60</top>
+            <visible>Player.ShowInfo</visible>
+            <control type="label" id="10">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>34</height>
+                <font>font_mono</font>
+            </control>
+            <control type="label" id="11">
+                <left>0</left>
+                <top>34</top>
+                <width>1728</width>
+                <height>34</height>
+                <font>font_mono</font>
+            </control>
+            <control type="label" id="12">
+                <left>0</left>
+                <top>68</top>
+                <width>1728</width>
+                <height>34</height>
+                <font>font_mono</font>
+            </control>
+        </control>
+    
+
+
+<!-- sport: the scoreboard top left (P1) --><control type="group" id="9700"><left>729</left><top>40</top><visible>Pvr.IsPlayingTV + !String.IsEmpty(Window(Home).Property(live.sc.on)) + String.IsEmpty(Window(Home).Property(live.sc.race))</visible><control type="image"><left>-6</left><top>4</top><width>462</width><height>66</height><texture border="20">rr20.png</texture><colordiffuse>66000000</colordiffuse></control><control type="group"><visible>![String.IsEqual(Window(Home).Property(live.sc.sport),basketball) | String.IsEqual(Window(Home).Property(live.sc.sport),football) | String.IsEqual(Window(Home).Property(live.sc.sport),baseball)]</visible><control type="image"><left>0</left><top>0</top><width>150</width><height>62</height><texture border="20">rr20.png</texture><colordiffuse>$INFO[Window(Home).Property(live.sc.hcol)]</colordiffuse></control><control type="image"><left>130</left><top>0</top><width>120</width><height>62</height><texture>white.png</texture><colordiffuse>FF111318</colordiffuse></control><control type="image"><left>230</left><top>0</top><width>150</width><height>62</height><texture border="20">rr20.png</texture><colordiffuse>$INFO[Window(Home).Property(live.sc.acol)]</colordiffuse></control><control type="image"><left>250</left><top>0</top><width>30</width><height>62</height><texture>white.png</texture><colordiffuse>$INFO[Window(Home).Property(live.sc.acol)]</colordiffuse></control><control type="image"><left>366</left><top>0</top><width>96</width><height>62</height><texture border="20">rr20.png</texture><colordiffuse>FF111318</colordiffuse></control><control type="image"><left>366</left><top>0</top><width>20</width><height>62</height><texture>white.png</texture><colordiffuse>FF111318</colordiffuse></control><control type="image"><left>14</left><top>11</top><width>40</width><height>40</height><aspectratio>keep</aspectratio><texture background="true">$INFO[Window(Home).Property(live.sc.hlogo)]</texture></control><control type="label"><left>60</left><top>0</top><width>76</width><height>62</height><font>font13_bold</font><textcolor>FFFFFFFF</textcolor><align>left</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.h)]</label></control><control type="label"><left>150</left><top>0</top><width>80</width><height>62</height><font>font13_bold</font><textcolor>FFFFFFFF</textcolor><align>center</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.hs)] – $INFO[Window(Home).Property(live.sc.as)]</label></control><control type="label"><left>240</left><top>0</top><width>76</width><height>62</height><font>font13_bold</font><textcolor>FFFFFFFF</textcolor><align>center</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.a)]</label></control><control type="image"><left>318</left><top>11</top><width>40</width><height>40</height><aspectratio>keep</aspectratio><texture background="true">$INFO[Window(Home).Property(live.sc.alogo)]</texture></control><control type="label"><left>380</left><top>0</top><width>76</width><height>62</height><font>font13_bold</font><textcolor>FFFF8A80</textcolor><align>center</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.clock)]</label></control></control><control type="group"><visible>[String.IsEqual(Window(Home).Property(live.sc.sport),basketball) | String.IsEqual(Window(Home).Property(live.sc.sport),football) | String.IsEqual(Window(Home).Property(live.sc.sport),baseball)]</visible><control type="image"><left>0</left><top>0</top><width>150</width><height>62</height><texture border="20">rr20.png</texture><colordiffuse>$INFO[Window(Home).Property(live.sc.hcol)]</colordiffuse></control><control type="image"><left>130</left><top>0</top><width>150</width><height>62</height><texture>white.png</texture><colordiffuse>$INFO[Window(Home).Property(live.sc.acol)]</colordiffuse></control><control type="image"><left>260</left><top>0</top><width>200</width><height>62</height><texture border="20">rr20.png</texture><colordiffuse>FF111318</colordiffuse></control><control type="image"><left>260</left><top>0</top><width>20</width><height>62</height><texture>white.png</texture><colordiffuse>FF111318</colordiffuse></control><control type="label"><left>16</left><top>0</top><width>120</width><height>62</height><font>font13_bold</font><textcolor>FFFFFFFF</textcolor><align>left</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.h)]  $INFO[Window(Home).Property(live.sc.hs)]</label></control><control type="label"><left>146</left><top>0</top><width>120</width><height>62</height><font>font13_bold</font><textcolor>FFFFFFFF</textcolor><align>left</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.a)]  $INFO[Window(Home).Property(live.sc.as)]</label></control><control type="label"><left>270</left><top>0</top><width>180</width><height>62</height><font>font12_bold</font><textcolor>FFFFFFFF</textcolor><align>center</align><aligny>center</aligny><label>$INFO[Window(Home).Property(live.sc.clock)]</label></control></control></control>
+<!-- sport end -->
+</controls>
+</window>

@@ -1,0 +1,2514 @@
+# Kodi Media Center language file
+# Addon Name: Lucent
+# Addon id: skin.lucent
+msgid ""
+msgstr ""
+"Project-Id-Version: skin.lucent\n"
+"Language: ar_SA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgctxt "#31000"
+msgid "Default"
+msgstr "افتراضي"
+
+msgctxt "#31002"
+msgid "Search"
+msgstr "بحث"
+
+msgctxt "#31006"
+msgid "Add-ons"
+msgstr "الإضافات"
+
+msgctxt "#31009"
+msgid "Power"
+msgstr "الطاقة"
+
+msgctxt "#31018"
+msgid "Resume"
+msgstr "استئناف"
+
+msgctxt "#31020"
+msgid "Episodes"
+msgstr "الحلقات"
+
+msgctxt "#31022"
+msgid "View"
+msgstr "العرض"
+
+msgctxt "#31023"
+msgid "Sort"
+msgstr "الترتيب"
+
+msgctxt "#31024"
+msgid "Ascending"
+msgstr "تصاعدي"
+
+msgctxt "#31025"
+msgid "Descending"
+msgstr "تنازلي"
+
+msgctxt "#31031"
+msgid "List"
+msgstr "قائمة"
+
+msgctxt "#31032"
+msgid "Posters"
+msgstr "ملصقات"
+
+msgctxt "#31033"
+msgid "Poster wall"
+msgstr "جدار الملصقات"
+
+msgctxt "#31034"
+msgid "Landscape"
+msgstr "أفقي"
+
+msgctxt "#31036"
+msgid "items"
+msgstr "عناصر"
+
+msgctxt "#31038"
+msgid "Done"
+msgstr "تم"
+
+msgctxt "#31041"
+msgid "Space"
+msgstr "مسافة"
+
+msgctxt "#31042"
+msgid "Symbols"
+msgstr "رموز"
+
+msgctxt "#31043"
+msgid "Shift"
+msgstr "Shift"
+
+msgctxt "#31044"
+msgid "Caps"
+msgstr "أحرف كبيرة"
+
+msgctxt "#31047"
+msgid "Ends at"
+msgstr "ينتهي في"
+
+msgctxt "#31048"
+msgid "Subtitles"
+msgstr "الترجمة"
+
+msgctxt "#31049"
+msgid "Audio"
+msgstr "الصوت"
+
+msgctxt "#31050"
+msgid "Video settings"
+msgstr "إعدادات الفيديو"
+
+msgctxt "#31052"
+msgid "Bookmarks"
+msgstr "العلامات المرجعية"
+
+msgctxt "#31053"
+msgid "Stop"
+msgstr "إيقاف"
+
+msgctxt "#31054"
+msgid "Next"
+msgstr "التالي"
+
+msgctxt "#31055"
+msgid "Previous"
+msgstr "السابق"
+
+msgctxt "#31056"
+msgid "Information"
+msgstr "معلومات"
+
+msgctxt "#31060"
+msgid "Show clock"
+msgstr "إظهار الساعة"
+
+msgctxt "#31061"
+msgid "Season"
+msgstr "الموسم"
+
+msgctxt "#31063"
+msgid "Rating"
+msgstr "التقييم"
+
+msgctxt "#31064"
+msgid "File manager"
+msgstr "مدير الملفات"
+
+msgctxt "#31065"
+msgid "System info"
+msgstr "معلومات النظام"
+
+msgctxt "#31066"
+msgid "Profiles"
+msgstr "الملفات الشخصية"
+
+msgctxt "#31067"
+msgid "Skin settings"
+msgstr "إعدادات الواجهة"
+
+msgctxt "#31068"
+msgid "Player"
+msgstr "المشغّل"
+
+msgctxt "#31069"
+msgid "Media"
+msgstr "الوسائط"
+
+msgctxt "#31070"
+msgid "Interface"
+msgstr "الواجهة"
+
+msgctxt "#31071"
+msgid "System"
+msgstr "النظام"
+
+msgctxt "#31072"
+msgid "Services"
+msgstr "الخدمات"
+
+msgctxt "#31076"
+msgid "Pause"
+msgstr "إيقاف مؤقت"
+
+msgctxt "#31077"
+msgid "Buffering"
+msgstr "جارٍ التخزين المؤقت"
+
+msgctxt "#31078"
+msgid "Directed by"
+msgstr "إخراج"
+
+msgctxt "#31088"
+msgid "Nothing here yet"
+msgstr "لا شيء هنا بعد"
+
+msgctxt "#31089"
+msgid "Install Seren and connect Trakt to fill your home screen, or add movies and series to your Kodi library."
+msgstr "ثبّت Seren واربط Trakt لملء شاشتك الرئيسية، أو أضف أفلامًا ومسلسلات إلى مكتبة Kodi."
+
+msgctxt "#31094"
+msgid "This folder is empty"
+msgstr "هذا المجلد فارغ"
+
+msgctxt "#31095"
+msgid "Manual search"
+msgstr "بحث يدوي"
+
+msgctxt "#31096"
+msgid "Muted"
+msgstr "مكتوم"
+
+msgctxt "#31097"
+msgid "Back 10 seconds"
+msgstr "رجوع 10 ثوانٍ"
+
+msgctxt "#31098"
+msgid "Forward 30 seconds"
+msgstr "تقديم 30 ثانية"
+
+msgctxt "#31099"
+msgid "Dependencies"
+msgstr "الاعتماديات"
+
+msgctxt "#31100"
+msgid "Thumbnails"
+msgstr "الصور المصغّرة"
+
+msgctxt "#31101"
+msgid "Paths"
+msgstr "المسارات"
+
+msgctxt "#31102"
+msgid "Name"
+msgstr "الاسم"
+
+msgctxt "#31103"
+msgid "Who is watching?"
+msgstr "من يشاهد؟"
+
+msgctxt "#31104"
+msgid "This tab has no widgets yet. Add them in Settings → Skin settings → Customise menu and widgets."
+msgstr "لا تحتوي هذه العلامة على أدوات بعد. أضفها من الإعدادات ← إعدادات الواجهة ← تخصيص القائمة والأدوات."
+
+msgctxt "#31105"
+msgid "Customise menu and widgets"
+msgstr "تخصيص القائمة والأدوات"
+
+msgctxt "#31106"
+msgid "Restore the default menu"
+msgstr "استعادة القائمة الافتراضية"
+
+msgctxt "#31107"
+msgid "Screen"
+msgstr "الشاشة"
+
+msgctxt "#31111"
+msgid "Cast and crew"
+msgstr "طاقم التمثيل والعمل"
+
+msgctxt "#31112"
+msgid "Similar titles"
+msgstr "عناوين مشابهة"
+
+msgctxt "#31113"
+msgid "Production"
+msgstr "الإنتاج"
+
+msgctxt "#31114"
+msgid "Library and lists"
+msgstr "المكتبة والقوائم"
+
+msgctxt "#31115"
+msgid "Mark as watched"
+msgstr "تعليم كمُشاهَد"
+
+msgctxt "#31116"
+msgid "Watched"
+msgstr "مُشاهَد"
+
+msgctxt "#31119"
+msgid "Trailers"
+msgstr "الإعلانات التشويقية"
+
+msgctxt "#31120"
+msgid "Filmography"
+msgstr "الأعمال الفنية"
+
+msgctxt "#31130"
+msgid "Appearance"
+msgstr "المظهر"
+
+msgctxt "#31131"
+msgid "Layout"
+msgstr "التخطيط"
+
+msgctxt "#31132"
+msgid "Menu and widgets"
+msgstr "القائمة والأدوات"
+
+msgctxt "#31133"
+msgid "Playback"
+msgstr "التشغيل"
+
+msgctxt "#31134"
+msgid "Integrations"
+msgstr "التكاملات"
+
+msgctxt "#31135"
+msgid "Tracking"
+msgstr "التتبّع"
+
+msgctxt "#31136"
+msgid "Profiles"
+msgstr "الملفات الشخصية"
+
+msgctxt "#31137"
+msgid "Advanced"
+msgstr "متقدّم"
+
+msgctxt "#31138"
+msgid "About"
+msgstr "حول"
+
+msgctxt "#31140"
+msgid "Theme"
+msgstr "السمة"
+
+msgctxt "#31141"
+msgid "Colour theme"
+msgstr "سمة الألوان"
+
+msgctxt "#31143"
+msgid "Interface scale"
+msgstr "حجم الواجهة"
+
+msgctxt "#31144"
+msgid "Font and language"
+msgstr "الخط واللغة"
+
+msgctxt "#31145"
+msgid "Screensaver"
+msgstr "شاشة التوقف"
+
+msgctxt "#31146"
+msgid "Dim when idle"
+msgstr "تعتيم عند الخمول"
+
+msgctxt "#31147"
+msgid "Idle timeout"
+msgstr "مهلة الخمول"
+
+msgctxt "#31148"
+msgid "Dim strength"
+msgstr "شدة التعتيم"
+
+msgctxt "#31149"
+msgid "Home"
+msgstr "الرئيسية"
+
+msgctxt "#31150"
+msgid "Show poster labels"
+msgstr "إظهار أسماء الملصقات"
+
+msgctxt "#31151"
+msgid "Landscape posters"
+msgstr "ملصقات أفقية"
+
+msgctxt "#31152"
+msgid "Watched titles"
+msgstr "العناوين المُشاهَدة"
+
+msgctxt "#31153"
+msgid "Hide side icons"
+msgstr "إخفاء الأيقونات الجانبية"
+
+msgctxt "#31154"
+msgid "Show full release date"
+msgstr "إظهار تاريخ الإصدار كاملًا"
+
+msgctxt "#31155"
+msgid "Fullscreen hero backdrop"
+msgstr "خلفية رئيسية بملء الشاشة"
+
+msgctxt "#31156"
+msgid "Cards"
+msgstr "البطاقات"
+
+msgctxt "#31157"
+msgid "Edge glow"
+msgstr "توهّج الحواف"
+
+msgctxt "#31158"
+msgid "Details page"
+msgstr "صفحة التفاصيل"
+
+msgctxt "#31159"
+msgid "Show ratings"
+msgstr "إظهار التقييمات"
+
+msgctxt "#31161"
+msgid "Show trailer button"
+msgstr "إظهار زر الإعلان التشويقي"
+
+msgctxt "#31162"
+msgid "Menu, rows and services"
+msgstr "القائمة والصفوف والخدمات"
+
+msgctxt "#31164"
+msgid "Kodi player settings"
+msgstr "إعدادات مشغّل Kodi"
+
+msgctxt "#31165"
+msgid "Seren playback settings"
+msgstr "إعدادات التشغيل في Seren"
+
+msgctxt "#31166"
+msgid "Subtitles and audio language"
+msgstr "لغة الترجمة والصوت"
+
+msgctxt "#31167"
+msgid "Add-ons"
+msgstr "الإضافات"
+
+msgctxt "#31169"
+msgid "Trakt watch history, watchlist and lists are handled by Seren. Log in to Trakt in the Seren settings."
+msgstr "يتولّى Seren سجلّ المشاهدة وقائمة المشاهدة والقوائم في Trakt. سجّل الدخول إلى Trakt من إعدادات Seren."
+
+msgctxt "#31170"
+msgid "System information"
+msgstr "معلومات النظام"
+
+msgctxt "#31171"
+msgid "Event log"
+msgstr "سجلّ الأحداث"
+
+msgctxt "#31172"
+msgid "Reload skin"
+msgstr "إعادة تحميل الواجهة"
+
+msgctxt "#31173"
+msgid "Restore all skin settings"
+msgstr "استعادة جميع إعدادات الواجهة"
+
+msgctxt "#31174"
+msgid "Lucent - a cinematic glass skin for Kodi, made with Claude. Updates arrive automatically through the Lucent Repository."
+msgstr "Lucent - واجهة زجاجية سينمائية لـ Kodi، صُنعت بمساعدة Claude. تصل التحديثات تلقائيًا عبر مستودع Lucent."
+
+msgctxt "#31177"
+msgid "View options"
+msgstr "خيارات العرض"
+
+msgctxt "#31178"
+msgid "Other options"
+msgstr "خيارات أخرى"
+
+msgctxt "#31179"
+msgid "Order"
+msgstr "الترتيب"
+
+msgctxt "#31180"
+msgid "Filter"
+msgstr "التصفية"
+
+msgctxt "#31181"
+msgid "Skin settings"
+msgstr "إعدادات الواجهة"
+
+msgctxt "#31182"
+msgid "Pause screen"
+msgstr "شاشة الإيقاف المؤقت"
+
+msgctxt "#31183"
+msgid "Show info after"
+msgstr "إظهار المعلومات بعد"
+
+msgctxt "#31185"
+msgid "Your own picture and sound logos"
+msgstr "شعارات الصورة والصوت الخاصة بك"
+
+msgctxt "#31186"
+msgid "YOU'RE WATCHING"
+msgstr "أنت تشاهد"
+
+msgctxt "#31187"
+msgid "Statistics"
+msgstr "الإحصاءات"
+
+msgctxt "#31190"
+msgid "SOURCE"
+msgstr "المصدر"
+
+msgctxt "#31191"
+msgid "VIDEO"
+msgstr "الفيديو"
+
+msgctxt "#31192"
+msgid "AUDIO"
+msgstr "الصوت"
+
+msgctxt "#31193"
+msgid "NETWORK"
+msgstr "الشبكة"
+
+msgctxt "#31194"
+msgid "SYSTEM"
+msgstr "النظام"
+
+msgctxt "#31195"
+msgid "File"
+msgstr "الملف"
+
+msgctxt "#31196"
+msgid "Location"
+msgstr "الموقع"
+
+msgctxt "#31197"
+msgid "Type"
+msgstr "النوع"
+
+msgctxt "#31198"
+msgid "Bitrate"
+msgstr "معدّل البت"
+
+msgctxt "#31199"
+msgid "Video"
+msgstr "الفيديو"
+
+msgctxt "#31200"
+msgid "HDR"
+msgstr "HDR"
+
+msgctxt "#31201"
+msgid "Format"
+msgstr "الصيغة"
+
+msgctxt "#31202"
+msgid "Decoder"
+msgstr "مفكّك الترميز"
+
+msgctxt "#31203"
+msgid "Deinterlace"
+msgstr "إزالة التشابك"
+
+msgctxt "#31204"
+msgid "Display"
+msgstr "الشاشة"
+
+msgctxt "#31205"
+msgid "Queue"
+msgstr "قائمة الانتظار"
+
+msgctxt "#31206"
+msgid "Audio"
+msgstr "الصوت"
+
+msgctxt "#31207"
+msgid "Language"
+msgstr "اللغة"
+
+msgctxt "#31208"
+msgid "Buffer"
+msgstr "الذاكرة المؤقتة"
+
+msgctxt "#31210"
+msgid "CPU"
+msgstr "المعالج"
+
+msgctxt "#31211"
+msgid "Temperature"
+msgstr "درجة الحرارة"
+
+msgctxt "#31212"
+msgid "CPU clock"
+msgstr "تردد المعالج"
+
+msgctxt "#31213"
+msgid "Memory"
+msgstr "الذاكرة"
+
+msgctxt "#31215"
+msgid "Stream"
+msgstr "بث"
+
+msgctxt "#31216"
+msgid "Local file"
+msgstr "ملف محلي"
+
+msgctxt "#31217"
+msgid "hardware"
+msgstr "عتادي"
+
+msgctxt "#31218"
+msgid "software"
+msgstr "برمجي"
+
+msgctxt "#31219"
+msgid "Poster focus"
+msgstr "التركيز على الملصق"
+
+msgctxt "#31220"
+msgid "Trailer on focus"
+msgstr "إعلان تشويقي عند التركيز"
+
+msgctxt "#31221"
+msgid "Start trailer after"
+msgstr "بدء الإعلان التشويقي بعد"
+
+msgctxt "#31222"
+msgid "Trailers play through the YouTube add-on (installed with the skin)."
+msgstr "تُشغَّل الإعلانات التشويقية عبر إضافة YouTube (مثبّتة مع الواجهة)."
+
+msgctxt "#31223"
+msgid "YouTube add-on settings"
+msgstr "إعدادات إضافة YouTube"
+
+msgctxt "#31224"
+msgid "Calendar"
+msgstr "التقويم"
+
+msgctxt "#31225"
+msgid "Pop-up when a new episode is out"
+msgstr "نافذة منبثقة عند صدور حلقة جديدة"
+
+msgctxt "#31226"
+msgid "Open the calendar"
+msgstr "فتح التقويم"
+
+msgctxt "#31227"
+msgid "Calendar notification"
+msgstr "إشعار التقويم"
+
+msgctxt "#31228"
+msgid "Notification on"
+msgstr "الإشعار مفعّل"
+
+msgctxt "#31229"
+msgid "The calendar shows the series and films of your Trakt collection (Seren library). Switch the bell on for a title (here or on its info page) to get a pop-up for a new episode or a digital release."
+msgstr "يعرض التقويم المسلسلات والأفلام الموجودة في مجموعتك على Trakt (مكتبة Seren). فعّل الجرس لعنوانٍ ما (هنا أو في صفحة معلوماته) لتصلك نافذة منبثقة عند صدور حلقة جديدة أو إصدار رقمي."
+
+msgctxt "#31230"
+msgid "Typing on a keyboard:  Enter = done   ·   Esc = cancel   ·   Backspace = delete"
+msgstr "الكتابة بلوحة المفاتيح:  Enter = تم   ·   Esc = إلغاء   ·   Backspace = حذف"
+
+msgctxt "#31232"
+msgid "Pop-up when a new version is available"
+msgstr "نافذة منبثقة عند توفر إصدار جديد"
+
+msgctxt "#31234"
+msgid "Subtitles"
+msgstr "الترجمة"
+
+msgctxt "#31235"
+msgid "Lucent Subtitles searches OpenSubtitles, SubDL and Podnapisi at the same time; the Subtitles button in the player menu opens the list. Fill in your free accounts below."
+msgstr "يبحث Lucent Subtitles في OpenSubtitles وSubDL وPodnapisi في وقت واحد؛ ويفتح زر الترجمة في قائمة المشغّل القائمة. أدخل بيانات حساباتك المجانية أدناه."
+
+msgctxt "#31236"
+msgid "Lucent Subtitles: accounts and keys"
+msgstr "Lucent Subtitles: الحسابات والمفاتيح"
+
+msgctxt "#31237"
+msgid "Use as default"
+msgstr "استخدام كافتراضي"
+
+msgctxt "#31239"
+msgid "Show login screen on startup"
+msgstr "إظهار شاشة تسجيل الدخول عند البدء"
+
+msgctxt "#31240"
+msgid "Log in automatically on startup"
+msgstr "تسجيل الدخول تلقائيًا عند البدء"
+
+msgctxt "#31242"
+msgid "TV guide"
+msgstr "دليل البرامج"
+
+msgctxt "#31243"
+msgid "Channel down"
+msgstr "القناة السابقة"
+
+msgctxt "#31244"
+msgid "Channel up"
+msgstr "القناة التالية"
+
+msgctxt "#31245"
+msgid "Record"
+msgstr "تسجيل"
+
+msgctxt "#31246"
+msgid "UP NEXT"
+msgstr "التالي"
+
+msgctxt "#31247"
+msgid "left"
+msgstr "متبقٍّ"
+
+msgctxt "#31248"
+msgid "RECENT"
+msgstr "الأحدث"
+
+msgctxt "#31249"
+msgid "LIVE"
+msgstr "مباشر"
+
+msgctxt "#31250"
+msgid "Test: live TV instead of a trailer (temporary)"
+msgstr "اختبار: بث تلفزيوني مباشر بدلًا من الإعلان التشويقي (مؤقت)"
+
+msgctxt "#31254"
+msgid "Films and series from this studio"
+msgstr "أفلام ومسلسلات من هذا الاستوديو"
+
+msgctxt "#31260"
+msgid "Playback of video, music, discs and pictures, audio and subtitle language"
+msgstr "تشغيل الفيديو والموسيقى والأقراص والصور، ولغة الصوت والترجمة"
+
+msgctxt "#31261"
+msgid "Video playback, refresh rate, zoom and stretch"
+msgstr "تشغيل الفيديو ومعدّل التحديث والتكبير والتمديد"
+
+msgctxt "#31262"
+msgid "Font, size, colour and position of subtitles"
+msgstr "خط الترجمة وحجمها ولونها وموضعها"
+
+msgctxt "#31263"
+msgid "Preferred audio and subtitle language"
+msgstr "اللغة المفضّلة للصوت والترجمة"
+
+msgctxt "#31264"
+msgid "Crossfade, visualisation and replay gain"
+msgstr "التلاشي المتداخل والمؤثرات المرئية وموازنة مستوى الصوت"
+
+msgctxt "#31265"
+msgid "DVD and Blu-ray playback"
+msgstr "تشغيل أقراص DVD وBlu-ray"
+
+msgctxt "#31266"
+msgid "Slideshow and picture display"
+msgstr "عرض الشرائح وعرض الصور"
+
+msgctxt "#31267"
+msgid "Library, file lists and how your media is shown"
+msgstr "المكتبة وقوائم الملفات وطريقة عرض وسائطك"
+
+msgctxt "#31268"
+msgid "Update the library, show watched and extra art"
+msgstr "تحديث المكتبة وإظهار المُشاهَد والصور الإضافية"
+
+msgctxt "#31269"
+msgid "Video library: titles, flags, actors and trailers"
+msgstr "مكتبة الفيديو: العناوين والشارات والممثلون والإعلانات التشويقية"
+
+msgctxt "#31270"
+msgid "Music library and tags"
+msgstr "مكتبة الموسيقى والوسوم"
+
+msgctxt "#31271"
+msgid "Picture thumbnails and EXIF"
+msgstr "الصور المصغّرة للصور وبيانات EXIF"
+
+msgctxt "#31272"
+msgid "File lists: hide extensions, sort, delete and rename"
+msgstr "قوائم الملفات: إخفاء الامتدادات والترتيب والحذف وإعادة التسمية"
+
+msgctxt "#31273"
+msgid "Live TV"
+msgstr "التلفاز المباشر"
+
+msgctxt "#31274"
+msgid "Your IPTV channels, guide, recordings and parental control"
+msgstr "قنوات IPTV الخاصة بك والدليل والتسجيلات والرقابة الأبوية"
+
+msgctxt "#31275"
+msgid "Channel manager, groups and channel numbers"
+msgstr "مدير القنوات والمجموعات وأرقام القنوات"
+
+msgctxt "#31276"
+msgid "Guide: days to show, update interval"
+msgstr "الدليل: عدد الأيام المعروضة وفترة التحديث"
+
+msgctxt "#31277"
+msgid "Playback: switch channels, start at the last channel"
+msgstr "التشغيل: التنقل بين القنوات، والبدء بآخر قناة"
+
+msgctxt "#31278"
+msgid "Recordings: margins and file names"
+msgstr "التسجيلات: الهوامش وأسماء الملفات"
+
+msgctxt "#31279"
+msgid "Lock channels with a PIN code"
+msgstr "قفل القنوات برمز PIN"
+
+msgctxt "#31280"
+msgid "The PVR add-ons (IPTV Simple Client)"
+msgstr "إضافات PVR (IPTV Simple Client)"
+
+msgctxt "#31281"
+msgid "Skin, language, region, screensaver and start-up"
+msgstr "الواجهة واللغة والمنطقة وشاشة التوقف والبدء"
+
+msgctxt "#31282"
+msgid "Choose the skin, zoom, sounds and RSS"
+msgstr "اختيار الواجهة والتكبير والأصوات وRSS"
+
+msgctxt "#31283"
+msgid "Language, keyboard, time, date and units"
+msgstr "اللغة ولوحة المفاتيح والوقت والتاريخ والوحدات"
+
+msgctxt "#31284"
+msgid "Screensaver and when it starts"
+msgstr "شاشة التوقف ومتى تبدأ"
+
+msgctxt "#31285"
+msgid "Start-up window and what Kodi shows first"
+msgstr "نافذة البدء وما يعرضه Kodi أولًا"
+
+msgctxt "#31286"
+msgid "Master lock with a code"
+msgstr "القفل الرئيسي برمز"
+
+msgctxt "#31287"
+msgid "Display, audio, input, internet and power"
+msgstr "الشاشة والصوت والإدخال والإنترنت والطاقة"
+
+msgctxt "#31288"
+msgid "Resolution, refresh rate and calibration"
+msgstr "الدقة ومعدّل التحديث والمعايرة"
+
+msgctxt "#31289"
+msgid "Audio output, passthrough and channels"
+msgstr "مخرج الصوت والتمرير المباشر والقنوات"
+
+msgctxt "#31290"
+msgid "Remote, keyboard, mouse and peripherals"
+msgstr "جهاز التحكم ولوحة المفاتيح والفأرة والأجهزة الطرفية"
+
+msgctxt "#31291"
+msgid "Proxy and internet speed"
+msgstr "الوكيل وسرعة الإنترنت"
+
+msgctxt "#31292"
+msgid "Shut down when idle, wake-on-LAN"
+msgstr "الإيقاف عند الخمول، والتشغيل عبر الشبكة (Wake-on-LAN)"
+
+msgctxt "#31293"
+msgid "Unknown sources, updates and dependencies"
+msgstr "المصادر غير المعروفة والتحديثات والاعتماديات"
+
+msgctxt "#31294"
+msgid "Debug logging for problems"
+msgstr "سجلّ التصحيح لحل المشكلات"
+
+msgctxt "#31295"
+msgid "Remote control, sharing and streaming between devices"
+msgstr "التحكم عن بُعد والمشاركة والبث بين الأجهزة"
+
+msgctxt "#31296"
+msgid "Device name and zeroconf"
+msgstr "اسم الجهاز وZeroconf"
+
+msgctxt "#31297"
+msgid "Control from a phone app or web browser"
+msgstr "التحكم من تطبيق هاتف أو متصفح ويب"
+
+msgctxt "#31298"
+msgid "Share your library with other devices"
+msgstr "مشاركة مكتبتك مع أجهزة أخرى"
+
+msgctxt "#31299"
+msgid "Receive video and music from Apple devices"
+msgstr "استقبال الفيديو والموسيقى من أجهزة Apple"
+
+msgctxt "#31300"
+msgid "Windows network shares"
+msgstr "مشاركات شبكة Windows"
+
+msgctxt "#31301"
+msgid "Install, update and manage add-ons"
+msgstr "تثبيت الإضافات وتحديثها وإدارتها"
+
+msgctxt "#31302"
+msgid "All add-ons you have installed"
+msgstr "جميع الإضافات المثبّتة لديك"
+
+msgctxt "#31303"
+msgid "Browse the repositories you added"
+msgstr "تصفّح المستودعات التي أضفتها"
+
+msgctxt "#31304"
+msgid "Install an add-on or repository from a zip"
+msgstr "تثبيت إضافة أو مستودع من ملف zip"
+
+msgctxt "#31305"
+msgid "Add-ons with a newer version"
+msgstr "إضافات لها إصدار أحدث"
+
+msgctxt "#31306"
+msgid "Search add-ons"
+msgstr "البحث في الإضافات"
+
+msgctxt "#31307"
+msgid "Find an add-on by name"
+msgstr "العثور على إضافة بالاسم"
+
+msgctxt "#31308"
+msgid "Add-on settings"
+msgstr "إعدادات الإضافات"
+
+msgctxt "#31309"
+msgid "Unknown sources, automatic updates"
+msgstr "المصادر غير المعروفة والتحديثات التلقائية"
+
+msgctxt "#31310"
+msgid "Files and profiles"
+msgstr "الملفات والملفات الشخصية"
+
+msgctxt "#31311"
+msgid "Your files, sources, profiles, kids mode and backup"
+msgstr "ملفاتك والمصادر والملفات الشخصية ووضع الأطفال والنسخ الاحتياطي"
+
+msgctxt "#31312"
+msgid "Copy, move and delete files"
+msgstr "نسخ الملفات ونقلها وحذفها"
+
+msgctxt "#31313"
+msgid "Profiles for every person in the house"
+msgstr "ملفات شخصية لكل فرد في المنزل"
+
+msgctxt "#31314"
+msgid "Hardware, storage, network, event log, self-test and safe log"
+msgstr "العتاد والتخزين والشبكة وسجلّ الأحداث والفحص الذاتي والسجلّ الآمن"
+
+msgctxt "#31315"
+msgid "Kodi version, CPU, memory, storage and network"
+msgstr "إصدار Kodi والمعالج والذاكرة والتخزين والشبكة"
+
+msgctxt "#31316"
+msgid "What Kodi did recently, with errors"
+msgstr "ما قام به Kodi مؤخرًا، مع الأخطاء"
+
+msgctxt "#31317"
+msgid "Look, home screen, menu, widgets and setup assistant of Lucent"
+msgstr "مظهر Lucent والشاشة الرئيسية والقائمة والأدوات ومساعد الإعداد"
+
+msgctxt "#31318"
+msgid "Theme, layout, info page, integrations and more"
+msgstr "السمة والتخطيط وصفحة المعلومات والتكاملات والمزيد"
+
+msgctxt "#31319"
+msgid "Tabs of the side menu and the rows on Home"
+msgstr "علامات القائمة الجانبية والصفوف في الرئيسية"
+
+msgctxt "#31320"
+msgid "Calibrate the picture"
+msgstr "معايرة الصورة"
+
+msgctxt "#31321"
+msgid "Fix black edges or a picture that falls off the screen"
+msgstr "إصلاح الحواف السوداء أو صورة تتجاوز حدود الشاشة"
+
+msgctxt "#31322"
+msgid "Accounts, scraping, playback and the look of Seren"
+msgstr "الحسابات والكشط والتشغيل ومظهر Seren"
+
+msgctxt "#31323"
+msgid "All Seren settings"
+msgstr "جميع إعدادات Seren"
+
+msgctxt "#31324"
+msgid "Open the settings of Seren"
+msgstr "فتح إعدادات Seren"
+
+msgctxt "#31325"
+msgid "Accounts"
+msgstr "الحسابات"
+
+msgctxt "#31326"
+msgid "Trakt, Real-Debrid, Premiumize and AllDebrid"
+msgstr "Trakt وReal-Debrid وPremiumize وAllDebrid"
+
+msgctxt "#31327"
+msgid "Playback"
+msgstr "التشغيل"
+
+msgctxt "#31328"
+msgid "Source select, autoplay, Up Next and the playback watchdog"
+msgstr "اختيار المصدر والتشغيل التلقائي وUp Next ومراقب التشغيل"
+
+msgctxt "#31400"
+msgid "Closed"
+msgstr "مغلق"
+
+msgctxt "#31401"
+msgid "Open"
+msgstr "مفتوح"
+
+msgctxt "#31402"
+msgid "Colour theme, scale, clock and screensaver"
+msgstr "سمة الألوان والحجم والساعة وشاشة التوقف"
+
+msgctxt "#31403"
+msgid "Home screen, cards and the info page"
+msgstr "الشاشة الرئيسية والبطاقات وصفحة المعلومات"
+
+msgctxt "#31404"
+msgid "Tabs, rows, streaming services and the power menu"
+msgstr "العلامات والصفوف وخدمات البث وقائمة الطاقة"
+
+msgctxt "#31405"
+msgid "Player, subtitles and the pause screen"
+msgstr "المشغّل والترجمة وشاشة الإيقاف المؤقت"
+
+msgctxt "#31406"
+msgid "Seren, TMDB and subtitles"
+msgstr "Seren وTMDB والترجمة"
+
+msgctxt "#31407"
+msgid "Trakt and the calendar"
+msgstr "Trakt والتقويم"
+
+msgctxt "#31408"
+msgid "Profiles for everyone in the house"
+msgstr "ملفات شخصية لكل من في المنزل"
+
+msgctxt "#31409"
+msgid "Picture calibration, system info and resetting"
+msgstr "معايرة الصورة ومعلومات النظام وإعادة الضبط"
+
+msgctxt "#31411"
+msgid "Seren settings"
+msgstr "إعدادات Seren"
+
+msgctxt "#31412"
+msgid "Accent colour of the focus, buttons and glow"
+msgstr "لون التمييز للتركيز والأزرار والتوهّج"
+
+msgctxt "#31413"
+msgid "AMOLED mode"
+msgstr "وضع AMOLED"
+
+msgctxt "#31414"
+msgid "Pure black surfaces, saves power on OLED screens"
+msgstr "أسطح سوداء خالصة، توفّر الطاقة على شاشات OLED"
+
+msgctxt "#31415"
+msgid "Make everything a bit larger or smaller"
+msgstr "تكبير كل شيء أو تصغيره قليلًا"
+
+msgctxt "#31416"
+msgid "Language, region and keyboard of Kodi"
+msgstr "لغة Kodi ومنطقته ولوحة مفاتيحه"
+
+msgctxt "#31417"
+msgid "Clock at the top right of every screen"
+msgstr "ساعة أعلى يمين كل شاشة"
+
+msgctxt "#31418"
+msgid "Darken the screen when you do nothing for a while"
+msgstr "تعتيم الشاشة عند عدم القيام بأي شيء لفترة"
+
+msgctxt "#31419"
+msgid "How long before the screen dims"
+msgstr "المدة قبل أن تُعتَّم الشاشة"
+
+msgctxt "#31420"
+msgid "How dark the screen gets"
+msgstr "مدى إعتام الشاشة"
+
+msgctxt "#31421"
+msgid "Tabs of the side menu and the rows on Home"
+msgstr "علامات القائمة الجانبية والصفوف في الرئيسية"
+
+msgctxt "#31422"
+msgid "Title under every poster"
+msgstr "العنوان أسفل كل ملصق"
+
+msgctxt "#31423"
+msgid "Wide cards instead of posters on Home"
+msgstr "بطاقات عريضة بدلًا من الملصقات في الرئيسية"
+
+msgctxt "#31424"
+msgid "Show, dim or hide titles you have seen"
+msgstr "إظهار العناوين التي شاهدتها أو تعتيمها أو إخفاؤها"
+
+msgctxt "#31425"
+msgid "No icons next to the closed side menu"
+msgstr "بلا أيقونات بجوار القائمة الجانبية المغلقة"
+
+msgctxt "#31426"
+msgid "Day and month as well as the year"
+msgstr "اليوم والشهر إضافةً إلى السنة"
+
+msgctxt "#31427"
+msgid "Enlarge the hero background so it fills the screen"
+msgstr "تكبير الخلفية الرئيسية لتملأ الشاشة"
+
+msgctxt "#31428"
+msgid "Play a trailer when a poster keeps the focus"
+msgstr "تشغيل إعلان تشويقي عندما يبقى التركيز على ملصق"
+
+msgctxt "#31429"
+msgid "How long to wait before the trailer starts"
+msgstr "مدة الانتظار قبل بدء الإعلان التشويقي"
+
+msgctxt "#31430"
+msgid "Quality and login of the YouTube add-on"
+msgstr "جودة إضافة YouTube وتسجيل الدخول إليها"
+
+msgctxt "#31431"
+msgid "Temporary test switch"
+msgstr "مفتاح اختبار مؤقت"
+
+msgctxt "#31432"
+msgid "Glow around the card that has the focus"
+msgstr "توهّج حول البطاقة التي عليها التركيز"
+
+msgctxt "#31433"
+msgid "IMDb, TMDB and Trakt scores on the info page"
+msgstr "تقييمات IMDb وTMDB وTrakt في صفحة المعلومات"
+
+msgctxt "#31434"
+msgid "Rating logos"
+msgstr "شعارات التقييم"
+
+msgctxt "#31435"
+msgid "Your own logo images instead of the names"
+msgstr "صور شعاراتك الخاصة بدلًا من الأسماء"
+
+msgctxt "#31436"
+msgid "OK on a film opens its page"
+msgstr "الضغط على OK فوق فيلم يفتح صفحته"
+
+msgctxt "#31437"
+msgid "Off: the stream starts at once"
+msgstr "عند الإيقاف: يبدأ البث فورًا"
+
+msgctxt "#31438"
+msgid "OK on an episode opens its page"
+msgstr "الضغط على OK فوق حلقة يفتح صفحتها"
+
+msgctxt "#31439"
+msgid "Off: the stream starts at once"
+msgstr "عند الإيقاف: يبدأ البث فورًا"
+
+msgctxt "#31440"
+msgid "Trailer button on the info page"
+msgstr "زر الإعلان التشويقي في صفحة المعلومات"
+
+msgctxt "#31441"
+msgid "Install studio logos"
+msgstr "تثبيت شعارات الاستوديوهات"
+
+msgctxt "#31442"
+msgid "Logo pack for the studios on the info page"
+msgstr "حزمة شعارات للاستوديوهات في صفحة المعلومات"
+
+msgctxt "#31443"
+msgid "Tabs of the side menu and the rows on Home"
+msgstr "علامات القائمة الجانبية والصفوف في الرئيسية"
+
+msgctxt "#31444"
+msgid "Put the tabs and rows back the way they were"
+msgstr "إعادة العلامات والصفوف إلى ما كانت عليه"
+
+msgctxt "#31445"
+msgid "Trakt, accounts and sources"
+msgstr "Trakt والحسابات والمصادر"
+
+msgctxt "#31446"
+msgid "Video, sound and refresh rate of Kodi's player"
+msgstr "الفيديو والصوت ومعدّل التحديث في مشغّل Kodi"
+
+msgctxt "#31447"
+msgid "Source select, autoplay, Up Next and the playback watchdog"
+msgstr "اختيار المصدر والتشغيل التلقائي وUp Next ومراقب التشغيل"
+
+msgctxt "#31448"
+msgid "Preferred language for audio and subtitles"
+msgstr "اللغة المفضّلة للصوت والترجمة"
+
+msgctxt "#31449"
+msgid "When the info appears after you pause"
+msgstr "متى تظهر المعلومات بعد الإيقاف المؤقت"
+
+msgctxt "#31450"
+msgid "Picture and sound info"
+msgstr "معلومات الصورة والصوت"
+
+msgctxt "#31451"
+msgid "Resolution, HDR and audio badges on the pause screen"
+msgstr "شارات الدقة وHDR والصوت في شاشة الإيقاف المؤقت"
+
+msgctxt "#31452"
+msgid "Use your own badge images"
+msgstr "استخدام صور الشارات الخاصة بك"
+
+msgctxt "#31453"
+msgid "Trakt, accounts and sources"
+msgstr "Trakt والحسابات والمصادر"
+
+msgctxt "#31454"
+msgid "Install and manage add-ons"
+msgstr "تثبيت الإضافات وإدارتها"
+
+msgctxt "#31455"
+msgid "Services"
+msgstr "الخدمات"
+
+msgctxt "#31456"
+msgid "Remote control and sharing"
+msgstr "التحكم عن بُعد والمشاركة"
+
+msgctxt "#31457"
+msgid "TMDB API key"
+msgstr "مفتاح TMDB API"
+
+msgctxt "#31458"
+msgid "For cast, collections, studios and the pages opened from them"
+msgstr "لطاقم التمثيل والمجموعات والاستوديوهات والصفحات المفتوحة منها"
+
+msgctxt "#31459"
+msgid "Accounts and keys (OpenSubtitles, SubDL), sources"
+msgstr "الحسابات والمفاتيح (OpenSubtitles وSubDL)، والمصادر"
+
+msgctxt "#31460"
+msgid "Lucent Subtitles for all films and series"
+msgstr "Lucent Subtitles لجميع الأفلام والمسلسلات"
+
+msgctxt "#31461"
+msgid "Search automatically"
+msgstr "البحث تلقائيًا"
+
+msgctxt "#31462"
+msgid "When a video starts without subtitles in your language: off, show the list, or choose one by itself in the background"
+msgstr "عندما يبدأ فيديو بلا ترجمة بلغتك: إيقاف، أو إظهار القائمة، أو اختيار ترجمة تلقائيًا في الخلفية"
+
+msgctxt "#31465"
+msgid "Log in to Trakt in Seren"
+msgstr "سجّل الدخول إلى Trakt في Seren"
+
+msgctxt "#31466"
+msgid "Notification when a followed series has a new episode"
+msgstr "إشعار عند صدور حلقة جديدة لمسلسل تتابعه"
+
+msgctxt "#31467"
+msgid "Week, list and month view"
+msgstr "عرض أسبوعي وقائمة وشهري"
+
+msgctxt "#31468"
+msgid "Photo, own colour theme and Who is watching? at start (switch on Login screen)"
+msgstr "صورة، وسمة ألوان خاصة، و«من يشاهد؟» عند البدء (فعّلها من شاشة تسجيل الدخول)"
+
+msgctxt "#31469"
+msgid "Calibrate the picture"
+msgstr "معايرة الصورة"
+
+msgctxt "#31470"
+msgid "Fix black edges or a picture that is too large"
+msgstr "إصلاح الحواف السوداء أو صورة كبيرة جدًا"
+
+msgctxt "#31471"
+msgid "Display settings"
+msgstr "إعدادات الشاشة"
+
+msgctxt "#31472"
+msgid "Resolution and refresh rate"
+msgstr "الدقة ومعدّل التحديث"
+
+msgctxt "#31473"
+msgid "Version, processor, memory and storage"
+msgstr "الإصدار والمعالج والذاكرة والتخزين"
+
+msgctxt "#31474"
+msgid "What Kodi did recently"
+msgstr "ما قام به Kodi مؤخرًا"
+
+msgctxt "#31475"
+msgid "Reload Lucent without restarting Kodi"
+msgstr "إعادة تحميل Lucent دون إعادة تشغيل Kodi"
+
+msgctxt "#31476"
+msgid "All Lucent settings back to their defaults"
+msgstr "إعادة جميع إعدادات Lucent إلى قيمها الافتراضية"
+
+msgctxt "#31477"
+msgid "Skin debug"
+msgstr "تصحيح الواجهة"
+
+msgctxt "#31478"
+msgid "Shows the names of windows and controls"
+msgstr "يعرض أسماء النوافذ وعناصر التحكم"
+
+msgctxt "#31480"
+msgid "Rows, posters and what you see on Home"
+msgstr "الصفوف والملصقات وما تراه في الرئيسية"
+
+msgctxt "#31481"
+msgid "Trailer on a poster that has the focus"
+msgstr "إعلان تشويقي على الملصق الذي عليه التركيز"
+
+msgctxt "#31482"
+msgid "Look of the cards"
+msgstr "مظهر البطاقات"
+
+msgctxt "#31483"
+msgid "Ratings, buttons and what OK does"
+msgstr "التقييمات والأزرار ووظيفة OK"
+
+msgctxt "#31484"
+msgid "Seren, add-ons, services and TMDB"
+msgstr "Seren والإضافات والخدمات وTMDB"
+
+msgctxt "#31485"
+msgid "Search subtitles from the player"
+msgstr "البحث عن ترجمة من المشغّل"
+
+msgctxt "#31500"
+msgid "Version"
+msgstr "الإصدار"
+
+msgctxt "#31501"
+msgid "Made by Wilfried with Claude  ·  design inspired by Nuvio Arc"
+msgstr "صنعه Wilfried بمساعدة Claude  ·  التصميم مستوحى من Nuvio Arc"
+
+msgctxt "#31502"
+msgid "for Kodi"
+msgstr "لـ Kodi"
+
+msgctxt "#31510"
+msgid "Licences and credits"
+msgstr "التراخيص والإشادات"
+
+msgctxt "#31512"
+msgid "DATA AND SERVICES"
+msgstr "البيانات والخدمات"
+
+msgctxt "#31513"
+msgid "Cast, collections, studios and the pages opened from them use the TMDB API, but Lucent is not endorsed or certified by TMDB."
+msgstr "يستخدم طاقم التمثيل والمجموعات والاستوديوهات والصفحات المفتوحة منها واجهة TMDB API، لكن Lucent غير معتمد أو مصادق عليه من TMDB."
+
+msgctxt "#31514"
+msgid "Watch history, watchlist, lists and the calendar, through your Trakt login in Seren. Lucent is not affiliated with Trakt."
+msgstr "سجلّ المشاهدة وقائمة المشاهدة والقوائم والتقويم، عبر تسجيل دخولك إلى Trakt في Seren. Lucent غير تابع لـ Trakt."
+
+msgctxt "#31515"
+msgid "Air times in the calendar, from the free TVmaze API (CC BY-SA)."
+msgstr "مواعيد البث في التقويم، من واجهة TVmaze API المجانية (CC BY-SA)."
+
+msgctxt "#31516"
+msgid "Games, scores, tables and Formula 1 data on the Sport tab. Lucent is not affiliated with ESPN."
+msgstr "المباريات والنتائج والجداول وبيانات الفورمولا 1 في علامة الرياضة. Lucent غير تابع لـ ESPN."
+
+msgctxt "#31517"
+msgid "ADD-ONS, FONT AND DESIGN"
+msgstr "الإضافات والخط والتصميم"
+
+msgctxt "#31518"
+msgid "Home rows, sources and playing go through the Seren add-on by Nixgates. Lucent is not affiliated with Seren."
+msgstr "تمرّ صفوف الرئيسية والمصادر والتشغيل عبر إضافة Seren من Nixgates. Lucent غير تابع لـ Seren."
+
+msgctxt "#31519"
+msgid "Trailers play through the YouTube add-on for Kodi."
+msgstr "تُشغَّل الإعلانات التشويقية عبر إضافة YouTube لـ Kodi."
+
+msgctxt "#31520"
+msgid "Subtitles (via Lucent Subtitles)."
+msgstr "الترجمة (عبر Lucent Subtitles)."
+
+msgctxt "#31521"
+msgid "Studio logos"
+msgstr "شعارات الاستوديوهات"
+
+msgctxt "#31522"
+msgid "White and coloured studio logo packs from the official Kodi repository."
+msgstr "حزم شعارات الاستوديوهات البيضاء والملوّنة من مستودع Kodi الرسمي."
+
+msgctxt "#31523"
+msgid "Font by Rasmus Andersson, SIL Open Font License 1.1."
+msgstr "الخط من تصميم Rasmus Andersson، برخصة SIL Open Font License 1.1."
+
+msgctxt "#31524"
+msgid "The design is inspired by Nuvio Arc, a fork of Nuvio TV by ysosrs123. Lucent is not affiliated with it."
+msgstr "التصميم مستوحى من Nuvio Arc، وهو نسخة متفرعة من Nuvio TV من تطوير ysosrs123. Lucent غير تابع له."
+
+msgctxt "#31525"
+msgid "Lucent is a skin for Kodi. Kodi is a trademark of the XBMC Foundation."
+msgstr "Lucent واجهة لـ Kodi. وKodi علامة تجارية لمؤسسة XBMC."
+
+msgctxt "#31329"
+msgid "Version, news, updates, licences and credits"
+msgstr "الإصدار والأخبار والتحديثات والتراخيص والإشادات"
+
+msgctxt "#31330"
+msgid "About Lucent"
+msgstr "حول Lucent"
+
+msgctxt "#31331"
+msgid "Logo, version, update options and licences"
+msgstr "الشعار والإصدار وخيارات التحديث والتراخيص"
+
+msgctxt "#31332"
+msgid "Check for updates now"
+msgstr "التحقق من التحديثات الآن"
+
+msgctxt "#31333"
+msgid "Look for a new version of Lucent"
+msgstr "البحث عن إصدار جديد من Lucent"
+
+msgctxt "#31334"
+msgid "Automatic updates by Kodi"
+msgstr "التحديثات التلقائية عبر Kodi"
+
+msgctxt "#31335"
+msgid "Kodi installs new versions from the Lucent Repository"
+msgstr "يثبّت Kodi الإصدارات الجديدة من مستودع Lucent"
+
+msgctxt "#31336"
+msgid "What's new"
+msgstr "ما الجديد"
+
+msgctxt "#31337"
+msgid "The changes of every version"
+msgstr "تغييرات كل إصدار"
+
+msgctxt "#31530"
+msgid "What's new"
+msgstr "ما الجديد"
+
+msgctxt "#31531"
+msgid "Watch on"
+msgstr "شاهده على"
+
+msgctxt "#31532"
+msgid "Streaming data: JustWatch via TMDB"
+msgstr "بيانات البث: JustWatch عبر TMDB"
+
+msgctxt "#31533"
+msgid "Colour from the poster"
+msgstr "لون من الملصق"
+
+msgctxt "#31534"
+msgid "The background glows in the colour of the poster you are on"
+msgstr "تتوهّج الخلفية بلون الملصق الذي تقف عليه"
+
+msgctxt "#31535"
+msgid "Sport today"
+msgstr "رياضة اليوم"
+
+msgctxt "#31537"
+msgid "OK: watch on"
+msgstr "OK: شاهد على"
+
+msgctxt "#31538"
+msgid "No channel found yet – OK opens Sport"
+msgstr "لم يُعثر على قناة بعد – OK يفتح الرياضة"
+
+msgctxt "#31539"
+msgid "Sport on the home screen"
+msgstr "الرياضة في الشاشة الرئيسية"
+
+msgctxt "#31540"
+msgid "A card with today's game of a team you follow, OK to watch"
+msgstr "بطاقة بمباراة اليوم لفريق تتابعه، اضغط OK للمشاهدة"
+
+msgctxt "#31541"
+msgid "watched"
+msgstr "مُشاهَد"
+
+msgctxt "#31542"
+msgid "done at"
+msgstr "ينتهي في"
+
+msgctxt "#31543"
+msgid "Intro at start"
+msgstr "مقدمة عند البدء"
+
+msgctxt "#31544"
+msgid "The Lucent moon rises when Kodi starts (about 3 seconds)"
+msgstr "يبزغ قمر Lucent عند بدء Kodi (نحو 3 ثوانٍ)"
+
+msgctxt "#31545"
+msgid "Tonight for you"
+msgstr "الليلة لك"
+
+msgctxt "#31546"
+msgid "A row on Home with titles like what you watched last, fitting the time of day"
+msgstr "صف في الرئيسية بعناوين تشبه آخر ما شاهدته، تناسب وقت اليوم"
+
+msgctxt "#31547"
+msgid "Films on my watchlist"
+msgstr "أفلام في قائمة مشاهدتي"
+
+msgctxt "#31548"
+msgid "Pop-up when a film from your Trakt collection or watchlist comes out digitally, with where to watch it"
+msgstr "نافذة منبثقة عند صدور فيلم من مجموعتك أو قائمة مشاهدتك على Trakt رقميًا، مع أماكن مشاهدته"
+
+msgctxt "#31549"
+msgid "Seasons"
+msgstr "المواسم"
+
+msgctxt "#31550"
+msgid "Halloween, Sinterklaas, Christmas with snow, New Year and King's Day on Home"
+msgstr "الهالوين وسينتركلاس وعيد الميلاد مع الثلج ورأس السنة ويوم الملك في الرئيسية"
+
+msgctxt "#31551"
+msgid "Light mode (2 GB boxes)"
+msgstr "الوضع الخفيف (أجهزة 2 GB)"
+
+msgctxt "#31552"
+msgid "At most 6 rows per tab, small Seren artwork, no snow and no poster colour. The skin reloads once"
+msgstr "6 صفوف كحد أقصى لكل علامة، وصور Seren صغيرة، بلا ثلج ولا لون الملصق. يُعاد تحميل الواجهة مرة واحدة"
+
+msgctxt "#31553"
+msgid "Keep the rows (faster)"
+msgstr "الإبقاء على الصفوف (أسرع)"
+
+msgctxt "#31554"
+msgid "Home shows the last rows at once and refreshes them in the background"
+msgstr "تعرض الرئيسية آخر الصفوف فورًا وتحدّثها في الخلفية"
+
+msgctxt "#31555"
+msgid "Load rows as you go"
+msgstr "تحميل الصفوف تدريجيًا"
+
+msgctxt "#31556"
+msgid "Only the top three rows load at start, the rest when you scroll down"
+msgstr "تُحمَّل الصفوف الثلاثة العليا فقط عند البدء، والباقي عند التمرير للأسفل"
+
+msgctxt "#31557"
+msgid "ENDED"
+msgstr "انتهى"
+
+msgctxt "#31558"
+msgid "CONTINUING"
+msgstr "مستمر"
+
+msgctxt "#31559"
+msgid "CANCELLED"
+msgstr "أُلغي"
+
+msgctxt "#31560"
+msgid "COMING"
+msgstr "قادم"
+
+msgctxt "#31561"
+msgid "RELEASED"
+msgstr "صدر"
+
+msgctxt "#31562"
+msgid "seasons"
+msgstr "مواسم"
+
+msgctxt "#31563"
+msgid "episodes"
+msgstr "حلقات"
+
+msgctxt "#31564"
+msgid "watched"
+msgstr "مُشاهَد"
+
+msgctxt "#31565"
+msgid "Continue"
+msgstr "متابعة"
+
+msgctxt "#31566"
+msgid "More info"
+msgstr "مزيد من المعلومات"
+
+msgctxt "#31567"
+msgid "Seasons as tabs"
+msgstr "المواسم كعلامات تبويب"
+
+msgctxt "#31568"
+msgid "Left / right: episode   ·   Up: choose a season   ·   OK: play via Seren"
+msgstr "يسار / يمين: الحلقة   ·   أعلى: اختيار موسم   ·   OK: التشغيل عبر Seren"
+
+msgctxt "#31569"
+msgid "Series: seasons as tabs"
+msgstr "المسلسلات: المواسم كعلامات تبويب"
+
+msgctxt "#31570"
+msgid "Opening a series shows the seasons as tabs above the episodes"
+msgstr "عند فتح مسلسل تظهر المواسم كعلامات تبويب فوق الحلقات"
+
+msgctxt "#31571"
+msgid "Showcase"
+msgstr "المعرض"
+
+msgctxt "#31572"
+msgid "new"
+msgstr "جديد"
+
+msgctxt "#31573"
+msgid "Lucent Library"
+msgstr "مكتبة Lucent"
+
+msgctxt "#31574"
+msgid "Your Trakt collection as a Kodi library: status and updates"
+msgstr "مجموعتك على Trakt كمكتبة Kodi: الحالة والتحديثات"
+
+msgctxt "#31575"
+msgid "Update now"
+msgstr "التحديث الآن"
+
+msgctxt "#31576"
+msgid "Update automatically"
+msgstr "التحديث تلقائيًا"
+
+msgctxt "#31577"
+msgid "Only at start"
+msgstr "عند البدء فقط"
+
+msgctxt "#31578"
+msgid "hours"
+msgstr "ساعات"
+
+msgctxt "#31579"
+msgid "Watched marks to Trakt"
+msgstr "علامات المشاهدة إلى Trakt"
+
+msgctxt "#31580"
+msgid "A watched mark you set by hand in Kodi goes to Trakt too"
+msgstr "علامة المشاهدة التي تضعها يدويًا في Kodi تُرسَل إلى Trakt أيضًا"
+
+msgctxt "#31581"
+msgid "Surprise me"
+msgstr "فاجئني"
+
+msgctxt "#31582"
+msgid "Pick something from your library you have not seen yet"
+msgstr "اختيار شيء من مكتبتك لم تشاهده بعد"
+
+msgctxt "#31583"
+msgid "films"
+msgstr "أفلام"
+
+msgctxt "#31584"
+msgid "series"
+msgstr "مسلسلات"
+
+msgctxt "#31585"
+msgid "last update"
+msgstr "آخر تحديث"
+
+msgctxt "#31586"
+msgid "Also at start of Kodi; more often keeps new episodes up to date"
+msgstr "أيضًا عند بدء Kodi؛ التحديث الأكثر تكرارًا يُبقي الحلقات الجديدة محدّثة"
+
+msgctxt "#31587"
+msgid "Every"
+msgstr "كل"
+
+msgctxt "#31588"
+msgid "Quick filters"
+msgstr "عوامل تصفية سريعة"
+
+msgctxt "#31589"
+msgid "Not watched"
+msgstr "غير مُشاهَد"
+
+msgctxt "#31590"
+msgid "Genre"
+msgstr "النوع"
+
+msgctxt "#31591"
+msgid "Year"
+msgstr "السنة"
+
+msgctxt "#31592"
+msgid "Shorter than 2 hours"
+msgstr "أقصر من ساعتين"
+
+msgctxt "#31593"
+msgid "Newly added"
+msgstr "المضاف حديثًا"
+
+msgctxt "#31594"
+msgid "of"
+msgstr "من"
+
+msgctxt "#31595"
+msgid "Watch the next one"
+msgstr "شاهد التالي"
+
+msgctxt "#31596"
+msgid "Collection"
+msgstr "المجموعة"
+
+msgctxt "#31597"
+msgid "Subtitles"
+msgstr "الترجمة"
+
+msgctxt "#31599"
+msgid "Lucent subtitle list"
+msgstr "قائمة ترجمات Lucent"
+
+msgctxt "#31600"
+msgid "All subtitle add-ons at once, your language first; opens by itself 5 seconds after a film starts (without pausing)"
+msgstr "جميع إضافات الترجمة دفعة واحدة، بلغتك أولًا؛ تُفتح تلقائيًا بعد 5 ثوانٍ من بدء الفيلم (دون إيقاف مؤقت)"
+
+msgctxt "#31601"
+msgid "AI translation"
+msgstr "الترجمة بالذكاء الاصطناعي"
+
+msgctxt "#31602"
+msgid "No subtitle in your language? Gemini, OpenRouter or Claude translates one (your own key)"
+msgstr "لا توجد ترجمة بلغتك؟ يترجم Gemini أو OpenRouter أو Claude واحدة (بمفتاحك الخاص)"
+
+msgctxt "#31603"
+msgid "Set"
+msgstr "مُعيَّن"
+
+msgctxt "#31604"
+msgid "Not set"
+msgstr "غير مُعيَّن"
+
+msgctxt "#31605"
+msgid "Close"
+msgstr "إغلاق"
+
+msgctxt "#31606"
+msgid "Turn off subtitles"
+msgstr "إيقاف الترجمة"
+
+msgctxt "#31607"
+msgid "Search yourself"
+msgstr "ابحث بنفسك"
+
+msgctxt "#31608"
+msgid "Important: first load your whole collection in Seren (Movies > My movies (collection) and TV shows > My shows (collection)) until everything is in. Lucent Library only takes over what Seren already knows; titles Seren has not loaded yet are added later."
+msgstr "مهم: حمّل أولًا مجموعتك كاملة في Seren (Movies > My movies (collection) وTV shows > My shows (collection)) حتى يكتمل كل شيء. لا تأخذ مكتبة Lucent إلا ما يعرفه Seren مسبقًا؛ وتُضاف العناوين التي لم يحمّلها Seren بعد لاحقًا."
+
+msgctxt "#31609"
+msgid "Sync"
+msgstr "المزامنة"
+
+msgctxt "#31610"
+msgid "Sync subtitles automatically"
+msgstr "مزامنة الترجمة تلقائيًا"
+
+msgctxt "#31611"
+msgid "A subtitle that is not marked in sync is lined up with one that is"
+msgstr "الترجمة غير الموسومة بأنها متزامنة تُحاذى مع ترجمة موسومة بذلك"
+
+msgctxt "#31612"
+msgid "Available groups"
+msgstr "المجموعات المتاحة"
+
+msgctxt "#31613"
+msgid "Add group"
+msgstr "إضافة مجموعة"
+
+msgctxt "#31614"
+msgid "Rename group"
+msgstr "إعادة تسمية المجموعة"
+
+msgctxt "#31615"
+msgid "Delete group"
+msgstr "حذف المجموعة"
+
+msgctxt "#31616"
+msgid "Channel options"
+msgstr "خيارات القناة"
+
+msgctxt "#31617"
+msgid "Other options"
+msgstr "خيارات أخرى"
+
+msgctxt "#31619"
+msgid "Options"
+msgstr "الخيارات"
+
+msgctxt "#31620"
+msgid "Hide all groups"
+msgstr "إخفاء جميع المجموعات"
+
+msgctxt "#31621"
+msgid "Show all groups"
+msgstr "إظهار جميع المجموعات"
+
+msgctxt "#31622"
+msgid "Setup assistant"
+msgstr "مساعد الإعداد"
+
+msgctxt "#31623"
+msgid "The most important settings and logins, step by step"
+msgstr "أهم الإعدادات وعمليات تسجيل الدخول، خطوة بخطوة"
+
+msgctxt "#31624"
+msgid "▲  Press Up to read on"
+msgstr "▲  اضغط أعلى لمتابعة القراءة"
+
+msgctxt "#31625"
+msgid "Backup and restore"
+msgstr "النسخ الاحتياطي والاستعادة"
+
+msgctxt "#31626"
+msgid "Save all your settings and logins in one file, and put them back"
+msgstr "احفظ جميع إعداداتك وبيانات دخولك في ملف واحد، واستعدها لاحقًا"
+
+msgctxt "#31627"
+msgid "Sleep timer"
+msgstr "مؤقّت النوم"
+
+msgctxt "#31628"
+msgid "Kids mode"
+msgstr "وضع الأطفال"
+
+msgctxt "#31629"
+msgid "Only the menu items you choose, settings behind a PIN"
+msgstr "عناصر القائمة التي تختارها فقط، والإعدادات خلف رمز PIN"
+
+msgctxt "#31630"
+msgid "Kids mode off"
+msgstr "إيقاف وضع الأطفال"
+
+msgctxt "#31631"
+msgid "Search subtitles"
+msgstr "البحث عن ترجمة"
+
+msgctxt "#31632"
+msgid "Xtream login (IPTV)"
+msgstr "تسجيل دخول Xtream (IPTV)"
+
+msgctxt "#31633"
+msgid "Fill in your provider's server address, user name and password; Lucent sets up IPTV Simple"
+msgstr "أدخل عنوان خادم مزوّدك واسم المستخدم وكلمة المرور؛ ويُعِدّ Lucent إضافة IPTV Simple"
+
+msgctxt "#31634"
+msgid "Self-test"
+msgstr "الفحص الذاتي"
+
+msgctxt "#31635"
+msgid "Checks Seren, IPTV, subtitles and the channel list and tells you what is missing"
+msgstr "يفحص Seren وIPTV والترجمة وقائمة القنوات ويخبرك بما ينقص"
+
+msgctxt "#31636"
+msgid "Safe log"
+msgstr "السجلّ الآمن"
+
+msgctxt "#31637"
+msgid "Copies Kodi's log with all logins blanked out, to share"
+msgstr "ينسخ سجلّ Kodi مع حجب جميع بيانات الدخول، لمشاركته"
+
+msgctxt "#31638"
+msgid "Goal notifications: on"
+msgstr "إشعارات الأهداف: مفعّلة"
+
+msgctxt "#31639"
+msgid "Goal notifications: off"
+msgstr "إشعارات الأهداف: معطّلة"
+
+msgctxt "#31640"
+msgid "A pop-up when a team you follow scores (select to switch on / off)"
+msgstr "نافذة منبثقة عندما يسجّل فريق تتابعه هدفًا (اختر للتفعيل / التعطيل)"
+
+msgctxt "#31641"
+msgid "Add / remove channel in favourites"
+msgstr "إضافة القناة إلى المفضّلة / إزالتها منها"
+
+msgctxt "#31642"
+msgid "Hide channels"
+msgstr "إخفاء القنوات"
+
+msgctxt "#31643"
+msgid "Leave out groups and channels you never watch (shorter list, faster guide)"
+msgstr "استبعد المجموعات والقنوات التي لا تشاهدها أبدًا (قائمة أقصر، ودليل أسرع)"
+
+msgctxt "#31644"
+msgid "Licences and credits"
+msgstr "التراخيص والإشادات"
+
+msgctxt "#31645"
+msgid "Libraries, fonts and artwork that Lucent uses"
+msgstr "المكتبات والخطوط والرسومات التي يستخدمها Lucent"
+
+msgctxt "#31646"
+msgid "Update pop-up: on"
+msgstr "نافذة التحديث: مفعّلة"
+
+msgctxt "#31647"
+msgid "Update pop-up: off"
+msgstr "نافذة التحديث: معطّلة"
+
+msgctxt "#31648"
+msgid "Light mode: on"
+msgstr "الوضع الخفيف: مفعّل"
+
+msgctxt "#31649"
+msgid "Light mode: off"
+msgstr "الوضع الخفيف: معطّل"
+
+msgctxt "#31650"
+msgid "On: Home builds only 6 rows and uses small pictures (for boxes with 2 GB). Off: up to 10 rows"
+msgstr "مفعّل: تبني الرئيسية 6 صفوف فقط وتستخدم صورًا صغيرة (للأجهزة ذات 2 GB). معطّل: حتى 10 صفوف"
+
+msgctxt "#31651"
+msgid "CoreELEC settings"
+msgstr "إعدادات CoreELEC"
+
+msgctxt "#31652"
+msgid "LibreELEC settings"
+msgstr "إعدادات LibreELEC"
+
+msgctxt "#31653"
+msgid "Network, Bluetooth, updates and system of this box"
+msgstr "الشبكة والبلوتوث والتحديثات ونظام هذا الجهاز"
+
+msgctxt "#31654"
+msgid "Power menu"
+msgstr "قائمة الطاقة"
+
+msgctxt "#31655"
+msgid "Hide Kodi's own buttons, or add your own (Settings, an add-on, Reload skin…)"
+msgstr "أخفِ أزرار Kodi الأصلية، أو أضف أزرارك الخاصة (الإعدادات، إضافة، إعادة تحميل الواجهة…)"
+
+msgctxt "#31656"
+msgid "Streaming services"
+msgstr "خدمات البث"
+
+msgctxt "#31657"
+msgid "Which services the 'Streaming services' row shows, their order and their pictures"
+msgstr "الخدمات التي يعرضها صف 'خدمات البث'، وترتيبها وصورها"
+
+msgctxt "#31658"
+msgid "Hide films and series until you can watch them"
+msgstr "إخفاء الأفلام والمسلسلات حتى تصبح متاحة للمشاهدة"
+
+msgctxt "#31659"
+msgid "Films stay out of the Home rows until their digital release, series until their first episode has aired"
+msgstr "تبقى الأفلام خارج صفوف الرئيسية حتى إصدارها الرقمي، والمسلسلات حتى عرض حلقتها الأولى"
+
+msgctxt "#31660"
+msgid "Big posters on Home"
+msgstr "ملصقات كبيرة في الرئيسية"
+
+msgctxt "#31661"
+msgid "On: posters 15% bigger, without names. Off: the old, smaller posters, with the next row peeking in"
+msgstr "مفعّل: ملصقات أكبر بنسبة 15% دون أسماء. معطّل: الملصقات القديمة الأصغر، مع ظهور جزء من الصف التالي"
+
+msgctxt "#31662"
+msgid "Off"
+msgstr "إيقاف"
+
+msgctxt "#31663"
+msgid "Show the list"
+msgstr "إظهار القائمة"
+
+msgctxt "#31664"
+msgid "In the background"
+msgstr "في الخلفية"
+
+msgctxt "#31665"
+msgid "In the background + AI"
+msgstr "في الخلفية + الذكاء الاصطناعي"
+
+
+msgctxt "#31666"
+msgid "Time & look"
+msgstr "الوقت والمظهر"
+
+msgctxt "#31667"
+msgid "Spoken language"
+msgstr "لغة الصوت"
+
+
+msgctxt "#31668"
+msgid "First and second choice for the sound of a film or episode"
+msgstr "الخيار الأول والثاني لصوت الفيلم أو الحلقة"
+
+msgctxt "#31669"
+msgid "Maintenance"
+msgstr "الصيانة"
+
+msgctxt "#31670"
+msgid "Free up space: old pictures, add-on zip files and temporary files; also once a month by itself"
+msgstr "تحرير المساحة: الصور القديمة وملفات zip للإضافات والملفات المؤقتة؛ ويتم ذلك تلقائيًا مرة كل شهر أيضًا"
+
+
+msgctxt "#31671"
+msgid "Skip"
+msgstr "تخطٍّ"
+
+
+msgctxt "#31672"
+msgid "OK to skip  ·  Back to keep watching"
+msgstr "OK للتخطي  ·  رجوع لمتابعة المشاهدة"
+
+msgctxt "#31673"
+msgid "Photos of stadiums and race circuits."
+msgstr "صور الملاعب وحلبات السباق."
+
+msgctxt "#31674"
+msgid "TV channel logos by tv-logo (CC BY-SA / BY-NC-SA). The logos belong to their owners."
+msgstr "شعارات القنوات التلفزيونية من tv-logo (CC BY-SA / BY-NC-SA). الشعارات ملك لأصحابها."
+
+msgctxt "#31675"
+msgid "Coming up"
+msgstr "قريبًا"
+
+msgctxt "#31676"
+msgid "Nothing coming up. Follow a series or film with the bell on its info page."
+msgstr "لا شيء قادم. تابع مسلسلًا أو فيلمًا بالجرس في صفحة معلوماته."
+
+msgctxt "#31677"
+msgid "Today"
+msgstr "اليوم"
+
+msgctxt "#31678"
+msgid "No games today. Choose clubs or competitions under Follow in Sport."
+msgstr "لا مباريات اليوم. اختر الأندية أو البطولات من قسم المتابعة في الرياضة."
+
+msgctxt "#31679"
+msgid "Next"
+msgstr "التالي"
+
+msgctxt "#31680"
+msgid "No TV channels yet. Set up live TV in the setup assistant."
+msgstr "لا توجد قنوات تلفزيونية بعد. أعِدّ التلفاز المباشر من مساعد الإعداد."
+
+msgctxt "#31681"
+msgid "Look, rows, kids mode"
+msgstr "المظهر والصفوف ووضع الأطفال"
+
+msgctxt "#31682"
+msgid "Menu and widgets"
+msgstr "القائمة والأدوات"
+
+msgctxt "#31683"
+msgid "Tabs and rows"
+msgstr "العلامات والصفوف"
+
+msgctxt "#31684"
+msgid "Player"
+msgstr "المشغّل"
+
+msgctxt "#31685"
+msgid "Buffer, picture and sound"
+msgstr "الذاكرة المؤقتة والصورة والصوت"
+
+msgctxt "#31686"
+msgid "Subtitles"
+msgstr "الترجمة"
+
+msgctxt "#31687"
+msgid "Lucent Subtitles, languages"
+msgstr "Lucent Subtitles واللغات"
+
+msgctxt "#31688"
+msgid "Live TV"
+msgstr "التلفاز المباشر"
+
+msgctxt "#31689"
+msgid "IPTV Simple, channels, guide"
+msgstr "IPTV Simple والقنوات والدليل"
+
+msgctxt "#31690"
+msgid "System"
+msgstr "النظام"
+
+msgctxt "#31691"
+msgid "Display, network, storage"
+msgstr "الشاشة والشبكة والتخزين"
+
+msgctxt "#31692"
+msgid "Kodi has been running for"
+msgstr "يعمل Kodi منذ"
+
+msgctxt "#31693"
+msgid "Power off"
+msgstr "إيقاف التشغيل"
+
+msgctxt "#31694"
+msgid "Restart"
+msgstr "إعادة التشغيل"
+
+msgctxt "#31695"
+msgid "Sleep"
+msgstr "السكون"
+
+msgctxt "#31696"
+msgid "Sleep timer"
+msgstr "مؤقّت النوم"
+
+msgctxt "#31697"
+msgid "Other profile"
+msgstr "ملف شخصي آخر"
+
+msgctxt "#31698"
+msgid "Video add-ons"
+msgstr "إضافات الفيديو"
+
+msgctxt "#31699"
+msgid "Program add-ons"
+msgstr "إضافات البرامج"
+
+msgctxt "#31700"
+msgid "Skin settings"
+msgstr "إعدادات الواجهة"
+
+msgctxt "#31701"
+msgid "Video add-on"
+msgstr "إضافة فيديو"
+
+msgctxt "#31702"
+msgid "version"
+msgstr "الإصدار"
+
+msgctxt "#31703"
+msgid "Watch now"
+msgstr "شاهد الآن"
+
+msgctxt "#31704"
+msgid "Remind me"
+msgstr "ذكّرني"
+
+msgctxt "#31705"
+msgid "Full guide"
+msgstr "الدليل الكامل"
+
+msgctxt "#31706"
+msgid "Audio"
+msgstr "الصوت"
+
+msgctxt "#31707"
+msgid "More"
+msgstr "المزيد"
+
+msgctxt "#31708"
+msgid "No guide for this channel"
+msgstr "لا يوجد دليل لهذه القناة"
+
+msgctxt "#31709"
+msgid "Statistics"
+msgstr "الإحصاءات"
+
+msgctxt "#31710"
+msgid "Timeline"
+msgstr "الخط الزمني"
+
+msgctxt "#31711"
+msgid "Table"
+msgstr "الجدول"
+
+msgctxt "#31712"
+msgid "Also live"
+msgstr "مباشر أيضًا"
+
+msgctxt "#31713"
+msgid "Guide"
+msgstr "الدليل"
+
+msgctxt "#31714"
+msgid "Subtitles / audio"
+msgstr "الترجمة / الصوت"
+
+msgctxt "#31715"
+msgid "Box score"
+msgstr "إحصاءات المباراة"
+
+msgctxt "#31716"
+msgid "Standings"
+msgstr "الترتيب"
+
+msgctxt "#31717"
+msgid "Positions"
+msgstr "المراكز"
+
+msgctxt "#31718"
+msgid "Championship"
+msgstr "البطولة"
+
+msgctxt "#31719"
+msgid "Next on"
+msgstr "التالي على"
+
+msgctxt "#31720"
+msgid "ALSO LIVE  ·  OK SWITCHES"
+msgstr "مباشر أيضًا  ·  OK للتبديل"
+
+msgctxt "#31721"
+msgid "GOALS"
+msgstr "الأهداف"
+
+msgctxt "#31722"
+msgid "No other live games on your channels right now."
+msgstr "لا توجد مباريات مباشرة أخرى على قنواتك حاليًا."
+
+msgctxt "#31723"
+msgid "TOP PLAYERS"
+msgstr "أفضل اللاعبين"
+
+msgctxt "#31724"
+msgid "Statistics come in during the game."
+msgstr "تصل الإحصاءات خلال المباراة."
+
+msgctxt "#31725"
+msgid "LIVE POSITIONS"
+msgstr "المراكز المباشرة"
+
+msgctxt "#31726"
+msgid "Player info"
+msgstr "معلومات المشغّل"
+
+msgctxt "#31727"
+msgid "Picture"
+msgstr "الصورة"
+
+msgctxt "#31728"
+msgid "Sound"
+msgstr "الصوت"
+
+msgctxt "#31729"
+msgid "Subtitles"
+msgstr "الترجمة"
+
+msgctxt "#31730"
+msgid "Container"
+msgstr "الحاوية"
+
+msgctxt "#31731"
+msgid "Resolution"
+msgstr "الدقة"
+
+msgctxt "#31732"
+msgid "Track"
+msgstr "المسار"
+
+msgctxt "#31733"
+msgid "Quality"
+msgstr "الجودة"
+
+msgctxt "#31734"
+msgid "Temperature CPU"
+msgstr "حرارة المعالج"
+
+msgctxt "#31735"
+msgid "Temperature GPU"
+msgstr "حرارة معالج الرسوميات"
+
+msgctxt "#31736"
+msgid "Render"
+msgstr "العرض"
+
+msgctxt "#31737"
+msgid "Video queue"
+msgstr "قائمة انتظار الفيديو"
+
+msgctxt "#31738"
+msgid "Overview"
+msgstr "نظرة عامة"
+
+msgctxt "#31739"
+msgid "switch"
+msgstr "تبديل"
+
+msgctxt "#31740"
+msgid "Resolution"
+msgstr "الدقة"
+
+msgctxt "#31741"
+msgid "Aspect ratio"
+msgstr "نسبة العرض إلى الارتفاع"
+
+msgctxt "#31742"
+msgid "Frame rate"
+msgstr "معدّل الإطارات"
+
+msgctxt "#31743"
+msgid "Scan"
+msgstr "المسح"
+
+msgctxt "#31744"
+msgid "Brightness · HDR"
+msgstr "السطوع · HDR"
+
+msgctxt "#31745"
+msgid "Colour"
+msgstr "اللون"
+
+msgctxt "#31746"
+msgid "From file to screen"
+msgstr "من الملف إلى الشاشة"
+
+msgctxt "#31747"
+msgid "Picture bitrate"
+msgstr "معدّل بت الصورة"
+
+msgctxt "#31748"
+msgid "From file to your speakers"
+msgstr "من الملف إلى مكبّرات الصوت"
+
+msgctxt "#31749"
+msgid "What you hear"
+msgstr "ما تسمعه"
+
+msgctxt "#31750"
+msgid "Output"
+msgstr "المخرج"
+
+msgctxt "#31751"
+msgid "Device"
+msgstr "الجهاز"
+
+msgctxt "#31752"
+msgid "Configuration"
+msgstr "التهيئة"
+
+msgctxt "#31753"
+msgid "Volume"
+msgstr "مستوى الصوت"
+
+msgctxt "#31754"
+msgid "Audio queue"
+msgstr "قائمة انتظار الصوت"
+
+msgctxt "#31755"
+msgid "sofa"
+msgstr "الأريكة"
+
+msgctxt "#31756"
+msgid "HEIGHT"
+msgstr "الارتفاع"
+
+msgctxt "#31757"
+msgid "Playing"
+msgstr "قيد التشغيل"
+
+msgctxt "#31758"
+msgid "Check for updates"
+msgstr "التحقق من التحديثات"
+
+msgctxt "#31759"
+msgid "Look for a new Lucent now"
+msgstr "البحث عن إصدار جديد من Lucent الآن"
+
+msgctxt "#31760"
+msgid "Use my lists as library"
+msgstr "استخدام قوائمي كمكتبة"
+
+msgctxt "#31761"
+msgid "Off – only the Trakt collection"
+msgstr "معطّل – مجموعة Trakt فقط"
+
+msgctxt "#31762"
+msgid "SOLIS · SOLAR PANELS"
+msgstr "SOLIS · الألواح الشمسية"
+
+msgctxt "#31763"
+msgid "Solis now"
+msgstr "Solis الآن"
+
+msgctxt "#31764"
+msgid "Watching"
+msgstr "المشاهدة"
+
+msgctxt "#31765"
+msgid "Seren and library"
+msgstr "Seren والمكتبة"
+
+msgctxt "#31766"
+msgid "Help and info"
+msgstr "المساعدة والمعلومات"
+
+msgctxt "#31767"
+msgid "Look, menu, streaming services, kids mode and the setup assistant"
+msgstr "المظهر والقائمة وخدمات البث ووضع الأطفال ومساعد الإعداد"
+
+msgctxt "#31768"
+msgid "Playback, subtitles, language and skipping intros"
+msgstr "التشغيل والترجمة واللغة وتخطي المقدمات"
+
+msgctxt "#31769"
+msgid "Seren, your accounts and Lucent Library"
+msgstr "Seren وحساباتك ومكتبة Lucent"
+
+msgctxt "#31770"
+msgid "Screen, sound, remote, network, language and screensaver"
+msgstr "الشاشة والصوت وجهاز التحكم والشبكة واللغة وشاشة التوقف"
+
+msgctxt "#31771"
+msgid "What's new, updates, self-test and system information"
+msgstr "ما الجديد والتحديثات والفحص الذاتي ومعلومات النظام"
+
+msgctxt "#31772"
+msgid "Lucent Subtitles"
+msgstr "Lucent Subtitles"
+
+msgctxt "#31773"
+msgid "Accounts, keys and how subtitles are found"
+msgstr "الحسابات والمفاتيح وطريقة العثور على الترجمات"
+
+msgctxt "#31774"
+msgid "Automatic subtitle search"
+msgstr "البحث التلقائي عن الترجمة"
+
+msgctxt "#31775"
+msgid "Off, show the list, or quietly in the background"
+msgstr "إيقاف، أو إظهار القائمة، أو بهدوء في الخلفية"
+
+msgctxt "#31777"
+msgid "Which sound a film starts with (first and second choice)"
+msgstr "الصوت الذي يبدأ به الفيلم (الخيار الأول والثاني)"
+
+msgctxt "#31778"
+msgid "Skip intro"
+msgstr "تخطي المقدمة"
+
+msgctxt "#31779"
+msgid "TheIntroDB: skip the intro, recap and preview of episodes"
+msgstr "TheIntroDB: تخطي المقدمة والملخص والمعاينة في الحلقات"
+
+msgctxt "#31780"
+msgid "Update Lucent Library"
+msgstr "تحديث مكتبة Lucent"
+
+msgctxt "#31781"
+msgid "Put your collection and lists into Kodi's library now"
+msgstr "أدخل مجموعتك وقوائمك إلى مكتبة Kodi الآن"
+
+msgctxt "#31782"
+msgid "Your own Trakt lists next to the collection, without its limit"
+msgstr "قوائم Trakt الخاصة بك بجانب المجموعة، دون حدّها"
+
+msgctxt "#31783"
+msgid "Clean channel logos"
+msgstr "شعارات قنوات نظيفة"
+
+msgctxt "#31784"
+msgid "Logos from tv-logos in the guide, the TV tab and the player (on or off)"
+msgstr "شعارات من tv-logos في الدليل وعلامة التلفاز والمشغّل (تفعيل أو تعطيل)"
+
+msgctxt "#31785"
+msgid "Favourite channel group"
+msgstr "مجموعة القنوات المفضّلة"
+
+msgctxt "#31786"
+msgid "Opens first in the guide and shows on the TV tab"
+msgstr "تُفتح أولًا في الدليل وتظهر في علامة التلفاز"
+
+msgctxt "#31787"
+msgid "More Kodi settings"
+msgstr "مزيد من إعدادات Kodi"
+
+msgctxt "#31788"
+msgid "Music, discs, pictures, services and games"
+msgstr "الموسيقى والأقراص والصور والخدمات والألعاب"
+
+msgctxt "#31789"
+msgid "Sound to your amplifier"
+msgstr "الصوت إلى المضخّم"
+
+msgctxt "#31790"
+msgid "Set the volume there"
+msgstr "اضبط مستوى الصوت هناك"
+
+msgctxt "#31791"
+msgid "YouTube trailer fix"
+msgstr "إصلاح إعلانات YouTube التشويقية"
+
+msgctxt "#31792"
+msgid "Keeps trailers from stopping after about a minute (bug in YouTube 7.4)"
+msgstr "يمنع توقف الإعلانات التشويقية بعد دقيقة تقريبًا (خلل في YouTube 7.4)"
+
+msgctxt "#31793"
+msgid "Name and count above lists"
+msgstr "الاسم والعدد أعلى القوائم"
+
+msgctxt "#31794"
+msgid "Shown (e.g. 'Red Light · 1647 items · Date') - choose to hide"
+msgstr "ظاهر (مثل 'Red Light · 1647 عنصرًا · التاريخ') - اختر للإخفاء"
+
+msgctxt "#31795"
+msgid "Hidden - choose to show again"
+msgstr "مخفي - اختر للإظهار مجددًا"
+
+msgctxt "#31796"
+msgid "Scores (OMDb)"
+msgstr "التقييمات (OMDb)"
+
+msgctxt "#31797"
+msgid "IMDb, Rotten Tomatoes and Metacritic with your own free key"
+msgstr "IMDb وRotten Tomatoes وMetacritic بمفتاحك المجاني الخاص"
+
+msgctxt "#31798"
+msgid "Covers"
+msgstr "الأغلفة"
+
+msgctxt "#31799"
+msgid "Subtitles always on"
+msgstr "الترجمة مفعّلة دائمًا"
+
+msgctxt "#31800"
+msgid "Off - choose to switch on: every new video starts with a subtitle"
+msgstr "معطّل - اختر للتفعيل: يبدأ كل فيديو جديد بترجمة"
+
+msgctxt "#31801"
+msgid "On - every new video starts with a subtitle, also in your own language"
+msgstr "مفعّل - يبدأ كل فيديو جديد بترجمة، حتى بلغتك"
+
+msgctxt "#31802"
+msgid "Skip intro by"
+msgstr "تخطي المقدمة عبر"
+
+msgctxt "#31803"
+msgid "Seren and TheIntroDB both have a Skip intro button: choose which one you keep"
+msgstr "لدى كلٍّ من Seren وTheIntroDB زر لتخطي المقدمة: اختر أيهما تُبقي"
+
+msgctxt "#31804"
+msgid "Readable text on light pictures"
+msgstr "نص مقروء على الصور الفاتحة"
+
+msgctxt "#31805"
+msgid "On - a dark edge around the texts and a darker fade behind them"
+msgstr "مفعّل - حافة داكنة حول النصوص وتدرّج أغمق خلفها"
+
+msgctxt "#31806"
+msgid "Off - white text straight on the picture"
+msgstr "معطّل - نص أبيض مباشرة على الصورة"

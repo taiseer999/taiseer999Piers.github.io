@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <!-- Fold state of the skin settings sections -->
+    <variable name="LucentFoldState_2201">
+        <value condition="Skin.HasSetting(lucent.ss.open.2201)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <variable name="LucentFoldState_2505">
+        <value condition="Skin.HasSetting(lucent.ss.open.2505)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <variable name="LucentFoldState_2204">
+        <value condition="Skin.HasSetting(lucent.ss.open.2204)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <variable name="LucentFoldState_2202">
+        <value condition="Skin.HasSetting(lucent.ss.open.2202)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <variable name="LucentFoldState_2203">
+        <value condition="Skin.HasSetting(lucent.ss.open.2203)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <variable name="LucentFoldState_2501">
+        <value condition="Skin.HasSetting(lucent.ss.open.2501)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <variable name="LucentFoldState_2503">
+        <value condition="Skin.HasSetting(lucent.ss.open.2503)">$LOCALIZE[31401]</value>
+        <value>$LOCALIZE[31400]</value>
+    </variable>
+    <!-- /fold -->
+    <!-- Explanation under the title of a Kodi settings page -->
+    <variable name="LucentSettingsSub">
+        <value condition="Window.IsActive(playersettings)">$LOCALIZE[31260]</value>
+        <value condition="Window.IsActive(mediasettings)">$LOCALIZE[31267]</value>
+        <value condition="Window.IsActive(pvrsettings)">$LOCALIZE[31274]</value>
+        <value condition="Window.IsActive(interfacesettings)">$LOCALIZE[31281]</value>
+        <value condition="Window.IsActive(systemsettings)">$LOCALIZE[31287]</value>
+        <value condition="Window.IsActive(servicesettings)">$LOCALIZE[31295]</value>
+    </variable>
+    <!-- Templates Kodi clones for every setting row (ids 7-15 are fixed by Kodi) -->
+    <include name="SettingTemplates">
+        <param name="width">1180</param>
+        <param name="cpos">1090</param>
+        <definition>
+            <control type="button" id="7">
+                <width>$PARAM[width]</width>
+                <height>76</height>
+                <font>font_label</font>
+                <textcolor>text2</textcolor>
+                <focusedcolor>on_focus</focusedcolor>
+                <textoffsetx>32</textoffsetx>
+                <texturefocus border="20" colordiffuse="focus">rr20.png</texturefocus>
+                <texturenofocus border="20">card_soft.png</texturenofocus>
+                <label2></label2>
+            </control>
+            <control type="radiobutton" id="8">
+                <width>$PARAM[width]</width>
+            </control>
+            <control type="spincontrolex" id="9">
+                <width>$PARAM[width]</width>
+            </control>
+            <control type="image" id="11">
+                <width>$PARAM[width]</width>
+                <height>2</height>
+                <texture>white.png</texture>
+                <colordiffuse>separator</colordiffuse>
+            </control>
+            <control type="edit" id="12">
+                <width>$PARAM[width]</width>
+            </control>
+            <control type="sliderex" id="13">
+                <width>$PARAM[width]</width>
+            </control>
+            <control type="label" id="14">
+                <width>$PARAM[width]</width>
+                <height>56</height>
+                <font>font_caps</font>
+                <textcolor>text4</textcolor>
+                <textoffsetx>8</textoffsetx>
+                <aligny>bottom</aligny>
+                <label></label>
+            </control>
+            <control type="colorbutton" id="15">
+                <width>$PARAM[width]</width>
+                <colorposx>$PARAM[cpos]</colorposx>
+            </control>
+        </definition>
+    </include>
+
+    <!-- Category button template (id 10) -->
+    <include name="CategoryTemplate">
+        <param name="width">420</param>
+        <definition>
+            <control type="button" id="10">
+                <width>$PARAM[width]</width>
+                <height>68</height>
+                <font>font_label</font>
+                <textcolor>text3</textcolor>
+                <focusedcolor>on_focus</focusedcolor>
+                <selectedcolor>text</selectedcolor>
+                <textoffsetx>40</textoffsetx>
+                <texturefocus border="20" colordiffuse="focus">rr20.png</texturefocus>
+                <texturenofocus colordiffuse="transparent">catsel.png</texturenofocus>
+                <alttexturefocus border="20" colordiffuse="focus">rr20.png</alttexturefocus>
+                <alttexturenofocus colordiffuse="focus">catsel.png</alttexturenofocus>
+            </control>
+        </definition>
+    </include>
+
+    <!-- Description of the focused setting -->
+    <include name="SettingDescription">
+        <param name="left">600</param>
+        <param name="top">950</param>
+        <param name="width">1220</param>
+        <definition>
+            <control type="textbox" id="6">
+                <left>$PARAM[left]</left>
+                <top>$PARAM[top]</top>
+                <width>$PARAM[width]</width>
+                <height>90</height>
+                <font>font12</font>
+                <textcolor>text4</textcolor>
+<include>TextAutoScroll</include>
+</control>
+        </definition>
+    </include>
+</includes>

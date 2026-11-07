@@ -1,0 +1,2508 @@
+# -*- coding: utf-8 -*-
+"""Lucent: the Sport screen - My sport | All games | Tables - with the IPTV channels that show each game.
+
+RunScript(special://skin/scripts/sport.py)             open the screen
+RunScript(special://skin/scripts/sport.py,ensure_tab)  add the Sport tab to the side menu (once)
+
+The window is xml/Lucent_Sport.xml (gen_sport.py). Data: sport_core.py (ESPN), guide: sport_epg.py (Kodi PVR).
+"""
+import datetime
+import re
+import sys
+import threading
+import time
+
+import xbmc
+import xbmcgui
+
+import agenda_core as ac
+import sport_core as sc
+import sport_epg as epg
+import sport_plan as plan
+
+WINDOW_XML = "Lucent_Sport.xml"
+ACTION_PREVIOUS_MENU = 10
+ACTION_NAV_BACK = 92
+ACTION_STOP = 13
+VIEW_BUTTONS = {101: "mine", 102: "all", 103: "tables", 104: "follow"}
+F_CHIPS, F_SEARCH, F_ORDER, F_MORE, F_SPORTS, F_COMPS, F_BTN, F_TEAMS = 570, 571, 522, 523, 530, 540, 550, 560
+F_TABS, F_QUERY, F_RESULTS, F_COUNTRIES, F_NAMEBTN, F_NAMES = 575, 581, 582, 590, 595, 596
+F_TAB_KEYS = ("search", "browse", "countries", "names")
+SPORT_ORDER = ("soccer", "basketball", "football", "hockey", "baseball", "rugby", "racing", "golf", "tennis", "mma", "aussie")
+FOLLOW_BUTTON = 104
+LIST = 200
+LIVE_STRIP = 205        # All games: the games that are on now, as cards above the list
+DAY_BUTTONS = range(111, 118)
+DAY_PREV, DAY_NEXT = 110, 118
+CHANNEL_BUTTONS = {311: 1, 312: 2, 313: 3, 314: 4, 341: 1, 342: 2, 343: 3, 344: 4}
+HERO_LIST = 150
+HERO_CHANNELS = (341, 342, 343, 344)
+ALSO_LIST = 160         # My sport: 'Also today' next to the big card
+WEEK_LIST = 209         # My sport: 'Your teams this week'
+HERO_WATCH, HERO_PAGE = 155, 156
+SECTION_LISTS = tuple(range(211, 221))
+FOLLOW_HOME, FOLLOW_AWAY, SHOW_TABLE = 321, 322, 323
+FIX_BUTTON, REMIND_BUTTON, RECORD_BUTTON = 331, 332, 333
+LEAGUE_LIST, TABLE_LIST, T_SPORTS = 400, 410, 395
+EPG_LEAGUE = "tv"
+ACTION_MOVE_LEFT, ACTION_MOVE_RIGHT = 1, 2
+HERO_MAX = 6
+SPORT_ICON = "special://skin/media/icons/sport.png"
+SPORT_ICONS = {"soccer", "basketball", "football", "hockey", "baseball", "rugby", "aussie", "racing", "tennis", "golf", "mma"}
+
+
+def sport_icon(sport):
+    return f"special://skin/media/icons/sport_{sport}.png" if sport in SPORT_ICONS else SPORT_ICON
+LETTERS = {"W": "W", "D": "G", "L": "V"} if sc.NL else {}
+
+
+def nice_day(d):
+    today = ac.today()
+    if d == today:
+        return sc.t("today")
+    if d == today + datetime.timedelta(days=1):
+        return sc.t("tomorrow")
+    if d == today - datetime.timedelta(days=1):
+        return sc.t("yesterday")
+    return ac.day_long(d)
+
+
+def league_name(key):
+    return sc.LEAGUES[key]["name"] if key in sc.LEAGUES else sc.t("tvguide")
+
+
+def when_line(ev):
+    d = sc.local_day(ev["start"])
+    text = nice_day(d) if d == ac.today() else ac.day_long(d)
+    return f"{text}  ·  {sc.local_time(ev['start'])}"
+
+
+def short_when(ev):
+    d = sc.local_day(ev["start"])
+    text = nice_day(d) if abs((d - ac.today()).days) <= 1 else ac.day_short(d)
+    return f"{text}  ·  {sc.local_time(ev['start'])}"
+
+
+def score_text(ev):
+    if ev["kind"] != "teams":
+        return ""
+    if ev["state"] in ("in", "post") and ev["home"].get("score") != "" and ev["away"].get("score") != "":
+        return f"{ev['home']['score']} – {ev['away']['score']}"
+    return "v"
+
+
+def name_events(follow, data):
+    """Followed free names ('Max Verstappen') become games of their own, taken from the TV guide titles."""
+    out, seen = [], set()
+    if not follow["names"]:
+        return out
+    now = time.time()
+    for cid, start, end, title, plot in data.get("rows", []):
+        if end < now - 3 * 3600 or start > now + (sc.DAYS_AHEAD * 86400):
+            continue
+        text = sc.norm(f"{title} {plot}")
+        for name in follow["names"]:
+            if sc.has_phrase(text, sc.norm(name)):
+                key = (start, sc.norm(title))
+                if key in seen:
+                    break
+                seen.add(key)
+                out.append({"id": f"{EPG_LEAGUE}:{cid}:{start}", "league": EPG_LEAGUE, "kind": "event", "start": start,
+                            "state": "in" if start <= now <= end else "post" if end < now else "pre", "status": "",
+                            "home": {}, "away": {}, "title": title, "sub": name, "venue": "", "round": "", "lg": "",
+                            "cid": cid})
+                break
+    return out
+
+
+def colour(hex_value, alpha="FF"):
+    """ESPN gives 'd4121a'; Kodi wants 'AARRGGBB'. Unknown colour -> a calm grey-blue."""
+    hex_value = (hex_value or "").strip("# ")
+    if len(hex_value) != 6 or any(c not in "0123456789abcdefABCDEF" for c in hex_value):
+        hex_value = "3a4a5c"
+    return alpha + hex_value.upper()
+
+
+def live_progress(ev):
+    """1..10: how far a football game is (the minute out of 90; half time = 5); '' for other sports."""
+    status = (ev.get("status") or "").strip()
+    if status.upper() in ("HT", "HALFTIME", "RUST"):
+        return "5"
+    m = re.match(r"(\d+)(?:\+\d+)?'", status)
+    if not m:
+        return ""
+    return str(min(10, max(1, round(int(m.group(1)) / 9))))
+
+
+def ordinal(n):
+    n = int(n) if str(n).isdigit() else n
+    if not isinstance(n, int):
+        return str(n)
+    return f"{n}{'th' if 10 <= n % 100 <= 20 else {1: 'st', 2: 'nd', 3: 'rd'}.get(n % 10, 'th')}"
+
+
+def listitem(label, label2="", icon="", **props):
+    item = xbmcgui.ListItem(label, label2)
+    if icon:
+        item.setArt({"icon": icon, "thumb": icon})
+    for key, value in props.items():
+        item.setProperty(key, "" if value is None else str(value))
+    return item
+
+
+class Sport(xbmcgui.WindowXML):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.view = "mine"
+        self.anchor = ac.today()
+        self.day = ac.today()
+        self.events = []             # what the list shows (dicts)
+        self.by_id = {}
+        self.hero_events = []
+        self.hero_index = 0
+        self.follow = sc.load_follow()
+        self.ready = False
+        self.closing = False
+        self.table_key = ""
+        self.marks = set()
+        self.team_name = ""
+        self.team_events = []
+        self.table_token = 0
+        self.club_token = 0
+        self.stadium_token = 0
+        self.table_pos = -1
+        self.guide_busy = False
+        self.has_pvr = False
+        self.sections_shown = 0
+        self.f_sport = "soccer"
+        self.f_league = ""
+        self.f_token = 0
+        self.f_dirty = False
+        self.f_has_teams = False
+        self.f_teams = []
+        self.error = ""
+        self.loaded = False
+        self.last_tint = None
+
+    # ------------------------------------------------------------------ window events
+    def onInit(self):
+        if self.ready:
+            self.restore_preview()          # back from full screen or a pop-up: the playing channel goes in the TV window
+            return
+        self.ready = True
+        for key in ("col_w", "col_d", "col_l", "col_club", "tc_last5", "c_home", "c_away", "c_next1", "f_add", "f_addcard",
+                    "f_nextcap", "f_close", "f_typename", "f_hint2", "f_hint_add"):
+            self.setProperty(f"sport.t.{key}", sc.t(key))
+        for key in ("title", "mine", "all", "tables", "follow", "watch", "gp", "gd", "pts", "powered", "notable", "hint", "hint_all", "previewhint", "fullhint", "stoptext", "f_search", "f_order", "f_more", "f_hint", "f_noteams"):
+            self.setProperty(f"sport.t.{key}", sc.t(key))
+        xbmcgui.Window(10000).setProperty("lucent.sport.wid", str(xbmcgui.getCurrentWindowId()))
+        self.check_pvr()
+        self.restore_preview()
+        if not sc.all_cached():
+            self.setProperty("sport.loadtitle", sc.t("loading_title"))
+            self.setProperty("sport.loadtext", sc.t("loading_text"))
+            self.setProperty("sport.loading", "1")
+        self.view = "mine" if sc.has_follow() else "all"
+        self.render()
+        self.setFocusId(102 if self.view == "all" else 101)
+        threading.Thread(target=self.background, daemon=True).start()
+        if getattr(self, "open_evid", ""):              # sport.py,game,<id>: straight to the page of that game
+            ev = next((e for e in sc.all_cached() if e["id"] == self.open_evid), None)
+            if ev:
+                self.by_id[ev["id"]] = ev
+                threading.Timer(0.8, self.open_game, args=(ev,)).start()
+        if getattr(self, "open_team", None):            # sport.py,team,<league>,<id>,<name>: straight to a club's page
+            key, team_id, name = self.open_team
+            threading.Timer(0.8, lambda: self.show_team_games(name, sc.team_card(key, team_id, name))).start()
+
+    def check_pvr(self):
+        """Is there a TV guide? Asked again when the screen opens and when the guide has been read."""
+        self.has_pvr = len(epg.channels()) > 0
+        if self.has_pvr and not epg.load().get("rows"):
+            text = sc.t("pvr_noepg") if epg.is_fresh() else sc.t("nochan")
+        else:
+            text = sc.t("nochan") if self.has_pvr else epg.diagnose()
+        self.setProperty("sport.t.nochan", text)
+
+    def onClose(self):
+        self.closing = True
+
+    def onAction(self, action):
+        aid = action.getId()
+        if aid in (ACTION_PREVIOUS_MENU, ACTION_NAV_BACK) and self.view == "follow" and self.getProperty("sport.f.add"):
+            self.close_add()
+            return
+        if self.view == "follow" and self.getFocusId() == F_TABS:
+            self.tab_after()
+        if aid in (ACTION_PREVIOUS_MENU, ACTION_NAV_BACK) and self.view == "team":
+            self.view = "tables"
+            self.setProperty("sport.t.title", sc.t("title"))
+            self.render()
+            self.setFocusId(TABLE_LIST)
+            return
+        if aid in (ACTION_PREVIOUS_MENU, ACTION_NAV_BACK):
+            # Back goes up one step at a time: content -> its tab button -> My sport -> out of Sport
+            fid = self.getFocusId()
+            tab = next((b for b, name in VIEW_BUTTONS.items() if name == self.view), 101)
+            if fid not in VIEW_BUTTONS:
+                self.setFocusId(tab)
+                return
+            if self.view != "mine":
+                self.onClick(101)
+                self.setFocusId(101)
+                return
+            self.closing = True
+            if epg.active()[0]:      # leaving Sport closes the channel in the TV window
+                epg.stop()
+            self.close()
+            return
+        if self.getFocusId() == LIVE_STRIP:
+            self.follow_strip()
+        if aid == ACTION_STOP and epg.active()[0]:
+            self.stop_preview()
+            return
+        if self.getFocusId() == TABLE_LIST:
+            self.club_token += 1
+            threading.Thread(target=self.club_after, args=(self.club_token, 0.3), daemon=True).start()
+        if self.getFocusId() == LEAGUE_LIST:
+            self.table_token += 1
+            token = self.table_token
+            threading.Timer(0.45, self.table_after, args=(token,)).start()
+        elif self.getFocusId() == T_SPORTS:
+            self.table_token += 1
+            threading.Timer(0.45, self.sport_after, args=(self.table_token,)).start()
+        if self.view in ("mine", "all"):
+            self.tint()
+        if self.view in ("all", "team") and self.getFocusId() in (LIST, LIVE_STRIP):
+            self.stadium_token += 1
+            threading.Thread(target=self.stadium_after, args=(self.stadium_token,), daemon=True).start()
+        if self.view == "follow" and self.getFocusId() in (F_SPORTS, F_COMPS):
+            self.f_token += 1
+            threading.Timer(0.4, self.follow_after, args=(self.f_token, self.getFocusId())).start()
+
+    def onClick(self, cid):
+        if cid in VIEW_BUTTONS:
+            if self.view == "follow" and VIEW_BUTTONS[cid] != "follow" and self.f_dirty:
+                self.f_dirty = False
+                threading.Thread(target=self.after_follow_change, daemon=True).start()
+            self.view = VIEW_BUTTONS[cid]
+            self.setProperty("sport.f.add", "")
+            self.marks = set()
+            self.setProperty("sport.t.title", sc.t("title"))
+            self.render()
+        elif cid == F_SEARCH:
+            self.open_add()
+        elif cid in (F_ORDER, F_MORE):
+            {F_ORDER: self.change_order, F_MORE: self.follow_menu}[cid]()
+            self.f_dirty = True
+            self.render(keep_focus=True)
+        elif cid == F_CHIPS:
+            self.card_menu()
+        elif cid == F_TABS:
+            self.tab_after()
+            self.setFocusId({"search": F_QUERY, "browse": F_SPORTS, "countries": F_COUNTRIES, "names": F_NAMEBTN}[self.f_tab])
+        elif cid == F_QUERY:
+            self.type_search()
+        elif cid == F_RESULTS:
+            self.follow_result(F_RESULTS)
+        elif cid == F_COUNTRIES:
+            self.toggle_country()
+        elif cid == F_NAMEBTN:
+            self.add_name()
+            self.f_dirty = True
+            self.fill_names()
+        elif cid == F_NAMES:
+            self.follow_result(F_NAMES)
+        elif cid == F_SPORTS:
+            self.setFocusId(F_COMPS)
+        elif cid == F_COMPS:
+            self.setFocusId(F_TEAMS if self.f_has_teams else F_BTN)
+        elif cid == F_BTN:
+            self.toggle_league()
+        elif cid == F_TEAMS:
+            self.toggle_team_card()
+        elif cid in DAY_BUTTONS:
+            self.day = self.anchor + datetime.timedelta(days=cid - DAY_BUTTONS[0])
+            self.render()
+            self.setFocusId(LIST if self.events else cid)
+        elif cid == DAY_PREV:
+            self.shift_days(-7)
+        elif cid == DAY_NEXT:
+            self.shift_days(7)
+        elif cid == FIX_BUTTON:
+            self.fix_channel()
+        elif cid == REMIND_BUTTON:
+            self.set_reminder()
+        elif cid == RECORD_BUTTON:
+            self.set_recording()
+        elif cid == 334:
+            self.stop_preview()
+        elif cid == HERO_WATCH:
+            self.setFocusId(HERO_LIST)
+            self.preview_channel(1)
+        elif cid == HERO_PAGE:
+            item = self.getControl(HERO_LIST).getSelectedItem()
+            ev = self.by_id.get(item.getProperty("evid")) if item else None
+            if ev:
+                self.open_game(ev)
+        elif cid == WEEK_LIST:
+            item = self.getControl(WEEK_LIST).getSelectedItem()
+            ev = self.by_id.get(item.getProperty("evid")) if item else None
+            if ev:
+                self.open_game(ev)
+        elif cid == ALSO_LIST:
+            item = self.getControl(ALSO_LIST).getSelectedItem()
+            if item and item.getProperty("kind") == "watch":
+                self.setFocusId(HERO_LIST)
+                self.preview_channel(1)
+            elif item:
+                ev = self.by_id.get(item.getProperty("evid")) or next((e for e in sc.all_cached() if e["id"] == item.getProperty("evid")), None)
+                if ev:
+                    self.open_game(ev)
+        elif cid in (350, 351):
+            if epg.active()[0]:          # the TV window: OK makes the channel full screen
+                epg.fullscreen()
+        elif cid in HERO_CHANNELS:
+            self.preview_channel(CHANNEL_BUTTONS[cid])
+        elif cid in CHANNEL_BUTTONS:
+            self.preview_channel(CHANNEL_BUTTONS[cid])
+        elif cid in (FOLLOW_HOME, FOLLOW_AWAY):
+            self.toggle_team("home" if cid == FOLLOW_HOME else "away")
+        elif cid == SHOW_TABLE:
+            self.open_table()
+        elif cid == T_SPORTS:
+            self.setFocusId(LEAGUE_LIST)
+        elif cid == LEAGUE_LIST:
+            self.setFocusId(TABLE_LIST)
+        elif cid == TABLE_LIST:
+            self.open_team_card()
+        elif cid == HERO_LIST or cid in SECTION_LISTS:
+            ev, item = self.current()
+            if ev and item:
+                self.open_game(ev)
+        elif cid == LIVE_STRIP:
+            item = self.getControl(LIVE_STRIP).getSelectedItem()
+            ev = self.by_id.get(item.getProperty("evid")) if item else None
+            if ev:
+                self.open_game(ev)
+        elif cid == LIST:
+            ev, item = self.current()
+            if item and item.getProperty("hero") and item.getProperty("ch1cid"):
+                self.play_channel(1)
+            elif ev:
+                self.open_game(ev)
+
+    # ------------------------------------------------------------------ background work
+    def status(self, text=""):
+        self.setProperty("sport.status", text)
+
+    def set_progress(self, done, total):
+        self.setProperty("sport.progress", str(min(10, int(done * 10 / max(total, 1)))) if total else "")
+
+    def background(self):
+        """Fetch the games and read the IPTV guide without keeping the screen waiting."""
+        first_time = not sc.all_cached()
+        try:
+            if first_time:
+                self.setProperty("sport.loadtitle", sc.t("loading_title"))
+                self.setProperty("sport.loadtext", sc.t("loading_text"))
+                self.setProperty("sport.loading", "1")
+            else:
+                self.status(sc.t("updating"))
+            if not self.has_pvr:
+                self.check_pvr()
+
+            def games_progress(done, total):
+                self.set_progress(done, total)
+                if first_time:
+                    self.setProperty("sport.loadtext", sc.t("loading_pct", int(done * 100 / max(total, 1))))
+
+            changed = sc.refresh(progress=games_progress)
+            if sc.LAST_FAIL[0] and sc.LAST_FAIL[0] == sc.LAST_FAIL[1]:
+                self.error = sc.t("neterr", sc.LAST_FAIL[2] or "?")
+            elif sc.DAYFAIL[0]:
+                self.error = sc.t("dayerr", sc.DAYFAIL[0], sc.DAYFAIL[1], sc.DAYFAIL[2] or "?")
+            for league in {t["league"] for t in sc.load_follow()["teams"] if t.get("league") in sc.LEAGUES and t["league"] != sc.NATIONAL_LEAGUE}:
+                sc.standings(league)             # for "2nd in Eredivisie"
+                changed = True
+            self.loaded = True
+            self.setProperty("sport.loading", "")
+            self.setProperty("sport.progress", "")
+            self.status(self.error)
+            if (changed or first_time or self.view == "mine") and not self.closing:
+                self.render(keep_focus=not first_time)
+            if self.has_pvr and not epg.is_fresh() and not self.closing:
+                self.guide_busy = True
+                last = [0]
+
+                def progress(done, total):
+                    pct = int(done * 100 / max(total, 1))
+                    if pct != last[0]:
+                        last[0] = pct
+                        self.status(sc.t("guide", pct))
+                        self.set_progress(done, total)
+
+                self.status(sc.t("guide", 0))
+                epg.scan(progress=progress, abort=lambda: self.closing)
+                self.guide_busy = False
+                self.check_pvr()
+                if not self.closing:
+                    self.render(keep_focus=True)
+        except Exception as error:  # noqa: BLE001
+            sc.log(f"background: {error}")
+        finally:
+            self.guide_busy = False
+            self.loaded = True
+            if not self.closing:
+                self.setProperty("sport.loading", "")
+                self.setProperty("sport.progress", "")
+                self.status(self.error)
+
+    # ------------------------------------------------------------------ data -> list
+    def pick_events(self):
+        self.follow = sc.load_follow()
+        data = epg.load() if self.has_pvr else {}
+        if self.view in ("mine", "team"):
+            return [], data
+        day_events = sc.events_on(self.day)
+        live, coming, _done = sc.order(day_events)        # games that are over are left out
+        return sorted(live + coming, key=lambda e: e["start"]), data
+
+    def event_item(self, ev, data, header="", headersub=""):
+        label, label2, props = self.event_props(ev, data, header, headersub)
+        return listitem(label, label2, **props)
+
+    def event_props(self, ev, data, header="", headersub=""):
+        kind_event = ev["kind"] == "event"
+        chans = self.channels_of(ev, data)
+        best = sc.display_channel(chans[0]["name"]) if chans else ""
+        live = ev["state"] == "in"
+        label = ev["title"] if kind_event else f"{ev['home'].get('name', '')} – {ev['away'].get('name', '')}"
+        status = ev["status"] if ev["state"] != "pre" else ""
+        props = {
+            "time": sc.local_time(ev["start"]), "status": status, "live": "1" if live else "",
+            "hname": ev["home"].get("name", ""), "aname": ev["away"].get("name", ""),
+            "hrec": ev["home"].get("rec", ""), "arec": ev["away"].get("rec", ""),
+            "hlogo": ev["home"].get("logo", ""), "alogo": ev["away"].get("logo", ""),
+            "mid": score_text(ev), "lgicon": ev.get("lg", ""), "isevent": "1" if kind_event else "",
+            "league": league_name(ev["league"]), "chan": best, "chanicon": (chans[0].get("icon") or "") if chans else "",
+            "when": when_line(ev), "venue": "  ·  ".join(x for x in (ev.get("venue"), ev.get("round")) if x),
+            "header": header, "headersub": headersub, "evid": ev["id"],
+            "hcol": colour(sc.club_hex(ev["home"].get("color"), ev["home"].get("alt")), "66"), "acol": colour(sc.club_hex(ev["away"].get("color"), ev["away"].get("alt")), "66"),
+        }
+        shown = ev["state"] in ("in", "post")
+        props["hscore"] = str(ev["home"].get("score", "")) if shown and not kind_event else ""
+        props["ascore"] = str(ev["away"].get("score", "")) if shown and not kind_event else ""
+        props["hbar"] = colour(sc.club_hex(ev["home"].get("color"), ev["home"].get("alt")))
+        props["abar"] = colour(sc.club_hex(ev["away"].get("color"), ev["away"].get("alt")))
+        props["herochip"] = sc.t("livenow") if live else short_when(ev)
+        props["heroline"] = props["venue"]
+        if kind_event and ev.get("sub") and ev["league"] != EPG_LEAGUE:
+            props["when"] = f"{ev['sub']}  ·  {when_line(ev)}"
+        guessed = [] if chans or ev["state"] == "post" or not data or kind_event else epg.guess_channels(ev, data)
+        for n, chan in enumerate(chans or guessed, 1):
+            bits = [chan["tag"]]
+            if sc.channel_country(chan["name"]):
+                bits.insert(0, sc.channel_country(chan["name"]))
+            if chan["q"]:
+                bits.append(chan["q"])
+            if chan["live"]:
+                bits.insert(0, sc.t("livenow"))
+            props[f"ch{n}name"] = sc.display_channel(chan["name"])
+            props[f"ch{n}sub"] = "  ·  ".join(bits)
+            props[f"ch{n}cid"] = chan["cid"]
+            props[f"ch{n}icon"] = chan.get("icon") or ""
+            props[f"ch{n}tag"] = (chan["tag"] or "").upper()
+            props[f"ch{n}q"] = chan["q"] or ""
+            props[f"ch{n}live"] = "1" if chan["live"] else ""
+        props.update(self.plan_props(ev))
+        foot = short_when(ev)
+        if props.get("badge"):
+            foot = f"{props['badge']}  ·  {foot}"
+        props["foot"] = foot
+        if not kind_event:
+            for who, side in (("home", ev["home"]), ("away", ev["away"])):
+                if side.get("name"):
+                    followed = sc.is_following_team(self.follow, side)
+                    props[f"follow{who}"] = f"✓ {side['name']}" if followed else sc.t("follow_team", side["name"])
+            if ev["league"] in sc.LEAGUES:
+                props["table"] = sc.t("show_table")
+        return label, ev.get("sub", "") if kind_event else "", props
+
+    def plan_props(self, ev):
+        """Texts of the three action buttons and the small badge on the row."""
+        out = {}
+        if ev["state"] == "post" or ev["league"] == EPG_LEAGUE:
+            return out
+        mode = plan.reminder_mode(ev["id"])
+        rec = plan.recording(ev["id"])
+        out["fixtext"] = plan.t("btn_fix")
+        out["remindtext"] = plan.t("btn_switch_on" if mode == "switch" else "btn_remind_on" if mode else "btn_remind")
+        out["rectext"] = plan.t("btn_rec_on" if rec else "btn_rec")
+        badges = [plan.t("badge_rec")] if rec else []
+        if mode:
+            badges.append(plan.t("badge_switch" if mode == "switch" else "badge_remind"))
+        out["badge"] = "  ·  ".join(badges)
+        return out
+
+    def channels_of(self, ev, data):
+        if ev["league"] == EPG_LEAGUE:
+            raw = data.get("names", {}).get(str(ev.get("cid")), "")
+            return [{"cid": ev["cid"], "name": epg.clean_name(raw) or raw, "q": epg.quality_of(raw), "score": 3,
+                     "tag": sc.t("sure"), "live": ev["state"] == "in", "title": ev["title"], "start": ev["start"],
+                     "icon": sc.channel_logo(epg.clean_name(raw) or raw) or data.get("icons", {}).get(str(ev.get("cid")), "")}]
+        found = epg.channels_for(ev, data) if data else []
+        chans = plan.with_fixes(ev, found, data or {})
+        for chan in chans:                       # a clean logo from tv-logos when the channel name is known there
+            chan["icon"] = sc.channel_logo(chan.get("name", "")) or chan.get("icon", "")
+        return chans
+
+    def render(self, keep_focus=False):
+        self.setProperty("sport.view", self.view)
+        for name in ("mine", "all", "tables"):
+            self.setProperty(f"sport.is.{name}", "1" if name == self.view else "")
+        if self.view == "tables":
+            self.setProperty("sport.empty", "")
+            self.fill_leagues()
+            return
+        if self.view == "follow":
+            self.setProperty("sport.empty", "")
+            self.fill_follow(keep_focus)
+            return
+        events, data = self.pick_events()
+        self.hero_events = []
+        if self.view == "team":
+            self.setProperty("sport.t.title", self.team_name)
+            self.events = self.team_events
+            self.by_id = {e["id"]: e for e in self.team_events}
+            items = [self.event_item(ev, data) for ev in self.team_events]
+        elif self.view == "mine":
+            self.fill_mine(data, keep_focus)
+            self.fill_strip([], data)
+            self.getControl(LIST).reset()
+            self.fill_days()
+            if self.hero_events or self.sections_shown:
+                self.setProperty("sport.empty", "")
+            else:
+                self.empty_state()
+            return
+        else:
+            self.events = events
+            self.by_id = {e["id"]: e for e in events}
+            items = self.all_items(events, data)
+            self.setProperty("sport.listtitle", nice_day(self.day).upper() if abs((self.day - ac.today()).days) <= 1 else ac.day_long(self.day).upper())
+            self.setProperty("sport.listcount", sc.t("list_n", len(events)) if events else "")
+        self.setProperty("sport.hashero", "1" if self.hero_events else "")
+        self.fill_strip(events if self.view == "all" else [], data, keep_focus)
+        control = self.getControl(LIST)
+        position = control.getSelectedPosition() if keep_focus else 0
+        control.reset()
+        control.addItems(items)
+        if items:
+            control.selectItem(min(max(position, 0), len(items) - 1))
+        self.fill_days()
+        if self.view == "team" and getattr(self, "team_look", None) and self.team_look[2]:
+            self.setProperty("sport.bgA", self.team_look[2])
+            self.setProperty("sport.bgB", self.team_look[2])
+        if self.view != "team":
+            self.setProperty("sport.teamlogo", "")
+        if self.view in ("all", "team"):
+            self.stadium_token += 1
+            threading.Thread(target=self.stadium_after, args=(self.stadium_token, 0.8), daemon=True).start()
+        if items:
+            self.setProperty("sport.empty", "")
+        else:
+            self.empty_state()
+
+    # ------------------------------------------------------------------ All games: live first, per competition
+    def all_items(self, events, data):
+        """Every game grouped per competition (in the order of their first game); the first game of a competition
+        carries its name, shown above the row."""
+        groups, order = {}, []
+        for ev in events:
+            if ev["league"] not in groups:
+                groups[ev["league"]] = []
+                order.append(ev["league"])
+            groups[ev["league"]].append(ev)
+        items = []
+        for league in order:
+            evs = groups[league]
+            for n, ev in enumerate(evs):
+                items.append(self.event_item(ev, data, header=league_name(league).upper() if n == 0 else "",
+                                             headersub=sc.t("list_n", len(evs)) if n == 0 else ""))
+        return items
+
+    def fill_strip(self, events, data, keep_focus=False):
+        """The games that are on now as cards above the list (OK opens the game, the panel on the right follows the
+        card). Without live games the list takes the whole height again."""
+        live = [e for e in events if e["state"] == "in" and e["kind"] != "event"]
+        strip = self.getControl(LIVE_STRIP)
+        keep = strip.getSelectedPosition() if keep_focus else 0
+        strip.reset()
+        cards = []
+        for ev in live:
+            chans = self.channels_of(ev, data)
+            cards.append(listitem(ev["title"] if ev.get("title") else "", "",
+                                  hname=ev["home"].get("short") or ev["home"].get("name", ""),
+                                  aname=ev["away"].get("short") or ev["away"].get("name", ""),
+                                  hlogo=ev["home"].get("logo", ""), alogo=ev["away"].get("logo", ""),
+                                  score=score_text(ev), min=ev["status"], chan=sc.display_channel(chans[0]["name"]) if chans else "",
+                                  prog=live_progress(ev), evid=ev["id"]))
+        if cards:
+            strip.addItems(cards)
+            strip.selectItem(min(max(keep, 0), len(cards) - 1))
+        self.setProperty("sport.live", f"{sc.t('livenow').upper()}  ·  {len(cards)}" if cards else "")
+        # the list sits under the cards (and is that much shorter), or in its own place
+        lst = self.getControl(LIST)
+        if cards:
+            lst.setPosition(150, 520)
+            lst.setHeight(500)
+        else:
+            lst.setPosition(150, 270)
+            lst.setHeight(750)
+
+    def follow_strip(self):
+        """A card in the live row has the focus: select the same game in the list, so the panel shows it."""
+        item = self.getControl(LIVE_STRIP).getSelectedItem()
+        if not item:
+            return
+        evid = item.getProperty("evid")
+        lst = self.getControl(LIST)
+        for n in range(lst.size()):
+            if lst.getListItem(n).getProperty("evid") == evid:
+                if lst.getSelectedPosition() != n:
+                    lst.selectItem(n)
+                break
+        self.tint()
+
+    def mine_data(self, data):
+        """Hero games and one block per team / competition / name you follow (your order): ([events], [section dicts])."""
+        follow = self.follow
+        by_id = {}
+
+        rows = []
+        for key, kind, ident, title in sc.sections(follow):
+            logo = ""
+            if kind == "team":
+                team = next((t for t in follow["teams"] if sc.team_ident(t) == ident), {"id": ident, "name": title})
+                events, sub, logo = sc.events_of_team(ident, title), sc.place_text(team), team.get("logo", "") or sc.flag_logo(title)
+            elif kind == "league":
+                events, sub = [e for e in sc.all_cached() if e["league"] == ident], ""
+            else:
+                events, sub = name_events({"names": [ident]}, data), sc.t("tvguide")
+            live = [e for e in events if e["state"] == "in"]
+            coming = sorted((e for e in events if e["state"] == "pre"), key=lambda e: e["start"])
+            shown = live + coming[:4]                          # games that are over are left out
+            if not logo and shown:
+                logo = shown[0].get("lg", "")
+            rows.append({"title": title, "sub": sub, "logo": logo, "events": shown, "kind": kind,
+                         "cardcol": sc.country_colour(title) if kind == "team" else ""})
+        everything = {}
+        for row in rows:
+            for e in row["events"]:
+                everything[e["id"]] = e
+        live_all = sorted((e for e in everything.values() if e["state"] == "in"), key=lambda e: e["start"])
+        coming_all = sorted((e for e in everything.values() if e["state"] == "pre"), key=lambda e: e["start"])
+        # the big card is only for your favourites: games of followed teams (and names); no favourites -> no big card
+        fav = {}
+        for row in rows:
+            if row["kind"] in ("team", "name"):
+                for e in row["events"]:
+                    fav[e["id"]] = e
+        pool = [e for e in live_all + coming_all if e["id"] in fav]
+        hero = pool[:HERO_MAX]
+        sections = []
+        today = ac.today()
+        big_live = {e["id"] for e in hero if e["state"] == "in"} | ({hero[0]["id"]} if hero else set())   # already on the big card
+        also = [e for e in live_all + coming_all if e["id"] not in big_live and sc.local_day(e["start"]) == today]
+        quiet = set(follow.get("nogoals", []))
+        teams = [t.get("name", "") for t in follow.get("teams", []) if t.get("name") and sc.team_ident(t) not in quiet][:3]
+        self.alerts = sc.t("goal_alerts", ", ".join(teams)) if teams and not xbmc.getCondVisibility("Skin.HasSetting(lucent.goals.off)") else ""
+        self.also = also[:8]
+        week_end = time.time() + 7 * 86400
+        week = [e for e in coming_all if e["id"] in fav and sc.local_day(e["start"]) != today and e["start"] < week_end]
+        self.week = week[:12]
+        sections += rows                      # followed teams show up even without games (and without IPTV)
+        for sec in sections:
+            for e in sec["events"]:
+                by_id[e["id"]] = e
+        for e in hero:
+            by_id[e["id"]] = e
+        self.by_id = by_id
+        self.events = list(by_id.values())
+        return hero, sections
+
+    def fill_mine(self, data, keep_focus=False):
+        hero, sections = self.mine_data(data)
+        self.hero_events = hero
+        keep = {}
+        if keep_focus:
+            for cid in (HERO_LIST,) + SECTION_LISTS:
+                try:
+                    keep[cid] = self.getControl(cid).getSelectedPosition()
+                except Exception:  # noqa: BLE001
+                    keep[cid] = 0
+        self.setProperty("sport.hashero", "1" if hero else "")
+        items = []
+        for n, ev in enumerate(hero, 1):
+            label, label2, props = self.event_props(ev, data)
+            props["heroof"] = f"{n} / {len(hero)}" if len(hero) > 1 else ""
+            hx = sc.club_hex(ev["home"].get("color"), ev["home"].get("alt")) if ev["kind"] != "event" else ""
+            ax = sc.club_hex(ev["away"].get("color"), ev["away"].get("alt")) if ev["kind"] != "event" else ""
+            props["hfull"] = colour(hx or "B3122E", "E6")
+            props["afull"] = colour(ax or hx or "1E3A8A", "E6")
+            bits = [props.get("league", ""), ev.get("venue", "")]
+            props["topline"] = "  ·  ".join(x for x in ([ev.get("status", "")] if ev["state"] == "in" else [short_when(ev)]) + bits if x)
+            if ev["state"] == "in":
+                props["topline"] = f"[B][COLOR FFE5534B]LIVE[/COLOR][/B]    {props['topline']}"
+            props["watchlabel"] = sc.t("watch_on", props["ch1name"]) if props.get("ch1name") else ""
+            if ev["state"] == "in" and ev["kind"] == "teams":       # your team plays now: the card is a live scoreboard
+                if sc.LEAGUES.get(ev["league"], {}).get("sport") == "soccer":
+                    props["prog"] = str(self.progress(ev))
+                else:
+                    props["prog"] = "0"                         # no minute bar for other sports, but still the scoreboard
+                props["when"] = "  ·  ".join(x for x in (ev.get("status"), ev.get("venue")) if x)
+            items.append(listitem(label, label2, **props))
+        self.fill_list(HERO_LIST, items, keep.get(HERO_LIST, 0))
+        self.fill_also(data)
+        self.fill_week()
+        live_hero = [(n, ev) for n, ev in enumerate(hero) if ev["state"] == "in" and ev["kind"] == "teams"]
+        if live_hero:
+            threading.Thread(target=self.hero_goals, args=(live_hero,), daemon=True).start()
+        self.sections_shown = min(len(sections), len(SECTION_LISTS))
+        for k, cid in enumerate(SECTION_LISTS):
+            if k < len(sections):
+                sec = sections[k]
+                evs = sec["events"]
+                self.setProperty(f"sport.sec{k + 1}.title", sec["title"])
+                self.setProperty(f"sport.sec{k + 1}.sub", sec["sub"])
+                self.setProperty(f"sport.sec{k + 1}.logo", sec["logo"] or SPORT_ICON)
+                self.setProperty(f"sport.sec{k + 1}.count", sc.t("n_games", len(evs)) if evs else "")
+                self.setProperty(f"sport.sec{k + 1}.on", "1")
+                cards = [self.event_item(ev, data) for ev in evs]
+                if not cards:
+                    cards = [listitem(sc.t("nogames"), "", isevent="1", league=sec["title"], lgicon=sec["logo"], foot="", hcol="66" + "3A4A5C", acol="66" + "3A4A5C")]
+                if sec.get("cardcol"):
+                    for card_item in cards:
+                        card_item.setProperty("cardcol", sec["cardcol"])
+                self.fill_list(cid, cards, keep.get(cid, 0))
+            else:
+                self.setProperty(f"sport.sec{k + 1}.on", "")
+                self.fill_list(cid, [], 0)
+        self.last_tint = None
+        self.tint()
+
+    def fill_week(self):
+        """'Your teams this week': slim cards with both crests, the game and the day."""
+        cards = []
+        for ev in getattr(self, "week", []):
+            title = ev.get("title") if ev["kind"] == "event" else f"{ev['home'].get('name', '')} – {ev['away'].get('name', '')}"
+            cards.append(listitem(title, "", evid=ev["id"], when=short_when(ev),
+                                  hlogo=ev["home"].get("logo", "") if ev["kind"] != "event" else ev.get("lg", ""),
+                                  alogo=ev["away"].get("logo", "") if ev["kind"] != "event" else ""))
+            self.by_id[ev["id"]] = ev
+        self.fill_list(WEEK_LIST, cards, 0)
+        self.setProperty("sport.weekhas", "1" if cards else "")
+        self.setProperty("sport.t.your_week", sc.t("your_week").upper())
+        self.setProperty("sport.t.gamepage", sc.t("game_page"))
+
+    def fill_also(self, data):
+        """Next to the big card: a Watch row for its channel, then the other games of today (OK opens the game)."""
+        rows = []
+        hero = self.getControl(HERO_LIST).getSelectedItem()
+        if hero and hero.getProperty("ch1name"):
+            rows.append(listitem(sc.t("watch_on", hero.getProperty("ch1name")), "", kind="watch", icon=hero.getProperty("ch1icon")))
+        now = time.time()
+        for ev in getattr(self, "also", []):
+            chans = self.channels_of(ev, data)
+            if ev["state"] == "in":
+                when, sub = ev.get("status") or "LIVE", f"{score_text(ev)}"
+            else:
+                left = max(0, int(ev["start"] - now))
+                when = sc.local_time(ev["start"])
+                sub = sc.t("g_in_h", left // 3600, left % 3600 // 60) if left >= 3600 else sc.t("g_in_m", left // 60)
+            title = ev.get("title") if ev["kind"] == "event" else f"{ev['home'].get('name', '')} – {ev['away'].get('name', '')}"
+            rows.append(listitem(title, sub, kind="game", evid=ev["id"], when=when, live="1" if ev["state"] == "in" else "",
+                                 hlogo=ev["home"].get("logo", "") if ev["kind"] != "event" else ev.get("lg", ""),
+                                 alogo=ev["away"].get("logo", "") if ev["kind"] != "event" else "",
+                                 chan=sc.display_channel(chans[0]["name"]) if chans else ""))
+        self.fill_list(ALSO_LIST, rows, 0)
+        self.setProperty("sport.alsohas", "1" if rows else "")
+        self.setProperty("sport.alerts", getattr(self, "alerts", ""))
+        self.setProperty("sport.t.also_today", sc.t("also_today").upper())
+        self.setProperty("sport.t.nothing_today", sc.t("nothing_today"))
+        self.setProperty("sport.t.goal_alerts_cap", sc.t("goal_alerts_cap"))
+
+    def hero_goals(self, live_hero):
+        """Who scored, per side, on the live scoreboard ('12' Leão  ·  31' Pulisic'), from ESPN's game summary."""
+        for n, ev in live_hero:
+            detail = self.game_detail(ev)
+            sides = {"home": [], "away": []}
+            habbr = ev["home"].get("abbr") or ev["home"].get("name", "")
+            for i in range(5, 0, -1):                             # the summary lists the newest goal first
+                minute = detail.get(f"sc{i}m")
+                if not minute:
+                    continue
+                who = detail.get(f"sc{i}x", "")
+                who = who.replace(" Own Goal", " (og)" if not sc.NL else " (e.d.)").replace(" Penalty - Scored", " (p)")
+                for word in (" Goal", "Goal - ", "Goal! "):
+                    who = who.replace(word, "")
+                side = "home" if detail.get(f"sc{i}t") == habbr else "away"
+                sides[side].append(f"{minute} {who.strip()}".strip())
+            try:
+                item = self.getControl(HERO_LIST).getListItem(n)
+            except Exception:  # noqa: BLE001 - the page moved on
+                return
+            if item.getProperty("evid") == ev["id"]:
+                item.setProperty("hgoals", "  ·  ".join(sides["home"]))
+                item.setProperty("agoals", "  ·  ".join(sides["away"]))
+
+    def stadium_after(self, token, wait=0.5):
+        """Photo of the stadium in the TV window while nothing plays: the home team's ground of the game you are on,
+        on a club page the club's own ground."""
+        if xbmc.Monitor().waitForAbort(wait) or token != self.stadium_token or self.closing:
+            return
+        try:
+            venue, short = "", ""
+            if self.view == "team" and getattr(self, "team_look", None):
+                name, sport = self.team_look[0], self.team_look[1]
+            else:
+                item = self.getControl(LIST).getSelectedItem()
+                ev = self.by_id.get(item.getProperty("evid")) if item else None
+                if not ev or ev["kind"] != "teams":
+                    self.setProperty("sport.stadium", "")
+                    return
+                name, sport = ev["home"].get("name", ""), sc.LEAGUES.get(ev["league"], {}).get("sport", "")
+                venue, short = ev.get("venue", ""), ev["home"].get("short", "")
+            img, stadium = sc.stadium_photo(name, sport, venue, short)
+            if token == self.stadium_token:
+                self.setProperty("sport.stadium", img)
+                self.setProperty("sport.stadium.name", stadium)
+        except Exception as error:  # noqa: BLE001
+            sc.log(f"stadium: {error}")
+
+    def fill_list(self, cid, items, position=0):
+        control = self.getControl(cid)
+        control.reset()
+        control.addItems(items)
+        if items:
+            control.selectItem(min(max(position, 0), len(items) - 1))
+
+    def tint(self):
+        """The background takes the colours of the game you are looking at."""
+        fid = self.getFocusId()
+        cid = HERO_LIST if fid in HERO_CHANNELS or fid == 350 else fid
+        if self.view == "all":
+            cid = LIST
+        elif cid != HERO_LIST and cid not in SECTION_LISTS:
+            if not self.getProperty("sport.bgA") and self.hero_events:
+                cid = HERO_LIST
+            else:
+                return
+        try:
+            item = self.getControl(cid).getSelectedItem()
+        except Exception:  # noqa: BLE001
+            return
+        if not item:
+            return
+        pair = (item.getProperty("hcol"), item.getProperty("acol"))
+        if pair != self.last_tint:
+            self.last_tint = pair
+            self.setProperty("sport.bgA", pair[0])
+            self.setProperty("sport.bgB", pair[1])
+
+
+    # ------------------------------------------------------------------ game page
+    def game_layout(self, ev):
+        if ev["kind"] == "teams":
+            return "teams"
+        return "race" if ev["league"] in sc.LEAGUES and sc.LEAGUES[ev["league"]]["sport"] == "racing" else "event"
+
+    def countdown(self, ev):
+        if ev["state"] == "in":
+            return ev.get("status") or "LIVE"
+        if ev["state"] == "post":
+            return sc.t("g_over")
+        left = int(ev["start"] - time.time())
+        if left <= 0:
+            return ""
+        days, hours, mins = left // 86400, left % 86400 // 3600, left % 3600 // 60
+        if days:
+            return sc.t("g_in_dh", days, hours)
+        return sc.t("g_in_h", hours, mins) if hours else sc.t("g_in_m", mins)
+
+    def progress(self, ev):
+        """0..10 for the bar under LIVE: minute / 90 (HT = 5, finished = 10)."""
+        if ev["state"] == "post":
+            return 10
+        if ev["state"] != "in":
+            return 0
+        text = (ev.get("status") or "").upper()
+        if text.startswith("HT") or "HALF" in text:
+            return 5
+        m = re.match(r"\s*(\d+)", text)
+        return max(1, min(10, round(int(m.group(1)) / 9))) if m else 1
+
+    def game_props(self, ev):
+        data = epg.load() if self.has_pvr else {}
+        label, label2, props = self.event_props(ev, data)
+        d = sc.local_day(ev["start"])
+        props.update(label=label, label2=label2, layout=self.game_layout(ev), dayshort=ac.day_short(d).upper(),
+                     clock=sc.local_time(ev["start"]), countdown=self.countdown(ev),
+                     crumb=f"‹ {sc.t('title')}     {props['league']}" + (f"  ·  {props['venue']}" if props["venue"] else ""))
+        if ev["kind"] == "teams":
+            props["hsub"] = props["asub"] = ""
+            props["info1"] = ev.get("venue", "")
+            props["info2"] = ev.get("round", "")
+            props["prog"] = str(self.progress(ev))
+            props["score"] = (f"{props['hscore']} – {props['ascore']}" if props.get("hscore") != "" and props.get("ascore") != "" and ev["state"] in ("in", "post") else "")
+            # the scoreboard of the page: both club colours, the line on top, the big middle
+            hx = sc.club_hex(ev["home"].get("color"), ev["home"].get("alt"))
+            ax = sc.club_hex(ev["away"].get("color"), ev["away"].get("alt"))
+            props["hfull"], props["afull"] = colour(hx or "B3122E", "E6"), colour(ax or hx or "1E3A8A", "E6")
+            props["hbarcol"], props["abarcol"] = colour(hx or "C8102E"), colour(ax or "1E4BA0")
+            crumbs = [x for x in (props["league"], ev.get("venue"), ev.get("round")) if x]
+            props["crumb"] = f"‹ {sc.t('title')}     " + "  ·  ".join(crumbs)
+            if ev["state"] == "in":
+                props["topline"] = f"[B][COLOR FFE5534B]LIVE[/COLOR][/B]    {ev.get('status', '')}"
+                props["bigmid"], props["bigsub"] = props["score"], ""
+            elif ev["state"] == "post":
+                props["topline"] = sc.t("g_over")
+                props["bigmid"], props["bigsub"] = props["score"], ""
+            else:
+                props["topline"] = when_line(ev)
+                props["bigmid"], props["bigsub"] = sc.local_time(ev["start"]), self.countdown(ev)
+            props["hname"], props["aname"] = ev["home"].get("name", ""), ev["away"].get("name", "")
+            sport = sc.LEAGUES.get(ev["league"], {}).get("sport", "")
+            props["soccer"] = "1" if sport == "soccer" else ""
+            props["habbr"] = ev["home"].get("abbr") or ev["home"].get("short") or ""
+            props["aabbr"] = ev["away"].get("abbr") or ev["away"].get("short") or ""
+            letter = {"basketball": "Q", "football": "Q", "hockey": "P", "baseball": ""}.get(sport, "")
+            for i in range(1, 9):
+                props[f"qlabel{i}"] = f"{letter}{i}"
+        else:
+            props["info1"] = ev.get("venue", "")
+            props["info2"] = ev.get("round", "")
+        if props["layout"] == "race":
+            mates = sorted((e for e in sc.all_cached() if e["league"] == ev["league"] and e["kind"] == "event" and e["title"] == ev["title"]),
+                           key=lambda e: e["start"])[:5]
+            now_ts = time.time()
+            next_n = next((i for i, e in enumerate(mates, 1) if e["start"] > now_ts), 0)
+            for n, e in enumerate(mates, 1):
+                props[f"s{n}name"] = e.get("sub") or e["title"]
+                props[f"s{n}when"] = f"{ac.day_short(sc.local_day(e['start']))}  {sc.local_time(e['start'])}"
+                props[f"s{n}day"] = ac.day_short(sc.local_day(e["start"]))
+                props[f"s{n}time"] = sc.local_time(e["start"])
+                props[f"s{n}now"] = "1" if e["id"] == ev["id"] else ""
+                props[f"s{n}past"] = "1" if e["start"] + 2 * 3600 < now_ts else ""
+                props[f"s{n}next"] = "1" if n == next_n else ""
+                props[f"s{n}evid"], props[f"s{n}comp"], props[f"s{n}state"] = e.get("evid", ""), e.get("comp", ""), e.get("state", "pre")
+        return props
+
+    def game_extra(self, ev):
+        """Slow part (form, standings): returns {name: value} for the page, filled in once it is ready."""
+        out = {}
+        if ev["kind"] == "event" and ev["league"] in sc.LEAGUES and sc.LEAGUES[ev["league"]]["sport"] == "racing":       # a race weekend: the circuit instead of the programme
+            try:
+                if not ev.get("circuit"):
+                    ev["circuit"], ev["circname"] = sc.circuit_of_event(ev)
+                c = sc.circuit_info(ev["circuit"], ev["league"])
+                direction = c.get("direction", "").lower()
+                facts = [x for x in (c.get("length", ""), f"{c['laps']} {sc.t('c_laps')}" if c.get("laps") else "",
+                                     f"{c['turns']} {sc.t('c_turns')}" if c.get("turns") else "",
+                                     sc.t("c_cw") if "clock" in direction and "anti" not in direction and "counter" not in direction
+                                     else (sc.t("c_ccw") if direction else "")) if x]
+                tiles = [(c.get("length", ""), sc.t("c_length")), (c.get("laps", ""), sc.t("c_laps")), (c.get("turns", ""), sc.t("c_turns")),
+                         (c.get("record", ""), ("Record" + (f" {c['recyear']}" if c.get("recyear") else "")))]
+                out = {f"circt{i}{k}": v for i, (val, cap) in enumerate(tiles, 1) for k, v in (("v", val), ("c", cap if val else ""))}
+                out.update({"circname": c.get("name") or ev.get("circname", ""), "circplace": c.get("place", ""), "circimg": sc.circuit_white(c.get("png")) or c.get("dark") or c.get("png") or c.get("image", ""), "circpng": "1" if (sc.circuit_white(c.get("png")) or c.get("dark")) else "", "circglow": "1" if sc.circuit_white(c.get("png")) else "", "circphoto": c.get("photo", ""),
+                       "circfacts": "  ·  ".join(facts),
+                       "circrec": f"{sc.t('circ_record')}  {c['record']}" + (f"  ({c['recyear']})" if c.get("recyear") else "") if c.get("record") else ""})
+            except Exception as error:  # noqa: BLE001 - the circuit is a bonus
+                sc.log(f"circuit: {error}")
+            return out
+        if ev["kind"] != "teams" or ev["league"] not in sc.LEAGUES:
+            return out
+        key = ev["league"]
+        marks = {s.get("id") for s in (ev["home"], ev["away"]) if s.get("id")}
+        try:
+            for side, who in (("h", "home"), ("a", "away")):
+                team = ev[who]
+                card = sc.team_card(key, team.get("id", ""), team.get("name", ""))
+                row = card["row"]
+                rec = "-".join(str(x) for x in (row.get("w"), row.get("d"), row.get("l")) if x not in ("", None))
+                out[f"{side}sub"] = "  ·  ".join(x for x in (rec, sc.t("g_home" if who == "home" else "g_away")) if x)
+                if row.get("rank"):
+                    out[f"{side}place"] = f"{row['rank']}e" if sc.NL else str(row["rank"])
+                for n in range(5):
+                    letter = card["recent"][n][1][0] if n < len(card["recent"]) else ""
+                    out[f"{side}f{n + 1}"] = LETTERS.get(letter, letter)
+                    out[f"{side}fc{n + 1}"] = sc.FORM_COLOURS.get(letter, "")
+            rows = [r for r in sc.table_rows(key, marks) if r.get("id")]
+            keep = set(range(min(2, len(rows))))
+            for i, r in enumerate(rows):
+                if r["id"] in marks:
+                    keep |= {i - 1, i, i + 1}
+            picked = [rows[i] for i in sorted(keep) if 0 <= i < len(rows)][:7]
+            for n, r in enumerate(picked, 1):
+                out[f"t{n}rank"], out[f"t{n}team"] = str(r.get("rank", "")), r.get("team", "")
+                out[f"t{n}gp"], out[f"t{n}gd"], out[f"t{n}pts"] = str(r.get("gp", "")), str(r.get("gd", "")), str(r.get("pts", ""))
+                out[f"t{n}mine"] = "1" if r["id"] in marks else ""
+            if picked:
+                out["tabletitle"] = sc.t("g_standings", league_name(key).upper())
+        except Exception as error:  # noqa: BLE001
+            sc.log(f"game_extra: {error}")
+        return out
+
+    def game_detail(self, ev):
+        try:
+            return sc.match_detail(ev) if ev["kind"] == "teams" else {}
+        except Exception as error:  # noqa: BLE001
+            sc.log(f"match_detail: {error}")
+            return {}
+
+    def open_game(self, ev):
+        while True:
+            props = self.game_props(ev)
+            window = GameInfo("Lucent_SportGame.xml", self.path(), "Default", "1080i")
+            window.setup(ev, props, self)
+            window.doModal()
+            result = window.result
+            del window
+            self.restore_preview()           # the game page may have started a channel in its TV window
+            if result.startswith("play"):
+                cid = props.get(f"ch{result[4:]}cid")
+                if cid:
+                    self.watch_full(cid, props.get(f"ch{result[4:]}name", ""))
+                return
+            if result == "full":
+                epg.fullscreen()
+                return
+            if result == "table":
+                self.open_table(ev)
+                return
+            if result == "remind":
+                self.remind_event(ev)
+            elif result == "record":
+                self.set_recording(ev)
+            elif result == "fix":
+                self.fix_channel(ev)
+            elif result == "done":
+                return
+            elif result in ("home", "away"):
+                if self.club_popup(ev, result):
+                    return
+            else:
+                self.render(keep_focus=True)
+                return
+
+    # ------------------------------------------------------------------ Follow page
+    def sport_of_team(self, team):
+        league = team.get("league")
+        if league == sc.NATIONAL_LEAGUE:
+            return "soccer"
+        return sc.LEAGUES[league]["sport"] if league in sc.LEAGUES else ""
+
+    def fill_follow(self, keep_focus=False):
+        self.fill_chips()
+        self.fill_sports()
+        self.fill_comps()
+
+    def fill_chips(self):
+        """What you follow as cards (your order): colour, place, next game and, for a club, goal alerts and reminders."""
+        follow = sc.load_follow()
+        auto = plan.load_plan()["auto"]
+        quiet, per = set(follow.get("nogoals", [])), set(follow.get("remind", []))
+        goals_off = xbmc.getCondVisibility("Skin.HasSetting(lucent.goals.off)")
+        data = epg.load() if self.has_pvr else {}
+        cards = []
+        for key, kind, ident, title in sc.sections(follow):
+            props = {"key": key, "kind": kind, "ident": ident}
+            logo, events = "", []
+            if kind == "team":
+                team = next((t for t in follow["teams"] if sc.team_ident(t) == ident), {"id": ident, "name": title})
+                logo = team.get("logo", "") or sc.flag_logo(title)
+                events = sc.events_of_team(team.get("id", ""), title)
+                props["sub"] = sc.place_text(team) or (sc.t("f_kind_country") if sc.country_colour(title) else sc.t("f_kind_club"))
+                base = sc.country_colour(title)[2:] or sc.colour_map().get(team.get("id", ""), "")[2:] or "3A4A5C"
+                goals = not goals_off and ident not in quiet
+                remind = auto or ident in per
+                props.update(goals=sc.t("f_goals_on" if goals else "f_goals_off"), goalson="1" if goals else "",
+                             remind=sc.t("f_rem_on" if remind else "f_rem_off"), remindon="1" if remind else "")
+            elif kind == "league":
+                logo = sc.league_logo(ident)
+                events = [e for e in sc.all_cached() if e["league"] == ident]
+                props["sub"] = f"{sc.t('f_kind_comp')}  ·  {sc.sport_name(sc.LEAGUES[ident]['sport'])}"
+                base = "3A4A5C"
+            else:
+                events = name_events({"names": [ident]}, data)
+                props["sub"] = sc.t("f_kind_name")
+                base = "3A4A5C"
+            props["col"], props["col2"] = "DD" + base, "33" + base
+            nxt = sorted((e for e in events if e["state"] in ("in", "pre")), key=lambda e: (e["state"] != "in", e["start"]))
+            if nxt:
+                ev = nxt[0]
+                what = ev.get("title") if ev["kind"] == "event" else f"{ev['home'].get('name', '')} – {ev['away'].get('name', '')}"
+                if ev["state"] == "in":
+                    props["next"], props["nextlive"] = f"LIVE {ev.get('status', '')}  ·  {what}  {score_text(ev)}", "1"
+                else:
+                    props["next"] = f"{short_when(ev)}  ·  {what}"
+            else:
+                props["next"] = sc.t("c_nonext")
+            cards.append(listitem(title, "", icon=logo, **props))
+        cards.append(listitem(sc.t("f_addcard"), "", kind="add"))
+        self.setProperty("sport.f.has", "1" if len(cards) > 1 else "")
+        self.setProperty("sport.f.count", sc.t("f_list", len(cards) - 1))
+        pos = self.getControl(F_CHIPS).getSelectedPosition()
+        self.fill_list(F_CHIPS, cards, pos)
+
+    def card_menu(self):
+        item = self.getControl(F_CHIPS).getSelectedItem()
+        if not item:
+            return
+        kind, ident, key = item.getProperty("kind"), item.getProperty("ident"), item.getProperty("key")
+        if kind == "add":
+            self.open_add()
+            return
+        follow = sc.load_follow()
+        entries = []
+        if kind == "team":
+            entries.append(("f_m_goals_off" if item.getProperty("goalson") else "f_m_goals_on", "goals"))
+            entries.append(("f_m_rem_off" if item.getProperty("remindon") else "f_m_rem_on", "remind"))
+        entries += [("f_m_first", "first"), ("f_m_up", "up"), ("f_m_down", "down"), ("f_m_stop", "stop")]
+        pick = xbmcgui.Dialog().contextmenu([sc.t(e[0]) for e in entries])
+        if pick < 0:
+            return
+        what = entries[pick][1]
+        if what == "goals":
+            quiet = follow.setdefault("nogoals", [])
+            if xbmc.getCondVisibility("Skin.HasSetting(lucent.goals.off)"):
+                # goal alerts were off for everyone: on for this club only
+                xbmc.executebuiltin("Skin.Reset(lucent.goals.off)")
+                follow["nogoals"] = [sc.team_ident(t) for t in follow["teams"] if sc.team_ident(t) != ident]
+            elif ident in quiet:
+                quiet.remove(ident)
+            else:
+                quiet.append(ident)
+            sc.save_follow(follow)
+            xbmc.sleep(200)
+        elif what == "remind":
+            per = follow.setdefault("remind", [])
+            the_plan = plan.load_plan()
+            if the_plan["auto"]:                 # reminders were on for every club: keep them for the others
+                the_plan["auto"] = False
+                plan.save_plan(the_plan)
+                follow["remind"] = [sc.team_ident(t) for t in follow["teams"] if sc.team_ident(t) != ident]
+            elif ident in per:
+                per.remove(ident)
+            else:
+                per.append(ident)
+            sc.save_follow(follow)
+        elif what == "stop":
+            if kind == "team":
+                follow["teams"] = [t for t in follow["teams"] if sc.team_ident(t) != ident]
+            elif kind == "league":
+                follow["leagues"] = [k for k in follow["leagues"] if k != ident]
+            else:
+                follow["names"] = [n for n in follow["names"] if n != ident]
+            sc.save_follow(follow)
+            self.f_dirty = True
+        else:
+            keys = [r[0] for r in sc.sections(follow)]
+            i = keys.index(key)
+            keys.pop(i)
+            at = 0 if what == "first" else max(i - 1, 0) if what == "up" else min(i + 1, len(keys))
+            keys.insert(at, key)
+            sc.save_order(keys)
+            self.f_dirty = True
+            self.fill_chips()
+            self.getControl(F_CHIPS).selectItem(at)
+            return
+        self.fill_chips()
+
+    # ------------------------------------------------------------------ Follow > Add
+    def open_add(self):
+        self.f_tab = "search"
+        self.setProperty("sport.f.add", "1")
+        self.setProperty("sport.f.tab", "search")
+        tabs = [listitem(sc.t(k), "", tab=v) for k, v in (("f_search", "search"), ("f_tab_browse", "browse"),
+                                                         ("f_tab_countries", "countries"), ("f_tab_names", "names"))]
+        self.fill_list(F_TABS, tabs, 0)
+        self.setProperty("sport.f.query", "")
+        self.setProperty("sport.f.qlabel", sc.t("f_typehere"))
+        self.fill_list(F_RESULTS, [], 0)
+        self.fill_sports()
+        self.fill_comps()
+        self.fill_countries()
+        self.fill_names()
+        focus_first(self, (F_QUERY,))
+
+    def close_add(self):
+        self.setProperty("sport.f.add", "")
+        self.fill_chips()
+        focus_first(self, (F_CHIPS, F_SEARCH))
+        if self.f_dirty:
+            self.f_dirty = False
+            threading.Thread(target=self.after_follow_change, daemon=True).start()
+
+    def tab_after(self):
+        item = self.getControl(F_TABS).getSelectedItem()
+        tab = item.getProperty("tab") if item else "search"
+        if tab != getattr(self, "f_tab", ""):
+            self.f_tab = tab
+            self.setProperty("sport.f.tab", tab)
+
+    def type_search(self):
+        text = xbmcgui.Dialog().input(sc.t("q_search"), self.getProperty("sport.f.query"))
+        if not text or not text.strip():
+            return
+        text = text.strip()
+        self.setProperty("sport.f.query", text)
+        self.setProperty("sport.f.qlabel", text)
+        self.fill_results(text)
+        focus_first(self, (F_RESULTS,))
+
+    def hit_followed(self, follow, kind, ident, extra=""):
+        if kind == "league":
+            return ident in follow["leagues"]
+        if kind == "country":
+            return any(sc.norm(t["name"]) == sc.norm(sc.country_label(ident)) for t in follow["teams"])
+        if kind == "name":
+            return ident in follow["names"]
+        return any(t.get("id") == ident for t in follow["teams"])
+
+    def result_item(self, follow, kind, ident, label, extra=""):
+        name, _sep, sub = label.partition("  ·  ")
+        if kind == "league":
+            name, sub, icon = sub or name, name, sc.league_logo(ident)
+        elif kind == "country":
+            name, sub, icon = sc.country_label(ident), sc.t("f_kind_country"), sc.flag_logo(ident)
+        elif kind == "name":
+            icon = ""
+        else:
+            icon = (extra.split("|") + ["", "", ""])[2]
+        on = self.hit_followed(follow, kind, ident, extra)
+        return listitem(name, sub, icon=icon, kind=kind, ident=ident, extra=extra, mine="1" if on else "",
+                        btn=sc.t("f_btn_following" if on else "f_btn_follow"))
+
+    def fill_results(self, text):
+        follow = sc.load_follow()
+        hits = sc.search_catalog(text)
+        order = {"team": 0, "country": 1, "league": 2}
+        hits.sort(key=lambda h: order.get(h[0], 3))
+        items = [self.result_item(follow, *h) for h in hits[:40]]
+        items.append(self.result_item(follow, "name", text, f"{text}  ·  {sc.t('f_kind_name')}"))
+        self.fill_list(F_RESULTS, items, 0)
+
+    def follow_result(self, cid):
+        """OK on a search result or a name: follow it, OK again stops."""
+        item = self.getControl(cid).getSelectedItem()
+        if not item:
+            return
+        kind, ident, extra = item.getProperty("kind"), item.getProperty("ident"), item.getProperty("extra")
+        follow = sc.load_follow()
+        on = self.hit_followed(follow, kind, ident, extra)
+        if kind == "league":
+            follow["leagues"] = [k for k in follow["leagues"] if k != ident] if on else follow["leagues"] + [ident]
+        elif kind == "country":
+            name = sc.country_label(ident)
+            follow["teams"] = ([t for t in follow["teams"] if sc.norm(t["name"]) != sc.norm(name)] if on
+                               else follow["teams"] + [{"league": sc.NATIONAL_LEAGUE, "id": "", "name": name, "logo": ""}])
+        elif kind == "name":
+            follow["names"] = [n for n in follow["names"] if n != ident] if on else follow["names"] + [ident]
+        else:
+            league, name, logo = (extra.split("|") + ["", "", ""])[:3]
+            follow["teams"] = ([t for t in follow["teams"] if t.get("id") != ident] if on
+                               else follow["teams"] + [{"league": league, "id": ident, "name": name, "logo": logo}])
+        sc.save_follow(follow)
+        self.f_dirty = True
+        item.setProperty("mine", "" if on else "1")
+        item.setProperty("btn", sc.t("f_btn_follow" if on else "f_btn_following"))
+
+    def fill_countries(self):
+        follow = sc.load_follow()
+        have = {sc.norm(t["name"]) for t in follow["teams"]}
+        items = []
+        for en in sorted(sc.COUNTRIES, key=lambda e: sc.country_label(e)):
+            name = sc.country_label(en)
+            items.append(listitem(name, "", icon=sc.flag_logo(en), en=en, mine="1" if sc.norm(name) in have else "",
+                                  tcol=sc.country_colour(en) or "CC3A4A5C"))
+        self.fill_list(F_COUNTRIES, items, self.getControl(F_COUNTRIES).getSelectedPosition())
+
+    def toggle_country(self):
+        item = self.getControl(F_COUNTRIES).getSelectedItem()
+        if not item:
+            return
+        follow = sc.load_follow()
+        name = sc.country_label(item.getProperty("en"))
+        on = any(sc.norm(t["name"]) == sc.norm(name) for t in follow["teams"])
+        follow["teams"] = ([t for t in follow["teams"] if sc.norm(t["name"]) != sc.norm(name)] if on
+                           else follow["teams"] + [{"league": sc.NATIONAL_LEAGUE, "id": "", "name": name, "logo": ""}])
+        sc.save_follow(follow)
+        self.f_dirty = True
+        item.setProperty("mine", "" if on else "1")
+
+    def fill_names(self):
+        """Names you follow, and the drivers of the racing tables we hold, to follow with one OK."""
+        follow = sc.load_follow()
+        names = list(follow["names"])
+        for key, lg in sc.LEAGUES.items():
+            if lg["sport"] != "racing":
+                continue
+            try:
+                entry = sc.load_cache()["standings"].get(key) or {}
+                for row in entry.get("rows", [])[:20]:
+                    if row.get("team") and row["team"] not in names:
+                        names.append(row["team"])
+            except Exception:  # noqa: BLE001
+                continue
+        items = [self.result_item(follow, "name", n, f"{n}  ·  {sc.t('f_kind_name')}") for n in names]
+        self.fill_list(F_NAMES, items, 0)
+    def fill_sports(self):
+        follow = sc.load_follow()
+        sports = [sp for sp in SPORT_ORDER if any(v["sport"] == sp for v in sc.LEAGUES.values())]
+        sports += sorted({v["sport"] for v in sc.LEAGUES.values()} - set(sports))
+        items = []
+        for sp in sports:
+            n = (sum(1 for k in follow["leagues"] if k in sc.LEAGUES and sc.LEAGUES[k]["sport"] == sp)
+                 + sum(1 for t in follow["teams"] if self.sport_of_team(t) == sp)
+                 + (len(follow["names"]) if sp == "racing" else 0))
+            items.append(listitem(sc.sport_name(sp), "", icon=sport_icon(sp), sport=sp, badge=str(n) if n else ""))
+        self.f_sports = sports
+        self.fill_list(F_SPORTS, items, sports.index(self.f_sport) if self.f_sport in sports else 0)
+
+    def comp_keys(self):
+        keys = [k for k, v in sc.LEAGUES.items() if v["sport"] == self.f_sport]
+        first = ("ned.1", "ned.2", "ned.cup", "bel.1") if sc.NL else ("eng.1", "esp.1", "ger.1", "ita.1")
+        return sorted(keys, key=lambda k: (first.index(k) if k in first else 9, not sc.LEAGUES[k]["default"], sc.LEAGUES[k]["name"]))
+
+    def fill_comps(self, reload=True):
+        follow = sc.load_follow()
+        keys = self.comp_keys()
+        items = []
+        for k in keys:
+            lg = sc.LEAGUES[k]
+            sub = sc.t("f_followed") if k in follow["leagues"] else (sc.t("f_teams") if lg["kind"] == "teams" else sc.t("f_competition"))
+            items.append(listitem(lg["name"], sub, icon=sc.league_logo(k) or sport_icon(lg["sport"]), key=k, followed="1" if k in follow["leagues"] else ""))
+        if reload and any(k not in sc.logo_map() for k in keys):
+            threading.Thread(target=self.load_logos, args=(list(keys),), daemon=True).start()
+        if self.f_league not in keys:
+            self.f_league = keys[0] if keys else ""
+        self.fill_list(F_COMPS, items, keys.index(self.f_league) if self.f_league in keys else 0)
+        if reload:
+            self.show_league()
+        else:
+            self.set_follow_button()
+
+    def load_table_logos(self, keys):
+        if sc.fetch_logos(keys) and self.view == "tables" and not self.closing:
+            self.fill_leagues(keep_sport=True)
+
+    def load_logos(self, keys):
+        """Fetch the logos of the competitions on screen once, then show them."""
+        if sc.fetch_logos(keys) and self.view == "follow" and not self.closing:
+            self.fill_comps(reload=False)
+            self.fill_chips()
+            if self.view == "tables":
+                self.fill_leagues(keep_sport=True)
+
+    def show_league(self):
+        key = self.f_league
+        if not key:
+            return
+        self.set_follow_button()
+        self.f_has_teams = False
+        self.setProperty("sport.f.noteams", "")
+        threading.Thread(target=self.load_teams, args=(key, self.f_token), daemon=True).start()
+
+    def set_follow_button(self):
+        key = self.f_league
+        if key:
+            name = sc.LEAGUES[key]["name"]
+            self.setProperty("sport.f.btn", sc.t("f_stop", name) if key in sc.load_follow()["leagues"] else sc.t("f_follow", name))
+
+    def load_teams(self, key, token):
+        """Teams of a competition as colour cards (alphabetical). Fetches when ESPN has not been asked yet."""
+        try:
+            lg = sc.LEAGUES[key]
+            if lg["kind"] != "teams":
+                self.fill_list(F_TEAMS, [], 0)
+                self.setProperty("sport.f.noteams", "1")
+                return
+            teams = sc.teams_of(key)
+            if not teams and not sc.load_cache()["leagues"].get(key):
+                sc.refresh(keys=[key])
+                teams = sc.teams_of(key)
+            if key != self.f_league or self.closing:
+                return
+            follow = sc.load_follow()
+            colours = sc.colour_map()
+            items = []
+            for tid, name, logo in teams:
+                mine = sc.is_following_team(follow, {"id": tid, "name": name})
+                base = colours.get(tid, "FF3A4A5C")
+                items.append(listitem(name, "", icon=logo, tid=tid, logo=logo, mine="1" if mine else "",
+                                      tcol="99" + base[2:], tcol2="22" + base[2:]))
+            self.f_teams = teams
+            self.f_has_teams = bool(items)
+            self.setProperty("sport.f.noteams", "" if items else "1")
+            self.fill_list(F_TEAMS, items, 0)
+        except Exception as error:  # noqa: BLE001
+            sc.log(f"load_teams {key}: {error}")
+
+    def follow_after(self, token, focus):
+        if token != self.f_token or self.closing or self.view != "follow":
+            return
+        if focus == F_SPORTS:
+            item = self.getControl(F_SPORTS).getSelectedItem()
+            if item and item.getProperty("sport") != self.f_sport:
+                self.f_sport = item.getProperty("sport")
+                self.f_league = ""
+                self.fill_comps()
+        elif focus == F_COMPS:
+            item = self.getControl(F_COMPS).getSelectedItem()
+            if item and item.getProperty("key") != self.f_league:
+                self.f_league = item.getProperty("key")
+                self.show_league()
+
+    def toggle_league(self):
+        key = self.f_league
+        if not key:
+            return
+        follow = sc.load_follow()
+        if key in follow["leagues"]:
+            follow["leagues"].remove(key)
+        else:
+            follow["leagues"].append(key)
+        sc.save_follow(follow)
+        self.f_dirty = True
+        self.refresh_follow_lists()
+
+    def toggle_team_card(self):
+        item = self.getControl(F_TEAMS).getSelectedItem()
+        if not item or not self.f_league:
+            return
+        side_ = {"id": item.getProperty("tid"), "name": item.getLabel(), "logo": item.getProperty("logo")}
+        followed = sc.toggle_team(self.f_league, side_)
+        item.setProperty("mine", "1" if followed else "")
+        xbmcgui.Dialog().notification(sc.t("title"), sc.t("follow_team" if followed else "unfollow_team", side_["name"]),
+                                      xbmcgui.NOTIFICATION_INFO, 2000, False)
+        self.f_dirty = True
+        self.refresh_follow_lists()
+
+    def unfollow_chip(self):
+        item = self.getControl(F_CHIPS).getSelectedItem()
+        if not item:
+            return
+        kind, ident = item.getProperty("kind"), item.getProperty("ident")
+        follow = sc.load_follow()
+        if kind == "team":
+            follow["teams"] = [t for t in follow["teams"] if sc.team_ident(t) != ident]
+        elif kind == "league":
+            follow["leagues"] = [k for k in follow["leagues"] if k != ident]
+        else:
+            follow["names"] = [n for n in follow["names"] if n != ident]
+        sc.save_follow(follow)
+        self.f_dirty = True
+        self.refresh_follow_lists()
+        self.fill_teams_marks()
+
+    def fill_teams_marks(self):
+        follow = sc.load_follow()
+        control = self.getControl(F_TEAMS)
+        for i in range(control.size()):
+            it = control.getListItem(i)
+            it.setProperty("mine", "1" if sc.is_following_team(follow, {"id": it.getProperty("tid"), "name": it.getLabel()}) else "")
+
+    def refresh_follow_lists(self):
+        """Redraw the strip, the badges and the follow button without losing your place."""
+        self.fill_chips()
+        pos = self.getControl(F_SPORTS).getSelectedPosition()
+        self.fill_sports()
+        self.getControl(F_SPORTS).selectItem(pos)
+        pos = self.getControl(F_COMPS).getSelectedPosition()
+        self.fill_comps(reload=False)
+        self.getControl(F_COMPS).selectItem(pos)
+
+    def empty_state(self):
+        if self.view == "mine" and not sc.has_follow():
+            title, text = sc.t("empty_title"), sc.t("empty_mine")
+        elif self.view == "mine":
+            title, text = sc.t("empty_day"), ""
+        elif not sc.all_cached():
+            title, text = sc.t("empty_title"), sc.t("empty_net") if not self.ready else sc.t("loading")
+        else:
+            title, text = sc.t("empty_day"), ""
+        self.setProperty("sport.empty.title", title)
+        self.setProperty("sport.empty.text", text)
+        self.setProperty("sport.empty", "1")
+
+    def fill_days(self):
+        self.setProperty("sport.hasdays", "1" if self.view == "all" else "")
+        for n in range(7):
+            d = self.anchor + datetime.timedelta(days=n)
+            name = nice_day(d) if abs((d - ac.today()).days) <= 1 else ac.day_short(d)
+            self.setProperty(f"sport.day{n + 1}.name", name)
+            self.setProperty(f"sport.day{n + 1}.sel", "1" if d == self.day else "")
+
+    def shift_days(self, step):
+        low, high = ac.today() - datetime.timedelta(days=sc.DAYS_BACK), ac.today() + datetime.timedelta(days=sc.DAYS_AHEAD - 6)
+        self.anchor = min(max(self.anchor + datetime.timedelta(days=step), low), high)
+        if not self.anchor <= self.day <= self.anchor + datetime.timedelta(days=6):
+            self.day = self.anchor
+        self.render()
+
+    # ------------------------------------------------------------------ item actions
+    def focus_list(self):
+        fid = self.getFocusId()
+        if fid in SECTION_LISTS or fid == HERO_LIST:
+            return fid
+        if fid in HERO_CHANNELS:
+            return HERO_LIST
+        return LIST
+
+    def current(self):
+        item = self.getControl(self.focus_list()).getSelectedItem()
+        if not item:
+            return None, None
+        return self.by_id.get(item.getProperty("evid")), item
+
+    def preview_channel(self, n):
+        """OK on a channel next to the big card: watch it in the small window; OK on the same channel again: full screen."""
+        item = self.current()[1]
+        cid = item.getProperty(f"ch{n}cid") if item else ""
+        if not cid:
+            return
+        name = item.getProperty(f"ch{n}name")
+        if epg.is_playing(cid, name) or (self.getProperty("sport.preview") == str(cid) and xbmc.getCondVisibility("Player.HasVideo")):
+            epg.fullscreen()
+            return
+        epg.set_active(cid, name)
+        self.setProperty("sport.preview", str(cid))
+        self.setProperty("sport.preview.name", name)
+        threading.Thread(target=self.start_preview, args=(cid,), daemon=True).start()
+
+    def restore_preview(self):
+        cid, name = epg.active()
+        self.setProperty("sport.preview", cid)
+        self.setProperty("sport.preview.name", name)
+
+    def stop_preview(self):
+        epg.stop()
+        self.setProperty("sport.preview", "")
+        self.setProperty("sport.preview.name", "")
+
+    def start_preview(self, cid):
+        """Start the channel behind this page (windowed). When Kodi cannot do that, play it and come back to this page."""
+        path = epg.channel_path(cid)
+        if path:
+            xbmc.Player().play(path, windowed=True)
+            return
+        if epg.play_windowed(cid):
+            return
+        wid = xbmcgui.getCurrentWindowId()
+        epg.play(cid)
+        for _ in range(50):
+            time.sleep(0.2)
+            if xbmc.getCondVisibility("Player.HasVideo"):
+                time.sleep(0.5)
+                if not self.closing:
+                    xbmc.executebuiltin(f"ActivateWindow({wid})")
+                return
+
+    def play_channel(self, n, item=None):
+        item = item or self.current()[1]
+        if not item:
+            return
+        cid = item.getProperty(f"ch{n}cid")
+        if cid:
+            self.watch_full(cid, item.getProperty(f"ch{n}name"))
+
+    def watch_full(self, cid, name=""):
+        """Watch a channel full screen while this page stays open behind it: Back in the player then makes the
+        channel small again in the TV window (fsback.py) instead of leaving Sport."""
+        epg.set_active(cid, name)
+        self.setProperty("sport.preview", str(cid))
+        self.setProperty("sport.preview.name", name or "")
+
+        def go():
+            if not epg.is_playing(cid, name):
+                self.start_preview(cid)
+                for _ in range(50):
+                    if xbmc.getCondVisibility("Player.HasVideo"):
+                        break
+                    time.sleep(0.2)
+                time.sleep(0.4)
+            epg.fullscreen()
+        threading.Thread(target=go, daemon=True).start()
+
+    def toggle_team(self, who, ev=None):
+        ev = ev or self.current()[0]
+        if not ev or ev["kind"] != "teams":
+            return
+        side = ev[who]
+        followed = sc.toggle_team(ev["league"], side)
+        xbmcgui.Dialog().notification(sc.t("title"), sc.t("follow_team" if followed else "unfollow_team", side["name"]),
+                                      xbmcgui.NOTIFICATION_INFO, 2500, False)
+        self.render(keep_focus=True)
+
+    def fix_channel(self, ev=None):
+        ev = ev or self.current()[0]
+        if not ev:
+            return
+        dialog = xbmcgui.Dialog()
+        chans = plan.all_channels()
+        if not chans:
+            dialog.notification(sc.t("title"), sc.t("noguide"), xbmcgui.NOTIFICATION_INFO, 3000, False)
+            return
+        options = ([plan.t("fix_clear")] if plan.fixed_cids(ev) else []) + [label for _cid, label in chans]
+        pick = dialog.select(plan.t("fix_pick"), options)
+        if pick < 0:
+            return
+        if plan.fixed_cids(ev) and pick == 0:
+            plan.clear_fix_game(ev)
+            self.render(keep_focus=True)
+            return
+        cid = chans[pick - (1 if plan.fixed_cids(ev) else 0)][0]
+        scopes = [("game", plan.t("fix_game")), ("league", plan.t("fix_league", league_name(ev["league"])))]
+        team_ident = ""
+        if ev["kind"] == "teams":
+            follow = sc.load_follow()
+            mine = next((s for s in (ev["home"], ev["away"]) if sc.is_following_team(follow, s)), ev["home"])
+            team_ident = mine.get("id") or mine.get("name")
+            scopes.append(("team", plan.t("fix_team", mine.get("name", ""))))
+        sel = dialog.select(plan.t("fix_scope"), [label for _k, label in scopes])
+        if sel < 0:
+            return
+        plan.set_fix(ev, scopes[sel][0], cid, team_ident)
+        self.render(keep_focus=True)
+
+    def set_reminder(self):
+        self.remind_event(self.current()[0])
+
+    def remind_event(self, ev):
+        if not ev or ev["state"] == "post":
+            return
+        modes = [("", plan.t("r_off")), ("remind", plan.t("r_remind")), ("switch", plan.t("r_switch"))]
+        current = plan.reminder_mode(ev["id"])
+        pick = xbmcgui.Dialog().select(plan.t("r_title"), [label for _m, label in modes],
+                                       preselect=[m for m, _l in modes].index(current))
+        if pick < 0:
+            return
+        data = epg.load() if self.has_pvr else {}
+        chans = self.channels_of(ev, data)
+        plan.set_reminder(ev, modes[pick][0], chans[0]["cid"] if chans else 0)
+        self.render(keep_focus=True)
+
+    def set_recording(self, ev=None):
+        ev = ev or self.current()[0]
+        if not ev or ev["state"] == "post":
+            return
+        dialog = xbmcgui.Dialog()
+        if plan.recording(ev["id"]):
+            if dialog.yesno(plan.t("btn_rec_on"), plan.t("rec_cancel"), nolabel=sc.t("q_cancel"), yeslabel=plan.t("rec_cancel")):
+                plan.cancel_recording(ev["id"])
+                self.render(keep_focus=True)
+            return
+        data = epg.load() if self.has_pvr else {}
+        chans = self.channels_of(ev, data)
+        if not chans:
+            dialog.notification(sc.t("title"), plan.t("rec_nochan"), xbmcgui.NOTIFICATION_INFO, 3500, False)
+            return
+        cid = chans[0]["cid"]
+        if len(chans) > 1:
+            pick = dialog.select(sc.t("watch"), [f"{c['name']}  ·  {c['tag']}" for c in chans])
+            if pick < 0:
+                return
+            cid = chans[pick]["cid"]
+        hours = [1, 2, 3, 4, 5, 6]
+        h = dialog.select(plan.t("rec_hours"), [plan.t("rec_hour") if n == 1 else plan.t("rec_hours_n", n) for n in hours],
+                          preselect=2)
+        if h < 0:
+            return
+        plan.set_recording(ev, cid, hours[h])
+        self.render(keep_focus=True)
+
+    def open_table(self, ev=None):
+        ev = ev or self.current()[0]
+        if not ev or ev["league"] not in sc.LEAGUES:
+            return
+        self.table_key = ev["league"]
+        self.marks = {s.get("id") for s in (ev["home"], ev["away"]) if s.get("id")} if ev["kind"] == "teams" else set()
+        self.view = "tables"
+        self.render()
+        self.setFocusId(TABLE_LIST)
+
+    # ------------------------------------------------------------------ tables
+    def table_sports(self):
+        sports = []
+        for k, v in sc.LEAGUES.items():
+            if v["kind"] == "teams" and v["sport"] not in sports:
+                sports.append(v["sport"])
+        order = {s: i for i, s in enumerate(SPORT_ORDER)}
+        sports.sort(key=lambda s: order.get(s, 99))
+        return sports
+
+    def fill_leagues(self, keep_sport=False):
+        sports = self.table_sports()
+        if not keep_sport or getattr(self, "t_sport", None) not in sports:
+            current = sc.LEAGUES.get(self.table_key, {}).get("sport")
+            self.t_sport = current if current in sports else (sports[0] if sports else "soccer")
+        if not keep_sport:                      # the sport buttons stay as they are while you move along them
+            chips = self.getControl(T_SPORTS)
+            chips.reset()
+            chips.addItems([listitem(sc.sport_name(s), sport=s) for s in sports])
+            chips.selectItem(sports.index(self.t_sport) if self.t_sport in sports else 0)
+            self.t_sports_shown = sports
+        keys = [k for k, v in sc.LEAGUES.items() if v["kind"] == "teams" and v["sport"] == self.t_sport]
+        active, position = set(sc.league_keys()), {k: i for i, k in enumerate(sc.LEAGUES)}
+        keys.sort(key=lambda k: (k not in self.follow["leagues"], k not in active, position[k]))
+        control = self.getControl(LEAGUE_LIST)
+        control.reset()
+        control.addItems([listitem(sc.LEAGUES[k]["name"], icon=sc.league_logo(k), key=k) for k in keys])
+        if any(k not in sc.logo_map() for k in keys):
+            threading.Thread(target=self.load_table_logos, args=(list(keys),), daemon=True).start()
+        self.league_keys_shown = keys
+        index = keys.index(self.table_key) if self.table_key in keys else 0
+        control.selectItem(index)
+        self.table_key = keys[index] if keys else ""
+        self.table_pos = index
+        if keys:
+            self.load_table(self.table_key)
+        else:
+            self.getControl(TABLE_LIST).reset()
+
+    def sport_after(self, token):
+        if token != self.table_token or self.closing:
+            return
+        try:
+            pos = self.getControl(T_SPORTS).getSelectedPosition()
+        except Exception:  # noqa: BLE001
+            return
+        shown = getattr(self, "t_sports_shown", [])
+        if 0 <= pos < len(shown) and shown[pos] != self.t_sport:
+            self.t_sport = shown[pos]
+            self.marks = set()
+            self.table_key = ""
+            self.fill_leagues(keep_sport=True)
+
+    def table_after(self, token):
+        if token != self.table_token or self.closing:
+            return
+        try:
+            pos = self.getControl(LEAGUE_LIST).getSelectedPosition()
+        except Exception:  # noqa: BLE001
+            return
+        if pos != self.table_pos and 0 <= pos < len(self.league_keys_shown):
+            self.table_pos = pos
+            self.marks = set()
+            self.table_key = self.league_keys_shown[pos]
+            self.load_table(self.table_key)
+
+    def load_table(self, key):
+        try:
+            rows = sc.table_rows(key, self.marks)
+        except Exception as error:  # noqa: BLE001 - the extras (form, colours) must never hide the table itself
+            sc.log(f"table {key}: {error}")
+            try:
+                rows = [dict(r, form=[], teamcol="", chg=0, edge="", mine=False) for r in sc.standings(key)]
+            except Exception as error2:  # noqa: BLE001
+                sc.log(f"table {key} (standings): {error2}")
+                rows = []
+        control = self.getControl(TABLE_LIST)
+        control.reset()
+        items = []
+        for row in rows:
+            if "header" in row:
+                items.append(listitem(row["header"], header=row["header"]))
+                continue
+            props = {"rank": row.get("rank", ""), "gp": row.get("gp", ""), "gd": row.get("gd", ""), "pts": row.get("pts", ""),
+                     "w": row.get("w", ""), "d": row.get("d", ""), "l": row.get("l", ""),
+                     "teamid": row.get("id", ""), "edge": row.get("edge", ""), "mine": "1" if row.get("mine") else "",
+                     "ring": ("66" + row["teamcol"][2:]) if row.get("teamcol") else ""}
+            chg = row.get("chg", 0)
+            props["chg"] = f"▲{chg}" if chg > 0 else f"▼{-chg}" if chg < 0 else ""
+            props["chgcol"] = "FF3FB950" if chg > 0 else "FFE5534B"
+            for n in range(5):
+                letter = row["form"][n] if n < len(row.get("form", [])) else ""
+                props[f"f{n + 1}"] = letter
+                props[f"f{n + 1}c"] = sc.FORM_COLOURS.get(letter, "")
+            items.append(listitem(row.get("team", ""), icon=row.get("logo", ""), **props))
+        control.addItems(items)
+        self.setProperty("sport.notable", "" if items else "1")
+        for n, (col, text) in enumerate(sc.legend(rows), 1):
+            self.setProperty(f"sport.leg{n}.col", col)
+            self.setProperty(f"sport.leg{n}.text", text)
+        for n in range(len(sc.legend(rows)) + 1, 5):
+            self.setProperty(f"sport.leg{n}.col", "")
+            self.setProperty(f"sport.leg{n}.text", "")
+        self.club_token += 1
+        threading.Thread(target=self.club_after, args=(self.club_token,), daemon=True).start()
+
+    def club_after(self, token, wait=0.0):
+        if wait and xbmc.Monitor().waitForAbort(wait):
+            return
+        if token == self.club_token and not self.closing:
+            try:
+                self.fill_club()
+            except Exception as error:  # noqa: BLE001 - the panel is extra, the table must stay
+                sc.log(f"club panel: {error}")
+
+    def fill_club(self):
+        """The panel next to the table: the club of the selected row with its form, last 5, home / away and next game."""
+        item = self.getControl(TABLE_LIST).getSelectedItem()
+        if not item or item.getProperty("header") or not item.getProperty("teamid"):
+            self.setProperty("sport.tc.on", "")
+            return
+        key, team_id, name = self.table_key, item.getProperty("teamid"), item.getLabel()
+        card = sc.team_card(key, team_id, name)
+        row = card["row"]
+        rank = row.get("rank", item.getProperty("rank"))
+        place = (f"{rank}e" if sc.NL else ordinal(rank)) if rank not in ("", None) else ""
+        p = {"name": name, "logo": item.getArt("icon") if hasattr(item, "getArt") else "",
+             "col": item.getProperty("ring")[2:] if item.getProperty("ring") else "",
+             "sub": sc.t("tc_sub", place, row.get("pts", item.getProperty("pts")), row.get("gp", item.getProperty("gp"))) if place else ""}
+        p["col"] = ("CC" + p["col"]) if p["col"] else "CC3A4A5C"
+        for n in range(5):
+            if n < len(card["recent"]):
+                ev, (letter, score, _opp, _home) = card["recent"][n]
+                p[f"f{n + 1}"], p[f"f{n + 1}c"] = LETTERS.get(letter, letter), sc.FORM_COLOURS.get(letter, "")
+                p[f"r{n + 1}"] = f"{ev['home'].get('name', '')} – {ev['away'].get('name', '')}"
+                p[f"r{n + 1}s"] = score
+            else:
+                p[f"f{n + 1}"] = p[f"f{n + 1}c"] = p[f"r{n + 1}"] = p[f"r{n + 1}s"] = ""
+        p["home"], p["away"] = card["home"], card["away"]
+        nxt = card["next"]
+        if nxt:
+            data = epg.load() if self.has_pvr else {}
+            chans = self.channels_of(nxt, data)
+            p["next"] = f"{short_when(nxt)}  ·  {nxt['home'].get('name', '')} – {nxt['away'].get('name', '')}"
+            p["nextchan"] = sc.display_channel(chans[0]["name"]) if chans else ""
+        else:
+            p["next"], p["nextchan"] = sc.t("c_nonext"), ""
+        if self.getControl(TABLE_LIST).getSelectedItem() is not item and \
+                self.getControl(TABLE_LIST).getSelectedItem().getProperty("teamid") != team_id:
+            return                                     # moved on while we were busy
+        for k, v in p.items():
+            self.setProperty(f"sport.tc.{k}", str(v))
+        self.setProperty("sport.tc.on", "1")
+
+    def open_team_card(self):
+        item = self.getControl(TABLE_LIST).getSelectedItem()
+        if not item or item.getProperty("header") or not item.getProperty("teamid"):
+            return
+        logo = item.getArt("icon") if hasattr(item, "getArt") else ""
+        self.show_team_card(self.table_key, item.getProperty("teamid"), item.getLabel(), logo)
+
+    def show_team_card(self, key, team_id, name, logo):
+        """The team card. Returns True when it moved on (played a channel or opened the team's games)."""
+        card = sc.team_card(key, team_id, name)
+        data = epg.load() if self.has_pvr else {}
+        chans = self.channels_of(card["next"], data) if card["next"] else []
+        window = TeamCard("Lucent_SportTeam.xml", self.path(), "Default", "1080i")
+        window.setup(key, team_id, name, logo, card, chans, sc.is_following_team(sc.load_follow(), {"id": team_id, "name": name}))
+        window.doModal()
+        result = window.result
+        del window
+        if result == "watch" and chans:
+            self.watch_full(chans[0]["cid"], chans[0].get("name", ""))
+            return True
+        elif result == "remind" and card["next"]:
+            self.by_id[card["next"]["id"]] = card["next"]
+            self.remind_event(card["next"])
+        elif result == "follow":
+            sc.toggle_team(key, {"id": team_id, "name": name, "logo": logo})
+            if self.view == "tables":
+                self.load_table(self.table_key)
+        elif result == "games":
+            self.show_team_games(name, card)
+            return True
+        return False
+
+    def show_team_games(self, name, card):
+        side = {}
+        for ev in card["games"] + [e for e, _r in card["recent"]]:
+            for who in ("home", "away"):
+                if sc.norm(ev[who].get("name")) == sc.norm(name):
+                    side = ev[who]
+                    break
+            if side:
+                sport = sc.LEAGUES.get(ev["league"], {}).get("sport", "")
+                break
+        else:
+            sport = ""
+        base = sc.club_hex(side.get("color"), side.get("alt")) if side else ""
+        self.setProperty("sport.teamlogo", side.get("logo", "") or sc.flag_logo(name))
+        self.setProperty("sport.teamcol", colour(base, "55") if base else "")
+        self.team_look = (name, sport, colour(base, "66") if base else "")
+        self.team_name = name
+        self.team_events = card["games"] + [e for e, _r in card["recent"]]
+        self.view = "team"
+        self.render()
+        self.setFocusId(LIST)
+
+    def club_popup(self, ev, who):
+        """Click on a club on the game page: now / last / next game, Watch now, Follow, All their games, Team info.
+        Returns True when the game page should not come back."""
+        side = ev[who]
+        key, team_id, name = ev["league"], side.get("id", ""), side.get("name", "")
+        card = sc.team_card(key, team_id, name)
+        data = epg.load() if self.has_pvr else {}
+        live = next((e for e in card["games"] if e["state"] == "in"), ev if ev["state"] == "in" else None)
+        nxt = next((e for e in card["games"] if e["state"] == "pre"), None)
+        watch_ev = live or nxt
+        chans = self.channels_of(watch_ev, data) if watch_ev else []
+        followed = sc.is_following_team(sc.load_follow(), {"id": team_id, "name": name})
+
+        def vs(game):
+            mine_home = (team_id and game["home"].get("id") == team_id) or sc.norm(game["home"].get("name")) == sc.norm(name)
+            other = game["away" if mine_home else "home"]
+            return ("vs " if mine_home else "@ ") + other.get("name", "")
+
+        info = {"name": name, "logo": side.get("logo", ""), "sub": sc.league_name_of(key),
+                "col": colour_of(side), "followtext": sc.t("unfollow_team" if followed else "follow_team", name),
+                "now": f"{vs(live)}  ·  {live.get('status') or 'LIVE'}" if live else "",
+                "nowscore": f"{live['home'].get('score', '')}–{live['away'].get('score', '')}" if live else "",
+                "last": "", "lastscore": "", "lastc": "", "lastl": "",
+                "next": f"{vs(nxt)}  ·  {when_line(nxt)}" if nxt else sc.t("c_nonext"),
+                "nextchan": f"{sc.display_channel(chans[0]['name'])}  ·  {chans[0]['tag']}" if chans else "",
+                "canwatch": "1" if chans else ""}
+        if card["recent"]:
+            last, (letter, score, _opp, _home) = card["recent"][0]
+            info.update(last=f"{vs(last)}  ·  {ac.day_short(sc.local_day(last['start']))}", lastscore=score,
+                        lastc=sc.FORM_COLOURS.get(letter, ""), lastl=LETTERS.get(letter, letter))
+        window = ClubPopup("Lucent_SportClub.xml", self.path(), "Default", "1080i")
+        window.setup(info)
+        window.doModal()
+        result = window.result
+        del window
+        if result == "watch" and chans:
+            self.watch_full(chans[0]["cid"], chans[0].get("name", ""))
+            return True
+        if result == "follow":
+            self.toggle_team(who, ev)
+        elif result == "games":
+            self.show_team_games(name, card)
+            return True
+        elif result == "info":
+            return self.show_team_card(key, team_id, name, side.get("logo", ""))
+        return False
+
+    def path(self):
+        import xbmcaddon
+        return xbmcaddon.Addon("skin.lucent").getAddonInfo("path")
+
+    # ------------------------------------------------------------------ follow menu
+    def follow_menu(self):
+        dialog = xbmcgui.Dialog()
+        entries = [(sc.t("m_search"), self.search_follow), (sc.t("m_leagues"), self.choose_leagues),
+                   (sc.t("m_teams"), self.choose_teams), (sc.t("m_countries"), self.choose_countries), (sc.t("m_name"), self.add_name),
+                   (sc.t("m_order"), self.change_order), (sc.t("m_manage"), self.manage),
+                   (plan.t("auto_off" if plan.load_plan()["auto"] is False else "auto_on"), self.toggle_auto)]
+        if self.has_pvr:
+            entries.append((sc.t("m_guide"), None))
+        choice = dialog.select(sc.t("follow"), [e[0] for e in entries])
+        if choice < 0:
+            return
+        handler = entries[choice][1]
+        if handler is None:
+            threading.Thread(target=self.rescan, daemon=True).start()
+            return
+        handler()
+        threading.Thread(target=self.after_follow_change, daemon=True).start()
+
+    def toggle_auto(self):
+        on = plan.toggle_auto()
+        xbmcgui.Dialog().notification(sc.t("title"), plan.t("auto_on" if on else "auto_off"), xbmcgui.NOTIFICATION_INFO, 3000, False)
+
+    def search_follow(self):
+        text = xbmcgui.Dialog().input(sc.t("q_search"))
+        if not text or not text.strip():
+            return
+        text = text.strip()
+        hits = sc.search_catalog(text)
+        labels = [h[2] for h in hits] + [sc.t("as_name", text)]
+        pick = xbmcgui.Dialog().select(sc.t("m_search"), labels)
+        if pick < 0:
+            return
+        follow = sc.load_follow()
+        if pick == len(hits):
+            if text not in follow["names"]:
+                follow["names"].append(text)
+        else:
+            kind, ident, _label, extra = hits[pick]
+            if kind == "country":
+                name = sc.country_label(ident)
+                if not any(sc.norm(t["name"]) == sc.norm(name) for t in follow["teams"]):
+                    follow["teams"].append({"league": sc.NATIONAL_LEAGUE, "id": "", "name": name, "logo": ""})
+            elif kind == "league":
+                if ident not in follow["leagues"]:
+                    follow["leagues"].append(ident)
+            elif not any(t["id"] == ident for t in follow["teams"]):
+                league, name, logo = (extra.split("|") + ["", "", ""])[:3]
+                follow["teams"].append({"league": league, "id": ident, "name": name, "logo": logo})
+        sc.save_follow(follow)
+
+    def change_order(self):
+        rows = sc.sections()
+        if len(rows) < 2:
+            return
+        dialog = xbmcgui.Dialog()
+        pick = dialog.select(sc.t("m_order"), [r[3] for r in rows])
+        if pick < 0:
+            return
+        move = dialog.select(sc.t("q_move"), [sc.t("first"), sc.t("up"), sc.t("down")])
+        if move < 0:
+            return
+        keys = [r[0] for r in rows]
+        key = keys.pop(pick)
+        at = 0 if move == 0 else max(pick - 1, 0) if move == 1 else min(pick + 1, len(keys))
+        keys.insert(at, key)
+        sc.save_order(keys)
+
+    def rescan(self):
+        if self.guide_busy:
+            return
+        self.guide_busy = True
+        try:
+            self.status(sc.t("guide", 0))
+            epg.scan(progress=lambda d, t: self.status(sc.t("guide", int(d * 100 / max(t, 1)))), abort=lambda: self.closing)
+        finally:
+            self.guide_busy = False
+            self.status("")
+            if not self.closing:
+                self.render(keep_focus=True)
+
+    def after_follow_change(self):
+        self.status(sc.t("loading"))
+        try:
+            sc.refresh()
+        finally:
+            self.status("")
+        if not self.closing:
+            if self.view == "tables":
+                self.view = "mine"
+            self.render()
+
+    def choose_leagues(self):
+        """First the sport, then the competitions of that sport (a tick list)."""
+        dialog = xbmcgui.Dialog()
+        sports = []
+        for lg in sc.LEAGUES.values():
+            if lg["sport"] not in sports:
+                sports.append(lg["sport"])
+        follow = sc.load_follow()
+        labels = []
+        for sp in sports:
+            keys = [k for k, v in sc.LEAGUES.items() if v["sport"] == sp]
+            on = sum(1 for k in keys if k in follow["leagues"])
+            labels.append(f"{sc.sport_name(sp)}  ({len(keys)})" + (f"  ·  {on} ✓" if on else ""))
+        pick = dialog.select(sc.t("m_leagues"), labels)
+        if pick < 0:
+            return
+        keys = [k for k, v in sc.LEAGUES.items() if v["sport"] == sports[pick]]
+        pre = [i for i, k in enumerate(keys) if k in follow["leagues"]]
+        picked = dialog.multiselect(sc.sport_name(sports[pick]), [sc.LEAGUES[k]["name"] for k in keys], preselect=pre)
+        if picked is None:
+            return
+        chosen = {keys[i] for i in picked}
+        follow = sc.load_follow()
+        follow["leagues"] = [k for k in follow["leagues"] if k not in keys] + [k for k in keys if k in chosen]
+        sc.save_follow(follow)
+
+    def choose_teams(self):
+        keys = [k for k, v in sc.LEAGUES.items() if v["kind"] == "teams"]
+        labels = [f"{sc.sport_name(sc.LEAGUES[k]['sport'])}  ·  {sc.LEAGUES[k]['name']}" for k in keys]
+        pick = xbmcgui.Dialog().select(sc.t("q_league"), labels)
+        if pick < 0:
+            return
+        key = keys[pick]
+        xbmc.executebuiltin("ActivateWindow(busydialognocancel)")
+        try:
+            teams = sc.teams_of(key)
+        finally:
+            xbmc.executebuiltin("Dialog.Close(busydialognocancel)")
+        if not teams:
+            xbmcgui.Dialog().notification(sc.t("title"), sc.t("notable"), xbmcgui.NOTIFICATION_INFO, 3000, False)
+            return
+        follow = sc.load_follow()
+        have = {t["id"] for t in follow["teams"]}
+        pre = [i for i, (tid, _n, _l) in enumerate(teams) if tid in have]
+        picked = xbmcgui.Dialog().multiselect(sc.LEAGUES[key]["name"], [name for _i, name, _l in teams], preselect=pre)
+        if picked is None:
+            return
+        chosen = {teams[i][0] for i in picked}
+        listed = {tid for tid, _n, _l in teams}
+        follow["teams"] = [t for t in follow["teams"] if t["id"] not in listed] + [
+            {"league": key, "id": tid, "name": name, "logo": logo} for tid, name, logo in teams if tid in chosen]
+        sc.save_follow(follow)
+
+    def choose_countries(self):
+        names = sorted(sc.COUNTRY_NL.values())
+        follow = sc.load_follow()
+        have = {sc.norm(t["name"]) for t in follow["teams"]}
+        pre = [i for i, n in enumerate(names) if sc.norm(n) in have]
+        picked = xbmcgui.Dialog().multiselect(sc.t("m_countries"), names, preselect=pre)
+        if picked is None:
+            return
+        chosen = {names[i] for i in picked}
+        listed = set(names)
+        follow["teams"] = [t for t in follow["teams"] if t["name"] not in listed] + [
+            {"league": sc.NATIONAL_LEAGUE, "id": "", "name": n, "logo": ""} for n in sorted(chosen)]
+        sc.save_follow(follow)
+
+    def add_name(self):
+        text = xbmcgui.Dialog().input(sc.t("q_name"))
+        if text and text.strip():
+            follow = sc.load_follow()
+            if text.strip() not in follow["names"]:
+                follow["names"].append(text.strip())
+                sc.save_follow(follow)
+
+    def manage(self):
+        follow = sc.load_follow()
+        rows = ([("leagues", k, f"{sc.sport_name(sc.LEAGUES[k]['sport'])}  ·  {sc.LEAGUES[k]['name']}")
+                 for k in follow["leagues"] if k in sc.LEAGUES]
+                + [("teams", sc.team_ident(t), t["name"]) for t in follow["teams"]]
+                + [("names", n, n) for n in follow["names"]])
+        if not rows:
+            return
+        picked = xbmcgui.Dialog().multiselect(sc.t("q_remove"), [r[2] for r in rows])
+        if not picked:
+            return
+        for i in picked:
+            kind, ident, _ = rows[i]
+            if kind == "teams":
+                follow["teams"] = [t for t in follow["teams"] if sc.team_ident(t) != ident]
+            else:
+                follow[kind] = [x for x in follow[kind] if x != ident]
+        sc.save_follow(follow)
+
+
+def focus_first(window, ids):
+    """Focus the first of these controls that is visible. Controls shown by a window property only count a moment
+    after the property is set, so setFocusId is tried again for about two seconds."""
+    for _ in range(25):
+        for cid in ids:
+            try:
+                window.setFocusId(cid)
+                if window.getFocusId() == cid:
+                    return
+            except Exception:  # noqa: BLE001
+                pass
+        xbmc.sleep(80)
+
+
+class GameInfo(xbmcgui.WindowXMLDialog):
+    """The page of one game; its layout depends on the kind of game (teams / race / event)."""
+    CLICKS = {311: "play1", 312: "play2", 313: "play3", 314: "play4", 332: "remind", 333: "record", 321: "home", 322: "away",
+              331: "fix", 323: "table"}
+    NEW_IDS = {1311: 311, 1312: 312, 1313: 313, 1314: 314, 1332: 332, 1333: 333, 1323: 323, 1321: 321, 1322: 322}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.result = ""
+        self.ev = None
+        self.props = {}
+        self.parent = None
+        self.alive = True
+
+    def setup(self, ev, props, parent):
+        self.ev, self.props, self.parent = ev, props, parent
+
+    def onInit(self):
+        for key, value in self.props.items():
+            self.setProperty(f"g.{key}", "" if value is None else str(value))
+        for key, text in (("watch", sc.t("watch")), ("nochan", self.parent.getProperty("sport.t.nochan")), ("form", sc.t("g_form")),
+                          ("info", sc.t("g_info")), ("matchinfo", sc.t("g_matchinfo")), ("fulltable", sc.t("g_fulltable")),
+                          ("sessions", sc.t("g_sessions")), ("teamstats", sc.t("g_teamstats")), ("top", sc.t("g_top")),
+                          ("scoring", sc.t("g_scoring")), ("nodata", sc.t("g_nodata")), ("showing", sc.t("g_showing")),
+                          ("previewhint", sc.t("previewhint"))):
+            self.setProperty(f"g.t.{key}", text)
+        self.setProperty("g.t.stoptext", sc.t("stoptext"))
+        cid, name = epg.active()
+        self.setProperty("g.preview", cid)
+        self.setProperty("g.preview.name", name)
+        for key, text in (("watchcap", sc.t("watch").upper()), ("statscap", sc.t("g_teamstats").upper()),
+                          ("timelinecap", sc.t("g_timeline")), ("notimeline", sc.t("g_notimeline")), ("topcap", sc.t("g_topplayers"))):
+            self.setProperty(f"g.t.{key}", text)
+        if self.props.get("layout") == "teams":
+            focus_first(self, (1311, 1332, 1321))
+        else:
+            focus_first(self, (311, 332, 321, 322, 323, 331))
+        threading.Thread(target=self.extra, daemon=True).start()
+
+    def onFocus(self, cid):
+        if 3401 <= cid <= 3405:
+            self.res_n = cid - 3400
+            threading.Thread(target=self.show_results, args=(cid - 3400,), daemon=True).start()
+        elif getattr(self, "res_n", 0):
+            self.res_n = 0
+            self.setProperty("g.resshow", "")
+
+    def show_results(self, n):
+        def put(note, rows=()):
+            if getattr(self, "res_n", 0) != n or not self.alive:
+                return False
+            self.setProperty("g.resnote", note)
+            for i in range(1, 11):
+                row = rows[i - 1] if i <= len(rows) else {}
+                self.setProperty(f"g.r{i}p", row.get("pos", ""))
+                self.setProperty(f"g.r{i}n", row.get("name", ""))
+                self.setProperty(f"g.r{i}t", row.get("team", ""))
+            return True
+        state = self.props.get(f"s{n}state", "pre")
+        self.setProperty("g.resname", f"{sc.t('res_title')}  ·  {self.props.get(f's{n}name', '')}")
+        self.setProperty("g.resshow", "1")
+        if state == "pre":
+            put(sc.t("res_pre"))
+            return
+        put(sc.t("res_loading"))
+        try:
+            rows = sc.session_results(self.ev["league"], self.props.get(f"s{n}evid"), self.props.get(f"s{n}comp"), final=state == "post")
+        except Exception as error:  # noqa: BLE001
+            sc.log(f"results: {error}")
+            rows = []
+        put("" if rows and state == "post" else (sc.t("res_live") if rows else sc.t("res_none")), rows)
+
+    def extra(self):
+        for key, value in self.parent.game_extra(self.ev).items():
+            if not self.alive:
+                return
+            self.setProperty(f"g.{key}", value)
+        extra = {}
+        for key in ("hplace", "aplace") + tuple(f"{side}f{n}" for side in "ha" for n in range(1, 6)):
+            extra[key] = self.getProperty(f"g.{key}")
+        for side in "ha":
+            form = "".join(extra[f"{side}f{n}"] for n in range(1, 6))
+            self.setProperty(f"g.{side}line", "  ·  ".join(x for x in (extra[f"{side}place"], form) if x))
+        detail = self.parent.game_detail(self.ev)
+        for key, value in detail.items():
+            if not self.alive:
+                return
+            self.setProperty(f"g.{key}", value)
+        sides = goal_sides(self.ev, detail)
+        self.setProperty("g.hgoals", "  ·  ".join(sides["home"]))
+        self.setProperty("g.agoals", "  ·  ".join(sides["away"]))
+
+    def preview(self, n):
+        """OK on a channel: watch it in the TV window of this page; OK on the same channel again: full screen."""
+        cid = self.props.get(f"ch{n}cid")
+        if not cid:
+            return
+        name = self.props.get(f"ch{n}name", "")
+        if epg.is_playing(cid, name) or (self.getProperty("g.preview") == str(cid) and xbmc.getCondVisibility("Player.HasVideo")):
+            # a dialog cannot switch windows: close the page first, the Sport window then goes full screen
+            self.result = "full"
+            self.alive = False
+            self.close()
+            return
+        epg.set_active(cid, name)
+        self.setProperty("g.preview", str(cid))
+        self.setProperty("g.preview.name", name)
+        threading.Thread(target=self.parent.start_preview, args=(cid,), daemon=True).start()
+
+    def onClick(self, cid):
+        if cid in (1311, 1312, 1313, 1314):          # the football page has no TV window: a channel goes full screen
+            self.result = f"play{cid - 1310}"
+            self.alive = False
+            self.close()
+            return
+        cid = self.NEW_IDS.get(cid, cid)
+        if cid in (311, 312, 313, 314):
+            self.preview(cid - 310)
+            return
+        if cid == 350:
+            if epg.active()[0]:
+                self.result = "full"
+                self.alive = False
+                self.close()
+            return
+        if cid == 334:
+            epg.stop()
+            self.setProperty("g.preview", "")
+            self.setProperty("g.preview.name", "")
+            return
+        if cid in (321, 322):
+            # the club pop-up opens on top of this page, so the page stays where it is
+            if self.parent.club_popup(self.ev, "home" if cid == 321 else "away"):
+                self.result = "done"
+                self.alive = False
+                self.close()
+            return
+        if cid in self.CLICKS:
+            self.result = self.CLICKS[cid]
+            self.alive = False
+            self.close()
+
+    def onAction(self, action):
+        if action.getId() in (ACTION_PREVIOUS_MENU, ACTION_NAV_BACK):
+            self.alive = False
+            self.close()      # the channel keeps playing
+        elif action.getId() == ACTION_STOP and epg.active()[0]:
+            epg.stop()
+            self.setProperty("g.preview", "")
+            self.setProperty("g.preview.name", "")
+
+
+def goal_sides(ev, detail):
+    """Who scored, per side, oldest first: {'home': ["12' Leão", ...], 'away': [...]}, from ESPN's game summary."""
+    sides = {"home": [], "away": []}
+    habbr = ev["home"].get("abbr") or ev["home"].get("name", "")
+    for i in range(5, 0, -1):
+        minute = detail.get(f"sc{i}m")
+        if not minute:
+            continue
+        who = detail.get(f"sc{i}x", "")
+        who = who.replace(" Own Goal", " (og)" if not sc.NL else " (e.d.)").replace(" Penalty - Scored", " (p)")
+        for word in (" Goal", "Goal - ", "Goal! "):
+            who = who.replace(word, "")
+        sides["home" if detail.get(f"sc{i}t") == habbr else "away"].append(f"{minute} {who.strip()}".strip())
+    return sides
+
+
+def colour_of(side):
+    value = sc.club_hex(side.get("color"), side.get("alt"))
+    return "FF" + value.upper() if value else "FF2A3441"
+
+
+class ClubPopup(xbmcgui.WindowXMLDialog):
+    """Small pop-up for a club: now / last / next game and four buttons."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.result = ""
+        self.info = {}
+
+    def setup(self, info):
+        self.info = info
+
+    def onInit(self):
+        for key, value in self.info.items():
+            self.setProperty(f"club.{key}", value)
+        for key, text in (("now", sc.t("c_now")), ("last", sc.t("c_last1")), ("next", sc.t("c_next1")), ("watch", sc.t("c_watch")),
+                          ("games", sc.t("c_theirgames")), ("info", sc.t("c_teaminfo"))):
+            self.setProperty(f"club.t.{key}", text)
+        focus_first(self, (801, 802, 803, 804))
+
+    def onClick(self, cid):
+        names = {801: "watch", 802: "follow", 803: "games", 804: "info"}
+        if cid in names:
+            self.result = names[cid]
+            self.close()
+
+    def onAction(self, action):
+        if action.getId() in (ACTION_PREVIOUS_MENU, ACTION_NAV_BACK):
+            self.close()
+
+
+class TeamCard(xbmcgui.WindowXMLDialog):
+    """The team card: record, home/away form, last three results, next game, Watch / Remind me, Follow, all games."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.result = ""
+        self.info = {}
+
+    def setup(self, key, team_id, name, logo, card, chans, followed):
+        self.info = {"key": key, "id": team_id, "name": name, "logo": logo, "card": card, "chans": chans, "followed": followed}
+
+    def onInit(self):
+        i, card = self.info, self.info["card"]
+        row = card["row"]
+        self.setProperty("card.name", i["name"])
+        self.setProperty("card.logo", i["logo"])
+        place = f"{row['rank']}e" if row.get("rank") and sc.NL else str(row.get("rank", ""))
+        self.setProperty("card.sub", f"{sc.league_name_of(i['key'])}  ·  {place}" if place else sc.league_name_of(i["key"]))
+        rec = "-".join(x for x in (row.get("w"), row.get("d"), row.get("l")) if x != "" and x is not None)
+        self.setProperty("card.record", f"{sc.t('c_record')}: {rec}   ·   {row.get('pts', '')} {sc.t('pts')}" if rec else "")
+        self.setProperty("card.home", f"{sc.t('c_home')}: {card['home']}")
+        self.setProperty("card.away", f"{sc.t('c_away')}: {card['away']}")
+        for n in range(5):
+            letter = card["recent"][n][1][0] if n < len(card["recent"]) else ""
+            self.setProperty(f"card.f{n + 1}", LETTERS.get(letter, letter))
+            self.setProperty(f"card.f{n + 1}c", sc.FORM_COLOURS.get(letter, ""))
+        for n in range(3):
+            if n < len(card["last3"]):
+                ev, (letter, score, opp, home) = card["last3"][n]
+                self.setProperty(f"card.r{n + 1}", f"{ac.day_short(sc.local_day(ev['start']))}   {'vs' if home else '@'} {opp}")
+                self.setProperty(f"card.r{n + 1}s", score)
+                self.setProperty(f"card.r{n + 1}c", sc.FORM_COLOURS[letter])
+            else:
+                for suffix in ("", "s", "c"):
+                    self.setProperty(f"card.r{n + 1}{suffix}", "")
+        nxt = card["next"]
+        self.setProperty("card.next", f"{when_line(nxt)}   {nxt['home'].get('name', '')} – {nxt['away'].get('name', '')}" if nxt else sc.t("c_nonext"))
+        chans = i["chans"]
+        self.setProperty("card.nextchan", f"{sc.display_channel(chans[0]['name'])}  ·  {chans[0]['tag']}" if chans else "")
+        self.setProperty("card.canwatch", "1" if chans else "")
+        self.setProperty("card.canremind", "1" if nxt else "")
+        self.setProperty("card.followtext", sc.t("unfollow_team" if i["followed"] else "follow_team", i["name"]))
+        self.setProperty("card.t.watch", sc.t("c_watch"))
+        self.setProperty("card.t.remind", plan.t("btn_remind"))
+        self.setProperty("card.t.games", sc.t("c_games"))
+        self.setProperty("card.t.last", sc.t("c_last"))
+        self.setProperty("card.t.next", sc.t("c_next"))
+        focus_first(self, (301, 303, 304))
+
+    def onClick(self, cid):
+        names = {301: "watch", 302: "remind", 303: "follow", 304: "games"}
+        if cid in names:
+            self.result = names[cid]
+            self.close()
+
+    def onAction(self, action):
+        if action.getId() in (ACTION_PREVIOUS_MENU, ACTION_NAV_BACK):
+            self.close()
+
+
+def open_window(game="", team=None):
+    import xbmcaddon
+    path = xbmcaddon.Addon("skin.lucent").getAddonInfo("path")
+    window = Sport(WINDOW_XML, path, "Default", "1080i")
+    window.open_evid = game
+    window.open_team = team
+    try:
+        window.doModal()
+    finally:
+        epg.restore_fullscreen()
+    del window
+
+
+def add_tab(flag, label_key, icon, action, before=("ActivateWindow(Settings)",)):
+    """Put a tab in the side menu once (before Settings)."""
+    if xbmc.getInfoLabel(f"Skin.String({flag})"):
+        return
+    if not xbmc.getInfoLabel("Skin.String(nuvio.menu.version)"):
+        return                              # the menu is not written yet; next time
+    xbmc.executebuiltin(f'Skin.SetString({flag},"1")', True)
+    import menu
+    m = menu.Menu()
+    if any(tab["action"] == action for tab in m.tabs) or len(m.tabs) >= menu.NTABS:
+        return
+    at = next((i for i, tab in enumerate(m.tabs) if tab["action"] in before), len(m.tabs))
+    start = m.start_tab()
+    m.tabs.insert(at, {"label": menu.tr(label_key), "icon": icon, "action": action, "widgets": [], "actionlabel": ""})
+    m.start = start
+    m.save()
+
+
+def ensure_tab():
+    """The Sport and TV tabs in the side menu (once each)."""
+    add_tab("nuvio.sport.tab", "t_sport", "icons/sport.png", "RunScript(special://skin/scripts/sport.py)")
+    add_tab("nuvio.tv.tab", "t_tv", "icons/tv.png", "RunScript(special://skin/scripts/tv.py)",
+            before=("RunScript(special://skin/scripts/sport.py)", "ActivateWindow(Settings)"))
+
+
+if __name__ == "__main__":
+    action = sys.argv[1] if len(sys.argv) > 1 else "open"
+    if action == "ensure_tab":
+        ensure_tab()
+    elif action == "homecard":
+        plan.open_home_card()
+    elif action == "game" and len(sys.argv) > 2:
+        open_window(sys.argv[2])
+    elif action == "team" and len(sys.argv) > 4:
+        open_window(team=(sys.argv[2], sys.argv[3], ",".join(sys.argv[4:])))
+    else:
+        open_window()
