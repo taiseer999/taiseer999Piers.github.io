@@ -1,0 +1,44 @@
+# Lucent Library
+msgid ""
+msgstr ""
+"Language: nl\n"
+
+msgctxt "#32001"
+msgid "Seren"
+msgstr "Seren"
+
+msgctxt "#32002"
+msgid "Seren: choose a source"
+msgstr "Seren: bron kiezen"
+
+msgctxt "#32003"
+msgid "Seren: search again (rescrape)"
+msgstr "Seren: opnieuw zoeken (rescrape)"
+
+msgctxt "#32004"
+msgid "Seren: Trakt manager"
+msgstr "Seren: Trakt-beheer"
+
+msgctxt "#32005"
+msgid "Seren: browse the series"
+msgstr "Seren: serie bekijken"
+
+msgctxt "#32006"
+msgid "Play"
+msgstr "Afspelen"
+
+msgctxt "#32007"
+msgid "Seren: search again and choose a source"
+msgstr "Seren: opnieuw zoeken en bron kiezen"
+
+msgctxt "#32008"
+msgid "Seren: find similar"
+msgstr "Seren: zoek soortgelijk"
+
+msgctxt "#32009"
+msgid "Add to my library"
+msgstr "Aan mijn bibliotheek toevoegen"
+
+msgctxt "#32010"
+msgid "Add to Home as widget"
+msgstr "Toevoegen aan Home als widget"
