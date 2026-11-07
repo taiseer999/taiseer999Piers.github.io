@@ -406,7 +406,7 @@
 		</assets>
 		<news>- code refactor</news>
 	</extension>
-</addon><addon id="script.lucent.library" version="1.15.4" name="Lucent Bibliotheek" provider-name="Claude">
+</addon><addon id="script.lucent.library" version="1.15.5" name="Lucent Bibliotheek" provider-name="Claude">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -422,6 +422,14 @@
             <item library="context.py" args="addwidget">
                 <label>32010</label>
                 <visible>ListItem.IsFolder + !ListItem.IsParentFolder + !String.IsEmpty(Skin.String(nuvio.tab1.label)) + !Window.IsVisible(home) + [String.StartsWith(ListItem.FolderPath,plugin://) | String.StartsWith(ListItem.Path,plugin://) | String.StartsWith(ListItem.FolderPath,videodb://) | String.StartsWith(ListItem.Path,videodb://) | String.StartsWith(ListItem.FolderPath,musicdb://) | String.StartsWith(ListItem.Path,musicdb://) | String.StartsWith(ListItem.FolderPath,library://) | String.StartsWith(ListItem.Path,library://) | String.StartsWith(ListItem.FolderPath,special://) | String.StartsWith(ListItem.Path,special://) | String.StartsWith(ListItem.FolderPath,addons://) | String.StartsWith(ListItem.Path,addons://) | String.StartsWith(ListItem.FolderPath,pvr://) | String.StartsWith(ListItem.Path,pvr://) | String.StartsWith(ListItem.FolderPath,sources://) | String.StartsWith(ListItem.Path,sources://)]</visible>
+            </item>
+            <item library="context.py" args="browseshow">
+                <label>32011</label>
+                <visible>String.IsEqual(ListItem.DBType,episode) + System.HasAddon(skin.lucent) + [!String.IsEmpty(ListItem.TvShowDBID) | [[String.StartsWith(ListItem.FileNameAndPath,plugin://) | String.StartsWith(ListItem.Path,plugin://)] + !String.StartsWith(ListItem.FileNameAndPath,plugin://plugin.video.seren/) + [!String.IsEmpty(ListItem.UniqueID(tmdb)) | !String.IsEmpty(ListItem.Property(tmdb_id))]]]</visible>
+            </item>
+            <item library="context.py" args="browseeps">
+                <label>32012</label>
+                <visible>String.IsEqual(ListItem.DBType,episode) + System.HasAddon(skin.lucent) + [!String.IsEmpty(ListItem.TvShowDBID) | [[String.StartsWith(ListItem.FileNameAndPath,plugin://) | String.StartsWith(ListItem.Path,plugin://)] + !String.StartsWith(ListItem.FileNameAndPath,plugin://plugin.video.seren/) + [!String.IsEmpty(ListItem.UniqueID(tmdb)) | !String.IsEmpty(ListItem.Property(tmdb_id))]]] + !String.IsEmpty(ListItem.Season)</visible>
             </item>
             <item library="context.py" args="addlib">
                 <label>32009</label>
@@ -462,7 +470,8 @@ IMPORTANT: first load your whole collection in Seren (Movies &gt; My movies (col
         <description lang="nl_NL">Leest de films van je Trakt-collectie uit Seren en maakt per film een klein .strm- en .nfo-bestand, zodat Kodi ze in zijn eigen bibliotheek toont (collecties gegroepeerd, losse films ertussen). Een film afspelen start Seren.
 
 BELANGRIJK: laad eerst je hele collectie in Seren (Films &gt; Mijn films (collectie) en Series &gt; Mijn series (collectie)) tot alles binnen is. Lucent Bibliotheek neemt alleen over wat Seren al kent; titels die Seren nog niet geladen heeft, komen er bij een volgende ronde bij.</description>
-        <news>1.15.4: Library rows with only films or only series (Continue watching, New in your collection ... on a Films or Series tab) keep their own order (last watched, newest first); Kodi sorted them on title when the widget sort was 'As the source gives it'.
+        <news>1.15.5: Browse series / Browse episodes in the menu (long press OK) of an episode, also on Home rows: opens the series or its season in the library, in Fen Light and its clones (like Red Light) or in TMDb Helper.
+1.15.4: Library rows with only films or only series (Continue watching, New in your collection ... on a Films or Series tab) keep their own order (last watched, newest first); Kodi sorted them on title when the widget sort was 'As the source gives it'.
 1.15.3: Long press on a folder of any add-on or of the library (with the Lucent skin): "Add to Home as widget" puts that folder as a row on a Lucent tab of your choice.
 1.15.2: Long press on a film or series in a row (Lucent): "Add to my library" puts it in your library list (or the Trakt collection) and in the Kodi library at once. New Home row "New seasons": series in your library whose new season starts soon or just started.
 1.15.1: Use my lists as library: tick as many of your Trakt lists as you like (for example your film list and your series list together). A new film goes to the chosen list with the most films, a new series to the one with the most series.
@@ -992,7 +1001,7 @@ v3.5.46
 		<description lang="en_NZ">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon><addon id="skin.lucent" version="1.34.11" name="Lucent" provider-name="Claude">
+</addon><addon id="skin.lucent" version="1.34.13" name="Lucent" provider-name="Claude">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="plugin.video.youtube" version="6.8.0" />
@@ -1009,7 +1018,9 @@ v3.5.46
         <summary lang="nl_NL">Lucent - een cinematische glas-skin</summary>
         <description lang="en_GB">A dark, cinematic Kodi skin with glass panels, large backdrops and rows for Trakt continue watching, trending titles, your library and your liked Trakt lists (via Seren).</description>
         <description lang="nl_NL">Een donkere, cinematische Kodi-skin met glazen panelen, grote achtergronden en rijen voor Trakt verder kijken, trending titels, je bibliotheek en je Trakt-lijsten (via Seren).</description>
-        <news>1.34.11: Readable text on light pictures (Settings &gt; Lucent, on by default): the title, details and plot over a big picture get a thin dark edge, like subtitles, and with the fullscreen backdrop the fade behind them is a bit darker and wider.
+        <news>1.34.13: Readable text: the grey lines over a big picture (genres, plot) are a shade lighter. Info page, Mark as watched: for Fen Light and its clones (like Red Light) the add-on marks it itself and tells Trakt as set there, also without Seren. With Lucent Library 1.15.5: Browse series / Browse episodes in the menu of an episode, also on Home rows.
+1.34.12: Episodes in landscape rows (Settings &gt; Lucent): choose the picture of the episode (a still, as before) or the picture of the series (landscape art with its logo), for example for Continue watching.
+1.34.11: Readable text on light pictures (Settings &gt; Lucent, on by default): the title, details and plot over a big picture get a thin dark edge, like subtitles, and with the fullscreen backdrop the fade behind them is a bit darker and wider.
 1.34.10: Safe log: web addresses show only the server name (no personal sub-domain, no playback link or token), add-on links without their arguments. Player info (Statistics) opens again when it stayed shut after an update.
 1.34.9: Player info, Video tab: From file to screen, the video bitrate and the Dolby Vision line are filled again (since 1.34.1 they stayed empty). Skip intro twice: when Seren and TheIntroDB both show a Skip intro button, Lucent asks once which one you keep and switches the other off (Settings &gt; Watching &gt; Skip intro by).
 1.34.8: OMDb scores in the lists: the film or series under the cursor shows Rotten Tomatoes and Metacritic (as pills in the hero views, as text in the list and poster views), no need to open the info page. Switch: Settings &gt; Lucent &gt; Scores (OMDb). Home: an episode without its own picture no longer shows a folder icon over the series picture.

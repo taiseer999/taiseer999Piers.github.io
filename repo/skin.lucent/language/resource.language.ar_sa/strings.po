@@ -2512,3 +2512,15 @@ msgstr "مفعّل - حافة داكنة حول النصوص وتدرّج أغم
 msgctxt "#31806"
 msgid "Off - white text straight on the picture"
 msgstr "معطّل - نص أبيض مباشرة على الصورة"
+
+msgctxt "#31807"
+msgid "Episodes in landscape rows"
+msgstr "الحلقات في الصفوف الأفقية"
+
+msgctxt "#31808"
+msgid "Picture of the episode (a still from the episode)"
+msgstr "صورة الحلقة (لقطة من الحلقة)"
+
+msgctxt "#31809"
+msgid "Picture of the series (landscape art with its logo)"
+msgstr "صورة المسلسل (صورة أفقية مع شعاره)"

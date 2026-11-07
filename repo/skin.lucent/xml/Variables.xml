@@ -27,6 +27,10 @@
         <value>$INFO[ListItem.Art(tvshow.clearlogo)]</value>
     </variable>
     <variable name="ItemLandscape">
+        <!-- "Episodes in landscape rows: picture of the series" (Settings > Lucent): the series' landscape art (with its logo) instead of a still -->
+        <value condition="Skin.HasSetting(lucent.land.series) + String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.Art(tvshow.landscape))">$INFO[ListItem.Art(tvshow.landscape)]</value>
+        <value condition="Skin.HasSetting(lucent.land.series) + String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
+        <value condition="Skin.HasSetting(lucent.land.series) + String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.Art(tvshow.fanart))">$INFO[ListItem.Art(tvshow.fanart)]</value>
         <value condition="String.IsEqual(ListItem.DBType,episode) + !String.IsEmpty(ListItem.Art(thumb))">$INFO[ListItem.Art(thumb)]</value>
         <value condition="!String.IsEmpty(ListItem.Art(landscape))">$INFO[ListItem.Art(landscape)]</value>
         <value condition="!String.IsEmpty(ListItem.Art(tvshow.landscape))">$INFO[ListItem.Art(tvshow.landscape)]</value>
@@ -137,6 +141,11 @@
         <value>$LOCALIZE[31663]</value>
     </variable>
     <!-- "Readable text on light pictures" (Settings > Lucent): a thin dark edge around hero texts, like subtitles -->
+    <!-- the grey lines over a big picture (genres, plot) a shade lighter when "Readable text" is on -->
+    <variable name="LucentHeroText3">
+        <value condition="!Skin.HasSetting(lucent.readable.off)">text2</value>
+        <value>text3</value>
+    </variable>
     <variable name="LucentTextShadow">
         <value condition="!Skin.HasSetting(lucent.readable.off)">E6000000</value>
         <value>00000000</value>
