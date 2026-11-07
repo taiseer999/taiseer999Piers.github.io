@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <defaultcontrol always="true">996</defaultcontrol>
+    <!-- Kodi centres this dialog on the focused control, so the window starts at 0,0
+         and its size is the size of the background image (id 999). -->
+    <coordinates>
+        <left>0</left>
+        <top>0</top>
+    </coordinates>
+    <include>Anim_Dialog</include>
+    <controls>
+        <!-- Dim the screen behind the menu (oversized because the dialog moves) -->
+        <control type="image">
+            <left>-1920</left>
+            <top>-1080</top>
+            <width>5760</width>
+            <height>3240</height>
+            <texture>white.png</texture>
+            <colordiffuse>dim</colordiffuse>
+        </control>
+        <control type="button">
+            <left>-1920</left>
+            <top>-1080</top>
+            <width>5760</width>
+            <height>3240</height>
+            <texturefocus/>
+            <texturenofocus/>
+            <onclick>Action(close)</onclick>
+        </control>
+        <!-- Background: Kodi sets its height to 40 + the height of the buttons
+             (its height minus the grouplist height must stay 40). -->
+        <control type="image" id="999">
+            <left>0</left>
+            <top>0</top>
+            <width>600</width>
+            <height>680</height>
+            <texture border="48">panel.png</texture>
+            <colordiffuse>modal</colordiffuse>
+        </control>
+        <control type="grouplist" id="996">
+            <pagecontrol>60</pagecontrol>
+            <onright condition="Control.IsVisible(60)">60</onright>
+            <onright>noop</onright>
+            <left>20</left>
+            <top>20</top>
+            <width>560</width>
+            <height>640</height>
+            <itemgap>4</itemgap>
+        </control>
+        <control type="scrollbar" id="60">
+            <left>586</left>
+            <top>20</top>
+            <height>640</height>
+            <onleft>996</onleft>
+            <onright>996</onright>
+            <visible>Control.IsVisible(996)</visible>
+        </control>
+        <control type="button" id="1000">
+            <width>560</width>
+            <height>68</height>
+            <font>font_label</font>
+            <textcolor>text2</textcolor>
+            <focusedcolor>on_focus</focusedcolor>
+            <textoffsetx>28</textoffsetx>
+            <texturefocus border="20" colordiffuse="focus">rr20.png</texturefocus>
+            <texturenofocus/>
+        </control>
+    </controls>
+</window>

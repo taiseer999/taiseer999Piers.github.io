@@ -1001,7 +1001,7 @@ v3.5.46
 		<description lang="en_NZ">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">FENtastic Plus is a modified version of the default Estuary skin for Kodi. It is intended for use with Fen Light, Red Light, The Gears, Umbrella, POV, TMDbH.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon><addon id="skin.lucent" version="1.34.13" name="Lucent" provider-name="Claude">
+</addon><addon id="skin.lucent" version="1.34.14" name="Lucent" provider-name="Claude">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="plugin.video.youtube" version="6.8.0" />

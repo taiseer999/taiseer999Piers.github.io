@@ -1,0 +1,787 @@
+# -*- coding: utf-8 -*-
+"""Lucent: setup assistant - the most important settings and logins, step by step.
+
+    RunScript(special://skin/scripts/setup.py)          open it (Settings > Lucent > Setup assistant)
+    RunScript(special://skin/scripts/setup.py,first)    from Home: only the very first time (Skin.String lucent.setup.done)
+
+Every step says what it is for, shows how it stands right now (green tick / orange note) and has buttons that set it
+up. The state is looked at again every two seconds, so after linking Trakt or installing an add-on the tick appears
+by itself. Nothing is required: every step can be skipped, and the assistant can be opened again later.
+"""
+import json
+import sys
+import threading
+
+import xbmc
+import xbmcaddon
+import xbmcgui
+
+NL = xbmc.getLanguage(xbmc.ISO_639_1) == "nl"
+DONE = "lucent.setup.done"
+SEREN = "plugin.video.seren"
+IPTV = "pvr.iptvsimple"
+SUBS = "service.subtitles.lucent"
+LIB = "script.lucent.library"
+SKIP = "plugin.video.tidb"          # TheIntroDB: skip intro, recap, credits and preview
+SKIP_REPO = "repository.tidb.repo"  # its repository; in the Lucent repository, installed by the setup assistant
+GREEN, ORANGE, GREY = "FF4CC38A", "FFE8A33D", "FF8A96A3"
+
+
+def t(en, nl):
+    return nl if NL else en
+
+
+def log(text):
+    xbmc.log(f"[skin.lucent] setup: {text}", xbmc.LOGINFO)
+
+
+def cond(text):
+    return xbmc.getCondVisibility(text)
+
+
+def rpc(method, params=None):
+    request = {"jsonrpc": "2.0", "id": 1, "method": method, "params": params or {}}
+    try:
+        return json.loads(xbmc.executeJSONRPC(json.dumps(request))).get("result")
+    except Exception as error:  # noqa: BLE001
+        log(f"{method}: {error}")
+        return None
+
+
+def setting(addon_id, key):
+    try:
+        return xbmcaddon.Addon(addon_id).getSetting(key)
+    except Exception:  # noqa: BLE001 - not installed
+        return ""
+
+
+def has(addon_id):
+    return cond(f"System.HasAddon({addon_id})")
+
+
+def install(addon_id):
+    xbmc.executebuiltin(f"InstallAddon({addon_id})")
+
+
+def run(builtin):
+    xbmc.executebuiltin(builtin)
+
+
+# ----------------------------------------------------------------------------- the steps
+# each: key, icon, title, body, status() -> (state 'ok' | 'todo' | 'info', text), actions() -> [(label, function)]
+
+def st_welcome():
+    return "info", ""
+
+
+def ac_welcome():
+    return []
+
+
+def no_seren():
+    return cond("Skin.HasSetting(lucent.noseren)")
+
+
+def st_seren():
+    if no_seren():
+        return "ok", t("You use Lucent without Seren", "Je gebruikt Lucent zonder Seren")
+    if not has(SEREN):
+        return "todo", t("Seren is not installed", "Seren is nog niet geïnstalleerd")
+    if not setting(SEREN, "trakt.auth"):
+        return "todo", t("Seren is there - Trakt is not linked yet", "Seren staat erop - Trakt is nog niet gekoppeld")
+    user = setting(SEREN, "trakt.username")
+    return "ok", t(f"Linked to Trakt{' as ' + user if user else ''}", f"Gekoppeld met Trakt{' als ' + user if user else ''}")
+
+
+SEREN_REPO = "repository.seren-nixgate"   # minhgi's Seren build (scrapers in modules); in the Lucent repository, installed by the setup assistant
+
+
+def install_seren():
+    """Seren is not in Kodi's own repository: first its own repository (Seren Nixgate by minhgi, installed with the skin from the Lucent
+    repository), then Seren from there. Runs in the background; Kodi asks to confirm each install."""
+    import threading
+
+    def go():
+        monitor = xbmc.Monitor()
+        if not has(SEREN_REPO):
+            xbmc.executebuiltin(f"InstallAddon({SEREN_REPO})")
+            for _ in range(120):
+                if has(SEREN_REPO) or monitor.waitForAbort(1):
+                    break
+            if not has(SEREN_REPO):
+                xbmcgui.Dialog().ok("Seren", t("The Seren repository (Seren Nixgate) could not be installed. Update the Lucent "
+                                               "repository (Add-ons > Check for updates) and try again.",
+                                               "De repository van Seren (Seren Nixgate) kon niet worden geïnstalleerd. Werk de "
+                                               "Lucent-repository bij (Add-ons > Controleren op updates) en probeer het opnieuw."))
+                return
+            xbmc.executebuiltin("UpdateAddonRepos")
+            monitor.waitForAbort(6)
+        xbmc.executebuiltin(f"InstallAddon({SEREN})")
+    threading.Thread(target=go, daemon=True).start()
+
+
+def choose_menu(question):
+    """Offer the default menu that fits the choice (with or without Seren)."""
+    if xbmcgui.Dialog().yesno("Lucent", question):
+        import menu
+        m = menu.Menu()
+        m.set_defaults()
+        m.save()
+        xbmcgui.Dialog().notification("Lucent", t("Menu set up", "Menu klaargezet"), "", 3000, False)
+
+
+def seren_off():
+    """'No, without Seren': the Seren choices leave the menu editor and the setup, and the menu can go without Seren."""
+    run("Skin.SetBool(lucent.noseren)")
+    xbmc.sleep(200)
+    choose_menu(t("Lucent now leaves out the Seren choices.\n\nAlso set up the menu without Seren (your Kodi library, search, "
+                  "add-ons and favourites)? Your own tabs and widgets are replaced.",
+                  "Lucent laat de Seren-keuzes nu weg.\n\nOok het menu zonder Seren klaarzetten (je Kodi-bibliotheek, zoeken, "
+                  "add-ons en favorieten)? Je eigen tabs en widgets worden vervangen."))
+
+
+def seren_on():
+    run("Skin.Reset(lucent.noseren)")
+    xbmc.sleep(200)
+    if has(SEREN):
+        choose_menu(t("Also set up the menu with Seren (search, movies and series from Seren)? Your own tabs and widgets are replaced.",
+                      "Ook het menu met Seren klaarzetten (zoeken, films en series uit Seren)? Je eigen tabs en widgets worden vervangen."))
+
+
+def ac_seren():
+    if no_seren():
+        return [(t("Use Seren after all", "Toch Seren gebruiken"), seren_on)]
+    if not has(SEREN):
+        return [(t("Yes: install Seren", "Ja: Seren installeren"), install_seren),
+                (t("No, without Seren", "Nee, zonder Seren"), seren_off)]
+    out = []
+    if not setting(SEREN, "trakt.auth"):
+        out.append((t("Link Trakt", "Trakt koppelen"), lambda: run(f"RunPlugin(plugin://{SEREN}/?action=authTrakt)")))
+    out.append((t("Seren settings", "Seren-instellingen"), lambda: run(f"Addon.OpenSettings({SEREN})")))
+    out.append((t("I don't use Seren", "Ik gebruik geen Seren"), seren_off))
+    return out
+
+
+def tmdb_key():
+    try:
+        import info
+        info._KEY["time"] = 0.0                       # always look again
+        return info.tmdb_key()
+    except Exception as error:  # noqa: BLE001
+        log(f"tmdb key: {error}")
+        return ""
+
+
+def st_tmdb():
+    if tmdb_key():
+        return "ok", t("A TMDb key is set", "Er is een TMDb-sleutel ingesteld")
+    return "todo", t("No TMDb key yet", "Nog geen TMDb-sleutel")
+
+
+def ac_tmdb():
+    def enter():
+        import info
+        info.set_tmdb_key()
+    return [(t("Enter key", "Sleutel invoeren"), enter)]
+
+
+def tv_channels():
+    result = rpc("PVR.GetChannels", {"channelgroupid": "alltv", "limits": {"end": 1}}) or {}
+    return int((result.get("limits") or {}).get("total") or 0)
+
+
+def st_iptv():
+    if not cond(f"System.HasAddon({IPTV})"):
+        if xbmc.getInfoLabel(f"System.AddonVersion({IPTV})"):                # installed, but switched off
+            return "todo", t("IPTV Simple Client is switched off", "IPTV Simple Client staat uit")
+        return "todo", t("IPTV Simple Client is not installed (no IPTV? Skip this step)",
+                         "IPTV Simple Client staat er nog niet op (geen IPTV? Sla over)")
+    count = tv_channels()
+    if count:
+        return "ok", t(f"{count} TV channels", f"{count} tv-zenders")
+    return "todo", t("No channels yet: fill in your channel list (M3U) and guide (EPG)",
+                     "Nog geen zenders: vul je zenderlijst (M3U) en gids (EPG) in")
+
+
+def ac_iptv():
+    if not cond(f"System.HasAddon({IPTV})"):
+        if xbmc.getInfoLabel(f"System.AddonVersion({IPTV})"):
+            return [(t("Switch on", "Aanzetten"), lambda: rpc("Addons.SetAddonEnabled", {"addonid": IPTV, "enabled": True}))]
+        return [(t("Install IPTV Simple Client", "IPTV Simple Client installeren"), lambda: install(IPTV))]
+    out = [(t("Xtream login", "Xtream-inlog"), lambda: run("RunScript(special://skin/scripts/xtream.py)")),
+           (t("Channel list and guide", "Zenderlijst en gids"), lambda: run(f"Addon.OpenSettings({IPTV})"))]
+    if tv_channels():                       # the window has room for four buttons
+        group = xbmc.getInfoLabel("Skin.String(lucent.guide.group)") or t("none", "geen")
+        out.append((t(f"Favourite group: {group}", f"Favoriete groep: {group}"),
+                    lambda: run("RunScript(special://skin/scripts/guidefav.py,settings)")))
+        try:
+            import channels
+            logos = channels.load().get("logos")
+        except Exception:  # noqa: BLE001
+            logos = False
+        out.append((t("Channel logos: on", "Zenderlogo's: aan") if logos else t("Channel logos: off", "Zenderlogo's: uit"),
+                    lambda: run("RunScript(special://skin/scripts/channels.py,logos)")))
+    return out
+
+
+def subs_default():
+    value = (rpc("Settings.GetSettingValue", {"setting": "subtitles.movie"}) or {}).get("value")
+    return value == SUBS
+
+
+def subs_keys():
+    """(OpenSubtitles key + login filled in, SubDL key filled in) of Lucent Ondertitels."""
+    try:
+        import xbmcaddon
+        addon = xbmcaddon.Addon(SUBS)
+        return (bool(addon.getSetting("os_key").strip() and addon.getSetting("os_user").strip() and addon.getSetting("os_pass")),
+                bool(addon.getSetting("subdl_key").strip()))
+    except Exception:  # noqa: BLE001
+        return False, False
+
+
+def st_subs():
+    if not has(SUBS):
+        return "todo", t("Lucent Subtitles is not installed", "Lucent Ondertitels is niet geïnstalleerd")
+    os_ok, subdl_ok = subs_keys()
+    parts = [t("Lucent Subtitles is the default", "Lucent Ondertitels is de standaard") if subs_default()
+             else t("Lucent Subtitles is not the default yet", "Lucent Ondertitels is nog niet de standaard"),
+             "OpenSubtitles ✓" if os_ok else t("OpenSubtitles: no account", "OpenSubtitles: geen account"),
+             "SubDL ✓" if subdl_ok else t("SubDL: no key", "SubDL: geen sleutel")]
+    if not cond("Skin.HasSetting(nuvio.autosubs)"):
+        parts.append(t("not searching automatically", "zoekt niet automatisch"))
+    elif xbmc.getInfoLabel("Skin.String(lucent.subs.mode)") == "background":
+        parts.append(t("picks one by itself", "kiest er zelf een"))
+    else:
+        parts.append(t("searching automatically", "zoekt automatisch"))
+    return ("ok" if subs_default() and (os_ok or subdl_ok) else "todo"), "  ·  ".join(parts)
+
+
+def ac_subs():
+    if not has(SUBS):
+        return [(t("Install Lucent Subtitles", "Lucent Ondertitels installeren"), lambda: install(SUBS))]
+    out = [(t("Accounts and keys", "Accounts en sleutels"), lambda: run(f"Addon.OpenSettings({SUBS})"))]
+    if not subs_default():
+        out.append((t("Make it the default", "Als standaard instellen"), lambda: run("RunScript(special://skin/scripts/subtitles.py,default)")))
+    if not cond("Skin.HasSetting(nuvio.autosubs)"):
+        mode = t("off", "uit")
+    elif xbmc.getInfoLabel("Skin.String(lucent.subs.mode)") == "background":
+        mode = t("in the background", "op de achtergrond") + (" + AI" if cond("Skin.HasSetting(lucent.subs.bg.ai)") else "")
+    else:
+        mode = t("show the list", "lijst laten zien")
+    out.append((t(f"Automatic search: {mode}", f"Automatisch zoeken: {mode}"),
+                lambda: run("RunScript(special://skin/scripts/subs_live.py,mode)")))
+    spoken = xbmc.getInfoLabel("Skin.String(lucent.audio.label)") or t("Kodi decides", "Kodi beslist")
+    out.append((t(f"Spoken language: {spoken}", f"Gesproken taal: {spoken}"),
+                lambda: run("RunScript(special://skin/scripts/subs_live.py,audio)")))
+    out.append((t("AI translation", "AI-vertaling"),       # the window has room for four buttons: this one goes first
+                lambda: run("RunScript(special://skin/scripts/subs_live.py,key)")))
+    return out
+
+
+# ----------------------------------------------------------------------------- skip intro (TheIntroDB)
+SKIP_KINDS = ("intro", "recap", "preview")   # credits: Seren shows 'Playing next' there itself
+
+
+def skip_auto():
+    """True when TheIntroDB skips intro, recap and preview by itself (no button)."""
+    try:
+        addon = xbmcaddon.Addon(SKIP)
+        return all(addon.getSetting(f"auto_skip_{kind}") == "true" for kind in SKIP_KINDS)
+    except Exception:  # noqa: BLE001 - not installed
+        return False
+
+
+def toggle_skip_auto():
+    try:
+        addon = xbmcaddon.Addon(SKIP)
+        value = "false" if skip_auto() else "true"
+        for kind in SKIP_KINDS:
+            addon.setSetting(f"auto_skip_{kind}", value)
+    except Exception as error:  # noqa: BLE001
+        log(f"skip auto: {error}")
+
+
+def install_skip():
+    """TheIntroDB is not in Kodi's own repository: first its repository (comes with the skin from the Lucent
+    repository), then the add-on from there. Runs in the background; Kodi asks to confirm."""
+    def go():
+        monitor = xbmc.Monitor()
+        if not has(SKIP_REPO):
+            install(SKIP_REPO)
+            for _ in range(120):
+                if has(SKIP_REPO) or monitor.waitForAbort(1):
+                    break
+            if not has(SKIP_REPO):
+                xbmcgui.Dialog().ok("TheIntroDB", t("The TheIntroDB repository could not be installed. Update the Lucent "
+                                                    "repository (Add-ons > Check for updates) and try again.",
+                                                    "De repository van TheIntroDB kon niet worden geïnstalleerd. Werk de "
+                                                    "Lucent-repository bij (Add-ons > Controleren op updates) en probeer het opnieuw."))
+                return
+            run("UpdateAddonRepos")
+            monitor.waitForAbort(6)
+        install(SKIP)
+    threading.Thread(target=go, daemon=True).start()
+
+
+def skip_key():
+    """The optional API key of TheIntroDB. It is not needed; a wrong one makes every lookup fail (401), so no button."""
+    return setting(SKIP, "introdb_api_key").strip()
+
+
+def clear_skip_key():
+    try:
+        addon = xbmcaddon.Addon(SKIP)
+        addon.setSetting("introdb_api_key", "")
+        addon.setSetting("test_api_key_now", "false")
+    except Exception as error:  # noqa: BLE001
+        log(f"skip key: {error}")
+
+
+def st_skip():
+    if not has(SKIP):
+        return "todo", t("TheIntroDB is not installed", "TheIntroDB is nog niet geïnstalleerd")
+    if skip_key():
+        return "todo", t("An API key is filled in. TheIntroDB does not need one, and a wrong key stops the button: remove it",
+                         "Er staat een API-sleutel ingevuld. TheIntroDB heeft die niet nodig, en een verkeerde sleutel houdt "
+                         "de knop tegen: haal hem weg")
+    if skip_auto():
+        return "ok", t("Skips intro, recap and preview by itself", "Slaat intro, terugblik en preview zelf over")
+    return "ok", t("Shows a 'Skip' button", "Laat een knop 'Overslaan' zien")
+
+
+def ac_skip():
+    if not has(SKIP):
+        return [(t("Install TheIntroDB", "TheIntroDB installeren"), install_skip)]
+    out = [(t("Remove API key", "API-sleutel weghalen"), clear_skip_key)] if skip_key() else []
+    out += [(t("Skip by itself: on", "Zelf overslaan: aan") if skip_auto() else t("Skip by itself: off", "Zelf overslaan: uit"),
+             toggle_skip_auto),
+            (t("TheIntroDB settings", "TheIntroDB-instellingen"), lambda: run(f"Addon.OpenSettings({SKIP})"))]
+    return out
+
+
+EVERY_NEXT = {"6": "12", "12": "24", "24": "0"}
+
+
+def st_library():
+    if not has(LIB):
+        return "todo", t("Lucent Library is not installed", "Lucent Bibliotheek is niet geïnstalleerd")
+    home = xbmcgui.Window(10000)
+    movies, shows = home.getProperty("lucent.lib.movies"), home.getProperty("lucent.lib.shows")
+    every = xbmc.getInfoLabel("Skin.String(lucent.lib.every)") or "6"
+    when = t("updates by itself every {0} hours", "werkt zichzelf om de {0} uur bij").format(every) if every != "0" \
+        else t("does not update by itself", "werkt niet vanzelf bij")
+    lists = xbmc.getInfoLabel("Skin.String(lucent.lib.lists)")
+    if lists:
+        when += t(f"  ·  lists: {lists}", f"  ·  lijsten: {lists}")
+    if movies or shows:
+        return "ok", t(f"{movies or 0} films, {shows or 0} series  ·  {when}", f"{movies or 0} films, {shows or 0} series  ·  {when}")
+    return "todo", t(f"Not filled yet  ·  {when}", f"Nog niet gevuld  ·  {when}")
+
+
+def ac_library():
+    if not has(LIB):
+        return [(t("Install", "Installeren"), lambda: install(LIB))]
+    every = xbmc.getInfoLabel("Skin.String(lucent.lib.every)") or "6"
+    label = t("Automatic: off", "Automatisch: uit") if every == "0" else t(f"Automatic: every {every} h", f"Automatisch: om de {every} uur")
+    lists = xbmc.getInfoLabel("Skin.String(lucent.lib.lists)") or t("off", "uit")
+    return [(t("Update now", "Nu bijwerken"), lambda: run(f"RunScript({LIB},update)")),
+            (label, lambda: run(f'Skin.SetString(lucent.lib.every,{EVERY_NEXT.get(every, "6")})')),
+            (t(f"My lists as library: {lists}", f"Mijn lijsten als bibliotheek: {lists}"), lambda: run(f"RunScript({LIB},chooselists)"))]
+
+
+def st_look():
+    lite = cond("Skin.HasSetting(lucent.lite)")
+    fy = not cond("Skin.HasSetting(lucent.fy.off)")
+    big = not cond("Skin.HasSetting(lucent.posters.small)")
+    return "ok", "  ·  ".join([t("Light mode on", "Lichte modus aan") if lite else t("Light mode off", "Lichte modus uit"),
+                               t("Tonight for you on", "Vanavond voor jou aan") if fy else t("Tonight for you off", "Vanavond voor jou uit"),
+                               t("big posters", "grote posters") if big else t("small posters", "kleine posters")])
+
+
+def toggle_posters():
+    """Big posters (no names) or the old, smaller posters (with names); the skin reloads to get the new row height."""
+    if cond("Skin.HasSetting(lucent.posters.small)"):
+        run("Skin.SetBool(nuvio.posterlabels.hide)")
+    else:
+        run("Skin.Reset(nuvio.posterlabels.hide)")
+    run("Skin.ToggleSetting(lucent.posters.small)")
+    xbmc.sleep(300)
+    run("ReloadSkin()")
+
+
+def ac_look():
+    lite = cond("Skin.HasSetting(lucent.lite)")
+    return [(t("Light mode: on", "Lichte modus: aan") if lite else t("Light mode: off", "Lichte modus: uit"),
+             lambda: (run("Skin.ToggleSetting(lucent.lite)"), xbmc.sleep(400),
+                      run("RunScript(special://skin/scripts/settings.py,litebuild)"))),
+            (t("Big posters: on", "Grote posters: aan") if not cond("Skin.HasSetting(lucent.posters.small)")
+             else t("Big posters: off", "Grote posters: uit"), toggle_posters),
+            (t("Films and series only once you can watch them: on", "Films en series pas als je ze kunt kijken: aan")
+             if cond("Skin.HasSetting(lucent.hide.undigital)")
+             else t("Films and series only once you can watch them: off", "Films en series pas als je ze kunt kijken: uit"),
+             lambda: run("Skin.ToggleSetting(lucent.hide.undigital)")),
+            (t("Menu and rows", "Menu en rijen"), lambda: run("RunScript(special://skin/scripts/menu.py)"))]
+
+
+def kodi_setting(key):
+    return (rpc("Settings.GetSettingValue", {"setting": key}) or {}).get("value")
+
+
+def set_kodi(key, value):
+    rpc("Settings.SetSettingValue", {"setting": key, "value": value})
+
+
+def ram_mb():
+    try:
+        return int("".join(ch for ch in xbmc.getInfoLabel("System.Memory(total)") if ch.isdigit()) or 0)
+    except ValueError:
+        return 0
+
+
+def buffer_advice():
+    """A bigger buffer than Kodi's 64 MB smooths out streams. Kodi can use up to three times this size, so it follows
+    the memory of the box: 96 MB up to 2 GB, 192 MB up to 4 GB, 384 MB above that."""
+    ram = ram_mb()
+    return 96 if 0 < ram <= 2200 else (192 if ram <= 4400 else 384)
+
+
+PASS = ("audiooutput.ac3passthrough", "audiooutput.eac3passthrough", "audiooutput.dtspassthrough",
+        "audiooutput.truehdpassthrough", "audiooutput.dtshdpassthrough")
+
+
+def st_play():
+    size, advice = kodi_setting("filecache.memorysize"), buffer_advice()
+    rate = kodi_setting("videoplayer.adjustrefreshrate")
+    passthrough = kodi_setting("audiooutput.passthrough")
+    parts = [t(f"Buffer {size} MB", f"Buffer {size} MB") + ("" if (size or 0) >= advice else t(f" (advice {advice})", f" (advies {advice})")),
+             t("frame rate follows the video", "beeldfrequentie volgt de video") if rate in (1, 2, 3) else t("frame rate fixed", "beeldfrequentie vast"),
+             t("sound to amplifier", "geluid naar versterker") if passthrough else t("Kodi decodes the sound", "Kodi zet het geluid om")]
+    return ("ok" if (size or 0) >= advice and rate in (1, 2, 3) else "todo"), "  ·  ".join(parts)
+
+
+def ac_play():
+    advice = buffer_advice()
+    rate = kodi_setting("videoplayer.adjustrefreshrate")
+    passthrough = kodi_setting("audiooutput.passthrough")
+
+    def buffer():
+        set_kodi("filecache.memorysize", advice)
+        set_kodi("filecache.readfactor", 400)                  # fill the buffer 4x faster than the video plays
+
+    def toggle_rate():
+        set_kodi("videoplayer.adjustrefreshrate", 0 if rate in (1, 2, 3) else 2)   # 2: on start and stop
+
+    def toggle_pass():
+        on = not passthrough
+        set_kodi("audiooutput.passthrough", on)
+        if on:
+            for key in PASS:
+                set_kodi(key, True)
+    out = []
+    if (kodi_setting("filecache.memorysize") or 0) < advice:
+        out.append((t(f"Buffer {advice} MB (advice)", f"Buffer {advice} MB (advies)"), buffer))
+    out.append((t("Frame rate: follows video", "Beeldfrequentie: volgt video") if rate in (1, 2, 3) else t("Frame rate: fixed", "Beeldfrequentie: vast"), toggle_rate))
+    out.append((t("Sound to amplifier: on", "Geluid naar versterker: aan") if passthrough else t("Sound to amplifier: off", "Geluid naar versterker: uit"), toggle_pass))
+    out.append((t("Player settings", "Spelerinstellingen"), lambda: run("ActivateWindow(PlayerSettings)")))
+    return out
+
+
+def st_backup():
+    import backup
+    last = backup.last_backup()
+    if last:
+        return "ok", t(f"Last backup: {last}", f"Laatste back-up: {last}")
+    return "todo", t("No backup yet", "Nog geen back-up")
+
+
+def ac_backup():
+    return [(t("Make a backup", "Back-up maken"), lambda: run("RunScript(special://skin/scripts/backup.py,backup)")),
+            (t("Restore", "Herstellen"), lambda: run("RunScript(special://skin/scripts/backup.py,restore)"))]
+
+
+
+# ----------------------------------------------------------------------------- tabs (only with the Solis add-on)
+SOLIS = "script.solis.dashboard"
+SOLIS_ACTION = f"RunAddon({SOLIS})"
+
+
+def solis_tab():
+    import menu
+    return any(SOLIS in tab["action"] for tab in menu.Menu().tabs)
+
+
+def st_tabs():
+    if solis_tab():
+        return "ok", t("Solis Dashboard has its own tab on Home", "Solis Dashboard heeft een eigen tabblad op Home")
+    return "todo", t("Solis Dashboard is installed but has no tab on Home yet", "Solis Dashboard staat erop, maar heeft nog geen tabblad op Home")
+
+
+def add_solis_tab():
+    import menu
+    m = menu.Menu()
+    if solis_tab():
+        return
+    if len(m.tabs) >= menu.NTABS:
+        xbmcgui.Dialog().ok("Lucent", t("The side menu is full. Remove a tab in Menu and widgets first.",
+                                        "Het zijmenu is vol. Haal eerst een tabblad weg bij Menu en widgets."))
+        return
+    at = next((i for i, tab in enumerate(m.tabs) if tab["action"] in ("AddonBrowser", "ActivateWindow(Settings)")
+               or "AddonBrowser" in tab["action"]), len(m.tabs))
+    start = m.start_tab()
+    m.tabs.insert(at, {"label": "Solis Dashboard", "icon": "icons/sparkle.png", "action": SOLIS_ACTION, "widgets": [], "actionlabel": ""})
+    m.start = start
+    m.save()
+    xbmcgui.Dialog().notification("Lucent", t("Solis Dashboard tab added", "Tabblad Solis Dashboard toegevoegd"), "", 3000, False)
+
+
+def ac_tabs():
+    if solis_tab():
+        return [(t("Menu and widgets", "Menu en widgets"), lambda: run("RunScript(special://skin/scripts/menu.py)"))]
+    return [(t("Add a Solis Dashboard tab", "Tabblad Solis Dashboard toevoegen"), add_solis_tab),
+            (t("Menu and widgets", "Menu en widgets"), lambda: run("RunScript(special://skin/scripts/menu.py)"))]
+
+STEPS = [
+    ("welcome", "icons/sparkle.png", ("Welcome", "Welkom"),
+     ("Welcome to Lucent. In a few steps we set up what matters most: Seren with your Trakt account (if you use it), a TMDb key for "
+      "pictures and information, your IPTV channels, subtitles and your own library.\n\nEvery step shows how it stands "
+      "right now. Something you do not use, you simply skip. You can open this assistant again later: "
+      "Settings > Lucent > Setup assistant.",
+      "Welkom bij Lucent. In een paar stappen zetten we het belangrijkste klaar: Seren met je Trakt-account (als je dat gebruikt), een "
+      "TMDb-sleutel voor plaatjes en informatie, je IPTV-zenders, ondertitels en je eigen bibliotheek.\n\nBij elke stap "
+      "zie je meteen hoe het nu staat. Wat je niet gebruikt, sla je gewoon over. Je kunt deze assistent later opnieuw "
+      "openen: Instellingen > Lucent > Setup-assistent."), st_welcome, ac_welcome),
+    ("seren", "icons/trakt.png", ("Do you use Seren?", "Gebruik je Seren?"),
+     ("Seren finds the streams and plays films and series. Your Trakt account keeps your lists, your collection and "
+      "what you watched - Lucent reads its rows, the calendar and 'Tonight for you' from it.\n\nLink Trakt: a code "
+      "appears, enter it on trakt.tv/activate (phone or computer).\n\nDon't use Seren? Choose 'No, without Seren'. Lucent then "
+      "works with your Kodi library and your own add-ons (Emby, Jellyfin, YouTube...) and leaves the Seren choices out. "
+      "Tip: long-press OK on a folder in any add-on and choose 'Add to Home as widget'.",
+      "Seren zoekt de bronnen en speelt films en series af. Je Trakt-account bewaart je lijsten, je collectie en wat "
+      "je gezien hebt - daar haalt Lucent zijn rijen, de kalender en 'Vanavond voor jou' uit.\n\nTrakt koppelen: er "
+      "verschijnt een code, vul die in op trakt.tv/activate (telefoon of computer).\n\nGebruik je geen Seren? Kies 'Nee, zonder "
+      "Seren'. Lucent werkt dan met je Kodi-bibliotheek en je eigen add-ons (Emby, Jellyfin, YouTube...) en laat de Seren-keuzes weg. "
+      "Tip: houd OK ingedrukt op een map in een add-on en kies 'Toevoegen aan Home als widget'."), st_seren, ac_seren),
+    ("tmdb", "icons/movies.png", ("TMDb key", "TMDb-sleutel"),
+     ("TMDb (The Movie Database) supplies posters, logos, cast, studios and trailers. A key of your own is free and "
+      "makes everything faster and more complete.\n\nGet one: make an account on themoviedb.org, then Settings > API > "
+      "'Create' (personal use). Copy the 'API key' (the short one, 32 characters).",
+      "TMDb (The Movie Database) levert posters, logo's, acteurs, studio's en trailers. Een eigen sleutel is gratis en "
+      "maakt alles sneller en vollediger.\n\nZo krijg je er een: maak een account op themoviedb.org, dan Instellingen > "
+      "API > 'Aanmaken' (persoonlijk gebruik). Kopieer de 'API-sleutel' (de korte, 32 tekens)."), st_tmdb, ac_tmdb),
+    ("iptv", "icons/tv.png", ("Live TV (IPTV)", "Live tv (IPTV)"),
+     ("For live TV Kodi uses IPTV Simple Client. Have an Xtream login (server address, user name, password)? "
+      "Press 'Xtream login': Lucent checks it with the server and sets up IPTV Simple for you - channels, guide and replay. "
+      "Got an M3U and EPG link instead? Fill those in under 'Channel list and guide'.\n\nAfter that Lucent shows the TV "
+      "guide, the Sport tab and live scores on the channels. 'Favourite group' opens first in the guide and fills the TV tab "
+      "on Home; 'Channel logos' puts clean logos (tv-logos) in place of your provider's.",
+      "Voor live tv gebruikt Kodi IPTV Simple Client. Heb je een Xtream-login (serveradres, gebruikersnaam, wachtwoord)? "
+      "Druk op 'Xtream-inlog': Lucent controleert hem bij de server en stelt IPTV Simple voor je in - zenders, gids en "
+      "terugkijken. Heb je een M3U- en EPG-link? Vul die in bij 'Zenderlijst en gids'.\n\nDaarna toont Lucent de tv-gids, "
+      "de Sport-tab en live standen bij de zenders. 'Favoriete groep' opent als eerste in de gids en vult het tv-tabblad "
+      "op Home; 'Zenderlogo's' zet nette logo's (tv-logos) in plaats van die van je aanbieder."),
+     st_iptv, ac_iptv),
+    ("play", "icons/videosettings.png", ("Picture and sound", "Beeld en geluid"),
+     ("Three things that make watching smoother. A bigger buffer: Kodi loads more of the stream ahead, so it stutters less "
+      "(Lucent picks a size that suits the memory of this box). Frame rate that follows the video: films are made at 24 frames "
+      "a second; when the TV switches to 23.976/24 Hz, panning shots run without jerks. Sound to the amplifier (passthrough): "
+      "Dolby, DTS and Atmos go untouched to your soundbar or receiver - only switch it on when you have one.\n\nHDR and Dolby Vision "
+      "are passed on by themselves on CoreELEC.",
+      "Drie dingen die het kijken soepeler maken. Een grotere buffer: Kodi laadt meer van de stream vooruit, zodat het minder "
+      "hapert (Lucent kiest een grootte die past bij het geheugen van deze box). Beeldfrequentie die de video volgt: films zijn "
+      "gemaakt met 24 beelden per seconde; schakelt de tv naar 23,976/24 Hz, dan lopen pannende beelden zonder schokjes. Geluid naar "
+      "de versterker (passthrough): Dolby, DTS en Atmos gaan onbewerkt naar je soundbar of receiver - zet dit alleen aan als je die hebt."
+      "\n\nHDR en Dolby Vision geeft CoreELEC vanzelf door."), st_play, ac_play),
+    ("skip", "icons/play.png", ("Skip intro", "Intro overslaan"),
+     ("TheIntroDB knows where the intro, the recap ('previously on...') and the preview of an episode start and end. "
+      "When one comes along, a 'Skip' button appears at the bottom right: press OK to jump past it, or Back to keep watching. "
+      "Switch on 'Skip by itself' and it jumps without asking.\n\nAt the credits Seren shows 'Playing next' itself. "
+      "TheIntroDB is made by other people: it works for episodes of most well-known series (not for films), not yet for "
+      "everything. It needs no API key - leave that field empty. In its settings you can switch off the anonymous usage "
+      "statistics it sends.",
+      "TheIntroDB weet waar de intro, de terugblik ('eerder in...') en de preview van een aflevering beginnen en eindigen. "
+      "Komt er een langs, dan verschijnt rechtsonder een knop 'Overslaan': druk op OK om erover te springen, of op Terug om "
+      "verder te kijken. Zet 'Zelf overslaan' aan en hij springt zonder te vragen.\n\nBij de aftiteling laat Seren zelf "
+      "'Volgende aflevering' zien. TheIntroDB is gemaakt door anderen: het werkt voor afleveringen van de meeste bekende series "
+      "(niet voor films), nog niet voor alles. Een API-sleutel is niet nodig - laat dat vakje leeg. In de instellingen kun je "
+      "de anonieme gebruiksstatistieken uitzetten die het verstuurt."), st_skip, ac_skip),
+    ("subs", "icons/subtitles.png", ("Subtitles", "Ondertitels"),
+     ("Lucent Subtitles asks OpenSubtitles, SubDL and Podnapisi at the same time and puts the subtitles that fit your "
+      "video exactly first. Make two free accounts and fill them in under 'Accounts and keys':\n"
+      "1. opensubtitles.com: sign up, then Profile > API consumers > New consumer (the API key) - plus your user name and password.\n"
+      "2. subdl.com: sign up, then Account > API key.\nOptional: an AI key (Gemini is free, or OpenRouter / Claude) translates English subtitles. "
+      "Under 'Spoken language' you choose which sound a film starts with (first and second choice).",
+      "Lucent Ondertitels vraagt OpenSubtitles, SubDL en Podnapisi tegelijk en zet de ondertitels die precies bij je video "
+      "passen bovenaan. Maak twee gratis accounts en vul ze in bij 'Accounts en sleutels':\n"
+      "1. opensubtitles.com: aanmelden, dan Profiel > API consumers > New consumer (de API-sleutel) - plus je gebruikersnaam en wachtwoord.\n"
+      "2. subdl.com: aanmelden, dan Account > API-sleutel.\nOptioneel: een AI-sleutel (Gemini is gratis, of OpenRouter / Claude) vertaalt Engelse ondertitels. "
+      "Bij 'Gesproken taal' kies je met welk geluid een film start (eerste en tweede keuze)."), st_subs, ac_subs),
+    ("library", "icons/library.png", ("Lucent Library", "Lucent Bibliotheek"),
+     ("Lucent Library turns your Trakt collection into Kodi's own library: films and series with their own pages, "
+      "'Continue watching' and 'Next episode' rows, and scores. Trakt caps the collection: with 'My lists as library' your own "
+      "Trakt lists (for example a film list and a series list) come in too, without that limit.\n\nImportant: first load your whole collection in Seren "
+      "(Movies > My movies and TV shows > My shows) until everything is in, then press 'Update now'.",
+      "Lucent Bibliotheek maakt van je Trakt-collectie de eigen bibliotheek van Kodi: films en series met eigen pagina's, "
+      "rijen 'Verder kijken' en 'Volgende aflevering', en scores. Trakt heeft een limiet op de collectie: met 'Mijn lijsten als "
+      "bibliotheek' komen ook je eigen Trakt-lijsten erbij (bijvoorbeeld een filmlijst en een serielijst), zonder die limiet.\n\nBelangrijk: laad eerst je hele collectie in Seren "
+      "(Films > Mijn films en Series > Mijn series) tot alles binnen is, en druk dan op 'Nu bijwerken'."), st_library, ac_library),
+    ("tabs", "icons/layout.png", ("Tabs", "Tabbladen"),
+     ("Solis Dashboard (for solar panels with Solis voor Homey) can get its own tab on Home: it shows the numbers of now - "
+      "solar panels, house, grid, today and this month - and OK opens the dashboard.\n\nOther tabs you add, move or remove "
+      "in Menu and widgets.",
+      "Solis Dashboard (voor zonnepanelen met Solis voor Homey) kan een eigen tabblad op Home krijgen: dat laat de cijfers "
+      "van nu zien - zonnepanelen, huis, net, vandaag en deze maand - en OK opent het dashboard.\n\nAndere tabbladen voeg "
+      "je toe, verplaats je of haal je weg bij Menu en widgets."), st_tabs, ac_tabs),
+    ("look", "icons/palette.png", ("Look", "Weergave"),
+     ("Light mode keeps Lucent quick on boxes with 2 GB of memory or less (fewer rows, no poster glow) - Lucent switches "
+      "it on by itself on such boxes. 'Tonight for you' is a row on Home with titles that fit the moment of the day.\n\n"
+      "Big posters fill the space under the information; switch them off for the smaller posters with names. "
+      "'Hide films until their digital release' keeps films that are only in cinemas out of the rows.\n\n"
+      "Colours, the menu and the rows on Home can be changed any time in Skin settings.",
+      "Lichte modus houdt Lucent vlot op boxen met 2 GB geheugen of minder (minder rijen, geen postergloed) - op zulke "
+      "boxen zet Lucent hem zelf aan. 'Vanavond voor jou' is een rij op het startscherm met titels die passen bij het "
+      "moment van de dag. Grote posters vullen de ruimte onder de informatie; zet ze uit voor de kleinere posters met namen. "
+      "'Films verbergen tot de digitale release' houdt films die alleen in de bioscoop draaien uit de rijen.\n\n"
+      "Kleuren, het menu en de rijen op het startscherm pas je altijd aan in Skin-instellingen."), st_look, ac_look),
+    ("backup", "icons/cloud.png", ("Backup", "Back-up"),
+     ("Save everything you set up in one file: Lucent's settings and menu, your favourites, the keys (TMDb, AI), the "
+      "settings of Seren, IPTV Simple and Lucent Library, and your sources. Put it on a USB stick or a network share, and "
+      "after a new installation (or on a second box) 'Restore' puts it all back.\n\nThe file holds your logins (Trakt, IPTV): "
+      "keep it to yourself.",
+      "Bewaar alles wat je hebt ingesteld in één bestand: de instellingen en het menu van Lucent, je favorieten, de sleutels "
+      "(TMDb, AI), de instellingen van Seren, IPTV Simple en Lucent Bibliotheek, en je bronnen. Zet het op een USB-stick of "
+      "netwerkmap; na een nieuwe installatie (of op een tweede box) zet 'Herstellen' alles terug.\n\nIn het bestand staan je "
+      "inlogs (Trakt, IPTV): houd het voor jezelf."), st_backup, ac_backup),
+]
+
+
+if not cond(f"System.AddonIsEnabled({SOLIS})"):          # the Tabs step is only for the Solis add-on for now
+    STEPS = [step for step in STEPS if step[0] != "tabs"]
+if no_seren():                                           # Lucent Library fills the library from Trakt / Seren
+    STEPS = [step for step in STEPS if step[0] != "library"]
+
+
+class Setup(xbmcgui.WindowXMLDialog):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.step = 0
+        self.actions = []
+        self.closing = False
+        self.lock = threading.Lock()
+
+    def onInit(self):
+        self.setProperty("heading", t("Set up Lucent", "Lucent instellen"))
+        self.items = []
+        for key, icon, title, _body, _st, _ac in STEPS:
+            li = xbmcgui.ListItem(title[1 if NL else 0])
+            li.setArt({"icon": icon})
+            self.items.append(li)
+        self.getControl(100).addItems(self.items)
+        self.show_step(0)
+        threading.Thread(target=self.watch, daemon=True).start()
+
+    # ----------------------------------------------------------------- drawing
+    def show_step(self, index):
+        self.step = max(0, min(index, len(STEPS) - 1))
+        key, _icon, title, body, _st, _ac = STEPS[self.step]
+        self.setProperty("stepno", t(f"Step {self.step + 1} of {len(STEPS)}", f"Stap {self.step + 1} van {len(STEPS)}"))
+        self.setProperty("title", title[1 if NL else 0])
+        self.setProperty("body", body[1 if NL else 0])
+        self.setProperty("prev", t("Back", "Vorige") if self.step else "")
+        last = self.step == len(STEPS) - 1
+        self.setProperty("next", t("Finish", "Klaar") if last else (t("Start", "Beginnen") if self.step == 0 else t("Next", "Volgende")))
+        self.setProperty("later", "" if last else t("Set up later", "Later instellen"))
+        for n, li in enumerate(self.items):
+            li.setProperty("current", "1" if n == self.step else "")
+        self.getControl(100).selectItem(self.step)
+        self.refresh()
+        self.setFocusId(300 if self.actions else 402)
+
+    def refresh(self):
+        """Status of every step (ticks in the list) and the buttons of this step."""
+        with self.lock:
+            for n, (_k, _i, _t, _b, status, _a) in enumerate(STEPS):
+                try:
+                    state, text = status()
+                except Exception as error:  # noqa: BLE001
+                    log(f"status {STEPS[n][0]}: {error}")
+                    state, text = "info", ""
+                self.items[n].setProperty("state", state)
+                if n == self.step:
+                    self.setProperty("status", text)
+                    self.setProperty("statecolor", {"ok": GREEN, "todo": ORANGE}.get(state, GREY))
+            try:
+                self.actions = STEPS[self.step][5]()[:4]
+            except Exception as error:  # noqa: BLE001
+                log(f"actions: {error}")
+                self.actions = []
+            for n in range(4):
+                self.setProperty(f"act{n + 1}", self.actions[n][0] if n < len(self.actions) else "")
+
+    def watch(self):
+        """Look again every two seconds: linking Trakt or installing an add-on happens in other windows."""
+        monitor = xbmc.Monitor()
+        while not self.closing and not monitor.abortRequested():
+            if monitor.waitForAbort(2):
+                break
+            if not self.closing:
+                self.refresh()
+
+    # ----------------------------------------------------------------- input
+    def onClick(self, control_id):
+        if control_id == 100:
+            self.show_step(self.getControl(100).getSelectedPosition())
+        elif 301 <= control_id <= 304:
+            n = control_id - 301
+            if n < len(self.actions):
+                try:
+                    self.actions[n][1]()
+                except Exception as error:  # noqa: BLE001
+                    log(f"action: {error}")
+                xbmc.sleep(300)
+                self.refresh()
+        elif control_id == 401:
+            self.show_step(self.step - 1)
+        elif control_id == 402:
+            if self.step == len(STEPS) - 1:
+                self.finish()
+            else:
+                self.show_step(self.step + 1)
+        elif control_id == 403:
+            self.finish(later=True)
+
+    def onAction(self, action):
+        if action.getId() in (10, 92):                       # back / previous menu
+            self.finish(later=True)
+
+    def finish(self, later=False):
+        self.closing = True
+        xbmc.executebuiltin(f'Skin.SetString({DONE},"1")')
+        if later:
+            xbmcgui.Dialog().notification("Lucent", t("Setup assistant: Settings > Lucent", "Setup-assistent: Instellingen > Lucent"),
+                                          "special://skin/resources/icon.png", 4000, False)
+        self.close()
+
+
+def open_window():
+    path = xbmcaddon.Addon("skin.lucent").getAddonInfo("path")
+    window = Setup("Lucent_Setup.xml", path, "Default", "1080i")
+    try:
+        if has(LIB):
+            xbmc.executebuiltin(f"RunScript({LIB},status)")   # film / series numbers for the library step
+        window.doModal()
+    finally:
+        window.closing = True
+        del window
+
+
+if __name__ == "__main__":
+    first = len(sys.argv) > 1 and sys.argv[1] == "first"
+    if first:
+        home = xbmcgui.Window(10000)
+        if xbmc.getInfoLabel(f"Skin.String({DONE})") or home.getProperty("lucent.setup.shown"):
+            sys.exit()
+        home.setProperty("lucent.setup.shown", "1")          # once per Kodi start, even when closed with Back
+        if xbmc.Monitor().waitForAbort(2):                    # let Home settle first
+            sys.exit()
+    open_window()
