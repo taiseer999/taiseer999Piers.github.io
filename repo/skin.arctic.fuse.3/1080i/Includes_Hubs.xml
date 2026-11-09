@@ -397,8 +397,8 @@
         <param name="groupid">321</param>
         <param name="label">$VAR[Label_FullscreenWidget_PlayButton]</param>
         <param name="image">$VAR[Image_FullscreenWidget_PlayButton]</param>
-        <param name="bordersize">20</param>
-        <param name="size">115</param>
+        <param name="bordersize">16</param>
+        <param name="size">92</param>
         <param name="left">0</param>
         <param name="width">auto</param>
         <definition>
@@ -410,7 +410,7 @@
                 <control type="group">
                     <visible>!Control.HasFocus($PARAM[id])</visible>
                     <control type="image">
-                        <texture colordiffuse="main_fg_100">diffuse/circle/circle_115.png</texture>
+                        <texture colordiffuse="main_fg_100">diffuse/circle/circle_120.png</texture>
                     </control>
                     <control type="image">
                         <bordersize>$PARAM[bordersize]</bordersize>
@@ -422,7 +422,7 @@
                     <control type="image">
                         <include content="Texture_FocusStyle">
                             <param name="directory">diffuse/circle</param>
-                            <param name="texture">circle_115</param>
+                            <param name="texture">circle_120</param>
                             <param name="border">0</param>
                         </include>
                     </control>
@@ -500,10 +500,10 @@
                     <height>160</height>
 
                     <control type="image" id="314">
-                        <width>40</width>
-                        <height>40</height>
+                        <width>32</width>
+                        <height>32</height>
                         <centertop>50%</centertop>
-                        <texture colordiffuse="main_fg_30">special://skin/extras/icons/angle-left.png</texture>
+                        <texture colordiffuse="main_fg_100">special://skin/extras/icons/angle-left.png</texture>
                         <include content="Animation_Fade_Out">
                             <param name="condition">!ControlGroup(310).HasFocus() | Skin.HasSetting(HomeSwitcher.Vertical)</param>
                         </include>
@@ -513,7 +513,7 @@
                     </control>
 
                     <control type="group" id="316">
-                        <width>240</width>
+                        <width>217</width>
                         <orientation>horizontal</orientation>
 
                         <include content="Hub_Spotlight_Button_Circle">
@@ -532,7 +532,7 @@
                             </include>
                             <include>Hub_Spotlight_OnLeft</include>
                             <onright>312</onright>
-                            <left>140</left>
+                            <left>117</left>
                             <onup condition="Skin.HasSetting(HomeSwitcher.Vertical)">SetProperty(Bumper.Direction,Up,Home)</onup>
                             <onup condition="Skin.HasSetting(HomeSwitcher.Vertical)">ActivateWindow(1180)</onup>
                             <onup condition="!Skin.HasSetting(HomeSwitcher.Vertical)">300</onup>
@@ -545,7 +545,7 @@
                         <param name="groupid">322</param>
                         <param name="label">$VAR[Label_FullscreenWidget_InfoButton]</param>
                         <param name="image">$VAR[Image_FullscreenWidget_InfoButton]</param>
-                        <param name="size">60</param>
+                        <param name="size">48</param>
                         <param name="bordersize">0</param>
                         <param name="left">80</param>
                         <onclick>SetFocus(301)</onclick>
@@ -559,10 +559,10 @@
 
                     <control type="image" id="315">
                         <left>20</left>
-                        <width>40</width>
-                        <height>40</height>
+                        <width>32</width>
+                        <height>32</height>
                         <centertop>50%</centertop>
-                        <texture colordiffuse="main_fg_30">special://skin/extras/icons/angle-right.png</texture>
+                        <texture colordiffuse="main_fg_100">special://skin/extras/icons/angle-right.png</texture>
                         <include content="Animation_Fade_Out">
                             <param name="condition">!ControlGroup(310).HasFocus()</param>
                         </include>
