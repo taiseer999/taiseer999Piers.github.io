@@ -392,11 +392,6 @@ msgctxt "#31077"
 msgid "More Information"
 msgstr "مزيد من المعلومات"
 
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31078"
-msgid "Static textboxes"
-msgstr "مربعات نص ثابتة"
-
 #: /1080i/Dialog_DialogCustom.xml
 msgctxt "#31080"
 msgid "Button"
@@ -2799,11 +2794,6 @@ msgstr "اختر ما إذا كان الضغط على «رجوع» في نواف
 msgctxt "#31686"
 msgid "Select whether the scrollbar jumps by letter when content is sorted alphabetically, or by page."
 msgstr "اختر ما إذا كان شريط التمرير يقفز حسب الحرف عند الفرز الأبجدي، أو حسب الصفحة."
-
-#: /1080i/Includes_SkinSettings.xml
-msgctxt "#31687"
-msgid "Use labels in place of textboxes for long text. This improves performance on Omega but the text will not scroll."
-msgstr "استخدم التسميات بدلًا من مربعات النص للنصوص الطويلة. يحسّن ذلك الأداء على Omega لكن النص لن يتحرك."
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31688"
