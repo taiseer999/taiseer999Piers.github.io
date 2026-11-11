@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="resource.images.af3.classicflags" name="AF3 Classic OSD Flags" version="1.0.0" provider-name="ABUKARIM">
+    <requires>
+        <import addon="kodi.resource" version="1.0.0" />
+    </requires>
+    <extension point="kodi.resource.images" compile="false" type="flags" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Classic colour media-flag badges for Arctic Fuse 3 (Piers)</summary>
+        <summary lang="ar_SA">شارات الوسائط الملوّنة الكلاسيكية لواجهة Arctic Fuse 3 (Piers)</summary>
+        <description lang="en_GB">The classic colour codec, HDR, audio, channel, source and language badges used by the Arctic Fuse 3 Piers build in the player OSD extras row and the footer codec row, plus a monochrome copy. Installed and switched on/off by AB Tools (AF3: Classic OSD Flags). Without it AF3 falls back to its stock footer and OSD.</description>
+        <description lang="ar_SA">شارات الترميز وHDR والصوت والقنوات والمصدر واللغة الملوّنة الكلاسيكية التي تستخدمها نسخة Piers من Arctic Fuse 3 في صفّ الإضافات بشاشة التشغيل وفي صفّ الترميز أسفل الشاشة، مع نسخة أحادية اللون. تُثبَّت وتُفعَّل أو تُعطَّل من AB Tools (AF3: شارات التشغيل الكلاسيكية). وفي غيابها تعود الواجهة إلى التذييل وشاشة التشغيل الافتراضيين.</description>
+        <platform>all</platform>
+        <license>CC BY-SA 4.0</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon>

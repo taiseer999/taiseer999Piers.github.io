@@ -440,7 +440,8 @@
                 {
                     "action": "Skin.ToggleSetting(Flags.EnableMonochrome)"
                 }
-            ]
+            ],
+            "enabled": "System.AddonIsEnabled(resource.images.af3.classicflags)"
         },
         "appearance_window_and_dialog": {
             "label": "$LOCALIZE[31847]",
@@ -550,14 +551,15 @@
                 {
                     "action": "Skin.ToggleSetting(Footer.EnableCodecs)"
                 }
-            ]
+            ],
+            "enabled": "System.AddonIsEnabled(resource.images.af3.classicflags)"
         },
         "interface_codec_logos": {
             "label": "$LOCALIZE[31998]",
             "control": "radiobutton",
             "group": "interface_footer",
             "selected": "!Skin.HasSetting(Furniture.DisableCodecLogos)",
-            "enabled": "Skin.HasSetting(Footer.EnableCodecs)",
+            "enabled": "Skin.HasSetting(Footer.EnableCodecs) + System.AddonIsEnabled(resource.images.af3.classicflags)",
             "onclick": [
                 {
                     "action": "Skin.ToggleSetting(Furniture.DisableCodecLogos)"
@@ -1031,7 +1033,8 @@
                 {
                     "action": "Skin.ToggleSetting(ExtraOSD)"
                 }
-            ]
+            ],
+            "enabled": "System.AddonIsEnabled(resource.images.af3.classicflags)"
         },
         "playback_time_display": {
             "label": "$LOCALIZE[31355]",

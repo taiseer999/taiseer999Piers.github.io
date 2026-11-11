@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template for the SkinVariables viewtype selector dialog (buildviews with selector=window). The script fills grouplist 3 with clones
+     of the group button 10 (or the group label 14 when groups are always expanded) and the viewtype button 8, sets the focused viewtype
+     name and screenshot as window properties, and removes the template buttons from the generated dialog. Controls with a viewtype id
+     are preview lists: the script fills them with up to "limit" items from the window under the dialog and shows each one while its
+     viewtype is focused. -->
+<window type="dialog">
+    <defaultcontrol always="true">3</defaultcontrol>
+
+    <controls>
+
+        <!-- The script fills list 5000 with the focused item of the window under the dialog. The previews read its details. -->
+        <include content="Object_Hidden_List">
+            <param name="id">5000</param>
+        </include>
+
+        <include content="Part_Dialog_Split">
+            <control type="group">
+                <include>Size_Dialog_Pad</include>
+                <include content="Part_Dialog_Split_Left">
+                    <param name="title">$LOCALIZE[31044]</param>
+                    <param name="subline">$INFO[Window.Property(SkinVariables.ViewTypes.Total),, $LOCALIZE[31044]]</param>
+                    <control type="grouplist" id="3">
+                        <orientation>vertical</orientation>
+                        <onup>3</onup>
+                        <ondown>3</ondown>
+                        <onleft>noop</onleft>
+                        <onright>noop</onright>
+                        <include>Size_Grouplist_Pad</include>
+                    </control>
+                </include>
+                <include content="Part_Dialog_Split_Right">
+                    <param name="title">$INFO[Window.Property(SkinVariables.ViewTypes.Header)]</param>
+                    <param name="subline">$VAR[Label_ViewTypes_Group] $VAR[Label_ViewTypes_Name]</param>
+                    <param name="help">$VAR[Label_ViewTypes_Description] $VAR[Label_ViewTypes_Usage]</param>
+                    <param name="help_topline">false</param>
+                    <param name="help_height">60</param>
+                    <param name="help_centerbottom">50</param>
+                    <param name="body_bottom">100</param>
+                    <include>DialogViewTypes_Preview_Group</include>
+                    <include content="DialogViewTypes_Preview_Live">
+                        <!-- Rows -->
+                        <include content="DialogViewTypes_Preview_View" limit="7">
+                            <param name="id">500</param>
+                            <param name="include">View_500_Square_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="4">
+                            <param name="id">501</param>
+                            <param name="include">View_501_Landscape_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="7">
+                            <param name="id">502</param>
+                            <param name="include">View_502_Poster_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="5">
+                            <param name="id">503</param>
+                            <param name="include">View_503_Circle_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="3">
+                            <param name="id">504</param>
+                            <param name="include">View_504_Board_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="5">
+                            <param name="id">505</param>
+                            <param name="include">View_505_Card_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="9">
+                            <param name="id">506</param>
+                            <param name="include">View_506_Flyer_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="7">
+                            <param name="id">509</param>
+                            <param name="include">View_509_Placard_Row</param>
+                        </include>
+                        <!-- Walls -->
+                        <include content="DialogViewTypes_Preview_View" limit="14">
+                            <param name="id">510</param>
+                            <param name="include">View_510_Square_Wall</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="8">
+                            <param name="id">511</param>
+                            <param name="include">View_511_Landscape_Wall</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="14">
+                            <param name="id">512</param>
+                            <param name="include">View_512_Poster_Wall</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="10">
+                            <param name="id">513</param>
+                            <param name="include">View_513_Circle_Wall</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="6">
+                            <param name="id">514</param>
+                            <param name="include">View_514_Board_Wall</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="18">
+                            <param name="id">516</param>
+                            <param name="include">View_516_Flyer_Wall</param>
+                        </include>
+                        <!-- Lists -->
+                        <include content="DialogViewTypes_Preview_View" limit="7">
+                            <param name="id">580</param>
+                            <param name="include">View_580_Basic_List</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="7">
+                            <param name="id">581</param>
+                            <param name="include">View_581_Poster_List</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="3">
+                            <param name="id">582</param>
+                            <param name="include">View_582_Expanded_List</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="4">
+                            <param name="id">583</param>
+                            <param name="include">View_583_Flixart_List</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="4">
+                            <param name="id">584</param>
+                            <param name="include">View_584_Flixart_List</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_View" limit="7">
+                            <param name="id">585</param>
+                            <param name="include">View_585_Square_List</param>
+                        </include>
+                        <!-- Combined rows: the limit is for the category tabs and content_limit for the row -->
+                        <include content="DialogViewTypes_Preview_Combined_Row" limit="8">
+                            <param name="id">520</param>
+                            <param name="index">0</param>
+                            <param name="content_limit">7</param>
+                            <param name="list">List_Square_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Row" limit="8">
+                            <param name="id">521</param>
+                            <param name="index">1</param>
+                            <param name="content_limit">4</param>
+                            <param name="list">List_Landscape_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Row" limit="8">
+                            <param name="id">522</param>
+                            <param name="index">2</param>
+                            <param name="content_limit">7</param>
+                            <param name="list">List_Poster_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Row" limit="8">
+                            <param name="id">523</param>
+                            <param name="index">3</param>
+                            <param name="content_limit">5</param>
+                            <param name="list">List_Circle_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Row" limit="8">
+                            <param name="id">524</param>
+                            <param name="index">4</param>
+                            <param name="content_limit">3</param>
+                            <param name="list">List_Board_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Row" limit="8">
+                            <param name="id">526</param>
+                            <param name="index">6</param>
+                            <param name="content_limit">9</param>
+                            <param name="list">List_Flyer_Row</param>
+                        </include>
+                        <!-- Combined lists: content_limit is for the expanded list -->
+                        <include content="DialogViewTypes_Preview_Combined_Sidebar" limit="7">
+                            <param name="id">527</param>
+                            <param name="content_limit">3</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Expanded" limit="8">
+                            <param name="id">528</param>
+                            <param name="content_limit">3</param>
+                        </include>
+                        <!-- Combined walls: the limit is for the category tabs and content_limit for the wall -->
+                        <include content="DialogViewTypes_Preview_Combined_Wall" limit="8">
+                            <param name="id">550</param>
+                            <param name="index">0</param>
+                            <param name="content_limit">14</param>
+                            <param name="list">List_Square_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Wall" limit="8">
+                            <param name="id">551</param>
+                            <param name="index">1</param>
+                            <param name="content_limit">8</param>
+                            <param name="list">List_Landscape_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Wall" limit="8">
+                            <param name="id">552</param>
+                            <param name="index">2</param>
+                            <param name="content_limit">14</param>
+                            <param name="list">List_Poster_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Wall" limit="8">
+                            <param name="id">553</param>
+                            <param name="index">3</param>
+                            <param name="content_limit">10</param>
+                            <param name="list">List_Circle_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Wall" limit="8">
+                            <param name="id">554</param>
+                            <param name="index">4</param>
+                            <param name="content_limit">6</param>
+                            <param name="list">List_Board_Row</param>
+                        </include>
+                        <include content="DialogViewTypes_Preview_Combined_Wall" limit="8">
+                            <param name="id">556</param>
+                            <param name="index">6</param>
+                            <param name="content_limit">18</param>
+                            <param name="list">List_Flyer_Row</param>
+                        </include>
+                    </include>
+                </include>
+            </control>
+        </include>
+
+        <include content="DialogViewTypes_Button_Group">
+            <param name="id">10</param>
+            <description>Group Button</description>
+        </include>
+
+        <include content="Settings_Label">
+            <param name="id">14</param>
+            <param name="control">label</param>
+            <param name="dialog">true</param>
+            <description>Group Label</description>
+            <textoffsetx>20</textoffsetx>
+        </include>
+
+        <include content="DialogViewTypes_Button_View">
+            <param name="id">8</param>
+            <description>Viewtype Button</description>
+        </include>
+
+    </controls>
+
+</window>

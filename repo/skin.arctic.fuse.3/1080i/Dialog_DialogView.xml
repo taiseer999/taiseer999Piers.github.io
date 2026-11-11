@@ -540,7 +540,8 @@
             <label>$INFO[Container.Viewmode]</label>
             <icon>special://skin/extras/icons/table.png</icon>
             <onclick condition="[Window.IsVisible(tvchannels) | Window.IsVisible(tvguide)]">SendClick($VAR[Action_CurrentMediaWindow],2)</onclick>
-            <onclick condition="![Window.IsVisible(tvchannels) | Window.IsVisible(tvguide)]">Close</onclick>
+            <!-- Close without the animation so the selector script reads the media window list rather than this dialog's list -->
+            <onclick condition="![Window.IsVisible(tvchannels) | Window.IsVisible(tvguide)]">Dialog.Close(1171,true)</onclick>
             <onclick condition="![Window.IsVisible(tvchannels) | Window.IsVisible(tvguide)]">Runscript(script.skinvariables,action=buildviews,contentid=$VAR[DialogView_ModeSwitch],pluginname=$INFO[Container.PluginName])</onclick>
             <visible>!Window.IsVisible(MyPlaylist.xml)</visible>
         </item>
