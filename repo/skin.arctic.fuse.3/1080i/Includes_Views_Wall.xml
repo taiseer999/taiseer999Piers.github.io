@@ -3,105 +3,68 @@
 
     <!-- Square Wall -->
     <include name="View_510_Square_Wall">
-        <param name="id">510</param>
-        <param name="visible">$EXP[Exp_View_510]</param>
-        <param name="include_content">Object_Null</param>
-        <definition>
-            <include content="View_Wall_Include">
-                <param name="id">$PARAM[id]</param>
-                <param name="include">List_Square_Row</param>
-                <param name="viewtype_label">$LOCALIZE[31556]</param>
-                <param name="visible">$PARAM[visible]</param>
-                <param name="include_content">$PARAM[include_content]</param>
-            </include>
-        </definition>
+        <include content="View_Wall_Include">
+            <param name="id">510</param>
+            <param name="include">List_Square_Row</param>
+            <param name="viewtype_label">$LOCALIZE[31556]</param>
+            <param name="visible">$EXP[Exp_View_510]</param>
+        </include>
     </include>
 
     <!-- Landscape Wall -->
     <include name="View_511_Landscape_Wall">
-        <param name="id">511</param>
-        <param name="visible">$EXP[Exp_View_511]</param>
-        <param name="include_content">Object_Null</param>
-        <definition>
-            <include content="View_Wall_Include">
-                <param name="id">$PARAM[id]</param>
-                <param name="include">List_Landscape_Row</param>
-                <param name="viewtype_label">$LOCALIZE[31555]</param>
-                <param name="visible">$PARAM[visible]</param>
-                <param name="include_content">$PARAM[include_content]</param>
-            </include>
-        </definition>
+        <include content="View_Wall_Include">
+            <param name="id">511</param>
+            <param name="include">List_Landscape_Row</param>
+            <param name="viewtype_label">$LOCALIZE[31555]</param>
+            <param name="visible">$EXP[Exp_View_511]</param>
+        </include>
     </include>
 
     <!-- Poster Wall -->
     <include name="View_512_Poster_Wall">
-        <param name="id">512</param>
-        <param name="visible">$EXP[Exp_View_512]</param>
-        <param name="include_content">Object_Null</param>
-        <definition>
-            <include content="View_Wall_Include">
-                <param name="id">$PARAM[id]</param>
-                <param name="include">List_Poster_Row</param>
-                <param name="viewtype_label">$LOCALIZE[31554]</param>
-                <param name="visible">$PARAM[visible]</param>
-                <param name="include_content">$PARAM[include_content]</param>
-            </include>
-        </definition>
+        <include content="View_Wall_Include">
+            <param name="id">512</param>
+            <param name="include">List_Poster_Row</param>
+            <param name="viewtype_label">$LOCALIZE[31554]</param>
+            <param name="visible">$EXP[Exp_View_512]</param>
+        </include>
     </include>
 
     <!-- Circle Wall -->
     <include name="View_513_Circle_Wall">
-        <param name="id">513</param>
-        <param name="visible">$EXP[Exp_View_513]</param>
-        <param name="include_content">Object_Null</param>
-        <definition>
-            <include content="View_Wall_Include">
-                <param name="id">$PARAM[id]</param>
-                <param name="include">List_Circle_Row</param>
-                <param name="viewtype_label">$LOCALIZE[31557]</param>
-                <param name="visible">$PARAM[visible]</param>
-                <param name="include_content">$PARAM[include_content]</param>
-            </include>
-        </definition>
+        <include content="View_Wall_Include">
+            <param name="id">513</param>
+            <param name="include">List_Circle_Row</param>
+            <param name="viewtype_label">$LOCALIZE[31557]</param>
+            <param name="visible">$EXP[Exp_View_513]</param>
+        </include>
     </include>
 
     <!-- Board Wall -->
     <include name="View_514_Board_Wall">
-        <param name="id">514</param>
-        <param name="visible">$EXP[Exp_View_514]</param>
-        <param name="include_content">Object_Null</param>
-        <definition>
-            <include content="View_Wall_Include">
-                <param name="id">$PARAM[id]</param>
-                <param name="include">List_Board_Row</param>
-                <param name="viewtype_label">$LOCALIZE[31101]</param>
-                <param name="visible">$PARAM[visible]</param>
-                <param name="include_content">$PARAM[include_content]</param>
-            </include>
-        </definition>
+        <include content="View_Wall_Include">
+            <param name="id">514</param>
+            <param name="include">List_Board_Row</param>
+            <param name="viewtype_label">$LOCALIZE[31101]</param>
+            <param name="visible">$EXP[Exp_View_514]</param>
+        </include>
     </include>
 
     <!-- Flyer Wall -->
     <include name="View_516_Flyer_Wall">
-        <param name="id">516</param>
-        <param name="visible">$EXP[Exp_View_516]</param>
-        <param name="include_content">Object_Null</param>
-        <definition>
-            <include content="View_Wall_Include">
-                <param name="id">$PARAM[id]</param>
-                <param name="include">List_Flyer_Row</param>
-                <param name="viewtype_label">$LOCALIZE[31157]</param>
-                <param name="visible">$PARAM[visible]</param>
-                <param name="include_content">$PARAM[include_content]</param>
-            </include>
-        </definition>
+        <include content="View_Wall_Include">
+            <param name="id">516</param>
+            <param name="include">List_Flyer_Row</param>
+            <param name="viewtype_label">$LOCALIZE[31157]</param>
+            <param name="visible">$EXP[Exp_View_516]</param>
+        </include>
     </include>
 
 
     <!-- Wall Template View -->
     <include name="View_Wall_Include">
         <param name="overlay">true</param>
-        <param name="include_content">Object_Null</param>
         <definition>
             <control type="group">
                 <visible>Control.IsVisible($PARAM[id])</visible>
@@ -117,9 +80,6 @@
                         <onright>611</onright>
                         <include>Action_View_Movement_OnLeft</include>
                         <pagecontrol>66</pagecontrol>
-                        <include content="$PARAM[include_content]">
-                            <param name="limit">$PARAM[content_limit]</param>
-                        </include>
                         <include content="Action_View_Movement_OnBack">
                             <param name="id">$PARAM[id]</param>
                             <param name="onback">True</param>

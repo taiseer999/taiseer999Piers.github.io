@@ -469,94 +469,6 @@
         </definition>
     </include>
 
-    <!-- Split dialog frame. The include content goes inside the dialog: a group with Size_Dialog_Pad holding Part_Dialog_Split_Left and Part_Dialog_Split_Right.
-         Kodi only inserts nested content into top-level elements, so each part keeps its <nested /> as a direct child of a top-level control. -->
-    <include name="Part_Dialog_Split">
-        <param name="dialog_size">Dimension_DialogFullMenu</param>
-        <definition>
-            <include>Part_Dim_Overlay</include>
-            <control type="group">
-                <include>$PARAM[dialog_size]</include>
-                <include>Animation_BounceIn_Dialog</include>
-                <include content="Part_Background_Panel">
-                    <param name="dialog_size">$PARAM[dialog_size]</param>
-                    <param name="topline">false</param>
-                </include>
-                <nested />
-            </control>
-        </definition>
-    </include>
-
-    <!-- Left pane of Part_Dialog_Split: a header with a subline above the include content -->
-    <include name="Part_Dialog_Split_Left">
-        <definition>
-            <control type="group">
-                <include>Size_LeftGroup_Medium</include>
-                <include>Size_Group_Head</include>
-                <include content="Part_HeadText">
-                    <param name="id">9999</param>
-                    <param name="label">$PARAM[title]</param>
-                    <param name="right">constant_dialog_pad</param>
-                </include>
-                <include content="Part_ItemLine">
-                    <param name="label">$PARAM[subline]</param>
-                </include>
-            </control>
-            <control type="group">
-                <include>Size_LeftGroup_Medium</include>
-                <include>Size_Group_Body</include>
-                <nested />
-            </control>
-        </definition>
-    </include>
-
-    <!-- Right pane of Part_Dialog_Split: a header with a subline and close button, the include content as its body and help text below.
-         Fills the dialog when there is no left pane. -->
-    <include name="Part_Dialog_Split_Right">
-        <param name="left">true</param>
-        <param name="help_subline">false</param>
-        <param name="help_topline">true</param>
-        <param name="help_height">40</param>
-        <param name="help_centerbottom">40</param>
-        <param name="body_bottom">80</param>
-        <definition>
-            <control type="group">
-                <include condition="$PARAM[left]">Size_RightGroup_Medium</include>
-                <include>Part_Panel</include>
-            </control>
-            <control type="group">
-                <include condition="$PARAM[left]">Size_RightGroup_Medium</include>
-                <include>Size_Group_Head</include>
-                <include content="Part_HeadText">
-                    <param name="id">2</param>
-                    <param name="label">$PARAM[title]</param>
-                </include>
-                <include content="Part_ItemLine">
-                    <param name="label">[UPPERCASE]$PARAM[subline][/UPPERCASE]</param>
-                </include>
-                <include>Part_CloseButton</include>
-            </control>
-            <control type="group">
-                <include condition="$PARAM[left]">Size_RightGroup_Medium</include>
-                <include>Size_Group_Body</include>
-                <bottom>$PARAM[body_bottom]</bottom>
-                <nested />
-            </control>
-            <control type="group">
-                <include condition="$PARAM[left]">Size_RightGroup_Medium</include>
-                <include>Size_Group_Body</include>
-                <include content="Part_InfoText">
-                    <param name="label">$PARAM[help]</param>
-                    <param name="label2">$PARAM[help_label2]</param>
-                    <param name="subline">$PARAM[help_subline]</param>
-                    <param name="topline">$PARAM[help_topline]</param>
-                    <param name="height">$PARAM[help_height]</param>
-                    <param name="centerbottom">$PARAM[help_centerbottom]</param>
-                </include>
-            </control>
-        </definition>
-    </include>
-
     <include name="Part_InfoText">
         <param name="colordiffuse">dialog_fg_70</param>
         <param name="fallback">19055</param>
@@ -566,21 +478,19 @@
         <param name="height">40</param>
         <param name="subline">false</param>
         <param name="scroll">false</param>
-        <param name="topline">true</param>
         <definition>
             <control type="group">
                 <height>$PARAM[height]</height>
                 <centerbottom>$PARAM[centerbottom]</centerbottom>
                 <left>$PARAM[left]</left>
                 <right>$PARAM[right]</right>
-                <include content="Object_Control" condition="$PARAM[topline]">
-                    <param name="control">image</param>
+                <control type="image">
                     <centertop>-20</centertop>
                     <height>1</height>
                     <left>20</left>
                     <right>20</right>
                     <texture colordiffuse="dialog_fg_06">common/white.png</texture>
-                </include>
+                </control>
                 <control type="image">
                     <centerleft>50</centerleft>
                     <width>40</width>

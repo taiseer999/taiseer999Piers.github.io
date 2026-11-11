@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
 
-    <variable name="Path_Stylised_Prefix">
-        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds)">defaults/</value>
-    </variable>
-
     <variable name="Path_VideoInfo_LocalSets">
         <value condition="String.IsEmpty(ListItem.SetID)">special://skin/extras/playlists/Null.xsp</value>
         <value>$INFO[ListItem.SetID,videodb://movies/sets/,/]</value>

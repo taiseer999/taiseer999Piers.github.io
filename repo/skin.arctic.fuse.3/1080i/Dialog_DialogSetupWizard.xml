@@ -37,25 +37,49 @@
         <param name="subline">$VAR[Label_SetupWizard_Subline]</param>
         <param name="help">$VAR[Label_SetupWizard_Help]</param>
         <definition>
-            <include content="Part_Dialog_Split">
-                <param name="dialog_size">$PARAM[dialog_size]</param>
-                <control type="group">
+            <include>Part_Dim_Overlay</include>
+            <control type="group">
+                <include>$PARAM[dialog_size]</include>
+                <include>Animation_BounceIn_Dialog</include>
+                <include content="Part_Background_Panel">
+                    <param name="dialog_size">$PARAM[dialog_size]</param>
+                    <param name="topline">false</param>
+                </include>
+                <control type="group" id="8000">
                     <include>Size_Dialog_Pad</include>
                     <include condition="$PARAM[rail]">DialogSetupWizard_Rail</include>
-                    <include content="Part_Dialog_Split_Right">
-                        <param name="left">$PARAM[rail]</param>
-                        <param name="title">$PARAM[title]</param>
-                        <param name="subline">$PARAM[subline]</param>
-                        <param name="help">$PARAM[help]</param>
-                        <include condition="$PARAM[rail]">DialogSetupWizard_Steps</include>
-                        <include content="DialogSetupWizard_Step" condition="![$PARAM[rail]]">
-                            <param name="step">$PARAM[step]</param>
-                            <param name="items">$PARAM[items]</param>
-                            <param name="rail">false</param>
-                        </include>
-                    </include>
+                    <control type="group">
+                        <include condition="$PARAM[rail]">Size_RightGroup_Medium</include>
+                        <include>Part_Panel</include>
+                        <control type="group">
+                            <include>Size_Group_Head</include>
+                            <include content="Part_HeadText">
+                                <param name="id">2</param>
+                                <param name="label">$PARAM[title]</param>
+                            </include>
+                            <include content="Part_ItemLine">
+                                <param name="label">[UPPERCASE]$PARAM[subline][/UPPERCASE]</param>
+                            </include>
+                            <include>Part_CloseButton</include>
+                        </control>
+                        <control type="group">
+                            <include>Size_Group_Body</include>
+                            <control type="group">
+                                <bottom>80</bottom>
+                                <include condition="$PARAM[rail]">DialogSetupWizard_Steps</include>
+                                <include content="DialogSetupWizard_Step" condition="![$PARAM[rail]]">
+                                    <param name="step">$PARAM[step]</param>
+                                    <param name="items">$PARAM[items]</param>
+                                    <param name="rail">false</param>
+                                </include>
+                            </control>
+                            <include content="Part_InfoText">
+                                <param name="label">$PARAM[help]</param>
+                            </include>
+                        </control>
+                    </control>
                 </control>
-            </include>
+            </control>
         </definition>
     </include>
 
@@ -104,20 +128,33 @@
 
     <!-- Step rail -->
     <include name="DialogSetupWizard_Rail">
-        <include content="Part_Dialog_Split_Left">
-            <param name="title">$LOCALIZE[31752]</param>
-            <param name="subline">$INFO[Container(3).CurrentItem,$LOCALIZE[31777] , / 6]</param>
-            <include content="List_Dialog">
-                <param name="id">3</param>
-                <param name="item_height">80</param>
-                <param name="itemlayout_include">DialogSetupWizard_Rail_Layout</param>
-                <onup>noop</onup>
-                <ondown>noop</ondown>
-                <onright>SetFocus(50$INFO[Container(3).CurrentItem])</onright>
-                <include>Size_Grouplist_Pad</include>
-                <include>DialogSetupWizard_Rail_Items</include>
-            </include>
-        </include>
+        <control type="group">
+            <include>Size_LeftGroup_Medium</include>
+            <control type="group">
+                <include>Size_Group_Head</include>
+                <include content="Part_HeadText">
+                    <param name="id">9999</param>
+                    <param name="label">$LOCALIZE[31752]</param>
+                    <param name="right">constant_dialog_pad</param>
+                </include>
+                <include content="Part_ItemLine">
+                    <param name="label">$INFO[Container(3).CurrentItem,$LOCALIZE[31777] , / 6]</param>
+                </include>
+            </control>
+            <control type="group">
+                <include>Size_Group_Body</include>
+                <include content="List_Dialog">
+                    <param name="id">3</param>
+                    <param name="item_height">80</param>
+                    <param name="itemlayout_include">DialogSetupWizard_Rail_Layout</param>
+                    <onup>noop</onup>
+                    <ondown>noop</ondown>
+                    <onright>SetFocus(50$INFO[Container(3).CurrentItem])</onright>
+                    <include>Size_Grouplist_Pad</include>
+                    <include>DialogSetupWizard_Rail_Items</include>
+                </include>
+            </control>
+        </control>
     </include>
 
     <include name="DialogSetupWizard_Rail_Items">

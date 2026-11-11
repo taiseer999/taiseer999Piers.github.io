@@ -33,7 +33,7 @@
     <include name="Object_Property"><property name="$PARAM[name]">$PARAM[property]</property></include>
     <include name="Object_ItemGap"><itemgap>$PARAM[itemgap]</itemgap></include>
     <include name="Object_Texture">
-        <texture colordiffuse="$PARAM[colordiffuse]" flipx="$PARAM[flipx]" flipy="$PARAM[flipy]" background="$PARAM[background]" diffuse="$PARAM[diffuse]" border="$PARAM[border]" fallback="$PARAM[fallback]">$PARAM[texture]</texture>
+        <texture colordiffuse="$PARAM[colordiffuse]" flipx="$PARAM[flipx]" flipy="$PARAM[flipy]" background="$PARAM[background]" diffuse="$PARAM[diffuse]" border="$PARAM[border]">$PARAM[texture]</texture>
     </include>
     <include name="Object_TextureFocus">
         <texturefocus colordiffuse="$PARAM[colordiffuse]" flipx="$PARAM[flipx]" flipy="$PARAM[flipy]" border="$PARAM[border]">$PARAM[texture]</texturefocus>
@@ -441,7 +441,7 @@
                     <param name="colordiffuse">$VAR[ColorSelected]</param>
                 </include>
                 <colordiffuse>main_fg_100</colordiffuse>
-                <texture background="true" diffuse="$PARAM[diffuse]">$VAR[Path_Stylised_Prefix]$PARAM[icon]</texture>
+                <texture background="true" diffuse="$PARAM[diffuse]">$PARAM[icon]</texture>
                 <aspectratio scalediffuse="false">$PARAM[aspectratio]</aspectratio>
                 <visible>String.StartsWith($PARAM[listitem].Icon,Default) + [String.IsEqual($PARAM[listitem].Art(thumb),$PARAM[listitem].Icon) | String.IsEmpty($PARAM[listitem].Art(thumb))] + String.IsEmpty($PARAM[listitem].Art(fanart)) + String.IsEmpty($PARAM[listitem].Art(poster))</visible>
                 <visible>!String.IsEqual($PARAM[listitem].Icon,DefaultFolder.png) | !String.IsEqual($PARAM[listitem].Label,$LOCALIZE[22082])</visible>
@@ -523,7 +523,7 @@
                     <param name="colordiffuse">$VAR[ColorSelected]</param>
                 </include>
                 <colordiffuse>main_fg_100</colordiffuse>
-                <texture background="true" fallback="$VAR[Path_Stylised_Prefix]DefaultGenres.png">$VAR[Path_Stylised_Prefix]$INFO[ListItem.Label,genres/,.png]</texture>
+                <texture background="true" diffuse="$PARAM[icon_diffuse]" fallback="DefaultGenres.png">$VAR[Image_Icon]</texture>
                 <aspectratio scalediffuse="false">keep</aspectratio>
                 <bordersize>$PARAM[genre_bordersize]</bordersize>
                 <visible>[String.IsEqual($PARAM[listitem].DBType,genre) | String.IsEqual($PARAM[listitem].Property(DBType),genre)]</visible>
@@ -533,12 +533,7 @@
                     <param name="colordiffuse">$VAR[ColorSelected]</param>
                 </include>
                 <colordiffuse>main_fg_100</colordiffuse>
-                <include content="Object_Texture" condition="!Skin.HasSetting(Info.EnableStylisedBackgrounds)">
-                    <param name="texture">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</param>
-                    <param name="background">true</param>
-                    <param name="fallback">DefaultStudios.png</param>
-                </include>
-                <texture background="true" diffuse="defaults/watercolor.png" fallback="DefaultStudios.png">$INFO[ListItem.Label,resource://resource.images.studios.white/,.png]</texture>
+                <texture background="true" diffuse="$PARAM[icon_diffuse]" fallback="DefaultStudios.png">$VAR[Image_Icon]</texture>
                 <aspectratio scalediffuse="false">keep</aspectratio>
                 <bordersize>$PARAM[other_bordersize]</bordersize>
                 <visible>[String.IsEqual($PARAM[listitem].DBType,studio) | String.IsEqual($PARAM[listitem].Property(DBType),studio)]</visible>
@@ -548,12 +543,7 @@
                     <param name="colordiffuse">$VAR[ColorSelected]</param>
                 </include>
                 <colordiffuse>main_fg_100</colordiffuse>
-                <include content="Object_Texture" condition="!Skin.HasSetting(Info.EnableStylisedBackgrounds)">
-                    <param name="texture">$INFO[ListItem.Label,resource://resource.images.moviecountryicons.maps/,.png]</param>
-                    <param name="background">true</param>
-                    <param name="fallback">DefaultCountry.png</param>
-                </include>
-                <texture background="true" diffuse="defaults/watercolor.png" fallback="DefaultCountry.png">$INFO[ListItem.Label,resource://resource.images.moviecountryicons.maps/,.png]</texture>
+                <texture background="true" diffuse="$PARAM[icon_diffuse]" fallback="DefaultCountry.png">$VAR[Image_Icon]</texture>
                 <aspectratio scalediffuse="false">keep</aspectratio>
                 <bordersize>$PARAM[other_bordersize]</bordersize>
                 <visible>[String.IsEqual($PARAM[listitem].DBType,country) | String.IsEqual($PARAM[listitem].Property(DBType),country)]</visible>
@@ -2114,6 +2104,10 @@
                 <visible>!$PARAM[is_other]</visible>
             </control>
             <control type="image">
+                <include content="Object_ColorDiffuse" condition="$PARAM[selected]">
+                    <param name="colordiffuse">$VAR[ColorSelected]</param>
+                </include>
+                <colordiffuse>main_fg_90</colordiffuse>
                 <texture background="true" diffuse="$PARAM[diffuse]" fallback="$PARAM[icon_genre_fallback]">$PARAM[icon_genre]</texture>
                 <fadetime>$PARAM[fadetime]</fadetime>
                 <aspectratio scalediffuse="false">keep</aspectratio>

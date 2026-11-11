@@ -38,119 +38,71 @@
         <value>$INFO[Window(Home).Property(TMDbHelper.ListItem.Base_Poster)]</value>
     </variable>
 
-    <variable name="Image_GenreFanart">
-        <value condition="String.IsEqual(ListItem.Label,Action)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-action.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Adventure)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-adventure.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Animation)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-animation.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Comedy)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-comedy.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Crime)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-crime.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Documentary)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-documentary.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Drama)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-drama.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Family)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-family.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Fantasy)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-fantasy.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,History)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-history.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Horror)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-horror.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Music)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-music.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Mystery)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-mystery.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Romance)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-romance.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Science Fiction)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-science-fiction.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,TV Movie)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-tv-movie.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Thriller)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-thriller.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,War)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-war.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Western)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-western.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Action &amp; Adventure)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-action-adventure.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Kids)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-kids.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,News)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-news.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Reality)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-reality.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Sci-Fi &amp; Fantasy)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-sci-fi-fantasy.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Soap)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-soap.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,Talk)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-talk.jpg</value>
-        <value condition="String.IsEqual(ListItem.Label,War &amp; Politics)">special://skin/extras/backgrounds/genres/fanart-watercolour-composite-war-politics.jpg</value>
-        <value>special://skin/extras/backgrounds/content/fanart-watercolour-composite-genres.jpg</value>
-    </variable>
-
     <variable name="Image_Blur_Fallback">
-        <value condition="!Skin.HasSetting(Info.EnableStylisedBackgrounds)">$VAR[Image_SimpleBackground]</value>
-        <value condition="[$EXP[Exp_IsGenre] | Container.Content(genres)] + !Window.IsVisible(MyMusicNav.xml)">$VAR[Image_GenreFanart]</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[1039])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-pictureaddons.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.Label,$LOCALIZE[20382]) | String.IsEqual(ListItem.Label,$LOCALIZE[20386]) | String.IsEqual(ListItem.Label,$LOCALIZE[20387]) | String.IsEqual(ListItem.Label,$LOCALIZE[20390])]">special://skin/extras/backgrounds/content/fanart-watercolour-composite-recentlyadded-star.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.Label,$LOCALIZE[575]) | String.IsEqual(ListItem.Label,$LOCALIZE[626])]">special://skin/extras/backgrounds/content/fanart-watercolour-composite-inprogress.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[135])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-genres.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20388])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-studios.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[344])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-actors.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20348])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-directors.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[652])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-years.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20459])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-tags.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20451])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-countries.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[40000])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-versions.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[342])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-movies.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20343])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-tvshows.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20434])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-sets.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20389])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-musicvideos.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[133])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-artists.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[132])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-albums.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[134])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-songs.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[29994])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-roles.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[136])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-playlists.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[744])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-files.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[39031])">special://skin/extras/backgrounds/content/fanart-watercolour-composite-sources.jpg</value>
-        <value condition="String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.Label,$LOCALIZE[1037]) | String.IsEqual(ListItem.Label,$LOCALIZE[1038])]">special://skin/extras/backgrounds/content/fanart-watercolour-composite-addons.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[135])">special://skin/extras/backgrounds/content/fanart-arctic-genres.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20388])">special://skin/extras/backgrounds/content/fanart-arctic-studios.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[344])">special://skin/extras/backgrounds/content/fanart-arctic-actors.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20348])">special://skin/extras/backgrounds/content/fanart-arctic-directors.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[652])">special://skin/extras/backgrounds/content/fanart-arctic-years.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20459])">special://skin/extras/backgrounds/content/fanart-arctic-tags.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20451])">special://skin/extras/backgrounds/content/fanart-arctic-countries.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[40000])">special://skin/extras/backgrounds/content/fanart-arctic-versions.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[342])">special://skin/extras/backgrounds/content/fanart-arctic-movies.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20343])">special://skin/extras/backgrounds/content/fanart-arctic-tvshows.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20434])">special://skin/extras/backgrounds/content/fanart-arctic-sets.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[20389])">special://skin/extras/backgrounds/content/fanart-arctic-musicvideos.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[133])">special://skin/extras/backgrounds/content/fanart-arctic-artists.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[132])">special://skin/extras/backgrounds/content/fanart-arctic-albums.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[134])">special://skin/extras/backgrounds/content/fanart-arctic-songs.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[29994])">special://skin/extras/backgrounds/content/fanart-arctic-roles.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[136])">special://skin/extras/backgrounds/content/fanart-arctic-playlists.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[744])">special://skin/extras/backgrounds/content/fanart-arctic-files.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + String.IsEqual(ListItem.Label,$LOCALIZE[39031])">special://skin/extras/backgrounds/content/fanart-arctic-sources.jpg</value>
+        <value condition="String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.Label,$LOCALIZE[1037]) | String.IsEqual(ListItem.Label,$LOCALIZE[1038])]">special://skin/extras/backgrounds/content/fanart-arctic-addons.jpg</value>
 
-        <value condition="Container.Content(genres)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-genres.jpg</value>
-        <value condition="Container.Content(studios)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-studios.jpg</value>
-        <value condition="Container.Content(actors)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-actors.jpg</value>
-        <value condition="Container.Content(directors)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-directors.jpg</value>
-        <value condition="Container.Content(years)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-years.jpg</value>
-        <value condition="Container.Content(tags)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-tags.jpg</value>
-        <value condition="Container.Content(countries)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-countries.jpg</value>
-        <value condition="Container.Content(videoversions)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-versions.jpg</value>
-        <value condition="Container.Content(movies)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-movies.jpg</value>
-        <value condition="Container.Content(tvshows)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-tvshows.jpg</value>
-        <value condition="Container.Content(seasons)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-seasons.jpg</value>
-        <value condition="Container.Content(episodes)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-episodes.jpg</value>
-        <value condition="Container.Content(sets)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-sets.jpg</value>
-        <value condition="Container.Content(musicvideos)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-musicvideos.jpg</value>
-        <value condition="Container.Content(artists)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-artists.jpg</value>
-        <value condition="Container.Content(albums)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-albums.jpg</value>
-        <value condition="Container.Content(songs)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-songs.jpg</value>
-        <value condition="Container.Content(playlists)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-playlists.jpg</value>
-        <value condition="Container.Content(files)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-files.jpg</value>
-        <value condition="Container.Content(sources)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-sources.jpg</value>
-        <value condition="Container.Content(addons)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-addons.jpg</value>
-        <value condition="Container.Content(plugins)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-plugins.jpg</value>
-        <value condition="Container.Content(games)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-games.jpg</value>
-        <value condition="Container.Content(images)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-images.jpg</value>
-        <value condition="Container.Content(mixed)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-mixed.jpg</value>
-        <value condition="Container.Content(videos)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-videos.jpg</value>
-        <value condition="Container.Content(recordings)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-recordings.jpg</value>
-        <value condition="Container.Content(roles)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-roles.jpg</value>
-        <value condition="Container.Content(videoassets)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-videoassets.jpg</value>
-        <value condition="Container.Content(videoextras)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-videoextras.jpg</value>
-        <value condition="Container.Content(livetv)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-livetv.jpg</value>
+        <value condition="Container.Content(genres)">special://skin/extras/backgrounds/content/fanart-arctic-genres.jpg</value>
+        <value condition="Container.Content(studios)">special://skin/extras/backgrounds/content/fanart-arctic-studios.jpg</value>
+        <value condition="Container.Content(actors)">special://skin/extras/backgrounds/content/fanart-arctic-actors.jpg</value>
+        <value condition="Container.Content(directors)">special://skin/extras/backgrounds/content/fanart-arctic-directors.jpg</value>
+        <value condition="Container.Content(years)">special://skin/extras/backgrounds/content/fanart-arctic-years.jpg</value>
+        <value condition="Container.Content(tags)">special://skin/extras/backgrounds/content/fanart-arctic-tags.jpg</value>
+        <value condition="Container.Content(countries)">special://skin/extras/backgrounds/content/fanart-arctic-countries.jpg</value>
+        <value condition="Container.Content(videoversions)">special://skin/extras/backgrounds/content/fanart-arctic-versions.jpg</value>
+        <value condition="Container.Content(movies)">special://skin/extras/backgrounds/content/fanart-arctic-movies.jpg</value>
+        <value condition="Container.Content(tvshows)">special://skin/extras/backgrounds/content/fanart-arctic-tvshows.jpg</value>
+        <value condition="Container.Content(seasons)">special://skin/extras/backgrounds/content/fanart-arctic-seasons.jpg</value>
+        <value condition="Container.Content(episodes)">special://skin/extras/backgrounds/content/fanart-arctic-episodes.jpg</value>
+        <value condition="Container.Content(sets)">special://skin/extras/backgrounds/content/fanart-arctic-sets.jpg</value>
+        <value condition="Container.Content(musicvideos)">special://skin/extras/backgrounds/content/fanart-arctic-musicvideos.jpg</value>
+        <value condition="Container.Content(artists)">special://skin/extras/backgrounds/content/fanart-arctic-artists.jpg</value>
+        <value condition="Container.Content(albums)">special://skin/extras/backgrounds/content/fanart-arctic-albums.jpg</value>
+        <value condition="Container.Content(songs)">special://skin/extras/backgrounds/content/fanart-arctic-songs.jpg</value>
+        <value condition="Container.Content(playlists)">special://skin/extras/backgrounds/content/fanart-arctic-playlists.jpg</value>
+        <value condition="Container.Content(files)">special://skin/extras/backgrounds/content/fanart-arctic-files.jpg</value>
+        <value condition="Container.Content(sources)">special://skin/extras/backgrounds/content/fanart-arctic-sources.jpg</value>
+        <value condition="Container.Content(addons)">special://skin/extras/backgrounds/content/fanart-arctic-addons.jpg</value>
+        <value condition="Container.Content(plugins)">special://skin/extras/backgrounds/content/fanart-arctic-plugins.jpg</value>
+        <value condition="Container.Content(games)">special://skin/extras/backgrounds/content/fanart-arctic-games.jpg</value>
+        <value condition="Container.Content(images)">special://skin/extras/backgrounds/content/fanart-arctic-images.jpg</value>
+        <value condition="Container.Content(mixed)">special://skin/extras/backgrounds/content/fanart-arctic-mixed.jpg</value>
+        <value condition="Container.Content(videos)">special://skin/extras/backgrounds/content/fanart-arctic-videos.jpg</value>
+        <value condition="Container.Content(recordings)">special://skin/extras/backgrounds/content/fanart-arctic-recordings.jpg</value>
+        <value condition="Container.Content(roles)">special://skin/extras/backgrounds/content/fanart-arctic-roles.jpg</value>
+        <value condition="Container.Content(videoassets)">special://skin/extras/backgrounds/content/fanart-arctic-videoassets.jpg</value>
+        <value condition="Container.Content(videoextras)">special://skin/extras/backgrounds/content/fanart-arctic-videoextras.jpg</value>
+        <value condition="Container.Content(livetv)">special://skin/extras/backgrounds/content/fanart-arctic-livetv.jpg</value>
 
-        <value condition="Window.IsVisible(MyVideoNav.xml)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-videoassets.jpg</value>
-        <value condition="Window.IsVisible(MyMusicNav.xml)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-artists.jpg</value>
-        <value condition="Window.IsVisible(MyPics.xml)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-images.jpg</value>
-        <value condition="Window.IsVisible(MyPrograms.xml)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-plugins.jpg</value>
-        <value condition="Window.IsVisible(MyGames.xml)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-games.jpg</value>
-        <value condition="Window.IsVisible(MyPlaylist.xml)">special://skin/extras/backgrounds/content/fanart-watercolour-composite-playlists.jpg</value>
+        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds) + Window.IsVisible(MyVideoNav.xml)">special://skin/extras/backgrounds/content/fanart-arctic-videoassets.jpg</value>
+        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds) + Window.IsVisible(MyMusicNav.xml)">special://skin/extras/backgrounds/content/fanart-arctic-artists.jpg</value>
+        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds) + Window.IsVisible(MyPics.xml)">special://skin/extras/backgrounds/content/fanart-arctic-images.jpg</value>
+        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds) + Window.IsVisible(MyPrograms.xml)">special://skin/extras/backgrounds/content/fanart-arctic-plugins.jpg</value>
+        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds) + Window.IsVisible(MyGames.xml)">special://skin/extras/backgrounds/content/fanart-arctic-games.jpg</value>
+        <value condition="Skin.HasSetting(Info.EnableStylisedBackgrounds) + Window.IsVisible(MyPlaylist.xml)">special://skin/extras/backgrounds/content/fanart-arctic-playlists.jpg</value>
         <value>$VAR[Image_SimpleBackground]</value>
     </variable>
 
     <variable name="Image_BasicList_Landscape">
-        <value condition="String.IsEqual(ListItem.Property(tmdb_type),person)"/>
-        <value condition="!String.IsEmpty(ListItem.Property(override_landscape))">$INFO[ListItem.Property(override_landscape)]</value>
-        <value condition="[String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,video) | String.IsEqual(ListItem.DBType,musicvideo)] + !String.IsEmpty(ListItem.Art(thumb)) + String.IsEqual(ListItem.Icon,ListItem.Art(thumb)) + !String.IsEqual(ListItem.Art(thumb),ListItem.Art(poster)) + !String.IsEqual(ListItem.Art(thumb),ListItem.Art(tvshow.poster))">$INFO[ListItem.Art(thumb)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(landscape)) + !Skin.HasSetting(DisableLandscapeArt)">$INFO[ListItem.Art(landscape)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(season.landscape)) + !Skin.HasSetting(DisableLandscapeArt)">$INFO[ListItem.Art(season.landscape)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.landscape)) + !Skin.HasSetting(DisableLandscapeArt)">$INFO[ListItem.Art(tvshow.landscape)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(fanart))">$INFO[ListItem.Art(fanart)]</value>
-        <value condition="!String.IsEmpty(ListItem.Art(tvshow.fanart))">$INFO[ListItem.Art(tvshow.fanart)]</value>
-        <value condition="!String.IsEmpty(ListItem.EPGEventIcon)">$INFO[ListItem.EPGEventIcon]</value>
-    </variable>
-
-    <variable name="Image_BasicList_Square">
-        <value condition="!String.StartsWith(ListItem.Icon,Default)">$INFO[ListItem.Icon]</value>
+        <value>$VAR[Image_Landscape]</value>
     </variable>
 
     <variable name="Image_OSD_SkipPrev">
@@ -551,7 +503,7 @@
     </variable>
 
     <variable name="Image_GenreIcon">
-        <value>$INFO[ListItem.Label,genres/,.png]</value>
+        <value condition="System.HasAddon(resource.images.moviegenreicons.transparent)">$INFO[ListItem.Label,genres/,.png]</value>
     </variable>
 
     <variable name="Image_DiscArt">
