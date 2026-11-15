@@ -177,6 +177,12 @@
         </control>
     </include>
 
+    <!-- ABUKARIM: compatibility alias. Upstream 3.5.0 removed Background_Video_FlixArt (FlixArt reflection rework);
+         AB Tools patches still include it, which logged "invalid include" on Home and every hub. Same videowindow as Background_Video. -->
+    <include name="Background_Video_FlixArt">
+        <include>Background_Video</include>
+    </include>
+
     <include name="Background_Main_Plain">
         <control type="group">
             <description>Plain background used to prevent fadetime transitions</description>

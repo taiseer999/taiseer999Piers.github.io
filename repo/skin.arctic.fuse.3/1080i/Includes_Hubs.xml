@@ -15,6 +15,8 @@
         <onload condition="$EXP[Exp_Hub_SplashPending] + !Skin.HasSetting(Startup.DisableWaitForLoad)">SetProperty(InitStatus,$LOCALIZE[31133],1198)</onload>
         <onload condition="$EXP[Exp_Hub_SplashPending] + !Skin.HasSetting(Startup.DisableWaitForLoad)">SetProperty(SplashIsVisible,True,1198)</onload>
         <onload condition="$EXP[Exp_Hub_SplashPending] + !Skin.HasSetting(Startup.DisableWaitForLoad) + !System.HasAlarm(SplashTimeOut)">AlarmClock(SplashTimeOut,noop,00:59,silent)</onload>
+        <!-- ABUKARIM: fetch the weather as the splash opens - Kodi's own first fetch comes too late for the splash, so Object_StartUp_Weather (Weather.IsFetched) never showed there -->
+        <onload condition="$EXP[Exp_Hub_SplashPending] + !Weather.IsFetched + !String.IsEmpty(Weather.Plugin)">Weather.Refresh</onload>
         <onload condition="$EXP[Exp_Hub_SplashPending]">RunScript(script.skinvariables,run_executebuiltin=special://skin/shortcuts/skinvariables-splash.json,use_rules=True)</onload>
         <onload>SetProperty(WidgetsInitialized,True,1198)</onload>
     </include>
