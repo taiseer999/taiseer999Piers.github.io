@@ -24,6 +24,10 @@
     <include name="Hub_Onload">
         <definition>
             <include>Hub_Splash_Onload</include>
+            <!-- ABUKARIM: remember the live weather for the next boot's splash (Object_StartUp_Weather) -->
+            <onload condition="!String.IsEmpty(Window(Weather).Property(Current.Temperature))">Skin.SetString(Splash.Weather.Temp,$ESCINFO[Window(Weather).Property(Current.Temperature)])</onload>
+            <onload condition="!String.IsEmpty(Window(Weather).Property(Current.FanartCode))">Skin.SetString(Splash.Weather.Code,$ESCINFO[Window(Weather).Property(Current.FanartCode)])</onload>
+            <onload condition="!String.IsEmpty(Window(Weather).Property(Current.Condition))">Skin.SetString(Splash.Weather.Condition,$ESCINFO[Window(Weather).Property(Current.Condition)])</onload>
 
             <include>Action_Blur_Onload</include>
 
