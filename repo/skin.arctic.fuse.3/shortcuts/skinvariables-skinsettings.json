@@ -1,9 +1,17 @@
 {
     "search": {
-        "mode": "global",
+        "mode": "mixed",
         "label": "",
         "description": "$LOCALIZE[31849]",
-        "hinttext": "$LOCALIZE[16017]"
+        "hinttext": "$LOCALIZE[16017]",
+        "category": {
+            "label": "$LOCALIZE[137]",
+            "description": "$LOCALIZE[31849]"
+        },
+        "tags": {
+            "description": "$LOCALIZE[31876]",
+            "default": "$LOCALIZE[31203]"
+        }
     },
     "categories": {
         "home": {
@@ -46,7 +54,10 @@
         },
         "home_menu": {
             "label": "$LOCALIZE[33061]",
-            "category": "home"
+            "category": "home",
+            "tags": [
+                "$LOCALIZE[33061]"
+            ]
         },
         "home_spotlight": {
             "label": "$LOCALIZE[31105]",
@@ -54,19 +65,31 @@
         },
         "home_startup": {
             "label": "$LOCALIZE[12999]",
-            "category": "home"
+            "category": "home",
+            "tags": [
+                "$LOCALIZE[12999]"
+            ]
         },
         "home_users": {
             "label": "$LOCALIZE[31813]",
-            "category": "home"
+            "category": "home",
+            "tags": [
+                "$LOCALIZE[12999]"
+            ]
         },
         "appearance_colours": {
             "label": "$LOCALIZE[14078]",
-            "category": "appearance"
+            "category": "appearance",
+            "tags": [
+                "$LOCALIZE[39123]"
+            ]
         },
         "appearance_backgrounds": {
             "label": "$LOCALIZE[31769]",
-            "category": "appearance"
+            "category": "appearance",
+            "tags": [
+                "$LOCALIZE[39123]"
+            ]
         },
         "interface_header": {
             "label": "$LOCALIZE[31208]",
@@ -78,85 +101,145 @@
         },
         "interface_context_menu": {
             "label": "$LOCALIZE[10106]",
-            "category": "interface"
+            "category": "interface",
+            "tags": [
+                "$LOCALIZE[33061]"
+            ]
         },
         "interface_text": {
             "label": "$LOCALIZE[31329]",
-            "category": "interface"
+            "category": "interface",
+            "tags": [
+                "$LOCALIZE[31818]"
+            ]
         },
         "interface_mouse": {
             "label": "$LOCALIZE[14125]",
-            "category": "interface"
+            "category": "interface",
+            "tags": [
+                "$LOCALIZE[31174]"
+            ]
         },
         "views_viewtypes": {
             "label": "$LOCALIZE[31044]",
-            "category": "views"
+            "category": "views",
+            "tags": [
+                "$LOCALIZE[31808]"
+            ]
         },
         "views_navigation": {
             "label": "$LOCALIZE[31174]",
-            "category": "views"
+            "category": "views",
+            "tags": [
+                "$LOCALIZE[31174]"
+            ]
         },
         "views_live_tv": {
             "label": "$LOCALIZE[31085]",
-            "category": "views"
+            "category": "views",
+            "tags": [
+                "$LOCALIZE[31808]"
+            ]
         },
         "widgets_widgets": {
             "label": "$LOCALIZE[31103]",
-            "category": "widgets"
+            "category": "widgets",
+            "tags": [
+                "$LOCALIZE[31103]"
+            ]
         },
         "widgets_information": {
             "label": "$LOCALIZE[19033]",
-            "category": "widgets"
+            "category": "widgets",
+            "tags": [
+                "$LOCALIZE[19033]"
+            ]
         },
         "details_services": {
             "label": "$LOCALIZE[14036]",
-            "category": "details"
+            "category": "details",
+            "tags": [
+                "$LOCALIZE[24001]"
+            ]
         },
         "details_ratings": {
             "label": "$LOCALIZE[31202]",
             "category": "details",
-            "visible": "$EXP[Exp_TMDbHelper_IsData]"
+            "visible": "$EXP[Exp_TMDbHelper_IsData]",
+            "tags": [
+                "$LOCALIZE[19033]"
+            ]
         },
         "details_plotline": {
             "label": "$LOCALIZE[31126]",
-            "category": "details"
+            "category": "details",
+            "tags": [
+                "$LOCALIZE[19033]"
+            ]
         },
         "details_information": {
             "label": "$LOCALIZE[19033]",
-            "category": "details"
+            "category": "details",
+            "tags": [
+                "$LOCALIZE[19033]"
+            ]
         },
         "playback_osd": {
             "label": "$LOCALIZE[478]",
-            "category": "playback"
+            "category": "playback",
+            "tags": [
+                "$LOCALIZE[14086]"
+            ]
         },
         "playback_seekbar": {
             "label": "$LOCALIZE[31817]",
-            "category": "playback"
+            "category": "playback",
+            "tags": [
+                "$LOCALIZE[14086]"
+            ]
         },
         "playback_backgrounds": {
             "label": "$LOCALIZE[31769]",
-            "category": "playback"
+            "category": "playback",
+            "tags": [
+                "$LOCALIZE[14086]"
+            ]
         },
         "seasonal_seasonal_themes": {
             "label": "$LOCALIZE[31610]",
-            "category": "tools"
+            "category": "tools",
+            "tags": [
+                "$LOCALIZE[31818]"
+            ]
         },
         "seasonal_effects": {
             "label": "$LOCALIZE[31818]",
             "category": "tools",
-            "visible": "Skin.HasSetting(SeasonalTheme.Enable)"
+            "visible": "Skin.HasSetting(SeasonalTheme.Enable)",
+            "tags": [
+                "$LOCALIZE[31818]"
+            ]
         },
         "tools_dependencies": {
             "label": "$LOCALIZE[39024]",
-            "category": "tools"
+            "category": "tools",
+            "tags": [
+                "$LOCALIZE[24001]"
+            ]
         },
         "tools_debug": {
             "label": "$LOCALIZE[14260]",
-            "category": "tools"
+            "category": "tools",
+            "tags": [
+                "$LOCALIZE[14260]"
+            ]
         },
         "tools_reset": {
             "label": "$LOCALIZE[13007]",
-            "category": "tools"
+            "category": "tools",
+            "tags": [
+                "$LOCALIZE[14260]"
+            ]
         }
     },
     "settings": {
@@ -169,6 +252,11 @@
                 {
                     "action": "ActivateWindow(1115)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]",
+                "$LOCALIZE[33061]",
+                "$LOCALIZE[31103]"
             ]
         },
         "home_setup_wizard": {
@@ -186,6 +274,12 @@
                 {
                     "action": "ActivateWindow(1130)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]",
+                "$LOCALIZE[12999]",
+                "$LOCALIZE[31103]",
+                "$LOCALIZE[39123]"
             ]
         },
         "home_position": {
@@ -237,6 +331,9 @@
                     "action": "Skin.SetBool(HomeSwitcher.DisableHeader)",
                     "condition": "!Skin.HasSetting(HomeSwitcher.DisableHeader) + Skin.HasSetting(HomeSwitcher.DisableDate)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "home_up_action": {
@@ -255,6 +352,9 @@
                     "action": "Skin.Reset(HomeSwitcher.OnUp)",
                     "condition": "Skin.String(HomeSwitcher.OnUp,options)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31174]"
             ]
         },
         "home_side_left_action": {
@@ -284,6 +384,9 @@
                 {
                     "action": "Skin.ToggleSetting(Spotlight.EnableSlide)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31818]"
             ]
         },
         "home_button_action": {
@@ -296,6 +399,10 @@
                 {
                     "action": "Skin.ToggleSetting(Spotlight.UseMenuButton)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]",
+                "$LOCALIZE[31174]"
             ]
         },
         "home_focus_widgets": {
@@ -308,6 +415,10 @@
                 {
                     "action": "Skin.ToggleSetting(HomeSwitcher.DisableFirstWidgetFocus)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31103]",
+                "$LOCALIZE[31174]"
             ]
         },
         "home_wait_for_widgets": {
@@ -320,6 +431,9 @@
                 {
                     "action": "Skin.ToggleSetting(Startup.DisableWaitForLoad)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31103]"
             ]
         },
         "home_preload_hubs": {
@@ -333,6 +447,9 @@
                 {
                     "action": "Skin.ToggleSetting(Startup.EnableHubPreloading)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31103]"
             ]
         },
         "home_startup_image": {
@@ -351,6 +468,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "home_startup_offset": {
@@ -401,6 +521,10 @@
                 {
                     "action": "Skin.ToggleSetting(SkinUserLogin.Disabled)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[33061]",
+                "$LOCALIZE[31103]"
             ]
         },
         "home_login_screen": {
@@ -429,6 +553,9 @@
                 {
                     "action": "ActivateWindow(1130)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]"
             ]
         },
         "appearance_tinyppi_font": {
@@ -458,6 +585,9 @@
                 {
                     "action": "Skin.ToggleSetting(Ratings.EnableColor)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "appearance_media_flags": {
@@ -485,6 +615,9 @@
                 {
                     "action": "ActivateWindow(1130)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]"
             ]
         },
         "appearance_fallback": {
@@ -497,6 +630,9 @@
                 {
                     "action": "ActivateWindow(1135)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]"
             ]
         },
         "appearance_extra_fanart": {
@@ -510,6 +646,9 @@
                 {
                     "action": "Skin.ToggleSetting(Background.ExtraFanart)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31818]"
             ]
         },
         "interface_weather": {
@@ -522,6 +661,9 @@
                 {
                     "action": "Skin.ToggleSetting(Header.DisableWeather)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "interface_network_ram": {
@@ -557,6 +699,9 @@
                 {
                     "action": "Skin.ToggleSetting(Footer.DisableNowPlaying)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[14086]"
             ]
         },
         "interface_studio": {
@@ -569,6 +714,10 @@
                 {
                     "action": "Skin.ToggleSetting(Footer.DisableStudio)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]",
+                "$LOCALIZE[19033]"
             ]
         },
         "interface_codecs": {
@@ -618,6 +767,9 @@
                 {
                     "action": "Skin.ToggleSetting(ContextMenu.DisableArtwork)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "interface_scroll_textboxes": {
@@ -630,6 +782,9 @@
                 {
                     "action": "Skin.ToggleSetting(Textboxes.DisableAutoscroll)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "interface_scroll_labels": {
@@ -642,6 +797,9 @@
                 {
                     "action": "Skin.ToggleSetting(Labels.Autoscroll)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31808]"
             ]
         },
         "interface_pointer_size": {
@@ -706,6 +864,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "views_back_action": {
@@ -735,6 +896,9 @@
                 {
                     "action": "Skin.ToggleSetting(Navigation.DisableAlphabetJump)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31808]"
             ]
         },
         "views_epg_genre_colours": {
@@ -747,6 +911,9 @@
                 {
                     "action": "Skin.ToggleSetting(PVR.DisableGenreColours)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "widgets_autoscroll_interval": {
@@ -765,6 +932,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31818]"
             ]
         },
         "widgets_show_more_item": {
@@ -777,6 +947,9 @@
                 {
                     "action": "Skin.ToggleSetting(Widgets.EnableShowMore)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31174]"
             ]
         },
         "widgets_empty_widgets": {
@@ -811,6 +984,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31103]"
             ]
         },
         "widgets_information_buttons": {
@@ -867,6 +1043,10 @@
                 {
                     "action": "ClearProperty(TMDbHelper.ListItem.base_label,Home)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]",
+                "$LOCALIZE[39123]"
             ]
         },
         "details_pvr_lookups": {
@@ -879,6 +1059,9 @@
                 {
                     "action": "Skin.ToggleSetting(TMDbHelper.DisablePVR)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "details_movie_ratings": {
@@ -898,6 +1081,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]"
             ]
         },
         "details_tv_show_ratings": {
@@ -917,6 +1103,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31203]"
             ]
         },
         "details_movie_plotline": {
@@ -1051,6 +1240,9 @@
                 {
                     "action": "ActivateWindow(1118)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31103]"
             ]
         },
         "playback_video_osd_extras": {
@@ -1143,6 +1335,9 @@
                 {
                     "action": "Skin.ToggleSetting(Background.DisableVideo)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "seasonal_enabled": {
@@ -1216,6 +1411,9 @@
                 {
                     "action": "Skin.ToggleSetting(SeasonalTheme.DisableOverlay)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "seasonal_atmosphere": {
@@ -1229,6 +1427,9 @@
                 {
                     "action": "Skin.ToggleSetting(SeasonalTheme.DisableLoop)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "seasonal_fly_bys": {
@@ -1286,6 +1487,9 @@
                     "action": "Addon.OpenSettings(plugin.video.themoviedb.helper)",
                     "condition": "System.AddonIsEnabled(plugin.video.themoviedb.helper) + System.HasAddon(plugin.video.themoviedb.helper)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "tools_script_skinvariables": {
@@ -1308,6 +1512,9 @@
                     "action": "Addon.OpenSettings(script.skinvariables)",
                     "condition": "System.AddonIsEnabled(script.skinvariables) + System.HasAddon(script.skinvariables)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31103]"
             ]
         },
         "tools_script_texturemaker": {
@@ -1330,6 +1537,9 @@
                     "action": "Addon.OpenSettings(script.texturemaker)",
                     "condition": "System.AddonIsEnabled(script.texturemaker) + System.HasAddon(script.texturemaker)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "tools_script_artistslideshow": {
@@ -1352,6 +1562,9 @@
                     "action": "Addon.OpenSettings(script.artistslideshow)",
                     "condition": "System.AddonIsEnabled(script.artistslideshow) + System.HasAddon(script.artistslideshow)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "tools_resource_images_arctic_waves": {
@@ -1374,6 +1587,9 @@
                     "action": "Addon.OpenSettings(resource.images.arctic.waves)",
                     "condition": "System.AddonIsEnabled(resource.images.arctic.waves) + System.HasAddon(resource.images.arctic.waves)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "tools_resource_images_weatherfanart_multi": {
@@ -1396,6 +1612,9 @@
                     "action": "Addon.OpenSettings(resource.images.weatherfanart.multi)",
                     "condition": "System.AddonIsEnabled(resource.images.weatherfanart.multi) + System.HasAddon(resource.images.weatherfanart.multi)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "tools_resource_images_moviecountryicons_maps": {
@@ -1418,6 +1637,9 @@
                     "action": "Addon.OpenSettings(resource.images.moviecountryicons.maps)",
                     "condition": "System.AddonIsEnabled(resource.images.moviecountryicons.maps) + System.HasAddon(resource.images.moviecountryicons.maps)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "tools_resource_images_studios_white": {
@@ -1440,6 +1662,9 @@
                     "action": "Addon.OpenSettings(resource.images.studios.white)",
                     "condition": "System.AddonIsEnabled(resource.images.studios.white) + System.HasAddon(resource.images.studios.white)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[39123]"
             ]
         },
         "tools_service_upnext": {
@@ -1462,6 +1687,9 @@
                     "action": "Addon.OpenSettings(service.upnext)",
                     "condition": "System.AddonIsEnabled(service.upnext) + System.HasAddon(service.upnext)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[14086]"
             ]
         },
         "tools_debug_information": {
@@ -1473,6 +1701,9 @@
                 {
                     "action": "Skin.ToggleSetting(DebugInfo)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[19033]"
             ]
         },
         "tools_debug_gridlines": {
@@ -1484,6 +1715,9 @@
                 {
                     "action": "Skin.ToggleSetting(DebugGrid)"
                 }
+            ],
+            "tags": [
+                "$LOCALIZE[31808]"
             ]
         },
         "tools_test_dialognumeric": {

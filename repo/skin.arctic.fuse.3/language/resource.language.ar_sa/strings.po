@@ -3536,3 +3536,11 @@ msgstr "حرّك الشعار والنص ومُحدِّد الملف الشخص�
 msgctxt "#31875"
 msgid "Show the splash screen with the current position. Press any button, click or move the mouse to close the preview."
 msgstr "اعرض شاشة البدء بالموضع الحالي. اضغط أي زر أو انقر أو حرّك الفأرة للإغلاق."
+
+msgctxt "#31849"
+msgid "Search all skin settings by name, section or description."
+msgstr "ابحث في جميع إعدادات الواجهة بالاسم أو القسم أو الوصف."
+
+msgctxt "#31876"
+msgid "Filter the skin settings by tag."
+msgstr "تصفية إعدادات الواجهة حسب الوسم."
