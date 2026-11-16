@@ -432,6 +432,9 @@
         <param name="selected">false</param>
         <definition>
             <control type="image">
+                <include content="Object_ColorDiffuse" condition="$PARAM[selected]">  <!-- ABUKARIM: Lucent glyph focus -->
+                    <param name="colordiffuse">$VAR[ABK_Lucent_GlyphFocus]</param>
+                </include>
                 <texture background="true" diffuse="$PARAM[diffuse]">$PARAM[icon]</texture>
                 <aspectratio scalediffuse="false">$PARAM[aspectratio]</aspectratio>
                 <visible>![String.IsEqual($PARAM[listitem].Art(thumb),$PARAM[listitem].Icon) | String.IsEmpty($PARAM[listitem].Art(thumb))] | !String.IsEmpty($PARAM[listitem].Art(fanart)) | !String.IsEmpty($PARAM[listitem].Art(poster)) | !String.StartsWith($PARAM[listitem].Icon,Default)</visible>
@@ -498,7 +501,7 @@
 
             <control type="group">
 
-                <visible>![[String.IsEqual($PARAM[listitem].DBType,genre) | String.IsEqual($PARAM[listitem].Property(DBType),genre)] | [String.IsEqual($PARAM[listitem].DBType,studio) | String.IsEqual($PARAM[listitem].Property(DBType),studio)] | [String.IsEqual($PARAM[listitem].DBType,country) | String.IsEqual($PARAM[listitem].Property(DBType),country)] | [String.IsEmpty($PARAM[listitem].$PARAM[main_artwork]) + String.StartsWith($PARAM[listitem].Icon,Default)]]</visible>
+                <visible>![[String.IsEqual($PARAM[listitem].DBType,genre) | String.IsEqual($PARAM[listitem].Property(DBType),genre)] | [String.IsEqual($PARAM[listitem].DBType,studio) | String.IsEqual($PARAM[listitem].Property(DBType),studio)] | [String.IsEqual($PARAM[listitem].DBType,country) | String.IsEqual($PARAM[listitem].Property(DBType),country)] | [String.IsEmpty($PARAM[listitem].$PARAM[main_artwork]) + [String.IsEmpty($PARAM[listitem].Icon) | String.StartsWith($PARAM[listitem].Icon,Default)]]]</visible>
 
                 <include content="Object_Layout_Image_Circle" condition="$PARAM[include_discart]">
                     <param name="diffuse">$PARAM[diffuse]</param>
@@ -824,6 +827,7 @@
     </include>
 
     <include name="Object_StartUp_Logo">
+        <!-- ABK Kodi 22 logo -->
         <control type="grouplist">
             <height>128</height>
             <centertop>350</centertop>
@@ -834,12 +838,12 @@
                 <height>96</height>
                 <centerleft>50%</centerleft>
                 <aspectratio>keep</aspectratio>
-                <texture>special://skin/extras/icons/CE.png</texture>
+                <texture>special://skin/extras/icons/kodi.png</texture>
             </control>
             <control type="label">
                 <height>30</height>
                 <textcolor>main_fg_100</textcolor>
-                <label>CoreELEC "NO"</label>
+                <label>KODI</label>
                 <font>font_logo_large</font>
                 <align>center</align>
             </control>
