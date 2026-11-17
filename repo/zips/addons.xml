@@ -154,7 +154,7 @@
             <icon>icon.png</icon>
         </assets>
     </extension>
-</addon><addon id="resource.images.arctic.backgrounds.surrealist" name="Arctic Backgrounds - Surrealist" version="1.0.0" provider-name="jurialmunkey">
+</addon><addon id="resource.images.arctic.backgrounds.surrealist" name="Arctic Backgrounds - Surrealist" version="1.0.2" provider-name="jurialmunkey">
     <requires>
         <import addon="kodi.resource" version="1.0.0" />
     </requires>
