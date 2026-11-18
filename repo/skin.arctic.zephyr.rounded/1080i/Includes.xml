@@ -46,6 +46,7 @@
 
     <include file="Includes_PVR.xml" />
     <include file="Includes_OSD.xml" />
+    <include file="Includes_ABK_LucentPlayer.xml" />  <!-- ABUKARIM: Lucent Player -->
 
     <!-- VIEWS -->
 

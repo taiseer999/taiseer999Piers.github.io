@@ -1,6 +1,41 @@
 <?xml version='1.0' encoding='utf-8'?>
 <fonts>
     <fontset id="Default" unicode="true">
+        <!-- ABK Lucent Player fonts -->
+        <font><name>abk_lp_font10</name><filename>AmazonEmberV2-Medium.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font12</name><filename>AmazonEmberV2-Medium.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font12_bold</name><filename>AmazonEmberV2-Bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font13</name><filename>AmazonEmberV2-Medium.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font13_bold</name><filename>AmazonEmberV2-Bold.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font45</name><filename>AmazonEmberV2-Bold.ttf</filename><size>48</size></font>
+        <font><name>abk_lp_font_body</name><filename>AmazonEmberV2-Medium.ttf</filename><size>26</size><linespacing>1.15</linespacing></font>
+        <font><name>abk_lp_font_caps</name><filename>AmazonEmberV2-Bold.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_clock</name><filename>AmazonEmberV2-Bold.ttf</filename><size>30</size></font>
+        <font><name>abk_lp_font_label_bold</name><filename>AmazonEmberV2-Bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font_pi_11b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>11</size></font>
+        <font><name>abk_lp_font_pi_13b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_14b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>14</size></font>
+        <font><name>abk_lp_font_pi_15</name><filename>AmazonEmberV2-Medium.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_16b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_17</name><filename>AmazonEmberV2-Medium.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_18s</name><filename>AmazonEmberV2-Bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_20b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>20</size></font>
+        <font><name>abk_lp_font_pi_21b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>21</size></font>
+        <font><name>abk_lp_font_pi_34b</name><filename>AmazonEmberV2-Bold.ttf</filename><size>34</size></font>
+        <font><name>abk_lp_font_pi_arrow</name><filename>AmazonEmberV2-Medium.ttf</filename><size>26</size></font>
+        <font><name>abk_lp_font_pi_badge</name><filename>AmazonEmberV2-Bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_core</name><filename>AmazonEmberV2-Medium.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_hint</name><filename>AmazonEmberV2-Medium.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_kick</name><filename>AmazonEmberV2-Bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_m</name><filename>AmazonEmberV2-Medium.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_mb</name><filename>AmazonEmberV2-Bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_row</name><filename>AmazonEmberV2-Medium.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_rowb</name><filename>AmazonEmberV2-Bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_sub</name><filename>AmazonEmberV2-Medium.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_tab</name><filename>AmazonEmberV2-Bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_time</name><filename>AmazonEmberV2-Medium.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_pi_title</name><filename>AmazonEmberV2-Bold.ttf</filename><size>30</size></font>
+
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -345,6 +380,41 @@
     </fontset>
 
     <fontset id="Al-Mohannad" unicode="false">
+        <!-- ABK Lucent Player fonts -->
+        <font><name>abk_lp_font10</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font12</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font12_bold</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font13</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font13_bold</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font45</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>48</size></font>
+        <font><name>abk_lp_font_body</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>26</size><linespacing>1.15</linespacing></font>
+        <font><name>abk_lp_font_caps</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_clock</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>30</size></font>
+        <font><name>abk_lp_font_label_bold</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font_pi_11b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>11</size></font>
+        <font><name>abk_lp_font_pi_13b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_14b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>14</size></font>
+        <font><name>abk_lp_font_pi_15</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_16b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_17</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_18s</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_20b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>20</size></font>
+        <font><name>abk_lp_font_pi_21b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>21</size></font>
+        <font><name>abk_lp_font_pi_34b</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>34</size></font>
+        <font><name>abk_lp_font_pi_arrow</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>26</size></font>
+        <font><name>abk_lp_font_pi_badge</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_core</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_hint</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_kick</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_m</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_mb</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_row</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_rowb</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_sub</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_tab</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_time</name><filename>RobotoNotoCJKsc-Regular.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_pi_title</name><filename>RobotoNotoCJKsc-Bold.ttf</filename><size>30</size></font>
+
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -688,6 +758,41 @@
         </font>
     </fontset>
     <fontset id="iPhone" unicode="true">
+        <!-- ABK Lucent Player fonts -->
+        <font><name>abk_lp_font10</name><filename>iphone.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font12</name><filename>iphone.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font12_bold</name><filename>iphone.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font13</name><filename>iphone.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font13_bold</name><filename>iphone.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font45</name><filename>iphone.ttf</filename><size>48</size></font>
+        <font><name>abk_lp_font_body</name><filename>iphone.ttf</filename><size>26</size><linespacing>1.15</linespacing></font>
+        <font><name>abk_lp_font_caps</name><filename>iphone.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_clock</name><filename>iphone.ttf</filename><size>30</size></font>
+        <font><name>abk_lp_font_label_bold</name><filename>iphone.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font_pi_11b</name><filename>iphone.ttf</filename><size>11</size></font>
+        <font><name>abk_lp_font_pi_13b</name><filename>iphone.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_14b</name><filename>iphone.ttf</filename><size>14</size></font>
+        <font><name>abk_lp_font_pi_15</name><filename>iphone.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_16b</name><filename>iphone.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_17</name><filename>iphone.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_18s</name><filename>iphone.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_20b</name><filename>iphone.ttf</filename><size>20</size></font>
+        <font><name>abk_lp_font_pi_21b</name><filename>iphone.ttf</filename><size>21</size></font>
+        <font><name>abk_lp_font_pi_34b</name><filename>iphone.ttf</filename><size>34</size></font>
+        <font><name>abk_lp_font_pi_arrow</name><filename>iphone.ttf</filename><size>26</size></font>
+        <font><name>abk_lp_font_pi_badge</name><filename>iphone.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_core</name><filename>iphone.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_hint</name><filename>iphone.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_kick</name><filename>iphone.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_m</name><filename>iphone.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_mb</name><filename>iphone.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_row</name><filename>iphone.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_rowb</name><filename>iphone.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_sub</name><filename>iphone.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_tab</name><filename>iphone.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_time</name><filename>iphone.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_pi_title</name><filename>iphone.ttf</filename><size>30</size></font>
+
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -1031,6 +1136,41 @@
         </font>
     </fontset>
     <fontset id="Tunis" unicode="true">
+        <!-- ABK Lucent Player fonts -->
+        <font><name>abk_lp_font10</name><filename>tonos.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font12</name><filename>tonos.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font12_bold</name><filename>tonos bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font13</name><filename>tonos.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font13_bold</name><filename>tonos bold.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font45</name><filename>tonos bold.ttf</filename><size>48</size></font>
+        <font><name>abk_lp_font_body</name><filename>tonos.ttf</filename><size>26</size><linespacing>1.15</linespacing></font>
+        <font><name>abk_lp_font_caps</name><filename>tonos bold.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_clock</name><filename>tonos bold.ttf</filename><size>30</size></font>
+        <font><name>abk_lp_font_label_bold</name><filename>tonos bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font_pi_11b</name><filename>tonos bold.ttf</filename><size>11</size></font>
+        <font><name>abk_lp_font_pi_13b</name><filename>tonos bold.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_14b</name><filename>tonos bold.ttf</filename><size>14</size></font>
+        <font><name>abk_lp_font_pi_15</name><filename>tonos.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_16b</name><filename>tonos bold.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_17</name><filename>tonos.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_18s</name><filename>tonos bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_20b</name><filename>tonos bold.ttf</filename><size>20</size></font>
+        <font><name>abk_lp_font_pi_21b</name><filename>tonos bold.ttf</filename><size>21</size></font>
+        <font><name>abk_lp_font_pi_34b</name><filename>tonos bold.ttf</filename><size>34</size></font>
+        <font><name>abk_lp_font_pi_arrow</name><filename>tonos.ttf</filename><size>26</size></font>
+        <font><name>abk_lp_font_pi_badge</name><filename>tonos bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_core</name><filename>tonos.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_hint</name><filename>tonos.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_kick</name><filename>tonos bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_m</name><filename>tonos.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_mb</name><filename>tonos bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_row</name><filename>tonos.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_rowb</name><filename>tonos bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_sub</name><filename>tonos.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_tab</name><filename>tonos bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_time</name><filename>tonos.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_pi_title</name><filename>tonos bold.ttf</filename><size>30</size></font>
+
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -1374,6 +1514,41 @@
         </font>
     </fontset>
     <fontset id="Hacen Promoter" unicode="true">
+        <!-- ABK Lucent Player fonts -->
+        <font><name>abk_lp_font10</name><filename>Hacen-Promoter_.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font12</name><filename>Hacen-Promoter_.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font12_bold</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font13</name><filename>Hacen-Promoter_.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font13_bold</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font45</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>48</size></font>
+        <font><name>abk_lp_font_body</name><filename>Hacen-Promoter_.ttf</filename><size>26</size><linespacing>1.15</linespacing></font>
+        <font><name>abk_lp_font_caps</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_clock</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>30</size></font>
+        <font><name>abk_lp_font_label_bold</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font_pi_11b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>11</size></font>
+        <font><name>abk_lp_font_pi_13b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_14b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>14</size></font>
+        <font><name>abk_lp_font_pi_15</name><filename>Hacen-Promoter_.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_16b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_17</name><filename>Hacen-Promoter_.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_18s</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_20b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>20</size></font>
+        <font><name>abk_lp_font_pi_21b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>21</size></font>
+        <font><name>abk_lp_font_pi_34b</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>34</size></font>
+        <font><name>abk_lp_font_pi_arrow</name><filename>Hacen-Promoter_.ttf</filename><size>26</size></font>
+        <font><name>abk_lp_font_pi_badge</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_core</name><filename>Hacen-Promoter_.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_hint</name><filename>Hacen-Promoter_.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_kick</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_m</name><filename>Hacen-Promoter_.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_mb</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_row</name><filename>Hacen-Promoter_.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_rowb</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_sub</name><filename>Hacen-Promoter_.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_tab</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_time</name><filename>Hacen-Promoter_.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_pi_title</name><filename>Hacen-Promoter_-Bold.ttf</filename><size>30</size></font>
+
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>
@@ -1717,6 +1892,41 @@
         </font>
     </fontset>
     <fontset id="Jazeerah" unicode="true">
+        <!-- ABK Lucent Player fonts -->
+        <font><name>abk_lp_font10</name><filename>Jazeerah.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font12</name><filename>Jazeerah.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font12_bold</name><filename>Jazeerah_bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font13</name><filename>Jazeerah.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font13_bold</name><filename>Jazeerah_bold.ttf</filename><size>28</size></font>
+        <font><name>abk_lp_font45</name><filename>Jazeerah_bold.ttf</filename><size>48</size></font>
+        <font><name>abk_lp_font_body</name><filename>Jazeerah.ttf</filename><size>26</size><linespacing>1.15</linespacing></font>
+        <font><name>abk_lp_font_caps</name><filename>Jazeerah_bold.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_clock</name><filename>Jazeerah_bold.ttf</filename><size>30</size></font>
+        <font><name>abk_lp_font_label_bold</name><filename>Jazeerah_bold.ttf</filename><size>25</size></font>
+        <font><name>abk_lp_font_pi_11b</name><filename>Jazeerah_bold.ttf</filename><size>11</size></font>
+        <font><name>abk_lp_font_pi_13b</name><filename>Jazeerah_bold.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_14b</name><filename>Jazeerah_bold.ttf</filename><size>14</size></font>
+        <font><name>abk_lp_font_pi_15</name><filename>Jazeerah.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_16b</name><filename>Jazeerah_bold.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_17</name><filename>Jazeerah.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_18s</name><filename>Jazeerah_bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_20b</name><filename>Jazeerah_bold.ttf</filename><size>20</size></font>
+        <font><name>abk_lp_font_pi_21b</name><filename>Jazeerah_bold.ttf</filename><size>21</size></font>
+        <font><name>abk_lp_font_pi_34b</name><filename>Jazeerah_bold.ttf</filename><size>34</size></font>
+        <font><name>abk_lp_font_pi_arrow</name><filename>Jazeerah.ttf</filename><size>26</size></font>
+        <font><name>abk_lp_font_pi_badge</name><filename>Jazeerah_bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_core</name><filename>Jazeerah.ttf</filename><size>13</size></font>
+        <font><name>abk_lp_font_pi_hint</name><filename>Jazeerah.ttf</filename><size>17</size></font>
+        <font><name>abk_lp_font_pi_kick</name><filename>Jazeerah_bold.ttf</filename><size>15</size></font>
+        <font><name>abk_lp_font_pi_m</name><filename>Jazeerah.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_mb</name><filename>Jazeerah_bold.ttf</filename><size>18</size></font>
+        <font><name>abk_lp_font_pi_row</name><filename>Jazeerah.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_rowb</name><filename>Jazeerah_bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_sub</name><filename>Jazeerah.ttf</filename><size>16</size></font>
+        <font><name>abk_lp_font_pi_tab</name><filename>Jazeerah_bold.ttf</filename><size>19</size></font>
+        <font><name>abk_lp_font_pi_time</name><filename>Jazeerah.ttf</filename><size>22</size></font>
+        <font><name>abk_lp_font_pi_title</name><filename>Jazeerah_bold.ttf</filename><size>30</size></font>
+
         <font>
             <name>font23_narrow</name>
             <filename>special://xbmc/media/Fonts/arial.ttf</filename>

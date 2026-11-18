@@ -28,6 +28,13 @@
     <zorder>0</zorder>
 
     <controls>
+        <!-- ABK_LP: Lucent seek bar / pause card -->
+        <control type="group">
+            <visible>VideoPlayer.IsFullscreen + Player.HasVideo</visible>
+            <include>ABK_LP_SeekBar</include>
+        </control>
+        <control type="group">
+            <visible>!VideoPlayer.IsFullscreen | ![Skin.HasSetting(abk.lucentplayer) + !VideoPlayer.Content(livetv) + !Pvr.IsPlayingTV]</visible>
 
         <!-- BACKGROUND ON DISPLAY PLOT -->
 
@@ -52,5 +59,6 @@
         <!-- CLOCK -->
 
         <include>Object_OSD_Video_Clock</include>
+        </control>
     </controls>
 </window>

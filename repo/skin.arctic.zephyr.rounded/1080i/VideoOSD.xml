@@ -19,7 +19,14 @@
 
     <onunload condition="Skin.HasSetting(osd.open.auto.pause) + Player.HasMedia + Player.HasVideo + Player.Paused + !Integer.IsEqual(Window(Home).Property(OSDVideo_DIALOG_VIDEO_INFO),1) + !Integer.IsEqual(Window(Home).Property(wikipedia),1)">PlayerControl(Play)</onunload>
 
+    <!-- ABUKARIM: Lucent Player - its play/pause button takes the focus -->
+    <onload condition="[Skin.HasSetting(abk.lucentplayer) + !VideoPlayer.Content(livetv) + !Pvr.IsPlayingTV]">SetFocus(7103)</onload>
+
     <controls>
+        <!-- ABK_LP: Lucent Player OSD; the AZR OSD stays for live TV / Lucent Player off -->
+        <include>ABK_LP_VideoOSD</include>
+        <control type="group">
+            <visible>![Skin.HasSetting(abk.lucentplayer) + !VideoPlayer.Content(livetv) + !Pvr.IsPlayingTV]</visible>
         <!-- OSD - BUTTONS -->
 
         <include>OSD_Video</include>
@@ -148,6 +155,7 @@
                 <textureslidernib colordiffuse="FFEDEDED">progress/slider_nib.png</textureslidernib>
                 <textureslidernibfocus />
             </control>
+        </control>
         </control>
     </controls>
 </window>

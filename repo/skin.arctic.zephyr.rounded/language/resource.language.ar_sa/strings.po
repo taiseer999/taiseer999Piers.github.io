@@ -2660,3 +2660,23 @@ msgstr "البحث الديناميكي: نتائج TMDb"
 msgctxt "#31657"
 msgid "Dynamic search: library results"
 msgstr "البحث الديناميكي: نتائج المكتبة"
+
+msgctxt "#31658"
+msgid "Lucent Player (OSD, seek bar, pause card, statistics)"
+msgstr "مشغّل Lucent (واجهة التشغيل، شريط التقدّم، بطاقة الإيقاف المؤقت، الإحصاءات)"
+
+msgctxt "#31659"
+msgid "Subtitle sync (DexSubtitles)"
+msgstr "مزامنة الترجمة (DexSubtitles)"
+
+msgctxt "#31660"
+msgid "Next subtitle (Subtitle Cycler)"
+msgstr "الترجمة التالية (Subtitle Cycler)"
+
+msgctxt "#31661"
+msgid "Subtitle look"
+msgstr "مظهر الترجمة"
+
+msgctxt "#31662"
+msgid "TinyPPI"
+msgstr "TinyPPI"

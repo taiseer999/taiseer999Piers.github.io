@@ -1,0 +1,1638 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- AB Tools "AF3: Lucent Player" - the player of the Lucent skin by djdirty60
+     (github.com/djdirty60/Lucent, GPL-2.0-or-later), ported to Arctic Zephyr Rounded (from the AB Tools AF3 port):
+     OSD, seek bar / pause screen, buffering, info screen. Shown while the skin bool
+     abk.lucentplayer is set; live TV keeps the AZR player. Generated - do not hand-edit. --><includes>
+    <!-- 4.8.85: the source badge of a Search All pick (abk.lp.src = ISO / REMUX / BLURAY / WEB ...,
+         set by AB Tools from the release name) when the playing file name has no source word
+         (debrid links such as .../00278.m2ts); otherwise AF3's own Image_VideoPlayer_RipSource. -->
+    <variable name="ABK_LP_RipSource">
+        <value condition="!String.IsEmpty(Window(Home).Property(abk.lp.src))">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.src)].png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,remux)">$VAR[ABK_LP_FlagDir]/REMUX.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,blu-ray) | String.Contains(Player.FileNameAndPath,bluray) | String.Contains(Player.FileNameAndPath,bdrip) | String.Contains(Player.FileNameAndPath,bd25) | String.Contains(Player.FileNameAndPath,bd50)">$VAR[ABK_LP_FlagDir]/BLURAY.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.FileNameAndPath,webdl) | String.Contains(Player.FileNameAndPath,webrip)">$VAR[ABK_LP_FlagDir]/WEB.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,hdtv)">$VAR[ABK_LP_FlagDir]/HDTV.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,pdtv)">$VAR[ABK_LP_FlagDir]/PDTV.png</value>
+        <value condition="String.Contains(Player.FileNameAndPath,dvdrip) | String.Contains(Player.FileNameAndPath,dvd)">$VAR[ABK_LP_FlagDir]/DVDRIP.png</value>
+    </variable>
+    <!-- 4.8.84: Kodi does not expand $VAR inside String.IsEmpty() in a visible condition, so
+         !String.IsEmpty($VAR[Image_VideoPlayer_RipSource]) was always false and the source badge never
+         showed. AZR: own keyword list (REMUX / BluRay / WEB / HDTV / PDTV / DVD). -->
+    <expression name="ABK_LP_HasRipSource">String.Contains(Player.FileNameAndPath,remux) | String.Contains(Player.FileNameAndPath,blu-ray) | String.Contains(Player.FileNameAndPath,bluray) | String.Contains(Player.FileNameAndPath,bdrip) | String.Contains(Player.FileNameAndPath,bd25) | String.Contains(Player.FileNameAndPath,bd50) | String.Contains(Player.FileNameAndPath,web-dl) | String.Contains(Player.FileNameAndPath,webdl) | String.Contains(Player.FileNameAndPath,webrip) | String.Contains(Player.FileNameAndPath,hdtv) | String.Contains(Player.FileNameAndPath,pdtv) | String.Contains(Player.FileNameAndPath,dvdrip) | String.Contains(Player.FileNameAndPath,dvd)</expression>
+    <!-- 4.8.74: OSD extras in the Lucent Player rows (af3_flagstyle.py) -->
+    <variable name="ABK_LP_ExtraDir">
+        <value condition="String.IsEqual(Skin.String(abk.flagstyle),colorful) + System.AddonIsEnabled(resource.images.af3.classicflags)">resource://resource.images.af3.classicflags/colorful</value>
+        <value condition="!String.IsEmpty(Skin.String(abk.flagstyle)) + !String.IsEqual(Skin.String(abk.flagstyle),off) + System.AddonIsEnabled(resource.images.af3.frbadges)">resource://resource.images.af3.frbadges/$INFO[Skin.String(abk.flagstyle)]</value>
+        <value condition="System.AddonIsEnabled(resource.images.af3.frbadges)">resource://resource.images.af3.frbadges/lucent</value>
+        <value condition="System.AddonIsEnabled(resource.images.af3.classicflags)">resource://resource.images.af3.classicflags/colorful</value>
+        <value>flags/colorful</value>
+    </variable>
+
+    <!-- 4.8.69: AF3 OSD Flags Style (af3_flagstyle.py) -->
+    <variable name="ABK_LP_FlagDir">
+        <value condition="String.IsEqual(Skin.String(abk.flagstyle),off)">abk_lp/flags</value>
+        <value condition="!String.IsEmpty(Skin.String(abk.flagstyle)) + System.AddonIsEnabled(resource.images.af3.frbadges)">resource://resource.images.af3.frbadges/$INFO[Skin.String(abk.flagstyle)]/lucent_player</value>
+        <value>abk_lp/flags</value>
+    </variable>
+
+<include name="ABK_LP_GlassPanel">
+        <param name="left">0</param>
+        <param name="top">0</param>
+        <param name="width">600</param>
+        <param name="height">400</param>
+        <param name="body">panel</param>
+        <definition>
+            <control type="group">
+                <left>$PARAM[left]</left>
+                <top>$PARAM[top]</top>
+                <width>$PARAM[width]</width>
+                <height>$PARAM[height]</height>
+                <control type="image">
+                    <left>-40</left>
+                    <top>-40</top>
+                    <right>-40</right>
+                    <bottom>-40</bottom>
+                    <texture border="88">abk_lp/panel_shadow.png</texture>
+                    <colordiffuse>99000000</colordiffuse>
+                </control>
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <right>0</right>
+                    <bottom>0</bottom>
+                    <texture border="48">abk_lp/panel.png</texture>
+                    <colordiffuse>$PARAM[body]</colordiffuse>
+                </control>
+                <control type="image">
+                    <left>0</left>
+                    <top>0</top>
+                    <right>0</right>
+                    <bottom>0</bottom>
+                    <texture border="48">abk_lp/panel_edge.png</texture>
+                    <colordiffuse>2EFFFFFF</colordiffuse>
+                </control>
+            </control>
+        </definition>
+    </include>
+<include name="ABK_LP_Spinner">
+        <param name="size">64</param>
+        <definition>
+            <control type="image">
+                <width>$PARAM[size]</width>
+                <height>$PARAM[size]</height>
+                <texture>abk_lp/spinner.png</texture>
+                <colordiffuse>FFFFFFFF</colordiffuse>
+                <animation effect="rotate" start="0" end="-360" center="auto" time="900" loop="true" condition="true">Conditional</animation>
+            </control>
+        </definition>
+    </include>
+<include name="ABK_LP_TextAutoScroll">
+        <autoscroll delay="6000" time="3000" repeat="8000">true</autoscroll>
+    </include>
+<variable name="ABK_LP_NuvioFlagImg_acodec">
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,dtshd_ma_x) + !String.IsEmpty(Skin.String(abk.lp.flag.dtsx))">$INFO[Skin.String(abk.lp.flag.dtsx)]</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,dtshd_ma_x)">$VAR[ABK_LP_FlagDir]/DTS-X.png</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,truehd) + !String.IsEmpty(Skin.String(abk.lp.flag.truehd))">$INFO[Skin.String(abk.lp.flag.truehd)]</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,truehd)">$VAR[ABK_LP_FlagDir]/TRUEHD.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma) + !String.IsEmpty(Skin.String(abk.lp.flag.dtshd_ma))">$INFO[Skin.String(abk.lp.flag.dtshd_ma)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma)">$VAR[ABK_LP_FlagDir]/DTS-HDMA.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra) + !String.IsEmpty(Skin.String(abk.lp.flag.dtshd_hra))">$INFO[Skin.String(abk.lp.flag.dtshd_hra)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra)">$VAR[ABK_LP_FlagDir]/DTS-HDHR.png</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,dts) + !String.IsEmpty(Skin.String(abk.lp.flag.dts))">$INFO[Skin.String(abk.lp.flag.dts)]</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,dts)">$VAR[ABK_LP_FlagDir]/DTS.png</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,eac3) + !String.IsEmpty(Skin.String(abk.lp.flag.eac3))">$INFO[Skin.String(abk.lp.flag.eac3)]</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,eac3)">$VAR[ABK_LP_FlagDir]/DD+.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,ac3) + !String.IsEmpty(Skin.String(abk.lp.flag.ac3))">$INFO[Skin.String(abk.lp.flag.ac3)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,ac3)">$VAR[ABK_LP_FlagDir]/DD.png</value>
+        <value condition="[String.StartsWith(VideoPlayer.AudioCodec,aac) | String.StartsWith(VideoPlayer.AudioCodec,he_aac)] + !String.IsEmpty(Skin.String(abk.lp.flag.aac))">$INFO[Skin.String(abk.lp.flag.aac)]</value>
+        <value condition="[String.StartsWith(VideoPlayer.AudioCodec,aac) | String.StartsWith(VideoPlayer.AudioCodec,he_aac)]">$VAR[ABK_LP_FlagDir]/AAC.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,flac) + !String.IsEmpty(Skin.String(abk.lp.flag.flac))">$INFO[Skin.String(abk.lp.flag.flac)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,flac)">$VAR[ABK_LP_FlagDir]/FLAC.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,opus) + !String.IsEmpty(Skin.String(abk.lp.flag.opus))">$INFO[Skin.String(abk.lp.flag.opus)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,opus)">$VAR[ABK_LP_FlagDir]/OPUS.png</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,pcm) + !String.IsEmpty(Skin.String(abk.lp.flag.pcm))">$INFO[Skin.String(abk.lp.flag.pcm)]</value>
+        <value condition="String.StartsWith(VideoPlayer.AudioCodec,pcm)">$VAR[ABK_LP_FlagDir]/PCM.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,mp3) + !String.IsEmpty(Skin.String(abk.lp.flag.mp3))">$INFO[Skin.String(abk.lp.flag.mp3)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioCodec,mp3)">$VAR[ABK_LP_FlagDir]/MP3.png</value>
+    </variable>
+<variable name="ABK_LP_NuvioFlagImg_atmos">
+        <value condition="[String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)] + !String.IsEmpty(Skin.String(abk.lp.flag.atmos))">$INFO[Skin.String(abk.lp.flag.atmos)]</value>
+        <value condition="[String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]">$VAR[ABK_LP_FlagDir]/ATMOS.png</value>
+    </variable>
+<variable name="ABK_LP_NuvioFlagImg_ch">
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,8) + !String.IsEmpty(Skin.String(abk.lp.flag.71))">$INFO[Skin.String(abk.lp.flag.71)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,8)">$VAR[ABK_LP_FlagDir]/7.1.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,7) + !String.IsEmpty(Skin.String(abk.lp.flag.61))">$INFO[Skin.String(abk.lp.flag.61)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,7)">$VAR[ABK_LP_FlagDir]/6.1.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,6) + !String.IsEmpty(Skin.String(abk.lp.flag.51))">$INFO[Skin.String(abk.lp.flag.51)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,6)">$VAR[ABK_LP_FlagDir]/5.1.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,2) + !String.IsEmpty(Skin.String(abk.lp.flag.20))">$INFO[Skin.String(abk.lp.flag.20)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,2)">$VAR[ABK_LP_FlagDir]/2.0.png</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,1) + !String.IsEmpty(Skin.String(abk.lp.flag.10))">$INFO[Skin.String(abk.lp.flag.10)]</value>
+        <value condition="String.IsEqual(VideoPlayer.AudioChannels,1)">$VAR[ABK_LP_FlagDir]/1.0.png</value>
+    </variable>
+<variable name="ABK_LP_NuvioFlagImg_hdr">
+        <value condition="$EXP[ABK_LP_LucentDV2Named]">$VAR[ABK_LP_FlagDir]/DV2.png</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision) + !String.IsEmpty(Skin.String(abk.lp.flag.dolbyvision))">$INFO[Skin.String(abk.lp.flag.dolbyvision)]</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,dolbyvision)">$VAR[ABK_LP_FlagDir]/DV.png</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,hdr10plus) + !String.IsEmpty(Skin.String(abk.lp.flag.hdr10plus))">$INFO[Skin.String(abk.lp.flag.hdr10plus)]</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,hdr10plus)">$VAR[ABK_LP_FlagDir]/HDR10+.png</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,hdr10) + !String.IsEmpty(Skin.String(abk.lp.flag.hdr10))">$INFO[Skin.String(abk.lp.flag.hdr10)]</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,hdr10)">$VAR[ABK_LP_FlagDir]/HDR10.png</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,hlg) + !String.IsEmpty(Skin.String(abk.lp.flag.hlg))">$INFO[Skin.String(abk.lp.flag.hlg)]</value>
+        <value condition="String.IsEqual(VideoPlayer.HdrType,hlg)">$VAR[ABK_LP_FlagDir]/HLG.png</value>
+    </variable>
+<variable name="ABK_LP_NuvioFlagImg_res">
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,8K) + !String.IsEmpty(Skin.String(abk.lp.flag.8k))">$INFO[Skin.String(abk.lp.flag.8k)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,8K)">$VAR[ABK_LP_FlagDir]/8K.png</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,4K) + !String.IsEmpty(Skin.String(abk.lp.flag.4k))">$INFO[Skin.String(abk.lp.flag.4k)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,4K)">$VAR[ABK_LP_FlagDir]/4K.png</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,1080) + !String.IsEmpty(Skin.String(abk.lp.flag.1080))">$INFO[Skin.String(abk.lp.flag.1080)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,1080)">$VAR[ABK_LP_FlagDir]/1080P.png</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,720) + !String.IsEmpty(Skin.String(abk.lp.flag.720))">$INFO[Skin.String(abk.lp.flag.720)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoResolution,720)">$VAR[ABK_LP_FlagDir]/720P.png</value>
+        <value condition="[String.IsEqual(VideoPlayer.VideoResolution,480) | String.IsEqual(VideoPlayer.VideoResolution,540) | String.IsEqual(VideoPlayer.VideoResolution,576)] + !String.IsEmpty(Skin.String(abk.lp.flag.sd))">$INFO[Skin.String(abk.lp.flag.sd)]</value>
+        <value condition="[String.IsEqual(VideoPlayer.VideoResolution,480) | String.IsEqual(VideoPlayer.VideoResolution,540) | String.IsEqual(VideoPlayer.VideoResolution,576)]">$VAR[ABK_LP_FlagDir]/SD.png</value>
+    </variable>
+<variable name="ABK_LP_NuvioFlagImg_vcodec">
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,hevc) + !String.IsEmpty(Skin.String(abk.lp.flag.hevc))">$INFO[Skin.String(abk.lp.flag.hevc)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,hevc)">$VAR[ABK_LP_FlagDir]/HEVC.png</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,av1) + !String.IsEmpty(Skin.String(abk.lp.flag.av1))">$INFO[Skin.String(abk.lp.flag.av1)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,av1)">$VAR[ABK_LP_FlagDir]/AV1.png</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,h264) + !String.IsEmpty(Skin.String(abk.lp.flag.h264))">$INFO[Skin.String(abk.lp.flag.h264)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,h264)">$VAR[ABK_LP_FlagDir]/AVC.png</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,vp9) + !String.IsEmpty(Skin.String(abk.lp.flag.vp9))">$INFO[Skin.String(abk.lp.flag.vp9)]</value>
+        <value condition="String.IsEqual(VideoPlayer.VideoCodec,vp9)">$VAR[ABK_LP_FlagDir]/VP9.png</value>
+    </variable>
+<variable name="ABK_LP_OSDButtonLabel">
+        <value condition="Control.HasFocus(7101)">$ADDON[plugin.program.abukarimtools 32007]</value>
+        <value condition="Control.HasFocus(7102)">$ADDON[plugin.program.abukarimtools 32011]</value>
+        <value condition="Control.HasFocus(7103) + !Player.Paused">$ADDON[plugin.program.abukarimtools 32009]</value>
+        <value condition="Control.HasFocus(7103) + Player.Paused">$LOCALIZE[208]</value>
+        <value condition="Control.HasFocus(7105)">$ADDON[plugin.program.abukarimtools 32012]</value>
+        <value condition="Control.HasFocus(7106)">$ADDON[plugin.program.abukarimtools 32006]</value>
+        <value condition="Control.HasFocus(7111)">$ADDON[plugin.program.abukarimtools 32001]</value>
+        <value condition="Control.HasFocus(7118)">$ADDON[plugin.program.abukarimtools 32037]</value>
+        <value condition="Control.HasFocus(7112)">$ADDON[plugin.program.abukarimtools 32002]</value>
+        <value condition="Control.HasFocus(7113)">$ADDON[plugin.program.abukarimtools 32003]</value>
+        <value condition="Control.HasFocus(7114)">$ADDON[plugin.program.abukarimtools 32004]</value>
+        <value condition="Control.HasFocus(7117)">$ADDON[plugin.program.abukarimtools 32014]</value>
+        <value condition="Control.HasFocus(7119)">$ADDON[plugin.program.abukarimtools 32036]$INFO[Window(Home).Property(lucent.sleep.label), · ,]</value>
+        <value condition="Control.HasFocus(7120)">$LOCALIZE[31659]</value>
+        <value condition="Control.HasFocus(7121)">$LOCALIZE[31660]</value>
+        <value condition="Control.HasFocus(7122)">$LOCALIZE[31661]</value>
+        <value condition="Control.HasFocus(7123)">$LOCALIZE[31662]</value>
+        <value condition="Control.HasFocus(7115)">$ADDON[plugin.program.abukarimtools 32008]</value>
+        <value condition="Control.HasFocus(7116)">$ADDON[plugin.program.abukarimtools 32005]</value>
+        <value condition="Control.HasFocus(220)">$LOCALIZE[5]</value>
+        <value condition="Control.HasFocus(402)">$ADDON[plugin.program.abukarimtools 32033]</value>
+        <value condition="Control.HasFocus(403)">$ADDON[plugin.program.abukarimtools 32034]</value>
+        <value condition="Control.HasFocus(406)">$ADDON[plugin.program.abukarimtools 32012]</value>
+        <value condition="Control.HasFocus(407)">$ADDON[plugin.program.abukarimtools 32006]</value>
+        <value condition="Control.HasFocus(411)">$ADDON[plugin.program.abukarimtools 32001]</value>
+        <value condition="Control.HasFocus(412)">$ADDON[plugin.program.abukarimtools 32002]</value>
+        <value condition="Control.HasFocus(413)">$ADDON[plugin.program.abukarimtools 32003]</value>
+        <value condition="Control.HasFocus(414)">$ADDON[plugin.program.abukarimtools 32035]</value>
+        <value condition="Control.HasFocus(417)">$ADDON[plugin.program.abukarimtools 32014]</value>
+        <value condition="Control.HasFocus(418)">$ADDON[plugin.program.abukarimtools 32036]$INFO[Window(Home).Property(lucent.sleep.label), · ,]</value>
+        <value condition="Control.HasFocus(419)">$ADDON[plugin.program.abukarimtools 32038]</value>
+        <value condition="Control.HasFocus(415)">$ADDON[plugin.program.abukarimtools 32008]</value>
+        <value condition="Control.HasFocus(416)">$ADDON[plugin.program.abukarimtools 32005]</value>
+    </variable>
+<variable name="ABK_LP_PlayerLogo">
+        <value condition="!String.IsEmpty(Player.Art(clearlogo))">$INFO[Player.Art(clearlogo)]</value>
+        <value condition="!String.IsEmpty(Player.Art(tvshow.clearlogo))">$INFO[Player.Art(tvshow.clearlogo)]</value>
+    </variable>
+<variable name="ABK_LP_PlayerSubtitle">
+        <value condition="Pvr.IsPlayingTV">$INFO[VideoPlayer.Genre]</value>
+        <value condition="!String.IsEmpty(VideoPlayer.TVShowTitle) + !String.IsEmpty(VideoPlayer.Season)">S$INFO[VideoPlayer.Season] · E$INFO[VideoPlayer.Episode]   $INFO[VideoPlayer.Title]</value>
+        <value>$INFO[VideoPlayer.Year]$INFO[VideoPlayer.Genre,   ,]</value>
+    </variable>
+<variable name="ABK_LP_PlayerTitle">
+        <value condition="Pvr.IsPlayingTV + !String.IsEmpty(VideoPlayer.ChannelName)">$INFO[VideoPlayer.ChannelNumberLabel,,   ]$INFO[VideoPlayer.ChannelName]</value>
+        <value condition="!String.IsEmpty(VideoPlayer.TVShowTitle)">$INFO[VideoPlayer.TVShowTitle]</value>
+        <value condition="!String.IsEmpty(VideoPlayer.Title)">$INFO[VideoPlayer.Title]</value>
+        <value>$INFO[Player.Title]</value>
+    </variable>
+<expression name="ABK_LP_LucentDV2Named">String.IsEqual(VideoPlayer.HdrType,dolbyvision) + [String.Contains(Player.Filename,.dv2.) | String.Contains(Player.Filename,.dv2-) | String.Contains(Player.Filename,-dv2.) | String.Contains(Player.Filename,_dv2_) | String.Contains(Player.Filename,.dv2_) | String.Contains(Player.Filename,dovi2) | String.Contains(Player.Filename,dovi.2.) | String.Contains(Player.Filename,dolby.vision.2.) | String.Contains(Player.Filename,dolbyvision2) | String.Contains(Player.FilenameAndPath,.dv2.) | String.Contains(Player.FilenameAndPath,.dv2-) | String.Contains(Player.FilenameAndPath,-dv2.) | String.Contains(Player.FilenameAndPath,_dv2_) | String.Contains(Player.FilenameAndPath,.dv2_) | String.Contains(Player.FilenameAndPath,dovi2) | String.Contains(Player.FilenameAndPath,dovi.2.) | String.Contains(Player.FilenameAndPath,dolby.vision.2.) | String.Contains(Player.FilenameAndPath,dolbyvision2)]</expression>
+<expression name="ABK_LP_NuvioPauseInfo">Player.Paused + !Player.Seeking + !Player.Caching + !String.IsEqual(Skin.String(abk.lp.pauseinfo),off) + [[String.IsEmpty(Skin.String(abk.lp.pauseinfo)) + System.IdleTime(5)] | [String.IsEqual(Skin.String(abk.lp.pauseinfo),3) + System.IdleTime(3)] | [String.IsEqual(Skin.String(abk.lp.pauseinfo),5) + System.IdleTime(5)] | [String.IsEqual(Skin.String(abk.lp.pauseinfo),10) + System.IdleTime(10)] | [String.IsEqual(Skin.String(abk.lp.pauseinfo),15) + System.IdleTime(15)] | [String.IsEqual(Skin.String(abk.lp.pauseinfo),30) + System.IdleTime(30)] | [String.IsEqual(Skin.String(abk.lp.pauseinfo),60) + System.IdleTime(60)]]</expression>
+<expression name="ABK_LP_OSDShowPlay">Player.Paused | Player.Forwarding | Player.Rewinding</expression>
+    <include name="ABK_LP_VideoOSD">
+        <control type="group">
+            <visible>Skin.HasSetting(abk.lucentplayer) + !Pvr.IsPlayingTV</visible>
+<control type="image">
+            <left>0</left>
+            <top>0</top>
+            <width>1920</width>
+            <height>360</height>
+            <texture>abk_lp/osd_grad_top.png</texture>
+            <colordiffuse>E6000000</colordiffuse>
+        </control>
+        
+<control type="image">
+            <left>0</left>
+            <top>560</top>
+            <width>1920</width>
+            <height>520</height>
+            <texture>abk_lp/osd_grad_bottom.png</texture>
+            <colordiffuse>F2000000</colordiffuse>
+        </control>
+        
+<control type="group">
+            <visible>!Pvr.IsPlayingTV</visible>
+            <animation effect="slide" start="0,-40" end="0,0" time="300" tween="cubic" easing="out">WindowOpen</animation>
+        <!-- Logo / title -->
+        <control type="group">
+            <!-- ABK_LP_AZR: Lucent position -->
+            <left>96</left>
+            <top>56</top>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>440</width>
+                <height>150</height>
+                <aspectratio align="left" aligny="center">keep</aspectratio>
+                <texture background="true">$VAR[ABK_LP_PlayerLogo]</texture>
+            </control>
+            <control type="label">
+                <left>0</left>
+                <top>40</top>
+                <width>1300</width>
+                <height>70</height>
+                <font>abk_lp_font45</font>
+                <label>$VAR[ABK_LP_PlayerTitle]</label>
+                <visible>String.IsEmpty(Player.Art(clearlogo)) + String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+            <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="label">
+                <left>0</left>
+                <top>160</top>
+                <width>1300</width>
+                <height>40</height>
+                <font>abk_lp_font13_bold</font>
+                <textcolor>FFDCE2E7</textcolor>
+                <label>$VAR[ABK_LP_PlayerSubtitle]</label>
+            <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        </control>
+
+        <!-- ABK_LP_AF3_LAYOUT: format flags (Lucent pause card) --><control type="grouplist">
+                    <top>772</top><left>96</left><width>1728</width>
+                    <height>41</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>10</itemgap>
+                    <visible>true</visible>
+                <!-- ABK_LP_ROW_499 -->
+<!-- ABK_LP_EXTRAS -->
+                <!-- 4.9.9 order: source, resolution, HDR, bit depth, audio, DTS core, video codec, container, channels, aspect, language, multi audio, subtitles -->
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_RipSource]</texture>
+                    <visible>$EXP[ABK_LP_HasRipSource] | !String.IsEmpty(Window(Home).Property(abk.lp.src))</visible>
+                </control>
+                <!-- 4.8.88: IMAX (release name of a Search All pick, or the file name) -->
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/IMAX.png</texture>
+                    <visible>String.Contains(Player.FileNameAndPath,imax) | !String.IsEmpty(Window(Home).Property(abk.lp.imax))</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_res]</texture>
+                    <visible>String.IsEqual(VideoPlayer.VideoResolution,8K) | String.IsEqual(VideoPlayer.VideoResolution,4K) | String.IsEqual(VideoPlayer.VideoResolution,1080) | String.IsEqual(VideoPlayer.VideoResolution,720) | [String.IsEqual(VideoPlayer.VideoResolution,480) | String.IsEqual(VideoPlayer.VideoResolution,540) | String.IsEqual(VideoPlayer.VideoResolution,576)]</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_hdr]</texture>
+                    <visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.bits)]-BIT.png</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(abk.lp.bits))</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_atmos]</texture>
+                    <visible>[String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_acodec]</texture>
+                    <visible>String.StartsWith(VideoPlayer.AudioCodec,dtshd_ma_x) | String.StartsWith(VideoPlayer.AudioCodec,truehd) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra) | String.StartsWith(VideoPlayer.AudioCodec,dts) | String.StartsWith(VideoPlayer.AudioCodec,eac3) | String.IsEqual(VideoPlayer.AudioCodec,ac3) | [String.StartsWith(VideoPlayer.AudioCodec,aac) | String.StartsWith(VideoPlayer.AudioCodec,he_aac)] | String.IsEqual(VideoPlayer.AudioCodec,flac) | String.IsEqual(VideoPlayer.AudioCodec,opus) | String.StartsWith(VideoPlayer.AudioCodec,pcm) | String.IsEqual(VideoPlayer.AudioCodec,mp3)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS.png</texture>
+                    <visible>String.StartsWith(VideoPlayer.AudioCodec,dtshd)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_vcodec]</texture>
+                    <visible>String.IsEqual(VideoPlayer.VideoCodec,hevc) | String.IsEqual(VideoPlayer.VideoCodec,av1) | String.IsEqual(VideoPlayer.VideoCodec,h264) | String.IsEqual(VideoPlayer.VideoCodec,vp9)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.cont)].png</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(abk.lp.cont))</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_ch]</texture>
+                    <visible>String.IsEqual(VideoPlayer.AudioChannels,8) | String.IsEqual(VideoPlayer.AudioChannels,7) | String.IsEqual(VideoPlayer.AudioChannels,6) | String.IsEqual(VideoPlayer.AudioChannels,2) | String.IsEqual(VideoPlayer.AudioChannels,1)</visible>
+                </control>
+                <control type="image">
+                    <width>88</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_ExtraDir]/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+                </control>
+                <control type="image">
+                    <width>128</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true" fallback="$VAR[ABK_LP_ExtraDir]/other/language/fallback.png">$VAR[ABK_LP_ExtraDir]/other/language/$INFO[VideoPlayer.AudioLanguage].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/MULTI.png</texture>
+                    <visible>String.IsEqual(Window(Home).Property(abk.lp.multi),1)</visible>
+                </control>
+                <control type="image">
+                    <width>128</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true" fallback="$VAR[ABK_LP_ExtraDir]/other/language/fallback.png">$VAR[ABK_LP_ExtraDir]/other/language/$INFO[VideoPlayer.SubtitlesLanguage].png</texture>
+                    <visible>VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
+                </control>
+                </control>
+            <control type="label">
+            <right>96</right>
+            <top>56</top>
+            <width>500</width>
+            <height>44</height>
+            <align>right</align>
+            <font>abk_lp_font_clock</font>
+            <label>$INFO[System.Time]</label>
+            <visible>true</visible>
+        <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        <control type="label">
+            <right>96</right>
+            <top>100</top>
+            <width>500</width>
+            <height>36</height>
+            <align>right</align>
+            <font>abk_lp_font10</font>
+            <textcolor>FFBDC8D1</textcolor>
+            <label>$ADDON[plugin.program.abukarimtools 32000] $INFO[Player.FinishTime]</label>
+            <visible>Player.HasDuration + true</visible>
+        <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        </control>
+        
+<control type="group">
+            <animation effect="slide" start="0,60" end="0,0" time="320" tween="cubic" easing="out">WindowOpen</animation>
+            <animation effect="slide" start="0,0" end="0,60" time="220" tween="cubic" easing="in">WindowClose</animation>
+        <control type="group">
+            <left>96</left>
+            <top>892</top>
+            <width>1728</width>
+            <visible>!Pvr.IsPlayingTV</visible>
+            <control type="label">
+                <left>0</left>
+                <top>-56</top>
+                <width>400</width>
+                <height>40</height>
+                <font>abk_lp_font13_bold</font>
+                <label>$INFO[Player.Time]</label>
+            <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="label">
+                <right>0</right>
+                <top>-56</top>
+                <width>600</width>
+                <height>40</height>
+                <align>right</align>
+                <font>abk_lp_font13</font>
+                <textcolor>FFBDC8D1</textcolor>
+                <label>-$INFO[Player.TimeRemaining]   /   $INFO[Player.Duration]</label>
+            <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="progress">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>6</height>
+                <info>Player.ProgressCache</info>
+                <texturebg border="3" colordiffuse="26FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="40FFFFFF">abk_lp/pill6.png</midtexture>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+            <control type="progress">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>6</height>
+                <info>Player.Progress</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="FFFFFFFF">abk_lp/pill6.png</midtexture>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+            <control type="progress">
+                <left>0</left>
+                <top>-3</top>
+                <width>1728</width>
+                <height>12</height>
+                <info>Player.Progress</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="FFFFFFFF">abk_lp/pill6.png</midtexture>
+                <visible>Control.HasFocus(7087)</visible>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+            <!-- the progress bar: Left / Right jump 10 s back / forward, Down goes to the buttons.
+                 A Kodi slider ate Left / Right without moving the film and kept Down, so this is a button now. -->
+            <control type="button" id="7087">
+                <left>0</left>
+                <top>-10</top>
+                <width>1728</width>
+                <height>26</height>
+                <label/>
+                <texturefocus>abk_lp/slider_track26.png</texturefocus>
+                <texturenofocus>abk_lp/slider_track26.png</texturenofocus>
+                <onleft>Seek(-10)</onleft>
+                <onright>Seek(10)</onright>
+                <onclick>PlayerControl(Play)</onclick>
+                <ondown>7100</ondown>
+                <onup>noop</onup>
+                <visible>Player.SeekEnabled</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+        </control>
+            <!-- ABK_LP_AZR: Lucent button row (AZR has no AF3 OSD buttons) -->
+            <control type="grouplist" id="7100">
+                <left>40</left>
+                <top>936</top>
+                <width>1840</width>
+                <height>104</height>
+                <orientation>horizontal</orientation>
+                <align>center</align>
+                <itemgap>14</itemgap>
+                <onup>7087</onup>
+                <visible>!Pvr.IsPlayingTV</visible>
+                <usecontrolcoords>false</usecontrolcoords>
+            <control type="button" id="7101">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/prev_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/prev_nf.png</texturenofocus>
+                <onclick>PlayerControl(Previous)</onclick>
+                <visible>VideoPlayer.Content(episodes) | !String.IsEmpty(VideoPlayer.TVShowTitle)</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7102">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/rewind_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/rewind_nf.png</texturenofocus>
+                <onclick>Seek(-10)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7116">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/stop_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/stop_nf.png</texturenofocus>
+                <onclick>PlayerControl(Stop)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <!-- one button for play and pause (two buttons that swap made the focus jump to the first button);
+                 a button cannot change its picture, so the pictures are images on top of an empty button -->
+            <control type="group" id="8031">
+                <width>104</width>
+                <height>104</height>
+                <defaultcontrol>7103</defaultcontrol>
+                <control type="button" id="7103">
+                    <left>0</left>
+                    <top>0</top>
+                    <width>104</width>
+                    <height>104</height>
+                    <label/>
+                    <texturefocus/>
+                    <texturenofocus/>
+                    <onclick>PlayerControl(Play)</onclick>
+                    <!-- inside a group the grouplist does not link it to its neighbours, so it is done here -->
+                    <onleft>7116</onleft>
+                    <onright>7105</onright>
+                    <onup>7087</onup>
+                <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+                <control type="image"><left>0</left><top>0</top><width>104</width><height>104</height><texture>abk_lp/buttons/pause_fo.png</texture><visible>Control.HasFocus(7103) + !$EXP[ABK_LP_OSDShowPlay]</visible></control><control type="image"><left>0</left><top>0</top><width>104</width><height>104</height><texture>abk_lp/buttons/pause_nf.png</texture><visible>!Control.HasFocus(7103) + !$EXP[ABK_LP_OSDShowPlay]</visible></control><control type="image"><left>0</left><top>0</top><width>104</width><height>104</height><texture>abk_lp/buttons/play_fo.png</texture><visible>Control.HasFocus(7103) + $EXP[ABK_LP_OSDShowPlay]</visible></control><control type="image"><left>0</left><top>0</top><width>104</width><height>104</height><texture>abk_lp/buttons/play_nf.png</texture><visible>!Control.HasFocus(7103) + $EXP[ABK_LP_OSDShowPlay]</visible></control>
+            </control>
+            <control type="button" id="7105">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/forward_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/forward_nf.png</texturenofocus>
+                <onclick>Seek(30)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7106">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/next_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/next_nf.png</texturenofocus>
+                <onclick>PlayerControl(Next)</onclick>
+                <visible>VideoPlayer.Content(episodes) | !String.IsEmpty(VideoPlayer.TVShowTitle)</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="label" id="7190">
+                <width>40</width>
+                <height>84</height>
+                <label/>
+            <font>abk_lp_font12</font><textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="button" id="7111">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/subtitles_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/subtitles_nf.png</texturenofocus>
+                <onclick condition="true">RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_list)</onclick>
+                <onclick condition="false">ActivateWindow(osdsubtitlesettings)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <!-- ABK_LP_AZR: DexSubtitles AutoSync (AF3 subtitle buttons) -->
+            <control type="button" id="7120">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/dexsync_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/dexsync_nf.png</texturenofocus>
+                <onclick>RunScript(special://home/addons/service.subtitles.dexworld/abk_osd_sync.py)</onclick>
+                <visible>System.AddonIsEnabled(service.subtitles.dexworld)</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <!-- ABK_LP_AZR: Subtitle Cycler -->
+            <control type="button" id="7121">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/subcycler_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/subcycler_nf.png</texturenofocus>
+                <onclick condition="System.AddonIsEnabled(script.subtitle.cycler)">RunScript(script.subtitle.cycler)</onclick>
+                <onclick condition="!System.AddonIsEnabled(script.subtitle.cycler)">RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_cycler)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <!-- ABK_LP_AZR: Subtitle look -->
+            <control type="button" id="7122">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/substyle_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/substyle_nf.png</texturenofocus>
+                <onclick>RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_style)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7118">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/search_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/search_nf.png</texturenofocus>
+                <onclick condition="true">RunPlugin(plugin://plugin.program.abukarimtools/?mode=subtitle_list)</onclick>
+                <onclick condition="false">ActivateWindow(subtitlesearch)</onclick>
+                <visible>false</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7112">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/audio_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/audio_nf.png</texturenofocus>
+                <onclick>ActivateWindow(osdaudiosettings)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7113">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/videosettings_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/videosettings_nf.png</texturenofocus>
+                <onclick>ActivateWindow(osdvideosettings)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7114">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/bookmark_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/bookmark_nf.png</texturenofocus>
+                <onclick>ActivateWindow(videobookmarks)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7117">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/stats_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/stats_nf.png</texturenofocus>
+                <onclick>RunScript(special://home/addons/plugin.program.abukarimtools/resources/lib/lucent_playerinfo.py,open)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <!-- ABK_LP_AZR: TinyPPI -->
+            <control type="button" id="7123">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/tinyppi_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/tinyppi_nf.png</texturenofocus>
+                <onclick>Dialog.Close(videoosd,true)</onclick>
+                <onclick>RunScript(script.tinyppi,dialog)</onclick>
+                <visible>System.AddonIsEnabled(script.tinyppi)</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7119">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/sleep_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/sleep_nf.png</texturenofocus>
+                <onclick>RunScript(special://home/addons/plugin.program.abukarimtools/resources/lib/lucent_sleep.py)</onclick>
+                <visible>true</visible>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            <control type="button" id="7115">
+                <width>84</width>
+                <height>84</height>
+                <label/>
+                <texturefocus>abk_lp/buttons/info_fo.png</texturefocus>
+                <texturenofocus>abk_lp/buttons/info_nf.png</texturenofocus>
+                <onclick>Dialog.Close(videoosd,true)</onclick>
+                <visible>true</visible>
+                <onclick>ActivateWindow(fullscreeninfo)</onclick>
+            <font>abk_lp_font_label_bold</font><textcolor>FFFFFFFF</textcolor><focusedcolor>FF0B1119</focusedcolor><disabledcolor>FF6F7C88</disabledcolor><selectedcolor>FFFFFFFF</selectedcolor><textoffsetx>30</textoffsetx><aligny>center</aligny><pulseonselect>false</pulseonselect></control>
+            </control>
+            <!-- Focused button name -->
+            <control type="label">
+                <visible>!Pvr.IsPlayingTV</visible>
+                <left>96</left>
+                <top>1040</top>
+                <width>1728</width>
+                <height>34</height>
+                <align>center</align>
+                <font>abk_lp_font10</font>
+                <textcolor>FFBDC8D1</textcolor>
+                <label>$VAR[ABK_LP_OSDButtonLabel]</label>
+            <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            </control>
+
+
+<!-- TV player: the mini guide (example 3) -->
+<!-- sport: the bar of the player menu (P1) -->
+<!-- sport bar end -->
+        
+        </control>
+    </include>
+    <include name="ABK_LP_SeekBar">
+        <control type="group">
+            <visible>Skin.HasSetting(abk.lucentplayer) + !Pvr.IsPlayingTV + ![Window.IsActive(videoosd) | Window.IsActive(fullscreeninfo)]</visible>
+<control type="image">
+            <left>0</left>
+            <top>560</top>
+            <width>1920</width>
+            <height>520</height>
+            <texture>abk_lp/osd_grad_bottom.png</texture>
+            <colordiffuse>F2000000</colordiffuse>
+        </control>
+        
+<control type="group">
+            <left>96</left>
+            <top>936</top>
+            <width>1728</width>
+            <control type="label">
+                <left>0</left>
+                <top>-56</top>
+                <width>600</width>
+                <height>40</height>
+                <font>abk_lp_font13_bold</font>
+                <label>$INFO[Player.Time]</label>
+                <visible>!Player.Seeking</visible>
+            <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="label">
+                <left>0</left>
+                <top>-56</top>
+                <width>600</width>
+                <height>40</height>
+                <font>abk_lp_font13_bold</font>
+                <label>$INFO[Player.SeekTime]$INFO[Player.SeekOffset,   (,)]</label>
+                <visible>Player.Seeking</visible>
+            <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="label">
+                <right>0</right>
+                <top>-56</top>
+                <width>600</width>
+                <height>40</height>
+                <align>right</align>
+                <font>abk_lp_font13</font>
+                <textcolor>FFBDC8D1</textcolor>
+                <label>$INFO[Player.Duration]</label>
+            <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="progress">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>6</height>
+                <info>Player.ProgressCache</info>
+                <texturebg border="3" colordiffuse="26FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="40FFFFFF">abk_lp/pill6.png</midtexture>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+            <control type="progress">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>6</height>
+                <info>Player.Progress</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="FFFFFFFF">abk_lp/pill6.png</midtexture>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+            <control type="slider" id="401">
+                <left>0</left>
+                <top>-10</top>
+                <width>1728</width>
+                <height>26</height>
+                <texturesliderbar>abk_lp/slider_track26.png</texturesliderbar>
+                <texturesliderbardisabled>abk_lp/slider_track26.png</texturesliderbardisabled>
+                <textureslidernib/>
+                <textureslidernibfocus/>
+                <visible>Player.SeekEnabled</visible>
+            </control>
+            <control type="progress" id="403">
+                <visible>false</visible>
+            <height>6</height><texturebg border="3" colordiffuse="24FFFFFF">abk_lp/pill6.png</texturebg><midtexture border="3" colordiffuse="FFFFFFFF">abk_lp/pill6.png</midtexture><lefttexture/><righttexture/><overlaytexture/></control>
+            <control type="label">
+                <left>0</left>
+                <top>24</top>
+                <width>1728</width>
+                <height>40</height>
+                <align>center</align>
+                <font>abk_lp_font12_bold</font>
+                <textcolor>FFDCE2E7</textcolor>
+                <label>$INFO[Player.SeekNumeric]</label>
+                <visible>!String.IsEmpty(Player.SeekNumeric)</visible>
+            <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        </control>
+        
+<control type="image">
+            <left>904</left>
+            <top>756</top>
+            <width>112</width>
+            <height>112</height>
+            <texture>abk_lp/buttons/pause_nf.png</texture>
+            <visible>Player.Paused + !Player.Seeking + !$EXP[ABK_LP_NuvioPauseInfo]</visible>
+        </control>
+        
+<!-- ============ What you are watching + picture / sound ============ -->
+        
+<control type="group">
+            <visible>$EXP[ABK_LP_NuvioPauseInfo]</visible>
+            <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+            <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>1920</width>
+                <height>1080</height>
+                <texture>abk_lp/white.png</texture>
+                <colordiffuse>99000000</colordiffuse>
+            </control>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>1300</width>
+                <height>1080</height>
+                <texture>abk_lp/osd_grad_left.png</texture>
+                <colordiffuse>E6000000</colordiffuse>
+            </control>
+            <control type="grouplist" id="14500">
+                <left>140</left>
+                <top>150</top>
+                <width>1640</width>
+                <height>700</height>
+                <orientation>vertical</orientation>
+                <itemgap>14</itemgap>
+                <usecontrolcoords>true</usecontrolcoords>
+                <animation effect="slide" start="-40,0" end="0,0" time="500" tween="cubic" easing="out">Visible</animation>
+                <control type="label" id="14501">
+                    <width>1100</width>
+                    <height>40</height>
+                    <font>abk_lp_font_caps</font>
+                    <textcolor>FFBDC8D1</textcolor>
+                    <label>$ADDON[plugin.program.abukarimtools 32013]</label>
+                <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="image" id="14502">
+                    <width>620</width>
+                    <height>200</height>
+                    <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_PlayerLogo]</texture>
+                    <visible>!String.IsEmpty(Player.Art(clearlogo)) | !String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+                </control>
+                <control type="label" id="14503">
+                    <width>1100</width>
+                    <height>110</height>
+                    <font>abk_lp_font45</font>
+                    <label>$VAR[ABK_LP_PlayerTitle]</label>
+                    <visible>String.IsEmpty(Player.Art(clearlogo)) + String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+                <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="label" id="14504">
+                    <width>1100</width>
+                    <height>48</height>
+                    <font>abk_lp_font13_bold</font>
+                    <label>S$INFO[VideoPlayer.Season] · E$INFO[VideoPlayer.Episode]$INFO[VideoPlayer.Title,   ,]</label>
+                    <visible>!String.IsEmpty(VideoPlayer.TVShowTitle) + !String.IsEmpty(VideoPlayer.Episode)</visible>
+                <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="label" id="14505">
+                    <width>1100</width>
+                    <height>40</height>
+                    <font>abk_lp_font12</font>
+                    <textcolor>FFBDC8D1</textcolor>
+                    <label>$INFO[VideoPlayer.Year]$INFO[VideoPlayer.Rating,   ★ ,]$INFO[VideoPlayer.Duration,   ,]$INFO[VideoPlayer.Genre,   ,]</label>
+                <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="textbox" id="14506">
+                    <width>1000</width>
+                    <height>190</height>
+                    <font>abk_lp_font_body</font>
+                    <textcolor>FFDCE2E7</textcolor>
+                    <label>$INFO[VideoPlayer.Plot]</label>
+                    <visible>!String.IsEmpty(VideoPlayer.Plot)</visible>
+<include>ABK_LP_TextAutoScroll</include>
+</control>
+                <control type="label" id="14507">
+                    <width>1000</width>
+                    <height>16</height>
+                    <label/>
+                <font>abk_lp_font12</font><textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="grouplist" id="14600">
+                    <width>1640</width>
+                    <height>41</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>10</itemgap>
+                    <visible>true</visible>
+                <!-- ABK_LP_ROW_499 -->
+<!-- ABK_LP_EXTRAS -->
+                <!-- 4.9.9 order: source, resolution, HDR, bit depth, audio, DTS core, video codec, container, channels, aspect, language, multi audio, subtitles -->
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_RipSource]</texture>
+                    <visible>$EXP[ABK_LP_HasRipSource] | !String.IsEmpty(Window(Home).Property(abk.lp.src))</visible>
+                </control>
+                <!-- 4.8.88: IMAX (release name of a Search All pick, or the file name) -->
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/IMAX.png</texture>
+                    <visible>String.Contains(Player.FileNameAndPath,imax) | !String.IsEmpty(Window(Home).Property(abk.lp.imax))</visible>
+                </control>
+                <control type="image" id="14601">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_res]</texture>
+                    <visible>String.IsEqual(VideoPlayer.VideoResolution,8K) | String.IsEqual(VideoPlayer.VideoResolution,4K) | String.IsEqual(VideoPlayer.VideoResolution,1080) | String.IsEqual(VideoPlayer.VideoResolution,720) | [String.IsEqual(VideoPlayer.VideoResolution,480) | String.IsEqual(VideoPlayer.VideoResolution,540) | String.IsEqual(VideoPlayer.VideoResolution,576)]</visible>
+                </control>
+                <control type="image" id="14602">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_hdr]</texture>
+                    <visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.bits)]-BIT.png</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(abk.lp.bits))</visible>
+                </control>
+                <control type="image" id="14604">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_atmos]</texture>
+                    <visible>[String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
+                </control>
+                <control type="image" id="14605">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_acodec]</texture>
+                    <visible>String.StartsWith(VideoPlayer.AudioCodec,dtshd_ma_x) | String.StartsWith(VideoPlayer.AudioCodec,truehd) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra) | String.StartsWith(VideoPlayer.AudioCodec,dts) | String.StartsWith(VideoPlayer.AudioCodec,eac3) | String.IsEqual(VideoPlayer.AudioCodec,ac3) | [String.StartsWith(VideoPlayer.AudioCodec,aac) | String.StartsWith(VideoPlayer.AudioCodec,he_aac)] | String.IsEqual(VideoPlayer.AudioCodec,flac) | String.IsEqual(VideoPlayer.AudioCodec,opus) | String.StartsWith(VideoPlayer.AudioCodec,pcm) | String.IsEqual(VideoPlayer.AudioCodec,mp3)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS.png</texture>
+                    <visible>String.StartsWith(VideoPlayer.AudioCodec,dtshd)</visible>
+                </control>
+                <control type="image" id="14603">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_vcodec]</texture>
+                    <visible>String.IsEqual(VideoPlayer.VideoCodec,hevc) | String.IsEqual(VideoPlayer.VideoCodec,av1) | String.IsEqual(VideoPlayer.VideoCodec,h264) | String.IsEqual(VideoPlayer.VideoCodec,vp9)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.cont)].png</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(abk.lp.cont))</visible>
+                </control>
+                <control type="image" id="14606">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_ch]</texture>
+                    <visible>String.IsEqual(VideoPlayer.AudioChannels,8) | String.IsEqual(VideoPlayer.AudioChannels,7) | String.IsEqual(VideoPlayer.AudioChannels,6) | String.IsEqual(VideoPlayer.AudioChannels,2) | String.IsEqual(VideoPlayer.AudioChannels,1)</visible>
+                </control>
+                <control type="image">
+                    <width>88</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_ExtraDir]/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+                </control>
+                <control type="image">
+                    <width>128</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true" fallback="$VAR[ABK_LP_ExtraDir]/other/language/fallback.png">$VAR[ABK_LP_ExtraDir]/other/language/$INFO[VideoPlayer.AudioLanguage].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/MULTI.png</texture>
+                    <visible>String.IsEqual(Window(Home).Property(abk.lp.multi),1)</visible>
+                </control>
+                <control type="image">
+                    <width>128</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true" fallback="$VAR[ABK_LP_ExtraDir]/other/language/fallback.png">$VAR[ABK_LP_ExtraDir]/other/language/$INFO[VideoPlayer.SubtitlesLanguage].png</texture>
+                    <visible>VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
+                </control>
+                </control>
+            </control>
+        </control>
+        
+        </control>
+    </include>
+    <include name="ABK_LP_FullScreen">
+        <control type="group">
+            <visible>Skin.HasSetting(abk.lucentplayer) + !Pvr.IsPlayingTV</visible>
+<control type="group">
+            <visible>Player.Caching</visible>
+            <animation effect="fade" start="0" end="100" time="200" delay="300">Visible</animation>
+            <control type="group">
+                <left>888</left>
+                <top>468</top>
+                <control type="image">
+                    <left>-28</left>
+                    <top>-28</top>
+                    <width>200</width>
+                    <height>200</height>
+                    <texture>abk_lp/mask_circle.png</texture>
+                    <colordiffuse>B30B1119</colordiffuse>
+                </control>
+                <control type="group">
+                    <left>40</left>
+                    <top>40</top>
+                    <include content="ABK_LP_Spinner"><param name="size">64</param></include>
+                </control>
+            </control>
+            <control type="label">
+                <left>0</left>
+                <top>660</top>
+                <width>1920</width>
+                <height>40</height>
+                <align>center</align>
+                <font>abk_lp_font12_bold</font>
+                <label>$ADDON[plugin.program.abukarimtools 32010]$INFO[Player.CacheLevel,  ,%]</label>
+            <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        </control>
+        
+        </control>
+    </include>
+    <include name="ABK_LP_FullScreenInfo">
+        <control type="group">
+            <visible>Skin.HasSetting(abk.lucentplayer) + !Pvr.IsPlayingTV</visible>
+<control type="image">
+            <left>0</left>
+            <top>560</top>
+            <width>1920</width>
+            <height>520</height>
+            <texture>abk_lp/osd_grad_bottom.png</texture>
+            <colordiffuse>F2000000</colordiffuse>
+        </control>
+        
+<control type="group">
+            <visible>!Pvr.IsPlayingTV</visible>
+        <!-- ============ What you are watching + picture / sound ============ -->
+        <control type="group">
+            <visible>true</visible>
+            <animation effect="fade" start="0" end="100" time="500">Visible</animation>
+            <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>1920</width>
+                <height>1080</height>
+                <texture>abk_lp/white.png</texture>
+                <colordiffuse>99000000</colordiffuse>
+            </control>
+            <control type="image">
+                <left>0</left>
+                <top>0</top>
+                <width>1300</width>
+                <height>1080</height>
+                <texture>abk_lp/osd_grad_left.png</texture>
+                <colordiffuse>E6000000</colordiffuse>
+            </control>
+            <control type="grouplist" id="14500">
+                <left>140</left>
+                <top>110</top>
+                <width>1640</width>
+                <height>700</height>
+                <orientation>vertical</orientation>
+                <itemgap>14</itemgap>
+                <usecontrolcoords>true</usecontrolcoords>
+                <animation effect="slide" start="-40,0" end="0,0" time="500" tween="cubic" easing="out">Visible</animation>
+                <control type="label" id="14501">
+                    <width>1100</width>
+                    <height>40</height>
+                    <font>abk_lp_font_caps</font>
+                    <textcolor>FFBDC8D1</textcolor>
+                    <label>$ADDON[plugin.program.abukarimtools 32013]</label>
+                <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="image" id="14502">
+                    <width>620</width>
+                    <height>200</height>
+                    <aspectratio align="left" aligny="bottom">keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_PlayerLogo]</texture>
+                    <visible>!String.IsEmpty(Player.Art(clearlogo)) | !String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+                </control>
+                <control type="label" id="14503">
+                    <width>1100</width>
+                    <height>110</height>
+                    <font>abk_lp_font45</font>
+                    <label>$VAR[ABK_LP_PlayerTitle]</label>
+                    <visible>String.IsEmpty(Player.Art(clearlogo)) + String.IsEmpty(Player.Art(tvshow.clearlogo))</visible>
+                <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="label" id="14504">
+                    <width>1100</width>
+                    <height>48</height>
+                    <font>abk_lp_font13_bold</font>
+                    <label>S$INFO[VideoPlayer.Season] · E$INFO[VideoPlayer.Episode]$INFO[VideoPlayer.Title,   ,]</label>
+                    <visible>!String.IsEmpty(VideoPlayer.TVShowTitle) + !String.IsEmpty(VideoPlayer.Episode)</visible>
+                <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="label" id="14505">
+                    <width>1100</width>
+                    <height>40</height>
+                    <font>abk_lp_font12</font>
+                    <textcolor>FFBDC8D1</textcolor>
+                    <label>$INFO[VideoPlayer.Year]$INFO[VideoPlayer.Rating,   ★ ,]$INFO[VideoPlayer.Duration,   ,]$INFO[VideoPlayer.Genre,   ,]</label>
+                <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="textbox" id="14506">
+                    <width>1000</width>
+                    <height>190</height>
+                    <font>abk_lp_font_body</font>
+                    <textcolor>FFDCE2E7</textcolor>
+                    <label>$INFO[VideoPlayer.Plot]</label>
+                    <visible>!String.IsEmpty(VideoPlayer.Plot)</visible>
+<include>ABK_LP_TextAutoScroll</include>
+</control>
+                <control type="label" id="14507">
+                    <width>1000</width>
+                    <height>16</height>
+                    <label/>
+                <font>abk_lp_font12</font><textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="grouplist" id="14600">
+                    <width>1640</width>
+                    <height>41</height>
+                    <orientation>horizontal</orientation>
+                    <itemgap>10</itemgap>
+                    <visible>true</visible>
+                <!-- ABK_LP_ROW_499 -->
+<!-- ABK_LP_EXTRAS -->
+                <!-- 4.9.9 order: source, resolution, HDR, bit depth, audio, DTS core, video codec, container, channels, aspect, language, multi audio, subtitles -->
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_RipSource]</texture>
+                    <visible>$EXP[ABK_LP_HasRipSource] | !String.IsEmpty(Window(Home).Property(abk.lp.src))</visible>
+                </control>
+                <!-- 4.8.88: IMAX (release name of a Search All pick, or the file name) -->
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/IMAX.png</texture>
+                    <visible>String.Contains(Player.FileNameAndPath,imax) | !String.IsEmpty(Window(Home).Property(abk.lp.imax))</visible>
+                </control>
+                <control type="image" id="14601">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_res]</texture>
+                    <visible>String.IsEqual(VideoPlayer.VideoResolution,8K) | String.IsEqual(VideoPlayer.VideoResolution,4K) | String.IsEqual(VideoPlayer.VideoResolution,1080) | String.IsEqual(VideoPlayer.VideoResolution,720) | [String.IsEqual(VideoPlayer.VideoResolution,480) | String.IsEqual(VideoPlayer.VideoResolution,540) | String.IsEqual(VideoPlayer.VideoResolution,576)]</visible>
+                </control>
+                <control type="image" id="14602">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_hdr]</texture>
+                    <visible>String.IsEqual(VideoPlayer.HdrType,dolbyvision) | String.IsEqual(VideoPlayer.HdrType,hdr10plus) | String.IsEqual(VideoPlayer.HdrType,hdr10) | String.IsEqual(VideoPlayer.HdrType,hlg)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.bits)]-BIT.png</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(abk.lp.bits))</visible>
+                </control>
+                <control type="image" id="14604">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_atmos]</texture>
+                    <visible>[String.IsEqual(VideoPlayer.AudioCodec,truehd_atmos) | String.IsEqual(VideoPlayer.AudioCodec,eac3_ddp_atmos)]</visible>
+                </control>
+                <control type="image" id="14605">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_acodec]</texture>
+                    <visible>String.StartsWith(VideoPlayer.AudioCodec,dtshd_ma_x) | String.StartsWith(VideoPlayer.AudioCodec,truehd) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_ma) | String.IsEqual(VideoPlayer.AudioCodec,dtshd_hra) | String.StartsWith(VideoPlayer.AudioCodec,dts) | String.StartsWith(VideoPlayer.AudioCodec,eac3) | String.IsEqual(VideoPlayer.AudioCodec,ac3) | [String.StartsWith(VideoPlayer.AudioCodec,aac) | String.StartsWith(VideoPlayer.AudioCodec,he_aac)] | String.IsEqual(VideoPlayer.AudioCodec,flac) | String.IsEqual(VideoPlayer.AudioCodec,opus) | String.StartsWith(VideoPlayer.AudioCodec,pcm) | String.IsEqual(VideoPlayer.AudioCodec,mp3)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS.png</texture>
+                    <visible>String.StartsWith(VideoPlayer.AudioCodec,dtshd)</visible>
+                </control>
+                <control type="image" id="14603">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_vcodec]</texture>
+                    <visible>String.IsEqual(VideoPlayer.VideoCodec,hevc) | String.IsEqual(VideoPlayer.VideoCodec,av1) | String.IsEqual(VideoPlayer.VideoCodec,h264) | String.IsEqual(VideoPlayer.VideoCodec,vp9)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/$INFO[Window(Home).Property(abk.lp.cont)].png</texture>
+                    <visible>!String.IsEmpty(Window(Home).Property(abk.lp.cont))</visible>
+                </control>
+                <control type="image" id="14606">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture>$VAR[ABK_LP_NuvioFlagImg_ch]</texture>
+                    <visible>String.IsEqual(VideoPlayer.AudioChannels,8) | String.IsEqual(VideoPlayer.AudioChannels,7) | String.IsEqual(VideoPlayer.AudioChannels,6) | String.IsEqual(VideoPlayer.AudioChannels,2) | String.IsEqual(VideoPlayer.AudioChannels,1)</visible>
+                </control>
+                <control type="image">
+                    <width>88</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_ExtraDir]/aspectratio/$INFO[VideoPlayer.VideoAspect].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.VideoAspect)</visible>
+                </control>
+                <control type="image">
+                    <width>128</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true" fallback="$VAR[ABK_LP_ExtraDir]/other/language/fallback.png">$VAR[ABK_LP_ExtraDir]/other/language/$INFO[VideoPlayer.AudioLanguage].png</texture>
+                    <visible>!String.IsEmpty(VideoPlayer.AudioLanguage)</visible>
+                </control>
+                <control type="image">
+                    <width>106</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/MULTI.png</texture>
+                    <visible>String.IsEqual(Window(Home).Property(abk.lp.multi),1)</visible>
+                </control>
+                <control type="image">
+                    <width>128</width>
+                    <height>41</height>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true" fallback="$VAR[ABK_LP_ExtraDir]/other/language/fallback.png">$VAR[ABK_LP_ExtraDir]/other/language/$INFO[VideoPlayer.SubtitlesLanguage].png</texture>
+                    <visible>VideoPlayer.SubtitlesEnabled + !String.IsEmpty(VideoPlayer.SubtitlesLanguage)</visible>
+                </control>
+                </control>
+                <control type="label" id="14508">
+                    <width>1100</width>
+                    <height>20</height>
+                    <label/>
+                <font>abk_lp_font12</font><textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="label" id="14509">
+                    <width>1100</width>
+                    <height>36</height>
+                    <font>abk_lp_font12</font>
+                    <textcolor>FFBDC8D1</textcolor>
+                    <label>$INFO[VideoPlayer.Director,$LOCALIZE[20339]: ,]</label>
+                    <visible>!String.IsEmpty(VideoPlayer.Director)</visible>
+                <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+                <control type="label" id="14510">
+                    <width>1100</width>
+                    <height>36</height>
+                    <font>abk_lp_font12</font>
+                    <textcolor>FFBDC8D1</textcolor>
+                    <label>$INFO[VideoPlayer.Studio,$LOCALIZE[572]: ,]$INFO[VideoPlayer.mpaa,   ·   ,]</label>
+                    <visible>!String.IsEmpty(VideoPlayer.Studio) | !String.IsEmpty(VideoPlayer.mpaa)</visible>
+                <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            </control>
+        </control>
+
+        <control type="label">
+            <right>96</right>
+            <top>56</top>
+            <width>500</width>
+            <height>44</height>
+            <align>right</align>
+            <font>abk_lp_font_clock</font>
+            <label>$INFO[System.Time]</label>
+            <visible>true</visible>
+        <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        <control type="label">
+            <right>96</right>
+            <top>100</top>
+            <width>500</width>
+            <height>36</height>
+            <align>right</align>
+            <font>abk_lp_font10</font>
+            <textcolor>FFBDC8D1</textcolor>
+            <label>$ADDON[plugin.program.abukarimtools 32000] $INFO[Player.FinishTime]</label>
+            <visible>Player.HasDuration + true</visible>
+        <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+        <control type="group">
+            <left>96</left>
+            <top>936</top>
+            <width>1728</width>
+            <control type="label">
+                <left>0</left>
+                <top>-56</top>
+                <width>400</width>
+                <height>40</height>
+                <font>abk_lp_font13_bold</font>
+                <label>$INFO[Player.Time]</label>
+            <textcolor>FFFFFFFF</textcolor><shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="label">
+                <right>0</right>
+                <top>-56</top>
+                <width>600</width>
+                <height>40</height>
+                <align>right</align>
+                <font>abk_lp_font13</font>
+                <textcolor>FFBDC8D1</textcolor>
+                <label>-$INFO[Player.TimeRemaining]   /   $INFO[Player.Duration]</label>
+            <shadowcolor>00FFFFFF</shadowcolor><aligny>center</aligny></control>
+            <control type="progress">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>6</height>
+                <info>Player.ProgressCache</info>
+                <texturebg border="3" colordiffuse="26FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="40FFFFFF">abk_lp/pill6.png</midtexture>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+            <control type="progress">
+                <left>0</left>
+                <top>0</top>
+                <width>1728</width>
+                <height>6</height>
+                <info>Player.Progress</info>
+                <texturebg border="3" colordiffuse="00FFFFFF">abk_lp/pill6.png</texturebg>
+                <midtexture border="3" colordiffuse="FFFFFFFF">abk_lp/pill6.png</midtexture>
+            <lefttexture/><righttexture/><overlaytexture/></control>
+        </control>
+        </control>
+
+        </control>
+    </include>
+<!-- 4.7.29: Lucent pills for AF3 Furniture_Codecs (af3_furniture.py) --><include name="ABK_LP_FlagsRow">
+        <param name="il_videoresolution">VideoPlayer.VideoResolution</param>
+        <param name="il_hdrtype">VideoPlayer.HdrType</param>
+        <param name="il_videocodec">VideoPlayer.VideoCodec</param>
+        <param name="il_audiocodec">VideoPlayer.AudioCodec</param>
+        <param name="il_audiochannels">VideoPlayer.AudioChannels</param>
+        <param name="il_filename">Player.Filename</param>
+        <param name="il_filenameandpath">Player.FilenameAndPath</param>
+        <param name="visible">true</param>
+        <param name="align">center</param>
+        <param name="height">51</param>
+        <param name="width">132</param>
+        <param name="itemgap">12</param>
+        <definition>
+            <control type="grouplist">
+                <visible>$PARAM[visible]</visible>
+                <orientation>horizontal</orientation>
+                <align>$PARAM[align]</align>
+                <itemgap>$PARAM[itemgap]</itemgap>
+                <height>$PARAM[height]</height>
+                <usecontrolcoords>false</usecontrolcoords>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/8K.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videoresolution],8K)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/4K.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videoresolution],4K)] + ![String.IsEqual($PARAM[il_videoresolution],8K)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/1080P.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videoresolution],1080)] + ![String.IsEqual($PARAM[il_videoresolution],8K)] + ![String.IsEqual($PARAM[il_videoresolution],4K)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/720P.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videoresolution],720)] + ![String.IsEqual($PARAM[il_videoresolution],8K)] + ![String.IsEqual($PARAM[il_videoresolution],4K)] + ![String.IsEqual($PARAM[il_videoresolution],1080)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/SD.png</texture>
+                    <visible>[[String.IsEqual($PARAM[il_videoresolution],480) | String.IsEqual($PARAM[il_videoresolution],540) | String.IsEqual($PARAM[il_videoresolution],576)]] + ![String.IsEqual($PARAM[il_videoresolution],8K)] + ![String.IsEqual($PARAM[il_videoresolution],4K)] + ![String.IsEqual($PARAM[il_videoresolution],1080)] + ![String.IsEqual($PARAM[il_videoresolution],720)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DV.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_hdrtype],dolbyvision)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/HDR10+.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_hdrtype],hdr10plus)] + ![String.IsEqual($PARAM[il_hdrtype],dolbyvision)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/HDR10.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_hdrtype],hdr10)] + ![String.IsEqual($PARAM[il_hdrtype],dolbyvision)] + ![String.IsEqual($PARAM[il_hdrtype],hdr10plus)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/HLG.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_hdrtype],hlg)] + ![String.IsEqual($PARAM[il_hdrtype],dolbyvision)] + ![String.IsEqual($PARAM[il_hdrtype],hdr10plus)] + ![String.IsEqual($PARAM[il_hdrtype],hdr10)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/HEVC.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videocodec],hevc)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/AV1.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videocodec],av1)] + ![String.IsEqual($PARAM[il_videocodec],hevc)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/AVC.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videocodec],h264)] + ![String.IsEqual($PARAM[il_videocodec],hevc)] + ![String.IsEqual($PARAM[il_videocodec],av1)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/VP9.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_videocodec],vp9)] + ![String.IsEqual($PARAM[il_videocodec],hevc)] + ![String.IsEqual($PARAM[il_videocodec],av1)] + ![String.IsEqual($PARAM[il_videocodec],h264)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/ATMOS.png</texture>
+                    <visible>[[String.IsEqual($PARAM[il_audiocodec],truehd_atmos) | String.IsEqual($PARAM[il_audiocodec],eac3_ddp_atmos)]]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS-X.png</texture>
+                    <visible>[String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/TRUEHD.png</texture>
+                    <visible>[String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS-HDMA.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS-HDHR.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DTS.png</texture>
+                    <visible>[String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DD+.png</texture>
+                    <visible>[String.StartsWith($PARAM[il_audiocodec],eac3)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/DD.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiocodec],ac3)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],eac3)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/AAC.png</texture>
+                    <visible>[[String.StartsWith($PARAM[il_audiocodec],aac) | String.StartsWith($PARAM[il_audiocodec],he_aac)]] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],eac3)] + ![String.IsEqual($PARAM[il_audiocodec],ac3)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/FLAC.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiocodec],flac)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],eac3)] + ![String.IsEqual($PARAM[il_audiocodec],ac3)] + ![[String.StartsWith($PARAM[il_audiocodec],aac) | String.StartsWith($PARAM[il_audiocodec],he_aac)]]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/OPUS.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiocodec],opus)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],eac3)] + ![String.IsEqual($PARAM[il_audiocodec],ac3)] + ![[String.StartsWith($PARAM[il_audiocodec],aac) | String.StartsWith($PARAM[il_audiocodec],he_aac)]] + ![String.IsEqual($PARAM[il_audiocodec],flac)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/PCM.png</texture>
+                    <visible>[String.StartsWith($PARAM[il_audiocodec],pcm)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],eac3)] + ![String.IsEqual($PARAM[il_audiocodec],ac3)] + ![[String.StartsWith($PARAM[il_audiocodec],aac) | String.StartsWith($PARAM[il_audiocodec],he_aac)]] + ![String.IsEqual($PARAM[il_audiocodec],flac)] + ![String.IsEqual($PARAM[il_audiocodec],opus)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/MP3.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiocodec],mp3)] + ![String.StartsWith($PARAM[il_audiocodec],dtshd_ma_x)] + ![String.StartsWith($PARAM[il_audiocodec],truehd)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_ma)] + ![String.IsEqual($PARAM[il_audiocodec],dtshd_hra)] + ![String.StartsWith($PARAM[il_audiocodec],dts)] + ![String.StartsWith($PARAM[il_audiocodec],eac3)] + ![String.IsEqual($PARAM[il_audiocodec],ac3)] + ![[String.StartsWith($PARAM[il_audiocodec],aac) | String.StartsWith($PARAM[il_audiocodec],he_aac)]] + ![String.IsEqual($PARAM[il_audiocodec],flac)] + ![String.IsEqual($PARAM[il_audiocodec],opus)] + ![String.StartsWith($PARAM[il_audiocodec],pcm)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/7.1.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiochannels],8)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/6.1.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiochannels],7)] + ![String.IsEqual($PARAM[il_audiochannels],8)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/5.1.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiochannels],6)] + ![String.IsEqual($PARAM[il_audiochannels],8)] + ![String.IsEqual($PARAM[il_audiochannels],7)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/2.0.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiochannels],2)] + ![String.IsEqual($PARAM[il_audiochannels],8)] + ![String.IsEqual($PARAM[il_audiochannels],7)] + ![String.IsEqual($PARAM[il_audiochannels],6)]</visible>
+                </control>
+                <control type="image">
+                    <width>$PARAM[width]</width>
+                    <height>$PARAM[height]</height>
+                    <centertop>50%</centertop>
+                    <aspectratio>keep</aspectratio>
+                    <texture background="true">$VAR[ABK_LP_FlagDir]/1.0.png</texture>
+                    <visible>[String.IsEqual($PARAM[il_audiochannels],1)] + ![String.IsEqual($PARAM[il_audiochannels],8)] + ![String.IsEqual($PARAM[il_audiochannels],7)] + ![String.IsEqual($PARAM[il_audiochannels],6)] + ![String.IsEqual($PARAM[il_audiochannels],2)]</visible>
+                </control>
+            </control>
+        </definition>
+    </include>
+<include name="ABK_LP_VolumePassthrough">
+        <param name="left">560</param>
+        <param name="top">40</param>
+        <definition>
+            <control type="group">
+                <left>$PARAM[left]</left>
+                <top>$PARAM[top]</top>
+                <width>800</width>
+                <height>70</height>
+                <visible>Skin.HasSetting(abk.lucentplayer) + Player.Passthrough</visible>
+                <animation effect="fade" start="0" end="100" time="160">WindowOpen</animation>
+                <animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+                <control type="image"><left>0</left><top>0</top><width>800</width><height>70</height><texture border="24">abk_lp/pinfo/rr22.png</texture><colordiffuse>EB0E121C</colordiffuse></control>
+                <control type="image"><left>0</left><top>0</top><width>800</width><height>70</height><texture border="28">abk_lp/pinfo/rr28_edge.png</texture><colordiffuse>1AFFFFFF</colordiffuse></control>
+                <control type="grouplist"><left>30</left><top>0</top><width>740</width><height>70</height><orientation>horizontal</orientation><itemgap>10</itemgap>
+                    <control type="label"><width>auto</width><height>70</height><font>abk_lp_font_caps</font><textcolor>FF5FE0E0</textcolor><aligny>center</aligny><label>$ADDON[plugin.program.abukarimtools 32100]</label></control>
+                    <control type="label"><width>auto</width><height>70</height><font>abk_lp_font10</font><textcolor>BFFFFFFF</textcolor><aligny>center</aligny><label>·  $ADDON[plugin.program.abukarimtools 32101]</label></control>
+                </control>
+            </control>
+        </definition>
+    </include>
+</includes>

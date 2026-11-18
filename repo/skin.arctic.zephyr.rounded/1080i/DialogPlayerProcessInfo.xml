@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
+    <!-- ABK_LP_PPI -->
+    <onload condition="[Skin.HasSetting(abk.lucentplayer) + !VideoPlayer.Content(livetv) + !Pvr.IsPlayingTV] + Player.HasVideo">RunScript(special://home/addons/plugin.program.abukarimtools/resources/lib/lucent_playerinfo.py,open)</onload>
+    <onload condition="[Skin.HasSetting(abk.lucentplayer) + !VideoPlayer.Content(livetv) + !Pvr.IsPlayingTV] + Player.HasVideo">Dialog.Close(playerprocessinfo,true)</onload>
     <controls>
         <control type="group">
             <include>Animation_Common_Fade_In</include>

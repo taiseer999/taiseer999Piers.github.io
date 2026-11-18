@@ -14,6 +14,7 @@
     <onunload condition="!Player.HasMedia | String.IsEmpty(VideoPlayer.DBID)">AlarmClock(ResetValue,ClearProperty(OSDVideo_DIALOG_VIDEO_INFO,Home),00:00,silent)</onunload>
 
     <controls>
+        <include>ABK_LP_FullScreen</include>  <!-- ABK_LP -->
         <control type="group" id="0">
             <visible>Control.IsVisible(10) | Control.IsVisible(11) | Control.IsVisible(12)</visible>
 

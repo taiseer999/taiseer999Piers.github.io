@@ -11,6 +11,10 @@
 
     <include>Def_Settings_Startup_Init</include>
 
+    <!-- ABUKARIM: Lucent Player on by default (once) -->
+    <onload condition="!Skin.HasSetting(abk.lp.azr.init)">Skin.SetBool(abk.lucentplayer)</onload>
+    <onload condition="!Skin.HasSetting(abk.lp.azr.init)">Skin.SetBool(abk.lp.azr.init)</onload>
+
     <!-- GO HOME -->
 
     <onload condition="!Skin.HasSetting(disable.startup.window)">ReplaceWindow(1100)</onload>

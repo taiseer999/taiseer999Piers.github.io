@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
     <controls>
+        <include>ABK_LP_VolumePassthrough</include>  <!-- ABK_LP_VOL -->
         <control type="group">
             <visible>!Player.Muted</visible>
+            <visible>![Skin.HasSetting(abk.lucentplayer) + Player.Passthrough]</visible>
 
             <control type="group">
                 <include>Animation_Common_Fade_In_Slide_Down_Bounce</include>
