@@ -3544,3 +3544,7 @@ msgstr "ابحث في جميع إعدادات الواجهة بالاسم أو �
 msgctxt "#31876"
 msgid "Filter the skin settings by tag."
 msgstr "تصفية إعدادات الواجهة حسب الوسم."
+
+msgctxt "#31877"
+msgid "Choose the style of the search results of each content type. Content types set to Default and results without a content type use the Default style."
+msgstr "اختر نمط نتائج البحث لكل نوع من المحتوى. تستخدم أنواع المحتوى المضبوطة على الافتراضي والنتائج التي لا نوع لها النمطَ الافتراضي."
