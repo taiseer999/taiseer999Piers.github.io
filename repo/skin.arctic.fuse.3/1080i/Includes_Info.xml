@@ -755,17 +755,58 @@
                     </include>
 
                     <!-- Star Rating -->
-                    <include content="Info_Line_StarRating" condition="!Skin.HasSetting(InfoTags.DisableStarRating)">
+                    <include content="Info_Line_StarRating" condition="!Skin.HasSetting(InfoTags.DisableStarRating) + !$EXP[Exp_ABK_DefaultOSD_Tags]">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="rating">$PARAM[container]$PARAM[listitem].Rating</param>
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) + String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating)</param>
                     </include>
-                    <include content="Info_Line_StarRating" condition="!Skin.HasSetting(InfoTags.DisableStarRating)">
+                    <include content="Info_Line_StarRating" condition="!Skin.HasSetting(InfoTags.DisableStarRating) + !$EXP[Exp_ABK_DefaultOSD_Tags]">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="rating">$PARAM[container]$PARAM[listitem].UserRating</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating)</param>
+                    </include>
+                    <include content="Info_Line_StarRating_Tags_ABK" condition="!Skin.HasSetting(InfoTags.DisableStarRating) + $EXP[Exp_ABK_DefaultOSD_Tags]">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="rating">$PARAM[container]$PARAM[listitem].Rating</param>
+                        <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Rating) + String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating)</param>
+                    </include>
+                    <include content="Info_Line_StarRating_Tags_ABK" condition="!Skin.HasSetting(InfoTags.DisableStarRating) + $EXP[Exp_ABK_DefaultOSD_Tags]">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="rating">$PARAM[container]$PARAM[listitem].UserRating</param>
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].UserRating)</param>
                     </include>
 
+                    <!-- ABUKARIM: Default OSD (AB Tools > Mods): upstream's outlined tags when abk.defaultosd is on and
+                         Skin settings > Information > Pill is chosen; otherwise the plain labels as before -->
+                    <include content="Info_Line_Labels_ABK" condition="!$EXP[Exp_ABK_DefaultOSD_Tags]">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="container">$PARAM[container]</param>
+                        <param name="listitem">$PARAM[listitem]</param>
+                        <param name="override">$PARAM[override]</param>
+                    </include>
+                    <include content="Info_Line_Tags" condition="$EXP[Exp_ABK_DefaultOSD_Tags]">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="container">$PARAM[container]</param>
+                        <param name="listitem">$PARAM[listitem]</param>
+                        <param name="override">$PARAM[override]</param>
+                    </include>
+
+                </control>
+            </control>
+            <include content="Info_Line_TwoRow_U3k">
+                <param name="visible">$PARAM[visible]</param>
+                <param name="left">$PARAM[left]</param>
+                <param name="container">$PARAM[container]</param>
+                <param name="listitem">$PARAM[listitem]</param>
+                <param name="override">$PARAM[override]</param>
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+            </include>
+        </definition>
+    </include>
+
+    <!-- ABUKARIM: the info line's plain labels (moved out of Info_Line unchanged, so AB Tools still finds them) -->
+    <include name="Info_Line_Labels_ABK">
+        <definition>
                     <!-- ====== -->
                     <!-- Labels -->
                     <!-- ====== -->
@@ -849,16 +890,27 @@
                         <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
                         <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
                     </include>
+        </definition>
+    </include>
 
-                </control>
-            </control>
-            <include content="Info_Line_TwoRow_U3k">
-                <param name="visible">$PARAM[visible]</param>
-                <param name="left">$PARAM[left]</param>
-                <param name="container">$PARAM[container]</param>
-                <param name="listitem">$PARAM[listitem]</param>
-                <param name="override">$PARAM[override]</param>
+    <!-- ABUKARIM: Default OSD - upstream's star rating on a solid pill (dark stars) -->
+    <include name="Info_Line_StarRating_Tags_ABK">
+        <param name="visible">true</param>
+        <definition>
+            <include content="Info_Line_Pill_Box">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <width>140</width>
+                <visible>$PARAM[visible]</visible>
+                <include content="Info_StarRating">
+                    <param name="colordiffuse">ff1a1a1a</param>
+                    <param name="rating">$PARAM[rating]</param>
+                    <param name="size">40</param>
+                    <height>40</height>
+                    <width>136</width>
+                    <centerleft>50%</centerleft>
+                    <centertop>50%</centertop>
+                    <itemgap>-16</itemgap>
+                </include>
             </include>
         </definition>
     </include>
@@ -945,11 +997,18 @@
                 <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration]</param>
                 <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,album) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,song)]</param>
             </include>
+            <!-- ABUKARIM: whole hours without "0 minutes" -->
+            <include content="$PARAM[item]">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="font">$PARAM[font]</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074]]</param>
+                <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
+            </include>
             <include content="$PARAM[item]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
                 <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074] ]$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
-                <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
+                <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
             </include>
             <include content="$PARAM[item]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>

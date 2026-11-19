@@ -212,6 +212,8 @@
 
     <expression name="Exp_OSD_PVRChannelSwitch">[VideoPlayer.Content(livetv) + [!String.IsEmpty(PVR.ChannelNumberInput) | Player.ShowInfo]]</expression>
 
+    <!-- ABUKARIM: Default OSD (AB Tools) with the Pill style chosen in skin settings - the info line draws upstream's outlined tags -->
+    <expression name="Exp_ABK_DefaultOSD_Tags">[Skin.HasSetting(abk.defaultosd) + !Skin.HasSetting(InfoTags.DisableTags)]</expression>
     <expression name="Exp_OSD_DelayInfo_Timing">[[System.IdleTime(3)] | [System.IdleTime(2) + Skin.String(OSD.AutoOnPause.Delay,2s)] | [System.IdleTime(1) + Skin.String(OSD.AutoOnPause.Delay,1s)] | [System.IdleTime(0) + Skin.String(OSD.AutoOnPause.Delay,0s)]]</expression>
 
     <expression name="Exp_OSD_DelayInfo">[$EXP[Exp_OSD_DelayInfo_Timing] + Skin.String(OSD.AutoOnPause,Info) + Player.Paused + !$EXP[Exp_InfoDialogs]]</expression>
