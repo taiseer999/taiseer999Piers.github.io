@@ -294,6 +294,20 @@
                 <filename>$PARAM[font_bold_lines_tiny]</filename>
                 <size>$PARAM[size_tiny]</size>
             </font>
+            <!-- ABUKARIM: Default OSD tags - upstream's default font (Inter Bold) and its line twin, in every fontset,
+                 so the outlines line up with the text (English labels) -->
+            <font>
+                <name>font_tiny_tag</name>
+                <filename>Inter-Bold.ttf</filename>
+                <size>21</size>
+                <style>uppercase</style>
+            </font>
+            <font>
+                <name>font_tiny_tag_lines</name>
+                <filename>Inter-Bold-Lines-Tiny.ttf</filename>
+                <size>21</size>
+                <style>uppercase</style>
+            </font>
             <font>
                 <name>font_hint_bold</name>
                 <filename>$PARAM[font_bold]</filename>

@@ -591,9 +591,9 @@
                 <haspath>$PARAM[haspath]</haspath>
                 <width>auto</width>
                 <textoffsetx>10</textoffsetx>
-                <textoffsety>info_tag_offset_y</textoffsety>
-                <aligny>top</aligny>
-                <font>font_infotag_bold</font>
+                <textoffsety>0</textoffsety>
+                <aligny>center</aligny>
+                <font>font_tiny_bold</font>
                 <textcolor>main_fg_90</textcolor>
                 <focusedcolor>main_fg_90</focusedcolor>
                 <include>Dimension_Info_Line_Pillbox</include>

@@ -785,6 +785,7 @@
                         <param name="override">$PARAM[override]</param>
                     </include>
                     <include content="Info_Line_Tags" condition="$EXP[Exp_ABK_DefaultOSD_Tags]">
+                        <param name="font">font_tiny_tag</param>
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="container">$PARAM[container]</param>
                         <param name="listitem">$PARAM[listitem]</param>
@@ -915,6 +916,8 @@
         </definition>
     </include>
 
+    <!-- ABUKARIM: only the Default OSD tags use this include, and they are drawn in Inter (English) - so the
+         duration and age read 2 HR 52 MINS / 40 YEARS OLD here, as in the English interface; the plain labels (Info_Line_Labels_ABK) stay Arabic -->
     <!-- Info line labels: item is Info_Line_Label for plain text or Info_Line_Tag for Info_Line_Tags -->
     <include name="Info_Line_Labels">
         <definition>
@@ -938,7 +941,7 @@
             <include content="$PARAM[item]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Property(Age),, $LOCALIZE[31057]]</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Property(Age),, Years Old]</param>
                 <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Property(age)) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,actor) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video)]</param>
             </include>
 
@@ -1001,19 +1004,19 @@
             <include content="$PARAM[item]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074]]</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, hr]</param>
                 <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
             </include>
             <include content="$PARAM[item]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, $LOCALIZE[31074] ]$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(h),, hr ]$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, mins]</param>
                 <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + !Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(m),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
             </include>
             <include content="$PARAM[item]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, $LOCALIZE[31073]]</param>
+                <param name="label">$INFO[$PARAM[container]$PARAM[listitem].Duration(m),, mins]</param>
                 <param name="visible">!String.IsEmpty($PARAM[container]$PARAM[listitem].Duration) + Integer.IsEqual($PARAM[container]$PARAM[listitem].Duration(h),0) + [String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,video) | $PARAM[override]]</param>
             </include>
         </definition>
