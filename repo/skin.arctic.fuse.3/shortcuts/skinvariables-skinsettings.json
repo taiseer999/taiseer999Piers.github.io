@@ -165,7 +165,7 @@
         "details_ratings": {
             "label": "$LOCALIZE[31202]",
             "category": "details",
-            "visible": "$EXP[Exp_TMDbHelper_IsData]",
+            "visible": "Skin.HasSetting(TMDbHelper.EnableData)",
             "tags": [
                 "$LOCALIZE[19033]"
             ]
@@ -762,7 +762,7 @@
             "group": "interface_context_menu",
             "description": "$LOCALIZE[31680]",
             "selected": "!Skin.HasSetting(ContextMenu.DisableArtwork)",
-            "visible": "$EXP[Exp_TMDbHelper_IsData]",
+            "visible": "Skin.HasSetting(TMDbHelper.EnableData)",
             "onclick": [
                 {
                     "action": "Skin.ToggleSetting(ContextMenu.DisableArtwork)"
@@ -1011,7 +1011,7 @@
             "control": "radiobutton",
             "group": "details_services",
             "description": "$LOCALIZE[31695]",
-            "selected": "$EXP[Exp_TMDbHelper_IsData]",
+            "selected": "Skin.HasSetting(TMDbHelper.EnableData)",
             "onclick": [
                 {
                     "action": "Skin.ToggleSetting(TMDbHelper.EnableData)"
@@ -1070,7 +1070,7 @@
             "group": "details_ratings",
             "description": "$LOCALIZE[31696]",
             "label2": "$INFO[Skin.String(CustomRating.Movies.Item01)]$INFO[Skin.String(CustomRating.Movies.Item02), • ,]$INFO[Skin.String(CustomRating.Movies.Item03), • ,]$INFO[Skin.String(CustomRating.Movies.Item04), • ,]$INFO[Skin.String(CustomRating.Movies.Item05), • ,]$INFO[Skin.String(CustomRating.Movies.Item06), • ,]$INFO[Skin.String(CustomRating.Movies.Item07), • ,]$INFO[Skin.String(CustomRating.Movies.Item08), • ,]",
-            "visible": "$EXP[Exp_TMDbHelper_IsData]",
+            "visible": "Skin.HasSetting(TMDbHelper.EnableData)",
             "onclick": [
                 {
                     "action": "SetProperty(CustomDialogSettingsTitle,[CAPITALIZE]$LOCALIZE[31202]: $LOCALIZE[342][/CAPITALIZE],Home)"
@@ -1092,7 +1092,7 @@
             "group": "details_ratings",
             "description": "$LOCALIZE[31697]",
             "label2": "$INFO[Skin.String(CustomRating.TVShows.Item01)]$INFO[Skin.String(CustomRating.TVShows.Item02), • ,]$INFO[Skin.String(CustomRating.TVShows.Item03), • ,]$INFO[Skin.String(CustomRating.TVShows.Item04), • ,]$INFO[Skin.String(CustomRating.TVShows.Item05), • ,]$INFO[Skin.String(CustomRating.TVShows.Item06), • ,]$INFO[Skin.String(CustomRating.TVShows.Item07), • ,]$INFO[Skin.String(CustomRating.TVShows.Item08), • ,]",
-            "visible": "$EXP[Exp_TMDbHelper_IsData]",
+            "visible": "Skin.HasSetting(TMDbHelper.EnableData)",
             "onclick": [
                 {
                     "action": "SetProperty(CustomDialogSettingsTitle,[CAPITALIZE]$LOCALIZE[31202]: $LOCALIZE[20343][/CAPITALIZE],Home)"

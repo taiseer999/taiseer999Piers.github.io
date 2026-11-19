@@ -3320,8 +3320,8 @@ msgstr "ودجات التحديد"
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31822"
-msgid "This category contains the add-ons the skin depends on, the debugging tools and the option to reset skin settings."
-msgstr "تحتوي هذه الفئة على الإضافات التي تعتمد عليها الواجهة، وأدوات التصحيح، وخيار إعادة ضبط إعدادات الواجهة."
+msgid "This category contains the seasonal themes and their effects, the add-ons the skin depends on, the debugging tools and the option to reset skin settings."
+msgstr "تحتوي هذه الفئة على السمات الموسمية وتأثيراتها، والإضافات التي تعتمد عليها الواجهة، وأدوات التصحيح، وخيار إعادة تعيين إعدادات الواجهة."
 
 #: /1080i/Includes_SkinSettings.xml
 msgctxt "#31823"
@@ -3548,3 +3548,23 @@ msgstr "تصفية إعدادات الواجهة حسب الوسم."
 msgctxt "#31877"
 msgid "Choose the style of the search results of each content type. Content types set to Default and results without a content type use the Default style."
 msgstr "اختر نمط نتائج البحث لكل نوع من المحتوى. تستخدم أنواع المحتوى المضبوطة على الافتراضي والنتائج التي لا نوع لها النمطَ الافتراضي."
+
+msgctxt "#31878"
+msgid "Decoder"
+msgstr "وحدة فك الترميز"
+
+msgctxt "#31879"
+msgid "Output"
+msgstr "الإخراج"
+
+msgctxt "#31880"
+msgid "Adjust"
+msgstr "ضبط"
+
+msgctxt "#31881"
+msgid "Select whether the item details are shown as plain text or as pills."
+msgstr "اختر عرض تفاصيل العنصر نصًّا عاديًّا أو على هيئة أقراص."
+
+msgctxt "#31882"
+msgid "Pill"
+msgstr "أقراص"

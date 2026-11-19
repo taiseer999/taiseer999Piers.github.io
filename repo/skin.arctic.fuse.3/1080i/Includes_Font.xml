@@ -201,6 +201,9 @@
         <param name="font_black">MOHANDbold.ttf</param>
             <param name="font_bold">MOHANDbold.ttf</param>
             <param name="font_regular">MOHAND-Regular.ttf</param>
+            <!-- ABUKARIM: outlined tag fonts - the Unicode line twin also covers Arabic (the Latin one has no Arabic) -->
+            <param name="font_bold_lines">Inter-Unicode-Bold-Lines.ttf</param>
+            <param name="font_bold_lines_tiny">Inter-Unicode-Bold-Lines-Tiny.ttf</param>
             <param name="style_light">light</param>
             <param name="size_hint">17</param>
             <param name="size_hint">15</param>
@@ -287,8 +290,19 @@
                 <size>$PARAM[size_tiny]</size>
             </font>
             <font>
+                <name>font_tiny_bold_lines</name>
+                <filename>$PARAM[font_bold_lines_tiny]</filename>
+                <size>$PARAM[size_tiny]</size>
+            </font>
+            <font>
                 <name>font_hint_bold</name>
                 <filename>$PARAM[font_bold]</filename>
+                <style>uppercase</style>
+                <size>$PARAM[size_hint]</size>
+            </font>
+            <font>
+                <name>font_hint_bold_lines</name>
+                <filename>$PARAM[font_bold_lines]</filename>
                 <style>uppercase</style>
                 <size>$PARAM[size_hint]</size>
             </font>
