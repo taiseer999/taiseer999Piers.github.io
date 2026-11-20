@@ -265,7 +265,7 @@
             <control type="group">
                 <left>$PARAM[left]</left>  <!-- ABUKARIM: first <left> wins; the 40 below is kept as the AB Tools anchor -->
                 <left>40</left>
-                <include>Info_Line_Height_U3k</include>
+                <height>60</height>
                 <visible>$PARAM[visible]</visible>
 
                 <control type="grouplist">
@@ -712,7 +712,7 @@
         <param name="override">false</param>
         <definition>
             <control type="group">
-                <visible>$PARAM[visible] + !Skin.HasSetting(InfoBar.TwoRow)</visible>
+                <visible>$PARAM[visible]</visible>
                 <left>$PARAM[left]</left>
                 <height>80</height>
 
@@ -739,11 +739,6 @@
                         <param name="is_sd">[!String.IsEmpty($PARAM[container]$PARAM[listitem].VideoResolution)]</param>
                     </include>
                     <include content="Info_Line_VideoQuality_HDRType" condition="Skin.HasSetting(InfoTags.EnableHDR)">
-                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
-                        <param name="container">$PARAM[container]</param>
-                        <param name="listitem">$PARAM[listitem]</param>
-                    </include>
-                    <include content="Info_Line_AudioCodec" condition="Skin.HasSetting(InfoTags.EnableAudioCodec)">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="container">$PARAM[container]</param>
                         <param name="listitem">$PARAM[listitem]</param>
@@ -794,14 +789,6 @@
 
                 </control>
             </control>
-            <include content="Info_Line_TwoRow_U3k">
-                <param name="visible">$PARAM[visible]</param>
-                <param name="left">$PARAM[left]</param>
-                <param name="container">$PARAM[container]</param>
-                <param name="listitem">$PARAM[listitem]</param>
-                <param name="override">$PARAM[override]</param>
-                <param name="colordiffuse">$PARAM[colordiffuse]</param>
-            </include>
         </definition>
     </include>
 
