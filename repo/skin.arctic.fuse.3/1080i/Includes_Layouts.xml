@@ -2901,6 +2901,7 @@
 
                     <include content="Object_Tags">
                         <param name="label">$VAR[Label_StreamCard_Tags]</param>
+                        <param name="font">font_card_tag</param>
                         <param name="selected">$PARAM[selected]</param>
                         <bottom>0</bottom>
                         <height>40</height>
