@@ -3568,3 +3568,15 @@ msgstr "اختر عرض تفاصيل العنصر نصًّا عاديًّا أو
 msgctxt "#31882"
 msgid "Pill"
 msgstr "أقراص"
+
+msgctxt "#31883"
+msgid "Choose which ratings are shown for episodes."
+msgstr "اختر التقييمات التي تظهر للحلقات."
+
+msgctxt "#31884"
+msgid "Anime"
+msgstr "أنمي"
+
+msgctxt "#31885"
+msgid "Change service"
+msgstr "تغيير الخدمة"
