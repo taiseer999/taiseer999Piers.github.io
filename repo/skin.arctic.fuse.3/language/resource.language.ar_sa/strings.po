@@ -3580,3 +3580,11 @@ msgstr "أنمي"
 msgctxt "#31885"
 msgid "Change service"
 msgstr "تغيير الخدمة"
+
+msgctxt "#31887"
+msgid "Very high"
+msgstr "مرتفع جدًّا"
+
+msgctxt "#31888"
+msgid "Moderate"
+msgstr "معتدل"
