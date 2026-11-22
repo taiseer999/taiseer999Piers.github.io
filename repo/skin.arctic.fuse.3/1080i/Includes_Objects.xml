@@ -212,6 +212,7 @@
         <param name="font">font_hint_bold</param>
         <param name="textcolor">main_fg_90</param>
         <param name="align">left</param>
+        <!-- ABUKARIM: &#x200E; (LRM) keeps the paragraph left-to-right, so an Arabic tag does not swap its &#x2002;/&#x2000; ends -->
         <definition>
             <control type="group">
                 <nested />
@@ -221,7 +222,7 @@
                     <aligny>center</aligny>
                     <font>$PARAM[font]</font>
                     <textcolor>$PARAM[textcolor]</textcolor>
-                    <label>$PARAM[label]</label>
+                    <label>&#x200E;$PARAM[label]</label>
                 </control>
                 <control type="label">
                     <include condition="$PARAM[selected]">Color_SelectedText</include>
@@ -229,7 +230,7 @@
                     <aligny>center</aligny>
                     <font>$PARAM[font]_lines</font>
                     <textcolor>$PARAM[textcolor]</textcolor>
-                    <label>$PARAM[label]</label>
+                    <label>&#x200E;$PARAM[label]</label>
                 </control>
             </control>
         </definition>
