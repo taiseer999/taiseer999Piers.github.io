@@ -208,8 +208,11 @@
         <control type="label">
             <include>DialogSubtitles_OSD_ListSlide</include>
             <top>120</top>
+            <right>0</right>
+            <width>710</width>  <!-- ABUKARIM: heading over the half-width list only -->
             <height>40</height>
             <align>right</align>
+            <scroll>true</scroll>
             <font>font_hint_bold</font>
             <textcolor>main_fg_70</textcolor>
             <label>$INFO[Player.FileName]$INFO[Control.GetLabel(140),  &#8226;  ,]$INFO[Control.GetLabel(130),  &#8226;  ,]</label>
@@ -220,17 +223,17 @@
         <include content="List_Core">
             <param name="orientation">vertical</param>
             <param name="id">120</param>
-            <param name="item_w">1420</param>
+            <param name="item_w">710</param>  <!-- ABUKARIM: half width, on the right -->
             <param name="item_h">100</param>
-            <param name="itemlayout_w">1420</param>
+            <param name="itemlayout_w">710</param>
             <param name="itemlayout_h">100</param>
-            <param name="itemlayout_include">Layout_DialogSubtitles_OSD</param>
+            <param name="itemlayout_include">Layout_DialogSubtitles_OSD_Half</param>
             <param name="offset_x">0</param>
             <param name="offset_y">0</param>
             <param name="preloaditems">0</param>
             <include>DialogSubtitles_OSD_ListSlide</include>
             <right>-40</right>
-            <width>1420</width>
+            <width>710</width>
             <top>180</top>
             <height>400</height>
             <pagecontrol>61</pagecontrol>
@@ -241,11 +244,11 @@
         </include>
     </include>
 
-    <!-- Search and service buttons on the left edge, with the list taking the remaining width -->
+    <!-- Search and service buttons beside the list (ABUKARIM: moved from the left edge) -->
     <include name="DialogSubtitles_OSD_Actions">
         <control type="grouplist" id="9000">
-            <left>0</left>
-            <width>360</width>
+            <right>690</right>  <!-- ABUKARIM: narrower, right beside the half-width list (off the clear logo) -->
+            <width>280</width>
             <top>180</top>
             <height>400</height>
             <orientation>vertical</orientation>
@@ -258,6 +261,88 @@
                 <param name="item">DialogSubtitles_OSD_ServiceItem</param>
             </include>
         </control>
+    </include>
+
+    <!-- ABUKARIM: half-width result row (list shrunk 50% to the right): smaller stars and tags, the text keeps the middle -->
+    <include name="Layout_DialogSubtitles_OSD_Half">
+        <param name="selected">false</param>
+        <definition>
+            <control type="group">
+                <width>$PARAM[item_w]</width>
+                <height>$PARAM[item_h]</height>
+                <include content="Object_Control" condition="$PARAM[selected]">
+                    <param name="control">image</param>
+                    <include>Texture_Menu_Highlight_H</include>
+                </include>
+                <control type="group">
+                    <left>20</left>
+                    <width>80</width>
+                    <control type="image">
+                        <centerleft>50%</centerleft>
+                        <top>16</top>
+                        <width>60</width>
+                        <height>40</height>
+                        <aspectratio>keep</aspectratio>
+                        <texture fallback="flags/color/language/unk.png">$INFO[ListItem.Thumb,flags/color/language/,.png]</texture>
+                    </control>
+                    <control type="label">
+                        <include condition="$PARAM[selected]">Color_SelectedText</include>
+                        <left>-20</left>
+                        <right>-20</right>
+                        <top>60</top>
+                        <height>20</height>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <font>font_hint</font>
+                        <textcolor>main_fg_70</textcolor>
+                        <selectedcolor>main_fg_70</selectedcolor>
+                        <label>$INFO[ListItem.Label]</label>
+                    </control>
+                </control>
+                <include content="Object_Control">
+                    <param name="control">textbox</param>
+                    <include condition="$PARAM[selected]">Color_SelectedText</include>
+                    <left>120</left>
+                    <right>310</right>
+                    <centertop>50%</centertop>
+                    <height>95</height>
+                    <aligny>center</aligny>
+                    <font>font_tiny</font>
+                    <textcolor>main_fg_100</textcolor>
+                    <selectedcolor>main_fg_100</selectedcolor>
+                    <autoscroll>false</autoscroll>
+                    <label>$INFO[ListItem.Label2]</label>
+                </include>
+                <include content="Layout_DialogSubtitles_OSD_Tag">
+                    <param name="label">&#x2002;SYNC&#x2000;</param>
+                    <param name="property">sync</param>
+                    <param name="selected">$PARAM[selected]</param>
+                    <param name="right">230</param>
+                    <param name="width">90</param>
+                </include>
+                <include content="Layout_DialogSubtitles_OSD_Tag">
+                    <param name="label">&#x2002;CC&#x2000;</param>
+                    <param name="property">hearing_imp</param>
+                    <param name="selected">$PARAM[selected]</param>
+                    <param name="right">175</param>
+                    <param name="width">55</param>
+                </include>
+                <control type="group">
+                    <right>20</right>
+                    <width>140</width>
+                    <centertop>50%</centertop>
+                    <height>36</height>
+                    <include content="Object_StarRating_Row">
+                        <param name="selected">$PARAM[selected]</param>
+                        <param name="size">36</param>
+                        <param name="right_2">24</param>
+                        <param name="right_3">48</param>
+                        <param name="right_4">72</param>
+                        <param name="right_5">96</param>
+                    </include>
+                </control>
+            </control>
+        </definition>
     </include>
 
     <include name="DialogSubtitles_OSD_ServiceItem">
