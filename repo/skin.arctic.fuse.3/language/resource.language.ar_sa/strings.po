@@ -3588,3 +3588,63 @@ msgstr "مرتفع جدًّا"
 msgctxt "#31888"
 msgid "Moderate"
 msgstr "معتدل"
+
+msgctxt "#31889"
+msgid "Extreme"
+msgstr "شديد للغاية"
+
+msgctxt "#31890"
+msgid "Icon style"
+msgstr "نمط الأيقونات"
+
+msgctxt "#31891"
+msgid "Orbit"
+msgstr "مدار"
+
+msgctxt "#31892"
+msgid "Filmstrip"
+msgstr "شريط فيلم"
+
+msgctxt "#31893"
+msgid "Reflection"
+msgstr "انعكاس"
+
+msgctxt "#31894"
+msgid "Select how genres, studios, countries and items without artwork are shown."
+msgstr "اختر طريقة عرض الأنواع والاستوديوهات والدول والعناصر التي لا صور لها."
+
+msgctxt "#31895"
+msgid "Aperture"
+msgstr "فتحة العدسة"
+
+msgctxt "#31896"
+msgid "Contour"
+msgstr "خطوط محيطية"
+
+msgctxt "#31897"
+msgid "Halftone"
+msgstr "نقطي"
+
+msgctxt "#31898"
+msgid "Blueprint"
+msgstr "مخطط هندسي"
+
+msgctxt "#31899"
+msgid "Sunburst"
+msgstr "أشعة الشمس"
+
+msgctxt "#31900"
+msgid "Corner Arc"
+msgstr "قوس الزاوية"
+
+msgctxt "#31901"
+msgid "Fan"
+msgstr "مروحة"
+
+msgctxt "#31902"
+msgid "Reveal"
+msgstr "كشف"
+
+msgctxt "#31903"
+msgid "Wallpaper"
+msgstr "خلفية"

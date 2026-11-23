@@ -472,7 +472,7 @@
     <include name="Info_Line_Tag">
         <definition>
             <control type="label">
-                <label>&#x200E;&#x2002;$PARAM[label]&#x2000;</label>  <!-- ABUKARIM: LRM keeps Arabic tags from swapping their ends -->
+                <label>&#x200E;&#x2002;$PARAM[label]&#x2000;&#x200E;</label>  <!-- ABUKARIM: LRM keeps Arabic tags from swapping their ends -->
                 <textcolor>$PARAM[colordiffuse]_90</textcolor>
                 <width>auto</width>
                 <aligny>center</aligny>

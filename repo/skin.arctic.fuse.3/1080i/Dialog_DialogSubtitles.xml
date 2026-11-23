@@ -314,14 +314,14 @@
                     <label>$INFO[ListItem.Label2]</label>
                 </include>
                 <include content="Layout_DialogSubtitles_OSD_Tag">
-                    <param name="label">&#x2002;SYNC&#x2000;</param>
+                    <param name="label">&#x200E;&#x2002;SYNC&#x2000;&#x200E;</param>
                     <param name="property">sync</param>
                     <param name="selected">$PARAM[selected]</param>
                     <param name="right">230</param>
                     <param name="width">90</param>
                 </include>
                 <include content="Layout_DialogSubtitles_OSD_Tag">
-                    <param name="label">&#x2002;CC&#x2000;</param>
+                    <param name="label">&#x200E;&#x2002;CC&#x2000;&#x200E;</param>
                     <param name="property">hearing_imp</param>
                     <param name="selected">$PARAM[selected]</param>
                     <param name="right">175</param>
