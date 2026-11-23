@@ -16,10 +16,10 @@
     </timer>
     <timer>
         <name>weather_trend_uv</name>
-        <description>Recalculate the OzWeather UV chart when its four forecast values change.</description>
-        <start reset="true">Window.IsActive(weather) + Weather.IsFetched + String.IsEqual(Weather.Plugin,weather.ozweather) + !String.IsEqual(Control.GetLabel(8052),Window(weather).Property(Weather.Trend.UV.Source))</start>
-        <stop>!Window.IsActive(weather) | !Weather.IsFetched | !String.IsEqual(Weather.Plugin,weather.ozweather) | Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(weather_trend_uv),1)</stop>
-        <onstop condition="Window.IsActive(weather) + Weather.IsFetched + String.IsEqual(Weather.Plugin,weather.ozweather)">RunScript(script.skinvariables,run_executebuiltin=special://skin/shortcuts/builtins/skinvariables-weather-trend-uv.json,use_rules=True)</onstop>
+        <description>Recalculate the OzWeather / Open-Meteo UV chart (ABUKARIM: Open-Meteo added) when its four forecast values change.</description>
+        <start reset="true">Window.IsActive(weather) + Weather.IsFetched + [String.IsEqual(Weather.Plugin,weather.ozweather) | String.IsEqual(Weather.Plugin,weather.openmeteo)] + !String.IsEqual(Control.GetLabel(8052),Window(weather).Property(Weather.Trend.UV.Source))</start>
+        <stop>!Window.IsActive(weather) | !Weather.IsFetched | ![String.IsEqual(Weather.Plugin,weather.ozweather) | String.IsEqual(Weather.Plugin,weather.openmeteo)] | Integer.IsGreaterOrEqual(Skin.TimerElapsedSecs(weather_trend_uv),1)</stop>
+        <onstop condition="Window.IsActive(weather) + Weather.IsFetched + [String.IsEqual(Weather.Plugin,weather.ozweather) | String.IsEqual(Weather.Plugin,weather.openmeteo)]">RunScript(script.skinvariables,run_executebuiltin=special://skin/shortcuts/builtins/skinvariables-weather-trend-uv.json,use_rules=True)</onstop>
     </timer>
     <timer>
         <name>weather_trend_radar</name>

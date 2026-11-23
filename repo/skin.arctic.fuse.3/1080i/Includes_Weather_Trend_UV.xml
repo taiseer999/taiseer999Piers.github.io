@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-    <expression name="Exp_Weather_Trend_Has_UV">[Weather.IsFetched + String.IsEqual(Weather.Plugin,weather.ozweather) + String.IsEqual(Control.GetLabel(8052),Window(weather).Property(Weather.Trend.UV.Source)) + !String.IsEmpty(Window(weather).Property(Weather.Trend.UV.First))]</expression>
+    <expression name="Exp_Weather_Trend_Has_UV">[Weather.IsFetched + [String.IsEqual(Weather.Plugin,weather.ozweather) | String.IsEqual(Weather.Plugin,weather.openmeteo)] + String.IsEqual(Control.GetLabel(8052),Window(weather).Property(Weather.Trend.UV.Source)) + !String.IsEmpty(Window(weather).Property(Weather.Trend.UV.First))]</expression>
     <expression name="Exp_Weather_Trend_UV_Page">[$EXP[Exp_Weather_Trend_Has_UV] + String.IsEqual(Window(weather).Property(Weather.Trend.Page),UV)]</expression>
 
     <include name="Weather_Trend_UV_Source">

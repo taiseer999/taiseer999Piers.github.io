@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
-    <expression name="Exp_Weather_Trend_Has_Radar">[Weather.IsFetched + String.IsEqual(Weather.Plugin,weather.ozweather) + !String.IsEmpty(Window(weather).Property(Radar))]</expression>
+    <expression name="Exp_Weather_Trend_Has_Radar">[Weather.IsFetched + [[String.IsEqual(Weather.Plugin,weather.ozweather) + !String.IsEmpty(Window(weather).Property(Radar))] | $EXP[Exp_Weather_Trend_Has_Radar_OpenMeteo]]]</expression>
+    <!-- ABUKARIM: Open-Meteo radar page (its map.N.* tiles, animated like the weather dialog) -->
+    <expression name="Exp_Weather_Trend_Has_Radar_OpenMeteo">[String.IsEqual(Weather.Plugin,weather.openmeteo) + !String.IsEmpty(Window(weather).Property(map.1.heading)) + !String.IsEmpty(Window(weather).Property(map.1.layer.1))]</expression>
     <expression name="Exp_Weather_Trend_Radar_Page">[$EXP[Exp_Weather_Trend_Has_Radar] + String.IsEqual(Window(weather).Property(Weather.Trend.Page),Radar)]</expression>
     <expression name="Exp_Weather_Trend_Radar_Text_Ready">String.IsEqual(Control.GetLabel(8053),Window(weather).Property(Weather.Trend.Radar.Source))</expression>
 
@@ -43,8 +45,79 @@
     <include name="Weather_Trend_Radar_Page">
         <control type="group">
             <visible>$EXP[Exp_Weather_Trend_Radar_Page]</visible>
-            <include>Weather_Trend_Radar_Details</include>
-            <include>Weather_Trend_Radar_Map</include>
+            <control type="group">
+                <visible>String.IsEqual(Weather.Plugin,weather.ozweather)</visible>
+                <include>Weather_Trend_Radar_Details</include>
+                <include>Weather_Trend_Radar_Map</include>
+            </control>
+            <control type="group">
+                <visible>String.IsEqual(Weather.Plugin,weather.openmeteo)</visible>
+                <include>Weather_Trend_Radar_Details_OpenMeteo</include>
+                <include>Weather_Trend_Radar_Map_OpenMeteo</include>
+            </control>
+        </control>
+    </include>
+
+    <!-- ABUKARIM: Open-Meteo map box - area tile under the newest-to-oldest radar layers, auto-scrolled like Dialog_DialogWeather -->
+    <include name="Weather_Trend_Radar_Map_OpenMeteo">
+        <control type="group">
+            <left>960</left>
+            <top>180</top>
+            <width>880</width>
+            <control type="group">
+                <height>720</height>
+                <include>Part_Box</include>
+                <control type="image">
+                    <aspectratio scalediffuse="false">scale</aspectratio>
+                    <texture background="true" diffuse="diffuse/landscape_w880_h720.png">$INFO[Window(weather).Property(map.1.area)]</texture>
+                </control>
+                <control type="list" id="93101">
+                    <orientation>horizontal</orientation>
+                    <scrolltime>0</scrolltime>
+                    <preloaditems>0</preloaditems>
+                    <autoscroll time="800">true</autoscroll>
+                    <itemlayout width="880" height="720" />
+                    <focusedlayout width="880" height="720" />
+                    <content>
+                        <include content="DialogWeather_Radar_OpenMeteo_Content_Items">
+                            <param name="mapid">1</param>
+                        </include>
+                    </content>
+                </control>
+                <control type="image">
+                    <aspectratio scalediffuse="false">scale</aspectratio>
+                    <texture diffuse="diffuse/landscape_w880_h720.png" colordiffuse="b3ffffff">$INFO[Container(93101).ListItem.Icon]</texture>
+                </control>
+            </control>
+            <include content="Weather_Trend_Radar_Caption">
+                <param name="top">-60</param>
+                <param name="font">font_main</param>
+                <param name="color">main_fg_90</param>
+                <param name="label_left">$INFO[Window(weather).Property(map.1.heading)]</param>
+                <param name="label_right">$INFO[Container(93101).ListItem.Label2]</param>
+            </include>
+        </control>
+    </include>
+
+    <include name="Weather_Trend_Radar_Details_OpenMeteo">
+        <control type="grouplist">
+            <left>60</left>
+            <top>500</top>
+            <width>840</width>
+            <height>460</height>
+            <orientation>vertical</orientation>
+            <itemgap>0</itemgap>
+            <include content="Weather_Trend_Radar_Heading">
+                <param name="height">60</param>
+                <param name="top">0</param>
+                <param name="label">$INFO[Window(weather).Property(Current.Condition)]</param>
+                <param name="visible">!String.IsEmpty(Window(weather).Property(Current.Condition))</param>
+            </include>
+            <include content="Weather_Trend_Radar_Text">
+                <param name="max">260</param>
+                <param name="label">$INFO[Window(weather).Property(Current.Humidity),$LOCALIZE[406]: ,[CR]]$INFO[Window(weather).Property(Current.Cloudiness),$LOCALIZE[31520]: ,[CR]]$INFO[Window(weather).Property(Current.PrecipitationProbability),$LOCALIZE[31465]: ,[CR]]$INFO[Window(weather).Property(Current.Precipitation),$LOCALIZE[376]: ,[CR]]$INFO[Window(weather).Property(Current.Wind),$LOCALIZE[404]: ,[CR]]$INFO[Window(weather).Property(Current.UVIndex),$LOCALIZE[403]: ,]</param>
+                <param name="visible">true</param>
+            </include>
         </control>
     </include>
 
