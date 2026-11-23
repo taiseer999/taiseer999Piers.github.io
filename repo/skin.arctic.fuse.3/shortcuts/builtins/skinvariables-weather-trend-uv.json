@@ -89,7 +89,7 @@
             "rules": [
                 "Window.IsActive(weather)",
                 "Weather.IsFetched",
-                "String.IsEqual(Weather.Plugin,weather.ozweather)",
+                "[String.IsEqual(Weather.Plugin,weather.ozweather) | String.IsEqual(Weather.Plugin,weather.openmeteo)]",
                 "{source}!=",
                 "{source}!={plotted}"
             ],

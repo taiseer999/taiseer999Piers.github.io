@@ -2,7 +2,7 @@
 <includes>
     <expression name="Exp_Weather_Trend_Has_Radar">[Weather.IsFetched + [[String.IsEqual(Weather.Plugin,weather.ozweather) + !String.IsEmpty(Window(weather).Property(Radar))] | $EXP[Exp_Weather_Trend_Has_Radar_OpenMeteo]]]</expression>
     <!-- ABUKARIM: Open-Meteo radar page (its map.N.* tiles, animated like the weather dialog) -->
-    <expression name="Exp_Weather_Trend_Has_Radar_OpenMeteo">[String.IsEqual(Weather.Plugin,weather.openmeteo) + !String.IsEmpty(Window(weather).Property(map.1.heading)) + !String.IsEmpty(Window(weather).Property(map.1.layer.1))]</expression>
+    <expression name="Exp_Weather_Trend_Has_Radar_OpenMeteo">[String.IsEqual(Weather.Plugin,weather.openmeteo) + !String.IsEmpty(Window(weather).Property(map.1.heading)) + !String.IsEmpty(Window(weather).Property(map.1.layer))]</expression>
     <expression name="Exp_Weather_Trend_Radar_Page">[$EXP[Exp_Weather_Trend_Has_Radar] + String.IsEqual(Window(weather).Property(Weather.Trend.Page),Radar)]</expression>
     <expression name="Exp_Weather_Trend_Radar_Text_Ready">String.IsEqual(Control.GetLabel(8053),Window(weather).Property(Weather.Trend.Radar.Source))</expression>
 
