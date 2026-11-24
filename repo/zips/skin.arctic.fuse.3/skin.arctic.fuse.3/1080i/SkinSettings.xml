@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Skin settings are built by SkinVariables from script-skinvariables-skinsettings.xml and shortcuts/skinvariables-skinsettings.json -->
+<window>
+    <onload>Action(Back)</onload>
+    <onload>RunScript(script.skinvariables,run_skinsettings=special://skin/shortcuts/skinvariables-skinsettings.json)</onload>
+    <controls />
+</window>

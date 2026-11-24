@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<!-- ABUKARIM: only the TinyPPI OSD button is kept from the U3k mods (AB Tools patches it here) and the info-line Pillbox style -->
+	<include name="PPI_Button">
+		<!-- Button 9 -->
+		<control type="button" id="6009">
+			<include>Defs_OSD_Button</include>
+			<onclick>CancelAlarm(osd_timeout,true)</onclick>
+			<onclick>RunScript(script.tinyppi,dialog)</onclick>
+		</control>
+		<include content="OSD_Button_Icon_Overlay">
+			<param name="icon">special://skin/extras/icons/ppi.png</param>
+			<param name="id">6009</param>
+			<param name="groupid">6109</param>
+			<param name="itemgap">osd_itemgap</param>
+		</include>
+	</include>
+	<variable name="Label_Setting_InfoLineStyle">
+		<value condition="Skin.HasSetting(Info.EnablePillboxStyle)">$LOCALIZE[31209]</value>
+		<value>$LOCALIZE[31329]</value>
+	</variable>
+
+    <include name="Info_Line_Label_Pillbox_U3k">
+        <param name="visible">true</param>
+        <param name="haspath">false</param>
+        <definition>
+            <control type="button">
+                <label fallback="$PARAM[label_fallback]">$PARAM[label]</label>
+                <texturefocus colordiffuse="main_fg_30" border="8">flags/blank-bordered.png</texturefocus>
+                <texturenofocus colordiffuse="main_fg_30" border="8">flags/blank-bordered.png</texturenofocus>
+                <haspath>$PARAM[haspath]</haspath>
+                <width>auto</width>
+                <textoffsetx>10</textoffsetx>
+                <textoffsety>0</textoffsety>
+                <aligny>center</aligny>
+                <font>font_tiny_bold</font>
+                <textcolor>main_fg_90</textcolor>
+                <focusedcolor>main_fg_90</focusedcolor>
+                <include>Dimension_Info_Line_Pillbox</include>
+                <shadowcolor>main_bg_12</shadowcolor>
+                <visible>$PARAM[visible] + Skin.HasSetting(Info.EnablePillboxStyle)</visible>
+            </control>
+        </definition>
+    </include>
+
+    <include name="Info_StarRating_Pillbox_U3k">
+        <param name="visible">true</param>
+        <definition>
+            <control type="group">
+                <visible>$PARAM[visible]</visible>
+                <visible>Skin.HasSetting(Info.EnablePillboxStyle)</visible>
+                <width>155</width>
+                <include>Dimension_Info_Line_Pillbox</include>
+                <control type="image">
+                    <texture colordiffuse="main_fg_30" border="8">flags/blank-bordered.png</texture>
+                </control>
+                <include content="Info_StarRating">
+                    <param name="colordiffuse">$PARAM[colordiffuse]_90</param>
+                    <param name="rating">$PARAM[rating]</param>
+                    <itemgap>-16</itemgap>
+                </include>
+            </control>
+        </definition>
+    </include>
+
+</includes>

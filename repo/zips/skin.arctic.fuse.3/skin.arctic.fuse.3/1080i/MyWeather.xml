@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="2600">
+    <defaultcontrol always="true">8000</defaultcontrol>
+    <menucontrol>9000</menucontrol>
+    <onload>ClearProperty(Weather.Trend.Page,weather)</onload>
+    <controls>
+
+        <include content="Object_Hidden_Button">
+            <param name="id">8000</param>
+            <onclick>Weather.LocationNext</onclick>
+            <onleft condition="$EXP[Exp_Weather_Trend_Prev_Radar]">SetProperty(Weather.Trend.Page,Radar,weather)</onleft>
+            <onleft condition="$EXP[Exp_Weather_Trend_Prev_UV]">SetProperty(Weather.Trend.Page,UV,weather)</onleft>
+            <onleft condition="$EXP[Exp_Weather_Trend_Prev_Details]">SetProperty(Weather.Trend.Page,Details,weather)</onleft>
+            <onleft condition="$EXP[Exp_Weather_Trend_Prev_Temperature]">ClearProperty(Weather.Trend.Page,weather)</onleft>
+            <onright condition="$EXP[Exp_Weather_Trend_Next_Details]">SetProperty(Weather.Trend.Page,Details,weather)</onright>
+            <onright condition="$EXP[Exp_Weather_Trend_Next_UV]">SetProperty(Weather.Trend.Page,UV,weather)</onright>
+            <onright condition="$EXP[Exp_Weather_Trend_Next_Radar]">SetProperty(Weather.Trend.Page,Radar,weather)</onright>
+            <onright condition="$EXP[Exp_Weather_Trend_Next_Temperature]">ClearProperty(Weather.Trend.Page,weather)</onright>
+        </include>
+
+        <include>Background_StartUp_Layered</include>
+        <include>Weather_Trend_Shading</include>
+        <include>Weather_Trend_Source</include>
+
+        <control type="group">
+            <include>Animation_View_WindowChange</include>
+            <control type="group">
+                <visible>!$EXP[Exp_Weather_Is_Loading]</visible>
+                <include>Weather_Trend_Today</include>
+                <include>Weather_Trend_Forecast</include>
+                <include>Weather_Trend_UV_Forecast</include>
+                <include>Weather_Trend_Radar_Page</include>
+            </control>
+        </control>
+
+        <include>Weather_Trend_Header</include>
+
+
+        <control type="group">
+            <visible>!$EXP[Exp_Weather_Is_Loading]</visible>
+            <include>Weather_Trend_Page_Hint</include>
+        </control>
+        <include content="Furniture_Footer_Right">
+            <param name="visible">!$EXP[Exp_Weather_Is_Loading]</param>
+        </include>
+
+        <include content="Furniture_Busy">
+            <param name="hasspinner">true</param>
+            <param name="spinspinner">true</param>
+            <param name="icon">special://skin/extras/icons/kodi.png</param>
+            <param name="haslabel">false</param>
+            <param name="spinnervisible">[!Window.IsActive(DialogVolumeBar.xml) | Player.Muted]</param>
+            <param name="visible">$EXP[Exp_Weather_Is_Loading]</param>
+            <param name="visible_condition">false</param>
+            <param name="windowopen_condition">false</param>
+        </include>
+
+    </controls>
+
+</window>

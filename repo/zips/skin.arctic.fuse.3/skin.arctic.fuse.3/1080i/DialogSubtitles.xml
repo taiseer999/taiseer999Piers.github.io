@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+
+    <defaultcontrol always="true">120</defaultcontrol>
+    <controls>
+        <include>DialogSubtitles</include>
+    </controls>
+</window>

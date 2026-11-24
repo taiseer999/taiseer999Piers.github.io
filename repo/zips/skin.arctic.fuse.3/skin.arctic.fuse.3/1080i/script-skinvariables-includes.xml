@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+
+    <variable name="Defs_PercentPlayed">
+        <value condition="!Skin.HasSetting(Indicator.DisableEpisodes) + !String.IsEmpty(ListItem.Property(WatchedEpisodePercent)) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),0) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),100)">$INFO[ListItem.Property(WatchedEpisodePercent)]</value>
+        <value condition="!Skin.HasSetting(Indicator.DisableProgress) + !String.IsEmpty(ListItem.PercentPlayed) + [!Integer.IsEqual(ListItem.PercentPlayed,0) | ListItem.IsResumable]">$INFO[ListItem.PercentPlayed]</value>
+        <value condition="!Skin.HasSetting(Indicator.DisableProgress) + !String.IsEmpty(ListItem.Property(WatchedProgress)) + !Integer.IsEqual(ListItem.Property(WatchedProgress),0) + !Integer.IsEqual(ListItem.Property(WatchedProgress),100)">$INFO[ListItem.Property(WatchedProgress)]</value>
+    </variable>
+    <expression name="Exp_IsFolder">[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist)]</expression>
+</includes>

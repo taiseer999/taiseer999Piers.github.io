@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template for SkinVariables run_skinsettings. The script fills grouplists 3 and 5 from shortcuts/skinvariables-skinsettings.json
+     using the template controls below, configures the search box and tags button in place, sets the description in textbox 6, and removes the
+     template controls from the generated window. -->
+<window>
+    <include content="Action_SettingsCategories_Onload">
+        <param name="defaultcontrol">3</param>
+    </include>
+
+    <onunload>$VAR[Action_RatingsMonitor]</onunload>
+
+    <controls>
+
+        <include>Background</include>
+
+        <include content="Settings_Dialog">
+            <include content="Settings_Main_Group">
+                <param name="label">$LOCALIZE[166] $LOCALIZE[5]</param>
+                <include content="Settings_Left_Group">
+                    <include content="Settings_Left_Content">
+                        <!-- The script lists the search category first, hidden until a search or tag is active or while it is selected.
+                             Moving to another category clears the search -->
+                        <control type="grouplist" id="3">
+                            <orientation>vertical</orientation>
+                            <onup>3</onup>
+                            <ondown>3</ondown>
+                            <onright>5</onright>
+                            <right>40</right>
+                        </control>
+                    </include>
+                </include>
+                <include content="Settings_Right_Group">
+                    <param name="header">$INFO[Window.Property(SkinVariables.SkinSettings.Category.Label)]</param>
+
+                    <include content="Settings_Right_Scrollbar">
+                        <onleft>5</onleft>
+                    </include>
+
+                    <!-- The first and last settings move to the last focused of the tags button and search box.
+                         Left returns to the search category while it is selected, as the last focused category would clear the search -->
+                    <include content="Settings_Right_Grouplist">
+                        <param name="id">5</param>
+                        <onleft condition="$EXP[Exp_SkinSettings_IsSearchCategory]">-200</onleft>
+                        <onleft condition="!$EXP[Exp_SkinSettings_IsSearchCategory]">3</onleft>
+                        <onup>20</onup>
+                        <ondown>20</ondown>
+                    </include>
+
+                    <!-- Global search box and tags button. The script keeps them in place, opens the tags to filter by from the tags button,
+                         and sets the selected tag and the first and last settings in view as window properties.
+                         The group remembers which of them was last focused so the settings can move back to it -->
+                    <control type="group" id="20">
+                        <defaultcontrol>12</defaultcontrol>
+                        <include content="Settings_SearchBox">
+                            <param name="buttonid">17</param>
+                            <param name="icon">special://skin/extras/icons/tags.png</param>
+                            <param name="right">600</param>
+                            <param name="width">280</param>
+                            <include content="Settings_SearchBox_Button">
+                                <param name="id">17</param>
+                                <description>Tags Button</description>
+                                <label>$VAR[Label_Settings_SearchTag]</label>
+                                <!-- The box width less the icon offset and a smaller right padding than textoffsetx gives -->
+                                <textwidth>170</textwidth>
+                                <onleft condition="$EXP[Exp_SkinSettings_IsSearchCategory]">-200</onleft>
+                                <onleft condition="!$EXP[Exp_SkinSettings_IsSearchCategory]">3</onleft>
+                                <onright>12</onright>
+                            </include>
+                        </include>
+                        <include content="Settings_SearchBox">
+                            <param name="buttonid">12</param>
+                            <param name="icon">special://skin/extras/icons/search.png</param>
+                            <include content="Settings_SearchBox_Button">
+                                <param name="id">12</param>
+                                <param name="control">edit</param>
+                                <description>Search Edit</description>
+                                <onleft>17</onleft>
+                            </include>
+                        </include>
+                    </control>
+
+                    <include content="Settings_Right_InfoText">
+                        <param name="id">6</param>
+                    </include>
+                </include>
+            </include>
+        </include>
+
+        <include content="Settings_Button">
+            <param name="id">10</param>
+            <param name="control">togglebutton</param>
+            <!-- The script sets usealttexture on the selected category. Mimic Kodi's hardcoded 50% alpha on the selected SettingsCategory button -->
+            <include content="Texture_Highlight_ToggleButton_FakeFocus_H">
+                <param name="diffuse_nofocus">diffuse/alpha_50.png</param>
+            </include>
+            <!-- The script replaces $SUBSTITUTE[label] with each category's own label -->
+            <altlabel>[COLOR=$VAR[ColorSelected]]$SUBSTITUTE[label][/COLOR]</altlabel>
+            <width>settings_category_w</width>
+            <description>Category Button</description>
+        </include>
+
+        <include content="Settings_Label">
+            <param name="id">14</param>
+            <description>Group Label</description>
+        </include>
+
+        <include content="Settings_Button">
+            <param name="id">7</param>
+            <param name="control">button</param>
+            <description>Setting Button</description>
+        </include>
+
+        <include content="Settings_Button">
+            <param name="id">8</param>
+            <param name="control">radiobutton</param>
+            <description>Setting Radiobutton</description>
+        </include>
+
+    </controls>
+
+</window>

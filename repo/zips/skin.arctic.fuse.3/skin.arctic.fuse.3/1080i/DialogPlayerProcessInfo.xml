@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <defaultcontrol always="true">5</defaultcontrol>
+    <onload>CancelAlarm(osd_timeout,true)</onload>
+    <controls>
+        <control type="group">
+            <include>Animation_SlideIn_Dialog</include>
+            <include content="Furniture_Header">
+                <param name="label">[CAPITALIZE]$LOCALIZE[10116][/CAPITALIZE]</param>
+                <param name="include_right">false</param>
+                <param name="textcolor">main_fg_90</param>
+            </include>
+            <control type="group">
+                <left>view_pad</left>
+                <right>view_pad</right>
+                <top>140</top>
+                <include>DialogProcessInfo_Details</include>
+                <include>DialogProcessInfo_Lanes</include>
+            </control>
+        </control>
+    </controls>
+</window>

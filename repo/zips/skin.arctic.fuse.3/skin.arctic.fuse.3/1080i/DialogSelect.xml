@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+
+    <defaultcontrol>3</defaultcontrol>
+    <controls>
+
+        <!-- 12015 is SelectVideoVersion, a Kodi 21 window -->
+        <include condition="!Window.IsDialogTopMost(12015) + !String.IsEmpty(Window(Home).Property(SkinViewtypes.DialogIsActive)) + ![Window.IsDialogTopMost(gamevideofilter) | Window.IsDialogTopMost(gamestretchmode) | Window.IsDialogTopMost(gamesaves) | Window.IsDialogTopMost(gamevideorotation) | Window.IsDialogTopMost(ingamesaves)]" content="DialogSelect_Viewtype">
+            <param name="itemlayout_include">Layout_ViewType_Wireframe</param>
+            <param name="focus_in_list">true</param>
+        </include>
+        <include condition="$EXP[Exp_DialogSelect_Standard] + Window.IsVisible(fullscreenvideo)">DialogSelect_OSD</include>
+        <include condition="$EXP[Exp_DialogSelect_Standard] + !Window.IsVisible(fullscreenvideo)">DialogSelect_Standard</include>
+        <include condition="Window.IsActive(12015)">DialogSelect_Versions</include>
+        <include condition="[Window.IsDialogTopMost(gamevideofilter) | Window.IsDialogTopMost(gamestretchmode) | Window.IsDialogTopMost(gamevideorotation)]">DialogSelect_GamePreview</include>
+        <include condition="Window.IsDialogTopMost(gamesaves)">DialogSelect_GameSaves</include>
+        <include condition="Window.IsDialogTopMost(ingamesaves)">DialogSelect_InGameSaves</include>
+
+        <!-- Hidden Buttons -->
+        <include content="Object_Hidden_Button">
+            <param name="id">5</param>
+            <onfocus>SetFocus(9001)</onfocus>
+        </include>
+        <include content="Object_Hidden_Button">
+            <param name="id">7</param>
+            <onfocus>SetFocus(9002)</onfocus>
+        </include>
+        <include content="Object_Hidden_Button">
+            <param name="id">8</param>
+            <onfocus>SetFocus(9003)</onfocus>
+        </include>
+
+    </controls>
+</window>
