@@ -1731,6 +1731,34 @@
                 <include content="Object_Indicator_Visible">
                 </include>
 
+                <!-- ABUKARIM: watched percentage - a capsule joined to the progress circle (the circle sits on
+                     its right end). Default: focused item only; abk.percentall = every item; abk.hidepercent = off
+                     (AB Tools "AF3: Watched percentage") -->
+                <control type="group">
+                    <right>30</right>
+                    <centertop>50%</centertop>
+                    <width>104</width>
+                    <height>36</height>
+                    <visible>!Skin.HasSetting(abk.hidepercent) + [$PARAM[selected] | Skin.HasSetting(abk.percentall)]</visible>
+                    <include content="Object_Indicator_Visible">
+                        <param name="include_type">Percentage</param>
+                    </include>
+                    <animation effect="fade" start="0" end="100" time="200" delay="150" condition="$PARAM[selected]">Visible</animation>
+                    <animation effect="fade" start="0" end="100" time="200" delay="150" condition="$PARAM[selected]">Focus</animation>
+                    <control type="image">
+                        <texture colordiffuse="e6202020" border="18">abk_percent/pill.png</texture>
+                    </control>
+                    <control type="label">
+                        <left>6</left>
+                        <right>32</right>
+                        <font>font_tiny_bold</font>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <textcolor>main_fg_100</textcolor>
+                        <label>$VAR[Defs_PercentPlayed$PARAM[affix],,%]</label>
+                    </control>
+                </control>
+
                 <!-- Focused Item -->
                 <include content="Object_Indicator_Selected" condition="$PARAM[selected]">
                     <param name="variant">$PARAM[variant]</param>
@@ -1752,29 +1780,6 @@
                         <param name="include_type">Percentage</param>
                     </include>
                 </include>
-
-                <!-- ABUKARIM: watched percentage as a number in a small pill above the progress circle
-                     (AB Tools "AF3: Watched percentage" sets abk.hidepercent to hide it) -->
-                <control type="group">
-                    <bottom>72</bottom>
-                    <centerleft>50%</centerleft>
-                    <width>84</width>
-                    <height>34</height>
-                    <visible>!Skin.HasSetting(abk.hidepercent)</visible>
-                    <include content="Object_Indicator_Visible">
-                        <param name="include_type">Percentage</param>
-                    </include>
-                    <control type="image">
-                        <texture colordiffuse="d9000000" border="4">flags/blank.png</texture>
-                    </control>
-                    <control type="label">
-                        <font>font_tiny_bold</font>
-                        <align>center</align>
-                        <aligny>center</aligny>
-                        <textcolor>main_fg_100</textcolor>
-                        <label>$VAR[Defs_PercentPlayed$PARAM[affix],,%]</label>
-                    </control>
-                </control>
 
                 <!-- Episodes Count -->
                 <include content="Object_Control" condition="!Skin.HasSetting(Indicator.DisableEpisodes)">
