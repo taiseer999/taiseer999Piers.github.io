@@ -82,7 +82,7 @@
     </variable>
 
     <variable name="Label_Setting_Hub_LiveTV_Search">
-        <value condition="!$EXP[Exp_HubsWindow_Mode_Standard]">$LOCALIZE[137]</value>
+        <value condition="!$EXP[Exp_HubsWindow_Mode_Standard] + !$EXP[Exp_HubsWindow_Mode_Simple]">$LOCALIZE[137]</value>
         <value>$LOCALIZE[568]</value>
     </variable>
 
@@ -144,6 +144,7 @@
     <variable name="Label_Setting_Home_Mode">
         <value condition="String.IsEqual(Skin.String(HomeSwitcher.Home.Mode),Combined)">$LOCALIZE[31845]</value>
         <value condition="String.IsEqual(Skin.String(HomeSwitcher.Home.Mode),Wall)">$LOCALIZE[31008]</value>
+        <value condition="String.IsEqual(Skin.String(HomeSwitcher.Home.Mode),Simple)">$LOCALIZE[31438]</value>
         <value>$LOCALIZE[602]</value>
     </variable>
 
@@ -205,9 +206,16 @@
         <value>$LOCALIZE[602]</value>
     </variable>
 
+    <variable name="Label_Setting_FlixArt_Visibility">
+        <value condition="Skin.String(Skin.FlixArt.Visibility,RowOnly)">$LOCALIZE[31007]</value>
+        <value condition="$EXP[Exp_FlixArt_IsOff]">$LOCALIZE[31623]</value>
+        <value>$LOCALIZE[571]</value>
+    </variable>
+
     <variable name="Label_Setting_Hub_Mode">
         <value condition="$EXP[Exp_HubsWindow_Mode_Combined]">$LOCALIZE[31845]</value>
         <value condition="$EXP[Exp_HubsWindow_Mode_Wall]">$LOCALIZE[31008]</value>
+        <value condition="$EXP[Exp_HubsWindow_Mode_Simple]">$LOCALIZE[31438]</value>
         <value>$LOCALIZE[602]</value>
     </variable>
 
@@ -252,7 +260,7 @@
         <value condition="String.IsEqual(Container.SortMethod,$LOCALIZE[38079])">$INFO[ListItem.OriginalDate]</value>
         <value condition="String.IsEqual(Container.SortMethod,$LOCALIZE[20359])">$INFO[ListItem.Episode]</value>
         <value condition="String.IsEqual(Container.SortMethod,$LOCALIZE[20074])">$INFO[ListItem.MPAA]</value>
-        <value condition="String.IsEqual(Container.SortMethod,$LOCALIZE[38018])">$INFO[ListItem.UserRating]</value>
+        <value condition="String.IsEqual(Container.SortMethod,$LOCALIZE[38018])">$INFO[ListItem.UserRating,,.0]</value>
         <value>$INFO[ListItem.SortLetter]</value>
     </variable>
 
