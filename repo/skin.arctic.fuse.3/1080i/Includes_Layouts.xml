@@ -2470,6 +2470,7 @@
                 <include content="Object_Indicator" condition="$PARAM[indicator]">
                     <param name="affix">$PARAM[affix]</param>
                     <param name="right">18.13</param>
+                    <param name="bar">false</param>
                 </include>
             </control>
         </definition>
@@ -2802,6 +2803,7 @@
                             <centerbottom>50%</centerbottom>
                             <param name="affix">$PARAM[affix]</param>
                             <param name="selected">$PARAM[selected]</param>
+                            <param name="bar">false</param>
                             <param name="shadow">false</param>
                         </include>
                     </control>

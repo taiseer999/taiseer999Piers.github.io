@@ -1712,6 +1712,53 @@
         </definition>
     </include>
 
+    <include name="ABK_Percent_Bar">
+        <param name="bar_right">100</param>
+        <definition>
+            <!-- ABUKARIM: Netflix-style progress bar on the bottom edge, leading into the circle
+                     (AB Tools "AF3: Watched percentage" > Bar: abk.percentbar) -->
+                <control type="group">
+                    <visible>Skin.HasSetting(abk.percentbar) + !Skin.HasSetting(abk.hidepercent)</visible>
+                    <control type="progress">
+                        <left>16</left>
+                        <right>$PARAM[bar_right]</right>
+                        <centerbottom>0</centerbottom>
+                        <height>6</height>
+                        <texturebg colordiffuse="b3000000" border="12,0,12,0">progress/progress-nib.png</texturebg>
+                        <include content="Texture_Progress_Mid">
+                            <param name="colordiffuse">$VAR[ColorWatchedProgress]</param>
+                        </include>
+                        <info>ListItem.Property(WatchedEpisodePercent)</info>
+                        <visible>!Skin.HasSetting(Indicator.DisableEpisodes) + !String.IsEmpty(ListItem.Property(WatchedEpisodePercent)) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),0) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),100)</visible>
+                    </control>
+                    <control type="progress">
+                        <left>16</left>
+                        <right>$PARAM[bar_right]</right>
+                        <centerbottom>0</centerbottom>
+                        <height>6</height>
+                        <texturebg colordiffuse="b3000000" border="12,0,12,0">progress/progress-nib.png</texturebg>
+                        <include content="Texture_Progress_Mid">
+                            <param name="colordiffuse">$VAR[ColorWatchedProgress]</param>
+                        </include>
+                        <info>ListItem.PercentPlayed</info>
+                        <visible>![!Skin.HasSetting(Indicator.DisableEpisodes) + !String.IsEmpty(ListItem.Property(WatchedEpisodePercent)) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),0) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),100)] + !Skin.HasSetting(Indicator.DisableProgress) + !String.IsEmpty(ListItem.PercentPlayed) + [!Integer.IsEqual(ListItem.PercentPlayed,0) | ListItem.IsResumable]</visible>
+                    </control>
+                    <control type="progress">
+                        <left>16</left>
+                        <right>$PARAM[bar_right]</right>
+                        <centerbottom>0</centerbottom>
+                        <height>6</height>
+                        <texturebg colordiffuse="b3000000" border="12,0,12,0">progress/progress-nib.png</texturebg>
+                        <include content="Texture_Progress_Mid">
+                            <param name="colordiffuse">$VAR[ColorWatchedProgress]</param>
+                        </include>
+                        <info>ListItem.Property(WatchedProgress)</info>
+                        <visible>![!Skin.HasSetting(Indicator.DisableEpisodes) + !String.IsEmpty(ListItem.Property(WatchedEpisodePercent)) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),0) + !Integer.IsEqual(ListItem.Property(WatchedEpisodePercent),100)] + ![!Skin.HasSetting(Indicator.DisableProgress) + !String.IsEmpty(ListItem.PercentPlayed) + [!Integer.IsEqual(ListItem.PercentPlayed,0) | ListItem.IsResumable]] + !Skin.HasSetting(Indicator.DisableProgress) + !String.IsEmpty(ListItem.Property(WatchedProgress)) + !Integer.IsEqual(ListItem.Property(WatchedProgress),0) + !Integer.IsEqual(ListItem.Property(WatchedProgress),100)</visible>
+                    </control>
+                </control>
+        </definition>
+    </include>
+
     <include name="Object_Indicator">
         <param name="affix" />
         <param name="selected">false</param>
@@ -1719,7 +1766,13 @@
         <param name="shadow">true</param>
         <param name="backing">true</param>
         <param name="right">25</param>
+        <param name="bar">true</param>
+        <param name="bar_right">100</param>
         <definition>
+            <!-- ABUKARIM: Netflix-style progress bar (ABK_Percent_Bar) -->
+            <include content="ABK_Percent_Bar" condition="$PARAM[bar]">
+                <param name="bar_right">$PARAM[bar_right]</param>
+            </include>
             <control type="group">
                 <nested />
                 <centerbottom>0</centerbottom>
@@ -1756,6 +1809,18 @@
                         <aligny>center</aligny>
                         <textcolor>main_fg_100</textcolor>
                         <label>$VAR[Defs_PercentPlayed$PARAM[affix],,%]</label>
+                        <visible>[!String.IsEqual(ListItem.DBType,tvshow) + !String.IsEqual(ListItem.DBType,season)] | String.IsEmpty(ListItem.Property(TotalEpisodes))</visible>
+                    </control>
+                    <!-- ABUKARIM: shows / seasons - watched episodes out of all (3/10) -->
+                    <control type="label">
+                        <left>6</left>
+                        <right>32</right>
+                        <font>font_tiny_bold</font>
+                        <align>center</align>
+                        <aligny>center</aligny>
+                        <textcolor>main_fg_100</textcolor>
+                        <label>$INFO[ListItem.Property(WatchedEpisodes)]$INFO[ListItem.Property(TotalEpisodes),/]</label>
+                        <visible>[String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season)] + !String.IsEmpty(ListItem.Property(TotalEpisodes))</visible>
                     </control>
                 </control>
 
