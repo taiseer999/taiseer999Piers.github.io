@@ -276,7 +276,6 @@
         <param name="status">Window(Home).Property(TMDbHelper.ListItem.Status)</param>
         <param name="ratings_id">730</param>
         <param name="meta_offset">0</param>  <!-- ABUKARIM: ratings line offset (Info_Meta) -->
-        <param name="ratings_visible">true</param>
         <definition>
 
             <control type="group">
@@ -327,7 +326,7 @@
 
                     <!-- Ratings -->
                     <include content="skinvariables-ratingsmovies" condition="$PARAM[include_tmdbhelper]">
-                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]] + [$PARAM[ratings_visible]]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,movie) | $PARAM[override_movie]]</param>
                         <param name="list">$PARAM[ratings_id]1</param>
                         <param name="extra_slots">Skin.HasSetting(Ratings.Movies.DisableEndTime)</param>
                         <param name="infolabels">$PARAM[container]$PARAM[listitem]</param>
@@ -336,7 +335,7 @@
                         <param name="source_prefix">$PARAM[source_prefix]</param>
                     </include>
                     <include content="skinvariables-ratingstvshows" condition="$PARAM[include_tmdbhelper]">
-                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)] + [$PARAM[ratings_visible]]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,tvshow) | String.IsEqual($PARAM[container]$PARAM[listitem].DBType,season)]</param>
                         <param name="list">$PARAM[ratings_id]2</param>
                         <param name="extra_slots">Skin.HasSetting(Ratings.TVShows.DisableStatus)</param>
                         <param name="infolabels">$PARAM[container]$PARAM[listitem]</param>
@@ -345,7 +344,7 @@
                         <param name="source_prefix">$PARAM[source_prefix]</param>
                     </include>
                     <include content="skinvariables-ratingsepisodes" condition="$PARAM[include_tmdbhelper]">
-                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)] + [$PARAM[ratings_visible]]</param>
+                        <param name="visible">[String.IsEqual($PARAM[container]$PARAM[listitem].DBType,episode)]</param>
                         <param name="list">$PARAM[ratings_id]3</param>
                         <param name="extra_slots">Skin.HasSetting(Ratings.Episodes.DisableEndTime)</param>
                         <param name="infolabels">$PARAM[container]$PARAM[listitem]</param>
