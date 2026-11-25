@@ -246,19 +246,21 @@
 
     <!-- Search and service buttons beside the list (ABUKARIM: moved from the left edge) -->
     <include name="DialogSubtitles_OSD_Actions">
-        <control type="grouplist" id="9000">
-            <right>690</right>  <!-- ABUKARIM: narrower, right beside the half-width list (off the clear logo) -->
-            <width>280</width>
+        <control type="group">
+            <right>690</right>  <!-- ABUKARIM: right beside the half-width list (off the clear logo); upstream's expandable action menu -->
+            <width>360</width>
             <top>180</top>
             <height>400</height>
-            <orientation>vertical</orientation>
-            <onright>120</onright>
-            <include content="DialogSelect_OSD_Action">
-                <param name="id">160</param>
-                <label>$LOCALIZE[137]</label>
-            </include>
-            <include content="DialogSubtitles_Services">
-                <param name="item">DialogSubtitles_OSD_ServiceItem</param>
+            <include content="Dialog_OSD_ActionMenu">
+                <param name="stretch">280</param>
+                <onright>120</onright>
+                <include content="DialogSelect_OSD_Action">
+                    <param name="id">160</param>
+                    <label>$LOCALIZE[137]</label>
+                </include>
+                <include content="DialogSubtitles_Services">
+                    <param name="item">DialogSubtitles_OSD_ServiceItem</param>
+                </include>
             </include>
         </control>
     </include>

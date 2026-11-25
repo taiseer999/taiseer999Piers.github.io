@@ -2407,8 +2407,8 @@ msgstr "مزود الفيديو الدعائي "
 
 #: /1080i/Dialog_DialogShortcuts.xml
 msgctxt "#31638"
-msgid "Hub type"
-msgstr "نوع المركز"
+msgid "Type"
+msgstr "النوع"
 
 #: /1080i/Dialog_DialogShortcuts.xml
 msgctxt "#31639"
@@ -3664,3 +3664,123 @@ msgstr "اعرض وسم 3D في معلومات العنصر للفيديوهات
 msgctxt "#31907"
 msgid "Flixart Visibility"
 msgstr "ظهور FlixArt"
+
+msgctxt "#31908"
+msgid "One row of items below the details of the focused item."
+msgstr "صف واحد من العناصر أسفل تفاصيل العنصر المحدد."
+
+msgctxt "#31909"
+msgid "Rows of items that fill the screen below a section heading."
+msgstr "صفوف من العناصر تملأ الشاشة أسفل عنوان القسم."
+
+msgctxt "#31910"
+msgid "One row of items below the details of the focused item, with categories above the row."
+msgstr "صف واحد من العناصر أسفل تفاصيل العنصر المحدد، وفوقه الفئات."
+
+msgctxt "#31911"
+msgid "Rows of items that fill the screen, with categories above them."
+msgstr "صفوف من العناصر تملأ الشاشة، وفوقها الفئات."
+
+msgctxt "#31912"
+msgid "Items show square artwork with labels below."
+msgstr "تعرض العناصر صورًا مربعة وأسفلها التسميات."
+
+msgctxt "#31913"
+msgid "Items show landscape artwork with labels below."
+msgstr "تعرض العناصر صورًا أفقية وأسفلها التسميات."
+
+msgctxt "#31914"
+msgid "Items show poster artwork."
+msgstr "تعرض العناصر الملصقات."
+
+msgctxt "#31915"
+msgid "Items show round artwork."
+msgstr "تعرض العناصر صورًا دائرية."
+
+msgctxt "#31916"
+msgid "Items show wide board artwork."
+msgstr "تعرض العناصر لوحات عريضة."
+
+msgctxt "#31917"
+msgid "The focused item opens out into a wide card."
+msgstr "يتوسّع العنصر المحدد إلى بطاقة عريضة."
+
+msgctxt "#31918"
+msgid "Items show poster artwork with labels over the bottom edge."
+msgstr "تعرض العناصر الملصقات وعلى حافتها السفلية التسميات."
+
+msgctxt "#31919"
+msgid "A list of items beside a large panel with the focused item's artwork."
+msgstr "قائمة عناصر بجانب لوحة كبيرة فيها صور العنصر المحدد."
+
+msgctxt "#31920"
+msgid "A wide list of items beside the focused item's poster."
+msgstr "قائمة عناصر عريضة بجانب ملصق العنصر المحدد."
+
+msgctxt "#31921"
+msgid "A list of items with artwork and a short plot, beside the focused item's poster."
+msgstr "قائمة عناصر مع صورها وقصة مختصرة، بجانب ملصق العنصر المحدد."
+
+msgctxt "#31922"
+msgid "A short list of items below the details of the focused item, beside its landscape artwork."
+msgstr "قائمة قصيرة من العناصر أسفل تفاصيل العنصر المحدد، بجانب صورته الأفقية."
+
+msgctxt "#31923"
+msgid "A short list of items below the details of the focused item, beside its landscape and poster artwork."
+msgstr "قائمة قصيرة من العناصر أسفل تفاصيل العنصر المحدد، بجانب صورته الأفقية وملصقه."
+
+msgctxt "#31924"
+msgid "A list of items beside the focused item's square artwork."
+msgstr "قائمة عناصر بجانب الصورة المربعة للعنصر المحدد."
+
+msgctxt "#31925"
+msgid "A list of categories beside the items in the selected category, with artwork and a short plot."
+msgstr "قائمة فئات بجانب عناصر الفئة المختارة، مع صورها وقصة مختصرة."
+
+msgctxt "#31926"
+msgid "Items with artwork and a short plot, with categories above them, beside the focused item's poster."
+msgstr "عناصر مع صورها وقصة مختصرة، وفوقها الفئات، بجانب ملصق العنصر المحدد."
+
+msgctxt "#31927"
+msgid "Play action"
+msgstr "إجراء التشغيل"
+
+msgctxt "#31928"
+msgid "Context menu"
+msgstr "قائمة السياق"
+
+msgctxt "#31929"
+msgid "Browse action"
+msgstr "إجراء التصفح"
+
+msgctxt "#31930"
+msgid "Choose what happens when a playable library item in this hub's widgets is clicked."
+msgstr "اختر ما يحدث عند النقر على عنصر قابل للتشغيل من المكتبة في ودجات هذا المركز."
+
+msgctxt "#31931"
+msgid "Choose what happens when a library folder item, such as a show or album, in this hub's widgets is clicked."
+msgstr "اختر ما يحدث عند النقر على مجلد من المكتبة، كمسلسل أو ألبوم، في ودجات هذا المركز."
+
+msgctxt "#31932"
+msgid "Choose the shortcut, path, label, icon and submenu of this hub."
+msgstr "اختر اختصار هذا المركز ومساره وتسميته وأيقونته وقائمته الفرعية."
+
+msgctxt "#31933"
+msgid "Menu"
+msgstr "القائمة"
+
+msgctxt "#31934"
+msgid "This hub"
+msgstr "هذا المركز"
+
+msgctxt "#31935"
+msgid "All hubs"
+msgstr "كل المراكز"
+
+msgctxt "#31936"
+msgid "Use this action for this hub only or for all hubs?"
+msgstr "هل يُستخدم هذا الإجراء لهذا المركز فقط أم لكل المراكز؟"
+
+msgctxt "#31937"
+msgid "Department"
+msgstr "القسم"
