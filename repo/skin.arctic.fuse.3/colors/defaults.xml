@@ -9,6 +9,16 @@
     <color name="main_fg_12">1fededed</color>
     <color name="main_fg_06">0fededed</color>
 
+    <!-- ABUKARIM: brighter foreground for the playback info over video (plot, ratings, end time).
+         Dolby Vision / HDR output dims the GUI, so main_fg_70 text read as grey there. -->
+    <color name="osd_fg_100">ffffffff</color>
+    <color name="osd_fg_90">ffffffff</color>
+    <color name="osd_fg_70">f2ffffff</color>
+    <color name="osd_fg_50">d9ffffff</color>
+    <color name="osd_fg_30">a6ffffff</color>
+    <color name="osd_fg_12">1fffffff</color>
+    <color name="osd_fg_06">0fffffff</color>
+
     <color name="main_bg_100">ff000000</color>
     <color name="main_bg_90">e7000000</color>
     <color name="main_bg_70">b3000000</color>

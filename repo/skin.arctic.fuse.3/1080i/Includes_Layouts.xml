@@ -2927,6 +2927,7 @@
                         <aligny>center</aligny>
                         <font>font_main_bold</font>
                         <textcolor>main_fg_100</textcolor>
+                        <shadowcolor>b3000000</shadowcolor>  <!-- ABUKARIM: readable over bright video -->
                         <label>$VAR[Label_StreamLanguage]</label>
                     </control>
                 </control>
@@ -2936,7 +2937,8 @@
                     <height>30</height>
                     <aligny>center</aligny>
                     <font>font_tiny</font>
-                    <textcolor>main_fg_70</textcolor>
+                    <textcolor>main_fg_90</textcolor>  <!-- ABUKARIM: was main_fg_70, hard to read over video -->
+                    <shadowcolor>b3000000</shadowcolor>
                     <label>$VAR[Label_StreamRow_Detail]</label>
                 </control>
             </control>

@@ -500,7 +500,7 @@
                 </include>
 
                 <include content="Info_Plot" condition="$PARAM[plot_visible]">
-                    <param name="colordiffuse">main_fg</param>
+                    <param name="colordiffuse">osd_fg</param>  <!-- ABUKARIM: brighter over video -->
                     <param name="listitem">VideoPlayer</param>
                     <param name="width">info_panel_w</param>
                     <param name="include_main">!VideoPlayer.Content(episodes)</param>
@@ -512,7 +512,7 @@
                 <control type="label">
                     <label>$INFO[VideoPlayer.Season,,x]$INFO[VideoPlayer.Episode,,. ]$INFO[VideoPlayer.Title]</label>
                     <height>40</height>
-                    <colordiffuse>main_fg_70</colordiffuse>
+                    <colordiffuse>osd_fg_70</colordiffuse>
                     <left>40</left>
                     <width>info_panel_w</width>
                     <visible>![$PARAM[plot_visible]]</visible>
@@ -523,7 +523,7 @@
                 <control type="label">
                     <label>$INFO[VideoPlayer.Tagline]</label>
                     <height>40</height>
-                    <colordiffuse>main_fg_70</colordiffuse>
+                    <colordiffuse>osd_fg_70</colordiffuse>
                     <left>40</left>
                     <width>info_panel_w</width>
                     <visible>![$PARAM[plot_visible]]</visible>
@@ -532,7 +532,7 @@
                 </control>
 
                 <include content="Info_Meta">
-                    <param name="colordiffuse">main_fg</param>
+                    <param name="colordiffuse">osd_fg</param>  <!-- ABUKARIM -->
                     <param name="listitem">VideoPlayer</param>
                     <param name="service">Player</param>
                     <param name="source_prefix">TMDbHelper.Player.</param>
