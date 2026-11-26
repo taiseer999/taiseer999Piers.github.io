@@ -20,6 +20,9 @@
             <visible>!$EXP[Exp_OSD_SliderVisible]</visible>
 
             <top>view_pad</top>
+            <include content="ABK_OSD_DimLeft">
+                <param name="top">-200</param>
+            </include>
             <control type="group">
                 <top>0</top>
                 <bottom>240</bottom>

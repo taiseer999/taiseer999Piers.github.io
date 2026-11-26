@@ -63,4 +63,44 @@
         </definition>
     </include>
 
+    <!-- ABUKARIM: dim backdrops behind the playback info (left) and the stream lists (right),
+         so the text stays readable over bright scenes. Fade in and out with their panels. -->
+    <include name="ABK_OSD_DimLeft">
+        <param name="width">1300</param>
+        <param name="top">0</param>
+        <param name="edge">0</param>
+        <definition>
+            <control type="image">
+                <left>$PARAM[edge]</left>
+                <top>$PARAM[top]</top>
+                <width>$PARAM[width]</width>
+                <height>1400</height>
+                <texture>abk_osd/grad_left.png</texture>
+                <colordiffuse>d9000000</colordiffuse>
+                <animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+                <animation effect="fade" start="0" end="100" time="300">Visible</animation>
+                <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+            </control>
+        </definition>
+    </include>
+
+    <include name="ABK_OSD_DimRight">
+        <param name="width">1150</param>
+        <param name="top">0</param>
+        <param name="edge">0</param>
+        <definition>
+            <control type="image">
+                <right>$PARAM[edge]</right>
+                <top>$PARAM[top]</top>
+                <width>$PARAM[width]</width>
+                <height>1400</height>
+                <texture>abk_osd/grad_right.png</texture>
+                <colordiffuse>d9000000</colordiffuse>
+                <animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+                <animation effect="fade" start="0" end="100" time="300">Visible</animation>
+                <animation effect="fade" start="100" end="0" time="200">Hidden</animation>
+            </control>
+        </definition>
+    </include>
+
 </includes>

@@ -21,6 +21,9 @@
             <include content="Animation_ConditionalFade">
                 <param name="condition">![Window.IsActive(VideoFullScreen.xml) | Window.IsActive(MusicVisualisation.xml)]</param>
             </include>
+            <include content="ABK_OSD_DimLeft">
+                <param name="top">-200</param>
+            </include>
             <include content="OSD_Progress_Details_Extended">
                 <param name="align">bottom</param>
                 <param name="landscape_visible">!Skin.HasSetting(OSD.InfoOverlay.DisableLandscapeOnInfo)</param>

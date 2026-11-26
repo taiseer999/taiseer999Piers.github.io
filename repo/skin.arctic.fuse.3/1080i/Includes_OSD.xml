@@ -271,6 +271,12 @@
             <include>Animation_SlideIn_Dialog</include>
             <animation effect="fade" start="100" end="0" condition="Integer.IsEqual(Container($PARAM[id]).NumItems,0)">Conditional</animation>
 
+            <include content="ABK_OSD_DimRight">
+                <param name="edge">-80</param>
+                <param name="width">1150</param>
+                <param name="top">-200</param>
+            </include>
+
             <control type="group">
                 <include content="OSD_Stream_ListSlide">
                     <param name="id">$PARAM[id]</param>
