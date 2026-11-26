@@ -3784,3 +3784,11 @@ msgstr "هل يُستخدم هذا الإجراء لهذا المركز فقط �
 msgctxt "#31937"
 msgid "Department"
 msgstr "القسم"
+
+msgctxt "#31938"
+msgid "Information line"
+msgstr "سطر المعلومات"
+
+msgctxt "#31939"
+msgid "of 10 units used"
+msgstr "من 10 وحدات مستخدمة"
