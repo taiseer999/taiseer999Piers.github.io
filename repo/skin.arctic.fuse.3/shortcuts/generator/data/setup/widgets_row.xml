@@ -97,7 +97,7 @@
     <rules name="widget_target">
         <rule>
             <condition>{item_path}==Stacked_Folder</condition>
-            <value>$INFO[Window.Property(WidgetMeta.{widget_prev_id}.Target)]</value>
+            <value>videos</value>
         </rule>
         <rule>
             <condition>{item_target}!=</condition>
