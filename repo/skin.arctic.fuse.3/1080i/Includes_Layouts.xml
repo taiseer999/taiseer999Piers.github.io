@@ -3032,6 +3032,7 @@
                     </include>
 
                     <control type="label">
+                        <shadowcolor>80000000</shadowcolor>  <!-- ABUKARIM: readable over video -->
                         <include condition="$PARAM[selected]">Color_SelectedText</include>
                         <right>0</right>
                         <width>180</width>

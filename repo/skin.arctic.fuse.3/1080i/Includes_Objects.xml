@@ -1415,7 +1415,7 @@
                 <aligny>center</aligny>
                 <align>center</align>
                 <width>auto</width>
-                <font>font_info_black</font>
+                <font>font_title_huge</font>  <!-- ABUKARIM: upstream size (was the 130px font_info_black) -->
                 <textcolor>$VAR[ColorHighlight]</textcolor>
                 <label>[COLOR=main_logo]Arctic[/COLOR] Fuse</label>
             </control>
@@ -1424,7 +1424,7 @@
                 <height>50</height>
                 <align>center</align>
                 <width>auto</width>
-                <font>font_huge_bold</font>
+                <font>font_head_bold</font>
                 <textcolor>$VAR[ColorHighlight]</textcolor>
                 <label>$NUMBER[3]</label>
             </control>

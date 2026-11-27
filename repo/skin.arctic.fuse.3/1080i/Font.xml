@@ -1,6 +1,54 @@
 <?xml version='1.0' encoding='utf-8'?>
 <fonts>
     <fontset id="Default" unicode="false">
+        <!-- ABUKARIM: Amazon Ember is the default font (same as the "امازون" fontset); the former default is "Inter" -->
+         <include content="Font_Default">
+            <param name="font_black">AmazonEmberV2-Bold.ttf</param>
+            <param name="font_bold">AmazonEmberV2-Bold.ttf</param>
+            <param name="font_regular">AmazonEmberV2-Medium.ttf</param>
+            <param name="style_light">light</param>
+            <param name="size_hint">17</param>
+            <param name="size_hint">15</param>
+            <param name="size_tiny">21</param>
+            <param name="size_mini">23</param>
+            <param name="size_main">29</param>
+            <param name="size_midi">34</param>
+            <param name="size_head">36</param>
+            <param name="size_huge">41</param>
+            <param name="size_main_x2">54</param>
+            <param name="size_huge_x2">84</param>
+            <param name="size_midi_x2">62</param>
+            <param name="size_info_title">50</param>
+            
+            <param name="plot_linespacing_head">1.03</param>
+            <param name="plot_linespacing_midi">1.45</param>
+            <param name="plot_linespacing_main">0.9</param>
+            <param name="plot_linespacing_mini">1.15</param>
+            <param name="plot_linespacing_tiny">1.11</param>       
+        </include>
+        <font>
+            <name>font23_narrow</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>
+            <name>font32</name>
+            <filename>special://xbmc/media/Fonts/arial.ttf</filename>
+            <size>32</size>
+        </font>
+        <font>
+            <name>font10</name>
+            <filename>inter-r.ttf</filename>
+            <size>21</size>
+        </font>
+        <font>  <!-- ABUKARIM: fixed font for the genre line (any fontset) -->
+            <name>font_genre_hacen</name>
+            <filename>Hacen-Promoter -Bold.ttf</filename>
+            <size>29</size>
+        </font>
+    </fontset>
+
+    <fontset id="Inter" unicode="true">
         <include>Font_Default</include>
         <font>
             <name>font23_narrow</name>

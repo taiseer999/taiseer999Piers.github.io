@@ -395,6 +395,7 @@
                 <param name="visible">$PARAM[visible] + !Skin.HasSetting(Info.EnablePillboxStyle)</param>
             </include>
             <control type="label">
+                <shadowcolor>80000000</shadowcolor>  <!-- ABUKARIM: readable over video -->
                 <label fallback="$PARAM[label_fallback]">$PARAM[label]</label>
                 <haspath>$PARAM[haspath]</haspath>
                 <textcolor>$PARAM[colordiffuse]_70</textcolor>
@@ -436,8 +437,7 @@
                     <param name="end">$PARAM[end]</param>
                     <param name="dbtype">$PARAM[dbtype]</param>
                     <param name="player">$PARAM[player]</param>
-                    <param name="hours">$PARAM[hours]</param>
-                    <param name="minutes">$PARAM[minutes]</param>
+                    <param name="duration">$PARAM[duration]</param>
                 </include>
                 <include content="Info_Line_Tags_Grouplist">
                     <param name="font">$PARAM[font]_lines</param>
@@ -446,8 +446,7 @@
                     <param name="end">$PARAM[end]</param>
                     <param name="dbtype">$PARAM[dbtype]</param>
                     <param name="player">$PARAM[player]</param>
-                    <param name="hours">$PARAM[hours]</param>
-                    <param name="minutes">$PARAM[minutes]</param>
+                    <param name="duration">$PARAM[duration]</param>
                 </include>
             </control>
         </definition>
@@ -467,8 +466,7 @@
                     <param name="end">$PARAM[end]</param>
                     <param name="dbtype">$PARAM[dbtype]</param>
                     <param name="player">$PARAM[player]</param>
-                    <param name="hours">$PARAM[hours]</param>
-                    <param name="minutes">$PARAM[minutes]</param>
+                    <param name="duration">$PARAM[duration]</param>
                 </include>
             </control>
         </definition>
@@ -657,8 +655,7 @@
                 <param name="source">$PARAM[container]$PARAM[listitem].</param>
                 <param name="dbtype">$PARAM[container]$PARAM[listitem].DBType</param>
                 <param name="stereo">$PARAM[container]$PARAM[listitem].IsStereoscopic + !String.IsEqual($PARAM[container]$PARAM[listitem].StereoscopicMode,mono)</param>
-                <param name="hours">$PARAM[container]$PARAM[listitem].Duration(h)</param>
-                <param name="minutes">$PARAM[container]$PARAM[listitem].Duration(m)</param>
+                <param name="duration">$PARAM[container]$PARAM[listitem].Duration(</param>
             </include>
         </definition>
     </include>
@@ -706,8 +703,7 @@
                         <param name="dbtype">$PARAM[dbtype]</param>
                         <param name="player">$PARAM[player]</param>
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
-                        <param name="hours">$PARAM[hours]</param>
-                        <param name="minutes">$PARAM[minutes]</param>
+                        <param name="duration">$PARAM[duration]</param>
                         <param name="item">Info_Line_Label</param>
                     </include>
                     <include content="Info_Line_Tags" condition="$EXP[Exp_ABK_DefaultOSD_Tags]">
@@ -717,8 +713,7 @@
                         <param name="player">$PARAM[player]</param>
                         <param name="font">font_tiny_tag</param>
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
-                        <param name="hours">$PARAM[hours]</param>
-                        <param name="minutes">$PARAM[minutes]</param>
+                        <param name="duration">$PARAM[duration]</param>
                     </include>
                 </control>
             </control>
@@ -869,39 +864,39 @@
             <include content="$PARAM[item]" condition="!$EXP[Exp_ABK_DefaultOSD_Tags]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="label">$INFO[$PARAM[hours],, $LOCALIZE[31074]]</param>  <!-- ABUKARIM: whole hours, no "0 minutes" -->
-                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[hours],0) + Integer.IsEqual($PARAM[minutes],0)</param>
+                <param name="label">$INFO[$PARAM[duration]h),, $LOCALIZE[31074]]</param>  <!-- ABUKARIM: whole hours, no "0 minutes" -->
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[duration]h),0) + Integer.IsEqual($PARAM[duration]m),0)</param>
             </include>
             <include content="$PARAM[item]" condition="!$EXP[Exp_ABK_DefaultOSD_Tags]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[hours],0) + !Integer.IsEqual($PARAM[minutes],0)</param>
-                <param name="label">$INFO[$PARAM[hours],, $LOCALIZE[31074] ]$INFO[$PARAM[minutes],, $LOCALIZE[31073]]</param>
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[duration]h),0) + !Integer.IsEqual($PARAM[duration]m),0)</param>
+                <param name="label">$INFO[$PARAM[duration]h),, $LOCALIZE[31074] ]$INFO[$PARAM[duration]m),, $LOCALIZE[31073]]</param>
             </include>
             <include content="$PARAM[item]" condition="!$EXP[Exp_ABK_DefaultOSD_Tags]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + Integer.IsEqual($PARAM[hours],0)</param>
-                <param name="label">$INFO[$PARAM[minutes],, $LOCALIZE[31073]]</param>
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + Integer.IsEqual($PARAM[duration]h),0)</param>
+                <param name="label">$INFO[$PARAM[duration]m),, $LOCALIZE[31073]]</param>
             </include>
             <!-- ABUKARIM: the Default OSD tags are drawn in Inter (English): 2 HR 52 MINS, as in the English interface -->
             <include content="$PARAM[item]" condition="$EXP[Exp_ABK_DefaultOSD_Tags]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="label">$INFO[$PARAM[hours],, hr]</param>
-                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[hours],0) + Integer.IsEqual($PARAM[minutes],0)</param>
+                <param name="label">$INFO[$PARAM[duration]h),, hr]</param>
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[duration]h),0) + Integer.IsEqual($PARAM[duration]m),0)</param>
             </include>
             <include content="$PARAM[item]" condition="$EXP[Exp_ABK_DefaultOSD_Tags]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[hours],0) + !Integer.IsEqual($PARAM[minutes],0)</param>
-                <param name="label">$INFO[$PARAM[hours],, hr ]$INFO[$PARAM[minutes],, mins]</param>
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + !Integer.IsEqual($PARAM[duration]h),0) + !Integer.IsEqual($PARAM[duration]m),0)</param>
+                <param name="label">$INFO[$PARAM[duration]h),, hr ]$INFO[$PARAM[duration]m),, mins]</param>
             </include>
             <include content="$PARAM[item]" condition="$EXP[Exp_ABK_DefaultOSD_Tags]">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="font">$PARAM[font]</param>
-                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + Integer.IsEqual($PARAM[hours],0)</param>
-                <param name="label">$INFO[$PARAM[minutes],, mins]</param>
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[source]Duration$PARAM[end]) + Integer.IsEqual($PARAM[duration]h),0)</param>
+                <param name="label">$INFO[$PARAM[duration]m),, mins]</param>
             </include>
         </definition>
     </include>
@@ -993,10 +988,11 @@
                 <itemgap>-16</itemgap>
                 <visible>$PARAM[visible]</visible>
             </include>
-            <include content="Info_StarRating_Pillbox_U3k">
+            <!-- ABUKARIM: Pillbox style - the stars sit on the same pill as the "i" / quality pills (was an outlined box) -->
+            <include content="Info_Line_StarRating_Tags_ABK">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
                 <param name="rating">$PARAM[rating]</param>
-                <param name="visible">$PARAM[visible]</param>
+                <param name="visible">$PARAM[visible] + Skin.HasSetting(Info.EnablePillboxStyle)</param>
             </include>
         </definition>
     </include>
