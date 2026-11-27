@@ -153,7 +153,12 @@
             <font>
                 <name>font_logo_large</name>
                 <filename>Questrial-Regular.ttf</filename>
-                <size>55</size>
+                <size>44</size>  <!-- ABUKARIM: upstream size (was 55) -->
+            </font>
+            <font>  <!-- ABUKARIM: start-up logo version number, upstream size in every fontset -->
+                <name>abk_splash_version</name>
+                <filename>$PARAM[font_bold]</filename>
+                <size>38</size>
             </font>
 
             <font>

@@ -1387,7 +1387,7 @@
         <!-- ABK Kodi 22 logo -->
         <control type="grouplist">
             <height>128</height>
-            <centertop>350</centertop>
+            <centertop>420</centertop>  <!-- ABUKARIM: upstream position -->
             <orientation>vertical</orientation>
             <align>center</align>
             <control type="image">
@@ -1398,16 +1398,17 @@
                 <texture>special://skin/extras/icons/kodi.png</texture>
             </control>
             <control type="label">
-                <height>30</height>
+                <height>32</height>
                 <textcolor>main_fg_100</textcolor>
+                <shadowcolor>main_bg_30</shadowcolor>
                 <label>KODI</label>
                 <font>font_logo_large</font>
                 <align>center</align>
             </control>
         </control>
         <control type="grouplist">
-            <height>140</height>
-            <centertop>47%</centertop>
+            <height>80</height>
+            <centertop>540</centertop>  <!-- ABUKARIM: upstream position -->
             <orientation>horizontal</orientation>
             <itemgap>10</itemgap>
             <align>center</align>
@@ -1417,6 +1418,7 @@
                 <width>auto</width>
                 <font>font_title_huge</font>  <!-- ABUKARIM: upstream size (was the 130px font_info_black) -->
                 <textcolor>$VAR[ColorHighlight]</textcolor>
+                <shadowcolor>main_bg_30</shadowcolor>
                 <label>[COLOR=main_logo]Arctic[/COLOR] Fuse</label>
             </control>
             <control type="label">
@@ -1424,7 +1426,8 @@
                 <height>50</height>
                 <align>center</align>
                 <width>auto</width>
-                <font>font_head_bold</font>
+                <font>abk_splash_version</font>  <!-- ABUKARIM: upstream size, any fontset -->
+                <shadowcolor>main_bg_30</shadowcolor>
                 <textcolor>$VAR[ColorHighlight]</textcolor>
                 <label>$NUMBER[3]</label>
             </control>
