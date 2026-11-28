@@ -3562,8 +3562,8 @@ msgid "Adjust"
 msgstr "ضبط"
 
 msgctxt "#31881"
-msgid "Select whether the item details are shown as plain text or as pills."
-msgstr "اختر عرض تفاصيل العنصر نصًّا عاديًّا أو على هيئة أقراص."
+msgid "Select whether the item details are shown as flags with text, as pills with text, or as pills."
+msgstr "اختر طريقة عرض تفاصيل العنصر: أعلامًا مع نص، أو أقراصًا مع نص، أو أقراصًا."
 
 msgctxt "#31882"
 msgid "Pill"
@@ -3792,3 +3792,15 @@ msgstr "سطر المعلومات"
 msgctxt "#31939"
 msgid "of 10 units used"
 msgstr "من 10 وحدات مستخدمة"
+
+msgctxt "#31940"
+msgid "Process Info"
+msgstr "معلومات المعالجة"
+
+msgctxt "#31941"
+msgid "Change"
+msgstr "تغيير"
+
+msgctxt "#31942"
+msgid "Flag"
+msgstr "أعلام"

@@ -5,6 +5,9 @@
     <expression name="Exp_ABK_ClassicFlags">System.AddonIsEnabled(resource.images.af3.classicflags)</expression>
     <expression name="Exp_FocusStyle_Outlined">Skin.HasSetting(OutlinedFocusedStyle)</expression>
 
+    <!-- Kodi 22 Piers. Features such as $MAP[] are only used when it is running -->
+    <expression name="Exp_Kodi_IsPiers">String.StartsWith(System.BuildVersion,22)</expression>
+
     <!-- Southern region country codes (two letters, or three on Windows).
          Countries spanning the equator use their predominantly southern location.
          Other or unknown regions use northern seasons. -->
@@ -200,7 +203,7 @@
     <expression name="Exp_BackgroundArtwork_IsSimple">[$EXP[Exp_PlainBackgroundWindows] | [Window.IsMedia + [[Window.IsVisible(DialogBusy.xml) + Integer.IsEqual(Container.NumItems,0)]]]]</expression>
 
     <expression name="Exp_Background_HasStylePack">
-        [[Skin.String(Background.Style,surrealist) | String.IsEmpty(Skin.String(Background.Style))] + System.AddonIsEnabled(resource.images.arctic.backgrounds.surrealist)] |
+        [Skin.String(Background.Style,surrealist) + System.AddonIsEnabled(resource.images.arctic.backgrounds.surrealist)] |
         [Skin.String(Background.Style,bauhaus) + System.AddonIsEnabled(resource.images.arctic.backgrounds.bauhaus)] |
         [Skin.String(Background.Style,expressionist) + System.AddonIsEnabled(resource.images.arctic.backgrounds.expressionist)] |
         [Skin.String(Background.Style,mosaic) + System.AddonIsEnabled(resource.images.arctic.backgrounds.mosaic)] |
@@ -256,7 +259,7 @@
     <expression name="Exp_OSD_PVRChannelSwitch">[VideoPlayer.Content(livetv) + [!String.IsEmpty(PVR.ChannelNumberInput) | Player.ShowInfo]]</expression>
 
     <!-- ABUKARIM: Default OSD (AB Tools) with the Pill style chosen in skin settings - the info line draws upstream's outlined tags -->
-    <expression name="Exp_ABK_DefaultOSD_Tags">[Skin.HasSetting(abk.defaultosd) + Skin.HasSetting(InfoTags.EnablePills)]</expression>  <!-- ABUKARIM: upstream made pills opt-in (InfoTags.EnablePills) -->
+    <expression name="Exp_ABK_DefaultOSD_Tags">[Skin.HasSetting(abk.defaultosd) + Skin.String(InfoTags.Style,Pill)]</expression>  <!-- ABUKARIM: upstream pill style (InfoTags.Style Pill; was the InfoTags.EnablePills bool) -->
     <expression name="Exp_OSD_DelayInfo_Timing">[[System.IdleTime(3)] | [System.IdleTime(2) + Skin.String(OSD.AutoOnPause.Delay,2s)] | [System.IdleTime(1) + Skin.String(OSD.AutoOnPause.Delay,1s)] | [System.IdleTime(0) + Skin.String(OSD.AutoOnPause.Delay,0s)]]</expression>
 
     <expression name="Exp_OSD_DelayInfo">[$EXP[Exp_OSD_DelayInfo_Timing] + Skin.String(OSD.AutoOnPause,Info) + Player.Paused + !$EXP[Exp_InfoDialogs]]</expression>
@@ -279,18 +282,22 @@
     <expression name="Exp_DialogSlider_CentreScale">[$EXP[Exp_DialogSlider_Delay] | $EXP[Exp_DialogSlider_Sharpness] | $EXP[Exp_DialogSlider_VerticalShift]]</expression>
     <expression name="Exp_DialogSlider_LeftScale">[$EXP[Exp_DialogSlider_Adjustment] | $EXP[Exp_DialogSlider_NoiseReduction] | $EXP[Exp_DialogSlider_VolumeAmp] | $EXP[Exp_DialogSlider_ToneMap]]</expression>
     <expression name="Exp_DialogSlider_Ruler">[$EXP[Exp_DialogSlider_CentreScale] | $EXP[Exp_DialogSlider_Zoom] | $EXP[Exp_DialogSlider_LeftScale]]</expression>
-    <!-- Ruler major ticks: every ten steps on the 90px scales, every eight on the 72px scales, including the playback speed ruler (1149) -->
-    <expression name="Exp_DialogSlider_RulerDecimal">[$EXP[Exp_DialogSlider_CentreScale] | $EXP[Exp_DialogSlider_Zoom] | [Window.IsVisible(1149) + Player.TempoEnabled]]</expression>
-    <expression name="Exp_DialogSlider_RulerSpeed">[$EXP[Exp_DialogSlider_LeftScale] | [Window.IsVisible(1149) + !Player.TempoEnabled]]</expression>
+    <!-- Ruler major ticks: every ten steps on the 90px scales, every eight on the 72px scales, including the playback speed ruler (1149).
+         The speed ruler has no heading, so the heading scales are excluded there -->
+    <expression name="Exp_DialogSlider_RulerDecimal">[[!Window.IsVisible(1149) + [$EXP[Exp_DialogSlider_CentreScale] | $EXP[Exp_DialogSlider_Zoom]]] | [Window.IsVisible(1149) + Player.TempoEnabled]]</expression>
+    <expression name="Exp_DialogSlider_RulerSpeed">[[!Window.IsVisible(1149) + $EXP[Exp_DialogSlider_LeftScale]] | [Window.IsVisible(1149) + !Player.TempoEnabled]]</expression>
     <expression name="Exp_OSD_StreamRows">[Window.IsVisible(1146) | Window.IsVisible(1147) | Window.IsVisible(1148)]</expression>
     <expression name="Exp_DialogSelect_Standard">[!Window.IsActive(12015) + String.IsEmpty(Window(Home).Property(SkinViewtypes.DialogIsActive)) + ![Window.IsDialogTopMost(gamevideofilter) | Window.IsDialogTopMost(gamestretchmode) | Window.IsDialogTopMost(gamesaves) | Window.IsDialogTopMost(gamevideorotation) | Window.IsDialogTopMost(ingamesaves)]]</expression>
     <expression name="Exp_OSD_DialogSelect">[Window.IsVisible(fullscreenvideo) + Window.IsVisible(DialogSelect.xml) + $EXP[Exp_DialogSelect_Standard]]</expression>
     <expression name="Exp_OSD_DialogSubtitles">[Window.IsVisible(fullscreenvideo) + Window.IsVisible(DialogSubtitles.xml)]</expression>
     <expression name="Exp_DialogSubtitles_NoResults">Integer.IsEqual(Container(120).NumItems,0)</expression>
     <expression name="Exp_DialogSubtitles_HasPages">Integer.IsGreater(Container(120).NumPages,1)</expression>
-    <expression name="Exp_OSD_SpotlightList">[Window.IsVisible(DialogSettings.xml) | $EXP[Exp_OSD_StreamRows] | $EXP[Exp_OSD_DialogSelect] | $EXP[Exp_OSD_DialogSubtitles]]</expression>
-    <expression name="Exp_StreamRow_HasTags">[!String.IsEmpty(ListItem.Property(codec)) | !String.IsEmpty(ListItem.Property(tags)) | ListItem.Property(IsForced) | ListItem.Property(IsDefault) | ListItem.Property(IsOriginal) | !String.IsEmpty(ListItem.Property(IsImpaired))]</expression>
+    <!-- A spotlight dialog other than the topmost one is open, or one stream dialog is switching to another. A dialog opening is topmost, so it only finds the one it opens over.
+         Switching stream dialogs closes the old one first, so the placeholder buttons mark the switch instead -->
+    <expression name="Exp_OSD_SpotlightBelow">[[Window.IsVisible(DialogSettings.xml) + !Window.IsDialogTopMost(DialogSettings.xml)] | [Window.IsVisible(DialogPlayerProcessInfo.xml) + !Window.IsDialogTopMost(DialogPlayerProcessInfo.xml)] | [Window.IsVisible(1146) + !Window.IsDialogTopMost(1146)] | [Window.IsVisible(1147) + !Window.IsDialogTopMost(1147)] | [Window.IsVisible(1148) + !Window.IsDialogTopMost(1148)] | [$EXP[Exp_OSD_DialogSelect] + !Window.IsDialogTopMost(DialogSelect.xml)] | [$EXP[Exp_OSD_DialogSubtitles] + !Window.IsDialogTopMost(DialogSubtitles.xml)] | !String.IsEmpty(Window(Home).Property(OSD.StreamSwitch))]</expression>
+    <expression name="Exp_OSD_SpotlightList">[Window.IsVisible(DialogSettings.xml) | Window.IsVisible(DialogPlayerProcessInfo.xml) | $EXP[Exp_OSD_StreamRows] | $EXP[Exp_OSD_DialogSelect] | $EXP[Exp_OSD_DialogSubtitles]]</expression>
     <expression name="Exp_StreamRow_IsStream">!String.IsEmpty(ListItem.Property(isfolder))</expression>
+    <expression name="Exp_StreamRow_IsProcess">!String.IsEmpty(ListItem.Property(hint))</expression>
     <expression name="Exp_OSD_HideControls">[Window.IsActive(1140) | Window.IsActive(1141) | Window.IsActive(1142) | Window.IsActive(videobookmarks) | Window.IsActive(pvrosdguide) | Window.IsActive(pvrosdchannels) | Window.IsActive(script-upnext-stillwatching.xml) | Window.IsActive(script-upnext-upnext.xml) | Window.IsActive(script-jellyfin-skip.xml)]</expression>
 
     <!-- ==== -->
