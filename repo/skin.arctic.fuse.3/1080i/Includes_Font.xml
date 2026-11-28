@@ -155,6 +155,11 @@
                 <filename>Questrial-Regular.ttf</filename>
                 <size>44</size>  <!-- ABUKARIM: upstream size (was 55) -->
             </font>
+            <font>  <!-- ABUKARIM: OSD button label (audio / subtitle language), a little under font_hint -->
+                <name>abk_osd_button_label</name>
+                <filename>$PARAM[font_regular]</filename>
+                <size>14</size>
+            </font>
             <font>  <!-- ABUKARIM: start-up logo version number, upstream size in every fontset -->
                 <name>abk_splash_version</name>
                 <filename>$PARAM[font_bold]</filename>
